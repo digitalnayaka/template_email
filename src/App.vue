@@ -1,13 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      width="270"
-      src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-      dark
-      height="100%"
-    >
+    <v-navigation-drawer v-model="drawer" app width="270" src="/img/gradient2.jpg" height="100%">
       <div class="pa-2" v-if="guest">
         <v-btn block color="teal" class="mb-1" @click="setDialogComponent('login')">
           <v-icon left>mdi-lock</v-icon>Masuk
@@ -88,7 +81,7 @@
 
     <alert />
 
-    <v-app-bar app color="blue darken-3" dark v-if="isHome">
+    <v-app-bar app color="teal" dark v-if="isHome">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
@@ -304,3 +297,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.a {
+  color: black;
+}
+</style>
