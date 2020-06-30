@@ -122,7 +122,7 @@
                 outputFormat="blob"
                 @input="onFileChange"
                 id="foto"
-                v-if="orders.id_mst_pembayaran_status == 1"
+                v-if="orders.id_mst_pembayaran_status == 1 && user.id != orders.id_penjual"
               >
                 <label for="foto" slot="upload-label">
                   <v-tooltip bottom>

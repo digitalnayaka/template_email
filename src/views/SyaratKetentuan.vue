@@ -11,7 +11,7 @@
         <v-img src="img/banner web syarat.png" width="600" height="150" contain></v-img>
       </v-card>
 
-      <v-card color="teal accent-3">
+      <v-card color="teal lighten-4">
         <v-container fluid>
           <div class="row mb-5 layout justify-center">
             <div class="col-md-10 text-justify white-gradient">

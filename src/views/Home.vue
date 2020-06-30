@@ -2,7 +2,7 @@
   <div>
     <v-row dense>
       <v-col cols="12">
-        <v-carousel cycle height="300">
+        <v-carousel cycle hide-delimiters height="300">
           <v-carousel-item
             v-for="(item,index) in banners"
             :key="index"
@@ -87,6 +87,29 @@
         </div>
       </v-col>
     </v-row>
+    <br />
+    <v-divider></v-divider>
+    <v-card align="center">
+      <v-col cols="12" align="center">
+        <v-row>
+          <div class="container">
+            <div class="section-title">
+              <img src="img/mobilehand.png" width="92px" />
+
+              <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
+              <img
+                href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
+                src="img/playstore.png"
+                width="162px"
+              />
+            </div>
+          </div>
+        </v-row>
+      </v-col>
+    </v-card>
+    <v-card align="center">
+      <p>2020 © Digital Network Asia. All Rights Reserved.</p>
+    </v-card>
   </div>
 </template>
 

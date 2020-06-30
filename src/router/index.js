@@ -26,7 +26,7 @@ const routes = [
     meta: {
       Auth: true
     }
-  },{
+  }, {
     path: '/role',
     name: 'role',
     component: () => import(/* webpackChunkName: "role" */ '../views/Role.vue'),
@@ -269,6 +269,12 @@ const routes = [
     path: '/panduan_pembeli',
     name: 'panduan_pembeli',
     component: () => import(/* webpackChunkName: "panduan_pembeli" */ '../views/PanduanBuyer.vue'),
+  },
+
+  {
+    path: '/panduan_penjual',
+    name: 'panduan_penjual',
+    component: () => import(/* webpackChunkName: "panduan_penjual" */ '../views/PanduanSeller.vue'),
   },
   {
     path: '/kode_etik',

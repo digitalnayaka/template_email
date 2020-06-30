@@ -24,7 +24,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/faq">
+          <v-list-item href="http://faq.simotor.id" target="_self">
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon>mdi-comment-question-outline</v-icon>FAQ
