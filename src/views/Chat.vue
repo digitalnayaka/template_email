@@ -14,13 +14,15 @@
         {{ appuser.nama }}
       </h2>
 
-      <v-toolbar dense flat color="grey lighten-2" v-if="pemenang == 'true'">
-        <div>User berikut adalah pemenang Tawar Bersama pada iklan yang Anda pasang. Selesaikan status user sebagai pememang?</div>
+      <v-list dense color="grey lighten-2" v-if="pemenang == 'true'">
+        <v-list-item>
+          <v-list-item-content>User berikut adalah pemenang Tawar Bersama pada iklan yang Anda pasang. Selesaikan status user sebagai pememang?</v-list-item-content>
 
-        <v-spacer></v-spacer>
-
-        <v-btn outlined @click="pinPemenang">Selesai</v-btn>
-      </v-toolbar>
+          <v-list-item-action>
+            <v-btn outlined @click="pinPemenang">Selesai</v-btn>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
 
       <div class="card">
         <div class="card-body">

@@ -71,16 +71,15 @@ export default {
     createMessage() {
       let formData = new FormData();
 
-      formData.append("from", this.user[0].id);
+      formData.append("from", this.user.id);
       formData.append("receive", this.$route.params.id);
       formData.append("message", this.newMessage);
 
       this.axios
         .post("/user/v1/chat/text", formData, formData, {
-          headers: { Authorization: "Bearer " + this.user[0].token }
+          headers: { Authorization: "Bearer " + this.user.token }
         })
-        .then(response => {
-          console.log(response);
+        .then(() => {
           this.newMessage = null;
         });
     },
@@ -90,13 +89,13 @@ export default {
     sendImage() {
       let formData = new FormData();
 
-      formData.append("from", this.user[0].id);
+      formData.append("from", this.user.id);
       formData.append("receive", this.$route.params.id);
       formData.append("foto", this.image, "foto.jpg");
 
       this.axios
         .post("/user/v1/chat/image", formData, formData, {
-          headers: { Authorization: "Bearer " + this.user[0].token }
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           console.log(response);
