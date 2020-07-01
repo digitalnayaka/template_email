@@ -89,26 +89,70 @@
     </v-row>
     <br />
     <v-divider></v-divider>
-    <v-card align="center">
-      <v-col cols="12" align="center">
-        <v-row>
-          <div class="container">
-            <div class="section-title">
-              <img src="img/mobilehand.png" width="92px" />
 
-              <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
-              <img
-                href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
-                src="img/playstore.png"
-                width="162px"
-              />
+    <div class="container mx-auto" align="center">
+      <v-row justify="center" align="center">
+        <v-col class="col-md-4 col-lg-4 col-sm-4">
+          <v-img src="img/app.png" width="280px" contain></v-img>
+        </v-col>
+
+        <v-col class="col-lg-6 col-md-6 col-sm-6">
+          <div class="container">
+            <div class="section-title" align="center">
+              <v-img align="center" src="img/mobilehand.png" width="92px"></v-img>
+              <h2>Apa itu SiMotor?</h2>
+              <p class="text-justify">
+                Sepeda motor sudah menjadi gaya hidup atau lifestyle masyarakat di Indonesia, benar nggak?
+                Oleh karena itu, kebutuhan akan sepeda motor juga meningkat dan kamu pasti ingin motor yang bagus dan berkualitas kan?
+                Disinilah SiMotor hadir sebagai jawaban. Beli motor jadi semakin mudah, cepat, dan berkualitas.
+              </p>
+              <v-card class="d-inline-block mx-auto" align="center">
+                <v-img src="img/banner.png" width="600" height="150" contain></v-img>
+                <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
+                  target="_blank"
+                >
+                  <v-img src="img/playstore.png" width="162px"></v-img>
+                </a>
+              </v-card>
             </div>
           </div>
+        </v-col>
+      </v-row>
+    </div>
+    <div class="container mx-auto">
+      <div class="section-title" align="center">
+        <img src="img/icon.png" width="92px" alt />
+        <h4>Apa aja fitur unggulan SiMotor?</h4>
+        <h2>Fitur SiMotor</h2>
+        <v-row justify="center" align="center">
+          <div class="container">
+            <v-col class="col-md-6 col-lg-6 col-sm-6">
+              <h2>Harga Pas</h2>
+              <v-img src="img/harga pas.png" width="120px" />
+
+              <p class="text-justify">
+                Harga pas berguna banget untuk kamu yang nggak mau ribet menawar unit.
+                Kamu hanya perlu memilih unit motor yang kamu butuhkan lalu segera hubungi penjual iklan unit tersebut.
+              </p>
+            </v-col>
+          </div>
+
+          <v-col class="col-lg-6 col-md-6 col-sm-6">
+            <div class="container">
+              <h2>Tawar Bersama</h2>
+              <v-img src="img/tawar bersama (paketan).png" width="120px" />
+              <p
+                class="text-justify"
+              >Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan penawaran sehingga harga yang kamu dapat sesuai dengan isi dompet.</p>
+            </div>
+          </v-col>
         </v-row>
-      </v-col>
-    </v-card>
+      </div>
+    </div>
     <v-card align="center">
-      <p>2020 © Digital Network Asia. All Rights Reserved.</p>
+      <h5>2020 © Digital Network Asia. All Rights Reserved.</h5>
     </v-card>
   </div>
 </template>

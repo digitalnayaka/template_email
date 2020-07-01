@@ -115,12 +115,6 @@
 
         <v-icon v-else>mdi-bell-outline</v-icon>
       </v-btn>
-
-      <v-btn icon large href="http://simotor.id" target="_blank">
-        <v-avatar size="32">
-          <v-img src="/img/simotor.png" alt="SiMotor"></v-img>
-        </v-avatar>
-      </v-btn>
     </v-app-bar>
 
     <keep-alive>
