@@ -93,7 +93,7 @@
     <div class="container mx-auto" align="center">
       <v-row justify="center" align="center">
         <v-col class="col-md-4 col-lg-4 col-sm-4">
-          <v-img src="img/app.png" width="280px" contain></v-img>
+          <v-img src="img/app-min.png" width="280px" contain></v-img>
         </v-col>
 
         <v-col class="col-lg-6 col-md-6 col-sm-6">
