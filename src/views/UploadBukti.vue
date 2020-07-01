@@ -137,15 +137,15 @@
                     <template v-slot:activator="{ on }">
                       <v-card
                         flat
-                        width="300"
-                        height="200"
+                        width="500"
+                        height="300"
                         :color="!hasImage ? 'grey lighten-3' : 'transparent'"
                         class="d-flex align-center justify-center"
                         v-on="on"
                       >
                         <v-icon x-large v-if="!hasImage">mdi-file-upload</v-icon>
 
-                        <v-img :src="previewUrl" contain v-else></v-img>
+                        <v-img :src="previewUrl" width="500" height="300" contain v-else></v-img>
                       </v-card>
                     </template>
                     <span>Pilih Foto</span>
@@ -157,8 +157,8 @@
                 :src="getImage(foto)"
                 contain
                 class="mx-2"
-                width="300"
-                height="200"
+                width="500"
+                height="300"
                 v-if="orders.id_mst_pembayaran_status > 1"
               ></v-img>
 
