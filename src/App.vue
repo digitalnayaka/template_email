@@ -194,6 +194,8 @@ export default {
           .then(response => {
             let { data } = response.data;
 
+            this.countNotif = [];
+
             for (let index = 0; index < data.length; index++) {
               const element = data[index];
               if (element.is_read == false) {
