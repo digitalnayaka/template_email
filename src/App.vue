@@ -2,7 +2,7 @@
   <v-app>
     <v-navigation-drawer v-model="drawer" app width="270" src="/img/gradient2.jpg" height="100%">
       <div class="pa-2" v-if="guest">
-        <v-btn block color="teal" class="mb-1" @click="setDialogComponent('login')">
+        <v-btn dark block color="teal" class="mb-1" @click="setDialogComponent('login')">
           <v-icon left>mdi-lock</v-icon>Masuk
         </v-btn>
 
@@ -85,7 +85,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
-        <span class="hidden-sm-and-down">SiMotor</span>
+        <v-img src="img/logo-tulisan.png" width="150px" contain></v-img>
       </v-toolbar-title>
 
       <v-text-field
@@ -93,9 +93,10 @@
         solo-inverted
         hide-details
         prepend-inner-icon="mdi-magnify"
-        label="Search"
+        label="Cari"
         class="hidden-sm-and-down"
         @click="setDialogComponent('search')"
+        contain
       ></v-text-field>
 
       <v-spacer></v-spacer>
