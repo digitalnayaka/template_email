@@ -76,7 +76,6 @@
           </v-col>
         </v-row>
       </v-form>
-      tes props: {{ tes }}
     </v-container>
   </div>
 </template>
@@ -112,7 +111,6 @@ export default {
     idBmr: null,
     loader: null,
     loading: false,
-    tes: 1
   }),
   methods: {
     ...mapActions({
