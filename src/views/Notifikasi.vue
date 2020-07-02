@@ -103,6 +103,7 @@ export default {
           } else {
             this.$router.push({ path: "/upload_bukti/" + data });
           }
+          this.$root.$children[0].getNotif();
         })
         .catch(error => {
           let responses = error.response.data;
