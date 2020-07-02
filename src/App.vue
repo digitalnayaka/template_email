@@ -113,6 +113,7 @@
 
           <v-icon>mdi-bell-outline</v-icon>
         </v-badge>
+        <v-icon v-else>mdi-bell-outline</v-icon>
       </v-btn>
     </v-app-bar>
 

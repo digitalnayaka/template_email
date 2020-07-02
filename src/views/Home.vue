@@ -88,7 +88,62 @@
         </div>
       </v-col>
     </v-row>
+    <v-divider></v-divider>
+    <v-container fluid>
+      <div align="center">
+        <h2>Tawar Bersama Berlangsung</h2>
+        <p>Ikuti Tawar Bersama berikut!</p>
+      </div>
+      <v-flex v-for="item in tbberlangsung" :key="item._source.id" xs6 sm3>
+        <v-card width="200" height="270">
+          <v-img width="200" height="150" :src="getImage(item._source.photo)" contain>
+            <v-card-title>
+              <v-chip small left color="red" text-color="white">{{ item._source.mst_iklan_jenis }}</v-chip>
+              <v-chip small left color="orange" text-color="white">{{ item._source.mst_iklan_type }}</v-chip>
+              <v-chip
+                small
+                left
+                color="green"
+                text-color="white"
+                v-if="item._source.is_verified == true"
+              >Tiket</v-chip>
+            </v-card-title>
+          </v-img>
+          <v-list dense class="ma-0 pa-0">
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title class="font-weight-black">{{ item._source.judul }}</v-list-item-title>
 
+                <v-list-item-subtitle v-if="item._source.harga == null">Harga awal</v-list-item-subtitle>
+                <v-list-item-subtitle v-else>Harga</v-list-item-subtitle>
+                <v-list-item-subtitle
+                  style="color:red"
+                  v-if="item._source.harga == null"
+                >Rp {{ Number(item._source.harga_awal).toLocaleString('id-ID') }}</v-list-item-subtitle>
+                <v-list-item-subtitle
+                  style="color:red"
+                  v-else
+                >Rp {{ Number(item._source.harga).toLocaleString('id-ID') }}</v-list-item-subtitle>
+                <v-list-item-subtitle>
+                  <v-avatar size="16" item>
+                    <v-img src="/img/verified.png" alt="verified"></v-img>
+                  </v-avatar>
+                  {{ item._source.app_user }}
+                </v-list-item-subtitle>
+
+                <v-list-item-subtitle v-if="item._source.id_mst_iklan_jenis == 2">
+                  <v-icon small>mdi-calendar</v-icon>
+                  {{ item._source.tanggal_mulai | dateTimeFormat(utc) }} {{ waktu }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-flex>
+      <div align="center">
+        <v-btn dark color="teal" to="/category/mokas?tb=berlangsung">Lihat Semua</v-btn>
+      </div>
+    </v-container>
     <br />
 
     <v-divider></v-divider>
@@ -184,7 +239,10 @@ export default {
   data: () => ({
     banners: [],
     categories: [],
-    jadwal: []
+    jadwal: [],
+    tbberlangsung: [],
+    utc: moment().utcOffset() / 60 - 7,
+    waktu: ""
   }),
   methods: {
     showBanners() {
@@ -235,16 +293,54 @@ export default {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
+    },
+    TBBerlangsung() {
+      this.axios
+        .get("/search/v1/search", {
+          params: {
+            id_mst_iklan_status: 1,
+            sort: "tanggal_mulai",
+            limit: 4,
+            offset: 0,
+            tb_berlangsung: true
+          }
+        })
+        .then(response => {
+          let data = response.data;
+          let { hits } = data.hits;
+          this.tbberlangsung = hits;
+        })
+        .catch(error => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
     }
   },
+
   created() {
     this.showBanners();
     this.showCategories();
     this.jadwalLelang();
+    this.TBBerlangsung();
+    if (this.utc == 0) {
+      this.waktu = "WIB";
+    }
+    if (this.utc == 1) {
+      this.waktu = "WITA";
+    }
+    if (this.utc == 2) {
+      this.waktu = "WIT";
+    }
   },
   filters: {
     dateFormat: date => {
       return moment.utc(date).format("DD MMM YYYY");
+    },
+    dateTimeFormat: (date, utc) => {
+      return moment
+        .utc(date)
+        .add(utc, "h")
+        .format("DD MMM, HH:mm");
     }
   }
 };
