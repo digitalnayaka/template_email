@@ -49,6 +49,7 @@
           <v-card
             class="card ma-2"
             v-for="(item,index) in jadwal"
+            contain
             :key="index"
             :to="'/list_lelang/' + item.id_app_user + '?tgl=' + item.date.substr(0,10)"
           >
@@ -90,7 +91,7 @@
     <br />
     <v-divider></v-divider>
 
-    <div class="container mx-auto" align="center">
+    <div class="d-inline-block container mx-auto" align="center">
       <v-row justify="center" align="center">
         <v-col class="col-md-4 col-lg-4 col-sm-4">
           <v-img src="img/app-min.png" width="280px" contain></v-img>
