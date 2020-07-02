@@ -89,12 +89,12 @@
       </v-toolbar-title>
 
       <v-text-field
+        :slot="$vuetify.breakpoint.xsOnly ? 'extension' : 'default'"
         flat
         solo-inverted
         hide-details
         prepend-inner-icon="mdi-magnify"
         label="Cari"
-        class="hidden-sm-and-down"
         @click="setDialogComponent('search')"
         contain
       ></v-text-field>
@@ -113,6 +113,7 @@
 
           <v-icon>mdi-bell-outline</v-icon>
         </v-badge>
+
         <v-icon v-else>mdi-bell-outline</v-icon>
       </v-btn>
     </v-app-bar>
@@ -263,6 +264,8 @@ export default {
     this.oneSignal();
     this.geolocation();
     this.getNotif();
+
+    console.log(this.$vuetify.breakpoint.lg);
 
     let OneSignal = window.OneSignal || [];
     OneSignal.getUserId(userId => {

@@ -88,15 +88,19 @@
         </div>
       </v-col>
     </v-row>
-    <v-divider></v-divider>
+
+    <v-divider class="mt-4"></v-divider>
+
     <v-container fluid>
       <div align="center">
         <h2>Tawar Bersama Berlangsung</h2>
+
         <p>Ikuti Tawar Bersama berikut!</p>
       </div>
+
       <v-flex v-for="item in tbberlangsung" :key="item._source.id" xs6 sm3>
-        <v-card width="200" height="270">
-          <v-img width="200" height="150" :src="getImage(item._source.photo)" contain>
+        <v-card>
+          <v-img :src="getImage(item._source.photo)" contain>
             <v-card-title>
               <v-chip small left color="red" text-color="white">{{ item._source.mst_iklan_jenis }}</v-chip>
               <v-chip small left color="orange" text-color="white">{{ item._source.mst_iklan_type }}</v-chip>
@@ -109,6 +113,7 @@
               >Tiket</v-chip>
             </v-card-title>
           </v-img>
+          
           <v-list dense class="ma-0 pa-0">
             <v-list-item>
               <v-list-item-content>
@@ -140,11 +145,11 @@
           </v-list>
         </v-card>
       </v-flex>
+
       <div align="center">
         <v-btn dark color="teal" to="/category/mokas?tb=berlangsung">Lihat Semua</v-btn>
       </div>
     </v-container>
-    <br />
 
     <v-divider></v-divider>
 
