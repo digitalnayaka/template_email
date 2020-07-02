@@ -1,4 +1,4 @@
-# simotor_5
+# SiMotor
 
 ## Project setup
 ```
