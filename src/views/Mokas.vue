@@ -118,7 +118,8 @@ export default {
       lengthPage: 0,
       limit: 20,
       offset: 0,
-      total: 0
+      total: 0,
+      tb: this.$route.query.tb
     };
   },
   methods: {
@@ -134,6 +135,9 @@ export default {
       params.append("limit", this.limit);
       if (this.selected != 0) {
         params.append("id_mst_iklan_jenis", this.selected);
+      }
+      if (this.tb == "berlangsung") {
+        params.append("tb_berlangsung", true);
       }
       var request = {
         params: params
