@@ -98,7 +98,7 @@
         <p>Ikuti Tawar Bersama berikut!</p>
       </div>
 
-      <v-flex v-for="item in tbberlangsung" :key="item._source.id" xs6 sm3>
+      <v-flex v-for="item in tbberlangsung" :key="item._source.id" xs6 sm6>
         <v-card
           :to="item._source.id_mst_iklan_type != 2 ? '/detail_iklan/' + item._source.id : '/detail_paket/' +  item._source.id"
         >
@@ -147,8 +147,6 @@
           </v-list>
         </v-card>
       </v-flex>
-
-      <br />
 
       <div align="center">
         <v-btn dark color="teal" to="/category/mokas?tb=berlangsung">Lihat Semua</v-btn>
