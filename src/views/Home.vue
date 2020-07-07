@@ -113,7 +113,7 @@
               >Tiket</v-chip>
             </v-card-title>
           </v-img>
-          
+
           <v-list dense class="ma-0 pa-0">
             <v-list-item>
               <v-list-item-content>
