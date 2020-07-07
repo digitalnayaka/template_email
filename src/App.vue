@@ -113,9 +113,9 @@
       </v-btn>
 
       <v-btn icon to="/notifikasi">
-        <v-badge color="orange" overlap v-if="countNotif.length > 0">
+        <v-badge color="orange" overlap v-if="countNotif > 0">
           <template v-slot:badge>
-            <span>{{ countNotif.length }}</span>
+            <span>{{ countNotif }}</span>
           </template>
 
           <v-icon>mdi-bell-outline</v-icon>
@@ -163,7 +163,7 @@ export default {
   data: () => ({
     drawer: true,
     menus: [],
-    countNotif: [],
+    countNotif: 0,
     notif: ""
   }),
   methods: {
@@ -201,25 +201,12 @@ export default {
             }
           })
           .then(response => {
-            let { data } = response.data;
-
-            this.countNotif = [];
-
-            for (let index = 0; index < data.length; index++) {
-              const element = data[index];
-              if (element.is_read == false) {
-                this.countNotif.push(element.id);
-              }
-            }
+            let { data } = response;
+            this.countNotif = data.count;
           })
           .catch(error => {
-            let responses = error.response;
-            let data = responses.data;
-            this.setAlert({
-              status: true,
-              color: "error",
-              text: data.api_message
-            });
+            let responses = error.response.data;
+            console.log(responses.api_message);
           });
       }
     },
@@ -302,9 +289,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.a {
-  color: black;
-}
-</style>

@@ -99,7 +99,9 @@
       </div>
 
       <v-flex v-for="item in tbberlangsung" :key="item._source.id" xs6 sm3>
-        <v-card>
+        <v-card
+          :to="item._source.id_mst_iklan_type != 2 ? '/detail_iklan/' + item._source.id : '/detail_paket/' +  item._source.id"
+        >
           <v-img :src="getImage(item._source.photo)" contain>
             <v-card-title>
               <v-chip small left color="red" text-color="white">{{ item._source.mst_iklan_jenis }}</v-chip>
