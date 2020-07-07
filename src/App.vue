@@ -1,6 +1,13 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" app width="270" src="/img/gradient2.jpg" height="100%">
+    <v-navigation-drawer
+      v-model="drawer"
+      dark
+      app
+      width="270"
+      src="/img/gradient2.jpg"
+      height="100%"
+    >
       <div class="pa-2" v-if="guest">
         <v-btn dark block color="teal" class="mb-1" @click="setDialogComponent('login')">
           <v-icon left>mdi-lock</v-icon>Masuk
