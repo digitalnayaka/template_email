@@ -98,6 +98,8 @@
 
               <v-divider></v-divider>
             </v-list>
+
+            <v-pagination v-model="page" @input="getUnitMokas" :length="lengthPage" :total-visible="5"></v-pagination>
           </v-stepper-content>
 
           <v-stepper-content step="3">
@@ -369,7 +371,12 @@ export default {
       utc: moment().utcOffset() / 60 - 7,
       suffix: {},
       waktu: "",
-      thumbnail: ""
+      thumbnail: "",
+      page: 1,
+      lengthPage: 0,
+      limit: 10,
+      offset: 0,
+      total: 0
     };
   },
   methods: {
@@ -411,18 +418,24 @@ export default {
       }
     },
     getUnitMokas() {
+      var offset = (this.page - 1) * this.limit;
+
       this.axios
         .get("/produk/v1/unit_mokas", {
           params: {
             id_app_user: this.user.id,
             id_mst_motor_bekas_status: 1,
             search: this.keyword,
-            limit: 999
+            offset: offset,
+            limit: this.limit
           }
         })
         .then(response => {
           let { data } = response.data;
           this.unitMokas = data;
+
+          this.total = response.data.count;
+          this.lengthPage = Math.ceil(this.total / this.limit);
         })
         .catch(error => {
           let responses = error.response.data;
