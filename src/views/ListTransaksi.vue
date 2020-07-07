@@ -200,7 +200,7 @@
       </v-tab-item>
     </v-tabs>
 
-    <!-- <v-pagination v-model="page" @input="loadData" :length="lengthPage" :total-visible="5"></v-pagination> -->
+    <v-pagination v-model="page" @input="loadData" :length="lengthPage" :total-visible="5"></v-pagination>
   </div>
 </template>
 
@@ -239,7 +239,7 @@ export default {
           params: {
             id_pembeli: this.user.id,
             offset: offset,
-            limit: 20
+            limit: this.limit
           }
         })
         .then(response => {
@@ -247,6 +247,8 @@ export default {
           this.orders = data;
           this.total = response.data.count;
           this.lengthPage = Math.ceil(this.total / this.limit);
+
+          this.orderStatus = [];
 
           const map = new Map();
           for (const item of this.orders) {
@@ -258,6 +260,8 @@ export default {
               });
             }
           }
+
+          this.group = [];
 
           for (let index = 0; index < this.orderStatus.length; index++) {
             const id_mst_pembayaran_status = this.orderStatus[index]
@@ -285,7 +289,7 @@ export default {
         .get("/transaksi/v1/pencairan_tiket", {
           params: {
             id_penjual: this.user.id,
-            limit: 999
+            limit: this.limit
           }
         })
         .then(response => {
