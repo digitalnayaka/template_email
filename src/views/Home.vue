@@ -113,7 +113,7 @@
               >Tiket</v-chip>
             </v-card-title>
           </v-img>
-          
+
           <v-list dense class="ma-0 pa-0">
             <v-list-item>
               <v-list-item-content>
@@ -145,6 +145,8 @@
           </v-list>
         </v-card>
       </v-flex>
+
+      <br />
 
       <div align="center">
         <v-btn dark color="teal" to="/category/mokas?tb=berlangsung">Lihat Semua</v-btn>

@@ -85,7 +85,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
-        <v-img src="img/logo-tulisan.png" width="150px" contain></v-img>
+        <v-img src="img/logo-tulisan.png" width="150" contain></v-img>
       </v-toolbar-title>
 
       <v-text-field
@@ -189,7 +189,8 @@ export default {
           .get("/log/v1/log/notifikasi", {
             params: {
               id_user: this.user.id,
-              limit: 999
+              is_read: false,
+              limit: 1
             }
           })
           .then(response => {
@@ -264,8 +265,6 @@ export default {
     this.oneSignal();
     this.geolocation();
     this.getNotif();
-
-    console.log(this.$vuetify.breakpoint.lg);
 
     let OneSignal = window.OneSignal || [];
     OneSignal.getUserId(userId => {
