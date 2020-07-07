@@ -46,7 +46,9 @@
 
                       <v-spacer></v-spacer>
 
-                      <div class="red--text">{{ subItem.expired_at | dateTimeFormat(utc) }} {{ waktu }}</div>
+                      <div
+                        class="red--text"
+                      >{{ subItem.expired_at | dateTimeFormat(utc) }} {{ waktu }}</div>
                     </v-toolbar>
 
                     <v-list class="pa-0">
@@ -141,7 +143,9 @@
 
                       <v-spacer></v-spacer>
 
-                      <div class="red--text">{{ subItem.expired_at | dateTimeFormat(utc) }} {{ waktu }}</div>
+                      <div
+                        class="red--text"
+                      >{{ subItem.expired_at | dateTimeFormat(utc) }} {{ waktu }}</div>
                     </v-toolbar>
 
                     <v-list class="pa-0">
@@ -182,7 +186,7 @@
                       class="d-block pa-2 teal accent-4 white--text text-center"
                       v-if="subItem.id_mst_pembayaran_status == 4"
                     >Menunggu Verifikasi</div>
-                    
+
                     <div
                       class="d-block pa-2 red accent-2 white--text text-center"
                       v-if="subItem.id_mst_pembayaran_status == 6"
@@ -196,7 +200,7 @@
       </v-tab-item>
     </v-tabs>
 
-    <!-- <v-pagination v-model="page" @input="loadData" :length="lengthPage" :total-visible="5"></v-pagination> -->
+    <v-pagination v-model="page" @input="loadData" :length="lengthPage" :total-visible="5"></v-pagination>
   </div>
 </template>
 
@@ -235,7 +239,7 @@ export default {
           params: {
             id_pembeli: this.user.id,
             offset: offset,
-            limit: 999
+            limit: this.limit
           }
         })
         .then(response => {
@@ -243,6 +247,8 @@ export default {
           this.orders = data;
           this.total = response.data.count;
           this.lengthPage = Math.ceil(this.total / this.limit);
+
+          this.orderStatus = [];
 
           const map = new Map();
           for (const item of this.orders) {
@@ -254,6 +260,8 @@ export default {
               });
             }
           }
+
+          this.group = [];
 
           for (let index = 0; index < this.orderStatus.length; index++) {
             const id_mst_pembayaran_status = this.orderStatus[index]
