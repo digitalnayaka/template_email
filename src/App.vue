@@ -2,11 +2,11 @@
   <v-app>
     <v-navigation-drawer
       v-model="drawer"
-      dark
       app
       width="270"
       src="/img/gradient2.jpg"
       height="100%"
+      dark
     >
       <div class="pa-2" v-if="guest">
         <v-btn dark block color="teal" class="mb-1" @click="setDialogComponent('login')">
@@ -92,16 +92,16 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
-        <v-img src="img/logo-tulisan.png" width="150" contain></v-img>
+        <v-img src="img/logo-tulisan.png" width="150px" contain></v-img>
       </v-toolbar-title>
 
       <v-text-field
-        :slot="$vuetify.breakpoint.xsOnly ? 'extension' : 'default'"
         flat
         solo-inverted
         hide-details
         prepend-inner-icon="mdi-magnify"
         label="Cari"
+        class="hidden-sm-and-down"
         @click="setDialogComponent('search')"
         contain
       ></v-text-field>
@@ -113,14 +113,13 @@
       </v-btn>
 
       <v-btn icon to="/notifikasi">
-        <v-badge color="orange" overlap v-if="countNotif > 0">
+        <v-badge color="orange" overlap v-if="countNotif.length > 0">
           <template v-slot:badge>
-            <span>{{ countNotif }}</span>
+            <span>{{ countNotif.length }}</span>
           </template>
 
           <v-icon>mdi-bell-outline</v-icon>
         </v-badge>
-
         <v-icon v-else>mdi-bell-outline</v-icon>
       </v-btn>
     </v-app-bar>
@@ -163,7 +162,7 @@ export default {
   data: () => ({
     drawer: true,
     menus: [],
-    countNotif: 0,
+    countNotif: [],
     notif: ""
   }),
   methods: {
@@ -196,17 +195,29 @@ export default {
           .get("/log/v1/log/notifikasi", {
             params: {
               id_user: this.user.id,
-              is_read: false,
-              limit: 1
+              limit: 999
             }
           })
           .then(response => {
-            let { data } = response;
-            this.countNotif = data.count;
+            let { data } = response.data;
+
+            this.countNotif = [];
+
+            for (let index = 0; index < data.length; index++) {
+              const element = data[index];
+              if (element.is_read == false) {
+                this.countNotif.push(element.id);
+              }
+            }
           })
           .catch(error => {
-            let responses = error.response.data;
-            console.log(responses.api_message);
+            let responses = error.response;
+            let data = responses.data;
+            this.setAlert({
+              status: true,
+              color: "error",
+              text: data.api_message
+            });
           });
       }
     },
@@ -289,3 +300,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.a {
+  color: black;
+}
+</style>

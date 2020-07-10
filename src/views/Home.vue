@@ -90,68 +90,79 @@
     </v-row>
 
     <v-divider class="mt-4"></v-divider>
+    <div align="center">
+      <h2>Tawar Bersama Berlangsung</h2>
 
-    <v-container fluid>
-      <div align="center">
-        <h2>Tawar Bersama Berlangsung</h2>
+      <p>Ikuti Tawar Bersama berikut!</p>
+    </div>
+    <v-row dense>
+      <v-col
+        class="col-md-4 col-lg-4 col-sm-4"
+        v-for="item in tbberlangsung"
+        :key="item._source.id"
+        align="center"
+      >
+        <div class="scrolling-wrapper-flexbox mx-2" v-if="tbberlangsung.length > 0">
+          <!-- <v-flex v-for="item in tbberlangsung" :key="item._source.id" xs6 sm3 lg3 md3> -->
+          <v-card
+            :to="item._source.id_mst_iklan_type != 2 ? '/detail_iklan/' + item._source.id : '/detail_paket/' +  item._source.id"
+          >
+            <v-img width="400" height="300" :src="getImage(item._source.photo)" contain>
+              <v-card-title>
+                <v-chip small left color="red" text-color="white">{{ item._source.mst_iklan_jenis }}</v-chip>
+                <v-chip
+                  small
+                  left
+                  color="orange"
+                  text-color="white"
+                >{{ item._source.mst_iklan_type }}</v-chip>
+                <v-chip
+                  small
+                  left
+                  color="green"
+                  text-color="white"
+                  v-if="item._source.is_verified == true"
+                >Tiket</v-chip>
+              </v-card-title>
+            </v-img>
 
-        <p>Ikuti Tawar Bersama berikut!</p>
-      </div>
+            <v-list dense class="ma-0 pa-0">
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title class="font-weight-black">{{ item._source.judul }}</v-list-item-title>
 
-      <v-flex v-for="item in tbberlangsung" :key="item._source.id" xs6 sm3>
-        <v-card
-          :to="item._source.id_mst_iklan_type != 2 ? '/detail_iklan/' + item._source.id : '/detail_paket/' +  item._source.id"
-        >
-          <v-img :src="getImage(item._source.photo)" contain>
-            <v-card-title>
-              <v-chip small left color="red" text-color="white">{{ item._source.mst_iklan_jenis }}</v-chip>
-              <v-chip small left color="orange" text-color="white">{{ item._source.mst_iklan_type }}</v-chip>
-              <v-chip
-                small
-                left
-                color="green"
-                text-color="white"
-                v-if="item._source.is_verified == true"
-              >Tiket</v-chip>
-            </v-card-title>
-          </v-img>
+                  <v-list-item-subtitle v-if="item._source.harga == null">Harga awal</v-list-item-subtitle>
+                  <v-list-item-subtitle v-else>Harga</v-list-item-subtitle>
+                  <v-list-item-subtitle
+                    style="color:red"
+                    v-if="item._source.harga == null"
+                  >Rp {{ Number(item._source.harga_awal).toLocaleString('id-ID') }}</v-list-item-subtitle>
+                  <v-list-item-subtitle
+                    style="color:red"
+                    v-else
+                  >Rp {{ Number(item._source.harga).toLocaleString('id-ID') }}</v-list-item-subtitle>
+                  <v-list-item-subtitle>
+                    <v-avatar size="16" item>
+                      <v-img src="/img/verified.png" alt="verified"></v-img>
+                    </v-avatar>
+                    {{ item._source.app_user }}
+                  </v-list-item-subtitle>
 
-          <v-list dense class="ma-0 pa-0">
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="font-weight-black">{{ item._source.judul }}</v-list-item-title>
-
-                <v-list-item-subtitle v-if="item._source.harga == null">Harga awal</v-list-item-subtitle>
-                <v-list-item-subtitle v-else>Harga</v-list-item-subtitle>
-                <v-list-item-subtitle
-                  style="color:red"
-                  v-if="item._source.harga == null"
-                >Rp {{ Number(item._source.harga_awal).toLocaleString('id-ID') }}</v-list-item-subtitle>
-                <v-list-item-subtitle
-                  style="color:red"
-                  v-else
-                >Rp {{ Number(item._source.harga).toLocaleString('id-ID') }}</v-list-item-subtitle>
-                <v-list-item-subtitle>
-                  <v-avatar size="16" item>
-                    <v-img src="/img/verified.png" alt="verified"></v-img>
-                  </v-avatar>
-                  {{ item._source.app_user }}
-                </v-list-item-subtitle>
-
-                <v-list-item-subtitle v-if="item._source.id_mst_iklan_jenis == 2">
-                  <v-icon small>mdi-calendar</v-icon>
-                  {{ item._source.tanggal_mulai | dateTimeFormat(utc) }} {{ waktu }}
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-card>
-      </v-flex>
-
-      <div align="center">
-        <v-btn dark color="teal" to="/category/mokas?tb=berlangsung">Lihat Semua</v-btn>
-      </div>
-    </v-container>
+                  <v-list-item-subtitle v-if="item._source.id_mst_iklan_jenis == 2">
+                    <v-icon small>mdi-calendar</v-icon>
+                    {{ item._source.tanggal_mulai | dateTimeFormat(utc) }} {{ waktu }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card>
+          <!-- </v-flex> -->
+        </div>
+      </v-col>
+    </v-row>
+    <div align="center">
+      <v-btn dark color="teal" to="/category/mokas?tb=berlangsung">Lihat Semua</v-btn>
+    </div>
 
     <v-divider></v-divider>
 
@@ -249,7 +260,10 @@ export default {
     jadwal: [],
     tbberlangsung: [],
     utc: moment().utcOffset() / 60 - 7,
-    waktu: ""
+    waktu: "",
+    offset: 0,
+    total: 0,
+    limit: 20
   }),
   methods: {
     showBanners() {
@@ -285,16 +299,21 @@ export default {
         });
     },
     jadwalLelang() {
+      var offset = (this.page - 1) * this.limit;
       this.axios
         .get("/iklan/v2/iklan_jadwal_tb", {
           params: {
             id_mst_iklan_status: 1,
-            limit: 999
+            offset: offset,
+            limit: this.limit
           }
         })
         .then(response => {
           let { data } = response.data;
-          this.jadwal = data;
+          this.jadwal = data.data;
+
+          this.total = data.count;
+          this.lengthPage = Math.ceil(this.total / this.limit);
         })
         .catch(error => {
           let responses = error.response.data;

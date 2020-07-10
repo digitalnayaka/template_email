@@ -144,7 +144,7 @@ export default {
           params: {
             tanggal_mulai: this.date,
             id_mst_iklan_status: 1,
-            limit: 999
+            limit: 99
           }
         })
         .then(response => {
