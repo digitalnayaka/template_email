@@ -53,16 +53,17 @@
         </v-carousel>
       </v-col>
 
-      <v-col cols="12" sm="6">
+      <v-col cols="12" sm="6" xs="6">
         <v-card class="d-flex justify-space-between align-center" flat>
           <v-card align="center">
-            <v-card-title class="d-block pa-2 teal accent-4 white--text">Tanggal Mulai</v-card-title>
+            <v-card-title class="teal accent-4 white--text">Tanggal Mulai</v-card-title>
             <div>{{ hits.tanggal_mulai | dateFormat}}</div>
             <div>{{ hits.tanggal_mulai | timeFormat}} {{ waktu }}</div>
           </v-card>
-          <v-img src="/img/icons/gradient.jpg" width="100" height="60"></v-img>
+          <v-img src="/img/icons/gradient.jpg" width="100" height="100"></v-img>
+
           <v-card align="center">
-            <v-card-title class="d-block pa-2 red accent-4 white--text">Tanggal Selesai</v-card-title>
+            <v-card-title class="red accent-4 white--text">Tanggal Selesai</v-card-title>
             <div>{{ hits.tanggal_selesai | dateFormat}}</div>
             <div>{{ hits.tanggal_selesai | timeFormat}} {{ waktu }}</div>
           </v-card>

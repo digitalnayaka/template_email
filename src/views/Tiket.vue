@@ -41,21 +41,21 @@
     </v-row>
 
     <v-row dense class="text-center">
-      <v-col cols="12" sm="4">
+      <v-col cols="4" sm="4" xs="4">
         <v-card dark color="transparent" to="/beli_tiket">
           <v-img src="/img/beli-tiket.png"></v-img>
           <v-btn block small color="primary">Beli Tiket</v-btn>
         </v-card>
       </v-col>
 
-      <v-col cols="12" sm="4">
+      <v-col cols="4" sm="4" xs="4">
         <v-card dark color="transparent" to="/refund_tiket">
           <v-img class="center_image" src="/img/refund-tiket.png"></v-img>
           <v-btn block small color="red">Refund Tiket</v-btn>
         </v-card>
       </v-col>
 
-      <v-col cols="12" sm="4">
+      <v-col cols="4" sm="4" xs="4">
         <v-card dark color="transparent" to="/list_transaksi">
           <v-img class="center_image" src="/img/list-transaksi.png"></v-img>
           <v-btn block small color="amber darken-1">Daftar Transaksi</v-btn>
@@ -71,15 +71,13 @@
       :to="item.id_mst_pembayaran_status == 0 ? '/detail_iklan/' + item.id_iklan : '/detail_transaksi/' + item.id_order"
       class="my-4"
     >
-    <v-toolbar dense flat>
-      <div>Tawar Bersama selesai pada:</div>
+      <v-toolbar dense flat>
+        <div>Tawar Bersama selesai pada:</div>
 
-      <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
 
-      <div
-        class="red--text"
-      >{{ item.tanggal_selesai | dateTimeFormat(utc) }} {{ waktu }}</div>
-    </v-toolbar>
+        <div class="red--text">{{ item.tanggal_selesai | dateTimeFormat(utc) }} {{ waktu }}</div>
+      </v-toolbar>
 
       <v-list class="pa-0">
         <v-list-item>
@@ -89,7 +87,9 @@
 
           <v-list-item-content>
             <v-list-item-title>{{ item.judul }}</v-list-item-title>
-            <v-list-item-subtitle class="teal--text">{{ item.jenis }} {{ item.type }} {{ item.type_tb }}</v-list-item-subtitle>
+            <v-list-item-subtitle
+              class="teal--text"
+            >{{ item.jenis }} {{ item.type }} {{ item.type_tb }}</v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-content>

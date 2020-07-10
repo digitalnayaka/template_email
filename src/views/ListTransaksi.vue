@@ -289,7 +289,7 @@ export default {
         .get("/transaksi/v1/pencairan_tiket", {
           params: {
             id_penjual: this.user.id,
-            limit: 999
+            limit: this.limit
           }
         })
         .then(response => {
