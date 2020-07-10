@@ -48,6 +48,8 @@
             <p class="display-1">Tidak ada data</p>
             <p>Tidak ada jadwal tawar bersama di tanggal ini</p>
           </div>
+
+          <v-pagination v-model="page" @input="jadwalLelang" :length="lengthPage" :total-visible="5"></v-pagination>
         </v-container>
       </v-tab-item>
 
@@ -101,8 +103,11 @@
                 <p class="display-1">Tidak ada data</p>
                 <p>Tidak ada jadwal tawar bersama di tanggal ini</p>
               </div>
+
+              <v-pagination v-model="page" @input="jadwalLelang" :length="lengthPage" :total-visible="5"></v-pagination>
             </v-col>
           </v-row>
+          
         </v-container>
       </v-tab-item>
     </v-tabs>
@@ -118,20 +123,31 @@ export default {
     jadwal: [],
     event: [],
     iklan: [],
-    arrayEvents: []
+    arrayEvents: [],
+    page: 1,
+    lengthPage: 0,
+    limit: 20,
+    offset: 0,
+    total: 0
   }),
   methods: {
     jadwalLelang() {
+      var offset = (this.page - 1) * this.limit;
+
       this.axios
         .get("/iklan/v2/iklan_jadwal_tb", {
           params: {
             id_mst_iklan_status: 1,
-            limit: 999
+            offset: offset,
+            limit: this.limit
           }
         })
         .then(response => {
           let { data } = response.data;
           this.jadwal = data;
+
+          this.total = this.jadwal.length;
+          this.lengthPage = Math.ceil(this.total / this.limit);
         })
         .catch(error => {
           let responses = error.response.data;
