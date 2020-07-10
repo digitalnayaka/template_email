@@ -96,12 +96,7 @@
       <p>Ikuti Tawar Bersama berikut!</p>
     </div>
     <v-row dense>
-      <v-col
-        class="col-md-4 col-lg-4 col-sm-4"
-        v-for="item in tbberlangsung"
-        :key="item._source.id"
-        align="center"
-      >
+      <v-flex v-for="item in tbberlangsung" :key="item._source.id" align="center" xs6 sm6 md3>
         <div class="scrolling-wrapper-flexbox mx-2" v-if="tbberlangsung.length > 0">
           <!-- <v-flex v-for="item in tbberlangsung" :key="item._source.id" xs6 sm3 lg3 md3> -->
           <v-card
@@ -158,19 +153,19 @@
           </v-card>
           <!-- </v-flex> -->
         </div>
-      </v-col>
+      </v-flex>
     </v-row>
     <div align="center">
       <v-btn dark color="teal" to="/category/mokas?tb=berlangsung">Lihat Semua</v-btn>
     </div>
 
-    <v-divider></v-divider>
+    <v-divider class="mt-4"></v-divider>
 
     <div class="d-inline-block container mx-auto" align="center">
       <v-row justify="center" align="center">
-        <v-col class="col-md-4 col-lg-4 col-sm-4">
+        <v-flex xs6 sm6 md6 lg6>
           <v-img src="img/app-min.png" width="280" contain></v-img>
-        </v-col>
+        </v-flex>
 
         <v-col class="col-lg-6 col-md-6 col-sm-6">
           <div class="container">
@@ -261,6 +256,7 @@ export default {
     tbberlangsung: [],
     utc: moment().utcOffset() / 60 - 7,
     waktu: "",
+    lengthPage: 0,
     offset: 0,
     total: 0,
     limit: 20
@@ -299,21 +295,16 @@ export default {
         });
     },
     jadwalLelang() {
-      var offset = (this.page - 1) * this.limit;
       this.axios
         .get("/iklan/v2/iklan_jadwal_tb", {
           params: {
             id_mst_iklan_status: 1,
-            offset: offset,
-            limit: this.limit
+            limit: 999
           }
         })
         .then(response => {
           let { data } = response.data;
-          this.jadwal = data.data;
-
-          this.total = data.count;
-          this.lengthPage = Math.ceil(this.total / this.limit);
+          this.jadwal = data;
         })
         .catch(error => {
           let responses = error.response.data;
