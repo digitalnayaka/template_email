@@ -49,7 +49,12 @@
             <p>Tidak ada jadwal tawar bersama di tanggal ini</p>
           </div>
 
-          <v-pagination v-model="page" @input="jadwalLelang" :length="lengthPage" :total-visible="5"></v-pagination>
+          <v-pagination
+            v-model="page"
+            @input="jadwalLelang"
+            :length="lengthPage"
+            :total-visible="5"
+          ></v-pagination>
         </v-container>
       </v-tab-item>
 
@@ -104,10 +109,14 @@
                 <p>Tidak ada jadwal tawar bersama di tanggal ini</p>
               </div>
 
-              <v-pagination v-model="page" @input="jadwalLelang" :length="lengthPage" :total-visible="5"></v-pagination>
+              <v-pagination
+                v-model="page2"
+                @input="listIklan"
+                :length="lengthPage2"
+                :total-visible="5"
+              ></v-pagination>
             </v-col>
           </v-row>
-          
         </v-container>
       </v-tab-item>
     </v-tabs>
@@ -128,7 +137,12 @@ export default {
     lengthPage: 0,
     limit: 20,
     offset: 0,
-    total: 0
+    total: 0,
+    page2: 1,
+    lengthPage2: 0,
+    limit2: 20,
+    offset2: 0,
+    total2: 0
   }),
   methods: {
     jadwalLelang() {
@@ -155,17 +169,23 @@ export default {
         });
     },
     listIklan() {
+      var offset2 = (this.page2 - 1) * this.limit2;
+
       this.axios
         .get("/iklan/v2/iklan_jadwal_tb", {
           params: {
             tanggal_mulai: this.date,
             id_mst_iklan_status: 1,
-            limit: 99
+            offset: offset2,
+            limit: this.limit2
           }
         })
         .then(response => {
           let { data } = response.data;
           this.iklan = data;
+
+          this.total2 = this.iklan.length;
+          this.lengthPage2 = Math.ceil(this.total2 / this.limit2);
         })
         .catch(error => {
           let responses = error.response.data;
