@@ -496,7 +496,7 @@
 
                     <p class="error">{{ error }}</p>
 
-                    <StreamBarcodeReader @decode="onDecode" @error="onInit"></StreamBarcodeReader>
+                    <!-- <StreamBarcodeReader @decode="onDecode" @error="onInit"></StreamBarcodeReader> -->
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
@@ -523,13 +523,13 @@
 import { mapGetters, mapActions } from "vuex";
 import { mask } from "vue-the-mask";
 import ImageUploader from "vue-image-upload-resize";
-import { StreamBarcodeReader } from "vue-barcode-reader";
+// import { StreamBarcodeReader } from "vue-barcode-reader";
 
 export default {
   name: "TambahUnit",
   components: {
-    ImageUploader,
-    StreamBarcodeReader
+    ImageUploader
+    // StreamBarcodeReader
   },
   directives: { mask },
   beforeRouteLeave(to, from, next) {
