@@ -99,7 +99,12 @@
               <v-divider></v-divider>
             </v-list>
 
-            <v-pagination v-model="page" @input="getUnitMokas" :length="lengthPage" :total-visible="5"></v-pagination>
+            <v-pagination
+              v-model="page"
+              @input="getUnitMokas"
+              :length="lengthPage"
+              :total-visible="5"
+            ></v-pagination>
           </v-stepper-content>
 
           <v-stepper-content step="3">
@@ -245,6 +250,7 @@
                       v-model="tglMulaiTB"
                       @input="dateTimeRange"
                       :textFieldProps="suffix"
+                      :timePickerProps="{format:'24hr'}"
                     >
                       <template slot="dateIcon">
                         <v-icon>mdi-calendar</v-icon>
@@ -264,6 +270,7 @@
                       v-model="tglSelesaiTB"
                       :datePickerProps="datePickerProps"
                       :textFieldProps="textFieldProps"
+                      :timePickerProps="{format:'24hr'}"
                       @input="checkDateTB"
                     >
                       <template slot="dateIcon">

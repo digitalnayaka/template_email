@@ -261,7 +261,7 @@ export default {
         });
         this.getModules();
         this.countNotif = [];
-        // this.$router.push({ path: "/" });
+        this.$router.push({ path: "/" });
       }
     }
   },
