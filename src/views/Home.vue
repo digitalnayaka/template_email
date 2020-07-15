@@ -170,13 +170,13 @@
       <v-btn dark color="teal" to="/category/mokas?tb=berlangsung">Lihat Semua</v-btn>
     </div>
 
-    <v-divider></v-divider>
+    <v-divider class="mt-4"></v-divider>
 
     <div class="d-inline-block container mx-auto" align="center">
       <v-row justify="center" align="center">
-        <v-col class="col-md-4 col-lg-4 col-sm-4">
+        <v-flex xs6 sm6 md6 lg6>
           <v-img src="img/app-min.png" width="280" contain></v-img>
-        </v-col>
+        </v-flex>
 
         <v-col class="col-lg-6 col-md-6 col-sm-6">
           <div class="container">

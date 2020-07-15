@@ -149,18 +149,25 @@ export default {
   },
   methods: {
     getTBBerlangsung() {
-      var params = new URLSearchParams();
+      // var params = new URLSearchParams();
 
-      params.append("id_app_user", this.user.id);
-      params.append("id_mst_iklan_status", 1);
-      params.append("id_mst_iklan_jenis", 2);
+      // params.append("id_app_user", this.user.id);
+      // params.append("id_mst_iklan_status", 1);
+      // params.append("id_mst_iklan_jenis", 2);
 
-      var request = {
-        params: params
-      };
+      // var request = {
+      //   params: params
+      // };
 
       this.axios
-        .get("/bid/v1/iklan_tb_peserta", request)
+        .get("/bid/v1/iklan_tb_peserta", {
+          params: {
+            id_app_user: this.user.id,
+            id_mst_iklan_status: 1,
+            id_mst_iklan_jenis: 2
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
+        })
         .then(response => {
           let { data } = response.data;
           this.berlangsung = data;
@@ -182,7 +189,8 @@ export default {
       params.append("id_mst_iklan_jenis", 2);
 
       var request = {
-        params: params
+        params: params,
+        headers: { Authorization: "Bearer " + this.user.token }
       };
 
       this.axios
