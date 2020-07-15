@@ -222,9 +222,7 @@
         </div>
 
         <div v-else>
-          <span
-            class="subheading red--text float-left"
-          >Tawar Bersama {{ iklan.mst_iklan_type }} {{ iklan.mst_type_tb }} {{ hits.mst_type_tb }}</span>
+          <span class="subheading red--text float-left">Tawar Bersama {{ iklan.mst_iklan_type }}</span>
 
           <div class="text-right ma-0 pa-0">
             <v-icon>mdi-eye</v-icon>
