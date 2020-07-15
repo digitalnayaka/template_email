@@ -21,8 +21,8 @@
       <div v-else>
         <v-list dense>
           <v-list-item>
-            <v-list-item-avatar size="80" color="white">
-              <v-icon large v-if="user.photo == null">mdi-account-circle</v-icon>
+            <v-list-item-avatar size="80">
+              <v-img src="/img/profile.png" contain v-if="user.photo == null"></v-img>
               <v-img :src="getImage(user.photo)" contain v-else></v-img>
             </v-list-item-avatar>
 

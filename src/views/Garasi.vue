@@ -44,7 +44,14 @@
     <v-row align="center" dense>
       <v-col cols="6" sm="4" v-for="item in unitMokas" :key="item.id">
         <v-card outlined tile :to="'/unit_mokas/'+item.id">
-          <v-img class="align-start" width="350px" height="250px" :src="getImage(item.foto_1)" contain></v-img>
+          <v-img
+            class="align-start"
+            width="350px"
+            height="250px"
+            :src="getImage(item.foto_1)"
+            contain
+            align="center"
+          ></v-img>
 
           <v-list class="ma-0 pa-0">
             <v-list-item>
