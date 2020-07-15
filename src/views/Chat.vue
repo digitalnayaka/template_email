@@ -106,7 +106,7 @@ import "firebase/firestore";
 import { db } from "../main";
 import VueChatScroll from "vue-chat-scroll";
 import "bootstrap";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Vue from "vue";
 
 Vue.use(VueChatScroll);

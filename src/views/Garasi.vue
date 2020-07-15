@@ -42,7 +42,7 @@
     </v-card>
     <v-container fluid>
       <v-row align="center" dense>
-        <v-col cols="6" sm="4" v-for="item in unitMokas" :key="item.id">
+        <v-col cols="6" sm="4" lg="3" v-for="item in unitMokas" :key="item.id">
           <v-card outlined tile :to="'/unit_mokas/'+item.id">
             <div align="center">
               <v-img align="center" width="500" height="300" :src="getImage(item.foto_1)" contain></v-img>
