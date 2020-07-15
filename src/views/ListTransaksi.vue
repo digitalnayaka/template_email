@@ -235,12 +235,12 @@ export default {
 
       this.axios
         .get("/transaksi/v1/order", {
-          headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id_pembeli: this.user.id,
             offset: offset,
             limit: this.limit
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then(response => {
           let { data } = response.data;
@@ -290,7 +290,8 @@ export default {
           params: {
             id_penjual: this.user.id,
             limit: this.limit
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then(response => {
           let { data } = response.data;

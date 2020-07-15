@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-card>
+    <v-card v-if="notif.length > 0">
       <v-list>
         <v-subheader class="title">Notifikasi</v-subheader>
 
@@ -44,6 +44,10 @@
 
       <v-pagination v-model="page" @input="getNotif" :length="lengthPage" :total-visible="5"></v-pagination>
     </v-card>
+
+    <div align="center" v-else>
+      <v-img src="/img/notifikasi-belum.png" width="500" height="600" contain></v-img>
+    </div>
   </div>
 </template>
 

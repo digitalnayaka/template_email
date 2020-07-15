@@ -221,7 +221,8 @@ export default {
         .get("/tiket/v1/total_tiket", {
           params: {
             id_app_user: this.user.id
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;
@@ -238,7 +239,8 @@ export default {
           params: {
             id_app_user: this.user.id,
             limit: 999
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;
@@ -306,15 +308,19 @@ export default {
             id_app_user: this.user.id,
             id_mst_tiket_status: 1,
             limit: this.qty
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;
           this.tiket = data;
         })
-        .catch(error => {
-          let responses = error.response.data;
-          console.log(responses);
+        .catch(() => {
+          this.setAlert({
+            status: true,
+            color: "error",
+            text: "Anda tidak memiliki tiket"
+          });
         });
     },
     refund() {

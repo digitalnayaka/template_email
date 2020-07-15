@@ -149,16 +149,6 @@ export default {
   },
   methods: {
     getTBBerlangsung() {
-      // var params = new URLSearchParams();
-
-      // params.append("id_app_user", this.user.id);
-      // params.append("id_mst_iklan_status", 1);
-      // params.append("id_mst_iklan_jenis", 2);
-
-      // var request = {
-      //   params: params
-      // };
-
       this.axios
         .get("/bid/v1/iklan_tb_peserta", {
           params: {

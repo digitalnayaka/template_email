@@ -65,64 +65,76 @@
 
     <h3 class="mt-2">Daftar Pemakaian Tiket</h3>
 
-    <v-card
-      v-for="item in used"
-      :key="item.id_iklan"
-      :to="item.id_mst_pembayaran_status == 0 ? '/detail_iklan/' + item.id_iklan : '/detail_transaksi/' + item.id_order"
-      class="my-4"
-    >
-      <v-toolbar dense flat>
-        <div>Tawar Bersama selesai pada:</div>
+    <div v-if="used.length > 0">
+      <v-card
+        v-for="item in used"
+        :key="item.id_iklan"
+        :to="item.id_mst_pembayaran_status == 0 ? '/detail_iklan/' + item.id_iklan : '/detail_transaksi/' + item.id_order"
+        class="my-4"
+      >
+        <v-toolbar dense flat>
+          <div>Tawar Bersama selesai pada:</div>
 
-        <v-spacer></v-spacer>
+          <v-spacer></v-spacer>
 
-        <div class="red--text">{{ item.tanggal_selesai | dateTimeFormat(utc) }} {{ waktu }}</div>
-      </v-toolbar>
+          <div class="red--text">{{ item.tanggal_selesai | dateTimeFormat(utc) }} {{ waktu }}</div>
+        </v-toolbar>
 
-      <v-list class="pa-0">
-        <v-list-item>
-          <v-list-item-avatar rounded size="80">
-            <v-img :src="getImage(item.photo)"></v-img>
-          </v-list-item-avatar>
+        <v-list class="pa-0">
+          <v-list-item>
+            <v-list-item-avatar rounded size="80">
+              <v-img :src="getImage(item.photo)"></v-img>
+            </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.judul }}</v-list-item-title>
-            <v-list-item-subtitle
-              class="teal--text"
-            >{{ item.jenis }} {{ item.type }} {{ item.type_tb }}</v-list-item-subtitle>
-          </v-list-item-content>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.judul }}</v-list-item-title>
+              <v-list-item-subtitle
+                class="teal--text"
+              >{{ item.jenis }} {{ item.type }} {{ item.type_tb }}</v-list-item-subtitle>
+            </v-list-item-content>
 
-          <v-list-item-content>
-            <v-list-item-title>Tawaran Terakhir</v-list-item-title>
-            <v-list-item-subtitle
-              style="color: black"
-            >Rp {{ Number(item.bid_tertinggi).toLocaleString("id-ID") }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Tawaran Terakhir</v-list-item-title>
+              <v-list-item-subtitle
+                style="color: black"
+              >Rp {{ Number(item.bid_tertinggi).toLocaleString("id-ID") }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
 
-        <div
-          class="d-block pa-2 yellow darken-1 white--text text-center"
-          v-if="item.id_mst_status_pemenang == 1"
-        >{{ item.deskripsi_status }}</div>
-        <div
-          class="d-block pa-2 red accent-2 white--text text-center"
-          v-if="item.id_mst_status_pemenang == 2"
-        >
-          <div v-if="item.id_mst_pembayaran_status == 3">{{ item.pembayaran_status }}</div>
-          <div v-else>{{ item.deskripsi_status }}</div>
-        </div>
-        <div
-          class="d-block pa-2 red accent-2 white--text text-center"
-          v-if="item.id_mst_status_pemenang == 3"
-        >{{ item.deskripsi_status }}</div>
-        <div
-          class="d-block pa-2 red accent-2 white--text text-center"
-          v-if="item.id_mst_status_pemenang == 4"
-        >{{ item.deskripsi_status }}</div>
-      </v-list>
-    </v-card>
+          <div
+            class="d-block pa-2 yellow darken-1 white--text text-center"
+            v-if="item.id_mst_status_pemenang == 1"
+          >{{ item.deskripsi_status }}</div>
+          <div
+            class="d-block pa-2 red accent-2 white--text text-center"
+            v-if="item.id_mst_status_pemenang == 2"
+          >
+            <div v-if="item.id_mst_pembayaran_status == 3">{{ item.pembayaran_status }}</div>
+            <div v-else>{{ item.deskripsi_status }}</div>
+          </div>
+          <div
+            class="d-block pa-2 red accent-2 white--text text-center"
+            v-if="item.id_mst_status_pemenang == 3"
+          >{{ item.deskripsi_status }}</div>
+          <div
+            class="d-block pa-2 red accent-2 white--text text-center"
+            v-if="item.id_mst_status_pemenang == 4"
+          >{{ item.deskripsi_status }}</div>
+        </v-list>
+      </v-card>
+    </div>
 
-    <v-pagination v-model="page" @input="getTiket" :length="lengthPage" :total-visible="5"></v-pagination>
+    <v-pagination
+      v-model="page"
+      @input="getTiket"
+      :length="lengthPage"
+      :total-visible="5"
+      v-if="used.length > 0"
+    ></v-pagination>
+
+    <div align="center" v-else>
+      <h3>Tidak ada data</h3>
+    </div>
   </div>
 </template>
 
@@ -151,7 +163,8 @@ export default {
         .get("/tiket/v1/total_tiket", {
           params: {
             id_app_user: this.user.id
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;
@@ -172,7 +185,8 @@ export default {
             use_tiket: true,
             offset: offset,
             limit: this.limit
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;

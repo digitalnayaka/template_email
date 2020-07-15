@@ -498,9 +498,10 @@
               <v-btn block color="primary" @click="dialogInfo2 = true">Hubungi</v-btn>
             </v-col>
             <v-col cols="6">
-              <v-btn block color="teal" :to="'/chat2/' + iklan.id_app_user">Pesan</v-btn>
+              <v-btn block color="teal" :to="'/chat/' + iklan.id_app_user">Pesan</v-btn>
             </v-col>
           </v-row>
+          
           <v-dialog v-model="dialogInfo2" persistent max-width="500px">
             <v-card>
               <v-toolbar dark color="teal">
@@ -702,7 +703,8 @@ export default {
             id_app_user: this.user.id,
             id_mst_tiket_status: 1,
             limit: 1
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;
