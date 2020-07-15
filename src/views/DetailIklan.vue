@@ -60,7 +60,7 @@
             <div>{{ hits.tanggal_mulai | dateFormat}}</div>
             <div>{{ hits.tanggal_mulai | timeFormat}} {{ waktu }}</div>
           </v-card>
-          <v-img src="/img/icons/gradient.jpg" width="100" height="100"></v-img>
+          <v-img src="/img/icons/gradient.jpg" width="100" height="60"></v-img>
 
           <v-card align="center">
             <v-card-title class="red accent-4 white--text">Tanggal Selesai</v-card-title>
@@ -398,7 +398,7 @@
       v-else
     >Tanggal Expired: {{ iklan.expired_at | dateTimeFormat(utc) }} {{ waktu }}</p>
 
-    <div v-if="iklan.id_mst_iklan_jenis > 1 && start == true">
+    <div v-if="iklan.id_mst_iklan_jenis > 1 && start == true && end == false">
       <div v-if="!guest">
         <div v-if="iklan.id_app_user != user.id">
           <v-btn
@@ -899,7 +899,8 @@ export default {
         .get("/transaksi/v1/order", {
           params: {
             id_iklan: this.$route.params.id
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;

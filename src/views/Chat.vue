@@ -20,6 +20,7 @@
           <v-btn small dark @click="pinPemenang" color="teal">Selesai</v-btn>
         </div>
       </v-card>
+
       <div class="card">
         <div class="card-body">
           <p class="nomessages text-secondary" v-if="messages.length == 0">[No messages yet!]</p>
@@ -205,7 +206,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .chat h2 {
   font-size: 2.6em;
   margin-bottom: 0px;
