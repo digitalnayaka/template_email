@@ -501,7 +501,7 @@
               <v-btn block color="teal" :to="'/chat/' + iklan.id_app_user">Pesan</v-btn>
             </v-col>
           </v-row>
-          
+
           <v-dialog v-model="dialogInfo2" persistent max-width="500px">
             <v-card>
               <v-toolbar dark color="teal">
@@ -711,12 +711,11 @@ export default {
           this.tiket = data[0];
           this.getTotalTiket();
         })
-        .catch(error => {
-          let responses = error.response.data;
+        .catch(() => {
           this.setAlert({
             status: true,
             color: "error",
-            text: responses.api_message
+            text: "Anda tidak memiliki tiket"
           });
         });
     },
