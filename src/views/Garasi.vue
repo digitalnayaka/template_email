@@ -42,10 +42,11 @@
     </v-card>
     <v-container fluid>
       <v-row align="center" dense>
-        <v-flex v-for="item in unitMokas" :key="item.id" xs4 sm4 lg4>
-          <!-- <v-col cols="6" sm="4" lg="4" v-for="item in unitMokas" :key="item.id"> -->
+        <v-col cols="6" sm="4" v-for="item in unitMokas" :key="item.id">
           <v-card outlined tile :to="'/unit_mokas/'+item.id">
-            <v-img align="center" width="500" height="300" :src="getImage(item.foto_1)" contain></v-img>
+            <div align="center">
+              <v-img align="center" width="500" height="300" :src="getImage(item.foto_1)" contain></v-img>
+            </div>
 
             <v-list class="ma-0 pa-0">
               <v-list-item>
@@ -57,8 +58,7 @@
               </v-list-item>
             </v-list>
           </v-card>
-          <!-- </v-col> -->
-        </v-flex>
+        </v-col>
       </v-row>
     </v-container>
     <v-pagination v-model="page" @input="doSearch" :length="lengthPage" :total-visible="5"></v-pagination>
