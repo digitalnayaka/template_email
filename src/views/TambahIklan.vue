@@ -291,7 +291,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="primary" @click="id == undefined ? e1 = 2 : e1 = 1">Sebelumnya</v-btn>
-              <v-btn color="primary" :disabled="!valid" @click="storeItem">Simpan</v-btn>
+              <v-btn color="primary" :disabled="!valid" @click="storeItem" :loading="loading">Simpan</v-btn>
             </v-card-actions>
           </v-stepper-content>
         </v-form>
@@ -383,6 +383,8 @@ export default {
       lengthPage: 0,
       limit: 10,
       offset: 0,
+      loader: null,
+      loading: false,
       total: 0
     };
   },
@@ -514,6 +516,8 @@ export default {
       var r = confirm("Apakah Anda Yakin!");
       if (r == true) {
         this.submit = true;
+
+        this.loader = "loading";
 
         let formData = new FormData();
 

@@ -14,13 +14,13 @@
 
       <v-card align="center" class="d-inline-block mx-auto">
         <v-list>
-          <v-list-item>
+          <v-list-item href="http://faq.simotor.id" target="_self">
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon>mdi-cellphone</v-icon>Versi Aplikasi
               </v-list-item-title>
 
-              <v-list-item-subtitle>1.4.0</v-list-item-subtitle>
+              <v-list-item-subtitle>1.5.0</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 

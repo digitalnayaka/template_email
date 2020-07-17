@@ -311,7 +311,7 @@
     <v-divider></v-divider>
 
     <v-row dense v-if="this.liveBid != ''">
-      <v-col cols="6" v-if="iklan.id_mst_iklan_jenis > 1">
+      <v-col cols="6" sm="6" v-if="iklan.id_mst_iklan_jenis > 1">
         <v-list tile dense>
           <v-list-item v-for="(item,i) in liveBid.slice(0,5)" :key="item.Bid">
             <v-list-item-icon class="mx-0" v-if="i+1 == 1">
