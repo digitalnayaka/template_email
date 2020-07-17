@@ -284,7 +284,7 @@ export default {
       user: "auth/user",
       guest: "auth/guest",
       dialogStatus: "dialog/status",
-      currentComponent: "dialog/component"
+      currentComponent: "dialog/component",
     }),
     isHome() {
       return this.$route.path === "/";
@@ -300,9 +300,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.a {
-  color: black;
-}
-</style>

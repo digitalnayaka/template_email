@@ -191,7 +191,7 @@ export default {
         .then(response => {
           let { data } = response.data;
           this.used = data;
-          this.total = this.used.length;
+          this.total = response.data.count;
           this.lengthPage = Math.ceil(this.total / this.limit);
         })
         .catch(error => {

@@ -12,7 +12,7 @@
     <v-container fluid>
       <v-form ref="form" v-model="valid">
         <div align="center">
-          <v-card width="330" class="pa-5">
+          <v-card width="330" class="pa-5 mt-16">
             <div v-if="phoneDisplay">
               <h2>Masuk</h2>
 

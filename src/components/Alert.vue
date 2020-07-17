@@ -27,8 +27,8 @@ export default {
       set(value) {
         this.setAlert({
           status: value,
-          type: "success",
-          text: "test"
+          type: "",
+          text: ""
         });
       }
     }
@@ -39,7 +39,9 @@ export default {
     }),
     close() {
       this.setAlert({
-        status: false
+        status: false,
+        type: "success",
+        text: ""
       });
     }
   }

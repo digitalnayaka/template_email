@@ -6,10 +6,21 @@
       class="ma-0"
       :to="item._source.id_mst_iklan_type != 2 ? '/detail_iklan/' + item._source.id : '/detail_paket/' +  item._source.id"
     >
-      <v-img width="500" height="300" :src="getImage(item._source.photo)" contain>
+      <v-img width="500" height="300" :src="getThumb(item._source.photo)" contain>
         <v-card-title>
-          <v-chip small left color="red" text-color="white">{{ item._source.mst_iklan_jenis }}</v-chip>
-          <v-chip small left color="orange" text-color="white">{{ item._source.mst_iklan_type }}</v-chip>
+          <v-chip
+            small
+            left
+            :color="item._source.id_mst_iklan_jenis == 1 ? 'teal' : 'red'"
+            text-color="white"
+          >{{ item._source.mst_iklan_jenis }}</v-chip>
+          <v-chip
+            small
+            left
+            color="orange"
+            text-color="white"
+            v-if="item._source.id_mst_iklan_jenis > 1"
+          >{{ item._source.mst_iklan_type }}</v-chip>
           <v-chip
             small
             left
@@ -25,8 +36,8 @@
           <v-list-item-content>
             <v-list-item-title class="font-weight-black">{{ item._source.judul }}</v-list-item-title>
 
-            <v-list-item-subtitle v-if="item._source.harga == null">Harga awal</v-list-item-subtitle>
-            <v-list-item-subtitle v-else>Harga</v-list-item-subtitle>
+            <v-list-item-subtitle v-if="item._source.harga_saat_ini == null">Harga awal</v-list-item-subtitle>
+            <v-list-item-subtitle v-else>Harga saat ini</v-list-item-subtitle>
             <v-list-item-subtitle
               style="color:red"
               v-if="item._source.harga == null"

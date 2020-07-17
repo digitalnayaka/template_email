@@ -218,6 +218,14 @@ export default {
             .format("YYYY-MM-DD HH:mm:ss");
 
           this.dtlPembayaran();
+
+          if (
+            this.user.id != this.orders.id_pembeli &&
+            this.user.id != this.orders.id_penjual
+          ) {
+            alert("Anda tidak berhak mengakses halaman ini");
+            this.$router.push({ path: "/" });
+          }
         })
         .catch(error => {
           let responses = error.response.data;

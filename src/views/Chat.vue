@@ -76,7 +76,7 @@
 
               <span>
                 <v-img
-                  :src="getImage(item.Image)"
+                  :src="getThumb(item.Image)"
                   width="300"
                   height="200"
                   v-if="item.Type == 'image'"
@@ -106,7 +106,7 @@ import "firebase/firestore";
 import { db } from "../main";
 import VueChatScroll from "vue-chat-scroll";
 import "bootstrap";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Vue from "vue";
 
 Vue.use(VueChatScroll);
