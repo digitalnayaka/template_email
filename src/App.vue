@@ -4,7 +4,7 @@
       v-model="drawer"
       app
       width="270"
-      src="/img/gradient2.jpg"
+      src="/img/gradient2.png"
       height="100%"
       dark
     >
