@@ -76,7 +76,7 @@
 
               <span>
                 <v-img
-                  :src="getImage(item.Image)"
+                  :src="getThumb(item.Image)"
                   width="300"
                   height="200"
                   v-if="item.Type == 'image'"

@@ -291,7 +291,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="primary" @click="id == undefined ? e1 = 2 : e1 = 1">Sebelumnya</v-btn>
-              <v-btn color="primary" :disabled="!valid" @click="storeItem">Simpan</v-btn>
+              <v-btn color="primary" :disabled="!valid" @click="storeItem" :loading="loading">Simpan</v-btn>
             </v-card-actions>
           </v-stepper-content>
         </v-form>
@@ -383,7 +383,9 @@ export default {
       lengthPage: 0,
       limit: 10,
       offset: 0,
-      total: 0
+      total: 0,
+      loader: null,
+      loading: false
     };
   },
   methods: {
@@ -514,6 +516,8 @@ export default {
       var r = confirm("Apakah Anda Yakin!");
       if (r == true) {
         this.submit = true;
+
+        this.loader = "loading";
 
         let formData = new FormData();
 
@@ -701,6 +705,55 @@ export default {
     ...mapGetters({
       user: "auth/user"
     })
+  },
+  watch: {
+    loader() {
+      const l = this.loader;
+      this[l] = !this[l];
+
+      setTimeout(() => (this[l] = false), 3000);
+
+      this.loader = null;
+    }
   }
 };
 </script>
+
+<style>
+.custom-loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>

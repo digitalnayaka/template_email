@@ -20,7 +20,7 @@
                 <v-icon>mdi-cellphone</v-icon>Versi Aplikasi
               </v-list-item-title>
 
-              <v-list-item-subtitle>1.4.0</v-list-item-subtitle>
+              <v-list-item-subtitle>1.5.0</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 

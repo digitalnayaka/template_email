@@ -128,6 +128,13 @@
             >{{ item.deskripsi_status }}</div>
           </div>
         </v-card>
+
+        <v-pagination
+          v-model="page"
+          @input="getTBSelesai"
+          :length="lengthPage"
+          :total-visible="5"
+        ></v-pagination>
       </v-tab-item>
     </v-tabs>
   </div>
@@ -144,7 +151,12 @@ export default {
       berlangsung: [],
       selesai: [],
       utc: moment().utcOffset() / 60 - 7,
-      waktu: ""
+      waktu: "",
+      page: 1,
+      lengthPage: 0,
+      limit: 20,
+      offset: 0,
+      total: 0
     };
   },
   methods: {
@@ -168,6 +180,8 @@ export default {
         });
     },
     getTBSelesai() {
+      var offset = (this.page - 1) * this.limit;
+
       var params = new URLSearchParams();
 
       params.append("id_app_user", this.user.id);
@@ -177,6 +191,8 @@ export default {
       params.append("id_mst_iklan_status", 6);
       params.append("id_mst_iklan_status", 9);
       params.append("id_mst_iklan_jenis", 2);
+      params.append("offset", offset);
+      params.append("limit", this.limit);
 
       var request = {
         params: params,
@@ -188,6 +204,10 @@ export default {
         .then(response => {
           let { data } = response.data;
           this.selesai = data;
+
+          this.total = response.data.count;
+          this.lengthPage =
+            this.total == 0 ? 1 : Math.ceil(this.total / this.limit);
         })
         .catch(error => {
           let responses = error.response.data;

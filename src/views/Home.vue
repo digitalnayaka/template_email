@@ -107,7 +107,7 @@
               class="ma-0"
               :to="item._source.id_mst_iklan_type != 2 ? '/detail_iklan/' + item._source.id : '/detail_paket/' +  item._source.id"
             >
-              <v-img width="500" height="300" :src="getImage(item._source.photo)" contain>
+              <v-img width="500" height="300" :src="getThumb(item._source.photo)" contain>
                 <v-card-title>
                   <v-chip
                     small
@@ -272,11 +272,7 @@ export default {
   methods: {
     showBanners() {
       this.axios
-        .get("/master/v2/mst_banner", {
-          params: {
-            limit: 4
-          }
-        })
+        .get("/master/v2/mst_banner")
         .then(response => {
           let { data } = response.data;
 

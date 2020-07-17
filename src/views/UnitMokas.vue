@@ -9,18 +9,16 @@
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-btn
-            icon
-            class="mx-2"
-            v-on="on"
-            :href="'http://116.197.129.222/api/produk/v1/barcode?id=' + id + '&limit=1'"
-            target="_blank"
-          >
+          <v-btn icon class="mx-2" v-on="on" @click="getBarcode">
             <v-icon large>mdi-barcode-scan</v-icon>
           </v-btn>
         </template>
         <span>Barcode</span>
       </v-tooltip>
+
+      <v-dialog v-model="dialog">
+        <v-card v-html="barcode"></v-card>
+      </v-dialog>
 
       <div v-if="!guest">
         <div v-if="user.id == unitMokas.id_app_user">
@@ -200,7 +198,7 @@
         <div v-if="unitMokas.id_mst_motor_bekas_status == 1">
           <v-btn block color="teal" :to="'/tambah-iklan?id=' + unitMokas.id">Iklankan</v-btn>
         </div>
-        
+
         <div
           v-if="unitMokas.id_mst_motor_bekas_status == 2 || unitMokas.id_mst_motor_bekas_status == 4"
         >
@@ -230,7 +228,9 @@ export default {
       hits: [],
       fotos: [],
       dokumen: [],
-      dialog_dokumen: false
+      dialog_dokumen: false,
+      barcode: null,
+      dialog: false,
     };
   },
   methods: {
@@ -317,11 +317,20 @@ export default {
           console.log(responses.api_message);
         });
     },
-    barcode() {
-      window.open(
-        "116.197.129.222/api/produk/v1/barcode?id=" + this.id + "&limit=1",
-        "_blank"
-      );
+    getBarcode() {
+      this.axios
+        .get("/produk/v1/barcode?id=" + this.id + "&limit=1", {
+          headers: { Authorization: "Bearer " + this.user.token }
+        })
+        .then(response => {
+          let { data } = response;
+          this.barcode = data;
+          this.dialog = true;
+        })
+        .catch(error => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
     },
     deleteUnit() {
       var r = confirm("Yakin akan dihapus");

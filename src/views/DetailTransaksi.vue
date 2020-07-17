@@ -44,11 +44,15 @@
             </v-list-item>
 
             <v-btn
-              class="d-block my-2 pa-2 primary white--text text-center"
-              :href="'http://116.197.129.222/api/transaksi/v1/form_penawaran?id=' + orders.id"
-              target="_blank"
+              block
+              class="my-2 pa-2 primary white--text text-center"
+              @click="formPenawaran"
               v-if="orders.id_mst_order_status != 3"
             >Lihat Form Penawaran</v-btn>
+
+            <v-dialog v-model="dialog">
+              <v-card v-html="penawaran"></v-card>
+            </v-dialog>
           </v-list>
 
           <v-divider></v-divider>
@@ -196,7 +200,9 @@ export default {
     previewUrl: "",
     hasImage: false,
     iklan: [],
-    foto: ""
+    foto: "",
+    penawaran: null,
+    dialog: false
   }),
   methods: {
     ...mapActions({
@@ -205,10 +211,10 @@ export default {
     async getOrder() {
       await this.axios
         .get("/transaksi/v1/order", {
-          headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id: this.$route.params.id
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;
@@ -222,6 +228,11 @@ export default {
           this.getIklan(this.orders.id_iklan);
 
           this.dtlPembayaran();
+
+          if (this.user.id != this.orders.id_pembeli && this.user.id != this.orders.id_penjual) {
+            alert("Anda tidak berhak mengakses halaman ini");
+            this.$router.push({ path: "/" });
+          }
         })
         .catch(error => {
           let responses = error.response.data;
@@ -234,7 +245,8 @@ export default {
           params: {
             id: id,
             limit: 1
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;
@@ -327,14 +339,29 @@ export default {
     dtlPembayaran() {
       this.axios
         .get("/transaksi/v1/upload_pembayaran", {
-          headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id_pembayaran: this.orders.id_pembayaran
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;
           this.foto = data[0].foto;
+        })
+        .catch(error => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    formPenawaran() {
+      this.axios
+        .get("/transaksi/v1/form_penawaran?id=" + this.orders.id, {
+          headers: { Authorization: "Bearer " + this.user.token }
+        })
+        .then(response => {
+          let { data } = response;
+          this.penawaran = data;
+          this.dialog = true;
         })
         .catch(error => {
           let responses = error.response.data;

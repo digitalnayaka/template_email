@@ -106,7 +106,7 @@
           </v-card>
         </div>
 
-        <!-- <v-pagination v-model="page" @input="getTB" :length="lengthPageTB" :total-visible="5"></v-pagination> -->
+        <v-pagination v-model="page" @input="getTB" :length="lengthPageTB" :total-visible="5"></v-pagination>
       </v-tab-item>
 
       <v-tab-item>
@@ -119,7 +119,7 @@
           <v-list>
             <v-list-item>
               <v-list-item-avatar rounded size="80">
-                <v-img :src="getImage(item._source.photo)" contain></v-img>
+                <v-img :src="getThumb(item._source.photo)" contain></v-img>
               </v-list-item-avatar>
 
               <v-list-item-content>
@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import moment from "moment-timezone";
 
 export default {
@@ -159,10 +159,14 @@ export default {
       totalTB: 0,
       totalHP: 0,
       utc: moment().utcOffset() / 60 - 7,
-      waktu: ""
+      waktu: "",
+      orders: []
     };
   },
   methods: {
+    ...mapActions({
+      setOrder: "order/set"
+    }),
     getTB() {
       var offset = (this.page - 1) * this.limit;
 
@@ -202,13 +206,13 @@ export default {
           let { hits } = data.hits;
           this.hargaPas = hits;
           this.totalHP = data.hits.total.value;
-          this.lengthPageHP = Math.ceil(this.totalHP / this.limit);
+          this.lengthPageHP = this.totalHP == 0 ? 1 : Math.ceil(this.totalHP / this.limit);
         })
         .catch(error => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
-    }
+    },
   },
   created() {
     this.getTB();
@@ -226,7 +230,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
+      user: "auth/user",
+      order: "order/order"
     })
   },
   filters: {

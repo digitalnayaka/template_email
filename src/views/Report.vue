@@ -110,7 +110,7 @@ export default {
     valid: true,
     idBmr: null,
     loader: null,
-    loading: false,
+    loading: false
   }),
   methods: {
     ...mapActions({
@@ -129,11 +129,11 @@ export default {
     userBmr() {
       this.axios
         .get("/search/v1/user_search", {
-          headers: { Authorization: "Bearer " + this.user.token },
           params: {
             search: "raharja",
             limit: 999
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response;
@@ -157,13 +157,12 @@ export default {
       params.append("limit", 999);
 
       var request = {
-        params: params
+        params: params,
+        headers: { Authorization: "Bearer " + this.user.token }
       };
 
       this.axios
-        .get("/user/v1/user", request, {
-          headers: { Authorization: "Bearer " + this.user.token }
-        })
+        .get("/user/v1/user", request)
         .then(response => {
           let { data } = response.data;
           this.users = data;
@@ -178,10 +177,10 @@ export default {
 
       let formData = new FormData();
       formData.append("date", this.date);
-      formData.append("id_app_user_ho", this.user.id_mst_user_type);
-      // if (this.selectedUser != null) {
-      //   formData.append("id_app_user", this.selectedUser);
-      // }
+      formData.append("id_app_user_ho", 2);
+      if (this.selectedUser != null) {
+        formData.append("id_app_user", this.selectedUser);
+      }
 
       this.axios
         .post("/report/v1/reporttb", formData, {

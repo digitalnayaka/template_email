@@ -200,7 +200,7 @@
       </v-tab-item>
     </v-tabs>
 
-    <v-pagination v-model="page" @input="loadData" :length="lengthPage" :total-visible="5"></v-pagination>
+    <v-pagination v-model="page" @input="listRefund" :length="lengthPageRF" :total-visible="5"></v-pagination>
   </div>
 </template>
 
@@ -225,6 +225,11 @@ export default {
       limit: 20,
       offset: 0,
       total: 0,
+      pageRF: 1,
+      lengthPageRF: 0,
+      limitRF: 20,
+      offsetRF: 0,
+      totalRF: 0,
       utc: moment().utcOffset() / 60 - 7,
       waktu: ""
     };
@@ -246,7 +251,7 @@ export default {
           let { data } = response.data;
           this.orders = data;
           this.total = response.data.count;
-          this.lengthPage = Math.ceil(this.total / this.limit);
+          this.lengthPage = this.total == 0 ? 1 : Math.ceil(this.total / this.limit);
 
           this.orderStatus = [];
 
@@ -285,10 +290,13 @@ export default {
         });
     },
     listRefund() {
+      var offset = (this.pageRF - 1) * this.limitRF;
+
       this.axios
         .get("/transaksi/v1/pencairan_tiket", {
           params: {
             id_penjual: this.user.id,
+            offset: offset,
             limit: this.limit
           },
           headers: { Authorization: "Bearer " + this.user.token },
@@ -296,6 +304,8 @@ export default {
         .then(response => {
           let { data } = response.data;
           this.refunds = data;
+          this.totalRF = response.data.count;
+          this.lengthPageRF = this.totalRF == 0 ? 1 : Math.ceil(this.totalRF / this.limitRF);
 
           const map = new Map();
           for (const item of this.refunds) {

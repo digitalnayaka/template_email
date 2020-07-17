@@ -115,7 +115,7 @@
             class="align-start"
             width="500"
             height="300"
-            :src="getImage(item._source.photo)"
+            :src="getThumb(item._source.photo)"
             contain
           >
             <v-card-title>

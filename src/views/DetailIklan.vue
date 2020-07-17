@@ -140,14 +140,6 @@
               <v-list-item-subtitle>Lokasi</v-list-item-subtitle>
               <v-list-item-subtitle>{{ unitMokas.lokasi }}</v-list-item-subtitle>
             </v-list-item-content>
-
-            <v-list-item-content class="text-center" v-if="iklan.mst_iklan_type == 'Paketan'">
-              <v-list-item-title>
-                <v-icon large color="green">mdi-counter</v-icon>
-              </v-list-item-title>
-              <v-list-item-subtitle>Jumlah Unit</v-list-item-subtitle>
-              <v-list-item-subtitle>{{ iklan.motor_bekas.length }}</v-list-item-subtitle>
-            </v-list-item-content>
           </v-list-item>
         </v-list>
 
@@ -311,7 +303,7 @@
     <v-divider></v-divider>
 
     <v-row dense v-if="this.liveBid != ''">
-      <v-col cols="6" v-if="iklan.id_mst_iklan_jenis > 1">
+      <v-col cols="12" v-if="iklan.id_mst_iklan_jenis > 1">
         <v-list tile dense>
           <v-list-item v-for="(item,i) in liveBid.slice(0,5)" :key="item.Bid">
             <v-list-item-icon class="mx-0" v-if="i+1 == 1">
@@ -722,7 +714,8 @@ export default {
         .get("/tiket/v1/total_tiket", {
           params: {
             id_app_user: this.user.id
-          }
+          },
+          headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           let { data } = response.data;
@@ -957,7 +950,9 @@ export default {
   created() {
     this.getDtlIklan();
     this.GetBid();
-    this.getOrder();
+    if (!this.guest) {
+      this.getOrder();
+    }
   },
   mounted() {
     var app = this;
