@@ -40,12 +40,12 @@
             <v-list-item-subtitle v-else>Harga saat ini</v-list-item-subtitle>
             <v-list-item-subtitle
               style="color:red"
-              v-if="item._source.harga == null"
+              v-if="item._source.harga_saat_ini == null"
             >Rp {{ Number(item._source.harga_awal).toLocaleString('id-ID') }}</v-list-item-subtitle>
             <v-list-item-subtitle
               style="color:red"
               v-else
-            >Rp {{ Number(item._source.harga).toLocaleString('id-ID') }}</v-list-item-subtitle>
+            >Rp {{ Number(item._source.harga_saat_ini).toLocaleString('id-ID') }}</v-list-item-subtitle>
             <v-list-item-subtitle>
               <v-avatar size="16" item>
                 <v-img src="/img/verified.png" alt="verified"></v-img>
