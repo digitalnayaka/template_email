@@ -96,12 +96,12 @@
       </v-toolbar-title>
 
       <v-text-field
+        :slot="$vuetify.breakpoint.xsOnly ? 'extension' : 'default'"
         flat
         solo-inverted
         hide-details
         prepend-inner-icon="mdi-magnify"
         label="Cari"
-        class="hidden-sm-and-down"
         @click="setDialogComponent('search')"
         contain
       ></v-text-field>
@@ -284,7 +284,7 @@ export default {
       user: "auth/user",
       guest: "auth/guest",
       dialogStatus: "dialog/status",
-      currentComponent: "dialog/component",
+      currentComponent: "dialog/component"
     }),
     isHome() {
       return this.$route.path === "/";

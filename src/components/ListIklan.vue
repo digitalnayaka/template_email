@@ -36,16 +36,29 @@
           <v-list-item-content>
             <v-list-item-title class="font-weight-black">{{ item._source.judul }}</v-list-item-title>
 
-            <v-list-item-subtitle v-if="item._source.harga_saat_ini == null">Harga awal</v-list-item-subtitle>
-            <v-list-item-subtitle v-else>Harga saat ini</v-list-item-subtitle>
             <v-list-item-subtitle
-              style="color:red"
-              v-if="item._source.harga == null"
+              v-if="item._source.harga_saat_ini == null && item._source.id_mst_iklan_jenis == 1"
+            >Harga</v-list-item-subtitle>
+            <v-list-item-subtitle
+              v-if="item._source.harga_saat_ini == null && item._source.id_mst_iklan_jenis > 1"
+            >Harga awal</v-list-item-subtitle>
+            <v-list-item-subtitle
+              v-if="item._source.harga_saat_ini != null && item._source.id_mst_iklan_jenis > 1"
+            >Harga saat ini</v-list-item-subtitle>
+
+            <v-list-item-subtitle
+              class="red--text"
+              v-if="item._source.harga_saat_ini == null && item._source.id_mst_iklan_jenis == 1"
+            >Rp {{ Number(item._source.harga).toLocaleString('id-ID') }}</v-list-item-subtitle>
+            <v-list-item-subtitle
+              class="red--text"
+              v-if="item._source.harga_saat_ini == null && item._source.id_mst_iklan_jenis > 1"
             >Rp {{ Number(item._source.harga_awal).toLocaleString('id-ID') }}</v-list-item-subtitle>
             <v-list-item-subtitle
-              style="color:red"
-              v-else
-            >Rp {{ Number(item._source.harga).toLocaleString('id-ID') }}</v-list-item-subtitle>
+              class="red--text"
+              v-if="item._source.harga_saat_ini != null && item._source.id_mst_iklan_jenis > 1"
+            >Rp {{ Number(item._source.harga_saat_ini).toLocaleString('id-ID') }}</v-list-item-subtitle>
+
             <v-list-item-subtitle>
               <v-avatar size="16" item>
                 <v-img src="/img/verified.png" alt="verified"></v-img>
