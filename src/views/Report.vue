@@ -82,7 +82,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-
 export default {
   name: "Report",
   beforeRouteEnter(to, from, next) {
@@ -139,7 +138,6 @@ export default {
           let { data } = response;
           let hits = data.hits;
           this.idBmr = hits.hits;
-
           this.listUser();
         })
         .catch(error => {
@@ -155,12 +153,10 @@ export default {
       }
       params.append("id_mst_user_type", 2);
       params.append("limit", 999);
-
       var request = {
         params: params,
         headers: { Authorization: "Bearer " + this.user.token }
       };
-
       this.axios
         .get("/user/v1/user", request)
         .then(response => {
@@ -174,21 +170,18 @@ export default {
     },
     report() {
       this.loader = "loading";
-
       let formData = new FormData();
       formData.append("date", this.date);
       formData.append("id_app_user_ho", 2);
       if (this.selectedUser != null) {
         formData.append("id_app_user", this.selectedUser);
       }
-
       this.axios
         .post("/report/v1/reporttb", formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
           this.loader = null;
-
           let { data } = response;
           if (data.fileurl == "") {
             this.setAlert({
@@ -237,9 +230,7 @@ export default {
     loader() {
       const l = this.loader;
       this[l] = !this[l];
-
       setTimeout(() => (this[l] = false), 3000);
-
       this.loader = null;
     }
   }

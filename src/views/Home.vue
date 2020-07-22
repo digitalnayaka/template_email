@@ -251,7 +251,7 @@
       </div>
     </div>
 
-    <h5 class="text-center">2020 © Digital Network Asia. All Rights Reserved.</h5>
+    <h5 class="text-center">2020 © Digital Nayaka Abhinaya. All Rights Reserved.</h5>
   </div>
 </template>
 

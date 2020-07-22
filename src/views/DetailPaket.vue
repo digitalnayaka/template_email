@@ -56,7 +56,7 @@
       <v-col cols="12" sm="6">
         <span
           class="subheading red--text float-left"
-        >{{ hits.mst_iklan_jenis }} {{ hits.mst_iklan_type }} {{ hits.mst_type_tb }} {{ hits.mst_type_tb }}</span>
+        >{{ hits.mst_iklan_jenis }} {{ hits.mst_iklan_type }}</span>
 
         <div class="text-right ma-0 pa-0">
           <v-icon>mdi-eye</v-icon>
