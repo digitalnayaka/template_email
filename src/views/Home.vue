@@ -53,19 +53,16 @@
             :key="index"
             :to="'/list_lelang/' + item.id_app_user + '?tgl=' + item.date.substr(0,10)"
           >
-            <v-card dark color="teal">{{ item.total_iklan }} Iklan</v-card>
-
             <v-list>
               <v-list-item>
-                <v-list-item-content>
-                  <v-icon color="teal">mdi-calendar</v-icon>
-                  <v-list-item-title>{{ item.date | dateFormat }}</v-list-item-title>
-                </v-list-item-content>
-
                 <v-list-item-avatar size="70">
                   <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
                   <v-img :src="getImage(item.photo)" v-else contain></v-img>
                 </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-icon color="teal">mdi-calendar</v-icon>
+                  <v-list-item-title>{{ item.date | dateFormat }}</v-list-item-title>
+                </v-list-item-content>
               </v-list-item>
             </v-list>
 
@@ -75,6 +72,7 @@
               <v-img src="/img/verified.png" alt="verified"></v-img>
             </v-avatar>
             <span class="font-weight-bold">{{ item.nama }}</span>
+            <v-card color="white">{{ item.total_iklan }} Iklan Tayang</v-card>
           </v-card>
         </div>
 
@@ -267,13 +265,13 @@ export default {
     tbberlangsung: [],
     utc: moment().utcOffset() / 60 - 7,
     waktu: "",
-    limit: 20
+    limit: 20,
   }),
   methods: {
     showBanners() {
       this.axios
         .get("/master/v2/mst_banner")
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
 
           for (let index = 0; index < data.length; index++) {
@@ -281,7 +279,7 @@ export default {
             this.banners.push({ src: element });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -289,11 +287,11 @@ export default {
     showCategories() {
       this.axios
         .get("/setup/v1/category")
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.categories = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -303,14 +301,14 @@ export default {
         .get("/iklan/v2/iklan_jadwal_tb", {
           params: {
             id_mst_iklan_status: 1,
-            limit: this.limit
-          }
+            limit: this.limit,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.jadwal = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -323,19 +321,19 @@ export default {
             sort: "tanggal_mulai",
             limit: 3,
             offset: 0,
-            tb_berlangsung: true
-          }
+            tb_berlangsung: true,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let data = response.data;
           let { hits } = data.hits;
           this.tbberlangsung = hits;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
-    }
+    },
   },
 
   created() {
@@ -354,16 +352,13 @@ export default {
     }
   },
   filters: {
-    dateFormat: date => {
+    dateFormat: (date) => {
       return moment.utc(date).format("DD MMM YYYY");
     },
     dateTimeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("DD MMM, HH:mm");
-    }
-  }
+      return moment.utc(date).add(utc, "h").format("DD MMM, HH:mm");
+    },
+  },
 };
 </script>
 

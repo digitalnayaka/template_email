@@ -327,6 +327,14 @@ const routes = [
     }
   },
   {
+    path: '/detail_iklan2/:id',
+    name: 'detail_iklan2',
+    component: () => import(/* webpackChunkName: "detail_iklan2" */ '../views/DetailIklan2.vue'),
+    meta: {
+      Auth: true
+    }
+  },
+  {
     path: '/tawar_bersama_selesai/:id',
     name: 'tb_selesai',
     component: () => import(/* webpackChunkName: "tb_selesai" */ '../views/TBSelesai.vue'),
