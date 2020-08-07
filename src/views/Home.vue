@@ -120,6 +120,14 @@
                     left
                     color="orange"
                     text-color="white"
+                    v-if="item._source.id_mst_iklan_type == 1"
+                  >{{ item._source.mst_iklan_type }}</v-chip>
+                  <v-chip
+                    small
+                    left
+                    color="pink"
+                    text-color="white"
+                    v-if="item._source.id_mst_iklan_type == 2"
                   >{{ item._source.mst_iklan_type }}</v-chip>
                   <v-chip
                     small
@@ -267,13 +275,13 @@ export default {
     tbberlangsung: [],
     utc: moment().utcOffset() / 60 - 7,
     waktu: "",
-    limit: 20
+    limit: 20,
   }),
   methods: {
     showBanners() {
       this.axios
         .get("/master/v2/mst_banner")
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
 
           for (let index = 0; index < data.length; index++) {
@@ -281,7 +289,7 @@ export default {
             this.banners.push({ src: element });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -289,11 +297,11 @@ export default {
     showCategories() {
       this.axios
         .get("/setup/v1/category")
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.categories = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -303,14 +311,14 @@ export default {
         .get("/iklan/v2/iklan_jadwal_tb", {
           params: {
             id_mst_iklan_status: 1,
-            limit: this.limit
-          }
+            limit: this.limit,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.jadwal = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -323,19 +331,19 @@ export default {
             sort: "tanggal_mulai",
             limit: 3,
             offset: 0,
-            tb_berlangsung: true
-          }
+            tb_berlangsung: true,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let data = response.data;
           let { hits } = data.hits;
           this.tbberlangsung = hits;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
-    }
+    },
   },
 
   created() {
@@ -354,16 +362,13 @@ export default {
     }
   },
   filters: {
-    dateFormat: date => {
+    dateFormat: (date) => {
       return moment.utc(date).format("DD MMM YYYY");
     },
     dateTimeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("DD MMM, HH:mm");
-    }
-  }
+      return moment.utc(date).add(utc, "h").format("DD MMM, HH:mm");
+    },
+  },
 };
 </script>
 

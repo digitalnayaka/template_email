@@ -113,9 +113,9 @@
       </v-btn>
 
       <v-btn icon to="/notifikasi">
-        <v-badge color="orange" overlap v-if="countNotif.length > 0">
+        <v-badge color="orange" overlap v-if="countNotif > 0">
           <template v-slot:badge>
-            <span>{{ countNotif.length }}</span>
+            <span>{{ countNotif }}</span>
           </template>
 
           <v-icon>mdi-bell-outline</v-icon>
@@ -125,7 +125,13 @@
     </v-app-bar>
 
     <keep-alive>
-      <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialogbottom-transition">
+      <v-dialog
+        v-model="dialog"
+        fullscreen
+        hide-overlay
+        transition="dialogbottom-transition"
+        persistent
+      >
         <component :is="currentComponent" @closed="setDialogStatus"></component>
       </v-dialog>
     </keep-alive>
@@ -157,13 +163,13 @@ export default {
     Login: () =>
       import(/* webpackChunkName: "login" */ "@/components/Login.vue"),
     Daftar: () =>
-      import(/* webpackChunkName: "daftar" */ "@/components/Daftar.vue")
+      import(/* webpackChunkName: "daftar" */ "@/components/Daftar.vue"),
   },
   data: () => ({
     drawer: true,
     menus: [],
-    countNotif: [],
-    notif: ""
+    countNotif: 0,
+    notif: "",
   }),
   methods: {
     ...mapActions({
@@ -171,20 +177,20 @@ export default {
       setToken: "auth/SET_TOKEN",
       setAlert: "alert/set",
       setDialogStatus: "dialog/setStatus",
-      setDialogComponent: "dialog/setComponent"
+      setDialogComponent: "dialog/setComponent",
     }),
     getModules() {
       this.axios
         .get("/setup/v1/drawer", {
           params: {
-            user_id: this.guest == true ? 0 : this.user.id
-          }
+            user_id: this.guest == true ? 0 : this.user.id,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.menus = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -195,28 +201,21 @@ export default {
           .get("/log/v1/log/notifikasi", {
             params: {
               id_user: this.user.id,
-              limit: 999
-            }
+              is_read: false,
+              limit: 1,
+            },
           })
-          .then(response => {
-            let { data } = response.data;
-
-            this.countNotif = [];
-
-            for (let index = 0; index < data.length; index++) {
-              const element = data[index];
-              if (element.is_read == false) {
-                this.countNotif.push(element.id);
-              }
-            }
+          .then((response) => {
+            let { data } = response;
+            this.countNotif = data.count;
           })
-          .catch(error => {
+          .catch((error) => {
             let responses = error.response;
             let data = responses.data;
             this.setAlert({
               status: true,
               color: "error",
-              text: data.api_message
+              text: data.api_message,
             });
           });
       }
@@ -227,12 +226,12 @@ export default {
       OneSignal.push(() => {
         OneSignal.init({
           appId: "9af3274a-447f-482f-bca6-ec68dc143418",
-          subdomainName: "simotorweb.os.tc"
+          subdomainName: "simotorweb.os.tc",
         });
       });
 
       OneSignal.push(() => {
-        OneSignal.on("subscriptionChange", isSubscribed => {
+        OneSignal.on("subscriptionChange", (isSubscribed) => {
           // console.log("The user's subscription state is now:", isSubscribed);
           if (isSubscribed) {
             this.$router.go("/");
@@ -242,7 +241,7 @@ export default {
     },
     geolocation() {
       this.$getLocation({
-        enableHighAccuracy: true
+        enableHighAccuracy: true,
       });
     },
     signOut(e) {
@@ -257,13 +256,13 @@ export default {
         this.setAlert({
           status: true,
           color: "success",
-          text: "Logout successfully"
+          text: "Logout successfully",
         });
         this.getModules();
         this.countNotif = [];
         this.$router.push({ path: "/" });
       }
-    }
+    },
   },
   created() {
     this.getModules();
@@ -272,7 +271,7 @@ export default {
     this.getNotif();
 
     let OneSignal = window.OneSignal || [];
-    OneSignal.getUserId(userId => {
+    OneSignal.getUserId((userId) => {
       console.log("OneSignal User ID: " + userId);
       if (userId != null) {
         this.notif = userId + "[web]";
@@ -284,7 +283,7 @@ export default {
       user: "auth/user",
       guest: "auth/guest",
       dialogStatus: "dialog/status",
-      currentComponent: "dialog/component"
+      currentComponent: "dialog/component",
     }),
     isHome() {
       return this.$route.path === "/";
@@ -295,8 +294,8 @@ export default {
       },
       set(value) {
         this.setDialogStatus(value);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>

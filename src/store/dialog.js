@@ -2,7 +2,7 @@ export default {
     namespaced: true,
     state: {
         status: false,
-        component: 'search', // search or login or other
+        component: '',
     },
     mutations: {
         setStatus: (state, status) => {

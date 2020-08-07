@@ -4,6 +4,12 @@
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon to="/tiket_saya">
+        <v-icon>mdi-ticket</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <div class="text-center">
@@ -154,7 +160,7 @@ export default {
       offset: 0,
       total: 0,
       utc: moment().utcOffset() / 60 - 7,
-      waktu: ""
+      waktu: "",
     };
   },
   methods: {
@@ -162,15 +168,15 @@ export default {
       this.axios
         .get("/tiket/v1/total_tiket", {
           params: {
-            id_app_user: this.user.id
+            id_app_user: this.user.id,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.tiket = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
@@ -184,21 +190,21 @@ export default {
             id_app_user: this.user.id,
             use_tiket: true,
             offset: offset,
-            limit: this.limit
+            limit: this.limit,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.used = data;
           this.total = response.data.count;
           this.lengthPage = Math.ceil(this.total / this.limit);
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
-    }
+    },
   },
   created() {
     this.totalTiket();
@@ -216,16 +222,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
+      user: "auth/user",
+    }),
   },
   filters: {
     dateTimeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("DD MMM YYYY, HH:mm");
-    }
-  }
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY, HH:mm");
+    },
+  },
 };
 </script>

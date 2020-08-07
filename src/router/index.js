@@ -334,6 +334,14 @@ const routes = [
       Auth: true
     }
   },
+  {
+    path: '/tiket_saya',
+    name: 'MyTicket',
+    component: () => import(/* webpackChunkName: "tiket_saya" */ '../views/MyTicket.vue'),
+    meta: {
+      Auth: true
+    }
+  },
 ]
 
 const router = new VueRouter({
