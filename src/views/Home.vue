@@ -118,6 +118,14 @@
                     left
                     color="orange"
                     text-color="white"
+                    v-if="item._source.id_mst_iklan_type == 1"
+                  >{{ item._source.mst_iklan_type }}</v-chip>
+                  <v-chip
+                    small
+                    left
+                    color="pink"
+                    text-color="white"
+                    v-if="item._source.id_mst_iklan_type == 2"
                   >{{ item._source.mst_iklan_type }}</v-chip>
                   <v-chip
                     small

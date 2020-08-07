@@ -108,9 +108,7 @@
 
     <v-row dense>
       <v-col cols="6" sm="4" md="4" class="pa-2" v-for="item in hits" :key="item._source.id">
-        <v-card
-          :to="item._source.mst_iklan_type != 'Paketan' ? '/detail_iklan/' + item._source.id : '/detail_paket/' + item._source.id"
-        >
+        <v-card :to="'/detail_iklan/' + item._source.id">
           <v-img
             class="align-start"
             width="500"
@@ -120,7 +118,20 @@
           >
             <v-card-title>
               <v-chip small left color="red" text-color="white">{{ item._source.mst_iklan_jenis }}</v-chip>
-              <v-chip small left color="orange" text-color="white">{{ item._source.mst_iklan_type }}</v-chip>
+              <v-chip
+                small
+                left
+                color="orange"
+                text-color="white"
+                v-if="item._source.id_mst_iklan_type == 1"
+              >{{ item._source.mst_iklan_type }}</v-chip>
+              <v-chip
+                small
+                left
+                color="pink"
+                text-color="white"
+                v-if="item._source.id_mst_iklan_type == 2"
+              >{{ item._source.mst_iklan_type }}</v-chip>
               <v-chip
                 small
                 left
@@ -237,14 +248,14 @@ export default {
         .get("/user/v1/user", {
           params: {
             id: this.id_app_user,
-            limit: 1
-          }
+            limit: 1,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.appuser = data[0];
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -261,10 +272,10 @@ export default {
             sort: this.order,
             search: this.keyword,
             offset: offset,
-            limit: this.limit
-          }
+            limit: this.limit,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let data = response.data;
           let { hits } = data.hits;
           this.hits = hits;
@@ -272,7 +283,7 @@ export default {
           this.total = data.hits.total.value;
           this.lengthPage = Math.ceil(this.total / this.limit);
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -288,10 +299,10 @@ export default {
             id_mst_iklan_status: 1,
             sort: this.order,
             offset: offset,
-            limit: this.limit
-          }
+            limit: this.limit,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let data = response.data;
           let { hits } = data.hits;
           this.hits = hits;
@@ -299,7 +310,7 @@ export default {
           this.total = data.hits.total.value;
           this.lengthPage = Math.ceil(this.total / this.limit);
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -311,7 +322,7 @@ export default {
     resetFilter() {
       this.selected = "0";
       this.order = "posting_terbaru";
-    }
+    },
   },
   mounted() {
     this.listLelang();
@@ -328,15 +339,12 @@ export default {
     }
   },
   filters: {
-    dateFormat: date => {
+    dateFormat: (date) => {
       return moment.utc(date).format("DD-MMM-YYYY");
     },
     dateTimeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("DD MMM, HH:mm");
-    }
-  }
+      return moment.utc(date).add(utc, "h").format("DD MMM, HH:mm");
+    },
+  },
 };
 </script>

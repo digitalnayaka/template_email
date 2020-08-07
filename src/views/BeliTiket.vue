@@ -4,11 +4,28 @@
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon @click="dialog = true">
+        <v-badge color="orange" overlap v-if="countCart > 0">
+          <template v-slot:badge>
+            <span>{{ countCart }}</span>
+          </template>
+
+          <v-icon>mdi-cart</v-icon>
+        </v-badge>
+
+        <v-icon v-else>mdi-cart</v-icon>
+      </v-btn>
     </v-app-bar>
 
-    <h1 align="center">Beli Tiket Tawar Bersama</h1>
+    <div align="center">
+      <h1>Beli Tiket Tawar Bersama</h1>
+      <p>Paket Tiket</p>
+    </div>
 
-    <div class="text-center">
+    <!-- <div class="text-center">
       <v-card class="d-inline-block mx-auto">
         <v-container fluid>
           <v-row justify="space-between">
@@ -58,7 +75,48 @@
           <v-btn block color="primary" @click="storeItem" :loading="loading" :disabled="!valid">Beli Tiket</v-btn>
         </v-container>
       </v-card>
+    </div>-->
+
+    <div class="text-center">
+      <v-card class="d-inline-block mx-auto" flat>
+        <v-card v-for="item in bundles" :key="item.id" class="my-2" @click="addItem(item)">
+          <v-list dense>
+            <v-list-item>
+              <v-list-item-avatar tile size="80">
+                <v-img src="/img/tiket.png"></v-img>
+              </v-list-item-avatar>
+
+              <v-list-item-content>
+                <v-list-item-title>{{ item.judul }}</v-list-item-title>
+                <v-list-item-subtitle>Jumlah: {{ item.quantity }} Tiket</v-list-item-subtitle>
+              </v-list-item-content>
+
+              <v-list-item-content>
+                <v-list-item-title>Harga</v-list-item-title>
+                <v-list-item-subtitle>Rp {{ Number(item.total).toLocaleString("id-ID") }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-card>
     </div>
+
+    <v-dialog
+      v-model="dialog"
+      fullscreen
+      hide-overlay
+      transition="dialogbottom-transition"
+      persistent
+    >
+      <v-toolbar dark color="primary">
+        <v-btn icon dark @click="close">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+        <v-toolbar-title>Your Shopping Cart!</v-toolbar-title>
+      </v-toolbar>
+
+      <cart />
+    </v-dialog>
   </div>
 </template>
 
@@ -68,6 +126,9 @@ import { mask } from "vue-the-mask";
 
 export default {
   name: "BeliTiket",
+  components: {
+    Cart: () => import(/* webpackChunkName: "cart" */ "@/components/Cart.vue"),
+  },
   directives: { mask },
   data() {
     return {
@@ -77,12 +138,16 @@ export default {
       mask: "###",
       loader: null,
       loading: false,
-      valid: true
+      valid: true,
+      bundles: [],
+      dialog: false,
     };
   },
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
+      addCart: "cart/add",
+      setCart: "cart/set",
     }),
     plus(qty) {
       this.qty = Number(this.qty) + qty;
@@ -103,29 +168,54 @@ export default {
 
       this.axios
         .post("/transaksi/v1/order_tiket", formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           this.setAlert({
             status: true,
             color: "success",
-            text: data.api_message
+            text: data.api_message,
           });
           this.$router.push({ path: "/upload_bukti/" + data.data.id });
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
-    }
+    },
+    bundleTiket() {
+      this.axios
+        .get("/iklan/v1/iklan_tiket", {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.bundles = data;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
+        });
+    },
+    addItem(item) {
+      this.addCart(item);
+      this.dialog = true;
+    },
+    close() {
+      this.dialog = false;
+      this.setCart([]);
+    },
+  },
+  created() {
+    this.bundleTiket();
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
+      user: "auth/user",
+      countCart: "cart/count",
+    }),
   },
-  created() {}
 };
 </script>
 

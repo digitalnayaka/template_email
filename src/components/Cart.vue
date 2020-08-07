@@ -1,0 +1,149 @@
+<template>
+  <v-card>
+    <v-container fluid>
+      <div v-if="countCart === 0">
+        <v-alert outlined color="warning" icon="mdi-cart-off">Keranjang belanja kosong!</v-alert>
+      </div>
+
+      <v-list v-if="countCart > 0">
+        <template v-for="(item, index) in carts">
+          <v-list-item :key="'cart'+index">
+            <v-list-item-avatar tile size="80">
+              <v-img src="/img/tiket.png"></v-img>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ item.judul }}</v-list-item-title>
+              <v-list-item-subtitle>Jumlah: {{ item.qty }} Tiket</v-list-item-subtitle>
+            </v-list-item-content>
+
+            <v-list-item-content>
+              <v-list-item-title>Harga</v-list-item-title>
+              <v-list-item-subtitle>Rp {{ Number(item.price).toLocaleString("id-ID") }}</v-list-item-subtitle>
+            </v-list-item-content>
+
+            <!-- <v-list-item-content>
+              <v-list-item-title>Quantity</v-list-item-title>
+              <v-list-item-subtitle>
+                <span style="float:right">
+                  <v-btn icon small rounded depressed @click.stop="removeCart(item)">
+                    <v-icon dark color="error">mdi-minus-circle</v-icon>
+                  </v-btn>
+                  {{ item.quantity }}
+                  <v-btn icon small rounded depressed @click.stop="addCart(item)">
+                    <v-icon dark color="success">mdi-plus-circle</v-icon>
+                  </v-btn>
+                </span>
+              </v-list-item-subtitle>
+            </v-list-item-content>-->
+          </v-list-item>
+        </template>
+      </v-list>
+
+      <v-card>
+        <v-card-text>
+          <v-layout wrap>
+            <v-flex pa-1 xs6>
+              Total Price ({{ totalQuantity }} items)
+              <br />
+              <span class="title">Rp. {{ totalPrice.toLocaleString('id-ID') }}</span>
+            </v-flex>
+            <v-flex pa-1 xs6 text-right>
+              <v-btn
+                color="primary"
+                @click="dialog = true"
+                :loading="loading"
+                :disabled="totalQuantity == 0"
+              >
+                <v-icon>mdi-cart-arrow-right</v-icon>&nbsp; Checkout
+              </v-btn>
+            </v-flex>
+          </v-layout>
+        </v-card-text>
+      </v-card>
+
+      <v-dialog v-model="dialog" width="250" persistent>
+        <v-card>
+          <v-container fluid>anda yakin membeli paket ini?</v-container>
+
+          <v-divider></v-divider>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" text @click="dialog = false">Tidak</v-btn>
+            <v-btn color="primary" text @click="buy">Ya</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-container>
+  </v-card>
+</template>
+
+<script>
+import { mapGetters, mapActions } from "vuex";
+
+export default {
+  name: "cart",
+  data() {
+    return {
+      loader: null,
+      loading: false,
+      dialog: false,
+    };
+  },
+  computed: {
+    ...mapGetters({
+      user: "auth/user",
+      carts: "cart/carts",
+      countCart: "cart/count",
+      totalPrice: "cart/totalPrice",
+      totalQuantity: "cart/totalQuantity",
+    }),
+  },
+  methods: {
+    ...mapActions({
+      setAlert: "alert/set",
+      addCart: "cart/add",
+      removeCart: "cart/remove",
+      setCart: "cart/set",
+    }),
+    buy() {
+      this.loader = "loading";
+
+      let formData = new FormData();
+
+      formData.append("jumlah", this.carts[0].qty);
+      formData.append("id_mst_pembayaran_metode", 1);
+      formData.append("id_pembeli", this.user.id);
+      formData.append("id_iklan", this.carts[0].id);
+
+      this.axios
+        .post("/transaksi/v1/order_tiket", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: data.api_message,
+          });
+          this.setCart([]);
+          this.$router.push({ path: "/upload_bukti/" + data.data.id });
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
+        });
+    },
+    checkout() {
+      this.close();
+      this.$router.push({ path: "/checkout" });
+    },
+    close() {
+      this.$emit("closed", false);
+      this.setCart([]);
+    },
+  },
+};
+</script>
