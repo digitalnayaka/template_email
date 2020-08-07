@@ -225,6 +225,14 @@ const routes = [
     }
   },
   {
+    path: '/pengaturan',
+    name: 'pengaturan',
+    component: () => import(/* webpackChunkName: "pengaturan" */ '../views/Pengaturan.vue'),
+    meta: {
+      Auth: true
+    }
+  },
+  {
     path: '/rekening',
     name: 'rekening',
     component: () => import(/* webpackChunkName: "rekening" */ '../views/Rekening.vue'),
@@ -326,10 +334,19 @@ const routes = [
       Auth: true
     }
   },
+
   {
     path: '/tawar_bersama_selesai/:id',
     name: 'tb_selesai',
     component: () => import(/* webpackChunkName: "tb_selesai" */ '../views/TBSelesai.vue'),
+    meta: {
+      Auth: true
+    }
+  },
+  {
+    path: '/akun/',
+    name: 'akun',
+    component: () => import(/* webpackChunkName: "akun" */ '../views/Account.vue'),
     meta: {
       Auth: true
     }

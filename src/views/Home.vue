@@ -53,19 +53,16 @@
             :key="index"
             :to="'/list_lelang/' + item.id_app_user + '?tgl=' + item.date.substr(0,10)"
           >
-            <v-card dark color="teal">{{ item.total_iklan }} Iklan</v-card>
-
             <v-list>
               <v-list-item>
-                <v-list-item-content>
-                  <v-icon color="teal">mdi-calendar</v-icon>
-                  <v-list-item-title>{{ item.date | dateFormat }}</v-list-item-title>
-                </v-list-item-content>
-
                 <v-list-item-avatar size="70">
                   <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
                   <v-img :src="getImage(item.photo)" v-else contain></v-img>
                 </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-icon color="teal">mdi-calendar</v-icon>
+                  <v-list-item-title>{{ item.date | dateFormat }}</v-list-item-title>
+                </v-list-item-content>
               </v-list-item>
             </v-list>
 
@@ -75,6 +72,7 @@
               <v-img src="/img/verified.png" alt="verified"></v-img>
             </v-avatar>
             <span class="font-weight-bold">{{ item.nama }}</span>
+            <v-card color="white">{{ item.total_iklan }} Iklan Tayang</v-card>
           </v-card>
         </div>
 

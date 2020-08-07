@@ -184,7 +184,7 @@
                       <v-col cols="12" sm="4">
                         <v-item v-slot:default="{ active, toggle }" value="50000">
                           <v-card
-                            :color="active ? 'primary' : ''"
+                            :color="active ? 'teal' : ''"
                             class="d-flex align-center"
                             dark
                             @click="toggle"
@@ -201,7 +201,7 @@
                       <v-col cols="12" sm="4">
                         <v-item v-slot:default="{ active, toggle }" value="100000">
                           <v-card
-                            :color="active ? 'primary' : ''"
+                            :color="active ? 'teal' : ''"
                             class="d-flex align-center"
                             dark
                             @click="toggle"
@@ -216,7 +216,7 @@
                       <v-col cols="12" sm="4">
                         <v-item v-slot:default="{ active, toggle }" value="150000">
                           <v-card
-                            :color="active ? 'primary' : ''"
+                            :color="active ? 'teal' : ''"
                             class="d-flex align-center"
                             dark
                             @click="toggle"
@@ -236,16 +236,24 @@
                   <v-list-item>
                     <v-list-item-content>
                       <v-list-item-title>Gunakan Tiket</v-list-item-title>
+                      <v-list-item-subtitle>Isikan jumlah iklan tiket, minimal 1 Tiket</v-list-item-subtitle>
                     </v-list-item-content>
                     <v-list-item-action>
                       <v-switch v-model="tiket" input-value="true" color="success"></v-switch>
                     </v-list-item-action>
                   </v-list-item>
+                  <v-text-field
+                    outlined
+                    v-model="tiket"
+                    label="Jumlah Tiket"
+                    :counter="999"
+                    :rules="jumlahRules"
+                  ></v-text-field>
                 </v-list>
 
                 <v-row dense>
                   <v-col cols="6">
-                    <div>Tanggal Mulai</div>
+                    <div>Tanggal Mulai Tawar Bersama</div>
                     <v-datetime-picker
                       v-model="tglMulaiTB"
                       @input="dateTimeRange"
@@ -265,7 +273,7 @@
                   </v-col>
 
                   <v-col cols="6">
-                    <div>Tanggal Selesai</div>
+                    <div>Tanggal Selesai Tawar Bersama</div>
                     <v-datetime-picker
                       v-model="tglSelesaiTB"
                       :datePickerProps="datePickerProps"
@@ -290,8 +298,8 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" @click="id == undefined ? e1 = 2 : e1 = 1">Sebelumnya</v-btn>
-              <v-btn color="primary" :disabled="!valid" @click="storeItem" :loading="loading">Simpan</v-btn>
+              <v-btn color="teal" @click="id == undefined ? e1 = 2 : e1 = 1">Sebelumnya</v-btn>
+              <v-btn color="teal" :disabled="!valid" @click="storeItem" :loading="loading">Iklankan</v-btn>
             </v-card-actions>
           </v-stepper-content>
         </v-form>
@@ -338,40 +346,46 @@ export default {
       keyword: "",
       selectedIklan: [],
       selectedUnit: 0,
+      jumlahtiket: "",
+      jumlahRules: [
+        (v) => !!v || "Jumlah tiket harus diisi!",
+        (v) => v.length >= 1 || "Min 1 Tiket",
+        (v) => v.length <= 999 || "Max 999 Tiket",
+      ],
       judul_iklan: "",
       judulRules: [
-        v => !!v || "judul iklan harus diisi",
-        v => v.length >= 2 || "Min 2 characters",
-        v => v.length <= 70 || "Min 70 characters"
+        (v) => !!v || "judul iklan harus diisi",
+        (v) => v.length >= 2 || "Min 2 characters",
+        (v) => v.length <= 70 || "Min 70 characters",
       ],
       deskripsi_iklan: "",
       descRules: [
-        v => !!v || "deskripsi unit harus diisi",
-        v => v.length >= 2 || "Min 2 characters",
-        v => v.length <= 350 || "Min 350 characters"
+        (v) => !!v || "deskripsi unit harus diisi",
+        (v) => v.length >= 2 || "Min 2 characters",
+        (v) => v.length <= 350 || "Min 350 characters",
       ],
       money: {
         precision: 0,
         thousands: ".",
-        masked: true
+        masked: true,
       },
       amount: 0,
       amountRules: [
-        v => v != 0 || "Field is required",
-        v => v.length <= 11 || "Max 11 characters"
+        (v) => v != 0 || "Field is required",
+        (v) => v.length <= 11 || "Max 11 characters",
       ],
       price: 0,
       kelipatan: "",
       lat: 0,
       lng: 0,
-      tiket: false,
+      tiket: "",
       menu1: false,
       tglMulaiTB: moment().format("YYYY-MM-DD HH:mm"),
       datePickerProps: {},
       textFieldProps: {},
       menu2: false,
       tglSelesaiTB: null,
-      formRules: [v => !!v || "Field is required"],
+      formRules: [(v) => !!v || "Field is required"],
       tbDateRules: [],
       valid: true,
       submit: false,
@@ -385,25 +399,25 @@ export default {
       offset: 0,
       total: 0,
       loader: null,
-      loading: false
+      loading: false,
     };
   },
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
     }),
     getJenisIklan() {
       this.axios
         .get("/setup/v1/show_iklan", {
           params: {
-            limit: this.user.id_mst_user_type == 1 ? 1 : 3
-          }
+            limit: this.user.id_mst_user_type == 1 ? 1 : 3,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.jenisIklan = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -436,17 +450,17 @@ export default {
             id_mst_motor_bekas_status: 1,
             search: this.keyword,
             offset: offset,
-            limit: this.limit
-          }
+            limit: this.limit,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.unitMokas = data;
 
           this.total = response.data.count;
           this.lengthPage = Math.ceil(this.total / this.limit);
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -461,13 +475,11 @@ export default {
       this.tglMulaiTB = moment(this.tglMulaiTB).format("YYYY-MM-DD HH:mm");
       this.tglSelesaiTB = this.tglMulaiTB;
 
-      let maxdate = moment(this.tglMulaiTB)
-        .add(7, "d")
-        .format("YYYY-MM-DD");
+      let maxdate = moment(this.tglMulaiTB).add(7, "d").format("YYYY-MM-DD");
 
       this.datePickerProps = {
         min: this.tglMulaiTB,
-        max: maxdate
+        max: maxdate,
       };
     },
     checkDateTB() {
@@ -493,21 +505,21 @@ export default {
         this.textFieldProps = {
           rules: [
             h < 0 || "Tanggal Selesai harus lebih besar dari Tanggal Mulai",
-            m < 0 || "Tanggal Selesai harus lebih besar dari Tanggal Mulai"
+            m < 0 || "Tanggal Selesai harus lebih besar dari Tanggal Mulai",
           ],
-          suffix: this.waktu
+          suffix: this.waktu,
         };
       } else {
         this.textFieldProps = {
           rules: [],
-          suffix: this.waktu
+          suffix: this.waktu,
         };
       }
     },
     watchLocation() {
       this.$getLocation({
-        enableHighAccuracy: true
-      }).then(coordinates => {
+        enableHighAccuracy: true,
+      }).then((coordinates) => {
         this.lat = coordinates.lat;
         this.lng = coordinates.lng;
       });
@@ -536,23 +548,23 @@ export default {
 
           this.axios
             .post("/iklan/v1/iklan_hp_mokas_satuan", formData, {
-              headers: { Authorization: "Bearer " + this.user.token }
+              headers: { Authorization: "Bearer " + this.user.token },
             })
-            .then(response => {
+            .then((response) => {
               let { data } = response;
               this.setAlert({
                 status: true,
                 color: "success",
-                text: data.api_message
+                text: data.api_message,
               });
               this.$router.push({ path: "/iklan" });
             })
-            .catch(error => {
+            .catch((error) => {
               let responses = error.response.data;
               this.setAlert({
                 status: true,
                 color: "error",
-                text: responses.api_message
+                text: responses.api_message,
               });
             });
         }
@@ -587,23 +599,23 @@ export default {
 
           this.axios
             .post("/iklan/v2/iklan_tb_mokas_satuan", formData, {
-              headers: { Authorization: "Bearer " + this.user.token }
+              headers: { Authorization: "Bearer " + this.user.token },
             })
-            .then(response => {
+            .then((response) => {
               let { data } = response;
               this.setAlert({
                 status: true,
                 color: "success",
-                text: data.api_message
+                text: data.api_message,
               });
               this.$router.push({ path: "/iklan" });
             })
-            .catch(error => {
+            .catch((error) => {
               let responses = error.response.data;
               this.setAlert({
                 status: true,
                 color: "error",
-                text: responses.api_message
+                text: responses.api_message,
               });
             });
         }
@@ -643,28 +655,28 @@ export default {
 
           this.axios
             .post("/iklan/v2/iklan_tb_mokas_paketan", formData, {
-              headers: { Authorization: "Bearer " + this.user.token }
+              headers: { Authorization: "Bearer " + this.user.token },
             })
-            .then(response => {
+            .then((response) => {
               let { data } = response;
               this.setAlert({
                 status: true,
                 color: "success",
-                text: data.api_message
+                text: data.api_message,
               });
               this.$router.push({ path: "/iklan" });
             })
-            .catch(error => {
+            .catch((error) => {
               let responses = error.response.data;
               this.setAlert({
                 status: true,
                 color: "error",
-                text: responses.api_message
+                text: responses.api_message,
               });
             });
         }
       }
-    }
+    },
   },
   created() {
     this.getJenisIklan();
@@ -687,15 +699,15 @@ export default {
             id: this.id,
             id_app_user: this.user.id,
             id_mst_motor_bekas_status: 1,
-            limit: 1
-          }
+            limit: 1,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.selected = data[0];
           this.selectedUnit = data[0];
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -703,8 +715,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
+      user: "auth/user",
+    }),
   },
   watch: {
     loader() {
@@ -714,8 +726,8 @@ export default {
       setTimeout(() => (this[l] = false), 3000);
 
       this.loader = null;
-    }
-  }
+    },
+  },
 };
 </script>
 
