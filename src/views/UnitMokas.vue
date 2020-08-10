@@ -7,14 +7,16 @@
 
       <v-spacer></v-spacer>
 
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on }">
-          <v-btn icon class="mx-2" v-on="on" @click="getBarcode">
-            <v-icon large>mdi-barcode-scan</v-icon>
-          </v-btn>
-        </template>
-        <span>Barcode</span>
-      </v-tooltip>
+      <div v-if="!guest">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn icon class="mx-2" v-on="on" @click="getBarcode">
+              <v-icon large>mdi-barcode-scan</v-icon>
+            </v-btn>
+          </template>
+          <span>Barcode</span>
+        </v-tooltip>
+      </div>
 
       <v-dialog v-model="dialog">
         <v-card v-html="barcode"></v-card>
@@ -235,17 +237,17 @@ export default {
   },
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
     }),
     async unit_mokas() {
       await this.axios
         .get("/produk/v1/unit_mokas", {
           params: {
             id: this.id,
-            limit: 1
-          }
+            limit: 1,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.unitMokas = data[0];
           this.linkIklan(this.unitMokas.id);
@@ -276,7 +278,7 @@ export default {
             this.dokumen.push(pajak);
           }
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -285,16 +287,16 @@ export default {
       this.axios
         .get("/iklan/v1/link_iklan_tb", {
           params: {
-            id_motor_bekas: id
-          }
+            id_motor_bekas: id,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.iklan = data[0];
 
           this.getDtlIklan(this.iklan.id_iklan);
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -304,15 +306,15 @@ export default {
         .get("/search/v1/search", {
           params: {
             id: id,
-            limit: 1
-          }
+            limit: 1,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let data = response.data;
           let { hits } = data.hits;
           this.hits = hits[0]._source;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -320,14 +322,14 @@ export default {
     getBarcode() {
       this.axios
         .get("/produk/v1/barcode?id=" + this.id + "&limit=1", {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           this.barcode = data;
           this.dialog = true;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -342,24 +344,24 @@ export default {
 
         this.axios
           .post("/produk/v1/unit_mokas_delete", formData, {
-            headers: { Authorization: "Bearer " + this.user.token }
+            headers: { Authorization: "Bearer " + this.user.token },
           })
-          .then(response => {
+          .then((response) => {
             let { data } = response;
             this.unitMokas = data.data;
             this.setAlert({
               status: true,
               color: "success",
-              text: data.api_message
+              text: data.api_message,
             });
             this.$router.push({ path: "/garasi" });
           })
-          .catch(error => {
+          .catch((error) => {
             let responses = error.response.data;
             console.log(responses.api_message);
           });
       }
-    }
+    },
   },
   created() {
     this.unit_mokas();
@@ -367,15 +369,15 @@ export default {
   computed: {
     ...mapGetters({
       user: "auth/user",
-      guest: "auth/guest"
-    })
+      guest: "auth/guest",
+    }),
   },
   filters: {
     countDoc(doc) {
       if (doc !== null) {
         return true;
       }
-    }
-  }
+    },
+  },
 };
 </script>
