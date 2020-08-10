@@ -16,7 +16,7 @@
                   <v-icon>mdi-pencil</v-icon>
                 </v-btn>
               </template>
-              <span>Edit</span>
+              <span>Edit Profile</span>
             </v-tooltip>
           </v-btn>
 
@@ -47,9 +47,9 @@
                   <v-list-item-title>
                     <v-list-item-avatar tile size="16">
                       <v-img src="/img/verified.png" alt="verified"></v-img>
-                    </v-list-item-avatar>Nama
+                    </v-list-item-avatar> {{ appuser.nama}}
                   </v-list-item-title>
-                  <v-list-item-subtitle>Nomor hp</v-list-item-subtitle>
+                  <v-list-item-subtitle> {{ appuser.nomor_hp}} </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -65,7 +65,7 @@
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item-title>Jumlah</v-list-item-title>
+                    <v-list-item-title>{{ tiket.tersedia}} </v-list-item-title>
                     <v-list-item-subtitle>Tersedia</v-list-item-subtitle>
                   </v-list-item-content>
                   <v-list-item-content>
@@ -84,6 +84,7 @@
         <v-tabs v-model="tab" background-color="transparent" center-active grow>
           <v-tab>Pembeli</v-tab>
           <v-tab>Penjual</v-tab>
+        
         </v-tabs>
         <v-tabs-items v-model="tab">
           <v-tab-item>
@@ -111,7 +112,7 @@
                 </v-list-item>
               </v-list>
             </v-card>
-             <v-card :to="'/bantuan' ">
+            <v-card :to="'/bantuan' ">
               <v-list>
                 <v-list-item>
                   <v-list-item-content>
@@ -123,7 +124,7 @@
                 </v-list-item>
               </v-list>
             </v-card>
-             <v-card >
+            <v-card>
               <v-list>
                 <v-list-item>
                   <v-list-item-content>
@@ -150,7 +151,7 @@
                 </v-list-item>
               </v-list>
             </v-card>
-             <v-card :to="'/tambah-unit' ">
+            <v-card :to="'/tambah-unit' ">
               <v-list>
                 <v-list-item>
                   <v-list-item-content>
@@ -162,7 +163,7 @@
                 </v-list-item>
               </v-list>
             </v-card>
-             <v-card :to="'/iklan' ">
+            <v-card :to="'/iklan' ">
               <v-list>
                 <v-list-item>
                   <v-list-item-content>
@@ -174,7 +175,7 @@
                 </v-list-item>
               </v-list>
             </v-card>
-              <v-card :to="'/garasi' ">
+            <v-card :to="'/garasi' ">
               <v-list>
                 <v-list-item>
                   <v-list-item-content>
@@ -186,7 +187,7 @@
                 </v-list-item>
               </v-list>
             </v-card>
-             <v-card :to="'/bantuan' ">
+            <v-card :to="'/bantuan' ">
               <v-list>
                 <v-list-item>
                   <v-list-item-content>
@@ -211,16 +212,16 @@ export default {
   data() {
     return {
       appuser: [],
-      id_app_user: this.$route.params.id,
       tab: 0,
+       tiket: [],
     };
   },
   methods: {
-    getUser() {
+    getUser(id) {
       this.axios
         .get("/user/v1/user", {
           params: {
-            id: this.id_app_user,
+            id: id,
             limit: 1,
           },
         })
@@ -233,9 +234,27 @@ export default {
           console.log(responses.api_message);
         });
     },
+     totalTiket() {
+      this.axios
+        .get("/tiket/v1/total_tiket", {
+          params: {
+            id_app_user: this.id_app_user,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.tiket = data;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
+        });
+    },
   },
   mounted() {
     this.getUser();
+    this.totalTiket();
   },
 };
 </script>
