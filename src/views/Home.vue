@@ -57,7 +57,7 @@
               <v-list-item>
                 <v-list-item-avatar size="70">
                   <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
-                  <v-img :src="getImage(item.photo)" v-else contain></v-img>
+                  <v-img :src="getImage(item.photo)" v-else></v-img>
                 </v-list-item-avatar>
                 <v-list-item-content>
                   <v-icon color="teal">mdi-calendar</v-icon>
@@ -72,7 +72,7 @@
               <v-img src="/img/verified.png" alt="verified"></v-img>
             </v-avatar>
             <span class="font-weight-bold">{{ item.nama }}</span>
-            <v-card color="white">{{ item.total_iklan }} Iklan Tayang</v-card>
+            <div>{{ item.total_iklan }} Iklan Tayang</div>
           </v-card>
         </div>
 
@@ -81,7 +81,7 @@
           <p>Tidak ada jadwal tawar bersama di tanggal ini</p>
         </div>
 
-        <div align="center">
+        <div align="center" class="mt-4">
           <v-btn dark color="teal" to="/jadwal">Jadwal Tawar Bersama Selengkapnya</v-btn>
         </div>
       </v-col>
@@ -178,80 +178,73 @@
 
     <v-divider class="mt-4"></v-divider>
 
-    <div class="d-inline-block container mx-auto" align="center">
-      <v-row justify="center" align="center">
-        <v-flex xs6 sm6 md6 lg6>
-          <v-img src="img/app-min.png" width="280" contain></v-img>
-        </v-flex>
+    <div class="d-inline-block container" align="center">
+      <v-row>
+        <v-col cols="12" sm="6">
+          <v-img src="/img/app-min.png" width="280" contain></v-img>
+        </v-col>
 
-        <v-col class="col-lg-6 col-md-6 col-sm-6">
-          <div class="container">
-            <div class="section-title" align="center">
-              <v-img align="center" src="img/mobilehand.png" width="92"></v-img>
+        <v-col cols="12" sm="6">
+          <v-img src="/img/mobilehand.png" width="92" contain></v-img>
 
-              <h2>Apa itu SiMotor?</h2>
+          <h2>Apa itu SiMotor?</h2>
 
-              <p class="text-justify">
-                Sepeda motor sudah menjadi gaya hidup atau lifestyle masyarakat di Indonesia, benar nggak?
-                Oleh karena itu, kebutuhan akan sepeda motor juga meningkat dan kamu pasti ingin motor yang bagus dan berkualitas kan?
-                Disinilah SiMotor hadir sebagai jawaban. Beli motor jadi semakin mudah, cepat, dan berkualitas.
-              </p>
+          <p class="text-justify">
+            Sepeda motor sudah menjadi gaya hidup atau lifestyle masyarakat di Indonesia, benar nggak?
+            Oleh karena itu, kebutuhan akan sepeda motor juga meningkat dan kamu pasti ingin motor yang bagus dan berkualitas kan?
+            Disinilah SiMotor hadir sebagai jawaban. Beli motor jadi semakin mudah, cepat, dan berkualitas.
+          </p>
 
-              <v-card class="d-inline-block mx-auto" align="center">
-                <v-container fluid>
-                  <v-img src="img/banner.png" width="600" height="150" contain></v-img>
-                  <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
+          <v-card class="d-inline-block mx-auto" align="center">
+            <v-container fluid>
+              <v-img src="/img/banner.png" width="600" height="150" contain></v-img>
+              <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
 
-                  <a
-                    href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
-                    target="_blank"
-                  >
-                    <v-img
-                      src="img/playstore.png"
-                      width="162"
-                      href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
-                      target="_blank"
-                    ></v-img>
-                  </a>
-                </v-container>
-              </v-card>
-            </div>
-          </div>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
+                target="_blank"
+              >
+                <v-img
+                  src="img/playstore.png"
+                  width="162"
+                  href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
+                  target="_blank"
+                ></v-img>
+              </a>
+            </v-container>
+          </v-card>
         </v-col>
       </v-row>
     </div>
 
     <div class="container mx-auto">
       <div class="section-title" align="center">
-        <v-img src="img/icon.png" width="92"></v-img>
+        <v-img src="/img/icon.png" width="92"></v-img>
 
         <h4>Apa aja fitur unggulan SiMotor?</h4>
 
         <h2>Fitur SiMotor</h2>
 
-        <v-row justify="center" align="center">
-          <div class="container">
-            <v-col class="col-md-6 col-lg-6 col-sm-6">
-              <h2>Harga Pas</h2>
-              <v-img src="img/harga pas.png" width="120"></v-img>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <h2>Harga Pas</h2>
 
-              <p class="text-justify">
-                Harga pas berguna banget untuk kamu yang nggak mau ribet menawar unit.
-                Kamu hanya perlu memilih unit motor yang kamu butuhkan lalu segera hubungi penjual iklan unit tersebut.
-              </p>
-            </v-col>
-          </div>
+            <v-img src="/img/harga pas.png" width="120" contain></v-img>
 
-          <v-col class="col-lg-6 col-md-6 col-sm-6">
-            <div class="container">
-              <h2>Tawar Bersama</h2>
+            <p class="text-justify">
+              Harga pas berguna banget untuk kamu yang nggak mau ribet menawar unit.
+              Kamu hanya perlu memilih unit motor yang kamu butuhkan lalu segera hubungi penjual iklan unit tersebut.
+            </p>
+          </v-col>
 
-              <v-img src="img/tawar bersama (paketan).png" width="120"></v-img>
+          <v-col cols="12" sm="6">
+            <h2>Tawar Bersama</h2>
 
-              <p
-                class="text-justify"
-              >Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan penawaran sehingga harga yang kamu dapat sesuai dengan isi dompet.</p>
-            </div>
+            <v-img src="/img/tawar bersama (paketan).png" width="120" contain></v-img>
+
+            <p
+              class="text-justify"
+            >Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan penawaran sehingga harga yang kamu dapat sesuai dengan isi dompet.</p>
           </v-col>
         </v-row>
       </div>

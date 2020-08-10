@@ -76,7 +76,7 @@
               <v-list-item-avatar size="62">
                 <v-icon large v-if="hits.app_user_photo == 'null'">mdi-account-circle</v-icon>
 
-                <v-img :src="getImage(hits.app_user_photo)" contain v-else></v-img>
+                <v-img :src="getImage(hits.app_user_photo)" v-else></v-img>
               </v-list-item-avatar>
 
               <v-list-item-content>
@@ -175,38 +175,35 @@
 
         <v-tabs-items v-model="tab">
           <v-tab-item>
-            <v-card flat class="my-4" v-if="liveBid.length > 0">
-              <v-list tile dense v-if="iklan.id_mst_iklan_jenis > 1">
-                <v-list-item v-for="(item,i) in liveBid.slice(0,5)" :key="item.Bid">
-                  <v-list-item-icon class="mx-0" v-if="i+1 == 1">
-                    <v-icon large color="orange">mdi-star</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-icon class="mr-2" v-else>
-                    <v-chip color="green">{{ i + 1 }}</v-chip>
-                  </v-list-item-icon>
+            <div align="center" class="my-4" v-if="liveBid.length > 0">
+              <v-card class="d-flex justify-space-between align-center" flat width="500">
+                <v-list align="left" v-if="iklan.id_mst_iklan_jenis > 1">
+                  <v-list-item v-for="(item,i) in liveBid.slice(0,5)" :key="item.Bid">
+                    <v-list-item-icon class="mx-0" v-if="i+1 == 1">
+                      <v-icon large color="orange">mdi-star</v-icon>
+                    </v-list-item-icon>
 
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      <v-chip
-                        small
-                        color="red"
-                        text-color="white"
-                      >Rp {{ Number(item.Bid).toLocaleString('id-ID') }}</v-chip>&nbsp; oleh
-                      <span v-if="!guest">
-                        <v-chip
-                          small
-                          color="red"
-                          text-color="white"
-                          v-if="user.id == item.IdAppUser"
-                        >Anda</v-chip>
-                      </span>
-                      <v-chip small color="red" text-color="white">{{ item.IdUniq }}</v-chip>
-                    </v-list-item-title>
-                    <v-list-item-subtitle>{{ item.CreatedAt.toDate() | datediff }}</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-card>
+                    <v-list-item-icon class="mr-2" v-else>
+                      <v-chip color="green">{{ i + 1 }}</v-chip>
+                    </v-list-item-icon>
+
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        <div>Oleh: {{ item.IdUniq }}</div>
+                        <div v-if="!guest">
+                          <div v-if="user.id == item.IdAppUser">Anda</div>
+                        </div>
+                      </v-list-item-title>
+                      <v-list-item-subtitle>{{ item.CreatedAt.toDate() | datediff }}</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-action>
+                      <v-chip color="red" dark>Rp {{ Number(item.Bid).toLocaleString('id-ID') }}</v-chip>
+                    </v-list-item-action>
+                  </v-list-item>
+                </v-list>
+              </v-card>
+            </div>
 
             <v-card class="text-center ma-4" flat v-else>
               <div class="text-h4">Belum ada penawar</div>
@@ -523,7 +520,9 @@
                       <v-list-item-title>Jumlah Motor</v-list-item-title>
                     </v-list-item-content>
 
-                    <v-list-item-action v-if="iklan.motor_bekas != undefined">{{ iklan.motor_bekas.length }}</v-list-item-action>
+                    <v-list-item-action
+                      v-if="iklan.motor_bekas != undefined"
+                    >{{ iklan.motor_bekas.length }}</v-list-item-action>
                   </v-list-item>
 
                   <v-divider></v-divider>
@@ -554,7 +553,11 @@
 
                   <v-divider></v-divider>
 
-                  <v-list-item v-for="(item,i) in motorBekas" :key="i" :to="'/unit_mokas/' + item.id">
+                  <v-list-item
+                    v-for="(item,i) in motorBekas"
+                    :key="i"
+                    :to="'/unit_mokas/' + item.id"
+                  >
                     <v-list-item-avatar size="80">
                       <v-img :src="getImage(item.foto_1)" contain></v-img>
                     </v-list-item-avatar>
