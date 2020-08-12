@@ -9,38 +9,15 @@
     <div class="text-center">
       <v-card class="d-inline-block mx-auto">
         <v-container fluid>
-          <h1>Detail Transaksi</h1>
+          <h1>Detail Refund</h1>
 
           <v-card flat align="center" color="grey lighten-3">
             <v-avatar size="16" tile>
               <v-img src="/img/error.png"></v-img>
-            </v-avatar>Selalu waspada terhadap pihak yang tidak bertanggung jawab. Pastikan bukti pembayaran yang diupload sudah benar.
+            </v-avatar>Selalu waspada terhadap pihak yang tidak bertanggung jawab.
           </v-card>
-
-          <v-card class="d-inline-block mx-auto" flat>
-            <v-container>
-              <v-row justify="space-between">
-                <v-col cols="auto">
-                  <v-img height="80" width="80" src="/img/tiket.png"></v-img>
-                </v-col>
-
-                <v-col cols="auto" class="pl-0">
-                  <v-row class="flex-column ma-0 text-left" dense>
-                    <v-col class="px-0">
-                      <h3>Tiket</h3>
-                    </v-col>
-
-                    <v-col class="px-0">Jumlah: {{ orders.jumlah }} Tiket</v-col>
-                  </v-row>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card>
-
-          <v-divider></v-divider>
-
           <div class="text-left">
-            <h2>Informasi Tagihan</h2>
+            <h2>Informasi Refund</h2>
 
             <v-row dense>
               <v-col cols="6">Nomor Order:</v-col>
@@ -66,7 +43,7 @@
             </v-row>
 
             <v-row dense>
-              <v-col cols="6">Total Tagihan:</v-col>
+              <v-col cols="6">Total Refund:</v-col>
               <v-col
                 cols="6"
                 class="font-weight-black"
@@ -80,49 +57,34 @@
               <v-col cols="6" class="font-weight-black">{{ orders.metode }}</v-col>
             </v-row>
           </div>
+          <div class="text-left">
+            <v-row dense>
+              <v-col cols="6">
+                <v-card class="d-inline-block mx-auto" flat>
+                  <v-container>
+                    <v-row justify="space-between">
+                      <v-col cols="auto">
+                        <v-img height="80" width="80" src="/img/tiket.png"></v-img>
+                      </v-col>
 
+                      <v-col cols="auto" class="pl-0">
+                        <v-row class="flex-column ma-0 text-left" dense>
+                          <v-col class="px-0">
+                            <h3>Tiket</h3>
+                          </v-col>
+
+                          <v-col class="px-0">Jumlah: {{ orders.jumlah }} Tiket</v-col>
+                        </v-row>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card>
+              </v-col>
+            </v-row>
+          </div>
           <v-divider></v-divider>
 
-          <h3>Tujuan Pembayaran</h3>
-
-          <div>Transfer akan dilakukan ke rekening berikut:</div>
-
-          <v-list>
-            <v-list-item>
-              <v-list-item-icon>
-                <v-card
-                  width="70"
-                  dark
-                  color="primary"
-                  class="pa-2"
-                  v-if="bank.id_mst_bank == 2"
-                >MNDR</v-card>
-
-                <v-card width="70" dark color="orange" class="pa-2" v-if="bank.id_mst_bank == 3">BNI</v-card>
-
-                <v-card width="70" dark color="indigo" class="pa-2" v-if="bank.id_mst_bank == 4">BRI</v-card>
-
-                <v-card width="70" dark color="blue" class="pa-2" v-if="bank.id_mst_bank == 12">BCA</v-card>
-              </v-list-item-icon>
-
-              <v-list-item-content>
-                <v-list-item-title>{{ bank.bank_name }}</v-list-item-title>
-                <v-list-item-subtitle>{{ bank.nomor_rekening }}</v-list-item-subtitle>
-                <input type="hidden" id="nomor_rekening" :value="bank.nomor_rekening" />
-                <v-list-item-subtitle>{{ bank.nama_rekening }}</v-list-item-subtitle>
-              </v-list-item-content>
-
-              <v-list-item-action>
-                <v-btn class="teal--text" @click="salin" outlined>Salin</v-btn>
-              </v-list-item-action>
-            </v-list-item>
-
-            <p>Jika mengalami kendala dengan penjualan, silahkan kunjungi Bantuan.</p>
-
-            <v-divider></v-divider>
-
-            <!-- <v-btn color="red darken-1" dark class="mb-2" align="right" block @click="save">Batalkan</v-btn> -->
-          </v-list>
+          <v-divider></v-divider>
         </v-container>
       </v-card>
     </div>
@@ -139,11 +101,11 @@ export default {
     orders: [],
     bank: [],
     utc: moment().utcOffset() / 60 - 7,
-    waktu: ""
+    waktu: "",
   }),
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
     }),
     async getOrder() {
       await this.axios
@@ -151,10 +113,10 @@ export default {
           headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id: this.$route.params.id,
-            limit: 1
-          }
+            limit: 1,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.orders = data[0];
           this.getBank(
@@ -162,7 +124,7 @@ export default {
             this.orders.id_penjual
           );
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -174,14 +136,14 @@ export default {
           params: {
             id: id,
             id_app_user: user,
-            limit: 1
-          }
+            limit: 1,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.bank = data[0];
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -196,20 +158,20 @@ export default {
         this.setAlert({
           status: true,
           color: "success",
-          text: "Nomor rekening berhasil disalin"
+          text: "Nomor rekening berhasil disalin",
         });
       } catch (err) {
         this.setAlert({
           status: true,
           color: "error",
-          text: "Oops, unable to copy"
+          text: "Oops, unable to copy",
         });
       }
 
       /* unselect the range */
       testingCodeToCopy.setAttribute("type", "hidden");
       window.getSelection().removeAllRanges();
-    }
+    },
   },
   created() {
     this.getOrder();
@@ -226,17 +188,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
+      user: "auth/user",
+    }),
   },
   filters: {
     dateTimeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("DD MMM YYYY, HH:mm");
-    }
-  }
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY, HH:mm");
+    },
+  },
 };
 </script>
 

@@ -195,47 +195,16 @@ export default {
   name: "account",
   data() {
     return {
-<<<<<<< HEAD
-      appuser: [],
-=======
       tiket: [],
->>>>>>> 64d38e6a37857d62670a8c01be70070d0ba46b7e
       tab: 0,
-       tiket: [],
     };
   },
   methods: {
-<<<<<<< HEAD
-    getUser(id) {
-=======
     totalTiket() {
->>>>>>> 64d38e6a37857d62670a8c01be70070d0ba46b7e
       this.axios
         .get("/tiket/v1/total_tiket", {
           params: {
-<<<<<<< HEAD
-            id: id,
-            limit: 1,
-=======
             id_app_user: this.user.id,
->>>>>>> 64d38e6a37857d62670a8c01be70070d0ba46b7e
-          },
-          headers: { Authorization: "Bearer " + this.user.token },
-        })
-        .then((response) => {
-          let { data } = response.data;
-          this.tiket = data;
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          console.log(responses);
-        });
-    },
-     totalTiket() {
-      this.axios
-        .get("/tiket/v1/total_tiket", {
-          params: {
-            id_app_user: this.id_app_user,
           },
           headers: { Authorization: "Bearer " + this.user.token },
         })
@@ -249,11 +218,6 @@ export default {
         });
     },
   },
-<<<<<<< HEAD
-  mounted() {
-    this.getUser();
-    this.totalTiket();
-=======
   created() {
     this.totalTiket();
   },
@@ -261,7 +225,6 @@ export default {
     ...mapGetters({
       user: "auth/user",
     }),
->>>>>>> 64d38e6a37857d62670a8c01be70070d0ba46b7e
   },
 };
 </script>
