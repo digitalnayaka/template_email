@@ -28,28 +28,6 @@
             >Sebelum: {{ orders.expired_at | dateTimeFormat(utc) }} {{ waktu }}</v-card>
           </v-container>
 
-          <v-card class="d-inline-block mx-auto" flat>
-            <v-container>
-              <v-row justify="space-between">
-                <v-col cols="auto">
-                  <v-img height="80" width="80" src="/img/tiket.png"></v-img>
-                </v-col>
-
-                <v-col cols="auto" class="pl-0">
-                  <v-row class="flex-column ma-0 text-left" dense>
-                    <v-col class="px-0">
-                      <h3>Tiket</h3>
-                    </v-col>
-
-                    <v-col class="px-0">Jumlah: {{ orders.jumlah }} Tiket</v-col>
-                  </v-row>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card>
-
-          <v-divider></v-divider>
-
           <div class="text-left">
             <h2>Informasi Tagihan</h2>
 
@@ -67,23 +45,23 @@
             </v-row>
 
             <v-row dense>
-              <v-col cols="6">Status Tagihan:</v-col>
-              <v-col cols="6" class="font-weight-black red--text">{{ orders.pembayaran_status }}</v-col>
+              <v-col cols="6">Dijual Oleh:</v-col>
+              <v-col cols="6" class="font-weight-black">{{ orders.nama_penjual }}</v-col>
             </v-row>
 
-            <v-row dense v-if="orders.id_mst_pembayaran_status == 5">
+            <v-row dense>
+              <v-col cols="6">Metode Bayar:</v-col>
+              <v-col cols="6" class="font-weight-black">{{ orders.metode }}</v-col>
+            </v-row>
+
+            <!-- <v-row dense v-if="orders.id_mst_pembayaran_status == 5">
               <v-col cols="6">Alasan Ditolak:</v-col>
               <v-col cols="6" class="font-weight-black">{{ orders.note }}</v-col>
             </v-row>
 
-            <v-row dense v-if="orders.id_mst_pembayaran_status == 5">
+            <v-row dense v-if="orders.id_mst_pembayaran_status == 6">
               <v-col cols="6">Detail Alasan:</v-col>
               <v-col cols="6" class="font-weight-black">{{ orders.note_detail }}</v-col>
-            </v-row>
-
-            <v-row dense>
-              <v-col cols="6">Nama Penjual:</v-col>
-              <v-col cols="6" class="font-weight-black">{{ orders.nama_penjual }}</v-col>
             </v-row>
 
             <v-row dense>
@@ -94,13 +72,53 @@
                 v-if="orders.total_pembayaran > 0"
               >Rp {{ orders.total_pembayaran.toLocaleString("id-ID") }}</v-col>
               <v-col cols="6" class="font-weight-black" v-else>Rp {{ orders.total_pembayaran }}</v-col>
-            </v-row>
-
-            <v-row dense>
-              <v-col cols="6">Metode Bayar:</v-col>
-              <v-col cols="6" class="font-weight-black">{{ orders.metode }}</v-col>
-            </v-row>
+            </v-row>-->
           </div>
+
+          <v-divider></v-divider>
+
+          <h2 class="text-left">Informasi Produk</h2>
+
+          <v-card class="d-inline-block mx-auto" flat>
+            <v-container fluid>
+              <v-row justify="space-between" align="center">
+                <v-col cols="auto">
+                  <h3>Tiket</h3>
+                  <v-img height="90" width="90" src="/img/tiket.png"></v-img>
+                </v-col>
+
+                <v-col cols="auto" class="pl-0">
+                  <v-row class="flex-column ma-0 text-left" dense>
+                    <v-col class="px-0">
+                      Status Tagihan:
+                      <span
+                        class="font-weight-black red--text"
+                      >{{ orders.pembayaran_status }}</span>
+                    </v-col>
+
+                    <v-col class="px-0" v-if="orders.id_mst_pembayaran_status == 6">
+                      Alasan Ditolak:
+                      <span class="font-weight-black">{{ orders.note }}</span>
+                    </v-col>
+
+                    <v-col class="px-0" v-if="orders.id_mst_pembayaran_note == 5">
+                      Detail Alasan:
+                      <span class="font-weight-black">{{ orders.note_detail }}</span>
+                    </v-col>
+
+                    <v-col class="px-0 teal--text">Jumlah: {{ orders.jumlah }} Tiket</v-col>
+
+                    <v-col class="px-0">
+                      Total Tagihan:
+                      <span
+                        class="font-weight-black"
+                      >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</span>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card>
 
           <v-divider></v-divider>
 
@@ -196,21 +214,21 @@ export default {
     utc: moment().utcOffset() / 60 - 7,
     waktu: "",
     accounts: [],
-    hasImage: false
+    hasImage: false,
   }),
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
     }),
     async getOrder() {
       await this.axios
         .get("/transaksi/v1/order", {
           headers: { Authorization: "Bearer " + this.user.token },
           params: {
-            id: this.$route.params.id
-          }
+            id: this.$route.params.id,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.orders = data[0];
           this.countdown = moment
@@ -227,7 +245,7 @@ export default {
             this.$router.push({ path: "/" });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -242,24 +260,24 @@ export default {
 
       this.axios
         .post("/transaksi/v1/upload_pembayaran", formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           this.setAlert({
             status: true,
             color: "success",
-            text: data.api_message
+            text: data.api_message,
           });
           this.getOrder();
           this.dtlPembayaran();
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           this.setAlert({
             status: true,
             color: "success",
-            text: responses.api_message
+            text: responses.api_message,
           });
         });
     },
@@ -269,14 +287,14 @@ export default {
           params: {
             id_app_user: this.user.id,
             id: this.orders.id_app_user_rekening,
-            limit: 999
-          }
+            limit: 999,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.accounts = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -286,14 +304,14 @@ export default {
         .get("/transaksi/v1/upload_pembayaran", {
           headers: { Authorization: "Bearer " + this.user.token },
           params: {
-            id_pembayaran: this.orders.id_pembayaran
-          }
+            id_pembayaran: this.orders.id_pembayaran,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.foto = data[0].foto;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -310,11 +328,11 @@ export default {
 
       const reader = new FileReader();
 
-      reader.onload = e => {
+      reader.onload = (e) => {
         this.previewUrl = e.target.result;
       };
       reader.readAsDataURL(this.buktiBayar);
-    }
+    },
   },
   created() {
     this.getOrder();
@@ -331,17 +349,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
+      user: "auth/user",
+    }),
   },
   filters: {
     dateTimeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("DD MMM YYYY, HH:mm");
-    }
-  }
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY, HH:mm");
+    },
+  },
 };
 </script>
 

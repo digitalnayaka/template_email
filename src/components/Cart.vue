@@ -14,13 +14,13 @@
 
             <v-list-item-content>
               <v-list-item-title>{{ item.judul }}</v-list-item-title>
-              <v-list-item-subtitle>Jumlah: {{ item.qty }} Tiket</v-list-item-subtitle>
+              <v-list-item-subtitle>Jml: {{ item.qty }} Tiket</v-list-item-subtitle>
             </v-list-item-content>
 
-            <v-list-item-content>
-              <v-list-item-title>Harga</v-list-item-title>
-              <v-list-item-subtitle>Rp {{ Number(item.price).toLocaleString("id-ID") }}</v-list-item-subtitle>
-            </v-list-item-content>
+            <v-list-item-action>
+              <v-list-item-action-text>Harga</v-list-item-action-text>
+              Rp {{ Number(item.price).toLocaleString("id-ID") }}
+            </v-list-item-action>
 
             <!-- <v-list-item-content>
               <v-list-item-title>Quantity</v-list-item-title>
@@ -44,23 +44,32 @@
         <v-card-text>
           <v-layout wrap>
             <v-flex pa-1 xs6>
-              Total Price ({{ totalQuantity }} items)
+              Total Harga* ({{ totalQuantity }} items)
               <br />
               <span class="title">Rp. {{ totalPrice.toLocaleString('id-ID') }}</span>
             </v-flex>
-            <v-flex pa-1 xs6 text-right>
+
+            <v-flex pa-1 xs6 text-right align-self-center>
               <v-btn
                 color="primary"
                 @click="dialog = true"
                 :loading="loading"
                 :disabled="totalQuantity == 0"
               >
-                <v-icon>mdi-cart-arrow-right</v-icon>&nbsp; Checkout
+                <v-icon>mdi-cart-arrow-right</v-icon>&nbsp; Bayar
               </v-btn>
             </v-flex>
           </v-layout>
         </v-card-text>
       </v-card>
+
+      <div class="ma-2">
+        <div
+          class="red--text"
+        >(*Total harga akan ditambah 3 digit angka unik. Lakukan pembayaran sesuai dengan nominal yang tertera.)</div>
+
+        <div>Setelah Anda melakukan pembayaran, tiket Anda akan masuk dalam waktu 2x24 jam.</div>
+      </div>
 
       <v-dialog v-model="dialog" width="250" persistent>
         <v-card>

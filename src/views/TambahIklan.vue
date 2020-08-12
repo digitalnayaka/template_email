@@ -596,9 +596,10 @@ export default {
           formData.append("is_verified", this.tiket);
           formData.append("id_mst_type_tb", 1);
           formData.append("id_app_user", this.user.id);
+          formData.append("jumlah_tiket", 1);
 
           this.axios
-            .post("/iklan/v2/iklan_tb_mokas_satuan", formData, {
+            .post("/iklan/v3/iklan_tb_mokas_satuan", formData, {
               headers: { Authorization: "Bearer " + this.user.token },
             })
             .then((response) => {
@@ -652,9 +653,10 @@ export default {
           formData.append("is_verified", this.tiket);
           formData.append("id_mst_type_tb", 1);
           formData.append("id_app_user", this.user.id);
+          formData.append("jumlah_tiket", 1);
 
           this.axios
-            .post("/iklan/v2/iklan_tb_mokas_paketan", formData, {
+            .post("/iklan/v3/iklan_tb_mokas_paketan", formData, {
               headers: { Authorization: "Bearer " + this.user.token },
             })
             .then((response) => {
