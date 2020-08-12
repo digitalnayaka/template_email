@@ -21,8 +21,8 @@
     </v-app-bar>
 
     <div align="center">
-      <h1>Beli Tiket Tawar Bersama</h1>
-      <p>Paket Tiket</p>
+      <div class="text-h5 text-sm-h4">Beli Tiket Tawar Bersama</div>
+      <div>Paket yang tersedia</div>
     </div>
 
     <!-- <div class="text-center">
@@ -77,10 +77,10 @@
       </v-card>
     </div>-->
 
-    <div class="text-center">
-      <v-card class="d-inline-block mx-auto" flat>
-        <v-card v-for="item in bundles" :key="item.id" class="my-2" @click="addItem(item)">
-          <v-list dense>
+    <v-row>
+      <v-col cols="12" sm="4" v-for="item in bundles" :key="item.id">
+        <v-card @click="addItem(item)">
+          <v-list>
             <v-list-item>
               <v-list-item-avatar tile size="80">
                 <v-img src="/img/tiket.png"></v-img>
@@ -88,18 +88,20 @@
 
               <v-list-item-content>
                 <v-list-item-title>{{ item.judul }}</v-list-item-title>
-                <v-list-item-subtitle>Jumlah: {{ item.quantity }} Tiket</v-list-item-subtitle>
+                <v-list-item-subtitle>Jml: {{ item.quantity }} Tiket</v-list-item-subtitle>
               </v-list-item-content>
 
-              <v-list-item-content>
-                <v-list-item-title>Harga</v-list-item-title>
-                <v-list-item-subtitle>Rp {{ Number(item.total).toLocaleString("id-ID") }}</v-list-item-subtitle>
-              </v-list-item-content>
+              <v-list-item-action>
+                <v-list-item-action-text>Harga</v-list-item-action-text>
+                Rp {{ Number(item.total).toLocaleString("id-ID") }}
+              </v-list-item-action>
             </v-list-item>
           </v-list>
+
+          <v-btn block color="teal" dark>Beli</v-btn>
         </v-card>
-      </v-card>
-    </div>
+      </v-col>
+    </v-row>
 
     <v-dialog
       v-model="dialog"

@@ -4,9 +4,24 @@
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
+
+      <v-spacer></v-spacer>
+
+      <!-- <v-btn icon @click="dialog = true">
+        <v-badge color="orange" overlap v-if="countCart > 0">
+          <template v-slot:badge>
+            <span>{{ countCart }}</span>
+          </template>
+
+          <v-icon>mdi-cart</v-icon>
+        </v-badge>
+
+        <v-icon v-else>mdi-cart</v-icon>
+      </v-btn>-->
     </v-app-bar>
 
     <h1 align="center">Refund Tiket Tawar Bersama</h1>
+    <!-- <h5 align="center">Pilih tiket yang akan di refund.</h5> -->
 
     <div class="text-center">
       <v-card class="d-inline-block mx-auto">
@@ -17,7 +32,9 @@
 
           <h3 class="text-left">Jumlah Refund:</h3>
 
-          <v-row dense>
+          <h3 class="text-right">{{ Number(qty).toLocaleString("id-ID") }} Tiket</h3>
+
+          <!-- <v-row dense>
             <v-spacer></v-spacer>
 
             <v-col cols="4" sm="3">
@@ -33,9 +50,9 @@
                 ></v-text-field>
               </v-form>
             </v-col>
-          </v-row>
+          </v-row>-->
 
-          <v-row>
+          <!-- <v-row>
             <v-col cols="4">
               <v-btn outlined class="mx-2 red--text" @click="plus(1)">1 Tiket</v-btn>
             </v-col>
@@ -47,20 +64,97 @@
             <v-col cols="4">
               <v-btn outlined class="mx-2 red--text" @click="plus(tersedia)">Semua</v-btn>
             </v-col>
-          </v-row>
+          </v-row>-->
 
-          <v-divider class="my-2"></v-divider>
+          <v-dialog v-model="dialog" fullscreen width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn block dark v-bind="attrs" v-on="on" @click="open">Pilih Tiket Refund</v-btn>
+            </template>
+
+            <v-toolbar dark color="primary">
+              <v-btn icon dark @click="dialog = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+
+              <v-spacer></v-spacer>
+
+              <v-btn icon dark class="mx-2" @click="getTiket">Refund</v-btn>
+            </v-toolbar>
+
+            <v-card>
+              <v-container fluid>
+                <div class="d-flex justify-space-between">
+                  <h3>Pilih tiket yang akan di refund: {{ listRefund.length }} Tiket</h3>
+                  <v-checkbox class="my-0 py-0" label="Select All" @click="selectAll"></v-checkbox>
+                </div>
+
+                <v-item-group>
+                  <v-row>
+                    <v-col cols="4" v-for="item in listTersedia" :key="item.id">
+                      <v-item v-slot:default="{ active }">
+                        <v-card>
+                          <v-list>
+                            <v-list-item>
+                              <v-list-item-content>
+                                <v-list-item-subtitle>Kode Tiket</v-list-item-subtitle>
+                                <v-list-item-title>{{ item.code }}</v-list-item-title>
+                              </v-list-item-content>
+
+                              <v-list-item-action>
+                                <v-checkbox v-model="listRefund" :value="item" :input-value="active"></v-checkbox>
+                              </v-list-item-action>
+                            </v-list-item>
+
+                            <v-list-item>
+                              <v-list-item-content>
+                                <v-list-item-subtitle>Harga</v-list-item-subtitle>
+                                <v-list-item-title
+                                  class="teal--text"
+                                >Rp {{ Number(item.harga_beli).toLocaleString("id-ID") }}</v-list-item-title>
+                              </v-list-item-content>
+
+                              <v-list-item-content>
+                                <v-list-item-subtitle>Masa Berlaku</v-list-item-subtitle>
+                                <v-list-item-title
+                                  class="red--text text-caption"
+                                >{{ item.expired_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list>
+                        </v-card>
+                      </v-item>
+                    </v-col>
+                  </v-row>
+                </v-item-group>
+
+                <v-pagination
+                  v-model="pageTersedia"
+                  @input="tiketTersedia"
+                  :length="lengthPageTersedia"
+                  :total-visible="5"
+                ></v-pagination>
+              </v-container>
+            </v-card>
+          </v-dialog>
+
+          <v-divider class="my-4"></v-divider>
 
           <h2>Detail Tiket</h2>
 
-          <v-row dense v-if="qty > 0">
-            <v-col cols="6" class="text-left">- {{ qty }} Tiket x Rp {{ harga }}</v-col>
-            <v-col cols="6" class="text-right">Rp {{ total }}</v-col>
+          <v-row v-for="(item,i) in groupHarga" :key="i">
+            <v-col
+              cols="6"
+              class="text-left"
+            >- {{ item.qty.length }} Tiket x Rp {{ Number(item.harga_beli).toLocaleString("id-ID") }}</v-col>
+            <v-col
+              cols="6"
+              class="text-right"
+            >Rp {{ Number(item.qty.length * item.harga_beli).toLocaleString("id-ID") }}</v-col>
           </v-row>
 
           <h3 class="text-left">Total Refund</h3>
 
-          <h3 class="text-right">Rp {{ total }}</h3>
+          <h3 class="text-right">Rp {{ Number(total).toLocaleString("id-ID") }}</h3>
 
           <v-divider class="my-2"></v-divider>
 
@@ -173,39 +267,109 @@
         </v-container>
       </v-card>
     </div>
+
+    <!-- <div v-if="listTersedia.length > 0">
+      <v-row justify="center">
+        <v-col cols="4">Total Tiket: {{ listTersedia.length }} Tiket</v-col>
+
+        <v-col cols="4">Refund: {{ selected.length }} Tiket</v-col>
+
+        <v-col cols="4">
+          <v-checkbox label="Select All" class="my-0 py-0" @click="selectAll"></v-checkbox>
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col cols="12" sm="4" v-for="item in listTersedia" :key="item.id">
+          <v-card>
+            <v-list>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-subtitle>Kode Tiket</v-list-item-subtitle>
+                  <v-list-item-title>{{ item.code }}</v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-action>
+                  <v-checkbox v-model="selected" :value="item.id"></v-checkbox>
+                </v-list-item-action>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-subtitle>Harga</v-list-item-subtitle>
+                  <v-list-item-title
+                    class="teal--text"
+                  >Rp {{ Number(item.harga_beli).toLocaleString("id-ID") }}</v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-content>
+                  <v-list-item-subtitle>Masa Berlaku</v-list-item-subtitle>
+                  <v-list-item-title
+                    class="red--text text-caption"
+                  >{{ item.expired_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-col>
+      </v-row>
+
+      <v-pagination
+        v-model="pageTersedia"
+        @input="tiketTersedia"
+        :length="lengthPageTersedia"
+        :total-visible="5"
+      ></v-pagination>
+    </div>
+
+    <div class="text-center mt-14" v-else>
+      <h3>Anda tidak memiliki tiket untuk di refund.</h3>
+    </div>-->
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { mask } from "vue-the-mask";
+// import { mask } from "vue-the-mask";
+import moment from "moment-timezone";
 
 export default {
   name: "refund",
-  directives: { mask },
+  // directives: { mask },
   data: () => ({
+    dialog: false,
     mask: "###",
     qty: 0,
-    harga: 0,
+    // harga: 0,
     total: 0,
-    selected: "",
+    selected: [],
+    listRefund: [],
     dialogRekening: false,
     accounts: [],
     banks: [],
     editedItem: {
       bank_name: "",
       nama_rekening: "",
-      nomor_rekening: ""
+      nomor_rekening: "",
     },
     defaultItem: {},
     valid: true,
     tiket: [],
     tersedia: 0,
-    valid2: true
+    listTersedia: [],
+    groupHarga: [],
+    valid2: true,
+    pageTersedia: 1,
+    lengthPageTersedia: 0,
+    totalTersedia: 0,
+    limit: 15,
+    offset: 0,
+    utc: moment().utcOffset() / 60 - 7,
+    waktu: "",
   }),
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
     }),
     plus(qty) {
       if (qty >= this.tersedia) {
@@ -220,15 +384,15 @@ export default {
       this.axios
         .get("/tiket/v1/total_tiket", {
           params: {
-            id_app_user: this.user.id
+            id_app_user: this.user.id,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.tersedia = data.tersedia;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
@@ -238,15 +402,15 @@ export default {
         .get("/user/v1/user/rekening", {
           params: {
             id_app_user: this.user.id,
-            limit: 999
+            limit: 999,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.accounts = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
@@ -254,11 +418,11 @@ export default {
     getBank() {
       this.axios
         .get("/master/v1/mst_bank")
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.banks = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
@@ -280,88 +444,170 @@ export default {
 
       this.axios
         .post("/user/v1/user/rekening", formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           this.setAlert({
             status: true,
             color: "success",
-            text: data.api_message
+            text: data.api_message,
           });
           this.getRekening();
           this.close();
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
     },
-    totalHarga() {
-      this.total = Number(this.qty * this.harga).toLocaleString("id-ID");
-      this.getRefund();
-    },
-    getRefund() {
-      this.axios
-        .get("/tiket/v1/tiket", {
-          params: {
-            id_app_user: this.user.id,
-            id_mst_tiket_status: 1,
-            limit: this.qty
-          },
-          headers: { Authorization: "Bearer " + this.user.token }
-        })
-        .then(response => {
-          let { data } = response.data;
-          this.tiket = data;
-        })
-        .catch(() => {
-          this.setAlert({
-            status: true,
-            color: "error",
-            text: "Anda tidak memiliki tiket"
-          });
-        });
-    },
+    // totalHarga() {
+    //   this.total = Number(this.qty * this.harga).toLocaleString("id-ID");
+    //   this.getRefund();
+    // },
+    // getRefund() {
+    //   this.axios
+    //     .get("/tiket/v1/tiket", {
+    //       params: {
+    //         id_app_user: this.user.id,
+    //         id_mst_tiket_status: 1,
+    //         limit: this.qty,
+    //       },
+    //       headers: { Authorization: "Bearer " + this.user.token },
+    //     })
+    //     .then((response) => {
+    //       let { data } = response.data;
+    //       this.tiket = data;
+    //     })
+    //     .catch(() => {
+    //       this.setAlert({
+    //         status: true,
+    //         color: "error",
+    //         text: "Anda tidak memiliki tiket",
+    //       });
+    //     });
+    // },
     refund() {
       let formData = new FormData();
 
-      for (let index = 0; index < this.tiket.length; index++) {
-        const element = this.tiket[index].id;
+      for (let index = 0; index < this.listRefund.length; index++) {
+        const element = this.listRefund[index].id;
         formData.append("id_tiket", element);
+        console.log(element);
       }
       formData.append("id_penjual", this.user.id);
       formData.append("id_app_user_rekening", this.selected);
 
       this.axios
         .post("/transaksi/v1/pencairan_tiket", formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           this.setAlert({
             status: true,
             color: "success",
-            text: data.api_message
+            text: data.api_message,
           });
           this.$router.go(-1);
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
-    }
+    },
+    tiketTersedia() {
+      var offset = (this.pageTersedia - 1) * this.limit;
+
+      this.axios
+        .get("/tiket/v1/tiket", {
+          params: {
+            id_app_user: this.user.id,
+            id_mst_tiket_status: 1,
+            offset: offset,
+            limit: this.limit,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.listTersedia = data.data;
+
+          this.totalTersedia = data.count;
+          this.lengthPageTersedia = Math.ceil(this.totalTersedia / this.limit);
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
+        });
+    },
+    open() {
+      this.groupHarga = [];
+      this.total = 0;
+    },
+    getTiket() {
+      const map = new Map();
+      for (const item of this.listRefund) {
+        if (!map.has(item.harga_beli)) {
+          map.set(item.harga_beli, true);
+
+          let found = this.listRefund.filter(
+            (element) => element.harga_beli == item.harga_beli
+          );
+
+          this.groupHarga.push({
+            harga_beli: item.harga_beli,
+            qty: found,
+          });
+        }
+      }
+
+      for (let index = 0; index < this.groupHarga.length; index++) {
+        const element = this.groupHarga[index];
+        this.total += element.qty.length * element.harga_beli;
+      }
+
+      this.qty = this.listRefund.length;
+      // this.total = this.qty * this.harga;
+      this.dialog = false;
+    },
+    selectAll() {
+      if (this.listRefund == 0) {
+        for (let index = 0; index < this.listTersedia.length; index++) {
+          const element = this.listTersedia[index];
+          this.listRefund.push(element);
+        }
+      } else {
+        this.listRefund = [];
+      }
+    },
   },
   created() {
     this.totalTiket();
     this.getRekening();
     this.getBank();
-    this.getRefund();
+    // this.getRefund();
+    this.tiketTersedia();
+
+    if (this.utc == 0) {
+      this.waktu = "WIB";
+    }
+    if (this.utc == 1) {
+      this.waktu = "WITA";
+    }
+    if (this.utc == 2) {
+      this.waktu = "WIT";
+    }
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
-  }
+      user: "auth/user",
+    }),
+  },
+  filters: {
+    dateTimeFormat: (date, utc) => {
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY, HH:mm");
+    },
+  },
 };
 </script>

@@ -92,7 +92,7 @@ export default {
   props: ["item"],
   data: () => ({
     utc: moment().utcOffset() / 60 - 7,
-    waktu: ""
+    waktu: "",
   }),
   mounted() {
     if (this.utc == 0) {
@@ -107,11 +107,8 @@ export default {
   },
   filters: {
     dateTimeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("DD MMM, HH:mm");
-    }
-  }
+      return moment.utc(date).add(utc, "h").format("DD MMM, HH:mm");
+    },
+  },
 };
 </script>
