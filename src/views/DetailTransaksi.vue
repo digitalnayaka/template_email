@@ -97,7 +97,7 @@
 
           <v-btn
             class="d-block my-2 pa-2 primary white--text text-center"
-            :to="'/chat2/' + orders.id_penjual"
+            :to="'/chat/' + orders.id_penjual"
             v-else
           >Hubungi Penjual</v-btn>
 
