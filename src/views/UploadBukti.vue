@@ -6,7 +6,31 @@
       </v-btn>
     </v-app-bar>
 
-    <div class="text-center">
+    <div>
+      <h1 class="text-center">Detail Transaksi</h1>
+
+      <v-card class="mx-auto" max-width="600">
+        <v-row>
+          <v-col cols="12">
+            <v-card color="deep-orange lighten-2">
+              <div class="d-flex flex-no-wrap justify-space-between align-center">
+                <v-avatar class="ma-3" size="20" tile>
+                  <v-img src="/img/error.png"></v-img>
+                </v-avatar>
+
+                <div>
+                  <v-card-text>Selalu waspada terhadap pihak yang tidak bertanggung jawab. Pastikan bukti pembayaran yang diupload sudah benar.</v-card-text>
+                </div>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+
+        <detail-transaksi-tiket :item="orders" :foto="foto" />
+      </v-card>
+    </div>
+
+    <!-- <div class="text-center">
       <v-card class="d-inline-block mx-auto" width="590">
         <v-container fluid>
           <h1>Detail Transaksi</h1>
@@ -17,7 +41,11 @@
             </v-avatar>Selalu waspada terhadap pihak yang tidak bertanggung jawab. Pastikan bukti pembayaran yang diupload sudah benar.
           </v-card>
 
-          <v-container fluid class="text-center" v-if="orders.id_mst_pembayaran_status == 1">
+          <v-container
+            fluid
+            class="text-center"
+            v-if="orders.id_mst_pembayaran_status == 1 && orders.id_mst_order_type == 1"
+          >
             <div>Batas Waktu Pembayaran</div>
 
             <flip-countdown :deadline="countdown"></flip-countdown>
@@ -54,7 +82,7 @@
               <v-col cols="6" class="font-weight-black">{{ orders.metode }}</v-col>
             </v-row>
 
-            <!-- <v-row dense v-if="orders.id_mst_pembayaran_status == 5">
+            <v-row dense v-if="orders.id_mst_pembayaran_status == 5">
               <v-col cols="6">Alasan Ditolak:</v-col>
               <v-col cols="6" class="font-weight-black">{{ orders.note }}</v-col>
             </v-row>
@@ -72,14 +100,15 @@
                 v-if="orders.total_pembayaran > 0"
               >Rp {{ orders.total_pembayaran.toLocaleString("id-ID") }}</v-col>
               <v-col cols="6" class="font-weight-black" v-else>Rp {{ orders.total_pembayaran }}</v-col>
-            </v-row>-->
+            </v-row>
           </div>
 
-          <v-divider></v-divider>
+          <div if="orders.id_mst_order_type == 1">
+            <v-divider></v-divider>
 
-          <h2 class="text-left">Informasi Produk</h2>
+            <h2 class="text-left">Informasi Produk</h2>
 
-          <!-- <v-card class="d-inline-block mx-auto" flat>
+            <v-card class="d-inline-block mx-auto" flat>
             <v-container fluid>
               <v-row justify="space-between" align="center">
                 <v-col cols="auto">
@@ -118,70 +147,60 @@
                 </v-col>
               </v-row>
             </v-container>
-          </v-card>-->
+            </v-card>
 
-          <v-list subheader align="left">
-            <v-subheader v-if="orders.iklan != undefined">
-              <h1>{{ orders.iklan.judul }}</h1>
-            </v-subheader>
+            <v-list subheader align="left">
+              <v-subheader v-if="orders.iklan != undefined">
+                <h1>{{ orders.iklan.judul }}</h1>
+              </v-subheader>
 
-            <v-list-item>
-              <v-list-item-avatar tile size="80">
-                <v-img src="/img/tiket.png"></v-img>
-              </v-list-item-avatar>
+              <v-list-item>
+                <v-list-item-avatar tile size="80">
+                  <v-img src="/img/tiket.png"></v-img>
+                </v-list-item-avatar>
 
-              <v-list-item-content>
-                <v-list-item-title>
-                  Status Tagihan:
-                  <span
-                    class="font-weight-black red--text d-sm-inline-flex d-flex"
-                  >{{ orders.pembayaran_status }}</span>
-                </v-list-item-title>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    Status {{ orders.id_mst_order_type == 1 ? "Tagihan" : "Refund" }}:
+                    <span
+                      class="font-weight-black red--text d-sm-inline-flex d-flex"
+                    >{{ orders.pembayaran_status }}</span>
+                  </v-list-item-title>
 
-                <v-list-item-title v-if="orders.id_mst_pembayaran_status == 6">
-                  Alasan Ditolak:
-                  <span
-                    class="font-weight-black d-sm-inline-flex d-flex"
-                  >{{ orders.note }}</span>
-                </v-list-item-title>
+                  <v-list-item-title v-if="orders.id_mst_pembayaran_status == 6">
+                    Alasan Ditolak:
+                    <span
+                      class="font-weight-black d-sm-inline-flex d-flex"
+                    >{{ orders.note }}</span>
+                  </v-list-item-title>
 
-                <v-list-item-title v-if="orders.id_mst_pembayaran_note == 1">
-                  Detail Alasan:
-                  <span
-                    class="font-weight-black d-sm-inline-flex d-flex"
-                  >{{ orders.note_detail }}</span>
-                </v-list-item-title>
+                  <v-list-item-title v-if="orders.id_mst_pembayaran_note == 1">
+                    Detail Alasan:
+                    <span
+                      class="font-weight-black d-sm-inline-flex d-flex"
+                    >{{ orders.note_detail }}</span>
+                  </v-list-item-title>
 
-                <v-list-item-title>
-                  Total Tagihan:
-                  <span
-                    class="font-weight-black d-sm-inline-flex d-flex"
-                  >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</span>
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
+                  <v-list-item-title>
+                    Total {{ orders.id_mst_order_type == 1 ? "Tagihan" : "Refund" }}:
+                    <span
+                      class="font-weight-black d-sm-inline-flex d-flex"
+                    >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</span>
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </div>
 
-          <div align="left" v-if="orders.id_mst_pembayaran_status == 1">
+          <div
+            align="left"
+            v-if="orders.id_mst_pembayaran_status == 1 && orders.id_mst_order_type == 1"
+          >
             <v-divider></v-divider>
 
             <h2>Petunjuk Pembayaran</h2>
 
             <div>Transfer dapat dilakukan ke salah satu rekening berikut:</div>
-
-            <!-- <v-list class="py-0">
-              <v-list-item>
-                <v-list-item-avatar tile>
-                  <v-img src="/img/bank/bca.png" contain></v-img>
-                </v-list-item-avatar>
-
-                <v-list-item-content>
-                  <v-list-item-title class="blue--text text--darken-4">8920008390</v-list-item-title>
-                </v-list-item-content>
-
-                <v-list-item-action class="blue--text text--darken-4">A/N Digital Nayaka Abhinaya</v-list-item-action>
-              </v-list-item>
-            </v-list>-->
 
             <div>
               <img src="/img/bank/bca.png" width="60px" height="20px" />
@@ -190,6 +209,16 @@
             </div>
             <div>Mohon transfer sesuai dengan nominal yang tertera.</div>
             <div>Jika mengalami kendala dalam pembayaran, silahkan kunjungi bantuan.</div>
+          </div>
+
+          <div
+            align="left"
+            v-if="orders.id_mst_pembayaran_status == 1 && orders.id_mst_order_type == 2"
+          >
+            <v-divider></v-divider>
+
+            <h2>Tujuan Pembayaran</h2>
+
           </div>
 
           <div v-if="orders.id_mst_order_type == 1" align="center">
@@ -265,19 +294,25 @@
           </div>
         </v-container>
       </v-card>
-    </div>
+    </div>-->
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import FlipCountdown from "vue2-flip-countdown";
+// import FlipCountdown from "vue2-flip-countdown";
 import moment from "moment-timezone";
-import ImageUploader from "vue-image-upload-resize";
+// import ImageUploader from "vue-image-upload-resize";
 
 export default {
   name: "UploadBukti",
-  components: { FlipCountdown, ImageUploader },
+  // components: { FlipCountdown, ImageUploader },
+  components: {
+    DetailTransaksiTiket: () =>
+      import(
+        /* webpackChunkName: "detail-transaksi-tiket" */ "@/components/DetailTransaksiTiket.vue"
+      ),
+  },
   data: () => ({
     orders: [],
     buktiBayar: null,
@@ -288,6 +323,7 @@ export default {
     waktu: "",
     accounts: [],
     hasImage: false,
+    pencairan: [],
   }),
   methods: {
     ...mapActions({
@@ -304,11 +340,13 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.orders = data[0];
-          this.countdown = moment
-            .utc(this.orders.expired_at)
-            .format("YYYY-MM-DD HH:mm:ss");
+          // this.countdown = moment
+          //   .utc(this.orders.expired_at)
+          //   .format("YYYY-MM-DD HH:mm:ss");
 
-          this.dtlPembayaran();
+          if (this.orders.id_mst_pembayaran_status == 2 || this.orders.id_mst_pembayaran_status == 4) {
+            this.dtlPembayaran(this.orders.id_pembayaran);
+          }
 
           if (
             this.user.id != this.orders.id_pembeli &&
@@ -327,7 +365,7 @@ export default {
       let formData = new FormData();
 
       formData.append("id_pembayaran", this.orders.id_pembayaran);
-      formData.append("foto", this.buktiBayar);
+      formData.append("foto", this.buktiBayar, "Bukti_Bayar.jpg");
       formData.append("created_by_type", 1);
       formData.append("created_by", this.user.id);
 
@@ -403,17 +441,34 @@ export default {
           console.log(responses.api_message);
         });
     },
-    dtlPembayaran() {
+    dtlPembayaran(id_pembayaran) {
       this.axios
         .get("/transaksi/v1/upload_pembayaran", {
           headers: { Authorization: "Bearer " + this.user.token },
           params: {
-            id_pembayaran: this.orders.id_pembayaran,
+            id_pembayaran: id_pembayaran,
           },
         })
         .then((response) => {
           let { data } = response.data;
           this.foto = data[0].foto;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    getPencairan() {
+      this.axios
+        .get("/transaksi/v1/pencairan_tiket", {
+          params: {
+            id: this.$route.params.id,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.pencairan = data[0];
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -437,10 +492,15 @@ export default {
       };
       reader.readAsDataURL(this.buktiBayar);
     },
+    someMethod() {
+      alert("parent");
+    },
   },
   created() {
     this.getOrder();
-    this.getRekening();
+    // this.getRekening();
+    // this.getPencairan();
+
     if (this.utc == 0) {
       this.waktu = "WIB";
     }

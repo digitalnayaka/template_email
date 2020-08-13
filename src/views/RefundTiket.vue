@@ -353,7 +353,6 @@ export default {
       for (let index = 0; index < this.listRefund.length; index++) {
         const element = this.listRefund[index].id;
         formData.append("id_tiket", element);
-        console.log(element);
       }
       formData.append("id_penjual", this.user.id);
       formData.append("id_app_user_rekening", this.selected);

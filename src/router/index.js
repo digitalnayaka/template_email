@@ -359,6 +359,14 @@ const routes = [
       Auth: true
     }
   },
+  {
+    path: '/tes/:id',
+    name: 'tes',
+    component: () => import(/* webpackChunkName: "tes" */ '../components/DetailTransaksiTiket.vue'),
+    meta: {
+      Auth: true
+    }
+  },
 ]
 
 const router = new VueRouter({
