@@ -42,19 +42,19 @@
 
     <v-row class="text-center">
       <v-col cols="6">
-        <!-- <v-card dark color="transparent" to="/beli_tiket">
-          <v-img src="/img/beli-tiket.png"></v-img>
-          <v-btn block small color="primary">Beli Tiket</v-btn>
-        </v-card>-->
-        <v-btn block color="primary" to="/beli_tiket">Beli Tiket</v-btn>
+        <!-- <v-card dark color="transparent" to="/beli_tiket" max-width="400">
+          <v-img src="/img/beli-tiket.png" max-width="400"></v-img>
+         <v-btn block color="primary" to="/beli_tiket">Beli Tiket</v-btn>
+        </v-card> -->
+        <v-btn block color="primary" to="/beli_tiket" rounded>Beli Tiket</v-btn>
       </v-col>
 
       <v-col cols="6">
-        <!-- <v-card dark color="transparent" to="/refund_tiket">
-          <v-img class="center_image" src="/img/refund-tiket.png"></v-img>
-          <v-btn block small color="red">Refund Tiket</v-btn>
-        </v-card>-->
-        <v-btn block color="red" dark to="/refund_tiket">Refund Tiket</v-btn>
+        <!-- <v-card dark color="transparent" to="/refund_tiket" max-width="400">
+          <v-img class="center_image" src="/img/refund-tiket.png" max-width="400"></v-img>
+          <v-btn block color="red" dark to="/refund_tiket">Refund Tiket</v-btn>
+        </v-card> -->
+        <v-btn block color="red" dark to="/refund_tiket" rounded>Refund Tiket</v-btn>
       </v-col>
 
       <!-- <v-col cols="4" sm="4" xs="4">

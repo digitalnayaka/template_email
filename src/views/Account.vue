@@ -40,7 +40,9 @@
           {{ user.nama }}
           <span>
             <v-img src="/img/verified.png" width="20" height="20" contain></v-img>
+            
           </span>
+          
         </div>
 
         <div>{{ user.nomor_hp }}</div>
