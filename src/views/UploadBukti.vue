@@ -7,7 +7,7 @@
     </v-app-bar>
 
     <div class="text-center">
-      <v-card class="d-inline-block mx-auto">
+      <v-card class="d-inline-block mx-auto" width="590">
         <v-container fluid>
           <h1>Detail Transaksi</h1>
 
@@ -79,7 +79,7 @@
 
           <h2 class="text-left">Informasi Produk</h2>
 
-          <v-card class="d-inline-block mx-auto" flat>
+          <!-- <v-card class="d-inline-block mx-auto" flat>
             <v-container fluid>
               <v-row justify="space-between" align="center">
                 <v-col cols="auto">
@@ -118,21 +118,85 @@
                 </v-col>
               </v-row>
             </v-container>
-          </v-card>
+          </v-card>-->
 
-          <v-divider></v-divider>
+          <v-list subheader align="left">
+            <v-subheader v-if="orders.iklan != undefined">
+              <h1>{{ orders.iklan.judul }}</h1>
+            </v-subheader>
 
-          <div v-if="orders.id_mst_pembayaran_status == 1">
-            <h5 class="title" align="center">Petunjuk Pembayaran</h5>
-            <p>Transfer dapat dilakukan ke salah satu rekening berikut:</p>
-            <p>Jika mengalami kendala dalam pembayaran, silahkan kunjungi bantuan.</p>
+            <v-list-item>
+              <v-list-item-avatar tile size="80">
+                <v-img src="/img/tiket.png"></v-img>
+              </v-list-item-avatar>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  Status Tagihan:
+                  <span
+                    class="font-weight-black red--text d-sm-inline-flex d-flex"
+                  >{{ orders.pembayaran_status }}</span>
+                </v-list-item-title>
+
+                <v-list-item-title v-if="orders.id_mst_pembayaran_status == 6">
+                  Alasan Ditolak:
+                  <span
+                    class="font-weight-black d-sm-inline-flex d-flex"
+                  >{{ orders.note }}</span>
+                </v-list-item-title>
+
+                <v-list-item-title v-if="orders.id_mst_pembayaran_note == 1">
+                  Detail Alasan:
+                  <span
+                    class="font-weight-black d-sm-inline-flex d-flex"
+                  >{{ orders.note_detail }}</span>
+                </v-list-item-title>
+
+                <v-list-item-title>
+                  Total Tagihan:
+                  <span
+                    class="font-weight-black d-sm-inline-flex d-flex"
+                  >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</span>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+
+          <div align="left" v-if="orders.id_mst_pembayaran_status == 1">
+            <v-divider></v-divider>
+
+            <h2>Petunjuk Pembayaran</h2>
+
+            <div>Transfer dapat dilakukan ke salah satu rekening berikut:</div>
+
+            <!-- <v-list class="py-0">
+              <v-list-item>
+                <v-list-item-avatar tile>
+                  <v-img src="/img/bank/bca.png" contain></v-img>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title class="blue--text text--darken-4">8920008390</v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-action class="blue--text text--darken-4">A/N Digital Nayaka Abhinaya</v-list-item-action>
+              </v-list-item>
+            </v-list>-->
+
+            <div>
+              <img src="/img/bank/bca.png" width="60px" height="20px" />
+              <span class="blue--text text--darken-4">&nbsp;8920008390</span>
+              <span class="blue--text text--darken-4">&nbsp;A/N Digital Nayaka Abhinaya</span>
+            </div>
+            <div>Mohon transfer sesuai dengan nominal yang tertera.</div>
+            <div>Jika mengalami kendala dalam pembayaran, silahkan kunjungi bantuan.</div>
           </div>
 
-          <v-divider></v-divider>
-
           <div v-if="orders.id_mst_order_type == 1" align="center">
+            <v-divider class="my-2"></v-divider>
+
             <div v-if="orders.id_mst_order_status != 3">
-              <h5 class="title" align="center">Bukti Pembayaran</h5>
+              <h2>Bukti Pembayaran</h2>
               <p>Anda wajib melakukan konfirmasi pembayaran agar tiket dapat diproses.</p>
 
               <image-uploader
@@ -184,10 +248,19 @@
 
               <v-btn
                 block
-                color="primary"
+                color="teal"
+                dark
                 @click="upload"
                 v-if="orders.id_mst_pembayaran_status == 1"
               >Konfirmasi Pembayaran</v-btn>
+              <br />
+              <v-btn
+                block
+                color="red"
+                dark
+                @click="batalkan"
+                v-if="orders.id_mst_pembayaran_status == 1"
+              >Batalkan</v-btn>
             </div>
           </div>
         </v-container>
@@ -260,6 +333,37 @@ export default {
 
       this.axios
         .post("/transaksi/v1/upload_pembayaran", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: data.api_message,
+          });
+          this.getOrder();
+          this.dtlPembayaran();
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: responses.api_message,
+          });
+        });
+    },
+    batalkan() {
+      let formData = new FormData();
+
+      formData.append("id", this.orders.id);
+      formData.append("id_app_user", this.user.id);
+      formData.append("id_mst_pembayaran_note", 1);
+      formData.append("note_detail", "Membatalkan Tiket");
+
+      this.axios
+        .post("/transaksi/v1/batalkan_pembelian", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
