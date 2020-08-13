@@ -60,8 +60,9 @@
                   <v-img :src="getImage(item.photo)" v-else></v-img>
                 </v-list-item-avatar>
                 <v-list-item-content>
-                  <v-icon color="teal">mdi-calendar</v-icon>
-                  <v-list-item-title>{{ item.date | dateFormat }}</v-list-item-title>
+                  <v-btn small color="teal" dark rounded>
+                    <v-list-item-title>{{ item.date | dateFormat }}</v-list-item-title>
+                  </v-btn>
                 </v-list-item-content>
               </v-list-item>
             </v-list>

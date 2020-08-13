@@ -31,7 +31,7 @@
           <v-list>
             <v-list-item>
               <v-list-item-icon>
-                <v-img :src="getImage(iklan.photo)" contain></v-img>
+                <v-img :src="getImage(iklan.photo)" contain max-height="400"></v-img>
               </v-list-item-icon>
 
               <v-list-item-content>
