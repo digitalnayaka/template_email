@@ -4,154 +4,106 @@
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
-
-      <v-spacer></v-spacer>
-
-      <!-- <v-btn icon @click="dialog = true">
-        <v-badge color="orange" overlap v-if="countCart > 0">
-          <template v-slot:badge>
-            <span>{{ countCart }}</span>
-          </template>
-
-          <v-icon>mdi-cart</v-icon>
-        </v-badge>
-
-        <v-icon v-else>mdi-cart</v-icon>
-      </v-btn>-->
     </v-app-bar>
 
     <h1 align="center">Refund Tiket Tawar Bersama</h1>
-    <!-- <h5 align="center">Pilih tiket yang akan di refund.</h5> -->
 
     <div align="center">
       <v-card class="d-inline-block mx-auto">
         <v-container fluid>
           <v-card>
-            <v-img src="img/bg.png" height="200">
-            <v-container fluid>
-              <v-row>
-                <v-col cols="6" class="text-left">
-                  <h1 class="text-left">{{ tersedia }}</h1>
-                  <h3 class="text-left">Tiket Tersedia</h3>
-                </v-col>
-              </v-row>
-           
-              <!-- 
-            <h3 class="text-left">Jumlah Refund:</h3>
-            
-              <h3 class="text-right">{{ Number(qty).toLocaleString("id-ID") }} Tiket</h3>-->
-              <h5
-                class="text-left"
-              >Tiket yang tersedia dapat Anda refund. Silahkan refund dengan klik tombol dibawah ini:</h5>
-              <v-dialog v-model="dialog" fullscreen width="500">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn dark v-bind="attrs" v-on="on" @click="open" color="teal darken-2">Refund</v-btn>
-                </template>
+            <v-img src="/img/bg.png" height="200">
+              <v-container fluid>
+                <h1 class="text-left">{{ tersedia }}</h1>
+                <h3 class="text-left">Tiket Tersedia</h3>
 
-                <v-toolbar dark color="teal">
-                  <v-btn icon dark @click="dialog = false">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
+                <h5
+                  class="text-left"
+                >Tiket yang tersedia dapat Anda refund. Silahkan refund dengan klik tombol dibawah ini:</h5>
 
-                  <v-spacer></v-spacer>
-
-                  <v-btn icon dark class="mx-2" @click="getTiket">Refund</v-btn>
-                </v-toolbar>
-
-                <v-card>
-                  <v-container fluid>
-                    <div class="d-flex justify-space-between">
-                      <h3>Pilih tiket yang akan di refund: {{ listRefund.length }} Tiket</h3>
-                      <v-checkbox class="my-0 py-0" label="Select All" @click="selectAll"></v-checkbox>
+                <v-dialog v-model="dialog" fullscreen width="500">
+                  <template v-slot:activator="{ on, attrs }">
+                    <div align="right" class="mt-4">
+                      <v-btn dark v-bind="attrs" v-on="on" @click="open" color="teal darken-2">
+                        Pilih Tiket
+                        <v-icon>mdi-chevron-right</v-icon>
+                      </v-btn>
                     </div>
+                  </template>
 
-                    <v-item-group>
-                      <v-row>
-                        <v-col cols="4" v-for="item in listTersedia" :key="item.id">
-                          <v-item v-slot:default="{ active }">
-                            <v-card>
-                              <v-list>
-                                <v-list-item>
-                                  <v-list-item-content>
-                                    <v-list-item-subtitle>Kode Tiket</v-list-item-subtitle>
-                                    <v-list-item-title>{{ item.code }}</v-list-item-title>
-                                  </v-list-item-content>
+                  <v-toolbar dark color="teal">
+                    <v-btn icon dark @click="dialog = false">
+                      <v-icon>mdi-close</v-icon>
+                    </v-btn>
 
-                                  <v-list-item-action>
-                                    <v-checkbox
-                                      v-model="listRefund"
-                                      :value="item"
-                                      :input-value="active"
-                                    ></v-checkbox>
-                                  </v-list-item-action>
-                                </v-list-item>
+                    <v-spacer></v-spacer>
 
-                                <v-list-item>
-                                  <v-list-item-content>
-                                    <v-list-item-subtitle>Harga</v-list-item-subtitle>
-                                    <v-list-item-title
-                                      class="teal--text"
-                                    >Rp {{ Number(item.harga_beli).toLocaleString("id-ID") }}</v-list-item-title>
-                                  </v-list-item-content>
+                    <v-btn icon dark class="mx-2" @click="getTiket">Refund</v-btn>
+                  </v-toolbar>
 
-                                  <v-list-item-content>
-                                    <v-list-item-subtitle>Masa Berlaku</v-list-item-subtitle>
-                                    <v-list-item-title
-                                      class="red--text text-caption"
-                                    >{{ item.expired_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
-                                  </v-list-item-content>
-                                </v-list-item>
-                              </v-list>
-                            </v-card>
-                          </v-item>
-                        </v-col>
-                      </v-row>
-                    </v-item-group>
+                  <v-card>
+                    <v-container fluid>
+                      <div class="d-flex justify-space-between">
+                        <h3>Pilih tiket yang akan di refund: {{ listRefund.length }} Tiket</h3>
+                        <v-checkbox class="my-0 py-0" label="Select All" @click="selectAll"></v-checkbox>
+                      </div>
 
-                    <v-pagination
-                      v-model="pageTersedia"
-                      @input="tiketTersedia"
-                      :length="lengthPageTersedia"
-                      :total-visible="5"
-                    ></v-pagination>
-                  </v-container>
-                </v-card>
-              </v-dialog>
-            </v-container>
+                      <v-item-group>
+                        <v-row>
+                          <v-col cols="4" v-for="item in listTersedia" :key="item.id">
+                            <v-item v-slot:default="{ active }">
+                              <v-card>
+                                <v-list>
+                                  <v-list-item>
+                                    <v-list-item-content>
+                                      <v-list-item-subtitle>Kode Tiket</v-list-item-subtitle>
+                                      <v-list-item-title>{{ item.code }}</v-list-item-title>
+                                    </v-list-item-content>
+
+                                    <v-list-item-action>
+                                      <v-checkbox
+                                        v-model="listRefund"
+                                        :value="item"
+                                        :input-value="active"
+                                      ></v-checkbox>
+                                    </v-list-item-action>
+                                  </v-list-item>
+
+                                  <v-list-item>
+                                    <v-list-item-content>
+                                      <v-list-item-subtitle>Harga</v-list-item-subtitle>
+                                      <v-list-item-title
+                                        class="teal--text"
+                                      >Rp {{ Number(item.harga_beli).toLocaleString("id-ID") }}</v-list-item-title>
+                                    </v-list-item-content>
+
+                                    <v-list-item-content>
+                                      <v-list-item-subtitle>Masa Berlaku</v-list-item-subtitle>
+                                      <v-list-item-title
+                                        class="red--text text-caption"
+                                      >{{ item.expired_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
+                                    </v-list-item-content>
+                                  </v-list-item>
+                                </v-list>
+                              </v-card>
+                            </v-item>
+                          </v-col>
+                        </v-row>
+                      </v-item-group>
+
+                      <v-pagination
+                        v-model="pageTersedia"
+                        @input="tiketTersedia"
+                        :length="lengthPageTersedia"
+                        :total-visible="5"
+                      ></v-pagination>
+                    </v-container>
+                  </v-card>
+                </v-dialog>
+              </v-container>
             </v-img>
-
-            <!-- <v-row dense>
-            <v-spacer></v-spacer>
-
-            <v-col cols="4" sm="3">
-              <v-form ref="form" v-model="valid2">
-                <v-text-field
-                  outlined
-                  dense
-                  suffix="Tiket"
-                  v-model="qty"
-                  v-mask="mask"
-                  @keyup="totalHarga"
-                  :rules=" [v => !!v || 'Field is required',v => (v && v > 0) || 'Tidak boleh 0', v => v <= tersedia || 'Tiket lebih']"
-                ></v-text-field>
-              </v-form>
-            </v-col>
-            </v-row>-->
-
-            <!-- <v-row>
-            <v-col cols="4">
-              <v-btn outlined class="mx-2 red--text" @click="plus(1)">1 Tiket</v-btn>
-            </v-col>
-
-            <v-col cols="4">
-              <v-btn outlined class="mx-2 red--text" @click="plus(5)">5 Tiket</v-btn>
-            </v-col>
-
-            <v-col cols="4">
-              <v-btn outlined class="mx-2 red--text" @click="plus(tersedia)">Semua</v-btn>
-            </v-col>
-            </v-row>-->
           </v-card>
+
           <v-divider class="my-4"></v-divider>
 
           <h2>Detail Tiket</h2>
@@ -166,6 +118,7 @@
               class="text-right"
             >Rp {{ Number(item.qty.length * item.harga_beli).toLocaleString("id-ID") }}</v-col>
           </v-row>
+
           <v-row>
             <v-col cols="6" class="text-left">
               <h3>Total Refund</h3>
@@ -175,39 +128,19 @@
               <h3>Rp {{ Number(total).toLocaleString("id-ID") }}</h3>
             </v-col>
           </v-row>
+
           <v-divider class="my-2"></v-divider>
 
           <h2>Pilih Rekening</h2>
 
           <v-list v-if="accounts.length > 0">
             <v-list-item v-for="item in accounts" :key="item.id">
-              <v-list-item-avatar>
-                <!-- <v-card
-                  width="70"
-                  dark
-                  color="primary"
-                  class="pa-2"
-                  v-if="item.id_mst_bank == 2"
-                >MNDR</v-card>
-
-                <v-card width="70" dark color="orange" class="pa-2" v-if="item.id_mst_bank == 3">BNI</v-card>
-
-                <v-card width="70" dark color="indigo" class="pa-2" v-if="item.id_mst_bank == 4">BRI</v-card>
-
-                <v-card width="70" dark color="blue" class="pa-2" v-if="item.id_mst_bank == 12">BCA</v-card>
-
-                <v-card
-                  width="70"
-                  dark
-                  color="green"
-                  class="pa-2"
-                  v-if="item.id_mst_bank == 33"
-                >PRMT</v-card> -->
-                <v-img src="img/bank/bca.png" contain v-if="item.id_mst_bank == 12"></v-img>
-                 <v-img src="img/bank/bni.png" contain v-if="item.id_mst_bank == 3"></v-img>
-                 <v-img src="img/bank/bri.png" contain v-if="item.id_mst_bank == 4"></v-img>
-                 <v-img src="img/bank/mandiri.png" contain v-if="item.id_mst_bank == 2"></v-img>
-                 <v-img src="img/bank/permata.png" contain v-if="item.id_mst_bank == 33"></v-img>
+              <v-list-item-avatar tile size="80">
+                <v-img src="/img/bank/bca.png" contain v-if="item.id_mst_bank == 12"></v-img>
+                <v-img src="/img/bank/bni.png" contain v-if="item.id_mst_bank == 3"></v-img>
+                <v-img src="/img/bank/bri.png" contain v-if="item.id_mst_bank == 4"></v-img>
+                <v-img src="/img/bank/mandiri.png" contain v-if="item.id_mst_bank == 2"></v-img>
+                <v-img src="/img/bank/permata.png" contain v-if="item.id_mst_bank == 33"></v-img>
               </v-list-item-avatar>
 
               <v-list-item-content class="text-left">
@@ -280,7 +213,7 @@
 
           <h5
             class="my-3"
-          >Setelah anda melakukan penjualan tiket, uang anda akan masuk dalam waktu maksimal 2x24jam</h5>
+          >Uang Anda akan dikirim maksimal 2x24 jam setelah refund.</h5>
 
           <v-btn
             class="my-3"
@@ -291,80 +224,18 @@
         </v-container>
       </v-card>
     </div>
-
-    <!-- <div v-if="listTersedia.length > 0">
-      <v-row justify="center">
-        <v-col cols="4">Total Tiket: {{ listTersedia.length }} Tiket</v-col>
-
-        <v-col cols="4">Refund: {{ selected.length }} Tiket</v-col>
-
-        <v-col cols="4">
-          <v-checkbox label="Select All" class="my-0 py-0" @click="selectAll"></v-checkbox>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col cols="12" sm="4" v-for="item in listTersedia" :key="item.id">
-          <v-card>
-            <v-list>
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-subtitle>Kode Tiket</v-list-item-subtitle>
-                  <v-list-item-title>{{ item.code }}</v-list-item-title>
-                </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-checkbox v-model="selected" :value="item.id"></v-checkbox>
-                </v-list-item-action>
-              </v-list-item>
-
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-subtitle>Harga</v-list-item-subtitle>
-                  <v-list-item-title
-                    class="teal--text"
-                  >Rp {{ Number(item.harga_beli).toLocaleString("id-ID") }}</v-list-item-title>
-                </v-list-item-content>
-
-                <v-list-item-content>
-                  <v-list-item-subtitle>Masa Berlaku</v-list-item-subtitle>
-                  <v-list-item-title
-                    class="red--text text-caption"
-                  >{{ item.expired_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-card>
-        </v-col>
-      </v-row>
-
-      <v-pagination
-        v-model="pageTersedia"
-        @input="tiketTersedia"
-        :length="lengthPageTersedia"
-        :total-visible="5"
-      ></v-pagination>
-    </div>
-
-    <div class="text-center mt-14" v-else>
-      <h3>Anda tidak memiliki tiket untuk di refund.</h3>
-    </div>-->
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-// import { mask } from "vue-the-mask";
 import moment from "moment-timezone";
 
 export default {
   name: "refund",
-  // directives: { mask },
   data: () => ({
     dialog: false,
-    mask: "###",
     qty: 0,
-    // harga: 0,
     total: 0,
     selected: [],
     listRefund: [],
@@ -395,15 +266,6 @@ export default {
     ...mapActions({
       setAlert: "alert/set",
     }),
-    plus(qty) {
-      if (qty >= this.tersedia) {
-        this.qty = this.tersedia;
-      } else {
-        this.qty = Number(this.qty) + qty;
-      }
-
-      this.totalHarga();
-    },
     totalTiket() {
       this.axios
         .get("/tiket/v1/total_tiket", {
@@ -485,32 +347,6 @@ export default {
           console.log(responses);
         });
     },
-    // totalHarga() {
-    //   this.total = Number(this.qty * this.harga).toLocaleString("id-ID");
-    //   this.getRefund();
-    // },
-    // getRefund() {
-    //   this.axios
-    //     .get("/tiket/v1/tiket", {
-    //       params: {
-    //         id_app_user: this.user.id,
-    //         id_mst_tiket_status: 1,
-    //         limit: this.qty,
-    //       },
-    //       headers: { Authorization: "Bearer " + this.user.token },
-    //     })
-    //     .then((response) => {
-    //       let { data } = response.data;
-    //       this.tiket = data;
-    //     })
-    //     .catch(() => {
-    //       this.setAlert({
-    //         status: true,
-    //         color: "error",
-    //         text: "Anda tidak memiliki tiket",
-    //       });
-    //     });
-    // },
     refund() {
       let formData = new FormData();
 
@@ -592,7 +428,6 @@ export default {
       }
 
       this.qty = this.listRefund.length;
-      // this.total = this.qty * this.harga;
       this.dialog = false;
     },
     selectAll() {
@@ -610,7 +445,6 @@ export default {
     this.totalTiket();
     this.getRekening();
     this.getBank();
-    // this.getRefund();
     this.tiketTersedia();
 
     if (this.utc == 0) {

@@ -4,12 +4,6 @@
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon to="/tiket_saya">
-        <v-icon>mdi-ticket</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <div class="text-center">
@@ -533,7 +527,7 @@ export default {
       pageRF: 1,
       lengthPageRF: 0,
       totalRF: 0,
-      limit: 20,
+      limit: 15,
       offset: 0,
       utc: moment().utcOffset() / 60 - 7,
       waktu: "",
