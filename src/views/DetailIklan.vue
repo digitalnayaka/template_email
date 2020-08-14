@@ -543,7 +543,7 @@
 
                   <v-list-item>
                     <v-list-item-avatar>
-                      <v-img src="/img/icons/apple-touch-icon.png"></v-img>
+                      <v-img src="/img/icons/icon_list.png"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>

@@ -16,15 +16,17 @@
               <v-img src="/img/error.png"></v-img>
             </v-avatar>Selalu waspada terhadap pihak yang tidak bertanggung jawab. Pastikan bukti pembayaran yang diupload sudah benar.
           </v-card>
-
+          <v-card flat align="center">
+            <h1 class="red--text">Maaf! Anda belum memenangkan Tawar Bersama berikut</h1>
+          </v-card>
           <v-list>
             <v-list-item>
               <v-list-item-icon>
-                <v-img :src="getImage(hits.photo)" contain></v-img>
+                <v-img :src="getImage(hits.photo)" contain width="500" height="300"></v-img>
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title>{{ hits.judul }}</v-list-item-title>
+                <v-list-item-title><h4> {{ hits.judul }} </h4></v-list-item-title>
 
                 <v-list-item-subtitle
                   class="red--text"
@@ -45,28 +47,28 @@ export default {
   name: "tb_selesai",
   data: () => ({
     hits: [],
-    iklan: []
+    iklan: [],
   }),
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
     }),
     getDtlIklan() {
       this.axios
         .get("/search/v1/search", {
           params: {
             id: this.$route.params.id,
-            limit: 1
-          }
+            limit: 1,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let data = response.data;
           let { hits } = data.hits;
           this.hits = hits[0]._source;
 
           this.getTB();
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -76,26 +78,26 @@ export default {
         .get("/bid/v1/iklan_tb_peserta", {
           params: {
             id_app_user: this.user.id,
-            id_iklan: this.$route.params.id
-          }
+            id_iklan: this.$route.params.id,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.iklan = data[0];
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
-    }
+    },
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
+      user: "auth/user",
+    }),
   },
   created() {
     this.getDtlIklan();
-  }
+  },
 };
 </script>

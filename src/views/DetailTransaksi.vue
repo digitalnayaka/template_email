@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <div class="text-center">
+    <div align="center">
       <v-card class="d-inline-block mx-auto">
         <v-container fluid>
           <h1>Detail Transaksi</h1>
@@ -18,7 +18,7 @@
           </v-card>
 
           <v-container fluid class="text-center" v-if="orders.id_mst_pembayaran_status == 1">
-            <div>Batas Waktu Pembayaran</div>
+            <h2>Batas Waktu Pembayaran</h2>
 
             <flip-countdown :deadline="countdown"></flip-countdown>
 
@@ -28,66 +28,33 @@
             >Sebelum: {{ orders.expired_at | dateTimeFormat(utc) }} {{ waktu }}</v-card>
           </v-container>
 
-          <v-list>
-            <v-list-item>
-              <v-list-item-icon>
-                <v-img :src="getImage(iklan.photo)" contain max-height="400"></v-img>
-              </v-list-item-icon>
-
-              <v-list-item-content>
-                <v-list-item-title class="font-weight-black">{{ iklan.judul }}</v-list-item-title>
-
-                <v-list-item-subtitle>Jumlah: {{ iklans }} Unit</v-list-item-subtitle>
-              </v-list-item-content>
-
-              <v-btn color="primary" :to="'/detail_iklan/' + orders.id_iklan">Lihat Iklan</v-btn>
-            </v-list-item>
-
-            <v-btn
-              block
-              class="my-2 pa-2 primary white--text text-center"
-              @click="formPenawaran"
-              v-if="orders.id_mst_order_status != 3"
-            >Lihat Form Penawaran</v-btn>
-
-            <v-dialog v-model="dialog">
-              <v-card v-html="penawaran"></v-card>
-            </v-dialog>
-          </v-list>
-
           <v-divider></v-divider>
+          <v-card flat align="left">
+            <h2 class="text-center">Informasi Tagihan</h2>
+            <v-container fluid>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>Nomor Order:</v-list-item-title>
+                </v-list-item-content>
 
-          <div class="text-left">
-            <h2>Informasi Tagihan</h2>
+                <v-list-item-action>{{ orders.no_order }}</v-list-item-action>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>Tanggal Order:</v-list-item-title>
+                </v-list-item-content>
 
-            <v-row dense>
-              <v-col cols="6" sm="2">Nomor Order:</v-col>
-              <v-col cols="6" sm="10">{{ orders.no_order }}</v-col>
-            </v-row>
-            <v-row dense>
-              <v-col cols="6" sm="2">Tanggal Order:</v-col>
-              <v-col cols="6" sm="10">{{ orders.created_at | dateTimeFormat }} WIB</v-col>
-            </v-row>
-            <v-row dense>
-              <v-col cols="6" sm="2">Status Tagihan:</v-col>
-              <v-col cols="6" sm="10" class="red--text">{{ orders.pembayaran_status }}</v-col>
-            </v-row>
-            <v-row dense>
-              <v-col cols="6" sm="2">Nama Penjual:</v-col>
-              <v-col cols="6" sm="10">{{ orders.nama_penjual }}</v-col>
-            </v-row>
-            <v-row dense>
-              <v-col cols="6" sm="2">Total Tagihan:</v-col>
-              <v-col
-                cols="6"
-                sm="10"
-              >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</v-col>
-            </v-row>
-            <v-row dense>
-              <v-col cols="6" sm="2">Metode Bayar:</v-col>
-              <v-col cols="6" sm="10">{{ orders.metode }}</v-col>
-            </v-row>
-          </div>
+                <v-list-item-action>{{ orders.created_at | dateTimeFormat }} WIB</v-list-item-action>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>Nama Penjual:</v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-action>{{ orders.nama_penjual }}</v-list-item-action>
+              </v-list-item>
+            </v-container>
+          </v-card>
 
           <v-btn
             class="d-block my-2 pa-2 primary white--text text-center"
@@ -96,16 +63,123 @@
           >Hubungi Pembeli</v-btn>
 
           <v-btn
-            class="d-block my-2 pa-2 primary white--text text-center"
+            rounded
+            class="d-block my-2 pa-2 orange darken-1 white--text text-center"
             :to="'/chat/' + orders.id_penjual"
             v-else
           >Hubungi Penjual</v-btn>
 
           <v-divider></v-divider>
 
+          <v-card flat align="left">
+            <h2 class="text-center">Informasi Produk</h2>
+            <v-container fluid>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-img :src="getImage(iklan.photo)" contain width="500" height="300"></v-img>
+                </v-list-item-content>
+                <v-btn
+                  color="#0277BD"
+                  :to="'/detail_iklan/' + orders.id_iklan"
+                  text
+                  dark
+                >Lihat Iklan</v-btn>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>Jumlah:</v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-action>{{ iklans }} Unit</v-list-item-action>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>Status Transaksi:</v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-action class="red--text">{{ orders.pembayaran_status }}</v-list-item-action>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>Total Transaksi:</v-list-item-title>
+                </v-list-item-content>
+                <h3>Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</h3>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>Metode Pembayaran:</v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-action>{{ orders.metode }}</v-list-item-action>
+              </v-list-item>
+              <v-dialog v-model="dialog">
+                <v-card v-html="penawaran"></v-card>
+              </v-dialog>
+            </v-container>
+          </v-card>
+          <v-btn
+            block
+            rounded
+            class="my-2 pa-2 teal white--text text-center"
+            @click="formPenawaran"
+            v-if="orders.id_mst_order_status != 3"
+          >Lihat Form Penawaran</v-btn>
+          <!-- <div align="center">
+            <div class="text-left">
+              <h2>Informasi Produk</h2>
+              <v-row dense>
+                <v-list>
+                  <v-list-item>
+                    <v-list-item-icon>
+                      <v-img :src="getImage(iklan.photo)" contain width="500" height="300"></v-img>
+                    </v-list-item-icon>
+                    <v-btn
+                      color="#0277BD"
+                      :to="'/detail_iklan/' + orders.id_iklan"
+                      text
+                      dark
+                    >Lihat Iklan</v-btn>
+                  </v-list-item>
+
+                  <v-row>
+                    <v-col cols="6" sm="2">Jumlah:</v-col>
+                    <v-col cols="6" sm="10" class="black--text">{{ iklans }} Unit</v-col>
+                  </v-row>
+                  <v-row dense>
+                    <v-col cols="6" sm="2">Status Transaksi:</v-col>
+                    <v-col cols="6" sm="10" class="red--text">{{ orders.pembayaran_status }}</v-col>
+                  </v-row>
+                  <v-row dense>
+                    <v-col cols="6" sm="2">Total Transaksi:</v-col>
+                    <v-col cols="6" sm="10">
+                      <h3>Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</h3>
+                    </v-col>
+                  </v-row>
+                  <v-row dense>
+                    <v-col cols="6" sm="2">Metode Bayar:</v-col>
+                    <v-col cols="6" sm="10">{{ orders.metode }}</v-col>
+                  </v-row>
+                  <v-dialog v-model="dialog">
+                    <v-card v-html="penawaran"></v-card>
+                  </v-dialog>
+                </v-list>
+              </v-row>
+
+              <v-btn
+                block
+                rounded
+                class="my-2 pa-2 teal white--text text-center"
+                @click="formPenawaran"
+                v-if="orders.id_mst_order_status != 3"
+              >Lihat Form Penawaran</v-btn>
+            </div>
+          </div>-->
+
+          <v-divider></v-divider>
           <div align="center">
             <div v-if="orders.id_mst_order_status != 3">
-              <h5 class="title" align="center">Bukti Pembayaran</h5>
+              <h2 align="center">Bukti Pembayaran</h2>
               <p
                 v-if="orders.id_penjual != user.id"
               >Anda wajib melakukan konfirmasi pembayaran agar tiket dapat diproses.</p>
@@ -161,6 +235,7 @@
               <p>*Pastikan gambar yang diupload jelas dan terbaca</p>
 
               <v-btn
+                rounded
                 block
                 color="primary"
                 @click="upload"
@@ -169,6 +244,8 @@
 
               <v-btn
                 block
+                cyan
+                darken-1
                 color="teal"
                 @click="konfirmasi"
                 v-if="orders.id_mst_pembayaran_status == 4 && orders.id_penjual == user.id"
@@ -202,21 +279,21 @@ export default {
     iklan: [],
     foto: "",
     penawaran: null,
-    dialog: false
+    dialog: false,
   }),
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
     }),
     async getOrder() {
       await this.axios
         .get("/transaksi/v1/order", {
           params: {
-            id: this.$route.params.id
+            id: this.$route.params.id,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.orders = data[0];
           this.iklan = this.orders.iklan;
@@ -229,12 +306,15 @@ export default {
 
           this.dtlPembayaran();
 
-          if (this.user.id != this.orders.id_pembeli && this.user.id != this.orders.id_penjual) {
+          if (
+            this.user.id != this.orders.id_pembeli &&
+            this.user.id != this.orders.id_penjual
+          ) {
             alert("Anda tidak berhak mengakses halaman ini");
             this.$router.push({ path: "/" });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
@@ -244,15 +324,15 @@ export default {
         .get("/iklan/v1/iklan_tb_mokas", {
           params: {
             id: id,
-            limit: 1
+            limit: 1,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.iklans = data.motor_bekas.length;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
@@ -269,7 +349,7 @@ export default {
 
       const reader = new FileReader();
 
-      reader.onload = e => {
+      reader.onload = (e) => {
         this.previewUrl = e.target.result;
       };
       reader.readAsDataURL(this.buktiBayar);
@@ -284,24 +364,24 @@ export default {
 
       this.axios
         .post("/transaksi/v1/upload_pembayaran", formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           this.setAlert({
             status: true,
             color: "success",
-            text: data.api_message
+            text: data.api_message,
           });
           this.getOrder();
           this.dtlPembayaran();
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           this.setAlert({
             status: true,
             color: "success",
-            text: responses.api_message
+            text: responses.api_message,
           });
         });
     },
@@ -314,24 +394,24 @@ export default {
 
         this.axios
           .post("/transaksi/v1/konfirmasi_serah_terima", formData, {
-            headers: { Authorization: "Bearer " + this.user.token }
+            headers: { Authorization: "Bearer " + this.user.token },
           })
-          .then(response => {
+          .then((response) => {
             let { data } = response;
             this.setAlert({
               status: true,
               color: "success",
-              text: data.api_message
+              text: data.api_message,
             });
             this.getOrder();
             this.dtlPembayaran();
           })
-          .catch(error => {
+          .catch((error) => {
             let responses = error.response.data;
             this.setAlert({
               status: true,
               color: "success",
-              text: responses.api_message
+              text: responses.api_message,
             });
           });
       }
@@ -340,15 +420,15 @@ export default {
       this.axios
         .get("/transaksi/v1/upload_pembayaran", {
           params: {
-            id_pembayaran: this.orders.id_pembayaran
+            id_pembayaran: this.orders.id_pembayaran,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.foto = data[0].foto;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -356,23 +436,23 @@ export default {
     formPenawaran() {
       this.axios
         .get("/transaksi/v1/form_penawaran?id=" + this.orders.id, {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           this.penawaran = data;
           this.dialog = true;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
-    }
+    },
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
+      user: "auth/user",
+    }),
   },
   mounted() {
     this.getOrder();
@@ -389,12 +469,231 @@ export default {
   },
   filters: {
     dateTimeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("DD MMM YYYY HH:mm");
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY HH:mm");
+    },
+  },
+};
+</script>
+
+<style>
+#foto {
+  display: none;
+}
+</style>
+<script>
+import { mapGetters, mapActions } from "vuex";
+import FlipCountdown from "vue2-flip-countdown";
+import moment from "moment-timezone";
+import ImageUploader from "vue-image-upload-resize";
+
+export default {
+  name: "detailTransaksi",
+  components: { FlipCountdown, ImageUploader },
+  data: () => ({
+    orders: [],
+    iklans: 0,
+    countdown: 0,
+    utc: moment().utcOffset() / 60 - 7,
+    waktu: "",
+    buktiBayar: null,
+    previewUrl: "",
+    hasImage: false,
+    iklan: [],
+    foto: "",
+    penawaran: null,
+    dialog: false,
+  }),
+  methods: {
+    ...mapActions({
+      setAlert: "alert/set",
+    }),
+    async getOrder() {
+      await this.axios
+        .get("/transaksi/v1/order", {
+          params: {
+            id: this.$route.params.id,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.orders = data[0];
+          this.iklan = this.orders.iklan;
+
+          this.countdown = moment
+            .utc(this.orders.expired_at)
+            .format("YYYY-MM-DD HH:mm:ss");
+
+          this.getIklan(this.orders.id_iklan);
+
+          this.dtlPembayaran();
+
+          if (
+            this.user.id != this.orders.id_pembeli &&
+            this.user.id != this.orders.id_penjual
+          ) {
+            alert("Anda tidak berhak mengakses halaman ini");
+            this.$router.push({ path: "/" });
+          }
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
+        });
+    },
+    getIklan(id) {
+      this.axios
+        .get("/iklan/v1/iklan_tb_mokas", {
+          params: {
+            id: id,
+            limit: 1,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.iklans = data.motor_bekas.length;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
+        });
+    },
+    onFileChange() {
+      if (!this.buktiBayar) {
+        return false;
+      }
+      if (!this.buktiBayar.type.match("image.*")) {
+        return false;
+      }
+
+      this.hasImage = true;
+
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.previewUrl = e.target.result;
+      };
+      reader.readAsDataURL(this.buktiBayar);
+    },
+    upload() {
+      let formData = new FormData();
+
+      formData.append("id_pembayaran", this.orders.id_pembayaran);
+      formData.append("foto", this.buktiBayar);
+      formData.append("created_by_type", 1);
+      formData.append("created_by", this.user.id);
+
+      this.axios
+        .post("/transaksi/v1/upload_pembayaran", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: data.api_message,
+          });
+          this.getOrder();
+          this.dtlPembayaran();
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: responses.api_message,
+          });
+        });
+    },
+    konfirmasi() {
+      var r = confirm("Yakin ingin mengkonfirmasi pembayaran berikut?");
+      if (r == true) {
+        let formData = new FormData();
+
+        formData.append("id", this.orders.id);
+
+        this.axios
+          .post("/transaksi/v1/konfirmasi_serah_terima", formData, {
+            headers: { Authorization: "Bearer " + this.user.token },
+          })
+          .then((response) => {
+            let { data } = response;
+            this.setAlert({
+              status: true,
+              color: "success",
+              text: data.api_message,
+            });
+            this.getOrder();
+            this.dtlPembayaran();
+          })
+          .catch((error) => {
+            let responses = error.response.data;
+            this.setAlert({
+              status: true,
+              color: "success",
+              text: responses.api_message,
+            });
+          });
+      }
+    },
+    dtlPembayaran() {
+      this.axios
+        .get("/transaksi/v1/upload_pembayaran", {
+          params: {
+            id_pembayaran: this.orders.id_pembayaran,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.foto = data[0].foto;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    formPenawaran() {
+      this.axios
+        .get("/transaksi/v1/form_penawaran?id=" + this.orders.id, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.penawaran = data;
+          this.dialog = true;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+  },
+  computed: {
+    ...mapGetters({
+      user: "auth/user",
+    }),
+  },
+  mounted() {
+    this.getOrder();
+
+    if (this.utc == 0) {
+      this.waktu = "WIB";
     }
-  }
+    if (this.utc == 1) {
+      this.waktu = "WITA";
+    }
+    if (this.utc == 2) {
+      this.waktu = "WIT";
+    }
+  },
+  filters: {
+    dateTimeFormat: (date, utc) => {
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY HH:mm");
+    },
+  },
 };
 </script>
 
