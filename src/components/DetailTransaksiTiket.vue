@@ -13,7 +13,7 @@
 
     <v-list subheader>
       <v-subheader>
-        <h1>Informasi Tagihan</h1>
+        <h1>Informasi {{ item.id_mst_order_type == 1 ? "Tagihan" : "Refund" }}</h1>
       </v-subheader>
 
       <v-list-item>
@@ -28,9 +28,18 @@
         >{{ item.created_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
       </v-list-item>
 
+      <v-list-item v-if="item.id_mst_order_type == 2">
+        <v-list-item-title>Tanggal Refund:</v-list-item-title>
+        <v-list-item-title
+          class="font-weight-black"
+        >{{ item.created_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
+      </v-list-item>
+
       <v-list-item>
-        <v-list-item-title>Dijual Oleh:</v-list-item-title>
-        <v-list-item-title class="font-weight-black">{{ item.nama_penjual }}</v-list-item-title>
+        <v-list-item-title>{{ item.id_mst_order_type == 1 ? "Dijual Oleh" : "Nama Pembeli" }}</v-list-item-title>
+        <v-list-item-title
+          class="font-weight-black"
+        >{{ item.id_mst_order_type == 1 ? item.nama_penjual : item.nama_pembeli}}</v-list-item-title>
       </v-list-item>
 
       <v-list-item>
@@ -53,7 +62,7 @@
 
         <v-list-item-content>
           <v-list-item-title>
-            Status Tagihan:
+            Status {{ item.id_mst_order_type == 1 ? "Tagihan" : "Refund" }}:
             <span
               class="font-weight-black red--text d-sm-inline-flex d-flex"
             >{{ item.pembayaran_status }}</span>
@@ -72,7 +81,7 @@
           </v-list-item-title>
 
           <v-list-item-title>
-            Total Tagihan:
+            Total {{ item.id_mst_order_type == 1 ? "Tagihan" : "Refund" }}:
             <span
               class="font-weight-black d-sm-inline-flex d-flex"
             >Rp {{ Number(item.total_pembayaran).toLocaleString("id-ID") }}</span>
@@ -83,7 +92,7 @@
 
     <v-divider></v-divider>
 
-    <v-container fluid v-if="item.id_mst_pembayaran_status == 1 && item.id_mst_order_type == 1">
+    <!-- <v-container fluid v-if="item.id_mst_pembayaran_status == 1 && item.id_mst_order_type == 1">
       <h2>Petunjuk Pembayaran</h2>
 
       <div>Transfer dapat dilakukan ke salah satu rekening berikut:</div>
@@ -168,7 +177,7 @@
         @click="batalkan"
         v-if="item.id_mst_pembayaran_status == 1"
       >Batalkan</v-btn>
-    </v-container>
+    </v-container>-->
   </v-container>
 </template>
 
@@ -176,12 +185,12 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment-timezone";
 import FlipCountdown from "vue2-flip-countdown";
-import ImageUploader from "vue-image-upload-resize";
+// import ImageUploader from "vue-image-upload-resize";
 
 export default {
   name: "detail-transaksi-tiket",
   props: ["item", "foto"],
-  components: { FlipCountdown, ImageUploader },
+  components: { FlipCountdown },
   data: () => ({
     buktiBayar: null,
     hasImage: false,

@@ -238,17 +238,23 @@
                       <v-list-item-title>Gunakan Tiket</v-list-item-title>
                       <v-list-item-subtitle>Isikan jumlah iklan tiket, minimal 1 Tiket</v-list-item-subtitle>
                     </v-list-item-content>
+
                     <v-list-item-action>
                       <v-switch v-model="tiket" input-value="true" color="success"></v-switch>
                     </v-list-item-action>
                   </v-list-item>
-                  <v-text-field
-                    outlined
-                    v-model="tiket"
-                    label="Jumlah Tiket"
-                    :counter="999"
-                    :rules="jumlahRules"
-                  ></v-text-field>
+
+                  <v-list-item v-if="tiket">
+                    <v-list-item-content>
+                      <v-text-field
+                        outlined
+                        v-model="jumlahtiket"
+                        label="Jumlah Tiket"
+                        :rules="jumlahRules"
+                        v-mask="mask"
+                      ></v-text-field>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-list>
 
                 <v-row dense>
@@ -315,11 +321,12 @@ import DatetimePicker from "vuetify-datetime-picker";
 import moment from "moment-timezone";
 import { VMoney } from "v-money";
 import VueGeolocation from "vue-browser-geolocation";
+import { mask } from "vue-the-mask";
 Vue.use(DatetimePicker, VueGeolocation);
 
 export default {
   name: "tambah_iklan",
-  directives: { money: VMoney },
+  directives: { money: VMoney, mask },
   beforeRouteLeave(to, from, next) {
     if (!this.submit) {
       const answer = window.confirm(
@@ -346,9 +353,10 @@ export default {
       keyword: "",
       selectedIklan: [],
       selectedUnit: 0,
-      jumlahtiket: "",
+      jumlahtiket: 0,
+      mask: "###",
       jumlahRules: [
-        (v) => !!v || "Jumlah tiket harus diisi!",
+        (v) => v != 0 || "Field is required",
         (v) => v.length >= 1 || "Min 1 Tiket",
         (v) => v.length <= 999 || "Max 999 Tiket",
       ],
@@ -596,7 +604,7 @@ export default {
           formData.append("is_verified", this.tiket);
           formData.append("id_mst_type_tb", 1);
           formData.append("id_app_user", this.user.id);
-          formData.append("jumlah_tiket", 1);
+          formData.append("jumlah_tiket", this.jumlahtiket);
 
           this.axios
             .post("/iklan/v3/iklan_tb_mokas_satuan", formData, {
@@ -653,7 +661,7 @@ export default {
           formData.append("is_verified", this.tiket);
           formData.append("id_mst_type_tb", 1);
           formData.append("id_app_user", this.user.id);
-          formData.append("jumlah_tiket", 1);
+          formData.append("jumlah_tiket", this.jumlahtiket);
 
           this.axios
             .post("/iklan/v3/iklan_tb_mokas_paketan", formData, {

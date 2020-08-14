@@ -26,7 +26,175 @@
           </v-col>
         </v-row>
 
-        <detail-transaksi-tiket :item="orders" :foto="foto" />
+        <div class="text-center" v-if="orders.id_mst_pembayaran_status == 1">
+          <div>Batas Waktu Pembayaran</div>
+
+          <flip-countdown :deadline="orders.expired_at | countdown(utc)"></flip-countdown>
+
+          <v-card
+            flat
+            color="grey lighten-1"
+          >Sebelum: {{ orders.expired_at | dateTimeFormat(utc) }} {{ waktu }}</v-card>
+        </div>
+
+        <v-list subheader>
+          <v-subheader>
+            <h1>Informasi Tagihan</h1>
+          </v-subheader>
+
+          <v-list-item>
+            <v-list-item-title>Nomor Order:</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.no_order }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Tanggal Order:</v-list-item-title>
+            <v-list-item-title
+              class="font-weight-black"
+            >{{ orders.created_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Dijual Oleh</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.nama_penjual }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Metode Bayar:</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.metode }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+
+        <v-divider></v-divider>
+
+        <v-list subheader>
+          <v-subheader v-if="orders.iklan != undefined">
+            <h1>{{ orders.iklan.judul }}</h1>
+          </v-subheader>
+
+          <v-list-item>
+            <v-list-item-avatar tile size="80">
+              <v-img src="/img/tiket.png"></v-img>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title>
+                Status Tagihan:
+                <span
+                  class="font-weight-black red--text d-sm-inline-flex d-flex"
+                >{{ orders.pembayaran_status }}</span>
+              </v-list-item-title>
+
+              <v-list-item-title v-if="orders.id_mst_pembayaran_status == 6">
+                Alasan Ditolak:
+                <span
+                  class="font-weight-black d-sm-inline-flex d-flex"
+                >{{ orders.note }}</span>
+              </v-list-item-title>
+
+              <v-list-item-title v-if="orders.id_mst_pembayaran_note == 1">
+                Detail Alasan:
+                <span
+                  class="font-weight-black d-sm-inline-flex d-flex"
+                >{{ orders.note_detail }}</span>
+              </v-list-item-title>
+
+              <v-list-item-title>
+                Total Tagihan:
+                <span
+                  class="font-weight-black d-sm-inline-flex d-flex"
+                >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</span>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+
+        <v-divider></v-divider>
+
+        <v-container fluid v-if="orders.id_mst_pembayaran_status == 1">
+          <h2>Petunjuk Pembayaran</h2>
+
+          <div>Transfer dapat dilakukan ke salah satu rekening berikut:</div>
+          <div>
+            <img src="/img/bank/bca.png" width="60px" height="20px" />
+            <span class="blue--text text--darken-4">&nbsp;8920008390</span>
+            <span class="blue--text text--darken-4">&nbsp;A/N Digital Nayaka Abhinaya</span>
+          </div>
+          <div>Mohon transfer sesuai dengan nominal yang tertera.</div>
+          <div>Jika mengalami kendala dalam pembayaran, silahkan kunjungi bantuan.</div>
+        </v-container>
+
+        <v-container v-if="orders.id_mst_order_status != 3">
+          <h2>Bukti Pembayaran</h2>
+          <p>Anda wajib melakukan konfirmasi pembayaran agar tiket dapat diproses.</p>
+
+          <div align="center">
+            <image-uploader
+              v-model="buktiBayar"
+              :quality="0.7"
+              :scaleRatio="0.5"
+              accept="image/*"
+              :preview="false"
+              :className="['fileinput', { 'fileinput--loaded': hasImage }]"
+              :capture="false"
+              :debug="0"
+              :autoRotate="true"
+              outputFormat="blob"
+              @input="onFileChange"
+              id="foto"
+              v-if="orders.id_mst_pembayaran_status == 1"
+            >
+              <label for="foto" slot="upload-label">
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-card
+                      flat
+                      width="500"
+                      height="300"
+                      :color="!hasImage ? 'grey lighten-3' : 'transparent'"
+                      class="d-flex align-center justify-center"
+                      v-on="on"
+                    >
+                      <v-icon x-large v-if="!hasImage">mdi-file-upload</v-icon>
+
+                      <v-img :src="previewUrl" width="500" height="300" contain v-else></v-img>
+                    </v-card>
+                  </template>
+                  <span>Pilih Foto</span>
+                </v-tooltip>
+              </label>
+            </image-uploader>
+
+            <v-img
+              :src="getImage(foto)"
+              contain
+              class="mx-2"
+              width="500"
+              height="300"
+              v-if="orders.id_mst_pembayaran_status > 1"
+            ></v-img>
+
+            <p>*Pastikan gambar yang diupload jelas dan terbaca</p>
+          </div>
+
+          <v-btn
+            block
+            color="teal"
+            dark
+            @click="upload"
+            v-if="orders.id_mst_pembayaran_status == 1"
+          >Konfirmasi Pembayaran</v-btn>
+
+          <br />
+
+          <v-btn
+            block
+            color="red"
+            dark
+            @click="batalkan"
+            v-if="orders.id_mst_pembayaran_status == 1"
+          >Batalkan</v-btn>
+        </v-container>
       </v-card>
     </div>
 
@@ -300,30 +468,21 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-// import FlipCountdown from "vue2-flip-countdown";
+import FlipCountdown from "vue2-flip-countdown";
 import moment from "moment-timezone";
-// import ImageUploader from "vue-image-upload-resize";
+import ImageUploader from "vue-image-upload-resize";
 
 export default {
   name: "UploadBukti",
-  // components: { FlipCountdown, ImageUploader },
-  components: {
-    DetailTransaksiTiket: () =>
-      import(
-        /* webpackChunkName: "detail-transaksi-tiket" */ "@/components/DetailTransaksiTiket.vue"
-      ),
-  },
+  components: { FlipCountdown, ImageUploader },
   data: () => ({
     orders: [],
     buktiBayar: null,
+    hasImage: false,
     previewUrl: "",
     foto: null,
-    countdown: "",
     utc: moment().utcOffset() / 60 - 7,
     waktu: "",
-    accounts: [],
-    hasImage: false,
-    pencairan: [],
   }),
   methods: {
     ...mapActions({
@@ -340,11 +499,11 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.orders = data[0];
-          // this.countdown = moment
-          //   .utc(this.orders.expired_at)
-          //   .format("YYYY-MM-DD HH:mm:ss");
 
-          if (this.orders.id_mst_pembayaran_status == 2 || this.orders.id_mst_pembayaran_status == 4) {
+          if (
+            this.orders.id_mst_pembayaran_status == 2 ||
+            this.orders.id_mst_pembayaran_status == 4
+          ) {
             this.dtlPembayaran(this.orders.id_pembayaran);
           }
 
@@ -366,7 +525,7 @@ export default {
 
       formData.append("id_pembayaran", this.orders.id_pembayaran);
       formData.append("foto", this.buktiBayar, "Bukti_Bayar.jpg");
-      formData.append("created_by_type", 1);
+      formData.append("created_by_type", 3);
       formData.append("created_by", this.user.id);
 
       this.axios
@@ -381,7 +540,7 @@ export default {
             text: data.api_message,
           });
           this.getOrder();
-          this.dtlPembayaran();
+          this.dtlPembayaran(this.orders.id_pembayaran);
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -412,7 +571,6 @@ export default {
             text: data.api_message,
           });
           this.getOrder();
-          this.dtlPembayaran();
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -421,24 +579,6 @@ export default {
             color: "success",
             text: responses.api_message,
           });
-        });
-    },
-    getRekening() {
-      this.axios
-        .get("/user/v1/user/rekening", {
-          params: {
-            id_app_user: this.user.id,
-            id: this.orders.id_app_user_rekening,
-            limit: 999,
-          },
-        })
-        .then((response) => {
-          let { data } = response.data;
-          this.accounts = data;
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          console.log(responses.api_message);
         });
     },
     dtlPembayaran(id_pembayaran) {
@@ -452,23 +592,6 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.foto = data[0].foto;
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          console.log(responses.api_message);
-        });
-    },
-    getPencairan() {
-      this.axios
-        .get("/transaksi/v1/pencairan_tiket", {
-          params: {
-            id: this.$route.params.id,
-            limit: 1,
-          },
-        })
-        .then((response) => {
-          let { data } = response.data;
-          this.pencairan = data[0];
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -492,14 +615,9 @@ export default {
       };
       reader.readAsDataURL(this.buktiBayar);
     },
-    someMethod() {
-      alert("parent");
-    },
   },
   created() {
     this.getOrder();
-    // this.getRekening();
-    // this.getPencairan();
 
     if (this.utc == 0) {
       this.waktu = "WIB";
@@ -519,6 +637,9 @@ export default {
   filters: {
     dateTimeFormat: (date, utc) => {
       return moment.utc(date).add(utc, "h").format("DD MMM YYYY, HH:mm");
+    },
+    countdown: (date, utc) => {
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY HH:mm:ss");
     },
   },
 };
