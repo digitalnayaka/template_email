@@ -323,7 +323,7 @@
                   class="mx-2 mb-4"
                   v-for="subItem in item.found"
                   :key="subItem.id"
-                  :to="'/upload_bukti/' + subItem.id"
+                  :to="'/transaksi_refund/' + subItem.id"
                 >
                   <div
                     class="d-flex justify-space-between mx-2 pt-2"
@@ -684,6 +684,7 @@ export default {
         .get("/transaksi/v1/order", {
           params: {
             id_pembeli: this.user.id,
+            id_mst_order_type: 1,
             offset: offset,
             limit: this.limit,
           },
@@ -739,9 +740,10 @@ export default {
       var offset = (this.pageRF - 1) * this.limit;
 
       this.axios
-        .get("/transaksi/v1/pencairan_tiket", {
+        .get("/transaksi/v1/order", {
           params: {
             id_penjual: this.user.id,
+            id_mst_order_type: 2,
             offset: offset,
             limit: this.limit,
           },

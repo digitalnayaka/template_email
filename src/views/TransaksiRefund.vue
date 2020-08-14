@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <div class="text-center">
+    <!-- <div class="text-center">
       <v-card class="d-inline-block mx-auto">
         <v-container fluid>
           <h1>Detail Refund</h1>
@@ -87,6 +87,143 @@
           <v-divider></v-divider>
         </v-container>
       </v-card>
+    </div>-->
+
+    <div>
+      <h1 class="text-center">Detail Transaksi Refund</h1>
+
+      <v-card class="mx-auto" max-width="600">
+        <v-row>
+          <v-col cols="12">
+            <v-card color="deep-orange lighten-2">
+              <div class="d-flex flex-no-wrap justify-start align-center">
+                <v-avatar class="ma-3" size="20" tile>
+                  <v-img src="/img/error.png"></v-img>
+                </v-avatar>
+
+                <div>
+                  <v-card-text>Selalu waspada terhadap pihak yang tidak bertanggung jawab.</v-card-text>
+                </div>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-avatar tile size="80">
+              <v-img src="/img/tiket.png"></v-img>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title>Tiket Tawar Bersama</v-list-item-title>
+              <v-list-item-subtitle>Jumlah: {{ orders.jumlah }} Tiket</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+
+        <v-divider></v-divider>
+
+        <v-list subheader>
+          <v-subheader>
+            <h1>Informasi Refund</h1>
+          </v-subheader>
+
+          <v-list-item>
+            <v-list-item-title>Nomor Order:</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.no_order }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Tanggal Order:</v-list-item-title>
+            </v-list-item-content>
+
+            <v-list-item-content>
+              <div
+                class="font-weight-black d-flex"
+              >{{ orders.created_at | dateTimeFormat(utc) }} {{ waktu }}</div>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Tanggal Refund:</v-list-item-title>
+            </v-list-item-content>
+
+            <v-list-item-content>
+              <div
+                class="font-weight-black d-flex"
+              >{{ orders.created_at | dateTimeFormat(utc) }} {{ waktu }}</div>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Status Tagihan:</v-list-item-title>
+            <v-list-item-title class="font-weight-black red--text">{{ orders.pembayaran_status }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Nama Pembeli:</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.nama_pembeli }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Total Refund:</v-list-item-title>
+            <v-list-item-title
+              class="font-weight-black"
+            >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Metode Bayar:</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.metode }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+
+        <v-divider></v-divider>
+
+        <v-list subheader>
+          <v-subheader>
+            <h1>Tujuan Pembayaran</h1>
+          </v-subheader>
+
+          <v-list-item>
+            <v-list-item-title>Transfer akan dilakukan ke rekening berikut:</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-avatar tile size="80">
+              <v-img src="/img/bank/bca.png" contain v-if="bank.id_mst_bank == 12"></v-img>
+              <v-img src="/img/bank/bni.png" contain v-if="bank.id_mst_bank == 3"></v-img>
+              <v-img src="/img/bank/bri.png" contain v-if="bank.id_mst_bank == 4"></v-img>
+              <v-img src="/img/bank/mandiri.png" contain v-if="bank.id_mst_bank == 2"></v-img>
+              <v-img src="/img/bank/permata.png" contain v-if="bank.id_mst_bank == 33"></v-img>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ bank.bank_name }}</v-list-item-title>
+              <v-list-item-subtitle>{{ bank.nomor_rekening }}</v-list-item-subtitle>
+              <input type="hidden" id="nomor_rekening" :value="bank.nomor_rekening" />
+              <v-list-item-subtitle>{{ bank.nama_rekening }}</v-list-item-subtitle>
+            </v-list-item-content>
+
+            <v-list-item-action>
+              <v-btn class="teal--text" @click="salin" outlined>Salin</v-btn>
+            </v-list-item-action>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Jika mengalami kendala dengan penjualan, silahkan kunjungi Bantuan.</v-list-item-title>
+          </v-list-item>
+        </v-list>
+
+        <v-divider></v-divider>
+
+        <v-container fluid>
+          <v-btn color="red darken-1" dark block @click="batalkan" v-if="orders.id_mst_pembayaran_status == 1">Batalkan</v-btn>
+        </v-container>
+      </v-card>
     </div>
   </div>
 </template>
@@ -109,20 +246,29 @@ export default {
     }),
     async getOrder() {
       await this.axios
-        .get("/transaksi/v1/pencairan_tiket", {
-          headers: { Authorization: "Bearer " + this.user.token },
+        .get("/transaksi/v1/order", {
           params: {
             id: this.$route.params.id,
+            id_mst_order_type: 2,
             limit: 1,
           },
         })
         .then((response) => {
           let { data } = response.data;
           this.orders = data[0];
+
           this.getBank(
             this.orders.id_app_user_rekening,
             this.orders.id_penjual
           );
+
+          if (
+            this.user.id != this.orders.id_pembeli &&
+            this.user.id != this.orders.id_penjual
+          ) {
+            alert("Anda tidak berhak mengakses halaman ini");
+            this.$router.push({ path: "/" });
+          }
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -146,6 +292,36 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+        });
+    },
+    batalkan() {
+      let formData = new FormData();
+
+      formData.append("id", this.orders.id);
+      formData.append("id_app_user", this.user.id);
+      formData.append("id_mst_pembayaran_note", 1);
+      formData.append("note_detail", "Membatalkan Tiket");
+
+      this.axios
+        .post("/transaksi/v1/batalkan_pembelian", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: data.api_message,
+          });
+          this.getOrder();
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: responses.api_message,
+          });
         });
     },
     salin() {
