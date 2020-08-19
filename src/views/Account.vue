@@ -87,8 +87,8 @@
 
               <v-divider></v-divider>
 
-              <v-list-item>
-                <v-list-item-content>
+              <v-list-item to="/tawar_bersama">
+                <v-list-item-content >
                   <v-list-item-title>Iklan Diikuti</v-list-item-title>
                 </v-list-item-content>
 
