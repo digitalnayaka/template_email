@@ -604,32 +604,69 @@
         </div>
 
         <v-bottom-sheet v-model="sheet">
-          <v-sheet :height="height">
+          <v-sheet>
             <v-container fluid v-if="useTiket">
-              <h2>Oops!</h2>
+              <h2 class="text-center my-4">Oops!</h2>
 
-              <div>
+              <div class="text-center my-4">
                 Untuk dapat mengikuti iklan ini perlu memakai tiket. Gunakan Tiket Tawar Bersama pada iklan ini?
                 <br />Tiket yang dibutuhkan: 1 Tiket
                 <br />
-                Jumlah Tiket Tersedia: {{ totalTiket.tersedia }} Tiket
+                Jumlah tiket tersedia: {{ totalTiket.tersedia }} Tiket
               </div>
 
               <v-btn block color="success" class="my-4" @click="konfirmasiTiket">Gunakan Tiket Anda</v-btn>
             </v-container>
 
             <v-list v-if="ikutPenawaran">
+              <v-list-item-action>
+                <v-btn icon @click="sheet = !sheet">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </v-list-item-action>
+              <v-list-item>
+                <!-- <div align="center" v-if="liveBid.length > 0">
+                  <v-card class="d-flex justify-space-between align-center" flat width="500">
+                    <v-list align="left" v-if="iklan.id_mst_iklan_jenis > 1">
+                      <v-list-item v-for="(item,i) in liveBid.slice(0,5)" :key="item.Bid">
+                        <v-list-item-icon class="mx-0" v-if="i+1 == 1">
+                          <v-icon large color="orange">mdi-star</v-icon>
+                        </v-list-item-icon>
+
+                        <v-list-item-icon class="mr-2" v-else>
+                          <v-chip color="green">{{ i + 1 }}</v-chip>
+                        </v-list-item-icon>
+
+                        <v-list-item-content>
+                          <v-list-item-title>
+                            <div>Oleh: {{ item.IdUniq }}</div>
+                            <div v-if="!guest">
+                              <div v-if="user.id == item.IdAppUser">Anda</div>
+                            </div>
+                          </v-list-item-title>
+                          <v-list-item-subtitle>{{ item.CreatedAt.toDate() | datediff }}</v-list-item-subtitle>
+                        </v-list-item-content>
+
+                        <v-list-item-action>
+                          <v-chip color="red" dark>Rp {{ Number(item.Bid).toLocaleString('id-ID') }}</v-chip>
+                        </v-list-item-action>
+                      </v-list-item>
+                    </v-list>
+                  </v-card>
+                </div> -->
+              </v-list-item>
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title>Nominal Penawaran</v-list-item-title>
-                  <v-list-item-subtitle>Masukan nominal penawaran Anda</v-list-item-subtitle>
+                  <div class="teal--text" align="center" v-if="start == true && end == false">
+                    Tawar Bersama berlangsung:
+                    <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
+                  </div>
                 </v-list-item-content>
 
-                <v-list-item-action>
-                  <v-btn icon @click="sheet = !sheet">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                </v-list-item-action>
+                <!-- <v-list-item-content>
+                  <v-list-item-title>Nominal Penawaran</v-list-item-title>
+                  <v-list-item-subtitle>Masukan nominal penawaran Anda</v-list-item-subtitle>
+                </v-list-item-content>-->
               </v-list-item>
 
               <v-list-item>
@@ -637,18 +674,15 @@
                   <v-list-item-title>Kelipatan Tawaran</v-list-item-title>
                   <v-list-item-subtitle>Rp {{ Number(iklan.kelipatan).toLocaleString('id-ID') }}</v-list-item-subtitle>
                 </v-list-item-content>
-              </v-list-item>
-
-              <v-list-item>
+                <v-divider vertical class="mx-2"></v-divider>
                 <v-list-item-content>
                   <v-list-item-title>Harga Awal</v-list-item-title>
                   <v-list-item-subtitle>Rp {{ Number(iklan.harga_awal).toLocaleString('id-ID') }}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
-
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title>Penawaran Anda</v-list-item-title>
+                  <v-list-item-title>Nominal Penawaran</v-list-item-title>
 
                   <v-list-item-subtitle>
                     <v-text-field outlined v-model="bid" hide-details readonly></v-text-field>
@@ -659,7 +693,6 @@
                   <v-btn icon @click="minus">
                     <v-icon>mdi-minus</v-icon>
                   </v-btn>
-
                   <v-btn icon @click="bid += iklan.kelipatan">
                     <v-icon>mdi-plus</v-icon>
                   </v-btn>
@@ -667,7 +700,7 @@
               </v-list-item>
 
               <v-list-item>
-                <v-btn block color="success" @click="bidding">Konfirmasi Penawaran</v-btn>
+                <v-btn block dark color="teal" @click="bidding">Konfirmasi Penawaran</v-btn>
               </v-list-item>
             </v-list>
           </v-sheet>
@@ -1277,7 +1310,7 @@ export default {
     }),
     getDtlIklan() {
       this.axios
-        .get("/search/v1/search", {
+        .get("/search/v3/search", {
           params: {
             id: this.id,
             limit: 1,
@@ -1302,7 +1335,7 @@ export default {
     },
     unit_mokas(id) {
       this.axios
-        .get("/produk/v1/unit_mokas", {
+        .get("/produk/v3/unit_mokas", {
           params: {
             id: id,
             limit: 1,
@@ -1356,7 +1389,7 @@ export default {
       };
 
       this.axios
-        .get("/produk/v1/unit_mokas", request)
+        .get("/produk/v3/unit_mokas", request)
         .then((response) => {
           let { data } = response.data;
           this.motorBekas = data;
@@ -1368,7 +1401,7 @@ export default {
     },
     getHP(id) {
       this.axios
-        .get("/iklan/v1/iklan_hp_mokas", {
+        .get("/iklan/v3/iklan_hp_mokas", {
           params: {
             id: id,
           },
@@ -1384,7 +1417,7 @@ export default {
     },
     getTB(id) {
       this.axios
-        .get("/iklan/v1/iklan_tb_mokas", {
+        .get("/iklan/v3/iklan_tb_mokas", {
           params: {
             id: id,
           },
@@ -1411,7 +1444,7 @@ export default {
     },
     getTiket() {
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 1,
@@ -1434,7 +1467,7 @@ export default {
     },
     getTotalTiket() {
       this.axios
-        .get("/tiket/v1/total_tiket", {
+        .get("/tiket/v3/total_tiket", {
           params: {
             id_app_user: this.user.id,
           },
@@ -1464,7 +1497,7 @@ export default {
         formData.append("id_tiket", this.tiket.id);
 
         this.axios
-          .post("/bid/v1/konfirmasi_penggunaan_tiket", formData, {
+          .post("/bid/v3/konfirmasi_penggunaan_tiket", formData, {
             headers: { Authorization: "Bearer " + this.user.token },
           })
           .then((response) => {
@@ -1495,7 +1528,7 @@ export default {
       formData.append("id_app_user", this.user.id);
 
       this.axios
-        .post("/bid/v1/iklan_tb_peserta", formData, {
+        .post("/bid/v3/iklan_tb_peserta", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -1553,7 +1586,7 @@ export default {
       formData.append("id_app_user", this.user.id);
 
       this.axios
-        .post("/bid/v1/iklan_tb_bid", formData, {
+        .post("/bid/v3/iklan_tb_bid", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -1584,7 +1617,7 @@ export default {
         formData.append("id_mst_iklan_status", 2);
 
         this.axios
-          .put("iklan/v1/iklan_hp_mokas_satuan", formData, {
+          .put("iklan/v3/iklan_hp_mokas_satuan", formData, {
             headers: { Authorization: "Bearer " + this.user.token },
           })
           .then((response) => {
@@ -1610,7 +1643,7 @@ export default {
     },
     getOrder() {
       this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
             id_iklan: this.$route.params.id,
           },
@@ -1631,7 +1664,7 @@ export default {
       var r = confirm("Apakah anda yakin untuk menghapus iklan ini?");
       if (r == true) {
         this.axios
-          .delete("/iklan/v1/iklan", {
+          .delete("/iklan/v3/iklan", {
             headers: { Authorization: "Bearer " + this.user.token },
             params: {
               id: this.$route.params.id,
@@ -1654,7 +1687,7 @@ export default {
     },
     getUser(id) {
       this.axios
-        .get("/user/v1/user", {
+        .get("/user/v3/user", {
           params: {
             id: id,
             limit: 1,

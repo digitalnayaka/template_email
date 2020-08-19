@@ -58,7 +58,7 @@ export default {
     }),
     getTemplate() {
       this.axios
-        .get("/user/v1/user/template_chat", {
+        .get("/user/v3/user/template_chat", {
           params: {
             id_app_user: this.user.id
           }
@@ -81,7 +81,7 @@ export default {
       formData.append("chat", this.chat);
 
       this.axios
-        .post("/user/v1/user/template_chat", formData, {
+        .post("/user/v3/user/template_chat", formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {

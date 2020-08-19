@@ -245,7 +245,7 @@ export default {
   methods: {
     getUser() {
       this.axios
-        .get("/user/v1/user", {
+        .get("/user/v3/user", {
           params: {
             id: this.id_app_user,
             limit: 1,
@@ -264,7 +264,7 @@ export default {
       var offset = (this.page - 1) * this.limit;
 
       this.axios
-        .get("/search/v1/search", {
+        .get("/search/v3/search", {
           params: {
             id_app_user: this.id_app_user,
             tanggal_mulai: this.tanggal_mulai,
@@ -292,7 +292,7 @@ export default {
       var offset = (this.page - 1) * this.limit;
 
       this.axios
-        .get("/search/v1/search", {
+        .get("/search/v3/search", {
           params: {
             id_app_user: this.id_app_user,
             tanggal_mulai: this.tanggal_mulai,

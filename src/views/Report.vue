@@ -127,7 +127,7 @@ export default {
     },
     userBmr() {
       this.axios
-        .get("/search/v1/user_search", {
+        .get("/search/v3/user_search", {
           params: {
             search: "raharja",
             limit: 999
@@ -158,7 +158,7 @@ export default {
         headers: { Authorization: "Bearer " + this.user.token }
       };
       this.axios
-        .get("/user/v1/user", request)
+        .get("/user/v3/user", request)
         .then(response => {
           let { data } = response.data;
           this.users = data;
@@ -177,7 +177,7 @@ export default {
         formData.append("id_app_user", this.selectedUser);
       }
       this.axios
-        .post("/report/v1/reporttb", formData, {
+        .post("/report/v3/reporttb", formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {

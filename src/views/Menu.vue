@@ -122,7 +122,7 @@ export default {
       formData.set("name", this.editedItem.name);
       formData.set("icon", this.editedItem.icon);
       this.axios
-        .post("http://localhost/raharjadb-api/v1/store", formData)
+        .post("http://localhost/raharjadb-api/v3/store", formData)
         .then(response => {
           let { data } = response;
           if (data && data.status == "success") {
@@ -137,7 +137,7 @@ export default {
   },
   created() {
     this.axios
-      .get("http://localhost/raharjadb-api/v1/index")
+      .get("http://localhost/raharjadb-api/v3/index")
       .then(response => {
         let { data } = response.data;
         this.datas = data;

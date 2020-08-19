@@ -131,7 +131,7 @@ export default {
     }),
     getUser() {
       this.axios
-        .get("/user/v1/user", {
+        .get("/user/v3/user", {
           params: {
             id: this.$route.params.id,
             limit: 1
@@ -159,7 +159,7 @@ export default {
             let iklan = [];
             if (doc.data().Type == "iklan") {
               this.axios
-                .get("/iklan/v1/iklan_tb_mokas", {
+                .get("/iklan/v3/iklan_tb_mokas", {
                   params: {
                     id: doc.data().Iklan
                   }
@@ -189,7 +189,7 @@ export default {
       formData.append("from", this.user.id);
       formData.append("receive", this.$route.params.id);
 
-      this.axios.post("/user/v1/chat/pin_pemenang", formData, {
+      this.axios.post("/user/v3/chat/pin_pemenang", formData, {
         headers: { Authorization: "Bearer " + this.user.token }
       });
     }

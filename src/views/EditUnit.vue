@@ -655,7 +655,7 @@ export default {
     },
     loadData() {
       this.axios
-        .get("/produk/v1/unit_mokas", {
+        .get("/produk/v3/unit_mokas", {
           params: {
             id: this.id,
             limit: 1
@@ -731,7 +731,7 @@ export default {
     },
     getMerk() {
       this.axios
-        .get("/produk/v1/mst_motor_merk")
+        .get("/produk/v3/mst_motor_merk")
         .then(response => {
           let { data } = response.data;
           this.brands = data;
@@ -748,7 +748,7 @@ export default {
       //   this.years.push(tahun);
       // }
       this.axios
-        .get("/produk/v1/mst_motor_type_tahun", {
+        .get("/produk/v3/mst_motor_type_tahun", {
           params: {
             id_mst_motor_merk: data
           }
@@ -764,7 +764,7 @@ export default {
     },
     getTipe(data) {
       this.axios
-        .get("/produk/v1/mst_motor_type", {
+        .get("/produk/v3/mst_motor_type", {
           params: {
             id_mst_motor_merk: data
           }
@@ -790,7 +790,7 @@ export default {
     },
     getOdoMeter() {
       this.axios
-        .get("/produk/v1/mst_odometer")
+        .get("/produk/v3/mst_odometer")
         .then(response => {
           let { data } = response.data;
           this.odo = data;
@@ -802,7 +802,7 @@ export default {
     },
     getTransmisi() {
       this.axios
-        .get("/produk/v1/mst_motor_transmisi")
+        .get("/produk/v3/mst_motor_transmisi")
         .then(response => {
           let { data } = response.data;
           this.trans = data;
@@ -814,7 +814,7 @@ export default {
     },
     getJenis() {
       this.axios
-        .get("/produk/v1/mst_motor_jenis")
+        .get("/produk/v3/mst_motor_jenis")
         .then(response => {
           let { data } = response.data;
           this.jenis_motor = data;
@@ -961,7 +961,7 @@ export default {
       formData.append("id_app_user", this.user.id);
 
       this.axios
-        .put("/produk/v1/unit_mokas", formData, {
+        .put("/produk/v3/unit_mokas", formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {

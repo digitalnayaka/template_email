@@ -416,7 +416,7 @@ export default {
     }),
     getJenisIklan() {
       this.axios
-        .get("/setup/v1/show_iklan", {
+        .get("/setup/v3/show_iklan", {
           params: {
             limit: this.user.id_mst_user_type == 1 ? 1 : 3,
           },
@@ -452,7 +452,7 @@ export default {
       var offset = (this.page - 1) * this.limit;
 
       this.axios
-        .get("/produk/v1/unit_mokas", {
+        .get("/produk/v3/unit_mokas", {
           params: {
             id_app_user: this.user.id,
             id_mst_motor_bekas_status: 1,
@@ -555,7 +555,7 @@ export default {
           formData.append("id_app_user", this.user.id);
 
           this.axios
-            .post("/iklan/v1/iklan_hp_mokas_satuan", formData, {
+            .post("/iklan/v3/iklan_hp_mokas_satuan", formData, {
               headers: { Authorization: "Bearer " + this.user.token },
             })
             .then((response) => {
@@ -704,7 +704,7 @@ export default {
     }
     if (this.id != "") {
       this.axios
-        .get("/produk/v1/unit_mokas", {
+        .get("/produk/v3/unit_mokas", {
           params: {
             id: this.id,
             id_app_user: this.user.id,

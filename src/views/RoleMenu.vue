@@ -203,7 +203,7 @@ export default {
     },
     getRoleMenus() {
       this.axios
-        .get("/setup/v1/rolemenus")
+        .get("/setup/v3/rolemenus")
         .then(response => {
           let { data } = response.data;
           this.rolemenus = data;
@@ -215,7 +215,7 @@ export default {
     },
     getRoles() {
       this.axios
-        .get("/setup/v1/roles")
+        .get("/setup/v3/roles")
         .then(response => {
           let { data } = response.data;
           this.roles = data;
@@ -227,7 +227,7 @@ export default {
     },
     getMenus() {
       this.axios
-        .get("/setup/v1/allmenus", {
+        .get("/setup/v3/allmenus", {
           params: {
             role_id: this.editedItem.role_name
           }
@@ -251,7 +251,7 @@ export default {
       formData.append("status", this.editedItem.status);
       formData.append("created_by", this.user.id);
       this.axios
-        .post("/setup/v1/rolemenus", formData)
+        .post("/setup/v3/rolemenus", formData)
         .then(response => {
           let { data } = response.data;
           console.log(data);
@@ -283,7 +283,7 @@ export default {
       formData.append("updated_by", this.user.id);
       formData.append("updated_at", this.datetime);
       this.axios
-        .put("/setup/v1/rolemenus", formData)
+        .put("/setup/v3/rolemenus", formData)
         .then(response => {
           let { data } = response;
           console.log(data);
@@ -305,7 +305,7 @@ export default {
       var r = confirm("Yakin akan dihapus?");
       if (r == true) {
         this.axios
-          .delete("/setup/v1/rolemenus", {
+          .delete("/setup/v3/rolemenus", {
             data: {
               id: item.id
             }

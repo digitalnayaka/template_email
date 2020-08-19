@@ -194,7 +194,7 @@ export default {
     },
     functionEvents() {
       this.axios
-        .get("/iklan/v1/iklan_cal_event_jadwal_tb")
+        .get("/iklan/v3/iklan_cal_event_jadwal_tb")
         .then(response => {
           let { data } = response.data;
 

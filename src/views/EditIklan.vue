@@ -38,7 +38,7 @@ export default {
     }),
     getIklan() {
       this.axios
-        .get("/search/v1/search", {
+        .get("/search/v3/search", {
           params: {
             id: this.$route.params.id,
             limit: 1
@@ -66,7 +66,7 @@ export default {
 
       if (this.hits[0]._source.id_mst_iklan_jenis == 1) {
         this.axios
-          .put("/iklan/v1/iklan_hp_mokas_satuan", formData, {
+          .put("/iklan/v3/iklan_hp_mokas_satuan", formData, {
             headers: { Authorization: "Bearer " + this.user.token }
           })
           .then(response => {
@@ -88,7 +88,7 @@ export default {
           });
       } else {
         this.axios
-          .put("/iklan/v1/iklan_tb_mokas_satuan", formData, {
+          .put("/iklan/v3/iklan_tb_mokas_satuan", formData, {
             headers: { Authorization: "Bearer " + this.user.token }
           })
           .then(response => {

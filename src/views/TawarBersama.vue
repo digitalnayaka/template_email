@@ -15,7 +15,7 @@
         <v-card
           v-for="item in berlangsung"
           :key="item.id_iklan"
-          :to="item.id_mst_iklan_type != 2 ? '/detail_iklan/' + item.id_iklan : '/detail_paket/' + item.id_iklan"
+          :to="item.id_mst_iklan_type != 2 ? '/detail_iklan/' + item.id_iklan : '/detail_iklan/' + item.id_iklan"
           class="my-4"
         >
           <v-toolbar dense flat>
@@ -162,7 +162,7 @@ export default {
   methods: {
     getTBBerlangsung() {
       this.axios
-        .get("/bid/v1/iklan_tb_peserta", {
+        .get("/bid/v3/iklan_tb_peserta", {
           params: {
             id_app_user: this.user.id,
             id_mst_iklan_status: 1,
@@ -200,7 +200,7 @@ export default {
       };
 
       this.axios
-        .get("/bid/v1/iklan_tb_peserta", request)
+        .get("/bid/v3/iklan_tb_peserta", request)
         .then(response => {
           let { data } = response.data;
           this.selesai = data;

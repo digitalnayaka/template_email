@@ -78,33 +78,43 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title>
-                Status Tagihan:
-                <span
-                  class="font-weight-black red--text d-sm-inline-flex d-flex"
-                >{{ orders.pembayaran_status }}</span>
-              </v-list-item-title>
+              <v-row>
+                <v-col cols="6" class="text-left">
+                  <h3>Status Tagihan</h3>
+                </v-col>
+                <v-col cols="6" class="text-right">
+                  <h3 class="font-weight-black red--text d-sm-inline-flex d-flex">{{ orders.pembayaran_status }}</h3>
+                </v-col>
+              </v-row>
 
               <v-list-item-title v-if="orders.id_mst_pembayaran_status == 6">
                 Alasan Ditolak:
-                <span
+                <h3
                   class="font-weight-black d-sm-inline-flex d-flex"
-                >{{ orders.note }}</span>
+                >{{ orders.note }}</h3>
               </v-list-item-title>
 
               <v-list-item-title v-if="orders.id_mst_pembayaran_note == 1">
                 Detail Alasan:
-                <span
+                <h4
                   class="font-weight-black d-sm-inline-flex d-flex"
-                >{{ orders.note_detail }}</span>
+                >{{ orders.note_detail }}</h4>
               </v-list-item-title>
+              <v-row>
+                <v-col cols="6" class="text-left">
+                  <h3>Total Tagihan</h3>
+                </v-col>
 
-              <v-list-item-title>
+                <v-col cols="6" class="text-right">
+                  <h3>Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</h3>
+                </v-col>
+              </v-row>
+              <!-- <v-list-item-title>
                 Total Tagihan:
                 <span
                   class="font-weight-black d-sm-inline-flex d-flex"
                 >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</span>
-              </v-list-item-title>
+              </v-list-item-title>-->
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -115,10 +125,10 @@
           <h2>Petunjuk Pembayaran</h2>
 
           <div>Transfer dapat dilakukan ke salah satu rekening berikut:</div>
-          <div>
+          <div align="center">
             <img src="/img/bank/bca.png" width="60px" height="20px" />
-            <span class="blue--text text--darken-4">&nbsp;8920008390</span>
-            <span class="blue--text text--darken-4">&nbsp;A/N Digital Nayaka Abhinaya</span>
+            <h3 class="blue--text text--darken-4">&nbsp;8920008390</h3>
+            <h3 class="blue--text text--darken-4">&nbsp;A/N Digital Nayaka Abhinaya</h3>
           </div>
           <div>Mohon transfer sesuai dengan nominal yang tertera.</div>
           <div>Jika mengalami kendala dalam pembayaran, silahkan kunjungi bantuan.</div>
@@ -490,7 +500,7 @@ export default {
     }),
     async getOrder() {
       await this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id: this.$route.params.id,
@@ -529,7 +539,7 @@ export default {
       formData.append("created_by", this.user.id);
 
       this.axios
-        .post("/transaksi/v1/upload_pembayaran", formData, {
+        .post("/transaksi/v3/upload_pembayaran", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -560,7 +570,7 @@ export default {
       formData.append("note_detail", "Membatalkan Tiket");
 
       this.axios
-        .post("/transaksi/v1/batalkan_pembelian", formData, {
+        .post("/transaksi/v3/batalkan_pembelian", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -583,7 +593,7 @@ export default {
     },
     dtlPembayaran(id_pembayaran) {
       this.axios
-        .get("/transaksi/v1/upload_pembayaran", {
+        .get("/transaksi/v3/upload_pembayaran", {
           headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id_pembayaran: id_pembayaran,

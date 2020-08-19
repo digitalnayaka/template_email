@@ -239,7 +239,7 @@ export default {
       var offset = (this.page - 1) * this.limit;
 
       this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
             id_pembeli: this.user.id,
             offset: offset,
@@ -293,7 +293,7 @@ export default {
       var offset = (this.pageRF - 1) * this.limitRF;
 
       this.axios
-        .get("/transaksi/v1/pencairan_tiket", {
+        .get("/transaksi/v3/pencairan_tiket", {
           params: {
             id_penjual: this.user.id,
             offset: offset,

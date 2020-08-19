@@ -76,7 +76,7 @@ export default {
       formData.append("message", this.newMessage);
 
       this.axios
-        .post("/user/v1/chat/text", formData, formData, {
+        .post("/user/v3/chat/text", formData, formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(() => {
@@ -94,7 +94,7 @@ export default {
       formData.append("foto", this.image, "foto.jpg");
 
       this.axios
-        .post("/user/v1/chat/image", formData, formData, {
+        .post("/user/v3/chat/image", formData, formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {

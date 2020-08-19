@@ -2,7 +2,7 @@
   <v-card>
     <v-container fluid>
       <div v-if="countCart === 0">
-        <v-alert outlined color="warning" icon="mdi-cart-off">Keranjang belanja kosong!</v-alert>
+        <v-alert outlined color="warning" icon="mdi-cart-off">Anda belum memilih tiket!</v-alert>
       </div>
 
       <v-list v-if="countCart > 0">
@@ -14,11 +14,11 @@
 
             <v-list-item-content>
               <v-list-item-title>{{ item.judul }}</v-list-item-title>
-              <v-list-item-subtitle>Jml: {{ item.qty }} Tiket</v-list-item-subtitle>
+              <v-list-item-subtitle>Jumlah: {{ item.qty }} Tiket</v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
-              <v-list-item-action-text>Harga</v-list-item-action-text>
+              <v-list-item-action-text>Harga Satuan</v-list-item-action-text>
               Rp {{ Number(item.price).toLocaleString("id-ID") }}
             </v-list-item-action>
 
@@ -51,7 +51,8 @@
 
             <v-flex pa-1 xs6 text-right align-self-center>
               <v-btn
-                color="primary"
+              dark
+                color="teal"
                 @click="dialog = true"
                 :loading="loading"
                 :disabled="totalQuantity == 0"
@@ -73,14 +74,14 @@
 
       <v-dialog v-model="dialog" width="250" persistent>
         <v-card>
-          <v-container fluid>anda yakin membeli paket ini?</v-container>
+          <v-container fluid>Apakah Anda yakin membeli paket ini?</v-container>
 
           <v-divider></v-divider>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="dialog = false">Tidak</v-btn>
-            <v-btn color="primary" text @click="buy">Ya</v-btn>
+            <v-btn color="red" dark @click="dialog = false">Tidak</v-btn>
+            <v-btn color="primary" dark @click="buy">Ya</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -127,7 +128,7 @@ export default {
       formData.append("id_iklan", this.carts[0].id);
 
       this.axios
-        .post("/transaksi/v1/order_tiket", formData, {
+        .post("/transaksi/v3/order_tiket", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {

@@ -171,7 +171,7 @@ export default {
       var offset = (this.page - 1) * this.limit;
 
       this.axios
-        .get("/iklan/v1/iklan_tb_aktivitas", {
+        .get("/iklan/v3/iklan_tb_aktivitas", {
           params: {
             id_app_user: this.user.id,
             offset: offset,
@@ -193,7 +193,7 @@ export default {
       var offset = (this.page - 1) * this.limit;
 
       this.axios
-        .get("/search/v1/search", {
+        .get("/search/v3/search", {
           params: {
             id_app_user: this.user.id,
             id_mst_iklan_jenis: 1,

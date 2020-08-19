@@ -272,7 +272,7 @@ export default {
   methods: {
     showBanners() {
       this.axios
-        .get("/master/v2/mst_banner")
+        .get("/master/v3/mst_banner")
         .then((response) => {
           let { data } = response.data;
 
@@ -288,7 +288,7 @@ export default {
     },
     showCategories() {
       this.axios
-        .get("/setup/v1/category")
+        .get("/setup/v3/category")
         .then((response) => {
           let { data } = response.data;
           this.categories = data;
@@ -300,7 +300,7 @@ export default {
     },
     jadwalLelang() {
       this.axios
-        .get("/iklan/v2/iklan_jadwal_tb", {
+        .get("/iklan/v3/iklan_jadwal_tb", {
           params: {
             id_mst_iklan_status: 1,
             limit: this.limit,
@@ -317,7 +317,7 @@ export default {
     },
     TBBerlangsung() {
       this.axios
-        .get("/search/v1/search", {
+        .get("/search/v3/search", {
           params: {
             id_mst_iklan_status: 1,
             sort: "tanggal_mulai",

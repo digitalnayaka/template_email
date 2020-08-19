@@ -211,7 +211,7 @@ export default {
       formData.append("created_by", this.user.id);
 
       this.axios
-        .post("/transaksi/v1/upload_pembayaran", formData, {
+        .post("/transaksi/v3/upload_pembayaran", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -242,7 +242,7 @@ export default {
       formData.append("note_detail", "Membatalkan Tiket");
 
       this.axios
-        .post("/transaksi/v1/batalkan_pembelian", formData, {
+        .post("/transaksi/v3/batalkan_pembelian", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {

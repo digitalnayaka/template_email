@@ -131,7 +131,10 @@
 
           <v-list-item>
             <v-list-item-title>Nomor Order:</v-list-item-title>
-            <v-list-item-title class="font-weight-black">{{ orders.no_order }}</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.no_order }}  <v-list-item-action>
+              <v-btn class="teal--text" @click="salin" outlined>Salin</v-btn>
+            </v-list-item-action></v-list-item-title>
+            
           </v-list-item>
 
           <v-list-item>
@@ -208,9 +211,7 @@
               <v-list-item-subtitle>{{ bank.nama_rekening }}</v-list-item-subtitle>
             </v-list-item-content>
 
-            <v-list-item-action>
-              <v-btn class="teal--text" @click="salin" outlined>Salin</v-btn>
-            </v-list-item-action>
+           
           </v-list-item>
 
           <v-list-item>
@@ -246,7 +247,7 @@ export default {
     }),
     async getOrder() {
       await this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
             id: this.$route.params.id,
             id_mst_order_type: 2,
@@ -277,7 +278,7 @@ export default {
     },
     getBank(id, user) {
       this.axios
-        .get("/user/v1/user/rekening", {
+        .get("/user/v3/user/rekening", {
           headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id: id,
@@ -303,7 +304,7 @@ export default {
       formData.append("note_detail", "Membatalkan Tiket");
 
       this.axios
-        .post("/transaksi/v1/batalkan_pembelian", formData, {
+        .post("/transaksi/v3/batalkan_pembelian", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {

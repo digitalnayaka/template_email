@@ -196,7 +196,7 @@ export default {
     },
     getJenisIklan() {
       this.axios
-        .get("/setup/v1/jenis_iklan", {
+        .get("/setup/v3/jenis_iklan", {
           params: {
             limit: 999
           }
@@ -219,7 +219,7 @@ export default {
       formData.append("status", this.editedItem.status);
       formData.append("created_by", this.user.id);
       this.axios
-        .post("/setup/v1/jenis_iklan", formData)
+        .post("/setup/v3/jenis_iklan", formData)
         .then(response => {
           let { data } = response.data;
           this.setAlert({
@@ -251,7 +251,7 @@ export default {
       formData.append("updated_by", this.user.id);
       formData.append("updated_at", this.datetime);
       this.axios
-        .put("/setup/v1/jenis_iklan", formData)
+        .put("/setup/v3/jenis_iklan", formData)
         .then(response => {
           let { data } = response;
           console.log(data);
@@ -273,7 +273,7 @@ export default {
       var r = confirm("Yakin akan dihapus?");
       if (r == true) {
         this.axios
-          .delete("/setup/v1/jenis_iklan", {
+          .delete("/setup/v3/jenis_iklan", {
             data: {
               id: item.id
             }

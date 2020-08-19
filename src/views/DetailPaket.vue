@@ -288,32 +288,37 @@
     </div>
 
     <v-bottom-sheet v-model="sheet">
-      <v-sheet :height="height">
-        <v-container fluid v-if="useTiket">
-          <h2>Oops!</h2>
+        <v-sheet>
+            <v-container fluid v-if="useTiket">
+              <h2 class="text-center my-4">Oops!</h2>
 
-          <div>
-            Untuk dapat mengikuti iklan ini perlu memakai tiket. Gunakan Tiket Tawar Bersama pada iklan ini?
-            <br />Tiket yang dibutuhkan: 1 Tiket
-            <br />
-            Jumlah Tiket Tersedia: {{ totalTiket.tersedia }} Tiket
-          </div>
+              <div class="text-center my-4">
+                Untuk dapat mengikuti iklan ini perlu memakai tiket. Gunakan Tiket Tawar Bersama pada iklan ini?
+                <br />Tiket yang dibutuhkan: 1 Tiket
+                <br />
+                Jumlah tiket tersedia: {{ totalTiket.tersedia }} Tiket
+              </div>
 
-          <v-btn block color="success" class="my-4" @click="konfirmasiTiket">Gunakan Tiket Anda</v-btn>
-        </v-container>
-
+              <v-btn block color="success" class="my-4" @click="konfirmasiTiket">Gunakan Tiket Anda</v-btn>
+            </v-container>
         <v-list v-if="ikutPenawaran">
+          <v-list-item-action>
+            <v-btn icon @click="sheet = !sheet">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-list-item-action>
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title>Nominal Penawaran</v-list-item-title>
-              <v-list-item-subtitle>Masukan nominal penawaran Anda</v-list-item-subtitle>
+              <div class="teal--text" align="center" v-if="start == true && end == false">
+                Tawar Bersama berlangsung:
+                <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
+              </div>
             </v-list-item-content>
 
-            <v-list-item-action>
-              <v-btn icon @click="sheet = !sheet">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-list-item-action>
+            <!-- <v-list-item-content>
+                  <v-list-item-title>Nominal Penawaran</v-list-item-title>
+                  <v-list-item-subtitle>Masukan nominal penawaran Anda</v-list-item-subtitle>
+            </v-list-item-content>-->
           </v-list-item>
 
           <v-list-item>
@@ -392,21 +397,21 @@ export default {
       liveBid: [],
       dialogInfo: false,
       orders: [],
-      appuser: []
+      appuser: [],
     };
   },
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
     }),
     getTB() {
       this.axios
-        .get("/iklan/v1/iklan_tb_mokas", {
+        .get("/iklan/v3/iklan_tb_mokas", {
           params: {
-            id: this.id
-          }
+            id: this.id,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.hits = data;
           this.getUser(this.hits.id_app_user);
@@ -424,7 +429,7 @@ export default {
             this.unitMokas();
           });
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -440,61 +445,61 @@ export default {
       params.append("limit", this.hits.motor_bekas.length);
 
       var request = {
-        params: params
+        params: params,
       };
 
       this.axios
-        .get("/produk/v1/unit_mokas", request)
-        .then(response => {
+        .get("/produk/v3/unit_mokas", request)
+        .then((response) => {
           let { data } = response.data;
           this.motorBekas = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
     },
     getTiket() {
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 1,
-            limit: 1
+            limit: 1,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.tiket = data[0];
 
           this.getTotalTiket();
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           this.setAlert({
             status: true,
             color: "error",
-            text: responses.api_message
+            text: responses.api_message,
           });
         });
     },
     getTotalTiket() {
       this.axios
-        .get("/tiket/v1/total_tiket", {
+        .get("/tiket/v3/total_tiket", {
           params: {
-            id_app_user: this.user.id
+            id_app_user: this.user.id,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.totalTiket = data;
           this.height = 190;
           this.useTiket = !this.useTiket;
           this.sheet = !this.sheet;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -511,26 +516,26 @@ export default {
         formData.append("id_tiket", this.tiket.id);
 
         this.axios
-          .post("/bid/v1/konfirmasi_penggunaan_tiket", formData, {
-            headers: { Authorization: "Bearer " + this.user.token }
+          .post("/bid/v3/konfirmasi_penggunaan_tiket", formData, {
+            headers: { Authorization: "Bearer " + this.user.token },
           })
-          .then(response => {
+          .then((response) => {
             let { data } = response;
             this.setAlert({
               status: true,
               color: "success",
-              text: data.api_message
+              text: data.api_message,
             });
             this.height = 350;
             this.useTiket = !this.useTiket;
             this.ikutPenawaran = !this.ikutPenawaran;
           })
-          .catch(error => {
+          .catch((error) => {
             let responses = error.response.data;
             this.setAlert({
               status: true,
               color: "error",
-              text: responses.api_message
+              text: responses.api_message,
             });
           });
       }
@@ -542,10 +547,10 @@ export default {
       formData.append("id_app_user", this.user.id);
 
       this.axios
-        .post("/bid/v1/iklan_tb_peserta", formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+        .post("/bid/v3/iklan_tb_peserta", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           if (data.api_status == 1) {
             this.sheet = !this.sheet;
@@ -553,12 +558,12 @@ export default {
             this.ikutPenawaran = true;
           }
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           this.setAlert({
             status: true,
             color: "error",
-            text: responses.api_message
+            text: responses.api_message,
           });
           if (responses.api_status == 2) {
             this.getTiket();
@@ -576,9 +581,9 @@ export default {
         .collection(this.id)
         .limit(5)
         .orderBy("Bid", "desc")
-        .onSnapshot(querySnapshot => {
+        .onSnapshot((querySnapshot) => {
           let bidder = [];
-          querySnapshot.forEach(doc => {
+          querySnapshot.forEach((doc) => {
             bidder.push(doc.data());
             this.minBid = bidder[0].Bid;
             this.penawaran = Number(this.minBid) + Number(this.hits.kelipatan);
@@ -599,43 +604,43 @@ export default {
       formData.append("bid", this.bid);
       formData.append("id_app_user", this.user.id);
       this.axios
-        .post("/bid/v1/iklan_tb_bid", formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+        .post("/bid/v3/iklan_tb_bid", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           this.setAlert({
             status: true,
             color: "success",
-            text: data.api_message
+            text: data.api_message,
           });
           this.sheet = false;
           this.playSound("/audio/bid.mpeg");
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           this.setAlert({
             status: true,
             color: "error",
-            text: responses.api_message
+            text: responses.api_message,
           });
         });
     },
     getOrder() {
       this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
-            id_iklan: this.id
+            id_iklan: this.id,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           if (data.length > 0) {
             this.orders = data[0];
           }
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
@@ -644,22 +649,22 @@ export default {
       var r = confirm("Apakah anda yakin untuk menghapus iklan ini?");
       if (r == true) {
         this.axios
-          .delete("/iklan/v1/iklan", {
+          .delete("/iklan/v3/iklan", {
             headers: { Authorization: "Bearer " + this.user.token },
             params: {
-              id: this.$route.params.id
-            }
+              id: this.$route.params.id,
+            },
           })
-          .then(response => {
+          .then((response) => {
             let { data } = response;
             this.setAlert({
               status: true,
               color: "success",
-              text: data.api_message
+              text: data.api_message,
             });
             this.$router.push({ path: "/iklan" });
           })
-          .catch(error => {
+          .catch((error) => {
             let responses = error.response.data;
             console.log(responses);
           });
@@ -667,21 +672,21 @@ export default {
     },
     getUser(id) {
       this.axios
-        .get("/user/v1/user", {
+        .get("/user/v3/user", {
           params: {
             id: id,
-            limit: 1
-          }
+            limit: 1,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.appuser = data[0];
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
-    }
+    },
   },
   mounted() {
     this.getTB();
@@ -701,47 +706,38 @@ export default {
     }
 
     var app = this;
-    setInterval(function() {
+    setInterval(function () {
       app.time = moment().format(fmt);
     }, 1000);
   },
   computed: {
     ...mapGetters({
       user: "auth/user",
-      guest: "auth/guest"
+      guest: "auth/guest",
     }),
-    start: function() {
+    start: function () {
       return moment.utc(this.time).isAfter(this.hits.tanggal_mulai);
     },
-    end: function() {
+    end: function () {
       return moment.utc(this.time).isAfter(this.hits.tanggal_selesai);
-    }
+    },
   },
   filters: {
-    datediff: date => {
+    datediff: (date) => {
       return moment(date).from();
     },
-    dateFormat: date => {
+    dateFormat: (date) => {
       return moment.utc(date).format("DD MMM YYYY");
     },
     timeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("HH:mm");
+      return moment.utc(date).add(utc, "h").format("HH:mm");
     },
     dateTimeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format(fmt);
+      return moment.utc(date).add(utc, "h").format(fmt);
     },
     tglIklanFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("DD MMM YYYY HH:mm");
-    }
-  }
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY HH:mm");
+    },
+  },
 };
 </script>
