@@ -51,25 +51,30 @@
 
     <v-row dense>
       <v-col cols="12" sm="6">
-        <span v-if="iklan.id_mst_iklan_jenis == 1">
+        <h2 class="font-weight-black" v-if="iklan.id_mst_iklan_jenis == 1">
           Rp {{ Number(hits.harga).toLocaleString('id-ID') }}
-          <img src="/img/icons/hargapas.png" />
-        </span>
+          <img
+            src="/img/icons/hargapas.png"
+            height="25"
+          />
+        </h2>
 
         <div v-else>
-          <span v-if="liveBid.length == 0">
+          <h2 class="font-weight-black" v-if="liveBid.length == 0">
             Rp {{ Number(hits.harga_awal).toLocaleString('id-ID') }}
             <img
               src="/img/icons/harga_awal.png"
+              height="25"
             />
-          </span>
+          </h2>
 
-          <span v-else>
+          <h2 class="font-weight-black" v-else>
             Rp {{ Number(hits.harga_saat_ini).toLocaleString('id-ID') }}
             <img
               src="/img/icons/harga_sekarang.png"
+              height="25"
             />
-          </span>
+          </h2>
         </div>
 
         <div class="text-h5 teal--text">{{ iklan.judul }}</div>
