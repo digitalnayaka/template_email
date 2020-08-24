@@ -211,15 +211,11 @@
 
           <v-btn block class="ma-2" color="primary" @click="dialogRekening = true">Tambah Rekening</v-btn>
 
-          <h5
-            class="my-3"
-          >Refund akan diproses maksimal 2x24 Jam hari kerja</h5>
-          <h5
-            class="my-3"
-          >Jumlah refund diatas belum termasuk biaya antar bank</h5>
+          <h5 class="my-3">Refund akan diproses maksimal 2x24 Jam hari kerja</h5>
+          <h5 class="my-3">Jumlah refund diatas belum termasuk biaya antar bank</h5>
 
           <v-btn
-          dark
+            dark
             class="my-3"
             color="teal"
             @click="refund"
@@ -435,10 +431,26 @@ export default {
     },
     selectAll() {
       if (this.listRefund == 0) {
-        for (let index = 0; index < this.listTersedia.length; index++) {
-          const element = this.listTersedia[index];
-          this.listRefund.push(element);
-        }
+        // for (let index = 0; index < this.listTersedia.length; index++) {
+        //   const element = this.listTersedia[index];
+        //   this.listRefund.push(element);
+        // }
+        this.axios
+          .get("/tiket/v3/tiket", {
+            params: {
+              id_app_user: this.user.id,
+              id_mst_tiket_status: 1,
+            },
+            headers: { Authorization: "Bearer " + this.user.token },
+          })
+          .then((response) => {
+            let { data } = response.data;
+            this.listRefund = data;
+          })
+          .catch((error) => {
+            let responses = error.response.data;
+            console.log(responses);
+          });
       } else {
         this.listRefund = [];
       }

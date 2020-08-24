@@ -9,7 +9,7 @@
     <div>
       <h1 class="text-center">Detail Transaksi</h1>
 
-      <v-card class="mx-auto" max-width="600">
+      <v-card class="mx-auto" max-width="700">
         <v-row>
           <v-col cols="12">
             <v-card color="deep-orange lighten-2">
@@ -71,66 +71,64 @@
           <v-subheader v-if="orders.iklan != undefined">
             <h1>{{ orders.iklan.judul }}</h1>
           </v-subheader>
+
           <v-list-item>
             <v-list-item-title>Status Tagihan:</v-list-item-title>
             <v-list-item-title
               class="font-weight-black orange--text"
               v-if="orders.id_mst_pembayaran_status == 1"
             >{{ orders.pembayaran_status }}</v-list-item-title>
+
             <v-list-item-title
               class="font-weight-black blue--text"
               v-if="orders.id_mst_pembayaran_status == 2"
             >{{ orders.pembayaran_status }}</v-list-item-title>
+
             <v-list-item-title
               class="font-weight-black red--text"
               v-if="orders.id_mst_pembayaran_status == 3"
             >{{ orders.pembayaran_status }}</v-list-item-title>
+
             <v-list-item-title
               class="font-weight-black teal--text"
               v-if="orders.id_mst_pembayaran_status == 4"
             >{{ orders.pembayaran_status }}</v-list-item-title>
+
             <v-list-item-title
               class="font-weight-black red--text"
               v-if="orders.id_mst_pembayaran_status == 5"
             >{{ orders.pembayaran_status }}</v-list-item-title>
+
             <v-list-item-title
               class="font-weight-black red--text"
               v-if="orders.id_mst_pembayaran_status == 6"
             >{{ orders.pembayaran_status }}</v-list-item-title>
-            <v-list-item-title
-              class="font-weight-black red--text"
-              v-if="orders.id_mst_pembayaran_status == 6"
-            >Alasan Ditolak: {{ orders.note }}</v-list-item-title>
-
-            <!-- <v-list-item-title v-if="orders.id_mst_pembayaran_status == 6">
-                Alasan Ditolak:
-                <span
-                  class="font-weight-black d-sm-inline-flex d-flex"
-                >{{ orders.note }}</span>
-            </v-list-item-title>-->
-            <v-list-item-title
-              class="font-weight-black red--text"
-              v-if="orders.id_mst_pembayaran_status == 1"
-            >Alasan Ditolak: {{ orders.note_detail }}</v-list-item-title>
-            <!-- <v-list-item-title v-if="orders.id_mst_pembayaran_note == 1">
-                Detail Alasan:
-                <span
-                  class="font-weight-black d-sm-inline-flex d-flex"
-                >{{ orders.note_detail }}</span>
-            </v-list-item-title>-->
           </v-list-item>
-             <v-list-item>
+
+          <v-list-item v-if="orders.id_mst_pembayaran_status == 6">
+            <v-list-item-title>Alasan Ditolak:</v-list-item-title>
+
+            <v-list-item-title class="font-weight-black d-sm-inline-flex d-flex">{{ orders.note }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item v-if="orders.id_mst_pembayaran_note == 1">
+            <v-list-item-title >Detail Alasan:</v-list-item-title>
+
+            <v-list-item-title
+              class="font-weight-black d-sm-inline-flex d-flex"
+            >{{ orders.note_detail }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
             <v-list-item-title>Jumlah:</v-list-item-title>
             <v-list-item-title class="font-weight-black">{{ orders.jumlah }}</v-list-item-title>
           </v-list-item>
+
           <v-list-item>
             <v-list-item-title>Total Tagihan:</v-list-item-title>
             <v-list-item-title
               class="font-weight-black red--text"
             >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-content></v-list-item-content>
           </v-list-item>
         </v-list>
 

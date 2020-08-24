@@ -161,29 +161,57 @@
               >{{ orders.created_at | dateTimeFormat(utc) }} {{ waktu }}</div>
             </v-list-item-content>
           </v-list-item>
+
           <v-list-item>
             <v-list-item-title>Nama Pembeli:</v-list-item-title>
             <v-list-item-title class="font-weight-black">{{ orders.nama_pembeli }}</v-list-item-title>
           </v-list-item>
+
           <v-divider></v-divider>
+
           <v-subheader>
             <h1>Tiket</h1>
           </v-subheader>
+
           <v-list-item>
-            <v-list-item-title>Status Tagihan:  </v-list-item-title>
-             <v-list-item-title class="font-weight-black orange--text" v-if="orders.id_mst_pembayaran_status == 1">{{ orders.pembayaran_status }}</v-list-item-title>
-            <v-list-item-title class="font-weight-black blue--text" v-if="orders.id_mst_pembayaran_status == 2">{{ orders.pembayaran_status }}</v-list-item-title>
-            <v-list-item-title class="font-weight-black red--text" v-if="orders.id_mst_pembayaran_status == 3">{{ orders.pembayaran_status }}</v-list-item-title>
-             <v-list-item-title class="font-weight-black teal--text" v-if="orders.id_mst_pembayaran_status == 4">{{ orders.pembayaran_status }}</v-list-item-title>
-              <v-list-item-title class="font-weight-black red--text" v-if="orders.id_mst_pembayaran_status == 5">{{ orders.pembayaran_status }}</v-list-item-title>
-               <v-list-item-title class="font-weight-black red--text" v-if="orders.id_mst_pembayaran_status == 6">{{ orders.pembayaran_status }}</v-list-item-title>
-            
-               
+            <v-list-item-title>Status Tagihan:</v-list-item-title>
+
+            <v-list-item-title
+              class="font-weight-black orange--text d-flex"
+              v-if="orders.id_mst_pembayaran_status == 1"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
+
+            <v-list-item-title
+              class="font-weight-black blue--text d-flex"
+              v-if="orders.id_mst_pembayaran_status == 2"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
+
+            <v-list-item-title
+              class="font-weight-black red--text d-flex"
+              v-if="orders.id_mst_pembayaran_status == 3"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
+
+            <v-list-item-title
+              class="font-weight-black teal--text d-flex"
+              v-if="orders.id_mst_pembayaran_status == 4"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
+
+            <v-list-item-title
+              class="font-weight-black red--text d-flex"
+              v-if="orders.id_mst_pembayaran_status == 5"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
+
+            <v-list-item-title
+              class="font-weight-black red--text d-flex"
+              v-if="orders.id_mst_pembayaran_status == 6"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
           </v-list-item>
+
           <v-list-item>
             <v-list-item-title>Jumlah:</v-list-item-title>
             <v-list-item-title class="font-weight-black">{{ orders.jumlah }}</v-list-item-title>
           </v-list-item>
+
           <v-list-item>
             <v-list-item-title>Total Refund:</v-list-item-title>
             <v-list-item-title
@@ -205,7 +233,7 @@
           </v-subheader>
 
           <v-list-item>
-            <v-list-item-title>Transfer akan dilakukan ke rekening berikut:</v-list-item-title>
+            <div class="d-flex mx-2">Transfer akan dilakukan ke rekening berikut:</div>
           </v-list-item>
 
           <v-list-item>
@@ -223,11 +251,9 @@
               <v-list-item-subtitle>{{ bank.nama_rekening }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Jika mengalami kendala dengan penjualan, silahkan kunjungi Bantuan.</v-list-item-title>
-          </v-list-item>
         </v-list>
+
+        <div class="d-flex mx-2">Jika mengalami kendala dengan penjualan, silahkan kunjungi Bantuan.</div>
 
         <v-divider></v-divider>
 
