@@ -299,7 +299,7 @@ export default {
     },
     getModules() {
       this.axios
-        .get("/setup/v1/modules")
+        .get("/setup/v3/modules")
         .then(response => {
           let { data } = response.data;
           this.modules = data;
@@ -353,7 +353,7 @@ export default {
       formData.append("module_seq", this.editedItem.module_seq);
       formData.append("created_by", this.user.id);
       this.axios
-        .post("/setup/v1/modules", formData)
+        .post("/setup/v3/modules", formData)
         .then(response => {
           let { data } = response;
           this.setAlert({
@@ -373,7 +373,7 @@ export default {
       const index = this.modules.indexOf(item);
       var r = confirm("Yakin akan dihapus?");
       if (r == true) {
-        this.axios.delete("/setup/v1/modules", {
+        this.axios.delete("/setup/v3/modules", {
           data: {
             id: item.id
           }
@@ -395,7 +395,7 @@ export default {
       formData.append("module_seq", this.editedItem.module_seq);
       formData.append("updated_by", this.user.id);
       formData.append("updated_at", this.datetime);
-      this.axios.put("/setup/v1/modules", formData);
+      this.axios.put("/setup/v3/modules", formData);
       this.setAlert({
         status: true,
         color: "success",
@@ -407,7 +407,7 @@ export default {
     },
     getMenus(module_id) {
       this.axios
-        .get("/setup/v1/menus", {
+        .get("/setup/v3/menus", {
           params: {
             module_id: module_id
           }
@@ -439,7 +439,7 @@ export default {
       formData.append("module_id", this.editedItem.id);
       formData.append("created_by", this.user.id);
       this.axios
-        .post("/setup/v1/menus", formData)
+        .post("/setup/v3/menus", formData)
         .then(response => {
           let { data } = response.data;
           this.setAlert({
@@ -466,7 +466,7 @@ export default {
       formData.append("updated_by", this.user.id);
       formData.append("updated_at", this.datetime);
       this.axios
-        .put("/setup/v1/menus", formData)
+        .put("/setup/v3/menus", formData)
         .then(response => {
           console.log(response);
           this.setAlert({
@@ -487,7 +487,7 @@ export default {
       var r = confirm("Yakin akan dihapus?");
       if (r == true) {
         this.axios
-          .delete("/setup/v1/menus", {
+          .delete("/setup/v3/menus", {
             data: {
               id: item.id
             }

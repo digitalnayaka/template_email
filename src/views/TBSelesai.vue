@@ -55,7 +55,7 @@ export default {
     }),
     getDtlIklan() {
       this.axios
-        .get("/search/v1/search", {
+        .get("/search/v3/search", {
           params: {
             id: this.$route.params.id,
             limit: 1,
@@ -75,7 +75,7 @@ export default {
     },
     getTB() {
       this.axios
-        .get("/bid/v1/iklan_tb_peserta", {
+        .get("/bid/v3/iklan_tb_peserta", {
           params: {
             id_app_user: this.user.id,
             id_iklan: this.$route.params.id,

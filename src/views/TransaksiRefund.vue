@@ -246,7 +246,7 @@ export default {
     }),
     async getOrder() {
       await this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
             id: this.$route.params.id,
             id_mst_order_type: 2,
@@ -277,7 +277,7 @@ export default {
     },
     getBank(id, user) {
       this.axios
-        .get("/user/v1/user/rekening", {
+        .get("/user/v3/user/rekening", {
           headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id: id,
@@ -303,7 +303,7 @@ export default {
       formData.append("note_detail", "Membatalkan Tiket");
 
       this.axios
-        .post("/transaksi/v1/batalkan_pembelian", formData, {
+        .post("/transaksi/v3/batalkan_pembelian", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {

@@ -287,7 +287,7 @@ export default {
     }),
     async getOrder() {
       await this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
             id: this.$route.params.id,
           },
@@ -321,7 +321,7 @@ export default {
     },
     getIklan(id) {
       this.axios
-        .get("/iklan/v1/iklan_tb_mokas", {
+        .get("/iklan/v3/iklan_tb_mokas", {
           params: {
             id: id,
             limit: 1,
@@ -363,7 +363,7 @@ export default {
       formData.append("created_by", this.user.id);
 
       this.axios
-        .post("/transaksi/v1/upload_pembayaran", formData, {
+        .post("/transaksi/v3/upload_pembayaran", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -393,7 +393,7 @@ export default {
         formData.append("id", this.orders.id);
 
         this.axios
-          .post("/transaksi/v1/konfirmasi_serah_terima", formData, {
+          .post("/transaksi/v3/konfirmasi_serah_terima", formData, {
             headers: { Authorization: "Bearer " + this.user.token },
           })
           .then((response) => {
@@ -418,7 +418,7 @@ export default {
     },
     dtlPembayaran() {
       this.axios
-        .get("/transaksi/v1/upload_pembayaran", {
+        .get("/transaksi/v3/upload_pembayaran", {
           params: {
             id_pembayaran: this.orders.id_pembayaran,
           },
@@ -435,7 +435,7 @@ export default {
     },
     formPenawaran() {
       this.axios
-        .get("/transaksi/v1/form_penawaran?id=" + this.orders.id, {
+        .get("/transaksi/v3/form_penawaran?id=" + this.orders.id, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -509,7 +509,7 @@ export default {
     }),
     async getOrder() {
       await this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
             id: this.$route.params.id,
           },
@@ -543,7 +543,7 @@ export default {
     },
     getIklan(id) {
       this.axios
-        .get("/iklan/v1/iklan_tb_mokas", {
+        .get("/iklan/v3/iklan_tb_mokas", {
           params: {
             id: id,
             limit: 1,
@@ -585,7 +585,7 @@ export default {
       formData.append("created_by", this.user.id);
 
       this.axios
-        .post("/transaksi/v1/upload_pembayaran", formData, {
+        .post("/transaksi/v3/upload_pembayaran", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -615,7 +615,7 @@ export default {
         formData.append("id", this.orders.id);
 
         this.axios
-          .post("/transaksi/v1/konfirmasi_serah_terima", formData, {
+          .post("/transaksi/v3/konfirmasi_serah_terima", formData, {
             headers: { Authorization: "Bearer " + this.user.token },
           })
           .then((response) => {
@@ -640,7 +640,7 @@ export default {
     },
     dtlPembayaran() {
       this.axios
-        .get("/transaksi/v1/upload_pembayaran", {
+        .get("/transaksi/v3/upload_pembayaran", {
           params: {
             id_pembayaran: this.orders.id_pembayaran,
           },
@@ -657,7 +657,7 @@ export default {
     },
     formPenawaran() {
       this.axios
-        .get("/transaksi/v1/form_penawaran?id=" + this.orders.id, {
+        .get("/transaksi/v3/form_penawaran?id=" + this.orders.id, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {

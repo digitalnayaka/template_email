@@ -167,7 +167,7 @@ export default {
     }),
     GetBanners() {
       this.axios
-        .get("http://dna-developer.com:8080/api/setup/v1/banners")
+        .get("http://dna-developer.com:8080/api/setup/v3/banners")
         .then(response => {
           let { data } = response.data;
           this.banners = data;
@@ -191,7 +191,7 @@ export default {
       formData.append("banner_status", this.editedItem.banner_status);
       formData.append("created_by", this.user[0].id);
       this.axios
-        .post("http://dna-developer.com:8080/api/setup/v1/banners", formData)
+        .post("http://dna-developer.com:8080/api/setup/v3/banners", formData)
         .then(response => {
           let { data } = response.data;
           this.setAlert({
@@ -221,7 +221,7 @@ export default {
       formData.append("category_status", this.editedItem.category_status);
       formData.append("updated_by", this.user[0].id);
       this.axios
-        .put("http://dna-developer.com:8080/api/setup/v1/categories", formData)
+        .put("http://dna-developer.com:8080/api/setup/v3/categories", formData)
         .then(response => {
           let { data } = response;
           console.log(data);
@@ -243,7 +243,7 @@ export default {
       var r = confirm("Yakin akan dihapus?");
       if (r == true) {
         this.axios
-          .delete("http://dna-developer.com:8080/api/setup/v1/categories", {
+          .delete("http://dna-developer.com:8080/api/setup/v3/categories", {
             data: {
               id: item.id
             }

@@ -241,7 +241,7 @@ export default {
     }),
     async unit_mokas() {
       await this.axios
-        .get("/produk/v1/unit_mokas", {
+        .get("/produk/v3/unit_mokas", {
           params: {
             id: this.id,
             limit: 1,
@@ -285,7 +285,7 @@ export default {
     },
     linkIklan(id) {
       this.axios
-        .get("/iklan/v1/link_iklan_tb", {
+        .get("/iklan/v3/link_iklan_tb", {
           params: {
             id_motor_bekas: id,
           },
@@ -303,7 +303,7 @@ export default {
     },
     getDtlIklan(id) {
       this.axios
-        .get("/search/v1/search", {
+        .get("/search/v3/search", {
           params: {
             id: id,
             limit: 1,
@@ -321,7 +321,7 @@ export default {
     },
     getBarcode() {
       this.axios
-        .get("/produk/v1/barcode?id=" + this.id + "&limit=1", {
+        .get("/produk/v3/barcode?id=" + this.id + "&limit=1", {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -343,7 +343,7 @@ export default {
         formData.append("limit", 1);
 
         this.axios
-          .post("/produk/v1/unit_mokas_delete", formData, {
+          .post("/produk/v3/unit_mokas_delete", formData, {
             headers: { Authorization: "Bearer " + this.user.token },
           })
           .then((response) => {

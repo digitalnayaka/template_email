@@ -268,7 +268,7 @@ export default {
     }),
     totalTiket() {
       this.axios
-        .get("/tiket/v1/total_tiket", {
+        .get("/tiket/v3/total_tiket", {
           params: {
             id_app_user: this.user.id,
           },
@@ -285,7 +285,7 @@ export default {
     },
     getRekening() {
       this.axios
-        .get("/user/v1/user/rekening", {
+        .get("/user/v3/user/rekening", {
           params: {
             id_app_user: this.user.id,
             limit: 999,
@@ -303,7 +303,7 @@ export default {
     },
     getBank() {
       this.axios
-        .get("/master/v1/mst_bank")
+        .get("/master/v3/mst_bank")
         .then((response) => {
           let { data } = response.data;
           this.banks = data;
@@ -329,7 +329,7 @@ export default {
       formData.append("id_app_user", this.user.id);
 
       this.axios
-        .post("/user/v1/user/rekening", formData, {
+        .post("/user/v3/user/rekening", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -358,7 +358,7 @@ export default {
       formData.append("id_app_user_rekening", this.selected);
 
       this.axios
-        .post("/transaksi/v1/pencairan_tiket", formData, {
+        .post("/transaksi/v3/pencairan_tiket", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -379,7 +379,7 @@ export default {
       var offset = (this.pageTersedia - 1) * this.limit;
 
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 1,

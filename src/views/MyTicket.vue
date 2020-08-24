@@ -420,7 +420,7 @@ export default {
       var offset = (this.pageTersedia - 1) * this.limit;
 
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 1,
@@ -445,7 +445,7 @@ export default {
       var offset = (this.pageTerpakai - 1) * this.limit;
 
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 2,
@@ -470,7 +470,7 @@ export default {
       var offset = (this.pageDicairkan - 1) * this.limit;
 
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 3,
@@ -497,7 +497,7 @@ export default {
       var offset = (this.pageHangus - 1) * this.limit;
 
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 5,
@@ -522,7 +522,7 @@ export default {
       var offset = (this.pagePembelian - 1) * this.limit;
 
       this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
             id_pembeli: this.user.id,
             offset: offset,
@@ -580,7 +580,7 @@ export default {
       var offset = (this.pageRF - 1) * this.limit;
 
       this.axios
-        .get("/transaksi/v1/pencairan_tiket", {
+        .get("/transaksi/v3/pencairan_tiket", {
           params: {
             id_penjual: this.user.id,
             offset: offset,

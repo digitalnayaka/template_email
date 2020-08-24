@@ -401,7 +401,7 @@ export default {
     }),
     getTB() {
       this.axios
-        .get("/iklan/v1/iklan_tb_mokas", {
+        .get("/iklan/v3/iklan_tb_mokas", {
           params: {
             id: this.id
           }
@@ -444,7 +444,7 @@ export default {
       };
 
       this.axios
-        .get("/produk/v1/unit_mokas", request)
+        .get("/produk/v3/unit_mokas", request)
         .then(response => {
           let { data } = response.data;
           this.motorBekas = data;
@@ -456,7 +456,7 @@ export default {
     },
     getTiket() {
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 1,
@@ -481,7 +481,7 @@ export default {
     },
     getTotalTiket() {
       this.axios
-        .get("/tiket/v1/total_tiket", {
+        .get("/tiket/v3/total_tiket", {
           params: {
             id_app_user: this.user.id
           },
@@ -511,7 +511,7 @@ export default {
         formData.append("id_tiket", this.tiket.id);
 
         this.axios
-          .post("/bid/v1/konfirmasi_penggunaan_tiket", formData, {
+          .post("/bid/v3/konfirmasi_penggunaan_tiket", formData, {
             headers: { Authorization: "Bearer " + this.user.token }
           })
           .then(response => {
@@ -542,7 +542,7 @@ export default {
       formData.append("id_app_user", this.user.id);
 
       this.axios
-        .post("/bid/v1/iklan_tb_peserta", formData, {
+        .post("/bid/v3/iklan_tb_peserta", formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
@@ -599,7 +599,7 @@ export default {
       formData.append("bid", this.bid);
       formData.append("id_app_user", this.user.id);
       this.axios
-        .post("/bid/v1/iklan_tb_bid", formData, {
+        .post("/bid/v3/iklan_tb_bid", formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {
@@ -623,7 +623,7 @@ export default {
     },
     getOrder() {
       this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
             id_iklan: this.id
           },
@@ -644,7 +644,7 @@ export default {
       var r = confirm("Apakah anda yakin untuk menghapus iklan ini?");
       if (r == true) {
         this.axios
-          .delete("/iklan/v1/iklan", {
+          .delete("/iklan/v3/iklan", {
             headers: { Authorization: "Bearer " + this.user.token },
             params: {
               id: this.$route.params.id
@@ -667,7 +667,7 @@ export default {
     },
     getUser(id) {
       this.axios
-        .get("/user/v1/user", {
+        .get("/user/v3/user", {
           params: {
             id: id,
             limit: 1

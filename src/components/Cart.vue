@@ -127,7 +127,7 @@ export default {
       formData.append("id_iklan", this.carts[0].id);
 
       this.axios
-        .post("/transaksi/v1/order_tiket", formData, {
+        .post("/transaksi/v3/order_tiket", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {

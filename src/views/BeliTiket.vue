@@ -169,7 +169,7 @@ export default {
       formData.append("id_pembeli", this.user.id);
 
       this.axios
-        .post("/transaksi/v1/order_tiket", formData, {
+        .post("/transaksi/v3/order_tiket", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -188,7 +188,7 @@ export default {
     },
     bundleTiket() {
       this.axios
-        .get("/iklan/v1/iklan_tiket", {
+        .get("/iklan/v3/iklan_tiket", {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {

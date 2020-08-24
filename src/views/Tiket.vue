@@ -536,7 +536,7 @@ export default {
   methods: {
     totalTiket() {
       this.axios
-        .get("/tiket/v1/total_tiket", {
+        .get("/tiket/v3/total_tiket", {
           params: {
             id_app_user: this.user.id,
           },
@@ -555,7 +555,7 @@ export default {
       var offset = (this.page - 1) * this.limit;
 
       this.axios
-        .get("/bid/v1/iklan_tb_peserta", {
+        .get("/bid/v3/iklan_tb_peserta", {
           params: {
             id_app_user: this.user.id,
             use_tiket: true,
@@ -579,7 +579,7 @@ export default {
       var offset = (this.pageTersedia - 1) * this.limit;
 
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 1,
@@ -604,7 +604,7 @@ export default {
       var offset = (this.pageDicairkan - 1) * this.limit;
 
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 3,
@@ -631,7 +631,7 @@ export default {
       var offset = (this.pageHangus - 1) * this.limit;
 
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 5,
@@ -656,7 +656,7 @@ export default {
       var offset = (this.pageExpired - 1) * this.limit;
 
       this.axios
-        .get("/tiket/v1/tiket", {
+        .get("/tiket/v3/tiket", {
           params: {
             id_app_user: this.user.id,
             id_mst_tiket_status: 2,
@@ -681,7 +681,7 @@ export default {
       var offset = (this.pagePembelian - 1) * this.limit;
 
       this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
             id_pembeli: this.user.id,
             id_mst_order_type: 1,
@@ -740,7 +740,7 @@ export default {
       var offset = (this.pageRF - 1) * this.limit;
 
       this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           params: {
             id_penjual: this.user.id,
             id_mst_order_type: 2,

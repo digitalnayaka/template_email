@@ -71,7 +71,7 @@ export default {
       var offset = (this.page - 1) * this.limit;
 
       this.axios
-        .get("/log/v1/log/notifikasi", {
+        .get("/log/v3/log/notifikasi", {
           params: {
             id_user: this.user.id,
             offset: offset,
@@ -96,7 +96,7 @@ export default {
       formData.append("id", id);
 
       this.axios
-        .put("/log/v1/log/notifikasi", formData, {
+        .put("/log/v3/log/notifikasi", formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(() => {

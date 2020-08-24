@@ -126,7 +126,7 @@ export default {
       formData.append("id", this.user.id);
 
       await this.axios
-        .put("/user/v1/user", formData, {
+        .put("/user/v3/user", formData, {
           headers: { Authorization: "Bearer " + token }
         })
         .then(response => {
@@ -157,7 +157,7 @@ export default {
       formData.append("id", this.user.id);
 
       this.axios
-        .put("/user/v1/user", formData, {
+        .put("/user/v3/user", formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(response => {

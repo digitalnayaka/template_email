@@ -181,7 +181,7 @@ export default {
     }),
     getModules() {
       this.axios
-        .get("/setup/v1/drawer", {
+        .get("/setup/v3/drawer", {
           params: {
             user_id: this.guest == true ? 0 : this.user.id,
           },
@@ -198,7 +198,7 @@ export default {
     getNotif() {
       if (!this.guest) {
         this.axios
-          .get("/log/v1/log/notifikasi", {
+          .get("/log/v3/log/notifikasi", {
             params: {
               id_user: this.user.id,
               is_read: false,

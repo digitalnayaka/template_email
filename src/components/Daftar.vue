@@ -130,7 +130,7 @@ export default {
       formData.append("nomor_hp", this.phone);
 
       this.axios
-        .post("/user/v1/user/signupcheck", formData)
+        .post("/user/v3/user/signupcheck", formData)
         .then(response => {
           let { data } = response;
           this.setAlert({
@@ -157,7 +157,7 @@ export default {
       formData.append("nomor_hp", this.phone);
 
       this.axios
-        .post("/user/v1/user/otprequest", formData)
+        .post("/user/v3/user/otprequest", formData)
         .then(() => {})
         .catch(error => {
           let responses = error.response.data;
@@ -177,7 +177,7 @@ export default {
       formData.append("id_mst_user_type", 1);
 
       this.axios
-        .post("/user/v1/user", formData)
+        .post("/user/v3/user", formData)
         .then(response => {
           let { data } = response.data;
           this.setAuth(data[0]);
@@ -213,7 +213,7 @@ export default {
       formData.append("role_id", 2);
       formData.append("created_by", id);
 
-      this.axios.post("/setup/v1/user_roles", formData);
+      this.axios.post("/setup/v3/user_roles", formData);
     },
     ubah() {
       this.otpDisplay = false;

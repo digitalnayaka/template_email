@@ -490,7 +490,7 @@ export default {
     }),
     async getOrder() {
       await this.axios
-        .get("/transaksi/v1/order", {
+        .get("/transaksi/v3/order", {
           headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id: this.$route.params.id,
@@ -529,7 +529,7 @@ export default {
       formData.append("created_by", this.user.id);
 
       this.axios
-        .post("/transaksi/v1/upload_pembayaran", formData, {
+        .post("/transaksi/v3/upload_pembayaran", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -560,7 +560,7 @@ export default {
       formData.append("note_detail", "Membatalkan Tiket");
 
       this.axios
-        .post("/transaksi/v1/batalkan_pembelian", formData, {
+        .post("/transaksi/v3/batalkan_pembelian", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
@@ -583,7 +583,7 @@ export default {
     },
     dtlPembayaran(id_pembayaran) {
       this.axios
-        .get("/transaksi/v1/upload_pembayaran", {
+        .get("/transaksi/v3/upload_pembayaran", {
           headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id_pembayaran: id_pembayaran,

@@ -124,7 +124,7 @@ export default {
       formData.append("nomor_hp", this.phone);
 
       this.axios
-        .post("/user/v1/user/logincheck", formData)
+        .post("/user/v3/user/logincheck", formData)
         .then(() => {
           this.phoneDisplay = false;
           this.otpDisplay = true;
@@ -143,7 +143,7 @@ export default {
       let formData = new FormData();
       formData.append("nomor_hp", this.phone);
 
-      await this.axios.post("/user/v1/user/otprequest", formData);
+      await this.axios.post("/user/v3/user/otprequest", formData);
     },
     resend() {
       this.otpRequest();
@@ -162,7 +162,7 @@ export default {
       formData.append("id_one_signal", this.$root.$children[0].notif);
 
       await this.axios
-        .post("/user/v1/user/login", formData)
+        .post("/user/v3/user/login", formData)
         .then(response => {
           let { data } = response.data;
           this.setAuth(data[0]);

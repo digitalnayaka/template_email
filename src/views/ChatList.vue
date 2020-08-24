@@ -65,7 +65,7 @@ export default {
           let messages = [];
           querySnapshot.forEach(doc => {
             this.axios
-              .get("/user/v1/user", {
+              .get("/user/v3/user", {
                 params: {
                   id: doc.data().IdAppUser,
                   limit: 1
@@ -95,7 +95,7 @@ export default {
       formData.append("receive", id);
 
       this.axios
-        .post("/user/v1/chat/read", formData, {
+        .post("/user/v3/chat/read", formData, {
           headers: { Authorization: "Bearer " + this.user.token }
         })
         .then(() => {

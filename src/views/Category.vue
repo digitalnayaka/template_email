@@ -193,7 +193,7 @@ export default {
     },
     getCategories() {
       this.axios
-        .get("/setup/v1/categories")
+        .get("/setup/v3/categories")
         .then(response => {
           let { data } = response.data;
           this.categories = data;
@@ -218,7 +218,7 @@ export default {
       formData.append("category_status", this.editedItem.category_status);
       formData.append("created_by", this.user.id);
       this.axios
-        .post("/setup/v1/categories", formData)
+        .post("/setup/v3/categories", formData)
         .then(response => {
           let { data } = response;
           this.setAlert({
@@ -249,7 +249,7 @@ export default {
       formData.append("updated_by", this.user.id);
       formData.append("updated_at", this.date);
       this.axios
-        .put("/setup/v1/categories", formData)
+        .put("/setup/v3/categories", formData)
         .then(response => {
           let { data } = response;
           console.log(data);
@@ -271,7 +271,7 @@ export default {
       var r = confirm("Yakin akan dihapus?");
       if (r == true) {
         this.axios
-          .delete("/setup/v1/categories", {
+          .delete("/setup/v3/categories", {
             data: {
               id: item.id
             }

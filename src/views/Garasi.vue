@@ -100,7 +100,7 @@ export default {
       };
 
       await this.axios
-        .get("/produk/v1/unit_mokas", request)
+        .get("/produk/v3/unit_mokas", request)
         .then(response => {
           let { data } = response.data;
           this.unitMokas = data;
@@ -123,7 +123,7 @@ export default {
       };
 
       this.axios
-        .get("/produk/v1/unit_mokas", request)
+        .get("/produk/v3/unit_mokas", request)
         .then(response => {
           let { data } = response.data;
           this.unitMokas = data;
@@ -135,7 +135,7 @@ export default {
     },
     getStatus() {
       this.axios
-        .get("/produk/v1/mst_motor_bekas_status")
+        .get("/produk/v3/mst_motor_bekas_status")
         .then(response => {
           let { data } = response.data;
           this.items = data;

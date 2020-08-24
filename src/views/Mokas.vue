@@ -144,7 +144,7 @@ export default {
       };
 
       this.axios
-        .get("/search/v1/search", request)
+        .get("/search/v3/search", request)
         .then(response => {
           let data = response.data;
           let { hits } = data.hits;
@@ -173,7 +173,7 @@ export default {
       };
 
       this.axios
-        .get("/search/v1/search", request)
+        .get("/search/v3/search", request)
         .then(response => {
           let data = response.data;
           let { hits } = data.hits;

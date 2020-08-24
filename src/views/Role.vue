@@ -155,7 +155,7 @@ export default {
     },
     getRoles() {
       this.axios
-        .get("/setup/v1/roles")
+        .get("/setup/v3/roles")
         .then(response => {
           let { data } = response.data;
           this.roles = data;
@@ -170,7 +170,7 @@ export default {
       formData.append("role_name", this.editedItem.role_name);
       formData.append("created_by", this.user.id);
       this.axios
-        .post("/setup/v1/roles", formData)
+        .post("/setup/v3/roles", formData)
         .then(response => {
           let { data } = response.data;
           this.setAlert({
@@ -198,7 +198,7 @@ export default {
       formData.append("updated_by", this.user.id);
       formData.append("updated_at", this.datetime);
       this.axios
-        .put("/setup/v1/roles", formData)
+        .put("/setup/v3/roles", formData)
         .then(response => {
           let { data } = response;
           console.log(data);
@@ -220,7 +220,7 @@ export default {
       var r = confirm("Yakin akan dihapus?");
       if (r == true) {
         this.axios
-          .delete("/setup/v1/roles", {
+          .delete("/setup/v3/roles", {
             data: {
               id: item.id
             }

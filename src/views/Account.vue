@@ -204,7 +204,7 @@ export default {
   methods: {
     totalTiket() {
       this.axios
-        .get("/tiket/v1/total_tiket", {
+        .get("/tiket/v3/total_tiket", {
           params: {
             id_app_user: this.user.id,
           },
