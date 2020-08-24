@@ -187,13 +187,15 @@
     <v-row dense>
       <v-col cols="12">
         <v-tabs v-model="tab" background-color="transparent" center-active grow>
-          <v-tab>Detail Penawaran</v-tab>
-          <v-tab>Detail Tawar Bersama</v-tab>
+          <v-tab v-if="iklan.id_mst_iklan_jenis > 1">
+            <v-badge color="green" :content="liveBid.length">Detail Penawaran</v-badge>
+          </v-tab>
+          <v-tab v-if="iklan.id_mst_iklan_jenis > 1">Detail Tawar Bersama</v-tab>
           <v-tab>Detail Iklan</v-tab>
         </v-tabs>
 
         <v-tabs-items v-model="tab">
-          <v-tab-item>
+          <v-tab-item v-if="iklan.id_mst_iklan_jenis > 1">
             <div align="center" class="my-4" v-if="liveBid.length > 0">
               <v-card class="d-flex justify-space-between align-center" flat width="500">
                 <v-list align="left" v-if="iklan.id_mst_iklan_jenis > 1">
@@ -227,7 +229,7 @@
             </v-card>
           </v-tab-item>
 
-          <v-tab-item>
+          <v-tab-item v-if="iklan.id_mst_iklan_jenis > 1">
             <div align="center" class="my-4">
               <v-card class="d-flex justify-space-between align-center" flat width="500">
                 <v-card align="center">
@@ -632,6 +634,16 @@
               </div>
 
               <v-btn block color="success" class="my-4" @click="konfirmasiTiket">Gunakan Tiket Anda</v-btn>
+            </v-container>
+
+            <v-container fluid>
+              <v-row dense>
+                <v-col cols="6">{{ liveBid[0].IdUniq }}</v-col>
+                <v-col cols="6">
+                  <v-divider vertical class="mx-2"></v-divider>
+                  {{ liveBid[0].Bid }}
+                </v-col>
+              </v-row>
             </v-container>
 
             <v-list v-if="ikutPenawaran">
