@@ -116,8 +116,8 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title>Tiket Tawar Bersama</v-list-item-title>
-              <v-list-item-subtitle>Jumlah: {{ orders.jumlah }} Tiket</v-list-item-subtitle>
+             
+             <h3>{{ orders.jenis_iklan }}</h3>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -150,7 +150,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item>
+          <!-- <v-list-item>
             <v-list-item-content>
               <v-list-item-title>Tanggal Refund:</v-list-item-title>
             </v-list-item-content>
@@ -160,40 +160,61 @@
                 class="font-weight-black d-flex"
               >{{ orders.created_at | dateTimeFormat(utc) }} {{ waktu }}</div>
             </v-list-item-content>
-          </v-list-item>
+          </v-list-item> -->
           <v-list-item>
             <v-list-item-title>Nama Pembeli:</v-list-item-title>
             <v-list-item-title class="font-weight-black">{{ orders.nama_pembeli }}</v-list-item-title>
           </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Total Harga:</v-list-item-title>
+            <v-list-item-title class="font-weight-black black--text">
+              <h3>Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</h3>
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Metode Bayar:</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.metode }}</v-list-item-title>
+          </v-list-item>
           <v-divider></v-divider>
           <v-subheader>
-            <h1>Tiket</h1>
+            <h1>Informasi Produk</h1>
           </v-subheader>
           <v-list-item>
-            <v-list-item-title>Status Tagihan:  </v-list-item-title>
-             <v-list-item-title class="font-weight-black orange--text" v-if="orders.id_mst_pembayaran_status == 1">{{ orders.pembayaran_status }}</v-list-item-title>
-            <v-list-item-title class="font-weight-black blue--text" v-if="orders.id_mst_pembayaran_status == 2">{{ orders.pembayaran_status }}</v-list-item-title>
-            <v-list-item-title class="font-weight-black red--text" v-if="orders.id_mst_pembayaran_status == 3">{{ orders.pembayaran_status }}</v-list-item-title>
-             <v-list-item-title class="font-weight-black teal--text" v-if="orders.id_mst_pembayaran_status == 4">{{ orders.pembayaran_status }}</v-list-item-title>
-              <v-list-item-title class="font-weight-black red--text" v-if="orders.id_mst_pembayaran_status == 5">{{ orders.pembayaran_status }}</v-list-item-title>
-               <v-list-item-title class="font-weight-black red--text" v-if="orders.id_mst_pembayaran_status == 6">{{ orders.pembayaran_status }}</v-list-item-title>
-            
-               
+            <v-list-item-title>Status Tagihan:</v-list-item-title>
+            <v-list-item-title
+              class="font-weight-black orange--text"
+              v-if="orders.id_mst_pembayaran_status == 1"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
+            <v-list-item-title
+              class="font-weight-black blue--text"
+              v-if="orders.id_mst_pembayaran_status == 2"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
+            <v-list-item-title
+              class="font-weight-black red--text"
+              v-if="orders.id_mst_pembayaran_status == 3"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
+            <v-list-item-title
+              class="font-weight-black teal--text"
+              v-if="orders.id_mst_pembayaran_status == 4"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
+            <v-list-item-title
+              class="font-weight-black red--text"
+              v-if="orders.id_mst_pembayaran_status == 5"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
+            <v-list-item-title
+              class="font-weight-black red--text"
+              v-if="orders.id_mst_pembayaran_status == 6"
+            >{{ orders.pembayaran_status }}</v-list-item-title>
           </v-list-item>
           <v-list-item>
             <v-list-item-title>Jumlah:</v-list-item-title>
             <v-list-item-title class="font-weight-black">{{ orders.jumlah }}</v-list-item-title>
           </v-list-item>
           <v-list-item>
-            <v-list-item-title>Total Refund:</v-list-item-title>
-            <v-list-item-title
-              class="font-weight-black red--text"
-            >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Metode Bayar:</v-list-item-title>
-            <v-list-item-title class="font-weight-black">{{ orders.metode }}</v-list-item-title>
+            <v-list-item-title>Total Harga:</v-list-item-title>
+            <v-list-item-title class="font-weight-black black--text">
+              Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}
+            </v-list-item-title>
           </v-list-item>
         </v-list>
 
