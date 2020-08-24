@@ -93,7 +93,7 @@
 
               <v-list-item-action>
                 <v-list-item-action-text>Harga</v-list-item-action-text>
-                Rp {{ Number(item.total).toLocaleString("id-ID") }}
+                Rp {{ Number(item.harga).toLocaleString("id-ID") }}
               </v-list-item-action>
             </v-list-item>
           </v-list>

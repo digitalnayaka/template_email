@@ -69,7 +69,7 @@
           </h2>
 
           <h2 class="font-weight-black" v-else>
-            Rp {{ Number(hits.harga_saat_ini).toLocaleString('id-ID') }}
+            Rp {{ Number(liveBid[0].Bid).toLocaleString('id-ID') }}
             <img
               src="/img/icons/harga_sekarang.png"
               height="25"
@@ -191,16 +191,307 @@
 
     <v-row dense>
       <v-col cols="12">
-        <v-tabs v-model="tab" background-color="transparent" center-active grow>
-          <v-tab v-if="iklan.id_mst_iklan_jenis > 1">
-            <v-badge color="green" :content="liveBid.length">Detail Penawaran</v-badge>
-          </v-tab>
-          <v-tab v-if="iklan.id_mst_iklan_jenis > 1">Detail Tawar Bersama</v-tab>
+        <v-tabs
+          v-model="tab"
+          background-color="transparent"
+          center-active
+          grow
+          v-if="hits.id_mst_iklan_jenis == 1"
+        >
           <v-tab>Detail Iklan</v-tab>
         </v-tabs>
 
-        <v-tabs-items v-model="tab">
-          <v-tab-item v-if="iklan.id_mst_iklan_jenis > 1">
+        <v-tabs v-model="tab" background-color="transparent" center-active grow v-else>
+          <v-tab>
+            <v-badge
+              color="green"
+              :content="liveBid.length"
+              v-if="liveBid.length > 0"
+            >Detail Penawaran</v-badge>
+            <div v-else>Detail Penawaran</div>
+          </v-tab>
+          <v-tab>Detail Tawar Bersama</v-tab>
+          <v-tab>Detail Iklan</v-tab>
+        </v-tabs>
+
+        <v-tabs-items v-model="tab" v-if="hits.id_mst_iklan_jenis == 1">
+          <v-tab-item>
+            <div align="center" class="my-4">
+              <v-card flat width="500">
+                <div class="text-h6 text-left">Deskripsi</div>
+                <div class="text-subtitle-1 text-left">{{ iklan.deskripsi }}</div>
+
+                <v-divider class="my-4"></v-divider>
+
+                <v-list dense subheader class="text-left" v-if="iklan.mst_iklan_type == 'Satuan'">
+                  <v-subheader class="text-h6">Detail Motor</v-subheader>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_id_iklan.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>ID Motor</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.id }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_merek.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Merk</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.merk }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_tipe.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Tipe</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.type }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_tahun.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Tahun</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.tahun }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_odometer.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Odometer</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.odometer }} KM</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_warna.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Warna</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.warna }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_cc_mesin.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>CC Mesin</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.odometer }} CC</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_transmisi.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Transmisi</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.transmisi }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_jenis_motor.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Jenis Motor</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.jenis_motor }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_lokasi_samsat.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Samsat</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.lokasi_samsat }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_lokasi.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Lokasi</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.lokasi }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-subheader class="text-h6">Kelengkapan Dokumen</v-subheader>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_stnk.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>STNK</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_lembar_pajak.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Lembar Pajak</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.lembar_pajak ? "ADA" : "TIDAK" }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_bpkb.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>BPKB</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.lembar_bpkb ? "ADA" : "TIDAK" }}</v-list-item-action>
+                  </v-list-item>
+                </v-list>
+
+                <v-list dense subheader class="text-left" v-else>
+                  <v-subheader class="text-h6">Informasi Paket Motor</v-subheader>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_jenis_motor.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Jumlah Motor</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action
+                      v-if="iklan.motor_bekas != undefined"
+                    >{{ iklan.motor_bekas.length }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_lokasi.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Lokasi Motor</v-list-item-title>
+                    </v-list-item-content>
+
+                    <v-list-item-action>{{ unitMokas.lokasi }}</v-list-item-action>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item>
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/icon_list.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Daftar Paket Motor:</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list-item
+                    v-for="(item,i) in motorBekas"
+                    :key="i"
+                    :to="'/unit_mokas/' + item.id"
+                  >
+                    <v-list-item-avatar size="80">
+                      <v-img :src="getImage(item.foto_1)" contain></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.merk }} {{ item.type }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ item.tahun }}</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-action>
+                      <v-icon>mdi-chevron-right</v-icon>
+                    </v-list-item-action>
+                  </v-list-item>
+                </v-list>
+              </v-card>
+            </div>
+          </v-tab-item>
+        </v-tabs-items>
+
+        <v-tabs-items v-model="tab" v-else>
+          <v-tab-item>
             <div align="center" class="my-4" v-if="liveBid.length > 0">
               <v-card class="d-flex justify-space-between align-center" flat width="500">
                 <v-list align="left" v-if="iklan.id_mst_iklan_jenis > 1">
@@ -234,7 +525,7 @@
             </v-card>
           </v-tab-item>
 
-          <v-tab-item v-if="iklan.id_mst_iklan_jenis > 1">
+          <v-tab-item>
             <div align="center" class="my-4">
               <v-card class="d-flex justify-space-between align-center" flat width="500">
                 <v-card align="center">
@@ -641,58 +932,27 @@
               <v-btn block color="success" class="my-4" @click="konfirmasiTiket">Gunakan Tiket Anda</v-btn>
             </v-container>
 
-            <v-container fluid>
-              <v-row dense>
-                <v-col cols="6">{{ liveBid[0].IdUniq }}</v-col>
-                <v-col cols="6">
-                  <v-divider vertical class="mx-2"></v-divider>
-                  {{ liveBid[0].Bid }}
-                </v-col>
-              </v-row>
+            <v-container fluid v-if="noTiket">
+              <h2 class="text-center my-4">Oops!</h2>
+
+              <div class="text-center my-4">
+                Dengan mengikuti iklan Tawar Bersama ini Anda terdaftar sebagai peserta iklan ini meskipun Anda tidak melakukan penawaran
+                <br />Apakah Anda setuju?
+              </div>
+
+              <v-btn
+                block
+                color="success"
+                class="my-4"
+                @click="konfirmasiNonTiket"
+              >Setuju, mengikuti Tawar Bersama</v-btn>
             </v-container>
 
             <v-list v-if="ikutPenawaran">
-              <!-- <v-list-item>
-                <div align="center" v-if="liveBid.length > 0">
-                  <v-card class="d-flex justify-space-between align-center" flat width="500">
-                    <v-list align="left" v-if="iklan.id_mst_iklan_jenis > 1">
-                      <v-list-item v-for="(item,i) in liveBid.slice(0,5)" :key="item.Bid">
-                        <v-list-item-icon class="mx-0" v-if="i+1 == 1">
-                          <v-icon large color="orange">mdi-star</v-icon>
-                        </v-list-item-icon>
-
-                        <v-list-item-icon class="mr-2" v-else>
-                          <v-chip color="green">{{ i + 1 }}</v-chip>
-                        </v-list-item-icon>
-
-                        <v-list-item-content>
-                          <v-list-item-title>
-                            <div>Oleh: {{ item.IdUniq }}</div>
-                            <div v-if="!guest">
-                              <div v-if="user.id == item.IdAppUser">Anda</div>
-                            </div>
-                          </v-list-item-title>
-                          <v-list-item-subtitle>{{ item.CreatedAt.toDate() | datediff }}</v-list-item-subtitle>
-                        </v-list-item-content>
-
-                        <v-list-item-action>
-                          <v-chip color="red" dark>Rp {{ Number(item.Bid).toLocaleString('id-ID') }}</v-chip>
-                        </v-list-item-action>
-                      </v-list-item>
-                    </v-list>
-                  </v-card>
-                </div>
-              </v-list-item>-->
-
               <v-list-item>
                 <v-list-item-content>
                   <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
                 </v-list-item-content>
-
-                <!-- <v-list-item-content>
-                  <v-list-item-title>Nominal Penawaran</v-list-item-title>
-                  <v-list-item-subtitle>Masukan nominal penawaran Anda</v-list-item-subtitle>
-                </v-list-item-content>-->
               </v-list-item>
 
               <v-list-item>
@@ -1320,6 +1580,7 @@ export default {
       tiket: [],
       totalTiket: [],
       useTiket: false,
+      noTiket: false,
       ikutPenawaran: false,
       penawaran: 0,
       minBid: 0,
@@ -1335,6 +1596,7 @@ export default {
       orders: [],
       dialogInfo2: false,
       appuser: [],
+      title: "",
     };
   },
   methods: {
@@ -1360,6 +1622,7 @@ export default {
           } else {
             this.getTB(this.id);
           }
+          this.title = this.hits.judul;
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -1542,6 +1805,42 @@ export default {
             });
             this.height = 350;
             this.useTiket = !this.useTiket;
+            this.noTiket = !this.noTiket;
+            this.ikutPenawaran = !this.ikutPenawaran;
+          })
+          .catch((error) => {
+            let responses = error.response.data;
+            this.setAlert({
+              status: true,
+              color: "error",
+              text: responses.api_message,
+            });
+          });
+      }
+    },
+    konfirmasiNonTiket() {
+      var r = confirm(
+        "Konfirmasi mengikuti Tawar Bersama \nDengan mengikuti iklan Tawar Bersama ini Anda terdaftar sebagai peserta iklan ini meskipun Anda tidak melakukan penawaran. \nApakah Anda setuju?"
+      );
+      if (r == true) {
+        let formData = new FormData();
+
+        formData.append("id_iklan", this.id);
+        formData.append("id_app_user", this.user.id);
+
+        this.axios
+          .post("/bid/v3/konfirmasi_penggunaan_nontiket", formData, {
+            headers: { Authorization: "Bearer " + this.user.token },
+          })
+          .then((response) => {
+            let { data } = response;
+            this.setAlert({
+              status: true,
+              color: "success",
+              text: data.api_message,
+            });
+            this.height = 350;
+            this.noTiket = !this.noTiket;
             this.ikutPenawaran = !this.ikutPenawaran;
           })
           .catch((error) => {
@@ -1581,6 +1880,11 @@ export default {
           });
           if (responses.api_status == 2) {
             this.getTiket();
+          }
+          if (responses.api_status == 4) {
+            this.sheet = !this.sheet;
+            this.height = 350;
+            this.noTiket = true;
           }
         });
     },
@@ -1786,6 +2090,14 @@ export default {
     },
     dateTimeFormat: (date, utc) => {
       return moment.utc(date).add(utc, "h").format("DD MMM YYYY HH:mm");
+    },
+  },
+  watch: {
+    title: {
+      immediate: true,
+      handler() {
+        document.title = this.title;
+      },
     },
   },
 };

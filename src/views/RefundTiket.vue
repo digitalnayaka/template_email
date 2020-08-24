@@ -215,8 +215,8 @@
           <h5 class="my-3">Jumlah refund diatas belum termasuk biaya antar bank</h5>
 
           <v-btn
-            dark
-            class="my-3"
+            block
+            class="my-3 white--text"
             color="teal"
             @click="refund"
             :disabled="selected == '' || !valid2 ? true : false"

@@ -9,7 +9,8 @@ export default {
         id: payload.id,
         judul: payload.judul,
         qty: payload.quantity,
-        price: payload.total,
+        price: payload.harga,
+        total: payload.total,
         quantity: 1
       })
     },
@@ -62,7 +63,8 @@ export default {
     totalPrice: (state) => {
       let total = 0
       state.carts.forEach(function (cart) {
-        total += cart.price * cart.quantity
+        // total += cart.price * cart.quantity
+        total = cart.total
       })
       return total
     },
