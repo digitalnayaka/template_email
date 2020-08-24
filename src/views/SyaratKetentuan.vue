@@ -17,7 +17,7 @@
             <div class="col-md-10 text-justify white-gradient">
               <p>Selamat datang di SiMotor.</p>
               <p>
-                Syarat dan Ketentuan ini adalah perjanjian antara pengguna (“Anda”) dan PT Langeng Mitra Utama (“Kami”),
+                Syarat dan Ketentuan ini adalah perjanjian antara pengguna (“Anda”) dan PT. Digital Nayaka Abhinaya (“Kami”),
                 sebuah perseroan terbatas yang didirikan dan beroperasi secara sah berdasarkan hukum negara Republik Indonesia
                 dan berdomisili di DKI Jakarta, Indonesia.
               </p>

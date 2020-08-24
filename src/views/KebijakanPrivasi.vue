@@ -31,9 +31,9 @@
               <p class="ml-2 ml-lg-2 md-2 font-weight-bold">1. Siapa kami?</p>
 
               <p class="ml-2 ml-lg-2 md-2">
-                Pengelola utama data Anda untuk tujuan layanan kami adalah Digital Network Asia, sebuah perusahaan yang
+                Pengelola utama data Anda untuk tujuan layanan kami adalah Digital Nayaka Abhinaya, sebuah perusahaan yang
                 berlokasi di Menara Kirana II, lantai 10 A, Jalan Boulevard Timur No 88 Pegangsaan 2, Kelapa Gading, Jakarta Utara, Indonesia.
-                Digital Network asia adalah perusahaan pengelola dan pembuat dari aplikasi Simotor (selanjutnya secara bersama disebut sebagai
+                Digital Nayaka Abhinaya adalah perusahaan pengelola dan pembuat dari aplikasi Simotor (selanjutnya secara bersama disebut sebagai
                 “Simotor”, “kami”, “kita” atau “milik kami” dalam pernyataan privasi ini). yang menyediakan layanan kepada Anda sesuai dengan
                 <a
                   href="/"
