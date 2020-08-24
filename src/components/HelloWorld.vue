@@ -28,7 +28,7 @@ export default {
   methods: {
     showBanners() {
       this.axios
-        .get("/master/v2/mst_banner", {
+        .get("/master/v3/mst_banner", {
           params: {
             limit: 4
           }

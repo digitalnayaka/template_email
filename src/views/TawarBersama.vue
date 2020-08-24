@@ -15,7 +15,7 @@
         <v-card
           v-for="item in berlangsung"
           :key="item.id_iklan"
-          :to="item.id_mst_iklan_type != 2 ? '/detail_iklan/' + item.id_iklan : '/detail_iklan/' + item.id_iklan"
+          :to="'/detail_iklan/' + item.id_iklan"
           class="my-4"
         >
           <v-toolbar dense flat>

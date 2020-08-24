@@ -51,7 +51,26 @@
 
     <v-row dense>
       <v-col cols="12" sm="6">
-        <div>Rp {{ Number(iklan.harga_awal).toLocaleString('id-ID') }}</div>
+        <span v-if="iklan.id_mst_iklan_jenis == 1">
+          Rp {{ Number(hits.harga).toLocaleString('id-ID') }}
+          <img src="/img/icons/hargapas.png" />
+        </span>
+
+        <div v-else>
+          <span v-if="liveBid.length == 0">
+            Rp {{ Number(hits.harga_awal).toLocaleString('id-ID') }}
+            <img
+              src="/img/icons/harga_awal.png"
+            />
+          </span>
+
+          <span v-else>
+            Rp {{ Number(hits.harga_saat_ini).toLocaleString('id-ID') }}
+            <img
+              src="/img/icons/harga_sekarang.png"
+            />
+          </span>
+        </div>
 
         <div class="text-h5 teal--text">{{ iklan.judul }}</div>
 
@@ -189,10 +208,7 @@
 
                     <v-list-item-content>
                       <v-list-item-title>
-                        <div>Oleh: {{ item.IdUniq }}</div>
-                        <div v-if="!guest">
-                          <div v-if="user.id == item.IdAppUser">Anda</div>
-                        </div>
+                        <span>Oleh: {{ !guest && user.id == item.IdAppUser ? "Anda" : item.IdUniq }}</span>
                       </v-list-item-title>
                       <v-list-item-subtitle>{{ item.CreatedAt.toDate() | datediff }}</v-list-item-subtitle>
                     </v-list-item-content>
@@ -604,39 +620,62 @@
         </div>
 
         <v-bottom-sheet v-model="sheet">
-          <v-sheet :height="height">
+          <v-sheet>
             <v-container fluid v-if="useTiket">
-              <h2>Oops!</h2>
+              <h2 class="text-center my-4">Oops!</h2>
 
-              <div>
+              <div class="text-center my-4">
                 Untuk dapat mengikuti iklan ini perlu memakai tiket. Gunakan Tiket Tawar Bersama pada iklan ini?
                 <br />Tiket yang dibutuhkan: 1 Tiket
                 <br />
-                Jumlah Tiket Tersedia: {{ totalTiket.tersedia }} Tiket
+                Jumlah tiket tersedia: {{ totalTiket.tersedia }} Tiket
               </div>
 
               <v-btn block color="success" class="my-4" @click="konfirmasiTiket">Gunakan Tiket Anda</v-btn>
             </v-container>
 
             <v-list v-if="ikutPenawaran">
+              <!-- <v-list-item>
+                <div align="center" v-if="liveBid.length > 0">
+                  <v-card class="d-flex justify-space-between align-center" flat width="500">
+                    <v-list align="left" v-if="iklan.id_mst_iklan_jenis > 1">
+                      <v-list-item v-for="(item,i) in liveBid.slice(0,5)" :key="item.Bid">
+                        <v-list-item-icon class="mx-0" v-if="i+1 == 1">
+                          <v-icon large color="orange">mdi-star</v-icon>
+                        </v-list-item-icon>
+
+                        <v-list-item-icon class="mr-2" v-else>
+                          <v-chip color="green">{{ i + 1 }}</v-chip>
+                        </v-list-item-icon>
+
+                        <v-list-item-content>
+                          <v-list-item-title>
+                            <div>Oleh: {{ item.IdUniq }}</div>
+                            <div v-if="!guest">
+                              <div v-if="user.id == item.IdAppUser">Anda</div>
+                            </div>
+                          </v-list-item-title>
+                          <v-list-item-subtitle>{{ item.CreatedAt.toDate() | datediff }}</v-list-item-subtitle>
+                        </v-list-item-content>
+
+                        <v-list-item-action>
+                          <v-chip color="red" dark>Rp {{ Number(item.Bid).toLocaleString('id-ID') }}</v-chip>
+                        </v-list-item-action>
+                      </v-list-item>
+                    </v-list>
+                  </v-card>
+                </div>
+              </v-list-item>-->
+
               <v-list-item>
                 <v-list-item-content>
+                  <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
+                </v-list-item-content>
+
+                <!-- <v-list-item-content>
                   <v-list-item-title>Nominal Penawaran</v-list-item-title>
                   <v-list-item-subtitle>Masukan nominal penawaran Anda</v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-btn icon @click="sheet = !sheet">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                </v-list-item-action>
-              </v-list-item>
-
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title>Kelipatan Tawaran</v-list-item-title>
-                  <v-list-item-subtitle>Rp {{ Number(iklan.kelipatan).toLocaleString('id-ID') }}</v-list-item-subtitle>
-                </v-list-item-content>
+                </v-list-item-content>-->
               </v-list-item>
 
               <v-list-item>
@@ -644,22 +683,32 @@
                   <v-list-item-title>Harga Awal</v-list-item-title>
                   <v-list-item-subtitle>Rp {{ Number(iklan.harga_awal).toLocaleString('id-ID') }}</v-list-item-subtitle>
                 </v-list-item-content>
+
+                <v-divider vertical class="mx-2"></v-divider>
+
+                <v-list-item-content>
+                  <v-list-item-title>Kelipatan Tawaran</v-list-item-title>
+                  <v-list-item-subtitle>Rp {{ Number(iklan.kelipatan).toLocaleString('id-ID') }}</v-list-item-subtitle>
+                </v-list-item-content>
               </v-list-item>
 
               <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title>Penawaran Anda</v-list-item-title>
-
-                  <v-list-item-subtitle>
-                    <v-text-field outlined v-model="bid" hide-details readonly></v-text-field>
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-list-item-action>
+                <v-list-item-icon>
                   <v-btn icon @click="minus">
                     <v-icon>mdi-minus</v-icon>
                   </v-btn>
+                </v-list-item-icon>
 
+                <v-list-item-content align="center">
+                  <v-list-item-subtitle>Nominal Penawaran</v-list-item-subtitle>
+
+                  <v-list-item-title class="font-weight-black">
+                    <!-- <v-text-field outlined v-model="bid" hide-details readonly></v-text-field> -->
+                    Rp {{ Number(bid).toLocaleString("id-ID") }}
+                  </v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-action>
                   <v-btn icon @click="bid += iklan.kelipatan">
                     <v-icon>mdi-plus</v-icon>
                   </v-btn>
@@ -667,7 +716,7 @@
               </v-list-item>
 
               <v-list-item>
-                <v-btn block color="success" @click="bidding">Konfirmasi Penawaran</v-btn>
+                <v-btn block dark color="teal" @click="bidding">Konfirmasi Penawaran</v-btn>
               </v-list-item>
             </v-list>
           </v-sheet>

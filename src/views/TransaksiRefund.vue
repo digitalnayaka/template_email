@@ -131,10 +131,11 @@
 
           <v-list-item>
             <v-list-item-title>Nomor Order:</v-list-item-title>
-            <v-list-item-title class="font-weight-black">{{ orders.no_order }}  <v-list-item-action>
+            <v-list-item-title class="font-weight-black">
+              {{ orders.no_order }}
+              <input type="hidden" id="nomor_order" :value="orders.no_order" />
               <v-btn class="teal--text" @click="salin" outlined>Salin</v-btn>
-            </v-list-item-action></v-list-item-title>
-            
+            </v-list-item-title>
           </v-list-item>
 
           <v-list-item>
@@ -207,11 +208,8 @@
             <v-list-item-content>
               <v-list-item-title>{{ bank.bank_name }}</v-list-item-title>
               <v-list-item-subtitle>{{ bank.nomor_rekening }}</v-list-item-subtitle>
-              <input type="hidden" id="nomor_rekening" :value="bank.nomor_rekening" />
               <v-list-item-subtitle>{{ bank.nama_rekening }}</v-list-item-subtitle>
             </v-list-item-content>
-
-           
           </v-list-item>
 
           <v-list-item>
@@ -222,7 +220,13 @@
         <v-divider></v-divider>
 
         <v-container fluid>
-          <v-btn color="red darken-1" dark block @click="batalkan" v-if="orders.id_mst_pembayaran_status == 1">Batalkan</v-btn>
+          <v-btn
+            color="red darken-1"
+            dark
+            block
+            @click="batalkan"
+            v-if="orders.id_mst_pembayaran_status == 1"
+          >Batalkan</v-btn>
         </v-container>
       </v-card>
     </div>
@@ -326,7 +330,7 @@ export default {
         });
     },
     salin() {
-      let testingCodeToCopy = document.querySelector("#nomor_rekening");
+      let testingCodeToCopy = document.querySelector("#nomor_order");
       testingCodeToCopy.setAttribute("type", "text");
       testingCodeToCopy.select();
 
@@ -335,7 +339,7 @@ export default {
         this.setAlert({
           status: true,
           color: "success",
-          text: "Nomor rekening berhasil disalin",
+          text: "Nomor order berhasil disalin",
         });
       } catch (err) {
         this.setAlert({

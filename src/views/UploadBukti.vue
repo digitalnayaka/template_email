@@ -115,10 +115,10 @@
           <h2>Petunjuk Pembayaran</h2>
 
           <div>Transfer dapat dilakukan ke salah satu rekening berikut:</div>
-          <div>
+          <div align="center">
             <img src="/img/bank/bca.png" width="60px" height="20px" />
-            <span class="blue--text text--darken-4">&nbsp;8920008390</span>
-            <span class="blue--text text--darken-4">&nbsp;A/N Digital Nayaka Abhinaya</span>
+            <h3 class="blue--text text--darken-4">&nbsp;8920008390</h3>
+            <h3 class="blue--text text--darken-4">&nbsp;A/N Digital Nayaka Abhinaya</h3>
           </div>
           <div>Mohon transfer sesuai dengan nominal yang tertera.</div>
           <div>Jika mengalami kendala dalam pembayaran, silahkan kunjungi bantuan.</div>
