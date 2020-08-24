@@ -272,7 +272,7 @@ export default {
   methods: {
     showBanners() {
       this.axios
-        .get("/master/v2/mst_banner")
+        .get("/master/v3/mst_banner")
         .then((response) => {
           let { data } = response.data;
 

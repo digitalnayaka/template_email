@@ -88,7 +88,7 @@
 
               <v-list-item-content>
                 <v-list-item-title>{{ item.judul }}</v-list-item-title>
-                <v-list-item-subtitle>Jml: {{ item.quantity }} Tiket</v-list-item-subtitle>
+                <v-list-item-subtitle>Jumlah: {{ item.quantity }} Tiket</v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
@@ -110,11 +110,11 @@
       transition="dialogbottom-transition"
       persistent
     >
-      <v-toolbar dark color="primary">
+      <v-toolbar dark color="teal">
         <v-btn icon dark @click="close">
           <v-icon>mdi-close</v-icon>
         </v-btn>
-        <v-toolbar-title>Your Shopping Cart!</v-toolbar-title>
+        <v-toolbar-title>Pembelian Tiket</v-toolbar-title>
       </v-toolbar>
 
       <cart />

@@ -131,7 +131,10 @@
 
           <v-list-item>
             <v-list-item-title>Nomor Order:</v-list-item-title>
-            <v-list-item-title class="font-weight-black">{{ orders.no_order }}</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.no_order }}  <v-list-item-action>
+              <v-btn class="teal--text" @click="salin" outlined>Salin</v-btn>
+            </v-list-item-action></v-list-item-title>
+            
           </v-list-item>
 
           <v-list-item>
@@ -208,9 +211,7 @@
               <v-list-item-subtitle>{{ bank.nama_rekening }}</v-list-item-subtitle>
             </v-list-item-content>
 
-            <v-list-item-action>
-              <v-btn class="teal--text" @click="salin" outlined>Salin</v-btn>
-            </v-list-item-action>
+           
           </v-list-item>
 
           <v-list-item>

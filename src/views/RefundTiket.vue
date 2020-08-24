@@ -213,11 +213,15 @@
 
           <h5
             class="my-3"
-          >Uang Anda akan dikirim maksimal 2x24 jam setelah refund.</h5>
+          >Refund akan diproses maksimal 2x24 Jam hari kerja</h5>
+          <h5
+            class="my-3"
+          >Jumlah refund diatas belum termasuk biaya antar bank</h5>
 
           <v-btn
+          dark
             class="my-3"
-            color="primary"
+            color="teal"
             @click="refund"
             :disabled="selected == '' || !valid2 ? true : false"
           >Refund</v-btn>
