@@ -4,7 +4,7 @@
       outlined
       tile
       class="ma-0"
-      :to="item._source.id_mst_iklan_type != 2 ? '/detail_iklan/' + item._source.id : '/detail_paket/' +  item._source.id"
+      :to="'/detail_iklan/' + item._source.id"
     >
       <v-img width="500" height="300" :src="getThumb(item._source.photo)" contain>
         <v-card-title>

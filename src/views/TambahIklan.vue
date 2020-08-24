@@ -240,7 +240,12 @@
                     </v-list-item-content>
 
                     <v-list-item-action>
-                      <v-switch v-model="tiket" input-value="true" color="success"></v-switch>
+                      <v-switch
+                        v-model="tiket"
+                        input-value="true"
+                        color="success"
+                        @change="useTiket"
+                      ></v-switch>
                     </v-list-item-action>
                   </v-list-item>
 
@@ -354,11 +359,10 @@ export default {
       selectedIklan: [],
       selectedUnit: 0,
       jumlahtiket: 0,
-      mask: "###",
+      mask: "#",
       jumlahRules: [
-        (v) => v != 0 || "Field is required",
         (v) => v.length >= 1 || "Min 1 Tiket",
-        (v) => v.length <= 999 || "Max 999 Tiket",
+        (v) => v.length <= 9 || "Max 9 Tiket",
       ],
       judul_iklan: "",
       judulRules: [
@@ -386,7 +390,7 @@ export default {
       kelipatan: "",
       lat: 0,
       lng: 0,
-      tiket: "",
+      tiket: false,
       menu1: false,
       tglMulaiTB: moment().format("YYYY-MM-DD HH:mm"),
       datePickerProps: {},
@@ -522,6 +526,13 @@ export default {
           rules: [],
           suffix: this.waktu,
         };
+      }
+    },
+    useTiket() {
+      if (this.tiket) {
+        this.jumlahtiket = 1;
+      } else {
+        this.jumlahtiket = 0;
       }
     },
     watchLocation() {

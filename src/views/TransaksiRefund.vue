@@ -109,112 +109,100 @@
           </v-col>
         </v-row>
 
-        <v-list>
+        <v-list subheader>
+          <v-subheader>
+            <h1>Informasi Tagihan</h1>
+          </v-subheader>
+
+          <v-list-item>
+            <v-list-item-title>Nomor Order:</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.no_order }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Tanggal Order:</v-list-item-title>
+            <v-list-item-title
+              class="font-weight-black d-flex"
+            >{{ orders.created_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item v-if="orders.id_mst_pembayaran_status == 5">
+            <v-list-item-title>Alasan Ditolak:</v-list-item-title>
+
+            <v-list-item-title class="font-weight-black d-sm-inline-flex d-flex">{{ orders.note }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item v-if="orders.id_mst_pembayaran_note == 1">
+            <v-list-item-title>Detail Alasan:</v-list-item-title>
+
+            <v-list-item-title
+              class="font-weight-black d-sm-inline-flex d-flex"
+            >{{ orders.note_detail }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Nama Pembeli:</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.nama_pembeli }}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Metode Bayar:</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{ orders.metode }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+
+        <v-divider class="my-3"></v-divider>
+
+        <v-list subheader>
+          <v-subheader>
+            <h1>Informasi Produk</h1>
+          </v-subheader>
+
+          <div class="mx-4">Tiket Tawar Bersama</div>
+
           <v-list-item>
             <v-list-item-avatar tile size="80">
               <v-img src="/img/tiket.png"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
-             
-             <h3>{{ orders.jenis_iklan }}</h3>
+              <v-list-item-title>
+                Status:
+                <span
+                  class="font-weight-black orange--text"
+                  v-if="orders.id_mst_pembayaran_status == 1"
+                >{{ orders.pembayaran_status }}</span>
+
+                <span
+                  class="font-weight-black blue--text"
+                  v-if="orders.id_mst_pembayaran_status == 2"
+                >{{ orders.pembayaran_status }}</span>
+
+                <span
+                  class="font-weight-black red--text"
+                  v-if="orders.id_mst_pembayaran_status == 3"
+                >{{ orders.pembayaran_status }}</span>
+
+                <span
+                  class="font-weight-black teal--text"
+                  v-if="orders.id_mst_pembayaran_status == 4"
+                >{{ orders.pembayaran_status }}</span>
+
+                <span
+                  class="font-weight-black red--text"
+                  v-if="orders.id_mst_pembayaran_status == 5"
+                >{{ orders.pembayaran_status }}</span>
+
+                <span
+                  class="font-weight-black red--text"
+                  v-if="orders.id_mst_pembayaran_status == 6"
+                >{{ orders.pembayaran_status }}</span>
+              </v-list-item-title>
+
+              <v-list-item-title>Jumlah: {{ orders.jumlah }} Tiket</v-list-item-title>
+
+              <v-list-item-title>Total Harga: Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</v-list-item-title>
             </v-list-item-content>
-          </v-list-item>
-        </v-list>
-
-        <v-divider></v-divider>
-
-        <v-list subheader>
-          <v-subheader>
-            <h1>Informasi Refund</h1>
-          </v-subheader>
-
-          <v-list-item>
-            <v-list-item-title>Nomor Order:</v-list-item-title>
-            <v-list-item-title class="font-weight-black">
-              {{ orders.no_order }}
-              <input type="hidden" id="nomor_order" :value="orders.no_order" />
-              <v-btn class="teal--text" @click="salin" outlined>Salin</v-btn>
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>Tanggal Order:</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-content>
-              <div
-                class="font-weight-black d-flex"
-              >{{ orders.created_at | dateTimeFormat(utc) }} {{ waktu }}</div>
-            </v-list-item-content>
-          </v-list-item>
-
-          <!-- <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>Tanggal Refund:</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-content>
-              <div
-                class="font-weight-black d-flex"
-              >{{ orders.created_at | dateTimeFormat(utc) }} {{ waktu }}</div>
-            </v-list-item-content>
-          </v-list-item> -->
-          <v-list-item>
-            <v-list-item-title>Nama Pembeli:</v-list-item-title>
-            <v-list-item-title class="font-weight-black">{{ orders.nama_pembeli }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>Total Harga:</v-list-item-title>
-            <v-list-item-title class="font-weight-black black--text">
-              <h3>Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</h3>
-            </v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>Metode Bayar:</v-list-item-title>
-            <v-list-item-title class="font-weight-black">{{ orders.metode }}</v-list-item-title>
-          </v-list-item>
-          <v-divider></v-divider>
-          <v-subheader>
-            <h1>Informasi Produk</h1>
-          </v-subheader>
-          <v-list-item>
-            <v-list-item-title>Status Tagihan:</v-list-item-title>
-            <v-list-item-title
-              class="font-weight-black orange--text"
-              v-if="orders.id_mst_pembayaran_status == 1"
-            >{{ orders.pembayaran_status }}</v-list-item-title>
-            <v-list-item-title
-              class="font-weight-black blue--text"
-              v-if="orders.id_mst_pembayaran_status == 2"
-            >{{ orders.pembayaran_status }}</v-list-item-title>
-            <v-list-item-title
-              class="font-weight-black red--text"
-              v-if="orders.id_mst_pembayaran_status == 3"
-            >{{ orders.pembayaran_status }}</v-list-item-title>
-            <v-list-item-title
-              class="font-weight-black teal--text"
-              v-if="orders.id_mst_pembayaran_status == 4"
-            >{{ orders.pembayaran_status }}</v-list-item-title>
-            <v-list-item-title
-              class="font-weight-black red--text"
-              v-if="orders.id_mst_pembayaran_status == 5"
-            >{{ orders.pembayaran_status }}</v-list-item-title>
-            <v-list-item-title
-              class="font-weight-black red--text"
-              v-if="orders.id_mst_pembayaran_status == 6"
-            >{{ orders.pembayaran_status }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>Jumlah:</v-list-item-title>
-            <v-list-item-title class="font-weight-black">{{ orders.jumlah }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>Total Harga:</v-list-item-title>
-            <v-list-item-title class="font-weight-black black--text">
-              Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}
-            </v-list-item-title>
           </v-list-item>
         </v-list>
 
@@ -226,16 +214,12 @@
           </v-subheader>
 
           <v-list-item>
-            <v-list-item-title>Transfer akan dilakukan ke rekening berikut:</v-list-item-title>
+            <div class="d-flex mx-2">Transfer akan dilakukan ke rekening berikut:</div>
           </v-list-item>
 
           <v-list-item>
             <v-list-item-avatar tile size="80">
-              <v-img src="/img/bank/bca.png" contain v-if="bank.id_mst_bank == 12"></v-img>
-              <v-img src="/img/bank/bni.png" contain v-if="bank.id_mst_bank == 3"></v-img>
-              <v-img src="/img/bank/bri.png" contain v-if="bank.id_mst_bank == 4"></v-img>
-              <v-img src="/img/bank/mandiri.png" contain v-if="bank.id_mst_bank == 2"></v-img>
-              <v-img src="/img/bank/permata.png" contain v-if="bank.id_mst_bank == 33"></v-img>
+              <v-img :src="getImage(bank.foto)" contain></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -244,23 +228,21 @@
               <v-list-item-subtitle>{{ bank.nama_rekening }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Jika mengalami kendala dengan penjualan, silahkan kunjungi Bantuan.</v-list-item-title>
-          </v-list-item>
         </v-list>
+
+        <div class="d-flex mx-2 mb-2">Jika mengalami kendala dengan penjualan, silahkan kunjungi Bantuan.</div>
 
         <v-divider></v-divider>
 
-        <v-container fluid>
-          <v-btn
-            color="red darken-1"
-            dark
-            block
-            @click="batalkan"
-            v-if="orders.id_mst_pembayaran_status == 1"
-          >Batalkan</v-btn>
-        </v-container>
+          <!-- <v-container fluid>
+            <v-btn
+              color="red darken-1"
+              dark
+              block
+              @click="batalkan"
+              v-if="orders.id_mst_pembayaran_status == 1"
+            >Batalkan</v-btn>
+          </v-container> -->
       </v-card>
     </div>
   </div>
