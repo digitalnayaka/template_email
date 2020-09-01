@@ -8,7 +8,25 @@
 
     <div class="text-center">
       <div class="display-1 font-weight-black">Tiket Tawar Bersama</div>
-      <div>Untuk Iklan Tawar Bersama yang diiklankan oleh penjual terverifikasi, Anda membutuhkan tiket ini untuk bisa mengikuti iklan tersebut.</div>
+      <v-col cols="12">
+        <v-card color="blue lighten-4">
+          <div class="d-flex flex-no-wrap justify-space-between align-center">
+            <v-avatar class="ma-3" size="20" tile>
+              <v-img src="/img/error.png"></v-img>
+            </v-avatar>
+
+            <div>
+              <v-card-text>
+                Dikarenakan masih dalam periode promo, kami membuat harga
+                tiket menjadi Rp.0, untuk itu Anda perlu mengupload identitas diri Anda sebagai ganti bukti transfer.
+                Kami akan tetap menjaga privasi Anda dan ingin menjamin jaminan agar Anda serius dalam melakukan penawaran iklan Tawar Bersama.
+                Dan tiket ini sebagai deposit/setoran yang dapat anda tarik kembali (refund).
+              </v-card-text>
+            </div>
+          </div>
+        </v-card>
+      </v-col>
+      <!-- <div>Untuk Iklan Tawar Bersama yang diiklankan oleh penjual terverifikasi, Anda membutuhkan tiket ini untuk bisa mengikuti iklan tersebut.</div> -->
     </div>
 
     <v-row>
@@ -42,19 +60,24 @@
 
     <v-row class="text-center">
       <v-col cols="6">
-        <!-- <v-card dark color="transparent" to="/beli_tiket" max-width="400">
-          <v-img src="/img/beli-tiket.png" max-width="400"></v-img>
-         <v-btn block color="primary" to="/beli_tiket">Beli Tiket</v-btn>
-        </v-card> -->
-        <v-btn block color="primary" to="/beli_tiket" rounded>Beli Tiket</v-btn>
-      </v-col>
-
-      <v-col cols="6">
         <!-- <v-card dark color="transparent" to="/refund_tiket" max-width="400">
           <v-img class="center_image" src="/img/refund-tiket.png" max-width="400"></v-img>
           <v-btn block color="red" dark to="/refund_tiket">Refund Tiket</v-btn>
-        </v-card> -->
+        </v-card>-->
+        <v-list-item-avatar tile size="80">
+          <v-img src="/img/icons/ic_refund_tiket.png"></v-img>
+        </v-list-item-avatar>
         <v-btn block color="red" dark to="/refund_tiket" rounded>Refund Tiket</v-btn>
+      </v-col>
+      <v-col cols="6">
+        <!-- <v-card dark color="transparent" to="/beli_tiket" max-width="400">
+          <v-img src="/img/icons/ic_beli_tiket.png" max-width="400"></v-img>
+           <v-btn block color="primary" to="/beli_tiket" rounded>Dapatkan Tiket</v-btn>
+        </v-card>-->
+        <v-list-item-avatar tile size="80">
+          <v-img src="/img/icons/ic_beli_tiket.png"></v-img>
+        </v-list-item-avatar>
+        <v-btn block color="primary" to="/dapatkan_tiket" rounded>Dapatkan Tiket</v-btn>
       </v-col>
 
       <!-- <v-col cols="4" sm="4" xs="4">
@@ -146,8 +169,8 @@
     <v-tabs-items v-model="tab">
       <v-tab-item>
         <v-tabs v-model="subTab2" grow @change="changeTab">
-          <v-tab>Pembelian</v-tab>
-          <v-tab>Refund</v-tab>
+          <v-tab>Dapatkan Tiket</v-tab>
+          <v-tab>Refund Tiket</v-tab>
 
           <v-tab-item>
             <div v-if="group.length > 0">
@@ -341,7 +364,7 @@
                   </div>
 
                   <v-list>
-                    <v-list-item >
+                    <v-list-item>
                       <v-list-item-avatar rounded size="80">
                         <v-img src="/img/tiket.png"></v-img>
                       </v-list-item-avatar>

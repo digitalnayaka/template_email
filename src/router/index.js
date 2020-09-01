@@ -113,9 +113,9 @@ const routes = [
     }
   },
   {
-    path: '/beli_tiket',
-    name: 'beli_tiket',
-    component: () => import(/* webpackChunkName: "beli_tiket" */ '../views/BeliTiket.vue'),
+    path: '/dapatkan_tiket',
+    name: 'dapatkan_tiket',
+    component: () => import(/* webpackChunkName: "dapatkan_tiket" */ '../views/BeliTiket.vue'),
     meta: {
       Auth: true
     }
@@ -228,6 +228,14 @@ const routes = [
     path: '/pengaturan',
     name: 'pengaturan',
     component: () => import(/* webpackChunkName: "pengaturan" */ '../views/Pengaturan.vue'),
+    meta: {
+      Auth: true
+    }
+  },
+  {
+    path: '/iklan_favorit',
+    name: 'iklan_favorit',
+    component: () => import(/* webpackChunkName: "iklan_favorit" */ '../views/IklanFavorit.vue'),
     meta: {
       Auth: true
     }

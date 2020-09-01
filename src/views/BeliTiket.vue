@@ -21,7 +21,7 @@
     </v-app-bar>
 
     <div align="center">
-      <div class="text-h5 text-sm-h4">Beli Tiket Tawar Bersama</div>
+      <div class="text-h5 text-sm-h4">Dapatkan Tiket Tawar Bersama</div>
       <div>Paket yang tersedia</div>
     </div>
 

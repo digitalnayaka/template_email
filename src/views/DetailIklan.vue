@@ -43,7 +43,7 @@
             :src="getImage(item.src)"
             reverse-transition="fade-transition"
             transition="fade-transition"
-            contain
+           contain
           ></v-carousel-item>
         </v-carousel>
       </v-col>
@@ -217,7 +217,7 @@
         <v-tabs-items v-model="tab" v-if="hits.id_mst_iklan_jenis == 1">
           <v-tab-item>
             <div align="center" class="my-4">
-              <v-card flat width="500">
+              <v-card flat width="1000">
                 <div class="text-h6 text-left">Deskripsi</div>
                 <div class="text-subtitle-1 text-left">{{ iklan.deskripsi }}</div>
 

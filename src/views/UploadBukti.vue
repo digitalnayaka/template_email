@@ -9,7 +9,7 @@
     <div>
       <h1 class="text-center">Detail Transaksi</h1>
 
-      <v-card class="mx-auto" max-width="700">
+      <v-card class="mx-auto" max-width="1000">
         <v-row>
           <v-col cols="12">
             <v-card color="deep-orange lighten-2">
@@ -129,7 +129,7 @@
 
               <v-list-item-title>Jumlah: {{ orders.jumlah }} Tiket</v-list-item-title>
 
-              <v-list-item-title>Total Harga: Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</v-list-item-title>
+              <v-list-item-title> Total Harga: <span  class="font-weight-black"> Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID")  }}</span></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -140,7 +140,7 @@
           <h2>Petunjuk Pembayaran</h2>
 
           <div>Transfer dapat dilakukan ke salah satu rekening berikut:</div>
-          <v-list>
+          <!-- <v-list>
             <v-list-item>
               <v-list-item-avatar tile size="80">
                 <v-img :src="getImage(accounts.foto)" contain></v-img>
@@ -152,7 +152,7 @@
                 <v-list-item-subtitle>{{ accounts.nama_rekening }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
-          </v-list>
+          </v-list> -->
           <div>Jika mengalami kendala dalam pembayaran, silahkan kunjungi bantuan.</div>
         </v-container>
 
