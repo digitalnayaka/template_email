@@ -35,7 +35,7 @@
     </v-app-bar>
 
     <v-row dense>
-      <v-col cols="12">
+      <v-col cols="12" sm="6" class="d-flex align-center">
         <v-carousel cycle hide-delimiter-background height="300">
           <v-carousel-item
             v-for="(item,index) in fotos"
@@ -43,14 +43,39 @@
             :src="getImage(item.src)"
             reverse-transition="fade-transition"
             transition="fade-transition"
-           contain
+            contain
           ></v-carousel-item>
         </v-carousel>
       </v-col>
-    </v-row>
-
-    <v-row dense>
       <v-col cols="12" sm="6">
+        <div class="d-flex justify-sm-center">
+          <v-list>
+            <v-list-item>
+              <v-list-item-avatar size="62">
+                <v-icon large v-if="hits.app_user_photo == 'null'">mdi-account-circle</v-icon>
+
+                <v-img :src="getImage(hits.app_user_photo)" v-else></v-img>
+              </v-list-item-avatar>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  <span class="float-left">{{ hits.app_user }}</span>
+                  <v-img
+                    v-if="hits.id_mst_user_type == 2"
+                    src="/img/verified.png"
+                    width="20"
+                    height="20"
+                    contain
+                  ></v-img>
+                </v-list-item-title>
+
+                <v-list-item-subtitle>Penjual</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </div>
+      
+        <v-divider ></v-divider>
         <h2 class="font-weight-black" v-if="iklan.id_mst_iklan_jenis == 1">
           Rp {{ Number(hits.harga).toLocaleString('id-ID') }}
           <img
@@ -91,36 +116,7 @@
         </div>
       </v-col>
 
-      <v-col cols="12" sm="6">
-        <v-divider vertical class="float-left hidden-sm-and-down"></v-divider>
-
-        <div class="d-flex justify-sm-center">
-          <v-list>
-            <v-list-item>
-              <v-list-item-avatar size="62">
-                <v-icon large v-if="hits.app_user_photo == 'null'">mdi-account-circle</v-icon>
-
-                <v-img :src="getImage(hits.app_user_photo)" v-else></v-img>
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title>
-                  <span class="float-left">{{ hits.app_user }}</span>
-                  <v-img
-                    v-if="hits.id_mst_user_type == 2"
-                    src="/img/verified.png"
-                    width="20"
-                    height="20"
-                    contain
-                  ></v-img>
-                </v-list-item-title>
-
-                <v-list-item-subtitle>Penjual</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </div>
-      </v-col>
+      
     </v-row>
 
     <v-divider></v-divider>
@@ -216,6 +212,7 @@
 
         <v-tabs-items v-model="tab" v-if="hits.id_mst_iklan_jenis == 1">
           <v-tab-item>
+            <v-card>
             <div align="center" class="my-4">
               <v-card flat width="1000">
                 <div class="text-h6 text-left">Deskripsi</div>
@@ -487,6 +484,8 @@
                 </v-list>
               </v-card>
             </div>
+            </v-card>
+    
           </v-tab-item>
         </v-tabs-items>
 
@@ -1548,7 +1547,7 @@
           </v-dialog>
         </div>
       </div>
-    </div>-->
+    </div> -->
   </div>
 </template>
 

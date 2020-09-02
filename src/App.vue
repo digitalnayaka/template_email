@@ -143,6 +143,9 @@
         </v-slide-y-transition>
       </v-container>
     </v-main>
+    <v-btn bottom color="red" dark fab fixed right to="/bantuan">
+      <v-icon>mdi-ear-hearing</v-icon>
+    </v-btn>
   </v-app>
 </template>
 

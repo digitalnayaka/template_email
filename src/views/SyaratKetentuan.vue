@@ -230,7 +230,7 @@
               <p
                 class="ml-2 ml-lg-2"
               >Pemberian tanda khusus terhadap pengguna maupun iklan yang dipasang oleh pengguna bukan merupakan bentuk dukungan, rekomendasi maupun pendapat dari SiMotor terhadap pengguna, barang/jasa yang ditawarkan, serta bagaimana pengguna mengekspresikan barang/jasa yang mereka tawarkan.</p>
-              <p class="ml-2 ml-lg-2 font-weight-bold">9. Perubahan Layanan</p>
+              <p class="ml-2 ml-lg-2 font-weight-bold">8. Perubahan Layanan</p>
               <p
                 class="ml-2 ml-lg-2"
               >SiMotor berhak memperbarui dan/atau mengubah tampilan dan/atau Layanan dan/atau isi Layanan secara rutin dan setiap saat, demi memberi pelayanan yang lebih baik kepada setiap penggunanya.</p>
@@ -243,16 +243,16 @@
                   href
                 >Kebijakan Privasi.</a> Dengan menggunakan Layanan, pengguna setuju atas pemrosesan tersebut dan menjamin semua data yang diberikan adalah benar.
               </p>
-              <p class="ml-2 ml-lg-2 font-weight-bold">10. Mengunggah Materi ke Layanan</p>
+              <p class="ml-2 ml-lg-2 font-weight-bold">9. Mengunggah Materi ke Layanan</p>
               <p
                 class="ml-2 ml-lg-2"
               >Anda mengakui dan setuju bahwa Anda bertanggung jawab atas Materi yang Anda pasang, transmisikan melalui maupun tautkan kepada Layanan dan setiap konsekuensi yang timbul dari tindakan tersebut. Secara khusus Anda bertanggung jawab atas setiap Materi yang Anda unggah seperti email atau yang Anda sediakan melalui Layanan atau Situs. Sehubungan dengan Materi yang dipasang, ditransmisikan melalui maupun tautkan kepada Layanan oleh Anda, Anda menyatakan secara tegas bahwa:</p>
               <p
                 class="ml-3 ml-lg-3"
-              >10.1 Anda mempunyai dan akan tetap mempunyai hak atas Materi tersebut selama Materi tersebut masih tersedia di Layanan atau Situs; Anda mempunyai ijin, hak dan persetujuan untuk menggunakan Materi tersebut dan memberikan kewenangan kepada SiMotor untuk menggunakan Materi tersebut di dalam Layanan atau Situs atau untuk kepentingan promosi SiMotor atau untuk kepentingan lainnya sepanjang tidak bertentangan dengan Undang-Undang dan Syarat dan Ketentuan Umum ini; dan</p>
+              >9.1 Anda mempunyai dan akan tetap mempunyai hak atas Materi tersebut selama Materi tersebut masih tersedia di Layanan atau Situs; Anda mempunyai ijin, hak dan persetujuan untuk menggunakan Materi tersebut dan memberikan kewenangan kepada SiMotor untuk menggunakan Materi tersebut di dalam Layanan atau Situs atau untuk kepentingan promosi SiMotor atau untuk kepentingan lainnya sepanjang tidak bertentangan dengan Undang-Undang dan Syarat dan Ketentuan Umum ini; dan</p>
               <p
                 class="ml-3 ml-lg-3"
-              >10.2 Anda mempunyai persetujuan tertulis, pelepasan dan/atau ijin dari setiap dan seluruh individu yang dapat diidentifikasi maupun usaha yang terdapat di dalam Materi untuk menggunakan nama atau kemiripan dari setiap dan seluruh individu dan usaha tersebut di dalam Layanan atau Situs sesuai dengan Syarat dan Ketentuan Umum ini. Anda tetap memiliki hak milik atas setiap Materi; namun dengan memasukkan Materi ke dalam Layanan, Anda memberikan hak yang tidak dapat dibatalkan, tidak dapat dicabut kembali, berlaku terus menerus, di seluruh dunia, tidak eksklusif, bebas royalty dan dapat disublisensikan, dapat dipindahkan, untuk menggunakan, mereproduksi, mendistribusikan, membuat pekerjaan derivatif, memasang dan menampilkan Materi sehubungan dengan Layanan dan usaha SiMotor, termasuk namun tidak terbatas pada tujuan promosi dan redistribusi sebagian maupun seluruh dari Layanan dan Materi yang terdapat di dalamnya. Hak-hak ini diperlukan oleh SiMotor untuk dapat menyediakan Layanan dan memasang Materi Anda. Selanjutnya, dengan memasang Materi ke dalam area publik di dalam Layanan, Anda setuju untuk dan dengan ini memberikan kepada SiMotor seluruh hak yang diperlukan untuk melarang atau memperbolehkan pengumpulan, pemasangan, penyalinan, duplikasi, reproduksi atau eksploitasi Materi di dalam Layanan oleh pihak manapun untuk tujuan apapun. Anda juga dengan ini memberikan kepada setiap pengguna Layanan dan Situs sebuah hak non-eksklusif untuk mengakses Materi Anda melalui Layanan atau Situs. Hak ini akan tetap berlaku dan dengan segera berakhir pada saat Anda atau SiMotor menghapus atau menarik Materi dari Situs.</p>
+              >9.2 Anda mempunyai persetujuan tertulis, pelepasan dan/atau ijin dari setiap dan seluruh individu yang dapat diidentifikasi maupun usaha yang terdapat di dalam Materi untuk menggunakan nama atau kemiripan dari setiap dan seluruh individu dan usaha tersebut di dalam Layanan atau Situs sesuai dengan Syarat dan Ketentuan Umum ini. Anda tetap memiliki hak milik atas setiap Materi; namun dengan memasukkan Materi ke dalam Layanan, Anda memberikan hak yang tidak dapat dibatalkan, tidak dapat dicabut kembali, berlaku terus menerus, di seluruh dunia, tidak eksklusif, bebas royalty dan dapat disublisensikan, dapat dipindahkan, untuk menggunakan, mereproduksi, mendistribusikan, membuat pekerjaan derivatif, memasang dan menampilkan Materi sehubungan dengan Layanan dan usaha SiMotor, termasuk namun tidak terbatas pada tujuan promosi dan redistribusi sebagian maupun seluruh dari Layanan dan Materi yang terdapat di dalamnya. Hak-hak ini diperlukan oleh SiMotor untuk dapat menyediakan Layanan dan memasang Materi Anda. Selanjutnya, dengan memasang Materi ke dalam area publik di dalam Layanan, Anda setuju untuk dan dengan ini memberikan kepada SiMotor seluruh hak yang diperlukan untuk melarang atau memperbolehkan pengumpulan, pemasangan, penyalinan, duplikasi, reproduksi atau eksploitasi Materi di dalam Layanan oleh pihak manapun untuk tujuan apapun. Anda juga dengan ini memberikan kepada setiap pengguna Layanan dan Situs sebuah hak non-eksklusif untuk mengakses Materi Anda melalui Layanan atau Situs. Hak ini akan tetap berlaku dan dengan segera berakhir pada saat Anda atau SiMotor menghapus atau menarik Materi dari Situs.</p>
               <p
                 class="ml-2 ml-lg-2"
               >SiMotor dapat memberlakukan batasan-batasan terhadap sebagian atau seluruh aktivitas Anda atau mengenakan biaya terhadap iklan yang dipasang oleh pengguna di dalam bagian-bagian tertentu dari Layanan termasuk namun tidak terbatas pada penggunaan Fitur Promosi Iklan yang harus dilakukan sesuai dengan Syarat dan Ketentuan Umum ini, serta Syarat dan Ketentuan Fitur Promosi Iklan.</p>
@@ -262,25 +262,25 @@
               <p
                 class="ml-2 ml-lg-2"
               >SiMotor berhak untuk menghapus setiap isi, materi atau bagian lain dari iklan, baik sebagian maupun keseluruhan, yang dipasang pengguna di Layanan atau Situs tanpa pemberitahuan terlebih dahulu kepada pengguna. Hal ini termasuk tapi tidak terbatas apabila iklan tersebut mengandung isi, materi atau bagian yang bersifat sensitif, ofensif, dapat memicu kebencian, mencemarkan nama baik, memuat materi yang memicu perpecahan suku, agama, ras, antar golongan, pornografi, perjudian, ataupun bertentangan dengan norma etika kesusilaan dan hukum yang berlaku di Republik Indonesia serta tidak sesuai dengan aturan yang berlaku di Layanan.</p>
-              <p class="ml-2 ml-lg-2 font-weight-bold">11. Durasi Iklan</p>
+              <p class="ml-2 ml-lg-2 font-weight-bold">10. Durasi Iklan</p>
               <p
                 class="ml-2 ml-lg-2"
               >Masa aktif iklan adalah sebagaimana tertera di halaman pemasangan iklan Setelah masa aktif iklan habis maka iklan secara otomatis dan permanen terhapus.</p>
-              <p class="ml-2 ml-lg-2 font-weight-bold">12. Tautan (hyperlink) dari Layanan</p>
+              <p class="ml-2 ml-lg-2 font-weight-bold">11. Tautan (hyperlink) dari Layanan</p>
               <p
                 class="ml-2 ml-lg-2"
               >Layanan dapat mengandung tautan (hyperlink) ke situs dan/atau sumber daya lain yang disediakan oleh pihak ketiga, dimana SiMotor menegaskan bahwa tautan (hyperlink) tersebut disediakan hanya sebagai informasi bagi pengguna. SiMotor melepaskan diri dari kewajiban untuk mengontrol isi dari situs dan/atau sumber daya yang terjadi karena tautan (hyperlink) yang ada di Layanan.</p>
               <p
                 class="ml-2 ml-lg-2"
               >SiMotor tidak bertanggung jawab atas kehilangan dan/atau kerugian yang dapat timbul akibat penggunaan Layanan.</p>
-              <p class="ml-2 ml-lg-2 font-weight-bold">13.Hubungan dengan Pihak Ketiga</p>
+              <p class="ml-2 ml-lg-2 font-weight-bold">12.Hubungan dengan Pihak Ketiga</p>
               <p
                 class="ml-2 ml-lg-2"
               >Anda mengakui dan setuju bahwa SiMotor tidak akan bertanggung jawab atas interaksi Anda dengan pihak ketiga di dalam Situs maupun melalui Layanan. Hal ini termasuk, namun tidak terbatas pada, pembayaran dan pengiriman barang dan jasa, serta syarat, kondisi, jaminan atau pernyataan lain yang terkait dengan interaksi antara Anda dengan pihak ketiga. Hubungan ini adalah antara Anda dengan pihak ketiga tersebut. Anda mengakui dan setuju bahwa SiMotor tidak akan bertanggung jawab atas setiap kerugian atau kerusakan yang timbul dari hubungan atau interaksi tersebut.</p>
               <p
                 class="ml-2 ml-lg-2"
               >Dalam hal terjadi perselisihan antara pengguna dengan pihak ketiga, Anda mengerti dan setuju bahwa SiMotor tidak bertanggung jawab untuk melibatkan diri dalam perselisihan tersebut dan Anda dengan ini membebaskan SiMotor, karyawannya, petugasnya dan agennya dari setiap tuntutan dan kerugian yang timbul dalam bentuk apapun sehubungan dengan Layanan kami.</p>
-              <p class="ml-2 ml-lg-2 font-weight-bold">14. Yurisdiksi dan Hukum yang Berlaku</p>
+              <p class="ml-2 ml-lg-2 font-weight-bold">13. Yurisdiksi dan Hukum yang Berlaku</p>
               <p class="ml-2 ml-lg-2">
                 Syarat & Ketentuan Umum ini, Kebijakan Privasi dan Larangan Iklan serta hubungan pengguna dengan SiMotor tunduk, diatur dan patuh menurut hukum Republik Indonesia, dan pengguna sepakat untuk terikat pada yurisdiksi hukum Republik Indonesia.
                 Apabila terjadi perselisihan dalam penafsiran dan pelaksanaan Syarat & Ketentuan Umum ini,
@@ -289,17 +289,17 @@
                 >Kebijakan Privasi</a>dan
                 <a href="/">Larangan Iklan</a>, para pihak sepakat untuk menyelesaikannya secara musyawarah untuk mufakat
               </p>
-              <p class="ml-2 ml-lg-2 font-weight-bold">15. Perubahan‐Perubahan</p>
+              <p class="ml-2 ml-lg-2 font-weight-bold">14. Perubahan‐Perubahan</p>
               <p
                 class="ml-3 ml-lg-3"
-              >15.1 Setiap syarat dan ketentuan serta petunjuk lain yang berlaku untuk Layanan dapat diubah atau diperbarui oleh SiMotor dari waktu ke waktu atas kebijakannya sendiri.</p>
+              >14.1 Setiap syarat dan ketentuan serta petunjuk lain yang berlaku untuk Layanan dapat diubah atau diperbarui oleh SiMotor dari waktu ke waktu atas kebijakannya sendiri.</p>
               <p
                 class="ml-3 ml-lg-3"
-              >15.2 Pengguna diharapkan untuk memeriksa halaman ini dari waktu ke waktu untuk memperhatikan setiap perubahan, karena hal tersebut mengikat pengguna.</p>
+              >14.2 Pengguna diharapkan untuk memeriksa halaman ini dari waktu ke waktu untuk memperhatikan setiap perubahan, karena hal tersebut mengikat pengguna.</p>
               <p
                 class="ml-3 ml-lg-3"
-              >15.3 Sebagian dari ketentuan yang terdapat dalam Syarat & Ketentuan Umum ini dapat digantikan oleh ketentuan-ketentuan atau pemberitahuan lain yang dipublikasi di bagian lain Layanan.</p>
-              <p class="ml-2 ml-lg-2 font-weight-bold">16. Lain‐Lain</p>
+              >14.3 Sebagian dari ketentuan yang terdapat dalam Syarat & Ketentuan Umum ini dapat digantikan oleh ketentuan-ketentuan atau pemberitahuan lain yang dipublikasi di bagian lain Layanan.</p>
+              <p class="ml-2 ml-lg-2 font-weight-bold">15. Lain‐Lain</p>
               <p
                 class="ml-2 ml-lg-2"
               >Dengan menjadi pengguna Layanan, Anda dapat memilih apakah Anda berkeinginan untuk menerima informasi‐informasi terkait Layanan, penggunaanya, serta hal‐hal lain sehubungan dengan penggunaan akun Anda, adapun informasi‐informasi tersebut akan kami kirimkan atas dasar itikad baik melalui notifikasi baik berupa email ataupun notifikasi aplikasi ataupun bentuk‐bentuk lain. Jika Anda memilih untuk tidak menerima informasi, Anda dapat memberitahu kami dengan menghubungi layanan dukungan pelanggan kami.</p>

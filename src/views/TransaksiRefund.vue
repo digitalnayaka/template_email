@@ -92,7 +92,7 @@
     <div>
       <h1 class="text-center">Detail Transaksi Refund</h1>
 
-      <v-card class="mx-auto" max-width="600">
+      <v-card class="mx-auto" max-width="1000">
         <v-row>
           <v-col cols="12">
             <v-card color="deep-orange lighten-2">

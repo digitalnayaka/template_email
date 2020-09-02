@@ -31,33 +31,34 @@
 
     <v-row>
       <v-col cols="12" align="center">
-        <h4>Total Tiket</h4>
-        {{ tiket.total }}
+        <h2>Total Tiket</h2>
+        <h2>{{ tiket.total }}</h2>
       </v-col>
     </v-row>
+  
 
     <v-row class="text-center">
-      <v-col cols="3">
+      <v-col cols="2.99">
         <h5>Tersedia</h5>
         {{ tiket.tersedia }}
       </v-col>
-
+      <v-divider vertical></v-divider>
       <v-col cols="3">
         <h5>Terpakai</h5>
         {{ tiket.terpakai }}
       </v-col>
-
+      <v-divider vertical></v-divider>
       <v-col cols="3">
         <h5>Refund</h5>
         {{ tiket.return }}
       </v-col>
-
+      <v-divider vertical></v-divider>
       <v-col cols="3" class="red--text">
         <h5>Hangus</h5>
         {{ tiket.hangus }}
       </v-col>
     </v-row>
-
+  <v-divider vertical></v-divider>
     <v-row class="text-center">
       <v-col cols="6">
         <!-- <v-card dark color="transparent" to="/refund_tiket" max-width="400">
@@ -169,7 +170,7 @@
     <v-tabs-items v-model="tab">
       <v-tab-item>
         <v-tabs v-model="subTab2" grow @change="changeTab">
-          <v-tab>Dapatkan Tiket</v-tab>
+          <v-tab>Tiket Didapat</v-tab>
           <v-tab>Refund Tiket</v-tab>
 
           <v-tab-item>

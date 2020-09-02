@@ -44,25 +44,32 @@
         </div>
 
         <div>{{ user.nomor_hp }}</div>
+        
         <div class="text-center">
-          <v-card rounded="xl" to="/category/tiket" class="d-inline-block mx-auto" width="500">
+          <v-card rounded="xl" to="/category/tiket" class="d-inline-block mx-auto" width="1000">
             <v-list dense>
               <v-list-item>
+                 <v-list-item-content>
+                  
+                  <h5>BIOOOOOOOOOOOO</h5>
+                </v-list-item-content>
                 <v-list-item-avatar tile size="80">
                   <v-img src="/img/tiket.png"></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{ tiket.tersedia }}</v-list-item-title>
-                  <v-list-item-subtitle>Tersedia</v-list-item-subtitle>
+                  <h2>{{ tiket.tersedia }}</h2>
+                  <h2>Tersedia</h2>
                 </v-list-item-content>
 
                 <v-list-item-action>
                   <v-icon>mdi-chevron-right</v-icon>
                 </v-list-item-action>
+               
               </v-list-item>
             </v-list>
           </v-card>
+        
         </div>
 
         <v-tabs v-model="tab" background-color="transparent" center-active grow>
@@ -132,36 +139,6 @@
 
           <v-tab-item>
             <v-list class="text-left">
-              <v-list-item to="/tambah-iklan">
-                <v-list-item-avatar tile size="30">
-                  <v-img src="/img/icons/ic_tambah_iklan.png"></v-img>
-                </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title>Tambah Iklan</v-list-item-title>
-                </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-icon>mdi-chevron-right</v-icon>
-                </v-list-item-action>
-              </v-list-item>
-
-              <v-divider></v-divider>
-
-              <v-list-item to="/tambah-unit">
-                <v-list-item-avatar tile size="30">
-                  <v-img src="/img/icons/ic_tambah_unit.png"></v-img>
-                </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title>Tambah Unit</v-list-item-title>
-                </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-icon>mdi-chevron-right</v-icon>
-                </v-list-item-action>
-              </v-list-item>
-
-              <v-divider></v-divider>
-
               <v-list-item to="/iklan">
                 <v-list-item-avatar tile size="30">
                   <v-img src="/img/icons/ic_iklan_garasi_anda.png"></v-img>
@@ -183,6 +160,34 @@
                 </v-list-item-avatar>
                 <v-list-item-content>
                   <v-list-item-title>Garasi Anda</v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-action>
+                  <v-icon>mdi-chevron-right</v-icon>
+                </v-list-item-action>
+              </v-list-item>
+              <v-divider></v-divider>
+              <v-list-item to="/tambah-iklan">
+                <v-list-item-avatar tile size="30">
+                  <v-img src="/img/icons/ic_tambah_iklan.png"></v-img>
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>Tambah Iklan</v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-action>
+                  <v-icon>mdi-chevron-right</v-icon>
+                </v-list-item-action>
+              </v-list-item>
+
+              <v-divider></v-divider>
+
+              <v-list-item to="/tambah-unit">
+                <v-list-item-avatar tile size="30">
+                  <v-img src="/img/icons/ic_tambah_unit.png"></v-img>
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>Tambah Unit</v-list-item-title>
                 </v-list-item-content>
 
                 <v-list-item-action>

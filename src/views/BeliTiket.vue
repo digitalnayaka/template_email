@@ -22,7 +22,7 @@
 
     <div align="center">
       <div class="text-h5 text-sm-h4">Dapatkan Tiket Tawar Bersama</div>
-      <div>Paket yang tersedia</div>
+      <div>Harga Tiket Tawar Bersama adalah Rp. 150.000/Tiket. Silahkan Pilih paket yang tersedia</div>
     </div>
 
     <!-- <div class="text-center">
