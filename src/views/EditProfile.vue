@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-card class="d-inline-block mx-auto">
+    <v-card class="d-inline-block mx-auto" width="1000">
       <v-card-title>
         <span class="headline">Edit Profile</span>
       </v-card-title>
@@ -37,6 +37,8 @@
           <v-text-field label="Nomor Handphone" v-model="nomorHP" outlined readonly></v-text-field>
 
           <v-text-field label="Nomor Whatsapp" v-model="nomorWA" outlined :rules="waRules"></v-text-field>
+
+           <v-text-field label="Deskripsi Penjual" v-model="deskripsi" outlined :rules="deskripsiRules"></v-text-field>
 
           <v-text-field
             label="Alamat Email"
@@ -81,15 +83,21 @@ export default {
       nomorHP: "",
       nomorWA: "",
       email: "",
+      deskripsi:"",
       valid: true,
-      formRules: [v => !!v || "Field is required"],
+      formRules: [v => !!v || "Data harus diisi!"],
       waRules: [
-        v => v.length >= 10 || "Min 10 characters",
-        v => v.length <= 13 || "Max 13 characters"
+        v => v.length >= 10 || "Min. 10 karakter",
+        v => v.length <= 13 || "Maks. 13 karakter"
+      ],
+      deskripsiRules: [
+        
+        v => v.length >= 30 || "Min. 30 karakter",
+        v => v.length <= 150 || "Maks. 150 karakter"
       ],
       emailRules: [
-        v => !!v || "Field is required",
-        v => /.+@.+/.test(v) || "E-mail must be valid"
+        v => !!v || "Data harus diisi!",
+        v => /.+@.+/.test(v) || "E-mail harus valid"
       ]
     };
   },

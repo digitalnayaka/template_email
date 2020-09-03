@@ -33,7 +33,7 @@
                 <v-icon>mdi-phone</v-icon>Telepon
               </v-list-item-title>
 
-              <v-list-item-subtitle>(021)-30490087</v-list-item-subtitle>
+              <v-list-item-subtitle>(021)- 65835839</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -53,7 +53,10 @@
                 <v-icon>mdi-office-building</v-icon>Office
               </v-list-item-title>
 
-              <v-list-item-subtitle>Menara Kirana 2 Lantai 10 A, Jl. Boulevard Timur No.88 Pegangsaan 2, Kelapa Gading, Jakarta Utara</v-list-item-subtitle>
+              <v-list-item-subtitle>
+                Ruko Sentra Komersil (Rsk) Blok 7/96 Grand Galaxy City, Kelurahan Jakasetia,
+                Kecamatan Bekasi Selatan, Kota Bekasi, Jawa Barat
+              </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>

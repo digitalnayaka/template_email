@@ -9,7 +9,7 @@
     <h1 align="center">Refund Tiket Tawar Bersama</h1>
 
     <div align="center">
-      <v-card class="d-inline-block mx-auto">
+      <v-card class="d-inline-block mx-auto" width="1000">
         <v-container fluid>
           <v-card>
             <v-img src="/img/bg.png" height="200">
@@ -38,7 +38,7 @@
 
                     <v-spacer></v-spacer>
 
-                    <v-btn icon dark class="mx-2" @click="getTiket">Refund</v-btn>
+                    <v-btn icon dark color class="mx-2" @click="getTiket">Refund</v-btn>
                   </v-toolbar>
 
                   <v-card>
@@ -211,8 +211,8 @@
 
           <v-btn block class="ma-2" color="primary" @click="dialogRekening = true">Tambah Rekening</v-btn>
 
-          <h5 class="my-3">Refund akan diproses maksimal 2x24 Jam hari kerja</h5>
-          <h5 class="my-3">Jumlah refund diatas belum termasuk biaya antar bank</h5>
+          <h4 class="my-3">*Refund akan diproses maksimal 2x24 Jam hari kerja</h4>
+          <!-- <h5 class="my-3">Jumlah refund diatas belum termasuk biaya antar bank</h5> -->
 
           <v-btn
             block

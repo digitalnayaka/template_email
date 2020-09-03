@@ -14,7 +14,7 @@
 
       <v-card align="center" class="d-inline-block mx-auto">
         <v-list>
-          <v-list-item href="http://faq.simotor.id" target="_self">
+          <v-list-item>
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon>mdi-cellphone</v-icon>Versi Aplikasi
@@ -24,7 +24,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item href="http://faq.simotor.id" target="_self">
+          <v-list-item href="http://faq.simotor.id" target="_blank">
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon>mdi-comment-question-outline</v-icon>FAQ

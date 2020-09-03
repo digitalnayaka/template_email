@@ -65,11 +65,11 @@
       </v-card>
 
       <div class="ma-2">
-        <div
+        <!-- <div
           class="red--text"
-        >(*Total harga akan ditambah 3 digit angka unik. Lakukan pembayaran sesuai dengan nominal yang tertera.)</div>
+        >(*Total harga akan ditambah 3 digit angka unik. Lakukan pembayaran sesuai dengan nominal yang tertera.)</div> -->
 
-        <div>Setelah Anda melakukan pembayaran, tiket Anda akan masuk dalam waktu 2x24 jam.</div>
+        <div class="red--text">*setelah Anda melakukan pembayaran, tiket Anda akan masuk dalam waktu 2x24 jam.</div>
       </div>
 
       <v-dialog v-model="dialog" width="250" persistent>

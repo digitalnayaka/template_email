@@ -15,7 +15,7 @@
         <v-container fluid>
           <div class="row mb-5 layout justify-center">
             <div class="col-md-10 text-justify white-gradient">
-              <p class="font-weight-bold">Simotor ‐ Pernyataan Privasi</p>
+              <p class="font-weight-bold">SiMotor ‐ Pernyataan Privasi</p>
               <p>
                 Kami peduli dengan privasi Anda dan berkomitmen untuk melindungi data pribadi Anda. Pernyataan privasi ini akan memberitahu
                 Anda bagaimana kami menangani data pribadi Anda, hak privasi Anda dan bagaimana hukum melindungi Anda. Silakan baca pernyataan
@@ -31,10 +31,11 @@
               <p class="ml-2 ml-lg-2 md-2 font-weight-bold">1. Siapa kami?</p>
 
               <p class="ml-2 ml-lg-2 md-2">
-                Pengelola utama data Anda untuk tujuan layanan kami adalah Digital Network Asia, sebuah perusahaan yang
-                berlokasi di Menara Kirana II, lantai 10 A, Jalan Boulevard Timur No 88 Pegangsaan 2, Kelapa Gading, Jakarta Utara, Indonesia.
-                Digital Network asia adalah perusahaan pengelola dan pembuat dari aplikasi Simotor (selanjutnya secara bersama disebut sebagai
-                “Simotor”, “kami”, “kita” atau “milik kami” dalam pernyataan privasi ini). yang menyediakan layanan kepada Anda sesuai dengan
+                Pengelola utama data Anda untuk tujuan layanan kami adalah Digital Nayaka Abhinaya, sebuah perusahaan yang
+                berlokasi di Ruko Sentra Komersil (Rsk) Blok 7/96 Grand Galaxy City, Kelurahan Jakasetia,
+                Kecamatan Bekasi Selatan, Kota Bekasi, Jawa Barat, Indonesia.
+                Digital Nayaka Abhinaya adalah perusahaan pengelola dan pembuat dari aplikasi SiMotor (selanjutnya secara bersama disebut sebagai
+                “SiMotor”, “kami”, “kita” atau “milik kami” dalam pernyataan privasi ini). yang menyediakan layanan kepada Anda sesuai dengan
                 <a
                   href="/"
                 >Syarat & Ketentuan</a> kami.
@@ -241,7 +242,7 @@
               <p class="ml-3 ml-lg-3">
                 Dalam keadaan tertentu, Anda memiliki hak di bawah undang‐undang perlindungan data yang terkait dengan data pribadi Anda.
                 Jika Anda ingin menggunakan hak apa pun yang ditetapkan di bawah ini, silakan buka pengaturan akun / privasi Anda atau hubungi kami
-                menggunakan Formulir Kontak / id email privasi: support@simotor.id.
+                menggunakan Formulir Kontak / id email privasi: support@SiMotor.id.
               </p>
               <p class="ml-4 ml-lg-4">
                 5.1 Hak untuk meminta akses ke data pribadi Anda (umumnya dikenal sebagai "permintaan akses subjek data").
@@ -296,8 +297,9 @@
               </p>
               <p class="ml-3 ml-lg-3">
                 Namun, sebelum Anda mengajukan keluhan kepada otoritas perlindungan data, kami akan menghargai kesempatan untuk menangani
-                kekhawatiran Anda dalam contoh pertama, silakan hubungi Kantor Privasi kami di Menara Kirana II, lantai 10 A, Jalan Boulevard
-                Timur No 88 Pegangsaan 2, Kelapa Gading, Jakarta Utara.
+                kekhawatiran Anda dalam contoh pertama, silakan hubungi Kantor Privasi kami di Ruko Sentra Komersil (Rsk) Blok 7/96 Grand Galaxy City, Kelurahan Jakasetia,
+                Kecamatan Bekasi Selatan, Kota Bekasi, Jawa Barat
+                .
               </p>
               <p class="ml-2 ml-lg-2 font-weight-bold">6. Komunikasi dan pemasaran</p>
               <p class="ml-2 ml-lg-2">
@@ -309,7 +311,7 @@
               </p>
               <p class="ml-2 ml-lg-2">
                 Namun, Anda dapat meminta kami untuk berhenti mengirimi Anda komunikasi pemasaran kapan saja hubungi kami melalui
-                email ke support@simotor.id.
+                email ke support@SiMotor.id.
               </p>
               <p class="ml-2 ml-lg-2">Anda dapat menerima komunikasi pemasaran dari kami jika Anda:</p>
               <p class="ml-3 ml-lg-3">6.1 telah meminta informasi tersebut dari kami;</p>
@@ -321,7 +323,7 @@
               >Kami mungkin harus membagikan data pribadi Anda dengan pihak‐pihak yang ditetapkan di bawah ini untuk tujuan yang ditetapkan dalam bagian 4 di atas:</p>
               <p
                 class="ml-3 ml-lg-3"
-              >7.1 Afiliasi perusahaan ‐ kami dapat membagikan data Anda dengan perusahaan grup Simotor lainnya yang berlokasi di dalam maupun di luar Wilayah Ekonomi Eropa (“EEA”) dan membantu kami dalam menyediakan layanan operasi bisnis seperti peningkatan produk, dukungan pelanggan, dan mekanisme deteksi penipuan. Setiap pembagian data pribadi dalam kelompok perusahaan Simotor yang terletak di luar “EEA” akan selalu menjadi subjek perlindungan sebagaimana dijelaskan dalam bagian 9 atau pada perjanjian transfer data yang dengan jelas mendefinisikan kewajiban para pihak dan memastikan teknis yang sesuai dan langkah‐langkah organisasi untuk melindungi data Anda.</p>
+              >7.1 Afiliasi perusahaan ‐ kami dapat membagikan data Anda dengan perusahaan grup SiMotor lainnya yang berlokasi di dalam maupun di luar Wilayah Ekonomi Eropa (“EEA”) dan membantu kami dalam menyediakan layanan operasi bisnis seperti peningkatan produk, dukungan pelanggan, dan mekanisme deteksi penipuan. Setiap pembagian data pribadi dalam kelompok perusahaan SiMotor yang terletak di luar “EEA” akan selalu menjadi subjek perlindungan sebagaimana dijelaskan dalam bagian 9 atau pada perjanjian transfer data yang dengan jelas mendefinisikan kewajiban para pihak dan memastikan teknis yang sesuai dan langkah‐langkah organisasi untuk melindungi data Anda.</p>
               <p
                 class="ml-3 ml-lg-3"
               >7.2 Penyedia Layanan Pihak Ketiga: Kami menggunakan penyedia layanan pihak ketiga untuk membantu kami memberikan aspek tertentu dari Layanan kami, contohnya, fasilitas penyimpanan cloud seperti Amazon Web Services dan Microsoft Azure. Penyedia layanan dapat ditempatkan di dalam atau di luar “EEA”. Kami melakukan pemeriksaan pada penyedia layanan pihak ketiga kami dan mengharuskan mereka untuk menghormati keamanan data pribadi Anda dan memperlakukannya sesuai dengan hukum. Kami tidak mengizinkan mereka untuk menggunakan data pribadi Anda untuk tujuan mereka sendiri dan hanya mengizinkan mereka untuk memproses data pribadi Anda untuk tujuan tertentu dan sesuai dengan instruksi kami.</p>
@@ -354,13 +356,13 @@
               >Jika tidak ada aktivitas di akun Anda untuk jangka waktu lebih lama dari 24 bulan, kami akan menghapus akun Anda termasuk semua data pribadi yang tersimpan di akun Anda yang berarti bahwa Anda tidak akan lagi dapat mengakses dan menggunakannya.</p>
               <p
                 class="ml-2 ml-lg-2"
-              >Jika Anda memiliki pertanyaan terkait periode retensi data Anda, silakan hubungi kami di suport@simotor.id</p>
+              >Jika Anda memiliki pertanyaan terkait periode retensi data Anda, silakan hubungi kami di suport@SiMotor.id</p>
               <p
                 class="ml-3 ml-lg-3 font-weight-bold"
               >8.1 Tindakan teknis dan organisasi & pemrosesan keamanan</p>
               <p
                 class="ml-3 ml-lg-3"
-              >Semua informasi yang kami terima tentang Anda disimpan di server aman dan kami telah menerapkan langkah‐langkah teknis dan organisasi yang sesuai dan diperlukan untuk melindungi data pribadi Anda. Simotor terus mengevaluasi keamanan jaringannya dan kecukupan program keamanan informasi internalnya yang dirancang untuk (a) membantu mengamankan data Anda dari kehilangan, akses atau pengungkapan yang tidak disengaja atau melanggar hukum, (b) mengidentifikasi risiko yang dapat diduga secara wajar terhadap keamanan Simotor jaringan, dan (c) meminimalkan risiko keamanan, termasuk melalui penilaian risiko dan pengujian rutin. Selain itu, kami memastikan bahwa semua data pembayaran dienkripsi menggunakan teknologi SSL.</p>
+              >Semua informasi yang kami terima tentang Anda disimpan di server aman dan kami telah menerapkan langkah‐langkah teknis dan organisasi yang sesuai dan diperlukan untuk melindungi data pribadi Anda. SiMotor terus mengevaluasi keamanan jaringannya dan kecukupan program keamanan informasi internalnya yang dirancang untuk (a) membantu mengamankan data Anda dari kehilangan, akses atau pengungkapan yang tidak disengaja atau melanggar hukum, (b) mengidentifikasi risiko yang dapat diduga secara wajar terhadap keamanan SiMotor jaringan, dan (c) meminimalkan risiko keamanan, termasuk melalui penilaian risiko dan pengujian rutin. Selain itu, kami memastikan bahwa semua data pembayaran dienkripsi menggunakan teknologi SSL.</p>
               <p
                 class="ml-3 ml-lg-3"
               >Harap dicatat, meskipun kami telah melakukan langkah‐langkah yang kami terapkan untuk melindungi data Anda, transfer data melalui Internet atau jaringan terbuka lainnya tidak pernah sepenuhnya aman dan ada risiko bahwa data pribadi Anda dapat diakses oleh pihak ketiga yang tidak sah.</p>
@@ -369,9 +371,11 @@
                 class="ml-3 ml-lg-3"
               >Platform kami mungkin berisi tautan ke situs web atau aplikasi pihak ketiga. Jika Anda mengklik salah satu tautan ini, harap diperhatikan bahwa masing‐masing akan memiliki kebijakan privasinya sendiri. Kami tidak mengontrol situs web / aplikasi seperti ini dan tidak bertanggung jawab atas kebijakan tersebut. Ketika Anda meninggalkan Platform kami, kami mendorong Anda untuk membaca pemberitahuan privasi dari setiap situs web yang Anda kunjungi.</p>
               <p class="ml-3 ml-lg-3 font-weight-bold">8.3 Kontak</p>
-              <p
-                class="ml-3 ml-lg-3"
-              >Untuk informasi tambahan apa pun atau untuk menggunakan hak Anda, silakan hubungi Kantor Privasi kami di Menara Kirana II, lantai 10 A, Jalan Boulevard Timur No 88 Pegangsaan 2, Kelapa Gading, Jakarta Utara, atau melalui Bagian Bantuan di Platform kami. Anda juga dapat secara alternatif menghubungi pengelola Data untuk layanan lokal Anda di support@simotor.id.</p>
+              <p class="ml-3 ml-lg-3">
+                Untuk informasi tambahan apa pun atau untuk menggunakan hak Anda, silakan hubungi Kantor Privasi kami di Ruko Sentra Komersil (Rsk) Blok 7/96 Grand Galaxy City, Kelurahan Jakasetia,
+                Kecamatan Bekasi Selatan, Kota Bekasi, Jawa Barat
+                atau melalui Bagian Bantuan di Platform kami. Anda juga dapat secara alternatif menghubungi pengelola Data untuk layanan lokal Anda di support@SiMotor.id.
+              </p>
             </div>
           </div>
         </v-container>

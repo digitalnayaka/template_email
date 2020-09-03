@@ -235,7 +235,7 @@
                 <v-list>
                   <v-list-item>
                     <v-list-item-content>
-                      <v-list-item-title>Gunakan Tiket</v-list-item-title>
+                      <h3>Gunakan Tiket</h3>
                       <v-list-item-subtitle>Isikan jumlah iklan tiket, minimal 1 Tiket</v-list-item-subtitle>
                     </v-list-item-content>
 
