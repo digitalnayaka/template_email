@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar app color="teal" dark>
-      <v-btn icon @click.stop="$router.go(-1)">
+      <v-btn icon @click.stop="back">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
 
@@ -2038,6 +2038,10 @@ export default {
           let responses = error.response.data;
           console.log(responses);
         });
+    },
+    back() {
+      this.$router.go(-1);
+      this.title = "SiMotor";
     },
   },
   created() {
