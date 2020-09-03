@@ -145,7 +145,7 @@
     </v-main>
 
     <v-btn bottom color="red" dark fab fixed right to="/bantuan">
-      <v-icon>mdi-ear-hearing</v-icon>
+      <v-icon>mdi-account-question</v-icon>
     </v-btn>
   </v-app>
 </template>

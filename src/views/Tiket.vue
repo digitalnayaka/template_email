@@ -14,14 +14,8 @@
             <v-avatar class="ma-3" size="20" tile>
               <v-img src="/img/error.png"></v-img>
             </v-avatar>
-
             <div>
-              <v-card-text>
-                Dikarenakan masih dalam periode promo, kami membuat harga
-                tiket menjadi Rp.0, untuk itu Anda perlu mengupload identitas diri Anda sebagai ganti bukti transfer.
-                Kami akan tetap menjaga privasi Anda dan ingin menjamin jaminan agar Anda serius dalam melakukan penawaran iklan Tawar Bersama.
-                Dan tiket ini sebagai deposit/setoran yang dapat anda tarik kembali (refund).
-              </v-card-text>
+              <v-card-text>Anda membutuhkan tiket untuk mengikuti Iklan Tawar Bersama. Dapatkan harga promo tiket Rp. 0 hanya dengan upload bukti Identitas Anda. Kami selalu menjaga privasi Anda serta menjamin agar Anda serius dalam melakukan penawaran. Tiket ini sebagai deposit yang bisa Anda tarik kembali (refund).</v-card-text>
             </div>
           </div>
         </v-card>
@@ -37,30 +31,37 @@
     </v-row>
 
     <v-row class="text-center">
-      <v-col cols="2.9">
+      <v-col cols="2">
         <h5>Tersedia</h5>
         {{ tiket.tersedia }}
       </v-col>
 
       <v-divider vertical></v-divider>
 
-      <v-col cols="3">
+      <v-col cols="2">
         <h5>Terpakai</h5>
         {{ tiket.terpakai }}
       </v-col>
 
       <v-divider vertical></v-divider>
 
-      <v-col cols="3">
+      <v-col cols="2">
         <h5>Refund</h5>
         {{ tiket.return }}
       </v-col>
 
       <v-divider vertical></v-divider>
 
-      <v-col cols="3" class="red--text">
+      <v-col cols="2" class="red--text">
         <h5>Hangus</h5>
         {{ tiket.hangus }}
+      </v-col>
+
+      <v-divider vertical></v-divider>
+      
+      <v-col cols="2" class="red--text">
+        <h5>Expired</h5>
+        {{ tiket.expired }}
       </v-col>
     </v-row>
 

@@ -918,16 +918,19 @@
         <v-bottom-sheet v-model="sheet">
           <v-sheet>
             <v-container fluid v-if="useTiket">
-              <h2 class="text-center my-4">Oops!</h2>
+              <h2 class="text-center my-4 red--text">{{iklan.jumlah_tiket}} Tiket dibutuhkan</h2>
 
               <div class="text-center my-4">
                 Untuk dapat mengikuti iklan ini perlu memakai tiket. Gunakan Tiket Tawar Bersama pada iklan ini?
-                <br />Tiket yang dibutuhkan: 1 Tiket
+                <br />Catatan:
+                <br />1. Pastikan masa kadaluarsa tiket Anda melebihi waktu selesai tawar bersama iklan ini.
                 <br />
-                Jumlah tiket tersedia: {{ totalTiket.tersedia }} Tiket
+2. Tiket Anda akan tetap terpakai untuk mengikuti iklan Tawar Bersama ini meskipun Anda tidak melakukan penawaran
               </div>
-
-              <v-btn block color="success" class="my-4" @click="konfirmasiTiket">Gunakan Tiket Anda</v-btn>
+              <h2
+                class="text-center my-4 green--text"
+              >Jumlah tiket tersedia milik Anda: {{ totalTiket.tersedia }} Tiket</h2>
+              <v-btn block color="primary" class="my-4" @click="konfirmasiTiket">Gunakan Tiket Anda</v-btn>
             </v-container>
 
             <v-container fluid v-if="noTiket">

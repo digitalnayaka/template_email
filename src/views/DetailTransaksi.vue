@@ -44,7 +44,7 @@
                   class="font-weight-black"
                 >{{ orders.created_at | dateTimeFormat }} WIB</v-list-item-title>
               </v-list-item>
-              <v-list-item>
+              <!-- <v-list-item>
                 <v-list-item-title>Status Tagihan:</v-list-item-title>
 
                 <v-list-item-title
@@ -71,7 +71,19 @@
                   class="font-weight-black red--text"
                   v-if="orders.id_mst_pembayaran_status == 6"
                 >{{ orders.pembayaran_status }}</v-list-item-title>
+              </v-list-item>-->
+              <v-list-item v-if="orders.id_mst_pembayaran_status == 5">
+                <v-list-item-title >Alasan Ditolak:</v-list-item-title>
+
+                <v-list-item-title class="font-weight-black">{{ orders.note}}</v-list-item-title>
               </v-list-item>
+
+              <v-list-item v-if="orders.id_mst_pembayaran_note == 1">
+                <v-list-item-title>Detail Alasan:</v-list-item-title>
+
+                <v-list-item-title class="font-weight-black red--text">{{ orders.note_detail}}</v-list-item-title>
+              </v-list-item>
+
               <v-list-item>
                 <v-list-item-title>Nama Penjual:</v-list-item-title>
 

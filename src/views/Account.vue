@@ -50,7 +50,7 @@
             <v-list dense>
               <v-list-item>
                 <v-list-item-content>
-                  <h5>BIOOOOOOOOOOOO</h5>
+                  <h5>{{user.deskripsi}}</h5>
                 </v-list-item-content>
 
                 <v-list-item-avatar tile size="80">
@@ -78,7 +78,7 @@
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <v-list class="text-left">
-              <v-list-item>
+              <v-list-item  to="/iklan_favorit">
                 <v-list-item-avatar tile size="30">
                   <v-img src="/img/icons/ic_iklan_favorit.png"></v-img>
                 </v-list-item-avatar>

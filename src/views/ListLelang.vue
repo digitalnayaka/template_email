@@ -56,6 +56,7 @@
               <div class="mt-2">
                 <v-btn color="teal" dark @click="dialogHubungi = true" class="mx-2">Hubungi</v-btn>
                 <v-btn color="teal" dark :to="'/chat/' + appuser.id" class="mx-2">Pesan</v-btn>
+                <v-btn color="teal" dark @click="dialogBio = true" class="mx-2">Info Penjual</v-btn>
               </div>
             </v-list-item>
           </v-list>
@@ -89,6 +90,27 @@
                   >WhatsApp Now</a>
                 </v-btn>
               </div>
+            </v-card>
+          </v-dialog>
+
+          <v-dialog v-model="dialogBio" persistent max-width="500px">
+            <v-card>
+              <v-toolbar dark color="teal">
+                <v-toolbar-title>Bio Penjual</v-toolbar-title>
+
+                <div class="flex-grow-1"></div>
+
+                <v-btn icon @click="dialogBio = false">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </v-toolbar>
+
+              <v-card-text>Lorem ipsum dolor sit amet, semper quis, sapien id natoque elit. 
+                Nostra urna at, magna at neque sed sed ante imperdiet, dolor mauris cursus velit, velit non, sem nec. 
+                Volutpat sem ridiculus placerat leo, augue in, duis erat proin condimentum in a eget, sed fermentum sed vestibulum varius ac, vestibulum volutpat orci ut elit eget tortor. 
+                Ultrices nascetur nulla gravida ante arcu. Pharetra rhoncus morbi ipsum, nunc tempor debitis, ipsum pellentesque, vitae id quam ut mauris dui tempor, aptent non. Quisque turpis. 
+                Phasellus quis lectus luctus orci eget rhoncus. Amet donec vestibulum mattis commodo, nulla aliquet, nibh praesent, elementum nulla. Sit lacus pharetra tempus magna neque pellentesque, nulla vel erat. 
+               </v-card-text>
             </v-card>
           </v-dialog>
         </v-card>
@@ -234,6 +256,7 @@ export default {
       lengthPage: 0,
       limit: 20,
       dialogHubungi: false,
+      dialogBio: false,
       offset: 0,
       total: 0,
       waktu: "",

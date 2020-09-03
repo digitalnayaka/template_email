@@ -38,7 +38,12 @@
 
           <v-text-field label="Nomor Whatsapp" v-model="nomorWA" outlined :rules="waRules"></v-text-field>
 
-           <v-text-field label="Deskripsi Penjual" v-model="deskripsi" outlined :rules="deskripsiRules"></v-text-field>
+          <v-text-field
+            label="Deskripsi Penjual"
+            v-model="deskripsi"
+            outlined
+            :rules="deskripsiRules"
+          ></v-text-field>
 
           <v-text-field
             label="Alamat Email"
@@ -52,9 +57,15 @@
             Alamat Email
             <section id="firebaseui-auth-container"></section>
           </div>
+          <v-text-field
+            label="Kota"
+            v-model="kota"
+            outlined
+            :rules="kotaRules"
+          ></v-text-field>
         </v-form>
       </v-card-text>
-
+  
       <v-divider></v-divider>
 
       <div class="ma-2">Data anda selalu dirahasiakan dan tidak akan diberikan kepada pihak ketiga</div>
@@ -83,22 +94,26 @@ export default {
       nomorHP: "",
       nomorWA: "",
       email: "",
-      deskripsi:"",
+      deskripsi: "",
+      kota:"",
       valid: true,
-      formRules: [v => !!v || "Data harus diisi!"],
+      formRules: [(v) => !!v || "Data harus diisi!"],
       waRules: [
-        v => v.length >= 10 || "Min. 10 karakter",
-        v => v.length <= 13 || "Maks. 13 karakter"
+        (v) => v.length >= 10 || "Min. 10 karakter",
+        (v) => v.length <= 13 || "Maks. 13 karakter",
       ],
       deskripsiRules: [
-        
-        v => v.length >= 30 || "Min. 30 karakter",
-        v => v.length <= 150 || "Maks. 150 karakter"
+        (v) => v.length >= 30 || "Min. 15 karakter",
+        (v) => v.length <= 150 || "Maks. 150 karakter",
+      ],
+      kotaRules: [
+        (v) => v.length >= 15 || "Min. 4 karakter",
+        (v) => v.length <= 60 || "Maks. 60 karakter",
       ],
       emailRules: [
-        v => !!v || "Data harus diisi!",
-        v => /.+@.+/.test(v) || "E-mail harus valid"
-      ]
+        (v) => !!v || "Data harus diisi!",
+        (v) => /.+@.+/.test(v) || "E-mail harus valid",
+      ],
     };
   },
   mounted() {
@@ -106,14 +121,14 @@ export default {
       signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
       signInFlow: "popup",
       callbacks: {
-        signInSuccessWithAuthResult: authResult => {
+        signInSuccessWithAuthResult: (authResult) => {
           if (authResult) {
             this.googleLogin(authResult.user._lat, authResult.user.email);
             console.log(authResult.user);
           }
           return false;
-        }
-      }
+        },
+      },
     };
     var ui =
       firebaseui.auth.AuthUI.getInstance() ||
@@ -124,7 +139,7 @@ export default {
     ...mapActions({
       setAlert: "alert/set",
       setAuth: "auth/set",
-      setToken: "auth/SET_TOKEN"
+      setToken: "auth/SET_TOKEN",
     }),
     async googleLogin(token, email) {
       let formData = new FormData();
@@ -135,22 +150,22 @@ export default {
 
       await this.axios
         .put("/user/v3/user", formData, {
-          headers: { Authorization: "Bearer " + token }
+          headers: { Authorization: "Bearer " + token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           this.setAlert({
             status: true,
             color: "success",
-            text: data.api_message
+            text: data.api_message,
           });
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           this.setAlert({
             status: true,
             color: "error",
-            text: responses.api_message
+            text: responses.api_message,
           });
         });
     },
@@ -163,42 +178,43 @@ export default {
       formData.append("nama", this.nama);
       formData.append("nomor_whatsapp", this.nomorWA);
       formData.append("id", this.user.id);
-
+      formData.append("deskripsi", this.user.deskripsi);
       this.axios
         .put("/user/v3/user", formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response;
           this.key += 1;
           this.setAlert({
             status: true,
             color: "success",
-            text: data.api_message
+            text: data.api_message,
           });
           this.setAuth(data.data[0]);
           window.localStorage.setItem("user", JSON.stringify(data.data[0]));
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           this.setAlert({
             status: true,
             color: "error",
-            text: responses.api_message
+            text: responses.api_message,
           });
         });
-    }
+    },
   },
   created() {
     this.nama = this.user.nama;
     this.nomorHP = this.user.nomor_hp;
     this.nomorWA = this.user.nomor_whatsapp;
     this.email = this.user.email;
+    this.deskripsi = this.user.deskripsi;
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
-  }
+      user: "auth/user",
+    }),
+  },
 };
 </script>

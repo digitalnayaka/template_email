@@ -54,7 +54,7 @@
             >{{ orders.created_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
           </v-list-item>
 
-          <v-list-item v-if="orders.id_mst_pembayaran_status == 5">
+          <v-list-item v-if="orders.id_mst_pembayaran_status == 6">
             <v-list-item-title>Alasan Ditolak:</v-list-item-title>
 
             <v-list-item-title class="font-weight-black d-sm-inline-flex d-flex">{{ orders.note }}</v-list-item-title>
