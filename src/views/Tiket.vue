@@ -35,39 +35,44 @@
         <h2>{{ tiket.total }}</h2>
       </v-col>
     </v-row>
-  
 
     <v-row class="text-center">
-      <v-col cols="2.99">
+      <v-col cols="2.9">
         <h5>Tersedia</h5>
         {{ tiket.tersedia }}
       </v-col>
+
       <v-divider vertical></v-divider>
+
       <v-col cols="3">
         <h5>Terpakai</h5>
         {{ tiket.terpakai }}
       </v-col>
+
       <v-divider vertical></v-divider>
+
       <v-col cols="3">
         <h5>Refund</h5>
         {{ tiket.return }}
       </v-col>
+
       <v-divider vertical></v-divider>
+
       <v-col cols="3" class="red--text">
         <h5>Hangus</h5>
         {{ tiket.hangus }}
       </v-col>
     </v-row>
-  <v-divider vertical></v-divider>
+
     <v-row class="text-center">
       <v-col cols="6">
         <!-- <v-card dark color="transparent" to="/refund_tiket" max-width="400">
           <v-img class="center_image" src="/img/refund-tiket.png" max-width="400"></v-img>
           <v-btn block color="red" dark to="/refund_tiket">Refund Tiket</v-btn>
         </v-card>-->
-        <v-list-item-avatar tile size="80">
+        <v-avatar tile size="100">
           <v-img src="/img/icons/ic_refund_tiket.png"></v-img>
-        </v-list-item-avatar>
+        </v-avatar>
         <v-btn block color="red" dark to="/refund_tiket" rounded>Refund Tiket</v-btn>
       </v-col>
       <v-col cols="6">
@@ -75,9 +80,9 @@
           <v-img src="/img/icons/ic_beli_tiket.png" max-width="400"></v-img>
            <v-btn block color="primary" to="/beli_tiket" rounded>Dapatkan Tiket</v-btn>
         </v-card>-->
-        <v-list-item-avatar tile size="80">
+        <v-avatar tile size="100">
           <v-img src="/img/icons/ic_beli_tiket.png"></v-img>
-        </v-list-item-avatar>
+        </v-avatar>
         <v-btn block color="primary" to="/dapatkan_tiket" rounded>Dapatkan Tiket</v-btn>
       </v-col>
 

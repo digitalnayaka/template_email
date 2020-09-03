@@ -15,6 +15,16 @@
 
       <v-card align="center" class="d-inline-block mx-auto">
         <v-list>
+          <v-list-item to="/chat/1">
+            <v-list-item-content>
+              <v-list-item-title>
+                <v-icon>mdi-message-text</v-icon>Kirim Pesan
+              </v-list-item-title>
+
+              <v-list-item-subtitle>@SiMotor</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
           <v-list-item
             href="mailto:support@simotor.id?subject=Pengaduan Customer SiMotor &body=Nama: "
           >

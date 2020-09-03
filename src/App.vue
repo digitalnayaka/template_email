@@ -36,7 +36,7 @@
       </div>
 
       <v-list>
-        <v-list-item to="/">
+        <v-list-item to="/" exact>
           <v-list-item-icon>
             <v-icon left>mdi-home</v-icon>
           </v-list-item-icon>
@@ -47,14 +47,14 @@
         </v-list-item>
       </v-list>
 
-      <v-list-group v-for="item in menus" :key="item.id" :prepend-icon="item.module_icon" no-action>
+      <v-list-group v-for="item in menus" :key="item.id" :prepend-icon="item.module_icon" no-action color="red">
         <template v-slot:activator>
           <v-list-item-content>
             <v-list-item-title v-text="item.module_name"></v-list-item-title>
           </v-list-item-content>
         </template>
 
-        <v-list-item v-for="subItem in item.menu" :key="subItem.id" :to="subItem.menu_route">
+        <v-list-item v-for="subItem in item.menu" :key="subItem.id" :to="subItem.menu_route" color="red">
           <v-list-item-content>
             <v-list-item-title v-text="subItem.menu_name"></v-list-item-title>
           </v-list-item-content>
@@ -143,6 +143,7 @@
         </v-slide-y-transition>
       </v-container>
     </v-main>
+
     <v-btn bottom color="red" dark fab fixed right to="/bantuan">
       <v-icon>mdi-ear-hearing</v-icon>
     </v-btn>
@@ -272,6 +273,7 @@ export default {
     this.oneSignal();
     this.geolocation();
     this.getNotif();
+    this.$vuetify.theme.primary = "#3f51b5";
 
     let OneSignal = window.OneSignal || [];
     OneSignal.getUserId((userId) => {
@@ -302,3 +304,10 @@ export default {
   },
 };
 </script>
+
+<style>
+a.primary--text {
+color: #e5e9ec !important;
+caret-color: #f4f4f4 !important;
+}
+</style>

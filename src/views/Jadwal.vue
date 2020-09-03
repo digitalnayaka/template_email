@@ -149,7 +149,7 @@ export default {
       var offset = (this.page - 1) * this.limit;
 
       this.axios
-        .get("/iklan/v2/iklan_jadwal_tb", {
+        .get("/iklan/v3/iklan_jadwal_tb", {
           params: {
             id_mst_iklan_status: 1,
             offset: offset,
@@ -172,7 +172,7 @@ export default {
       var offset2 = (this.page2 - 1) * this.limit2;
 
       this.axios
-        .get("/iklan/v2/iklan_jadwal_tb", {
+        .get("/iklan/v3/iklan_jadwal_tb", {
           params: {
             tanggal_mulai: this.date,
             id_mst_iklan_status: 1,

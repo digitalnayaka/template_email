@@ -38,14 +38,25 @@
 
                     <v-spacer></v-spacer>
 
-                    <v-btn icon dark color class="mx-2" @click="getTiket">Refund</v-btn>
+                    <v-btn
+                      color="primary"
+                      dark
+                      class="mx-2"
+                      @click="getTiket"
+                      :disabled="listRefund.length > 0 ? false : true"
+                    >Refund</v-btn>
                   </v-toolbar>
 
                   <v-card>
                     <v-container fluid>
                       <div class="d-flex justify-space-between">
                         <h3>Pilih tiket yang akan di refund: {{ listRefund.length }} Tiket</h3>
-                        <v-checkbox class="my-0 py-0" label="Select All" @click="selectAll"></v-checkbox>
+                        <v-checkbox
+                          class="my-0 py-0"
+                          label="Select All"
+                          v-model="checkbox"
+                          @click="selectAll"
+                        ></v-checkbox>
                       </div>
 
                       <v-item-group>
@@ -239,6 +250,7 @@ export default {
     total: 0,
     selected: [],
     listRefund: [],
+    checkbox: false,
     dialogRekening: false,
     accounts: [],
     banks: [],
@@ -430,7 +442,7 @@ export default {
       this.dialog = false;
     },
     selectAll() {
-      if (this.listRefund == 0) {
+      if (this.checkbox) {
         // for (let index = 0; index < this.listTersedia.length; index++) {
         //   const element = this.listTersedia[index];
         //   this.listRefund.push(element);

@@ -35,7 +35,7 @@
     </v-app-bar>
 
     <v-row dense>
-      <v-col cols="12" sm="6" class="d-flex align-center">
+      <v-col cols="12" sm="6">
         <v-carousel cycle hide-delimiter-background height="300">
           <v-carousel-item
             v-for="(item,index) in fotos"
@@ -47,6 +47,7 @@
           ></v-carousel-item>
         </v-carousel>
       </v-col>
+
       <v-col cols="12" sm="6">
         <div class="d-flex justify-sm-center">
           <v-list>
@@ -74,9 +75,10 @@
             </v-list-item>
           </v-list>
         </div>
-      
-        <v-divider ></v-divider>
-        <h2 class="font-weight-black" v-if="iklan.id_mst_iklan_jenis == 1">
+
+        <v-divider class="mb-2"></v-divider>
+
+        <h2 class="font-weight-bold" v-if="iklan.id_mst_iklan_jenis == 1">
           Rp {{ Number(hits.harga).toLocaleString('id-ID') }}
           <img
             src="/img/icons/hargapas.png"
@@ -115,11 +117,9 @@
           </div>
         </div>
       </v-col>
-
-      
     </v-row>
 
-    <v-divider></v-divider>
+    <v-divider class="mt-2"></v-divider>
 
     <v-row dense>
       <v-col cols="12" v-if="iklan.id_mst_iklan_jenis > 1">
@@ -213,279 +213,278 @@
         <v-tabs-items v-model="tab" v-if="hits.id_mst_iklan_jenis == 1">
           <v-tab-item>
             <v-card>
-            <div align="center" class="my-4">
-              <v-card flat width="1000">
-                <div class="text-h6 text-left">Deskripsi</div>
-                <div class="text-subtitle-1 text-left">{{ iklan.deskripsi }}</div>
+              <div align="center" class="my-4">
+                <v-card flat width="1000">
+                  <div class="text-h6 text-left">Deskripsi</div>
+                  <div class="text-subtitle-1 text-left">{{ iklan.deskripsi }}</div>
 
-                <v-divider class="my-4"></v-divider>
+                  <v-divider class="my-4"></v-divider>
 
-                <v-list dense subheader class="text-left" v-if="iklan.mst_iklan_type == 'Satuan'">
-                  <v-subheader class="text-h6">Detail Motor</v-subheader>
+                  <v-list dense subheader class="text-left" v-if="iklan.mst_iklan_type == 'Satuan'">
+                    <v-subheader class="text-h6">Detail Motor</v-subheader>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_id_iklan.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_id_iklan.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>ID Motor</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>ID Motor</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.id }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.id }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_merek.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_merek.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Merk</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Merk</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.merk }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.merk }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_tipe.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_tipe.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Tipe</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Tipe</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.type }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.type }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_tahun.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_tahun.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Tahun</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Tahun</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.tahun }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.tahun }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_odometer.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_odometer.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Odometer</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Odometer</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.odometer }} KM</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.odometer }} KM</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_warna.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_warna.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Warna</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Warna</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.warna }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.warna }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_cc_mesin.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_cc_mesin.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>CC Mesin</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>CC Mesin</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.odometer }} CC</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.odometer }} CC</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_transmisi.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_transmisi.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Transmisi</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Transmisi</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.transmisi }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.transmisi }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_jenis_motor.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_jenis_motor.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Jenis Motor</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Jenis Motor</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.jenis_motor }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.jenis_motor }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_lokasi_samsat.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_lokasi_samsat.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Samsat</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Samsat</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.lokasi_samsat }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.lokasi_samsat }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_lokasi.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_lokasi.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Lokasi</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Lokasi</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.lokasi }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.lokasi }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-subheader class="text-h6">Kelengkapan Dokumen</v-subheader>
+                    <v-subheader class="text-h6">Kelengkapan Dokumen</v-subheader>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_stnk.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_stnk.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>STNK</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>STNK</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_lembar_pajak.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_lembar_pajak.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Lembar Pajak</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Lembar Pajak</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.lembar_pajak ? "ADA" : "TIDAK" }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.lembar_pajak ? "ADA" : "TIDAK" }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_bpkb.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_bpkb.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>BPKB</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>BPKB</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.lembar_bpkb ? "ADA" : "TIDAK" }}</v-list-item-action>
-                  </v-list-item>
-                </v-list>
+                      <v-list-item-action>{{ unitMokas.lembar_bpkb ? "ADA" : "TIDAK" }}</v-list-item-action>
+                    </v-list-item>
+                  </v-list>
 
-                <v-list dense subheader class="text-left" v-else>
-                  <v-subheader class="text-h6">Informasi Paket Motor</v-subheader>
+                  <v-list dense subheader class="text-left" v-else>
+                    <v-subheader class="text-h6">Informasi Paket Motor</v-subheader>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_jenis_motor.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_jenis_motor.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Jumlah Motor</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Jumlah Motor</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action
-                      v-if="iklan.motor_bekas != undefined"
-                    >{{ iklan.motor_bekas.length }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action
+                        v-if="iklan.motor_bekas != undefined"
+                      >{{ iklan.motor_bekas.length }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_lokasi.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_lokasi.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Lokasi Motor</v-list-item-title>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>Lokasi Motor</v-list-item-title>
+                      </v-list-item-content>
 
-                    <v-list-item-action>{{ unitMokas.lokasi }}</v-list-item-action>
-                  </v-list-item>
+                      <v-list-item-action>{{ unitMokas.lokasi }}</v-list-item-action>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_list.png"></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_list.png"></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Daftar Paket Motor:</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
+                      <v-list-item-content>
+                        <v-list-item-title>Daftar Paket Motor:</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
 
-                  <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                  <v-list-item
-                    v-for="(item,i) in motorBekas"
-                    :key="i"
-                    :to="'/unit_mokas/' + item.id"
-                  >
-                    <v-list-item-avatar size="80">
-                      <v-img :src="getImage(item.foto_1)" contain></v-img>
-                    </v-list-item-avatar>
+                    <v-list-item
+                      v-for="(item,i) in motorBekas"
+                      :key="i"
+                      :to="'/unit_mokas/' + item.id"
+                    >
+                      <v-list-item-avatar size="80">
+                        <v-img :src="getImage(item.foto_1)" contain></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>{{ item.merk }} {{ item.type }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ item.tahun }}</v-list-item-subtitle>
-                    </v-list-item-content>
+                      <v-list-item-content>
+                        <v-list-item-title>{{ item.merk }} {{ item.type }}</v-list-item-title>
+                        <v-list-item-subtitle>{{ item.tahun }}</v-list-item-subtitle>
+                      </v-list-item-content>
 
-                    <v-list-item-action>
-                      <v-icon>mdi-chevron-right</v-icon>
-                    </v-list-item-action>
-                  </v-list-item>
-                </v-list>
-              </v-card>
-            </div>
+                      <v-list-item-action>
+                        <v-icon>mdi-chevron-right</v-icon>
+                      </v-list-item-action>
+                    </v-list-item>
+                  </v-list>
+                </v-card>
+              </div>
             </v-card>
-    
           </v-tab-item>
         </v-tabs-items>
 
@@ -1547,7 +1546,7 @@
           </v-dialog>
         </div>
       </div>
-    </div> -->
+    </div>-->
   </div>
 </template>
 

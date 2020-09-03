@@ -121,18 +121,21 @@
 
               <v-row>
                 <v-col cols="12" :sm="selectedIklan == 3 ? 12 : 8">
-                  <v-text-field
+                  <v-textarea
                     outlined
+                    auto-grow
+                    rows="1"
                     v-model="deskripsi_iklan"
                     label="Deksripsi Iklan"
                     :counter="350"
                     :rules="descRules"
-                  ></v-text-field>
+                  ></v-textarea>
                 </v-col>
 
                 <v-col cols="12" sm="4" class="text-right" v-if="selectedIklan < 3">
                   <v-btn
                     color="teal"
+                    dark
                     @click="deskripsi_iklan = selected.deskripsi"
                   >Gunakan deskripsi unit</v-btn>
                 </v-col>
@@ -253,6 +256,7 @@
                     <v-list-item-content>
                       <v-text-field
                         outlined
+                        :autofocus="tiket ? true : false"
                         v-model="jumlahtiket"
                         label="Jumlah Tiket"
                         :rules="jumlahRules"
@@ -309,8 +313,14 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="teal" @click="id == undefined ? e1 = 2 : e1 = 1">Sebelumnya</v-btn>
-              <v-btn color="teal" :disabled="!valid" @click="storeItem" :loading="loading">Iklankan</v-btn>
+              <v-btn color="teal" dark @click="id == undefined ? e1 = 2 : e1 = 1">Sebelumnya</v-btn>
+              <v-btn
+                color="teal"
+                class="white--text"
+                :disabled="!valid"
+                @click="storeItem"
+                :loading="loading"
+              >Iklankan</v-btn>
             </v-card-actions>
           </v-stepper-content>
         </v-form>
@@ -530,7 +540,7 @@ export default {
     },
     useTiket() {
       if (this.tiket) {
-        this.jumlahtiket = 1;
+        this.jumlahtiket = "1";
       } else {
         this.jumlahtiket = 0;
       }
