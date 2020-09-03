@@ -72,7 +72,7 @@
                   v-if="orders.id_mst_pembayaran_status == 6"
                 >{{ orders.pembayaran_status }}</v-list-item-title>
               </v-list-item>-->
-              <v-list-item v-if="orders.id_mst_pembayaran_status == 5">
+              <v-list-item v-if="orders.id_mst_pembayaran_status == 6">
                 <v-list-item-title >Alasan Ditolak:</v-list-item-title>
 
                 <v-list-item-title class="font-weight-black">{{ orders.note}}</v-list-item-title>
