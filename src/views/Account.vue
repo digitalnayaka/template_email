@@ -123,7 +123,7 @@
 
               <v-divider></v-divider>
 
-              <v-list-item>
+              <!-- <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title>Rekomendasi Untuk Anda</v-list-item-title>
                 </v-list-item-content>
@@ -131,7 +131,7 @@
                 <v-list-item-action>
                   <v-icon>mdi-chevron-right</v-icon>
                 </v-list-item-action>
-              </v-list-item>
+              </v-list-item> -->
             </v-list>
           </v-tab-item>
 

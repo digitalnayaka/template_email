@@ -54,9 +54,9 @@
               </v-list-item-content>
 
               <div class="mt-2">
-                <v-btn color="teal" dark @click="dialogHubungi = true" class="mx-2">Hubungi</v-btn>
-                <v-btn color="teal" dark :to="'/chat/' + appuser.id" class="mx-2">Pesan</v-btn>
-                <v-btn color="teal" dark @click="dialogBio = true" class="mx-2">Info Penjual</v-btn>
+                <v-btn color="teal" dark @click="dialogHubungi = true" class="mx-2"> <v-icon>mdi-phone</v-icon></v-btn>
+                <v-btn color="teal" dark :to="'/chat/' + appuser.id" class="mx-2"><v-icon>mdi-chat</v-icon></v-btn>
+                <v-btn color="teal" dark @click="dialogBio = true" class="mx-2"><v-icon>mdi-information-outline </v-icon></v-btn>
               </div>
             </v-list-item>
           </v-list>
@@ -96,7 +96,7 @@
           <v-dialog v-model="dialogBio" persistent max-width="500px">
             <v-card>
               <v-toolbar dark color="teal">
-                <v-toolbar-title>Bio Penjual</v-toolbar-title>
+                <v-toolbar-title>Info Penjual</v-toolbar-title>
 
                 <div class="flex-grow-1"></div>
 
@@ -183,6 +183,8 @@
                   <v-icon small>mdi-calendar</v-icon>
                   {{ item._source.tanggal_mulai | dateTimeFormat(utc) }} {{ waktu }}
                 </v-list-item-subtitle>
+                
+               
               </v-list-item-content>
             </v-list-item>
           </v-list>

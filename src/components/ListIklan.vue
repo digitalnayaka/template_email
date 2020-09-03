@@ -77,6 +77,15 @@
               <v-icon small>mdi-calendar</v-icon>
               {{ item._source.tanggal_mulai | dateTimeFormat(utc) }} {{ waktu }}
             </v-list-item-subtitle>
+             <v-list-item-subtitle v-if="item._source.id_mst_iklan_status == 6"
+                  style="color:teal"
+                   class="font-italic"
+                >Belum Terjual </v-list-item-subtitle>
+                 <v-list-item-subtitle v-if="item._source.id_mst_iklan_status == 2"
+                  style="color:teal"
+                  class="font-italic"
+                  
+                >Terjual </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
