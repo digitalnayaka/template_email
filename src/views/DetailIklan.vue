@@ -31,6 +31,21 @@
             </v-tooltip>
           </v-btn>
         </div>
+
+        <div v-else>
+          <v-btn icon>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn icon class="mx-2" v-on="on" @click="favourite">
+                  <v-icon v-if="favorit == undefined">mdi-heart-outline</v-icon>
+
+                  <v-icon color="red" v-else>mdi-heart</v-icon>
+                </v-btn>
+              </template>
+              <span>Favorit</span>
+            </v-tooltip>
+          </v-btn>
+        </div>
       </div>
     </v-app-bar>
 
@@ -924,8 +939,7 @@
                 Untuk dapat mengikuti iklan ini perlu memakai tiket. Gunakan Tiket Tawar Bersama pada iklan ini?
                 <br />Catatan:
                 <br />1. Pastikan masa kadaluarsa tiket Anda melebihi waktu selesai tawar bersama iklan ini.
-                <br />
-2. Tiket Anda akan tetap terpakai untuk mengikuti iklan Tawar Bersama ini meskipun Anda tidak melakukan penawaran
+                <br />2. Tiket Anda akan tetap terpakai untuk mengikuti iklan Tawar Bersama ini meskipun Anda tidak melakukan penawaran
               </div>
               <h2
                 class="text-center my-4 green--text"
@@ -1598,6 +1612,7 @@ export default {
       dialogInfo2: false,
       appuser: [],
       title: "",
+      favorit: [],
     };
   },
   methods: {
@@ -2040,6 +2055,42 @@ export default {
           console.log(responses);
         });
     },
+    getFavourite() {
+      this.axios
+        .get("/iklan/v3/iklan_favorit", {
+          params: {
+            id_app_user: this.user.id,
+            id_iklan: this.id,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let data = response.data;
+          let { hits } = data.hits;
+          this.favorit = hits[0];
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    favourite() {
+      let formData = new FormData();
+      formData.append("id_iklan", this.id);
+      formData.append("id_app_user", this.user.id);
+
+      this.axios
+        .post("/iklan/v3/iklan_favorit", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then(() => {
+          this.getFavourite();
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
     back() {
       this.$router.go(-1);
       this.title = "SiMotor";
@@ -2048,6 +2099,7 @@ export default {
   created() {
     this.getDtlIklan();
     this.GetBid();
+    this.getFavourite();
     if (!this.guest) {
       this.getOrder();
     }

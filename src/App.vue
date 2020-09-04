@@ -108,7 +108,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
+      <v-btn icon to="/iklan_favorit">
         <v-icon>mdi-heart-outline</v-icon>
       </v-btn>
 

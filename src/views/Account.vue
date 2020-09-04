@@ -50,7 +50,7 @@
             <v-list dense>
               <v-list-item>
                 <v-list-item-content>
-                  <h5>{{user.deskripsi}}</h5>
+                  <h5>{{ user.deskripsi }}</h5>
                 </v-list-item-content>
 
                 <v-list-item-avatar tile size="80">
