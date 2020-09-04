@@ -77,43 +77,42 @@
         </div>
 
         <v-divider class="mb-2"></v-divider>
-
-        <h2 class="font-weight-bold" v-if="iklan.id_mst_iklan_jenis == 1">
-          Rp {{ Number(hits.harga).toLocaleString('id-ID') }}
-          <img
-            src="/img/icons/hargapas.png"
-            height="25"
-          />
-        </h2>
-
-        <div v-else>
-          <h2 class="font-weight-black" v-if="liveBid.length == 0">
-            Rp {{ Number(hits.harga_awal).toLocaleString('id-ID') }}
+        <div class="text-center">
+          <h2 class="font-weight-bold" v-if="iklan.id_mst_iklan_jenis == 1">
+            Rp {{ Number(hits.harga).toLocaleString('id-ID') }}
             <img
-              src="/img/icons/harga_awal.png"
+              src="/img/icons/hargapas.png"
               height="25"
             />
           </h2>
 
-          <h2 class="font-weight-black" v-else>
-            Rp {{ Number(liveBid[0].Bid).toLocaleString('id-ID') }}
-            <img
-              src="/img/icons/harga_sekarang.png"
-              height="25"
-            />
-          </h2>
-        </div>
+          <div v-else>
+            <h2 class="font-weight-black" v-if="liveBid.length == 0">
+              Rp {{ Number(hits.harga_awal).toLocaleString('id-ID') }}
+              <img
+                src="/img/icons/harga_awal.png"
+                height="25"
+              />
+            </h2>
 
-        <div class="text-h5 teal--text">{{ iklan.judul }}</div>
-
-        <div class="d-flex">
-          <div>ID Iklan: {{ id }}</div>
-
-          <v-divider vertical class="mx-2"></v-divider>
-
-          <div>
-            <v-icon>mdi-eye</v-icon>
-            {{ iklan.log_iklan_view }}
+            <h2 class="font-weight-black" v-else>
+              Rp {{ Number(liveBid[0].Bid).toLocaleString('id-ID') }}
+              <img
+                src="/img/icons/harga_sekarang.png"
+                height="25"
+              />
+            </h2>
+          </div>
+          <div class="text-center">
+            <div class="text-h5 teal--text text-center">{{ iklan.judul }}</div>
+            <div class="d-flex justify-sm-center">
+              <h4>ID Iklan: {{ id }}</h4>
+              <v-divider vertical class="mx-2"></v-divider>
+              <div>
+                <v-icon>mdi-eye</v-icon>
+                {{ iklan.log_iklan_view }}
+              </div>
+            </div>
           </div>
         </div>
       </v-col>
@@ -212,12 +211,16 @@
 
         <v-tabs-items v-model="tab" v-if="hits.id_mst_iklan_jenis == 1">
           <v-tab-item>
-            <v-card>
-              <div align="center" class="my-4">
-                <v-card flat width="1000">
-                  <div class="text-h6 text-left">Deskripsi</div>
-                  <div class="text-subtitle-1 text-left">{{ iklan.deskripsi }}</div>
+            <v-list-item>
+              <v-list-item-content>
+                <div class="text-h6 text-left">Deskripsi</div>
+                <div class="text-subtitle-1 text-left">{{ iklan.deskripsi }}</div>
+              </v-list-item-content>
 
+              <v-divider vertical class="mx-2"></v-divider>
+
+              <v-list-item-content>
+                <v-card flat width="1000">
                   <v-divider class="my-4"></v-divider>
 
                   <v-list dense subheader class="text-left" v-if="iklan.mst_iklan_type == 'Satuan'">
@@ -483,7 +486,12 @@
                     </v-list-item>
                   </v-list>
                 </v-card>
-              </div>
+              </v-list-item-content>
+            </v-list-item>
+            <v-card>
+              <!-- <div align="center" class="my-4">
+               
+              </div>-->
             </v-card>
           </v-tab-item>
         </v-tabs-items>
@@ -524,104 +532,152 @@
           </v-tab-item>
 
           <v-tab-item>
-            <div align="center" class="my-4">
-              <v-card class="d-flex justify-space-between align-center" flat width="500">
-                <v-card align="center">
-                  <v-card-subtitle class="teal accent-4 white--text">Tanggal Mulai</v-card-subtitle>
-                  <div>{{ hits.tanggal_mulai | dateFormat}}</div>
-                  <div>{{ hits.tanggal_mulai | timeFormat}} {{ waktu }}</div>
+            <v-list-item>
+              <v-list-item-content>
+                <v-card class="d-flex justify-space-between align-center" flat width="500">
+                  <v-card align="center">
+                    <v-card-subtitle class="teal accent-4 white--text">Tanggal Mulai</v-card-subtitle>
+                    <div>{{ hits.tanggal_mulai | dateFormat}}</div>
+                    <div>{{ hits.tanggal_mulai | timeFormat}} {{ waktu }}</div>
+                  </v-card>
+                  <v-img src="/img/icons/gradient.jpg" width="100" height="60"></v-img>
+
+                  <v-card align="center">
+                    <v-card-subtitle class="red accent-4 white--text">Tanggal Selesai</v-card-subtitle>
+                    <div>{{ hits.tanggal_selesai | dateFormat}}</div>
+                    <div>{{ hits.tanggal_selesai | timeFormat}} {{ waktu }}</div>
+                  </v-card>
                 </v-card>
-                <v-img src="/img/icons/gradient.jpg" width="100" height="60"></v-img>
+              </v-list-item-content>
 
-                <v-card align="center">
-                  <v-card-subtitle class="red accent-4 white--text">Tanggal Selesai</v-card-subtitle>
-                  <div>{{ hits.tanggal_selesai | dateFormat}}</div>
-                  <div>{{ hits.tanggal_selesai | timeFormat}} {{ waktu }}</div>
+              <v-divider vertical class="mx-2"></v-divider>
+
+              <v-list-item-content>
+                <v-card flat width="500" align="left">
+                  <v-list dense>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_jenis_iklan.png"></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <v-list-item-title>Jenis Iklan</v-list-item-title>
+                      </v-list-item-content>
+
+                      <v-list-item-action>{{ iklan.mst_iklan_jenis }} {{ iklan.mst_iklan_type }}</v-list-item-action>
+                    </v-list-item>
+
+                    <v-divider></v-divider>
+
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_tiket_dibutuhkan.png"></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <v-list-item-title>Tiket</v-list-item-title>
+                      </v-list-item-content>
+
+                      <v-list-item-action>{{ iklan.jumlah_tiket > 0 ? "Ya" : "Tidak" }}</v-list-item-action>
+                    </v-list-item>
+
+                    <v-divider></v-divider>
+
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_jumlah_tiket.png"></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <v-list-item-title>Jumlah Tiket</v-list-item-title>
+                      </v-list-item-content>
+
+                      <v-list-item-action>{{ iklan.jumlah_tiket }}</v-list-item-action>
+                    </v-list-item>
+
+                    <v-divider></v-divider>
+
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_harga_awal.png"></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <v-list-item-title>Harga Awal</v-list-item-title>
+                      </v-list-item-content>
+
+                      <v-list-item-action>Rp {{ Number(iklan.harga_awal).toLocaleString("id-ID") }}</v-list-item-action>
+                    </v-list-item>
+
+                    <v-divider></v-divider>
+
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img src="/img/icons/icon_harga_kelipatan.png"></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <v-list-item-title>Kelipatan</v-list-item-title>
+                      </v-list-item-content>
+
+                      <v-list-item-action>Rp {{ Number(iklan.kelipatan).toLocaleString("id-ID") }}</v-list-item-action>
+                    </v-list-item>
+                  </v-list>
                 </v-card>
-              </v-card>
-
-              <v-card flat width="500" align="left">
-                <v-list dense>
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_jenis_iklan.png"></v-img>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>Jenis Iklan</v-list-item-title>
-                    </v-list-item-content>
-
-                    <v-list-item-action>{{ iklan.mst_iklan_jenis }} {{ iklan.mst_iklan_type }}</v-list-item-action>
-                  </v-list-item>
-
-                  <v-divider></v-divider>
-
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_tiket_dibutuhkan.png"></v-img>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>Tiket</v-list-item-title>
-                    </v-list-item-content>
-
-                    <v-list-item-action>{{ iklan.jumlah_tiket > 0 ? "Ya" : "Tidak" }}</v-list-item-action>
-                  </v-list-item>
-
-                  <v-divider></v-divider>
-
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_jumlah_tiket.png"></v-img>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>Jml Tiket</v-list-item-title>
-                    </v-list-item-content>
-
-                    <v-list-item-action>{{ iklan.jumlah_tiket }}</v-list-item-action>
-                  </v-list-item>
-
-                  <v-divider></v-divider>
-
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_harga_awal.png"></v-img>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>Harga Awal</v-list-item-title>
-                    </v-list-item-content>
-
-                    <v-list-item-action>Rp {{ Number(iklan.harga_awal).toLocaleString("id-ID") }}</v-list-item-action>
-                  </v-list-item>
-
-                  <v-divider></v-divider>
-
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_harga_kelipatan.png"></v-img>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>Kelipatan</v-list-item-title>
-                    </v-list-item-content>
-
-                    <v-list-item-action>Rp {{ Number(iklan.kelipatan).toLocaleString("id-ID") }}</v-list-item-action>
-                  </v-list-item>
-                </v-list>
-              </v-card>
-            </div>
+              </v-list-item-content>
+            </v-list-item>
           </v-tab-item>
 
           <v-tab-item>
-            <div align="center" class="my-4">
-              <v-card flat width="500">
-                <div class="text-h6 text-left">Deskripsi</div>
-                <div class="text-subtitle-1 text-left">{{ iklan.deskripsi }}</div>
+            <v-list-item>
+              <v-list-item-content>
+                <v-subheader class="text-h6">Deskripsi</v-subheader>
+                <v-list-item-title>{{ iklan.deskripsi }}</v-list-item-title>
+                <v-divider></v-divider>
+                <v-subheader class="text-h6">Kelengkapan Dokumen</v-subheader>
+                <v-list-item>
+                  <v-list-item-avatar>
+                    <v-img src="/img/icons/icon_stnk.png"></v-img>
+                  </v-list-item-avatar>
 
-                <v-divider class="my-4"></v-divider>
+                  <v-list-item-content>
+                    <v-list-item-title>STNK</v-list-item-title>
+                  </v-list-item-content>
 
+                  <v-list-item-action>{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }}</v-list-item-action>
+                </v-list-item>
+                <v-divider></v-divider>
+
+                <v-list-item>
+                  <v-list-item-avatar>
+                    <v-img src="/img/icons/icon_lembar_pajak.png"></v-img>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title>Lembar Pajak</v-list-item-title>
+                  </v-list-item-content>
+
+                  <v-list-item-action>{{ unitMokas.lembar_pajak ? "ADA" : "TIDAK" }}</v-list-item-action>
+                </v-list-item>
+
+                <v-divider></v-divider>
+
+                <v-list-item>
+                  <v-list-item-avatar>
+                    <v-img src="/img/icons/icon_bpkb.png"></v-img>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title>BPKB</v-list-item-title>
+                  </v-list-item-content>
+
+                  <v-list-item-action>{{ unitMokas.lembar_bpkb ? "ADA" : "TIDAK" }}</v-list-item-action>
+                </v-list-item>
+              </v-list-item-content>
+
+              <v-divider vertical class="mx-2"></v-divider>
+
+              <v-list-item-content>
                 <v-list dense subheader class="text-left" v-if="iklan.mst_iklan_type == 'Satuan'">
                   <v-subheader class="text-h6">Detail Motor</v-subheader>
 
@@ -757,7 +813,7 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <v-list-item-title>Samsat</v-list-item-title>
+                      <v-list-item-title>Lokasi Samsat</v-list-item-title>
                     </v-list-item-content>
 
                     <v-list-item-action>{{ unitMokas.lokasi_samsat }}</v-list-item-action>
@@ -775,48 +831,6 @@
                     </v-list-item-content>
 
                     <v-list-item-action>{{ unitMokas.lokasi }}</v-list-item-action>
-                  </v-list-item>
-
-                  <v-subheader class="text-h6">Kelengkapan Dokumen</v-subheader>
-
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_stnk.png"></v-img>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>STNK</v-list-item-title>
-                    </v-list-item-content>
-
-                    <v-list-item-action>{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }}</v-list-item-action>
-                  </v-list-item>
-
-                  <v-divider></v-divider>
-
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_lembar_pajak.png"></v-img>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>Lembar Pajak</v-list-item-title>
-                    </v-list-item-content>
-
-                    <v-list-item-action>{{ unitMokas.lembar_pajak ? "ADA" : "TIDAK" }}</v-list-item-action>
-                  </v-list-item>
-
-                  <v-divider></v-divider>
-
-                  <v-list-item>
-                    <v-list-item-avatar>
-                      <v-img src="/img/icons/icon_bpkb.png"></v-img>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>BPKB</v-list-item-title>
-                    </v-list-item-content>
-
-                    <v-list-item-action>{{ unitMokas.lembar_bpkb ? "ADA" : "TIDAK" }}</v-list-item-action>
                   </v-list-item>
                 </v-list>
 
@@ -884,8 +898,8 @@
                     </v-list-item-action>
                   </v-list-item>
                 </v-list>
-              </v-card>
-            </div>
+              </v-list-item-content>
+            </v-list-item>
           </v-tab-item>
         </v-tabs-items>
 
@@ -924,15 +938,14 @@
                 Untuk dapat mengikuti iklan ini perlu memakai tiket. Gunakan Tiket Tawar Bersama pada iklan ini?
                 <br />Catatan:
                 <br />1. Pastikan masa kadaluarsa tiket Anda melebihi waktu selesai tawar bersama iklan ini.
-                <br />
-2. Tiket Anda akan tetap terpakai untuk mengikuti iklan Tawar Bersama ini meskipun Anda tidak melakukan penawaran
+                <br />2. Tiket Anda akan tetap terpakai untuk mengikuti iklan Tawar Bersama ini meskipun Anda tidak melakukan penawaran
               </div>
               <h2
                 class="text-center my-4 green--text"
               >Jumlah tiket tersedia milik Anda: {{ totalTiket.tersedia }} Tiket</h2>
               <v-btn block color="primary" class="my-4" @click="konfirmasiTiket">Gunakan Tiket Anda</v-btn>
             </v-container>
-
+            <!-- 
             <v-container fluid v-if="noTiket">
               <h2 class="text-center my-4">Oops!</h2>
 
@@ -947,7 +960,7 @@
                 class="my-4"
                 @click="konfirmasiNonTiket"
               >Setuju, mengikuti Tawar Bersama</v-btn>
-            </v-container>
+            </v-container>-->
 
             <v-list v-if="ikutPenawaran">
               <v-list-item>

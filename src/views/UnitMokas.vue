@@ -72,82 +72,89 @@
 
       <v-col cols="12" sm="6">
         <div class="text-center">
-          <div class="subheading red--text">{{ unitMokas.status }}</div>
-          <div class="subheading">{{ unitMokas.moderasi_deskripsi }}</div>
-          <h2 class="headline">{{ unitMokas.merk }} {{ unitMokas.type }}</h2>
-          <div class="subheading">{{ unitMokas.nomor_polisi }}</div>
+          <!-- <div class="subheading red--text">{{ unitMokas.status }}</div> -->
+          <!-- <div class="subheading">{{ unitMokas.moderasi_deskripsi }}</div> -->
+          <!-- <h2 class="headline">{{ unitMokas.merk }} {{ unitMokas.type }}</h2>
+          <div class="subheading">{{ unitMokas.nomor_polisi }}</div>-->
         </div>
 
         <v-divider></v-divider>
 
         <v-list>
           <v-list-item>
-            <v-list-item-content class="text-center">
-              <v-list-item-title>
-                <v-icon large color="green">mdi-speedometer</v-icon>
-              </v-list-item-title>
-              <v-list-item-subtitle>Kilometer</v-list-item-subtitle>
-              <v-list-item-subtitle>{{ unitMokas.odometer }} KM</v-list-item-subtitle>
+            <v-list-item-avatar>
+              <v-img src="/img/icons/icon_stnk.png"></v-img>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title>STNK</v-list-item-title>
             </v-list-item-content>
 
-            <v-list-item-content class="text-center">
-              <v-list-item-title>
-                <v-icon large color="green">mdi-calendar-month</v-icon>
-              </v-list-item-title>
-              <v-list-item-subtitle>Tahun</v-list-item-subtitle>
-              <v-list-item-subtitle>{{ unitMokas.tahun }}</v-list-item-subtitle>
-            </v-list-item-content>
-
-            <v-list-item-content class="text-center">
-              <v-list-item-title>
-                <v-icon large color="green" @click="dialog_dokumen = true">mdi-folder-open-outline</v-icon>
-              </v-list-item-title>
-              <v-list-item-subtitle>Dokumen</v-list-item-subtitle>
-              <v-list-item-subtitle>{{ dokumen.length }} / 3</v-list-item-subtitle>
-            </v-list-item-content>
-
-            <v-dialog v-model="dialog_dokumen" max-width="350">
-              <v-card>
-                <v-card-title primary-title>Daftar Dokumen</v-card-title>
-                <v-list>
-                  <v-list-item>
-                    <v-list-item-content>
-                      <v-list-item-title>Surat Tanda Nomer Kendaraan</v-list-item-title>
-                    </v-list-item-content>
-                    <v-list-item-action>
-                      <v-checkbox v-model="unitMokas.lembar_stnk" readonly></v-checkbox>
-                    </v-list-item-action>
-                  </v-list-item>
-
-                  <v-list-item>
-                    <v-list-item-content>
-                      <v-list-item-title>Surat Ketetapan Pajak</v-list-item-title>
-                    </v-list-item-content>
-                    <v-list-item-action>
-                      <v-checkbox v-model="unitMokas.lembar_pajak" readonly></v-checkbox>
-                    </v-list-item-action>
-                  </v-list-item>
-
-                  <v-list-item>
-                    <v-list-item-content>
-                      <v-list-item-title>Buku Pemilik Kendaraan Bermotor</v-list-item-title>
-                    </v-list-item-content>
-                    <v-list-item-action>
-                      <v-checkbox v-model="unitMokas.lembar_bpkb" readonly></v-checkbox>
-                    </v-list-item-action>
-                  </v-list-item>
-                </v-list>
-              </v-card>
-            </v-dialog>
-
-            <v-list-item-content class="text-center">
-              <v-list-item-title>
-                <v-icon large color="green">mdi-google-maps</v-icon>
-              </v-list-item-title>
-              <v-list-item-subtitle>Lokasi</v-list-item-subtitle>
-              <v-list-item-subtitle>{{ unitMokas.lokasi }}</v-list-item-subtitle>
-            </v-list-item-content>
+            <v-list-item-action>{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }}</v-list-item-action>
           </v-list-item>
+
+          <v-divider></v-divider>
+          <v-list-item>
+            <v-list-item-avatar>
+              <v-img src="/img/icons/icon_lembar_pajak.png"></v-img>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title>Lembar Pajak</v-list-item-title>
+            </v-list-item-content>
+
+            <v-list-item-action>{{ unitMokas.lembar_pajak ? "ADA" : "TIDAK" }}</v-list-item-action>
+          </v-list-item>
+
+          <v-list-item-content class="text-center">
+            <v-list-item-title>
+              <v-icon large color="green" @click="dialog_dokumen = true">mdi-folder-open-outline</v-icon>
+            </v-list-item-title>
+            <v-list-item-subtitle>Dokumen</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ dokumen.length }} / 3</v-list-item-subtitle>
+          </v-list-item-content>
+
+          <v-dialog v-model="dialog_dokumen" max-width="350">
+            <v-card>
+              <v-card-title primary-title>Daftar Dokumen</v-card-title>
+              <v-list>
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>Surat Tanda Nomer Kendaraan</v-list-item-title>
+                  </v-list-item-content>
+                  <v-list-item-action>
+                    <v-checkbox v-model="unitMokas.lembar_stnk" readonly></v-checkbox>
+                  </v-list-item-action>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>Surat Ketetapan Pajak</v-list-item-title>
+                  </v-list-item-content>
+                  <v-list-item-action>
+                    <v-checkbox v-model="unitMokas.lembar_pajak" readonly></v-checkbox>
+                  </v-list-item-action>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>Buku Pemilik Kendaraan Bermotor</v-list-item-title>
+                  </v-list-item-content>
+                  <v-list-item-action>
+                    <v-checkbox v-model="unitMokas.lembar_bpkb" readonly></v-checkbox>
+                  </v-list-item-action>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-dialog>
+
+          <v-list-item-content class="text-center">
+            <v-list-item-title>
+              <v-icon large color="green">mdi-google-maps</v-icon>
+            </v-list-item-title>
+            <v-list-item-subtitle>Lokasi</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ unitMokas.lokasi }}</v-list-item-subtitle>
+          </v-list-item-content>
         </v-list>
 
         <v-divider></v-divider>
