@@ -85,7 +85,7 @@
 
     <v-container fluid class="ma-0 pa-0" grid-list-sm>
       <v-layout wrap>
-        <v-flex v-for="item in hits" :key="item._source.id" xs6 sm3>
+        <v-flex v-for="item in hits" :key="item._source.id" xs6 sm2 md3>
           <list-iklan :item="item" @click.native="close" />
         </v-flex>
       </v-layout>

@@ -129,7 +129,7 @@
     <!-- Hasil pencarian ditampilkan di sini -->
 
     <v-row dense>
-      <v-col cols="6" sm="4" md="4" class="pa-2" v-for="item in hits" :key="item._source.id">
+      <v-col cols="6" sm="3" class="pa-2" v-for="item in hits" :key="item._source.id">
         <v-card :to="'/detail_iklan/' + item._source.id">
           <v-img
             class="align-start"

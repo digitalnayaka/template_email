@@ -1,11 +1,6 @@
 <template>
   <v-container fluid>
-    <v-card
-      outlined
-      tile
-      class="ma-0"
-      :to="'/detail_iklan/' + item._source.id"
-    >
+    <v-card outlined tile class="ma-0" :to="'/detail_iklan/' + item._source.id">
       <v-img width="500" height="300" :src="getThumb(item._source.photo)" contain>
         <v-card-title>
           <v-chip
@@ -77,15 +72,16 @@
               <v-icon small>mdi-calendar</v-icon>
               {{ item._source.tanggal_mulai | dateTimeFormat(utc) }} {{ waktu }}
             </v-list-item-subtitle>
-             <v-list-item-subtitle v-if="item._source.id_mst_iklan_status == 6"
-                  style="color:teal"
-                   class="font-italic"
-                >Belum Terjual </v-list-item-subtitle>
-                 <v-list-item-subtitle v-if="item._source.id_mst_iklan_status == 2"
-                  style="color:teal"
-                  class="font-italic"
-                  
-                >Terjual </v-list-item-subtitle>
+
+            <v-list-item-subtitle
+              v-if="item._source.id_mst_iklan_status == 6"
+              class="font-italic teal--text"
+            >Belum Terjual</v-list-item-subtitle>
+
+            <v-list-item-subtitle
+              v-if="item._source.id_mst_iklan_status == 2"
+              class="font-italic teal--text"
+            >Terjual</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
