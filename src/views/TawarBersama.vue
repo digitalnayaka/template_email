@@ -48,11 +48,9 @@
                 <v-list-item-subtitle>Rp {{ Number(item.bid_tertinggi).toLocaleString("id-ID") }}</v-list-item-subtitle>
               </v-list-item-content>
 
-               <v-list-item-content>
-                <v-btn small dark outline color="teal" >Tawar Lagi</v-btn>
-
-                
-              </v-list-item-content>
+              <!-- <v-list-item-content>
+                <v-btn small dark outline color="teal">Tawar Lagi</v-btn>
+              </v-list-item-content> -->
             </v-list-item>
           </v-list>
 
@@ -135,12 +133,7 @@
           </div>
         </v-card>
 
-        <v-pagination
-          v-model="page"
-          @input="getTBSelesai"
-          :length="lengthPage"
-          :total-visible="5"
-        ></v-pagination>
+        <v-pagination v-model="page" @input="getTBSelesai" :length="lengthPage" :total-visible="5"></v-pagination>
       </v-tab-item>
     </v-tabs>
   </div>
@@ -162,7 +155,7 @@ export default {
       lengthPage: 0,
       limit: 20,
       offset: 0,
-      total: 0
+      total: 0,
     };
   },
   methods: {
@@ -172,15 +165,15 @@ export default {
           params: {
             id_app_user: this.user.id,
             id_mst_iklan_status: 1,
-            id_mst_iklan_jenis: 2
+            id_mst_iklan_jenis: 2,
           },
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.berlangsung = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -202,12 +195,12 @@ export default {
 
       var request = {
         params: params,
-        headers: { Authorization: "Bearer " + this.user.token }
+        headers: { Authorization: "Bearer " + this.user.token },
       };
 
       this.axios
         .get("/bid/v3/iklan_tb_peserta", request)
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.selesai = data;
 
@@ -215,11 +208,11 @@ export default {
           this.lengthPage =
             this.total == 0 ? 1 : Math.ceil(this.total / this.limit);
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
-    }
+    },
   },
 
   created() {
@@ -238,16 +231,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
+      user: "auth/user",
+    }),
   },
   filters: {
     dateTimeFormat: (date, utc) => {
-      return moment
-        .utc(date)
-        .add(utc, "h")
-        .format("DD MMM YYYY, HH:mm");
-    }
-  }
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY, HH:mm");
+    },
+  },
 };
 </script>

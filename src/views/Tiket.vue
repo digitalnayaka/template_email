@@ -557,6 +557,7 @@ export default {
       pageRF: 1,
       lengthPageRF: 0,
       totalRF: 0,
+      narasiTiket: [],
       limit: 15,
       offset: 0,
       utc: moment().utcOffset() / 60 - 7,
@@ -707,6 +708,23 @@ export default {
           console.log(responses);
         });
     },
+     getNarasiTiket() {
+      this.axios
+        .get("/master/v3/mst_event_promo", {
+          params: {
+            limit: 99
+            
+          }
+        })
+        .then(response => {
+          let { data } = response.data;
+          this.narasiTiket = data;
+        })
+        .catch(error => {
+          let { responses } = error;
+          console.log(responses);
+        });
+    },
     loadData() {
       var offset = (this.pagePembelian - 1) * this.limit;
 
@@ -847,6 +865,7 @@ export default {
     this.totalTiket();
     this.loadData();
     this.tiketTersedia();
+    this.getNarasiTiket();
     // this.getTiket();
 
     if (this.utc == 0) {

@@ -32,31 +32,36 @@
 
     <div class="text-center">
       <v-card class="d-inline-block mx-auto" width="1000">
-        <v-avatar size="80">
-          <v-img src="/img/profile.png" alt="profile"></v-img>
-        </v-avatar>
+        <v-list>
+          <v-list-item class="d-flex justify-center">
+            <v-avatar size="80">
+              <v-img src="/img/profile.png" alt="profile"></v-img>
+            </v-avatar>
+          </v-list-item>
+          <v-list-item class="d-flex justify-center">
+            {{ user.nama }}
+            <span>
+              <v-img src="/img/verified.png" width="20" height="20" contain></v-img>
+            </span>
+          </v-list-item>
 
-        <div class="d-flex justify-center">
-          {{ user.nama }}
-          <span>
-            <v-img src="/img/verified.png" width="20" height="20" contain></v-img>
-          </span>
-        </div>
-
-        <div>{{ user.nomor_hp }}</div>
+          <div>{{ user.nomor_hp }}</div>
+          <div>
+            <h4>{{ user.deskripsi }}</h4>
+          </div>
+           
+        </v-list>
 
         <div class="text-center">
           <v-card rounded="xl" to="/category/tiket" class="d-inline-block mx-auto" width="1000">
             <v-list dense>
               <v-list-item>
-                <v-list-item-content>
-                  <h5>{{ user.deskripsi }}</h5>
-                </v-list-item-content>
-
+             
+              </v-list-item>
+              <v-list-item>
                 <v-list-item-avatar tile size="80">
                   <v-img src="/img/tiket.png"></v-img>
                 </v-list-item-avatar>
-
                 <v-list-item-content>
                   <v-list-item-title class="text-h6">{{ tiket.tersedia }}</v-list-item-title>
                   <v-list-item-subtitle class="text-h6">Tersedia</v-list-item-subtitle>
@@ -78,7 +83,7 @@
         <v-tabs-items v-model="tab">
           <v-tab-item>
             <v-list class="text-left">
-              <v-list-item  to="/iklan_favorit">
+              <v-list-item to="/iklan_favorit">
                 <v-list-item-avatar tile size="30">
                   <v-img src="/img/icons/ic_iklan_favorit.png"></v-img>
                 </v-list-item-avatar>
@@ -131,7 +136,7 @@
                 <v-list-item-action>
                   <v-icon>mdi-chevron-right</v-icon>
                 </v-list-item-action>
-              </v-list-item> -->
+              </v-list-item>-->
             </v-list>
           </v-tab-item>
 
@@ -205,7 +210,7 @@
                 <v-list-item-avatar tile size="30">
                   <v-img src="/img/icons/ic_bantuan.png"></v-img>
                 </v-list-item-avatar>
-                
+
                 <v-list-item-content>
                   <v-list-item-title>Bantuan</v-list-item-title>
                 </v-list-item-content>
