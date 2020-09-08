@@ -230,11 +230,13 @@
           </v-list-item>
         </v-list>
 
-        <div class="d-flex mx-2 mb-2">Jika mengalami kendala dengan penjualan, silahkan kunjungi Bantuan.</div>
+        <div
+          class="d-flex mx-2 mb-2"
+        >Jika mengalami kendala dengan penjualan, silahkan kunjungi Bantuan.</div>
 
         <v-divider></v-divider>
 
-          <!-- <v-container fluid>
+        <!-- <v-container fluid>
             <v-btn
               color="red darken-1"
               dark
@@ -242,7 +244,7 @@
               @click="batalkan"
               v-if="orders.id_mst_pembayaran_status == 1"
             >Batalkan</v-btn>
-          </v-container> -->
+        </v-container>-->
       </v-card>
     </div>
   </div>
@@ -272,6 +274,7 @@ export default {
             id_mst_order_type: 2,
             limit: 1,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -298,12 +301,12 @@ export default {
     getBank(id, user) {
       this.axios
         .get("/user/v3/user/rekening", {
-          headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id: id,
             id_app_user: user,
             limit: 1,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;

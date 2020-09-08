@@ -100,12 +100,7 @@
       <v-layout wrap>
         <v-flex v-for="item in tbberlangsung" :key="item._source.id" xs6 sm4>
           <v-container fluid>
-            <v-card
-              outlined
-              tile
-              class="ma-0"
-              :to="'/detail_iklan/' + item._source.id"
-            >
+            <v-card outlined tile class="ma-0" :to="'/detail_iklan/' + item._source.id">
               <v-img width="500" height="300" :src="getThumb(item._source.photo)" contain>
                 <v-card-title>
                   <v-chip
@@ -272,7 +267,11 @@ export default {
   methods: {
     showBanners() {
       this.axios
-        .get("/master/v3/mst_banner")
+        .get("/master/v3/mst_banner", {
+          params: {
+            limit: 5,
+          },
+        })
         .then((response) => {
           let { data } = response.data;
 
