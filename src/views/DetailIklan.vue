@@ -204,15 +204,13 @@
       <v-col cols="12">
         <v-tabs
           v-model="tab"
-          background-color="transparent"
-          center-active
           grow
           v-if="hits.id_mst_iklan_jenis == 1"
         >
           <v-tab>Detail Iklan</v-tab>
         </v-tabs>
 
-        <v-tabs v-model="tab" background-color="transparent" center-active grow v-else>
+        <v-tabs v-model="tab" show-arrows grow v-else>
           <v-tab>
             <v-badge
               color="green"
