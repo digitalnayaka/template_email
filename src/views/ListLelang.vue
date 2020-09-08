@@ -54,9 +54,22 @@
               </v-list-item-content>
 
               <div class="mt-2">
-                <v-btn color="teal" dark @click="dialogHubungi = true" class="mx-2"> <v-icon>mdi-phone</v-icon></v-btn>
-                <v-btn color="teal" dark :to="'/chat/' + appuser.id" class="mx-2"><v-icon>mdi-chat</v-icon></v-btn>
-                <v-btn color="teal" dark @click="dialogBio = true" class="mx-2"><v-icon>mdi-information-outline </v-icon></v-btn>
+                <v-btn color="white" @click="dialogHubungi = true" contain>
+                  <v-list-item-avatar>
+                    <v-img src="/img/icons/hubungi.png"></v-img>
+                  </v-list-item-avatar>Hubungi
+                </v-btn>
+
+                <v-btn color="white" :to="'/chat/' + appuser.id" class="mx-2">
+                  <v-list-item-avatar>
+                    <v-img src="/img/icons/pesan.png"></v-img>
+                  </v-list-item-avatar>Pesan
+                </v-btn>
+                <v-btn color="white" @click="dialogBio = true" class="mx-2">
+                  <v-list-item-avatar>
+                    <v-img src="/img/icons/info_penjual.png"></v-img>
+                  </v-list-item-avatar>Info Penjual
+                </v-btn>
               </div>
             </v-list-item>
           </v-list>
@@ -180,8 +193,6 @@
                   <v-icon small>mdi-calendar</v-icon>
                   {{ item._source.tanggal_mulai | dateTimeFormat(utc) }} {{ waktu }}
                 </v-list-item-subtitle>
-                
-               
               </v-list-item-content>
             </v-list-item>
           </v-list>

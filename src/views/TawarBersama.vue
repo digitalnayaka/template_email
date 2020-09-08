@@ -47,6 +47,12 @@
 
                 <v-list-item-subtitle>Rp {{ Number(item.bid_tertinggi).toLocaleString("id-ID") }}</v-list-item-subtitle>
               </v-list-item-content>
+
+               <v-list-item-content>
+                <v-btn small dark outline color="teal" >Tawar Lagi</v-btn>
+
+                
+              </v-list-item-content>
             </v-list-item>
           </v-list>
 
