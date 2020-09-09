@@ -10,7 +10,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 // Your web app's Firebase configuration
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyB2fsNR4-M_6YBO65sF0x9MemAXLY_5gDQ",
   authDomain: "simotor-dna.firebaseapp.com",
   databaseURL: "https://simotor-dna.firebaseio.com",
