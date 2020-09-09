@@ -118,7 +118,9 @@
                 </v-btn>
               </v-toolbar>
 
-              <h3>{{ appuser.deskripsi }}</h3>
+              <v-card-text>
+                {{ appuser.deskripsi }}
+               </v-card-text>
             </v-card>
           </v-dialog>
         </v-card>

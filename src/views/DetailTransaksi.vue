@@ -73,7 +73,7 @@
                 >{{ orders.pembayaran_status }}</v-list-item-title>
               </v-list-item>-->
               <v-list-item v-if="orders.id_mst_pembayaran_status == 6">
-                <v-list-item-title >Alasan Ditolak:</v-list-item-title>
+                <v-list-item-title>Alasan Ditolak:</v-list-item-title>
 
                 <v-list-item-title class="font-weight-black">{{ orders.note}}</v-list-item-title>
               </v-list-item>
@@ -289,7 +289,7 @@
               </image-uploader>
 
               <v-img
-                :src="getImage(foto)"
+                :src="gambar"
                 contain
                 class="mx-2"
                 width="300"
@@ -565,6 +565,7 @@ export default {
     hasImage: false,
     iklan: [],
     foto: "",
+    gambar: "",
     penawaran: null,
     dialog: false,
   }),
@@ -714,6 +715,8 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.foto = data[0].foto;
+
+          this.getGambar();
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -734,6 +737,21 @@ export default {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
+    },
+    async getGambar() {
+      this.axios
+        .get(this.getImage(this.foto), {
+          responseType: "arraybuffer",
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          var bytes = new Uint8Array(response.data);
+          var binary = bytes.reduce(
+            (data, b) => (data += String.fromCharCode(b)),
+            ""
+          );
+          this.gambar = "data:image/jpeg;base64," + btoa(binary);
+        })
     },
   },
   computed: {

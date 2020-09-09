@@ -129,7 +129,12 @@
 
               <v-list-item-title>Jumlah: {{ orders.jumlah }} Tiket</v-list-item-title>
 
-              <v-list-item-title> Total Harga: <span  class="font-weight-black"> Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID")  }}</span></v-list-item-title>
+              <v-list-item-title>
+                Total Harga:
+                <span
+                  class="font-weight-black"
+                >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</span>
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -152,7 +157,7 @@
                 <v-list-item-subtitle>{{ accounts.nama_rekening }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
-          </v-list> -->
+          </v-list>-->
           <div>Jika mengalami kendala dalam pembayaran, silahkan kunjungi bantuan.</div>
         </v-container>
 
@@ -200,7 +205,7 @@
             </image-uploader>
 
             <v-img
-              :src="getImage(foto)"
+              :src="gambar"
               contain
               class="mx-2"
               width="500"
@@ -251,6 +256,7 @@ export default {
     hasImage: false,
     previewUrl: "",
     foto: null,
+    gambar: null,
     utc: moment().utcOffset() / 60 - 7,
     waktu: "",
   }),
@@ -261,10 +267,10 @@ export default {
     async getOrder() {
       await this.axios
         .get("/transaksi/v3/order", {
-          headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id: this.$route.params.id,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -355,19 +361,36 @@ export default {
     dtlPembayaran(id_pembayaran) {
       this.axios
         .get("/transaksi/v3/upload_pembayaran", {
-          headers: { Authorization: "Bearer " + this.user.token },
           params: {
             id_pembayaran: id_pembayaran,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
           this.foto = data[0].foto;
+
+          this.getGambar();
         })
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
+    },
+    async getGambar() {
+      this.axios
+        .get(this.getImage(this.foto), {
+          responseType: "arraybuffer",
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          var bytes = new Uint8Array(response.data);
+          var binary = bytes.reduce(
+            (data, b) => (data += String.fromCharCode(b)),
+            ""
+          );
+          this.gambar = "data:image/jpeg;base64," + btoa(binary);
+        })
     },
     onFileChange() {
       if (!this.buktiBayar) {
@@ -393,6 +416,7 @@ export default {
             id_app_user: this.orders.id_penjual,
             limit: 1,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -406,7 +430,6 @@ export default {
   },
   created() {
     this.getOrder();
-    
 
     if (this.utc == 0) {
       this.waktu = "WIB";

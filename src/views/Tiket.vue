@@ -10,12 +10,13 @@
       <div class="display-1 font-weight-black">Tiket Tawar Bersama</div>
       <v-col cols="12">
         <v-card color="blue lighten-4">
-          <div class="d-flex flex-no-wrap justify-space-between align-center">
+          <div class="d-flex flex-no-wrap align-center">
             <v-avatar class="ma-3" size="20" tile>
               <v-img src="/img/error.png"></v-img>
             </v-avatar>
+
             <div>
-              <v-card-text>Anda membutuhkan tiket untuk mengikuti Iklan Tawar Bersama. Dapatkan harga promo tiket Rp. 0 hanya dengan upload bukti Identitas Anda. Kami selalu menjaga privasi Anda serta menjamin agar Anda serius dalam melakukan penawaran. Tiket ini sebagai deposit yang bisa Anda tarik kembali (refund).</v-card-text>
+              <v-card-text>{{ events.deskripsi }}</v-card-text>
             </div>
           </div>
         </v-card>
@@ -30,40 +31,40 @@
       </v-col>
     </v-row>
 
-    <v-row class="text-center">
-      <v-col cols="2">
-        <h5>Tersedia</h5>
-        {{ tiket.tersedia }}
-      </v-col>
+    <div class="d-flex justify-space-around">
+      <div class="text-center">
+        <div class="font-weight-bold">Tersedia</div>
+        <div>{{ tiket.tersedia }}</div>
+      </div>
 
       <v-divider vertical></v-divider>
 
-      <v-col cols="2">
-        <h5>Terpakai</h5>
-        {{ tiket.terpakai }}
-      </v-col>
+      <div class="text-center">
+        <div class="font-weight-bold">Terpakai</div>
+        <div>{{ tiket.terpakai }}</div>
+      </div>
 
       <v-divider vertical></v-divider>
 
-      <v-col cols="2">
-        <h5>Refund</h5>
-        {{ tiket.return }}
-      </v-col>
+      <div class="text-center">
+        <div class="font-weight-bold">Refund</div>
+        <div>{{ tiket.return }}</div>
+      </div>
 
       <v-divider vertical></v-divider>
 
-      <v-col cols="2" class="red--text">
-        <h5>Hangus</h5>
-        {{ tiket.hangus }}
-      </v-col>
+      <div class="text-center red--text">
+        <div class="font-weight-bold">Hangus</div>
+        <div>{{ tiket.hangus }}</div>
+      </div>
 
       <v-divider vertical></v-divider>
       
-      <v-col cols="2" class="red--text">
-        <h5>Expired</h5>
-        {{ tiket.expired }}
-      </v-col>
-    </v-row>
+      <div class="text-center red--text">
+        <div class="font-weight-bold">Expired</div>
+        <div>{{ tiket.kadaluarsa }}</div>
+      </div>
+    </div>
 
     <v-row class="text-center">
       <v-col cols="6">
@@ -562,6 +563,7 @@ export default {
       offset: 0,
       utc: moment().utcOffset() / 60 - 7,
       waktu: "",
+      events: [],
     };
   },
   methods: {
@@ -838,6 +840,24 @@ export default {
           console.log(responses.api_message);
         });
     },
+    getEvent() {
+      this.axios
+        .get("/master/v3/mst_event_promo", {
+          params: {
+            id_modul: 1,
+            limit: 1,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.events = data[0];
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
+        });
+    },
     changeTab() {
       if (this.subTab2 == 1) {
         if (this.refunds.length == 0) {
@@ -865,8 +885,7 @@ export default {
     this.totalTiket();
     this.loadData();
     this.tiketTersedia();
-    this.getNarasiTiket();
-    // this.getTiket();
+    this.getEvent();
 
     if (this.utc == 0) {
       this.waktu = "WIB";

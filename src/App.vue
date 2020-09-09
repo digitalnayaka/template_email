@@ -47,14 +47,25 @@
         </v-list-item>
       </v-list>
 
-      <v-list-group v-for="item in menus" :key="item.id" :prepend-icon="item.module_icon" no-action color="red">
+      <v-list-group
+        v-for="item in menus"
+        :key="item.id"
+        :prepend-icon="item.module_icon"
+        no-action
+        color="red"
+      >
         <template v-slot:activator>
           <v-list-item-content>
             <v-list-item-title v-text="item.module_name"></v-list-item-title>
           </v-list-item-content>
         </template>
 
-        <v-list-item v-for="subItem in item.menu" :key="subItem.id" :to="subItem.menu_route" color="red">
+        <v-list-item
+          v-for="subItem in item.menu"
+          :key="subItem.id"
+          :to="subItem.menu_route"
+          color="red"
+        >
           <v-list-item-content>
             <v-list-item-title v-text="subItem.menu_name"></v-list-item-title>
           </v-list-item-content>
@@ -144,8 +155,8 @@
       </v-container>
     </v-main>
 
-    <v-btn bottom color="red" dark fab fixed right to="/bantuan">
-      <v-icon>mdi-account-question</v-icon>
+    <v-btn bottom color="white" dark fab fixed right to="/bantuan">
+    <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
     </v-btn>
   </v-app>
 </template>
@@ -307,7 +318,7 @@ export default {
 
 <style>
 a.primary--text {
-color: #e5e9ec !important;
-caret-color: #f4f4f4 !important;
+  color: #e5e9ec !important;
+  caret-color: #f4f4f4 !important;
 }
 </style>

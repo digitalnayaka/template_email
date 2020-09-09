@@ -144,9 +144,10 @@ export default {
     },
   },
   created() {
-    this.$nextTick(() => {
-      this.doSearch();
-    });
+    // this.$nextTick(() => {
+    //   this.doSearch();
+    // });
+    this.doSearch();
     this.getStatus();
   },
   computed: {

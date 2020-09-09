@@ -38,6 +38,8 @@
 
           <v-text-field label="Nomor Whatsapp" v-model="nomorWA" outlined :rules="waRules"></v-text-field>
 
+          <v-text-field label="Kota" v-model="kota" outlined :rules="kotaRules"></v-text-field>
+
           <v-text-field
             label="Deskripsi Penjual"
             v-model="deskripsi"
@@ -57,15 +59,9 @@
             Alamat Email
             <section id="firebaseui-auth-container"></section>
           </div>
-          <v-text-field
-            label="Kota"
-            v-model="kota"
-            outlined
-            :rules="kotaRules"
-          ></v-text-field>
         </v-form>
       </v-card-text>
-  
+
       <v-divider></v-divider>
 
       <div class="ma-2">Data anda selalu dirahasiakan dan tidak akan diberikan kepada pihak ketiga</div>
@@ -95,7 +91,7 @@ export default {
       nomorWA: "",
       email: "",
       deskripsi: "",
-      kota:"",
+      kota: "",
       valid: true,
       formRules: [(v) => !!v || "Data harus diisi!"],
       waRules: [
@@ -103,11 +99,11 @@ export default {
         (v) => v.length <= 13 || "Maks. 13 karakter",
       ],
       deskripsiRules: [
-        (v) => v.length >= 30 || "Min. 15 karakter",
+        (v) => v.length >= 15 || "Min. 15 karakter",
         (v) => v.length <= 150 || "Maks. 150 karakter",
       ],
       kotaRules: [
-        (v) => v.length >= 15 || "Min. 4 karakter",
+        (v) => v.length >= 4 || "Min. 4 karakter",
         (v) => v.length <= 60 || "Maks. 60 karakter",
       ],
       emailRules: [
@@ -125,6 +121,10 @@ export default {
           if (authResult) {
             this.googleLogin(authResult.user._lat, authResult.user.email);
             console.log(authResult.user);
+            var user = authResult.user;
+            user.getIdToken().then(function (accessToken) {
+              console.log(accessToken);
+            });
           }
           return false;
         },
@@ -141,14 +141,14 @@ export default {
       setAuth: "auth/set",
       setToken: "auth/SET_TOKEN",
     }),
-    async googleLogin(token, email) {
+    googleLogin(token, email) {
       let formData = new FormData();
 
       formData.append("email", email);
       formData.append("id_token", token);
       formData.append("id", this.user.id);
 
-      await this.axios
+      this.axios
         .put("/user/v3/user", formData, {
           headers: { Authorization: "Bearer " + token },
         })
@@ -175,10 +175,11 @@ export default {
       if (this.photo != null) {
         formData.append("foto", this.photo);
       }
+      formData.append("id", this.user.id);
       formData.append("nama", this.nama);
       formData.append("nomor_whatsapp", this.nomorWA);
-      formData.append("id", this.user.id);
-      formData.append("deskripsi", this.user.deskripsi);
+      formData.append("deskripsi", this.deskripsi);
+      formData.append("kota", this.kota);
       this.axios
         .put("/user/v3/user", formData, {
           headers: { Authorization: "Bearer " + this.user.token },
@@ -210,6 +211,7 @@ export default {
     this.nomorWA = this.user.nomor_whatsapp;
     this.email = this.user.email;
     this.deskripsi = this.user.deskripsi;
+    this.kota = this.user.kota;
   },
   computed: {
     ...mapGetters({

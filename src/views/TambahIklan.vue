@@ -141,7 +141,7 @@
                 </v-col>
               </v-row>
 
-              <div v-if="selectedIklan == 3" class="mb-4">
+              <!-- <div v-if="selectedIklan == 3" class="mb-4">
                 <div>Thumbnail Iklan</div>
 
                 <v-sheet class="mx-auto" v-if="selected.length > 0">
@@ -165,7 +165,7 @@
                     </v-slide-item>
                   </v-slide-group>
                 </v-sheet>
-              </div>
+              </div> -->
 
               <v-divider></v-divider>
 
@@ -660,7 +660,7 @@ export default {
           for (i = 0; i < this.selected.length; i++) {
             formData.append("id_motor_bekas", this.selected[i].id);
           }
-          formData.append("photo", this.thumbnail);
+          // formData.append("photo", this.thumbnail);
           formData.append("judul", this.judul_iklan);
           formData.append("deskripsi", this.deskripsi_iklan);
           formData.append("harga_awal", amount2);

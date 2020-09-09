@@ -32,36 +32,52 @@
 
     <div class="text-center">
       <v-card class="d-inline-block mx-auto" width="1000">
-        <v-list>
-          <v-list-item class="d-flex justify-center">
-            <v-avatar size="80">
-              <v-img src="/img/profile.png" alt="profile"></v-img>
-            </v-avatar>
-          </v-list-item>
-          <v-list-item class="d-flex justify-center">
-            {{ user.nama }}
-            <span>
-              <v-img src="/img/verified.png" width="20" height="20" contain></v-img>
-            </span>
-          </v-list-item>
+        <v-avatar size="80">
+          <v-img src="/img/profile.png" alt="profile"></v-img>
+        </v-avatar>
 
+        <div class="d-flex justify-center">
+          <span>
+            <v-img src="/img/verified.png" width="20" height="20" contain></v-img>
+          </span>
+          {{ user.nama }}
+        </div>
+        <div class="d-flex justify-center">
+          <span>
+            <v-img src="/img/icons/hubungi.png" width="30" height="30" contain></v-img>
+          </span>
           <div>{{ user.nomor_hp }}</div>
-          <div>
-            <h4>{{ user.deskripsi }}</h4>
-          </div>
-           
-        </v-list>
+        </div>
+        <div class="d-flex justify-center">
+          <span>
+            <v-img src="/img/icons/icon_lokasi.png" width="25" height="25" contain></v-img>
+          </span>
+          <div>{{ user.kota }}</div>
+        </div>
 
         <div class="text-center">
           <v-card rounded="xl" to="/category/tiket" class="d-inline-block mx-auto" width="1000">
             <v-list dense>
               <v-list-item>
-             
-              </v-list-item>
-              <v-list-item>
+                <v-list-item-content>
+                  <!-- <span>
+                    <v-img src="/img/icons/info_penjual.png" width="30" height="30" contain></v-img>
+                  </span> deskripsi
+                  <div>{{user.deskripsi}}</div>-->
+                  <div class="d-flex justify-center">
+                    <span>
+                      <v-img src="/img/icons/info_penjual.png" width="30" height="30" contain></v-img>
+                    </span>
+                    Deskripsi:
+                    <br />
+                    {{user.deskripsi}}
+                  </div>
+                </v-list-item-content>
+
                 <v-list-item-avatar tile size="80">
                   <v-img src="/img/tiket.png"></v-img>
                 </v-list-item-avatar>
+
                 <v-list-item-content>
                   <v-list-item-title class="text-h6">{{ tiket.tersedia }}</v-list-item-title>
                   <v-list-item-subtitle class="text-h6">Tersedia</v-list-item-subtitle>
