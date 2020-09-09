@@ -52,7 +52,8 @@
             v-model="email"
             outlined
             :rules="emailRules"
-            v-if="user.email != null"
+            readonly
+            v-if="email != null"
           ></v-text-field>
 
           <div v-else>
@@ -114,17 +115,20 @@ export default {
   },
   mounted() {
     var uiConfig = {
-      signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+      signInOptions: [
+        {
+          provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          clientId:
+            "73051776825-88ohcrej4c2gqsqkn27jc62vdf5n7qkq.apps.googleusercontent.com",
+        },
+      ],
       signInFlow: "popup",
       callbacks: {
         signInSuccessWithAuthResult: (authResult) => {
           if (authResult) {
-            this.googleLogin(authResult.user._lat, authResult.user.email);
-            console.log(authResult.user);
             var user = authResult.user;
-            user.getIdToken().then(function (accessToken) {
-              console.log(accessToken);
-            });
+            var credential = authResult.credential;
+            this.googleLogin(credential.idToken, user.email);
           }
           return false;
         },
@@ -141,19 +145,22 @@ export default {
       setAuth: "auth/set",
       setToken: "auth/SET_TOKEN",
     }),
-    googleLogin(token, email) {
+    googleLogin(tokenGoogle, email) {
       let formData = new FormData();
 
       formData.append("email", email);
-      formData.append("id_token", token);
+      formData.append("id_token", tokenGoogle);
       formData.append("id", this.user.id);
 
       this.axios
         .put("/user/v3/user", formData, {
-          headers: { Authorization: "Bearer " + token },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;
+          this.email = email;
+          this.setAuth(data.data[0]);
+          window.localStorage.setItem("user", JSON.stringify(data.data[0]));
           this.setAlert({
             status: true,
             color: "success",
@@ -211,7 +218,7 @@ export default {
     this.nomorWA = this.user.nomor_whatsapp;
     this.email = this.user.email;
     this.deskripsi = this.user.deskripsi;
-    this.kota = this.user.kota;
+    this.kota = this.user.kota === null ? "" : this.user.kota;
   },
   computed: {
     ...mapGetters({
