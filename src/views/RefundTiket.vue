@@ -55,7 +55,7 @@
                           class="my-0 py-0"
                           label="Select All"
                           v-model="checkbox"
-                          @click="selectAll"
+                          @change="selectAll"
                         ></v-checkbox>
                       </div>
 
@@ -147,11 +147,7 @@
           <v-list v-if="accounts.length > 0">
             <v-list-item v-for="item in accounts" :key="item.id">
               <v-list-item-avatar tile size="80">
-                <v-img src="/img/bank/bca.png" contain v-if="item.id_mst_bank == 12"></v-img>
-                <v-img src="/img/bank/bni.png" contain v-if="item.id_mst_bank == 3"></v-img>
-                <v-img src="/img/bank/bri.png" contain v-if="item.id_mst_bank == 4"></v-img>
-                <v-img src="/img/bank/mandiri.png" contain v-if="item.id_mst_bank == 2"></v-img>
-                <v-img src="/img/bank/permata.png" contain v-if="item.id_mst_bank == 33"></v-img>
+                <v-img :src="getImage(item.foto)" contain></v-img>
               </v-list-item-avatar>
 
               <v-list-item-content class="text-left">
@@ -315,7 +311,9 @@ export default {
     },
     getBank() {
       this.axios
-        .get("/master/v3/mst_bank")
+        .get("/master/v3/mst_bank", {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
         .then((response) => {
           let { data } = response.data;
           this.banks = data;
