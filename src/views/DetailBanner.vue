@@ -7,30 +7,15 @@
     </v-app-bar>
 
     <div class="text-center">
-      <div class="display-1 font-weight-bold">Detail Banner</div>
+      <div class="display-1 font-weight-bold">Judul</div>
       <br />
 
-      <v-card align="center" class="d-inline-block mx-auto">
-        <v-list>
-          <v-row dense>
-            <v-col cols="12">
-              <v-carousel cycle hide-delimiters height="300">
-                <v-carousel-item
-                  v-for="(item,index) in banners"
-                  :key="index"
-                  :src="getImage(item.src)"
-                  reverse-transition="fade-transition"
-                  transition="fade-transition"
-                  cycle
-                  hide-delimiter-background
-                  show-arrows-on-hover
-                  contain
-                ></v-carousel-item>
-              </v-carousel>
-              
-            </v-col>
-          </v-row>
-        </v-list>
+      <v-card outlined tile class="ma-0" color="#B7E1DF">
+        <v-img width="500" height="300"></v-img>
+
+        <h3>Deskripsi:</h3>
+      {{banners.name}} 
+        <p>hasbfajsfb</p>
       </v-card>
     </div>
   </div>
