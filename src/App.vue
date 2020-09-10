@@ -91,7 +91,7 @@
       <template v-slot:append v-if="!guest">
         <div class="pa-2">
           <v-btn block color="red" dark @click="signOut">
-            <v-icon left>mdi-lock</v-icon>Keluar
+            <v-icon left>mdi-logout</v-icon>Keluar
           </v-btn>
         </div>
       </template>
@@ -123,7 +123,7 @@
         <v-icon>mdi-heart-outline</v-icon>
       </v-btn>
 
-      <v-btn icon to="/notifikasi">
+      <v-btn icon to="/notifikasi" class="mr-0">
         <v-badge color="orange" overlap v-if="countNotif > 0">
           <template v-slot:badge>
             <span>{{ countNotif }}</span>

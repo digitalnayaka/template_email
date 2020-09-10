@@ -13,7 +13,7 @@
         <v-row>
           <v-col cols="12">
             <v-card color="deep-orange lighten-2">
-              <div class="d-flex flex-no-wrap justify-space-between align-center">
+              <div class="d-flex align-center">
                 <v-avatar class="ma-3" size="20" tile>
                   <v-img src="/img/error.png"></v-img>
                 </v-avatar>
