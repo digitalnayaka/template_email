@@ -75,13 +75,18 @@
 
             <v-list-item-subtitle
               v-if="item._source.id_mst_iklan_status == 6"
-              class="font-italic teal--text"
+              class="font-italic red--text"
             >Belum Terjual</v-list-item-subtitle>
 
             <v-list-item-subtitle
               v-if="item._source.id_mst_iklan_status == 2"
               class="font-italic teal--text"
             >Terjual</v-list-item-subtitle>
+
+            <v-list-item-subtitle
+              v-if="item._source.id_mst_iklan_status == 3"
+              class="font-italic blue--text"
+            >Serah Terima</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>

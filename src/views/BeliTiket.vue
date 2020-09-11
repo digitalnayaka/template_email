@@ -22,7 +22,7 @@
 
     <div align="center">
       <div class="text-h5 text-sm-h4">Dapatkan Tiket Tawar Bersama</div>
-      <div>Harga Tiket Tawar Bersama adalah Rp. 150.000/Tiket. Silahkan Pilih paket yang tersedia</div>
+      <div>Silahkan pilih paket yang tersedia</div>
     </div>
 
     <!-- <div class="text-center">
@@ -93,7 +93,7 @@
 
               <v-list-item-action>
                 <v-list-item-action-text>Harga</v-list-item-action-text>
-                Rp {{ Number(item.harga).toLocaleString("id-ID") }}
+                Rp {{ Number(item.harga).toLocaleString("id-ID") }} /Tiket
               </v-list-item-action>
             </v-list-item>
           </v-list>

@@ -42,7 +42,7 @@
 
       <v-row align="center" dense>
         <v-col cols="6" sm="4" v-for="item in hits" :key="item._source.id">
-          <v-card :color="item._source.id_mst_iklan_status == 2 ? 'green' : 'red'">
+          <v-card :color="item._source.id_mst_iklan_status == 2 ? 'green' : item._source.id_mst_iklan_status == 3 ? 'blue' : 'red'">
             <list-iklan :item="item" />
           </v-card>
         </v-col>

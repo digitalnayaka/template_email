@@ -6,7 +6,7 @@
           <v-carousel-item
             v-for="(item,index) in banners"
             :key="index"
-            :src="getThumb(item.foto)"
+            :src="getImage(item.foto)"
             reverse-transition="fade-transition"
             transition="fade-transition"
             cycle
@@ -174,11 +174,14 @@
     </div>
 
     <v-divider class="mt-4"></v-divider>
+    <div align="center">
+      <h2>Tentang SiMotor</h2>
+    </div>
 
     <div class="d-inline-block container" align="center">
       <v-row>
         <v-col cols="12" sm="6">
-          <v-img src="/img/app-min.png" width="280" contain></v-img>
+          <v-img src="/img/mobilefront.png" width="280" contain></v-img>
         </v-col>
 
         <v-col cols="12" sm="6">
@@ -216,7 +219,7 @@
 
     <div class="container mx-auto">
       <div class="section-title" align="center">
-        <v-img src="/img/icon.png" width="92"></v-img>
+        <v-img src="/img/logo-sm.png" width="92"></v-img>
 
         <h4>Apa aja fitur unggulan SiMotor?</h4>
 
@@ -226,7 +229,7 @@
           <v-col cols="12" sm="6">
             <h2>Harga Pas</h2>
 
-            <v-img src="/img/harga pas.png" width="120" contain></v-img>
+            <v-img src="/img/hargapas.png" width="120" contain></v-img>
 
             <p class="text-justify">
               Harga pas berguna banget untuk kamu yang nggak mau ribet menawar unit.
