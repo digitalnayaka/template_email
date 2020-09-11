@@ -6,7 +6,7 @@
           <v-carousel-item
             v-for="(item,index) in banners"
             :key="index"
-            :src="getThumb(item.foto)"
+            :src="getImage(item.foto)"
             reverse-transition="fade-transition"
             transition="fade-transition"
             cycle
