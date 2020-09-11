@@ -390,6 +390,7 @@ export default {
     iklan: [],
     foto: "",
     dialogTolak: false,
+    dialogTerima: false,
     penawaran: null,
     dialog: false,
   }),
