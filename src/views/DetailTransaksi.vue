@@ -299,7 +299,7 @@
 
               <p>*Pastikan gambar yang diupload jelas dan terbaca</p>
 
-              <v-btn
+              <!-- <v-btn
                 rounded
                 block
                 color="primary"
@@ -314,8 +314,54 @@
                 color="teal"
                 @click="konfirmasi"
                 v-if="orders.id_mst_pembayaran_status == 4 && orders.id_penjual == user.id"
-              >Konfirmasi Pembayaran</v-btn>
+              >Konfirmasi Pembayaran</v-btn>-->
+
+              <v-btn color="red darken-1" dark @click="dialogTolak = true">Tolak</v-btn>
+              <v-btn color="blue darken-1" dark @click="dialogTerima = true">Terima</v-btn>
             </div>
+            <v-dialog v-model="dialogTolak" persistent max-width="500px">
+              <v-card>
+                <v-toolbar dark color="teal darken-3">
+                  <v-toolbar-title>Tolak Moderasi</v-toolbar-title>
+                  <div class="flex-grow-1"></div>
+                  <v-btn icon @click="dialogTolak = false">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                </v-toolbar>
+                <v-select
+                  item-text="alasan"
+                  item-value="alasan"
+                  label="Alasan Tolak Moderasi (Wajib Dipilih)"
+                  solo
+                ></v-select>
+                <v-card-text>
+                  <v-textarea label="Alasan Menolak"></v-textarea>
+                </v-card-text>
+                <v-card-actions>
+                  <div class="flex-grow-1"></div>
+                  <v-btn color="red darken-1" dark @click="dialogTolak = false">Cancel</v-btn>
+                  <v-btn color="blue darken-1" dark>Tolak</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
+            <v-dialog v-model="dialogTerima" persistent max-width="500px">
+              <v-card>
+                <v-toolbar dark color="teal darken-3">
+                  <v-toolbar-title>Terima Moderasi</v-toolbar-title>
+                  <div class="flex-grow-1"></div>
+                  <v-btn icon @click="dialogTerima = false">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                </v-toolbar>
+
+                <v-card-actions>
+                  <div class="flex-grow-1"></div>
+                  <v-btn color="red darken-1" dark @click="dialogTerima = false">Cancel</v-btn>
+                  <v-btn color="blue darken-1" dark>Terima</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </div>
         </v-container>
       </v-card>
@@ -343,6 +389,7 @@ export default {
     hasImage: false,
     iklan: [],
     foto: "",
+    dialogTolak: false,
     penawaran: null,
     dialog: false,
   }),
@@ -751,7 +798,7 @@ export default {
             ""
           );
           this.gambar = "data:image/jpeg;base64," + btoa(binary);
-        })
+        });
     },
   },
   computed: {
