@@ -6,13 +6,14 @@
           <v-carousel-item
             v-for="(item,index) in banners"
             :key="index"
-            :src="getImage(item.src)"
+            :src="getThumb(item.foto)"
             reverse-transition="fade-transition"
             transition="fade-transition"
             cycle
             hide-delimiter-background
             show-arrows-on-hover
             contain
+            :to="'/detail_banner/' + item.id"
           ></v-carousel-item>
         </v-carousel>
       </v-col>
@@ -275,10 +276,7 @@ export default {
         .then((response) => {
           let { data } = response.data;
 
-          for (let index = 0; index < data.length; index++) {
-            const element = data[index].foto;
-            this.banners.push({ src: element });
-          }
+          this.banners = data;
         })
         .catch((error) => {
           let responses = error.response.data;

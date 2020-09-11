@@ -51,17 +51,17 @@
                     <v-container fluid>
                       <div class="d-flex justify-space-between">
                         <h3>Pilih tiket yang akan di refund: {{ listRefund.length }} Tiket</h3>
-                        <v-checkbox
+                        <v-switch
                           class="my-0 py-0"
                           label="Select All"
                           v-model="checkbox"
                           @change="selectAll"
-                        ></v-checkbox>
+                        ></v-switch>
                       </div>
 
                       <v-item-group>
                         <v-row>
-                          <v-col cols="4" v-for="item in listTersedia" :key="item.id">
+                          <v-col cols="12" sm="4" v-for="item in listTersedia" :key="item.id">
                             <v-item v-slot:default="{ active }">
                               <v-card>
                                 <v-list>

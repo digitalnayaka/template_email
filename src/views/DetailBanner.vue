@@ -6,24 +6,21 @@
       </v-btn>
     </v-app-bar>
 
-    <div class="text-center">
-      <div class="display-1 font-weight-bold">Judul</div>
-      <br />
+    <v-card>
+      <v-card-title class="text-h4">{{ banners.nama }}</v-card-title>
 
-      <v-card outlined tile class="ma-0" color="#B7E1DF">
-        <v-img width="500" height="300"></v-img>
+      <v-img :src="getImage(banners.foto)" height="250" contain></v-img>
 
-        <h3>Deskripsi:</h3>
-      {{banners.name}} 
-        <p>hasbfajsfb</p>
-      </v-card>
-    </div>
+      <v-card-text>
+        {{ banners.deskripsi }}
+      </v-card-text>
+    </v-card>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Home",
+  name: "detail_banner",
   data: () => ({
     banners: [],
   }),
@@ -32,16 +29,12 @@ export default {
       this.axios
         .get("/master/v3/mst_banner", {
           params: {
-            limit: 5,
+            id: this.$route.params.id,
           },
         })
         .then((response) => {
           let { data } = response.data;
-
-          for (let index = 0; index < data.length; index++) {
-            const element = data[index].foto;
-            this.banners.push({ src: element });
-          }
+          this.banners = data[0];
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -49,7 +42,6 @@ export default {
         });
     },
   },
-
   created() {
     this.showBanners();
   },

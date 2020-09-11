@@ -31,9 +31,14 @@
 
               <v-btn block color="teal" :disabled="!valid" @click="logincheck">Selanjutnya</v-btn>
 
-              <div class="pa-5">-------------------- atau --------------------</div>
+              <div class="pt-5">--------------- atau masuk dengan ---------------</div>
 
-              <v-btn block color="primary" @click="setDialogComponent('daftar')">Daftar</v-btn>
+              <section id="firebaseui-auth-container"></section>
+
+              <div>
+                Belum punya akun SiMotor?
+                <a @click="setDialogComponent('daftar')">Daftar</a>
+              </div>
             </div>
 
             <div v-if="otpDisplay">
@@ -82,6 +87,9 @@
 <script>
 import { mask } from "vue-the-mask";
 import { mapGetters, mapActions } from "vuex";
+import * as firebase from "firebase/app";
+import * as firebaseui from "firebaseui";
+import "firebaseui/dist/firebaseui.css";
 import Vue from "vue";
 import VueCountdown from "@chenfengyuan/vue-countdown";
 Vue.component(VueCountdown.name, VueCountdown);
@@ -93,20 +101,20 @@ export default {
     return {
       phone: "",
       phoneRules: [
-        v => !!v || "Nomor HP wajib diisi (Min 10, Max 13)",
-        v => v && v.length >= 10
+        (v) => !!v || "Nomor HP wajib diisi (Min 10, Max 13)",
+        (v) => v && v.length >= 10,
       ],
       otpRules: [
-        v => !!v || "OTP is required",
-        v => (v && v.length == 6) || "OTP harus 6 digit",
-        v => /^\d+$/.test(v) || "Numbers Only"
+        (v) => !!v || "OTP is required",
+        (v) => (v && v.length == 6) || "OTP harus 6 digit",
+        (v) => /^\d+$/.test(v) || "Numbers Only",
       ],
       mask: "#############",
       valid: true,
       phoneDisplay: true,
       otpDisplay: false,
       otp: "",
-      countdown: true
+      countdown: true,
     };
   },
 
@@ -116,7 +124,7 @@ export default {
       setAuth: "auth/set",
       setToken: "auth/SET_TOKEN",
       setDialogStatus: "dialog/setStatus",
-      setDialogComponent: "dialog/setComponent"
+      setDialogComponent: "dialog/setComponent",
     }),
     logincheck() {
       let formData = new FormData();
@@ -130,12 +138,12 @@ export default {
           this.otpDisplay = true;
           this.otpRequest();
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           this.setAlert({
             status: true,
             color: "error",
-            text: responses.api_message
+            text: responses.api_message,
           });
         });
     },
@@ -163,7 +171,7 @@ export default {
 
       await this.axios
         .post("/user/v3/user/login", formData)
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.setAuth(data[0]);
           this.setToken(data[0].token);
@@ -172,7 +180,7 @@ export default {
           this.setAlert({
             status: true,
             color: "success",
-            text: "Selamat Datang " + this.user.nama
+            text: "Selamat Datang " + this.user.nama,
           });
           this.close();
           this.phone = "";
@@ -183,24 +191,81 @@ export default {
           this.$root.$children[0].getNotif();
           // this.$router.go("/");
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           this.setAlert({
             status: true,
             color: "error",
-            text: responses.api_message
+            text: responses.api_message,
+          });
+        });
+    },
+    googleLogin(tokenGoogle, email) {
+      let formData = new FormData();
+
+      formData.append("id_token", tokenGoogle);
+      formData.append("email", email);
+      formData.append("id_one_signal", this.$root.$children[0].notif);
+
+      this.axios
+        .post("/user/v3/user/login", formData)
+        .then((response) => {
+          let { data } = response.data;
+          this.setAuth(data[0]);
+          this.setToken(data[0].token);
+          window.localStorage.setItem("user", JSON.stringify(data[0]));
+          window.localStorage.setItem("token", data[0].token);
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: "Selamat Datang " + this.user.nama,
+          });
+          this.close();
+          this.$root.$children[0].getModules();
+          this.$root.$children[0].getNotif();
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          this.setAlert({
+            status: true,
+            color: "error",
+            text: responses.api_message,
           });
         });
     },
     close() {
       this.$emit("closed", false);
-    }
+    },
+  },
+  mounted() {
+    var uiConfig = {
+      signInOptions: [
+        {
+          provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        },
+      ],
+      signInFlow: "popup",
+      callbacks: {
+        signInSuccessWithAuthResult: (authResult) => {
+          if (authResult) {
+            var user = authResult.user;
+            var credential = authResult.credential;
+            this.googleLogin(credential.idToken, user.email);
+          }
+          return false;
+        },
+      },
+    };
+    var ui =
+      firebaseui.auth.AuthUI.getInstance() ||
+      new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start("#firebaseui-auth-container", uiConfig);
   },
   computed: {
     ...mapGetters({
       user: "auth/user",
       dialogStatus: "dialog/status",
-      currentComponent: "dialog/component"
+      currentComponent: "dialog/component",
     }),
     dialog: {
       get() {
@@ -208,8 +273,8 @@ export default {
       },
       set(value) {
         this.setDialogStatus(value);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
