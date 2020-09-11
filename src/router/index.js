@@ -303,7 +303,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "bantuan" */ '../views/Bantuan.vue'),
   },
   {
-    path: '/detail_banner',
+    path: '/detail_banner/:id',
     name: 'detail_banner',
     component: () => import(/* webpackChunkName: "detail_banner" */ '../views/DetailBanner.vue'),
   },
