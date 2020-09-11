@@ -70,10 +70,12 @@
 
             <v-divider></v-divider>
 
-            <v-avatar size="16" v-if="item.id_mst_user_type == 2">
-              <v-img src="/img/verified.png" alt="verified"></v-img>
-            </v-avatar>
-            <span class="font-weight-bold">{{ item.nama }}</span>
+            <span class="font-weight-bold">
+              <v-avatar size="16" v-if="item.id_mst_user_type == 2">
+                <v-img src="/img/verified.png" alt="verified"></v-img>
+              </v-avatar>
+              {{ item.nama }}
+            </span>
             <div>{{ item.total_iklan }} Iklan Tayang</div>
           </v-card>
         </div>
