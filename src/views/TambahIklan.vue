@@ -126,7 +126,7 @@
                     auto-grow
                     rows="1"
                     v-model="deskripsi_iklan"
-                    label="Deksripsi Iklan"
+                    label="Deskripsi Iklan"
                     :counter="350"
                     :rules="descRules"
                   ></v-textarea>

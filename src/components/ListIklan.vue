@@ -75,7 +75,7 @@
 
             <v-list-item-subtitle
               v-if="item._source.id_mst_iklan_status == 6"
-              class="font-italic teal--text"
+              class="font-italic red--text"
             >Belum Terjual</v-list-item-subtitle>
 
             <v-list-item-subtitle
