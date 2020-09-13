@@ -95,6 +95,11 @@
                 class="d-block pa-2 red accent-2 white--text text-center"
                 v-if="item.id_mst_pembayaran_status == 3"
               >{{ item.pembayaran_status }}</div>
+
+              <div
+                class="d-block pa-2 red accent-2 white--text text-center"
+                v-if="item.id_mst_pembayaran_status == 6"
+              >{{ item.pembayaran_status }}</div>
             </div>
 
             <div v-if="item.id_mst_iklan_status == 2">

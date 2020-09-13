@@ -245,7 +245,7 @@ export default {
   name: "Module",
   components: {
     Alert: () =>
-      import(/* webpackChunkName: "alert" */ "@/components/Alert.vue")
+      import(/* webpackChunkName: "alert" */ "@/components/Alert.vue"),
   },
   directives: { mask },
   data: () => ({
@@ -255,7 +255,7 @@ export default {
       { text: "Module Icon", value: "module_icon" },
       { text: "Seq", value: "module_seq" },
       { text: "Action", value: "action" },
-      { text: "", value: "data-table-expand" }
+      { text: "", value: "data-table-expand" },
     ],
     modules: [],
     method: "",
@@ -268,7 +268,7 @@ export default {
       id: "",
       module_name: "",
       module_icon: "",
-      module_seq: ""
+      module_seq: "",
     },
     mask: "##",
     expanded: [],
@@ -284,27 +284,29 @@ export default {
       menu_route: "",
       menu_seq: "",
       menu_status: "",
-      module_id: ""
+      module_id: "",
     },
-    formRules: [v => !!v || "Field is required"],
+    formRules: [(v) => !!v || "Field is required"],
     valid: true,
-    datetime: new Date().toISOString()
+    datetime: new Date().toISOString(),
   }),
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
     }),
     timestamp() {
       this.datetime = moment(this.date).format("YYYY-MM-DD HH:mm:ss");
     },
     getModules() {
       this.axios
-        .get("/setup/v3/modules")
-        .then(response => {
+        .get("/setup/v3/modules", {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
           let { data } = response.data;
           this.modules = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let { responses } = error;
           console.log(responses);
         });
@@ -353,18 +355,20 @@ export default {
       formData.append("module_seq", this.editedItem.module_seq);
       formData.append("created_by", this.user.id);
       this.axios
-        .post("/setup/v3/modules", formData)
-        .then(response => {
+        .post("/setup/v3/modules", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
           let { data } = response;
           this.setAlert({
             status: true,
             color: "success",
-            text: "Data Saved"
+            text: "Data Saved",
           });
           this.modules.push(data.data);
           this.forceRerender();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
       this.closeModule();
@@ -375,13 +379,14 @@ export default {
       if (r == true) {
         this.axios.delete("/setup/v3/modules", {
           data: {
-            id: item.id
-          }
+            id: item.id,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
         });
         this.setAlert({
           status: true,
           color: "success",
-          text: "Data Deleted"
+          text: "Data Deleted",
         });
         this.modules.splice(index, 1);
         this.forceRerender();
@@ -395,11 +400,13 @@ export default {
       formData.append("module_seq", this.editedItem.module_seq);
       formData.append("updated_by", this.user.id);
       formData.append("updated_at", this.datetime);
-      this.axios.put("/setup/v3/modules", formData);
+      this.axios.put("/setup/v3/modules", formData, {
+        headers: { Authorization: "Bearer " + this.user.token },
+      });
       this.setAlert({
         status: true,
         color: "success",
-        text: "Data Updated"
+        text: "Data Updated",
       });
       this.getModules();
       this.forceRerender();
@@ -409,14 +416,15 @@ export default {
       this.axios
         .get("/setup/v3/menus", {
           params: {
-            module_id: module_id
-          }
+            module_id: module_id,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.menus = data;
         })
-        .catch(error => {
+        .catch((error) => {
           let { responses } = error;
           console.log(responses);
           this.menus = "";
@@ -439,19 +447,21 @@ export default {
       formData.append("module_id", this.editedItem.id);
       formData.append("created_by", this.user.id);
       this.axios
-        .post("/setup/v3/menus", formData)
-        .then(response => {
+        .post("/setup/v3/menus", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
           let { data } = response.data;
           this.setAlert({
             status: true,
             color: "success",
-            text: "Data Saved"
+            text: "Data Saved",
           });
           console.log(data);
           this.menus.push(data);
           this.closeMenu();
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -466,18 +476,20 @@ export default {
       formData.append("updated_by", this.user.id);
       formData.append("updated_at", this.datetime);
       this.axios
-        .put("/setup/v3/menus", formData)
-        .then(response => {
+        .put("/setup/v3/menus", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
           console.log(response);
           this.setAlert({
             status: true,
             color: "success",
-            text: "Data Updated"
+            text: "Data Updated",
           });
           this.getMenus(this.expanded[0].id);
           this.closeMenu();
         })
-        .catch(error => {
+        .catch((error) => {
           let { responses } = error;
           console.log(responses);
         });
@@ -489,24 +501,25 @@ export default {
         this.axios
           .delete("/setup/v3/menus", {
             data: {
-              id: item.id
-            }
+              id: item.id,
+            },
+            headers: { Authorization: "Bearer " + this.user.token },
           })
-          .then(response => {
+          .then((response) => {
             console.log(response);
             this.setAlert({
               status: true,
               color: "success",
-              text: "Data Deleted"
+              text: "Data Deleted",
             });
             this.menus.splice(index, 1);
           })
-          .catch(error => {
+          .catch((error) => {
             let { responses } = error;
             console.log(responses);
           });
       }
-    }
+    },
   },
   created() {
     this.getModules();
@@ -517,8 +530,8 @@ export default {
       return this.editedIndex === -1 ? "New Module" : "Edit Module";
     },
     ...mapGetters({
-      user: "auth/user"
-    })
-  }
+      user: "auth/user",
+    }),
+  },
 };
 </script>
