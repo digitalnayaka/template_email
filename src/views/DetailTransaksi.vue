@@ -299,7 +299,7 @@
 
               <p>*Pastikan gambar yang diupload jelas dan terbaca</p>
 
-              <!-- <v-btn
+              <v-btn
                 rounded
                 block
                 color="primary"
@@ -314,10 +314,10 @@
                 color="teal"
                 @click="konfirmasi"
                 v-if="orders.id_mst_pembayaran_status == 4 && orders.id_penjual == user.id"
-              >Konfirmasi Pembayaran</v-btn>-->
+              >Konfirmasi Pembayaran</v-btn>
 
-              <v-btn color="red darken-1" dark @click="dialogTolak = true">Tolak</v-btn>
-              <v-btn color="blue darken-1" dark @click="dialogTerima = true">Terima</v-btn>
+              <!-- <v-btn color="red darken-1" dark @click="dialogTolak = true">Tolak</v-btn>
+              <v-btn color="blue darken-1" dark @click="dialogTerima = true">Terima</v-btn> -->
             </div>
             <v-dialog v-model="dialogTolak" persistent max-width="500px">
               <v-card>
