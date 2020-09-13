@@ -424,6 +424,7 @@ export default {
     hasImage: false,
     iklan: [],
     foto: "",
+    gambar: "",
     penawaran: null,
     dialog: false,
     dialogKonfirmasi: false,
