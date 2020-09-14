@@ -8,22 +8,20 @@
       <v-spacer></v-spacer>
 
       <div v-if="!guest">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn icon class="mx-2" v-on="on" @click="getBarcode">
-              <v-icon large>mdi-barcode-scan</v-icon>
-            </v-btn>
-          </template>
-          <span>Barcode</span>
-        </v-tooltip>
-      </div>
-
-      <v-dialog v-model="dialog">
-        <v-card v-html="barcode"></v-card>
-      </v-dialog>
-
-      <div v-if="!guest">
         <div v-if="user.id == unitMokas.id_app_user">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn icon class="mx-2" v-on="on" @click="getBarcode">
+                <v-icon large>mdi-barcode-scan</v-icon>
+              </v-btn>
+            </template>
+            <span>Barcode</span>
+          </v-tooltip>
+
+          <v-dialog v-model="dialog">
+            <v-card v-html="barcode"></v-card>
+          </v-dialog>
+
           <v-btn
             icon
             class="mx-2"
@@ -426,7 +424,11 @@ export default {
     },
     getBarcode() {
       this.axios
-        .get("/produk/v3/barcode?id=" + this.id + "&limit=1", {
+        .get("/produk/v3/barcode", {
+          params: {
+            id: this.id,
+            limit: 1,
+          },
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {

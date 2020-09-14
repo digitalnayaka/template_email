@@ -1819,7 +1819,6 @@ export default {
             });
             this.height = 350;
             this.useTiket = !this.useTiket;
-            this.noTiket = !this.noTiket;
             this.ikutPenawaran = !this.ikutPenawaran;
           })
           .catch((error) => {

@@ -75,7 +75,17 @@
           </v-list-item-icon>
         </v-list-item>
       </v-list-group>
+      <v-list>
+        <v-list-item to="/akun" v-if="!guest">
+          <v-list-item-icon>
+            <v-icon left>mdi-account-box</v-icon>
+          </v-list-item-icon>
 
+          <v-list-item-content>
+            <v-list-item-title>Detail Akun</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
       <v-list>
         <v-list-item to="/report" v-if="!guest && user.id_mst_user_type != 1">
           <v-list-item-icon>
@@ -156,7 +166,7 @@
     </v-main>
 
     <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-    <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
+      <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
     </v-btn>
   </v-app>
 </template>
