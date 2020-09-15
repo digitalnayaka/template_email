@@ -85,7 +85,12 @@
                   ></v-img>
                 </v-list-item-title>
 
-                <v-list-item-subtitle>Penjual</v-list-item-subtitle>
+                <v-list-item-subtitle>
+                  Penjual
+                  <v-btn x-small @click="login">
+                    <v-icon>mdi-eye</v-icon>
+                  </v-btn>
+                </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -202,11 +207,7 @@
 
     <v-row dense>
       <v-col cols="12">
-        <v-tabs
-          v-model="tab"
-          grow
-          v-if="hits.id_mst_iklan_jenis == 1"
-        >
+        <v-tabs v-model="tab" grow v-if="hits.id_mst_iklan_jenis == 1">
           <v-tab>Detail Iklan</v-tab>
         </v-tabs>
 
@@ -1571,6 +1572,7 @@ import "firebase/firestore";
 import { db } from "../main";
 import moment from "moment-timezone";
 import FlipCountdown from "vue2-flip-countdown";
+import index from "../store/index";
 
 const fmt = "YYYY-MM-DD HH:mm:ss";
 
@@ -2091,6 +2093,9 @@ export default {
     back() {
       this.$router.go(-1);
       this.title = "SiMotor";
+    },
+    login() {
+      index.dispatch("dialog/setComponent", "login");
     },
   },
   created() {

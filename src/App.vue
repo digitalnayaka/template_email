@@ -156,7 +156,7 @@
     </v-main>
 
     <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-    <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
+      <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
     </v-btn>
   </v-app>
 </template>
@@ -241,16 +241,21 @@ export default {
       OneSignal.push(() => {
         OneSignal.init({
           appId: "9af3274a-447f-482f-bca6-ec68dc143418",
-          subdomainName: "simotorweb.os.tc",
+          notifyButton: {
+            enable: true,
+          },
         });
-      });
 
-      OneSignal.push(() => {
         OneSignal.on("subscriptionChange", (isSubscribed) => {
-          // console.log("The user's subscription state is now:", isSubscribed);
+          console.log("The user's subscription state is now:", isSubscribed);
           if (isSubscribed) {
-            this.$router.go("/");
+            this.$router.go();
           }
+        });
+
+        OneSignal.getUserId().then((userId) => {
+          console.log("OneSignal User ID:", userId);
+          this.notif = userId + "[web]";
         });
       });
     },
@@ -284,15 +289,6 @@ export default {
     this.oneSignal();
     this.geolocation();
     this.getNotif();
-    this.$vuetify.theme.primary = "#3f51b5";
-
-    let OneSignal = window.OneSignal || [];
-    OneSignal.getUserId((userId) => {
-      console.log("OneSignal User ID: " + userId);
-      if (userId != null) {
-        this.notif = userId + "[web]";
-      }
-    });
   },
   computed: {
     ...mapGetters({
