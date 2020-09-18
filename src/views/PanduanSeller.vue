@@ -26,7 +26,7 @@
               </p>
               <p>
                 <a
-                  href="/img/Panduan Penggunaan Aplikasi SiMotor PENJUAL ver1-0-1.pdf"
+                  href="/img/Panduan Penggunaan Aplikasi SiMotor PENJUAL ver1-6-0.pdf"
                   download
                 >Download disini</a>
               </p>
@@ -55,7 +55,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >1.1.4. Jika kode OTP benar, maka Anda akan masuk ke menu halaman utama</p>
-              <img src="img/tutorial1.png" width="600px" class="img-fluid" />
+               <v-img src="img/penjual1.png" width="600" contain></v-img>
               <br />
               <br />
 
@@ -71,7 +71,7 @@
                 Catatan : Jika nomor Anda belum pernah terdaftar di aplikasi SiMotor, maka akan
                 ada pemberitahuan bahwa Anda harus mendaftar terlebih dahulu.
               </p>
-              <img src="img/tutorial3.png" width="600px" class="img-fluid" />
+              <v-img src="img/penjual2.png" width="600" contain></v-img>
               <br />
               <br />
 
