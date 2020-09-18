@@ -476,9 +476,7 @@ export default {
       formData.append("updated_by", this.user.id);
       formData.append("updated_at", this.datetime);
       this.axios
-        .put("/setup/v3/menus", formData, {
-          headers: { Authorization: "Bearer " + this.user.token },
-        })
+        .put("/setup/v3/menus", formData)
         .then((response) => {
           console.log(response);
           this.setAlert({
