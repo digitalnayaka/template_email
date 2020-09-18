@@ -362,7 +362,7 @@
                     :items="noteTolak"
                     item-text="note"
                     item-value="id"
-                    label="Alasan Tolak Moderasi (Wajib Dipilih)"
+                    label="Alasan Tolak (Wajib Dipilih)"
                     solo
                     class="px-2 pt-2"
                   ></v-select>

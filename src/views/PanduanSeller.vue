@@ -55,7 +55,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >1.1.4. Jika kode OTP benar, maka Anda akan masuk ke menu halaman utama</p>
-               <v-img src="img/penjual1.png" width="600" contain></v-img>
+              <v-img src="img/penjual1.png" width="600" contain></v-img>
               <br />
               <br />
 
@@ -74,14 +74,31 @@
               <v-img src="img/penjual2.png" width="600" contain></v-img>
               <br />
               <br />
-
+              <p
+                class="text-justify ml-3 ml-lg-3 md-3 font-weight-bold"
+              >2.2. Login via email (Gmail)</p>
+              <p
+                class="text-justify ml-4 ml-lg-4 md-4"
+              >2.2.1. Pada halaman Login & Sign Up, pilih tab Login</p>
+              <p
+                class="text-justify ml-4 ml-lg-4 md-4"
+              >2.2.2. Klik button Google yang ada dibawah tab nomor handphone</p>
+              <p
+                class="text-justify ml-4 ml-lg-4 md-4"
+              >2.2.3. Pilih email yang akan Anda daftarkan untuk SiMotor</p>
+              <p
+                class="text-justify ml-4 ml-lg-4 md-4"
+              >2.2.4 Jika berhasil, Anda akan masuk ke menu halaman utama</p>
+              <v-img src="img/pembeli3.png" width="600" contain></v-img>
+              <br />
+              <br />
               <p class="ml-2 ml-lg-2 md-2 font-weight-bold">3. TAMBAH UNIT</p>
               <p class="ml-3 ml-lg-3 md-3">3.1. Masuk ke halaman utama</p>
               <p class="ml-3 ml-lg-3 md-3">3.2. Klik tombol + (Tambah) di bar navigasi bagian bawah</p>
               <p
                 class="ml-3 ml-lg-3 md-3"
               >3.3. Klik ‘Tambah Unit’ untuk memasukkan data unit motor ke garasi Anda di aplikasi SiMotor</p>
-              <img src="img/penjual1.png" width="600px" class="img-fluid" />
+              <v-img src="img/penjual2.png" width="600" contain></v-img>
               <br />
               <br />
               <p class="ml-3 ml-lg-3 md-3">
@@ -91,7 +108,7 @@
               <p
                 class="ml-3 ml-lg-3 md-3"
               >3.6. Isi detail motor seperti warna, odometer, kapasitas mesin, transmisi dan sebagainya</p>
-              <img src="img/penjual2.png" width="600px" class="img-fluid" />
+              <v-img src="img/penjual3.png" width="600" contain></v-img>
 
               <br />
               <br />
@@ -106,7 +123,7 @@
                 Gambar 19. Klik tombol simpan Gambar 20. Proses moderasi Gambar 21. Unit tersedia diiklankan
                 Catatan: Dalam proses moderasi, unit akan ditolak apabila gambar dianggap tidak sesuai dengan syarat dan ketentuan Aplikasi
               </p>
-              <img src="img/penjual3.png" width="600px" class="img-fluid" />
+              <v-img src="img/penjual4.png" width="600" contain></v-img>
 
               <p
                 class="ml-3 ml-lg-3 md-3"
@@ -124,7 +141,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >4.1.3. Pilih Jenis Iklan ‘Harga Pas’ untuk melanjutkan ke langkah berikutnya</p>
-              <img src="img/penjual4.png" width="600px" class="img-fluid" />
+              <v-img src="img/penjual5.png" width="600" contain></v-img>
               <br />
               <br />
               <p
@@ -133,7 +150,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >4.1.5. Isi data iklan motor seperti Judul Iklan, Deskripsi Iklan, dan Harga yang ingin ditawarkan, kemudian klik tombol ‘Iklankan’</p>
-              <img src="img/penjual5.png" width="600px" class="img-fluid" />
+              <v-img src="img/penjual6.png" width="600" contain></v-img>
               <br />
               <br />
               <p class="ml-3 ml-lg-3 md-3">4.2. Tambah Iklan Tawar Bersama</p>
@@ -146,7 +163,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >4.2.3. Pilih jenis iklan Tawar Bersama Satuan atau Tawar Bersama Paketan</p>
-              <img src="img/penjual6.png" width="600px" class="img-fluid" />
+              <v-img src="img/penjual7-1.png" width="600" contain></v-img>
               <br />
               <br />
               <p class="ml-4 ml-lg-4 md-4">4.2.4. Pilih unit Motor yang ingin Anda iklankan</p>
@@ -156,8 +173,10 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >4.2.6. Setelah itu, iklan akan bisa dilihat di tab iklan pada menu Akun Anda</p>
-              <img src="img/penjual7.png" width="600px" class="img-fluid" />
-              <img src="img/penjual8.png" width="210px" class="img-fluid" />
+
+              <v-img src="img/penjual7.png" width="600" contain></v-img>
+              <v-img src="img/penjual8.png" width="600" contain></v-img>
+
               <p class="ml-4 ml-lg-4 md-4 font-weight-bold">Catatan:</p>
               <p class="ml-4 ml-lg-4 md-4">- Anda bisa memilih kelipatan tawar</p>
               <p
@@ -172,22 +191,22 @@
 
               <p class="ml-2 ml-lg-2 md-2 font-weight-bold">5. Menu Aktivitas</p>
               <p
-                class="ml-3 ml-lg-3 md-3"
+                class="ml-3 ml-lg-3 md-3 font-weight-bold" 
               >5.1. Buka halaman utama, Klik tombol Aktivitas di bar navigasi bagian bawah</p>
               <p
                 class="ml-3 ml-lg-3 md-3"
               >5.2. Klik tombol tab ‘Iklan Anda’ untuk melihat iklan apa saja yang sudah pernah Anda buat baik itu iklan Tawar Bersama maupun iklan Harga Pas (pilih salah satu)</p>
-              <img src="img/penjual9.png" width="500px" class="img-fluid" />
+
+              <v-img src="img/penjual9.png" width="600" contain></v-img>
               <p class="ml-2 ml-lg-2 md-2 font-weight-bold">6. PENGATURAN</p>
-              <p class="ml-3 ml-lg-3 md-3">6.1. Cara tambah rekening baru</p>
+              <p class="ml-3 ml-lg-3 md-3 font-weight-bold">6.1. Cara tambah rekening baru</p>
               <p
                 class="ml-4 ml-lg-4 md-4"
               >6.1.1. Buka halaman utama, lalu klik tombol ‘Akun’ di bar navigasi bagian bawah</p>
               <p class="ml-4 ml-lg-4 md-4">6.1.2. Klik tombol Pengaturan di pojok kanan atas</p>
               <p class="ml-4 ml-lg-4 md-4">6.1.3. Klik ‘Rekening Bank’</p>
-              <img src="img/penjual10.png" width="600px" class="img-fluid" />
-              <br />
-              <br />
+              <!-- <img src="img/penjual10.png" width="600px" class="img-fluid" /> -->
+
               <p class="ml-4 ml-lg-4 md-4">6.1.4. Akan tampil daftar nama dan nomor rekening Anda</p>
               <p
                 class="ml-4 ml-lg-4 md-4"
@@ -197,11 +216,8 @@
               >6.1.6. Setelah itu pilih nama bank, ketik nama rekening dan nomor rekening</p>
               <p class="ml-4 ml-lg-4 md-4">6.1.7. Klik tombol ‘tambah’</p>
               <p class="ml-4 ml-lg-4 md-4">6.1.8. Anda berhasil menambah rekening bank yang baru</p>
-              <img src="img/penjual11.png" width="800px" class="img-fluid" />
-              <br />
-              <br />
               <p
-                class="ml-3 ml-lg-3 md-3"
+                class="ml-3 ml-lg-3 md-3 font-weight-bold"
               >6.2. Cara membuat Pesan Otomatis yang akan dikirimkan kepada pembeli yang berada di urutan paling atas pada daftar penawaran dalam sesi Tawar Bersama</p>
               <p
                 class="ml-4 ml-lg-4 md-4"
@@ -214,10 +230,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >6.2.5. Klik tombol simpan dan Anda telah berhasil menambah chat otomatis</p>
-              <img src="img/penjual12.png" width="800px" class="img-fluid" />
-              <br />
-              <img src="img/penjual13.png" width="500px" class="img-fluid" />
-              <br />
+              <v-img src="img/penjual10.png" width="600" contain></v-img>
             </div>
           </div>
         </v-container>
