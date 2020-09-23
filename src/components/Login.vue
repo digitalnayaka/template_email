@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-toolbar dark color="teal darken-4">
+    <v-toolbar dark color="teal">
       <v-btn icon dark @click.native="close">
         <v-icon>mdi-close</v-icon>
       </v-btn>
@@ -31,14 +31,16 @@
 
               <v-btn block color="teal" :disabled="!valid" @click="logincheck">Selanjutnya</v-btn>
 
-              <div class="pt-5">--------------- atau masuk dengan ---------------</div>
+              <div class="d-flex align-center pt-5">
+                <v-divider></v-divider>
 
-              <section id="firebaseui-auth-container"></section>
+                <span>atau masuk dengan</span>
 
-              <div>
-                Belum punya akun SiMotor?
-                <a @click="setDialogComponent('daftar')">Daftar</a>
+                <v-divider></v-divider>
               </div>
+
+              <section id="firebaseui-auth-container"></section>Belum punya akun SiMotor?
+              <a @click="setDialogComponent('daftar')">Daftar</a>
             </div>
 
             <div v-if="otpDisplay">

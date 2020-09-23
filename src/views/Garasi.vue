@@ -1,160 +1,207 @@
 <template>
-  <div>
-    <v-app-bar app color="teal" dark>
+  <v-card flat>
+    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <v-card flat>
-      <v-card-title>
-        <h3>Daftar Garasi</h3>
+    <v-data-table :headers="headers" :items="garasi" :search="search" class="elevation-1">
+      <template v-slot:top>
+        <v-toolbar flat>
+          <v-toolbar-title>Daftar Unit</v-toolbar-title>
 
-        <v-spacer></v-spacer>
+          <v-divider class="mx-4" inset vertical></v-divider>
 
-        <v-row dense>
-          <v-col cols="12" sm="8">
-            <v-text-field
-              v-model="keyword"
-              solo
-              label="Cari Motor"
-              single-line
-              prepend-inner-icon="mdi-magnify"
-              hide-details
-              clearable
-              @keyup.enter="doSearch"
-              @click:clear="doClear"
-            ></v-text-field>
-          </v-col>
+          <v-spacer></v-spacer>
 
-          <v-col cols="12" sm="4">
-            <v-select
-              v-model="value"
-              :items="items"
-              label="Status"
-              item-text="status"
-              item-value="id"
-              @change="doSearch"
-            ></v-select>
-          </v-col>
-        </v-row>
-      </v-card-title>
-    </v-card>
-    <v-container fluid>
-      <v-row align="center" dense>
-        <v-col cols="6" sm="4" lg="3" v-for="item in unitMokas" :key="item.id">
-          <v-card outlined tile :to="'/unit_mokas/'+item.id">
-            <div align="center">
-              <v-img align="center" width="500" height="300" :src="getImage(item.foto_1)" contain></v-img>
-            </div>
+          <v-btn color="teal" dark class="mb-2 text-caption" to="/garasi/add-unit">
+            <v-icon left>mdi-plus</v-icon>Tambah Unit
+          </v-btn>
 
-            <v-list class="ma-0 pa-0">
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-subtitle style="color : red">{{ item.status }}</v-list-item-subtitle>
-                  <v-list-item-title class="font-weight-black">{{ item.type }}</v-list-item-title>
-                  <v-list-item-subtitle>{{ item.nomor_polisi }}</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-    <v-pagination v-model="page" @input="doSearch" :length="lengthPage" :total-visible="5"></v-pagination>
-  </div>
+          <v-text-field
+            v-model="search"
+            outlined
+            dense
+            label="Search"
+            class="mt-7"
+            slot="extension"
+          ></v-text-field>
+        </v-toolbar>
+      </template>
+
+      <template v-slot:item.type="{ item }">
+        <v-list class="d-inline-flex">
+          <v-list-item :to="'/garasi/detail-unit/' + item.id">
+            <v-list-item-avatar>
+              <v-img :src="getImage(item.foto_1)"></v-img>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title>{{item.type}}</v-list-item-title>
+              <v-list-item-subtitle>{{item.merk}}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </template>
+
+      <template v-slot:item.actions="{ item }">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn small outlined color="teal" dark v-bind="attrs" v-on="on">
+              Atur
+              <v-icon right v-if="attrs['aria-expanded'] === 'false'">mdi-chevron-down</v-icon>
+              <v-icon right v-else>mdi-chevron-up</v-icon>
+            </v-btn>
+          </template>
+
+          <v-list dense>
+            <v-list-item @click="getBarcode(item.id)">
+              <v-list-item-title class="d-flex align-center">
+                <v-icon small class="mr-2">mdi-barcode-scan</v-icon>Barcode
+              </v-list-item-title>
+
+              <v-dialog v-model="dialog">
+                <v-card v-html="barcode"></v-card>
+              </v-dialog>
+            </v-list-item>
+
+            <v-list-item :to="'/garasi/edit-unit/' + item.id">
+              <v-list-item-title class="d-flex align-center">
+                <v-icon small class="mr-2">mdi-pencil</v-icon>Edit
+              </v-list-item-title>
+            </v-list-item>
+
+            <v-list-item @click="deleteUnit(item)">
+              <v-list-item-title class="d-flex align-center">
+                <v-icon small class="mr-2">mdi-delete</v-icon>Hapus
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </template>
+
+      <template v-slot:no-data>Belum ada unit.</template>
+    </v-data-table>
+  </v-card>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "Garasi",
+  name: "garasi",
   data: () => ({
-    keyword: "",
-    unitMokas: [],
-    items: [],
-    value: { id: 0, status: "Semua" },
+    search: "",
+    headers: [
+      { text: "Info Unit", value: "type" },
+      { text: "Nomor Polisi", value: "nomor_polisi" },
+      { text: "Status", value: "status" },
+      { text: "Actions", value: "actions", sortable: false },
+    ],
+    garasi: [],
+    dialog: false,
+    barcode: null,
     page: 1,
-    lengthPage: 0,
-    limit: 20,
     offset: 0,
-    total: 0
+    limit: 20,
+    total: 0,
+    lengthPage: 0,
   }),
+  computed: {
+    ...mapGetters({
+      user: "auth/user",
+    }),
+  },
   methods: {
-    async doSearch() {
+    ...mapActions({
+      setAlert: "alert/set",
+    }),
+    daftarProduk() {
       var offset = (this.page - 1) * this.limit;
 
       var params = new URLSearchParams();
-      params.append("id_app_user", this.user.id);
-      if (this.value > 0) {
-        params.append("id_mst_motor_bekas_status", this.value);
-      }
-      params.append("search", this.keyword);
-      params.append("id_mst_iklan_status", this.value);
-      params.append("offset", offset);
-      params.append("limit", this.limit);
+
+      params.set("id_app_user", this.user.id);
+      params.set("id_mst_motor_bekas_status", 1);
+      params.append("id_mst_motor_bekas_status", 2);
+      params.append("id_mst_motor_bekas_status", 3);
+      params.append("id_mst_motor_bekas_status", 5);
+      params.set("search", this.search);
+      params.set("offset", offset);
+      params.set("limit", this.limit);
 
       var request = {
-        params: params
+        params: params,
+        headers: { Authorization: "Bearer " + this.user.token },
       };
 
-      await this.axios
+      this.axios
         .get("/produk/v3/unit_mokas", request)
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
-          this.unitMokas = data;
+          this.garasi = data;
           this.total = response.data.count;
           this.lengthPage = Math.ceil(this.total / this.limit);
         })
-        .catch(error => {
-          let { responses } = error;
-          console.log(responses);
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
         });
     },
-    doClear() {
-      var params = new URLSearchParams();
-      params.append("id_app_user", this.user.id);
-      params.append("search", "");
-      params.append("limit", 999);
-
-      var request = {
-        params: params
-      };
-
+    getBarcode(id) {
       this.axios
-        .get("/produk/v3/unit_mokas", request)
-        .then(response => {
-          let { data } = response.data;
-          this.unitMokas = data;
+        .get("/produk/v3/barcode", {
+          params: {
+            id: id,
+            limit: 1,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .catch(error => {
-          let { responses } = error;
-          console.log(responses);
+        .then((response) => {
+          let { data } = response;
+          this.barcode = data;
+          this.dialog = true;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
         });
     },
-    getStatus() {
-      this.axios
-        .get("/produk/v3/mst_motor_bekas_status")
-        .then(response => {
-          let { data } = response.data;
-          this.items = data;
-          this.items.splice(0, 0, { id: 0, status: "Semua" });
-        })
-        .catch(error => {
-          let { responses } = error;
-          console.log(responses);
-        });
-    }
+    deleteUnit(item) {
+      var r = confirm("Yakin akan dihapus");
+      if (r == true) {
+        let formData = new FormData();
+
+        formData.append("id", item.id);
+        formData.append("limit", 1);
+
+        this.axios
+          .post("/produk/v3/unit_mokas_delete", formData, {
+            headers: { Authorization: "Bearer " + this.user.token },
+          })
+          .then((response) => {
+            let { data } = response;
+            this.setAlert({
+              status: true,
+              color: "success",
+              text: data.api_message,
+            });
+            this.daftarProduk();
+          })
+          .catch((error) => {
+            let responses = error.response.data;
+            this.setAlert({
+              status: true,
+              color: "error",
+              text: responses.api_message,
+            });
+          });
+      }
+    },
   },
   created() {
-    this.doSearch();
-    this.getStatus();
+    this.daftarProduk();
   },
-  computed: {
-    ...mapGetters({
-      user: "auth/user"
-    })
-  }
 };
 </script>

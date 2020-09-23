@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container fluid>
     <v-app-bar app color="teal" dark>
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
@@ -17,104 +17,112 @@
       <v-stepper-items>
         <v-form ref="form" v-model="valid">
           <v-stepper-content step="1">
-            <h3>Pilih Jenis Iklan</h3>
+            <v-card>
+              <v-card-title>Pilih Jenis Iklan</v-card-title>
 
-            <v-list v-for="item in jenisIklan" :key="item.id">
-              <v-list-item @click="id == undefined ? step2(item.id) : stepSkip(item.id)">
-                <v-list-item-avatar tile size="50">
-                  <v-img :src="item.icon" contain></v-img>
-                </v-list-item-avatar>
+              <v-list>
+                <div v-for="item in jenisIklan" :key="item.id">
+                  <v-list-item @click="id == undefined ? step2(item.id) : stepSkip(item.id)">
+                    <v-list-item-avatar tile size="50">
+                      <v-img :src="item.icon" contain></v-img>
+                    </v-list-item-avatar>
 
-                <v-list-item-content>
-                  <v-list-item-title class="body-1">{{ item.name }}</v-list-item-title>
-                  <v-list-item-subtitle>{{ item.desc }}</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title class="body-1">{{ item.name }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ item.desc }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
 
-              <v-divider></v-divider>
-            </v-list>
+                  <v-divider></v-divider>
+                </div>
+              </v-list>
+            </v-card>
           </v-stepper-content>
 
           <v-stepper-content step="2">
-            <v-card flat>
-              <v-card-title>
+            <v-card>
+              <div class="d-flex justify-space-between align-center">
                 <v-btn icon color="primary" @click="e1 = 1">
                   <v-icon large>mdi-arrow-left-circle</v-icon>
                 </v-btn>
 
                 <v-spacer></v-spacer>
 
-                <h3>Pilih Unit Motor</h3>
+                <v-card-title>Pilih Unit Motor</v-card-title>
 
                 <v-spacer></v-spacer>
 
-                <div v-if="selectedIklan == 3 && selected.length > 1">
-                  <v-btn icon color="primary" @click="e1 = 3">
-                    <v-icon large>mdi-arrow-right-circle</v-icon>
-                  </v-btn>
-                </div>
-              </v-card-title>
+                <v-btn
+                  icon
+                  color="primary"
+                  @click="e1 = 3"
+                  v-if="selectedIklan == 3 && selected.length > 1"
+                >
+                  <v-icon large>mdi-arrow-right-circle</v-icon>
+                </v-btn>
+              </div>
+
+              <v-text-field
+                v-model="keyword"
+                label="Search"
+                hide-details
+                flat
+                autofocus
+                outlined
+                dense
+                prepend-inner-icon="mdi-magnify"
+                @keyup.enter="getUnitMokas"
+              ></v-text-field>
+
+              <v-list>
+                <v-list-item-group v-model="selected" :multiple="multiple">
+                  <template v-for="(item,i) in unitMokas">
+                    <v-list-item
+                      :key="item.id"
+                      :value="item"
+                      @click="selectUnit(item)"
+                      color="indigo"
+                    >
+                      <template v-slot:default="{ active }">
+                        <v-list-item-avatar tile size="80">
+                          <v-img :src="getImage(item.foto_1)" contain></v-img>
+                        </v-list-item-avatar>
+
+                        <v-list-item-content>
+                          <v-list-item-title v-html="item.type"></v-list-item-title>
+                          <v-list-item-subtitle v-html="item.nomor_polisi"></v-list-item-subtitle>
+                          <v-list-item-subtitle v-html="item.tahun"></v-list-item-subtitle>
+                        </v-list-item-content>
+
+                        <v-list-item-action>
+                          <v-icon v-if="!active" color="grey lighten-1" large>mdi-star</v-icon>
+                          <v-icon v-else color="yellow" large>mdi-star</v-icon>
+                        </v-list-item-action>
+                      </template>
+                    </v-list-item>
+                    <v-divider :key="i"></v-divider>
+                  </template>
+                </v-list-item-group>
+              </v-list>
+
+              <v-pagination
+                v-model="page"
+                @input="getUnitMokas"
+                :length="lengthPage"
+                :total-visible="5"
+              ></v-pagination>
             </v-card>
-
-            <v-text-field
-              hide-details
-              flat
-              autofocus
-              label="Search"
-              prepend-inner-icon="mdi-magnify"
-              v-model="keyword"
-              @keyup.enter="getUnitMokas"
-            ></v-text-field>
-
-            <v-list>
-              <v-list-item-group v-model="selected" :multiple="multiple">
-                <template v-for="item in unitMokas">
-                  <v-list-item
-                    :key="item.id"
-                    :value="item"
-                    @click="selectUnit(item)"
-                    color="indigo"
-                  >
-                    <template v-slot:default="{ active }">
-                      <v-list-item-avatar tile size="80">
-                        <v-img :src="getImage(item.foto_1)" contain></v-img>
-                      </v-list-item-avatar>
-
-                      <v-list-item-content>
-                        <v-list-item-title v-html="item.type"></v-list-item-title>
-                        <v-list-item-subtitle v-html="item.nomor_polisi"></v-list-item-subtitle>
-                        <v-list-item-subtitle v-html="item.tahun"></v-list-item-subtitle>
-                        <v-divider></v-divider>
-                      </v-list-item-content>
-
-                      <v-list-item-action>
-                        <v-icon v-if="!active" color="grey lighten-1">mdi-star</v-icon>
-                        <v-icon v-else color="yellow">mdi-star</v-icon>
-                      </v-list-item-action>
-                    </template>
-                  </v-list-item>
-                </template>
-              </v-list-item-group>
-
-              <v-divider></v-divider>
-            </v-list>
-
-            <v-pagination
-              v-model="page"
-              @input="getUnitMokas"
-              :length="lengthPage"
-              :total-visible="5"
-            ></v-pagination>
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <v-card flat>
-              <h3>Isi Detail Iklan Anda</h3>
+            <v-card>
+              <v-card-title>Isi Detail Iklan Anda</v-card-title>
 
               <v-text-field
-                outlined
                 v-model="judul_iklan"
                 label="Judul Iklan"
+                outlined
+                dense
                 :counter="70"
                 :rules="judulRules"
               ></v-text-field>
@@ -122,11 +130,12 @@
               <v-row>
                 <v-col cols="12" :sm="selectedIklan == 3 ? 12 : 8">
                   <v-textarea
+                    v-model="deskripsi_iklan"
+                    label="Deksripsi Iklan"
                     outlined
+                    dense
                     auto-grow
                     rows="1"
-                    v-model="deskripsi_iklan"
-                    label="Deskripsi Iklan"
                     :counter="350"
                     :rules="descRules"
                   ></v-textarea>
@@ -136,44 +145,22 @@
                   <v-btn
                     color="teal"
                     dark
+                    small
+                    class="mt-1"
                     @click="deskripsi_iklan = selected.deskripsi"
                   >Gunakan deskripsi unit</v-btn>
                 </v-col>
               </v-row>
 
-              <!-- <div v-if="selectedIklan == 3" class="mb-4">
-                <div>Thumbnail Iklan</div>
-
-                <v-sheet class="mx-auto" v-if="selected.length > 0">
-                  <v-slide-group show-arrows mandatory v-model="thumbnail">
-                    <v-slide-item
-                      v-for="(item,index) in selected"
-                      :key="index"
-                      v-slot:default="{ active, toggle }"
-                      :value="item.foto_1"
-                    >
-                      <v-card
-                        class="px-2 mx-2"
-                        :color="active ? 'primary' : ''"
-                        dark
-                        @click="toggle"
-                      >
-                        <v-card>
-                          <v-img :src="getImage(item.foto_1)" height="200" width="200" contain></v-img>
-                        </v-card>
-                      </v-card>
-                    </v-slide-item>
-                  </v-slide-group>
-                </v-sheet>
-              </div> -->
-
               <v-divider></v-divider>
 
-              <h3>Informasi Harga</h3>
+              <v-card-title>Informasi Harga</v-card-title>
+
               <v-text-field
-                outlined
                 v-model="amount"
                 :label="selectedIklan == 1 ? 'Harga' : 'Harga Awal'"
+                outlined
+                dense
                 :rules="amountRules"
                 :counter="11"
                 v-money="money"
@@ -181,58 +168,52 @@
 
               <div v-if="selectedIklan != 1">
                 <div class="subtitle-1">Kelipatan Tawaran</div>
+
                 <v-item-group v-model="kelipatan" mandatory>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12" sm="4">
-                        <v-item v-slot:default="{ active, toggle }" value="50000">
-                          <v-card
-                            :color="active ? 'teal' : ''"
-                            class="d-flex align-center"
-                            dark
-                            @click="toggle"
-                          >
-                            <div class="text-center">
-                              <v-card-title>Rp 50.000</v-card-title>
-                            </div>
-                            <v-scroll-y-transition>
-                              <div v-if="active" class="display-3 flex-grow-1 text-center"></div>
-                            </v-scroll-y-transition>
-                          </v-card>
-                        </v-item>
-                      </v-col>
-                      <v-col cols="12" sm="4">
-                        <v-item v-slot:default="{ active, toggle }" value="100000">
-                          <v-card
-                            :color="active ? 'teal' : ''"
-                            class="d-flex align-center"
-                            dark
-                            @click="toggle"
-                          >
-                            <v-card-title>Rp 100.000</v-card-title>
-                            <v-scroll-y-transition>
-                              <div v-if="active" class="display-3 flex-grow-1 text-center"></div>
-                            </v-scroll-y-transition>
-                          </v-card>
-                        </v-item>
-                      </v-col>
-                      <v-col cols="12" sm="4">
-                        <v-item v-slot:default="{ active, toggle }" value="150000">
-                          <v-card
-                            :color="active ? 'teal' : ''"
-                            class="d-flex align-center"
-                            dark
-                            @click="toggle"
-                          >
-                            <v-card-title>Rp 150.000</v-card-title>
-                            <v-scroll-y-transition>
-                              <div v-if="active" class="display-3 flex-grow-1 text-center"></div>
-                            </v-scroll-y-transition>
-                          </v-card>
-                        </v-item>
-                      </v-col>
-                    </v-row>
-                  </v-container>
+                  <v-row>
+                    <v-col cols="12" sm="4">
+                      <v-item v-slot:default="{ active, toggle }" value="50000">
+                        <v-card :color="active ? 'teal' : ''" dark @click="toggle">
+                          <v-card-title>Rp 50.000</v-card-title>
+
+                          <v-scroll-y-transition>
+                            <div v-if="active" class="display-3 flex-grow-1 text-center"></div>
+                          </v-scroll-y-transition>
+                        </v-card>
+                      </v-item>
+                    </v-col>
+
+                    <v-col cols="12" sm="4">
+                      <v-item v-slot:default="{ active, toggle }" value="100000">
+                        <v-card
+                          :color="active ? 'teal' : ''"
+                          class="d-flex align-center"
+                          dark
+                          @click="toggle"
+                        >
+                          <v-card-title>Rp 100.000</v-card-title>
+                          <v-scroll-y-transition>
+                            <div v-if="active" class="display-3 flex-grow-1 text-center"></div>
+                          </v-scroll-y-transition>
+                        </v-card>
+                      </v-item>
+                    </v-col>
+                    <v-col cols="12" sm="4">
+                      <v-item v-slot:default="{ active, toggle }" value="150000">
+                        <v-card
+                          :color="active ? 'teal' : ''"
+                          class="d-flex align-center"
+                          dark
+                          @click="toggle"
+                        >
+                          <v-card-title>Rp 150.000</v-card-title>
+                          <v-scroll-y-transition>
+                            <div v-if="active" class="display-3 flex-grow-1 text-center"></div>
+                          </v-scroll-y-transition>
+                        </v-card>
+                      </v-item>
+                    </v-col>
+                  </v-row>
                 </v-item-group>
 
                 <v-list>
@@ -309,24 +290,24 @@
                   </v-col>
                 </v-row>
               </div>
-            </v-card>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="teal" dark @click="id == undefined ? e1 = 2 : e1 = 1">Sebelumnya</v-btn>
-              <v-btn
-                color="teal"
-                class="white--text"
-                :disabled="!valid"
-                @click="storeItem"
-                :loading="loading"
-              >Iklankan</v-btn>
-            </v-card-actions>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="teal" dark @click="id == undefined ? e1 = 2 : e1 = 1">Sebelumnya</v-btn>
+                <v-btn
+                  color="teal"
+                  class="white--text"
+                  :disabled="!valid"
+                  @click="storeItem"
+                  :loading="loading"
+                >Iklankan</v-btn>
+              </v-card-actions>
+            </v-card>
           </v-stepper-content>
         </v-form>
       </v-stepper-items>
     </v-stepper>
-  </div>
+  </v-container>
 </template>
 
 <script>

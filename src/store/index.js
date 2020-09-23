@@ -5,6 +5,7 @@ import auth from '@/store/auth'
 import dialog from '@/store/dialog'
 import order from '@/store/order'
 import cart from '@/store/cart'
+import ads from '@/store/ads'
 
 Vue.use(Vuex)
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     auth,
     dialog,
     order,
-    cart
+    cart,
+    ads
   },
 })

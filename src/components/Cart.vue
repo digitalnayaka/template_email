@@ -51,13 +51,13 @@
 
             <v-flex pa-1 xs6 text-right align-self-center>
               <v-btn
-                dark
+              dark
                 color="teal"
                 @click="dialog = true"
                 :loading="loading"
                 :disabled="totalQuantity == 0"
               >
-                <v-icon>mdi-cart-arrow-right</v-icon>&nbsp; Dapatkan
+                <v-icon>mdi-cart-arrow-right</v-icon>&nbsp; Bayar
               </v-btn>
             </v-flex>
           </v-layout>
@@ -65,13 +65,11 @@
       </v-card>
 
       <div class="ma-2">
-        <!-- <div
-          class="red--text"
-        >(*Total harga akan ditambah 3 digit angka unik. Lakukan pembayaran sesuai dengan nominal yang tertera.)</div>-->
-
         <div
           class="red--text"
-        >*setelah Anda melakukan pembayaran, tiket Anda akan masuk dalam waktu 2x24 jam.</div>
+        >(*Total harga akan ditambah 3 digit angka unik. Lakukan pembayaran sesuai dengan nominal yang tertera.)</div>
+
+        <div>Setelah Anda melakukan pembayaran, tiket Anda akan masuk dalam waktu 2x24 jam.</div>
       </div>
 
       <v-dialog v-model="dialog" width="250" persistent>
@@ -145,12 +143,7 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          this.dialog = false;
-          this.setAlert({
-            status: true,
-            color: "error",
-            text: responses.api_message,
-          });
+          console.log(responses);
         });
     },
     checkout() {

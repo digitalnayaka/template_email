@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <v-app-bar app color="teal" dark>
+  <v-container fluid>
+    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
 
       <v-spacer></v-spacer>
 
-      <div v-if="!guest">
+      <!-- <div v-if="!guest">
         <div v-if="user.id == unitMokas.id_app_user">
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
@@ -52,279 +52,38 @@
             </v-tooltip>
           </v-btn>
         </div>
-      </div>
+      </div>-->
     </v-app-bar>
 
-    <v-row dense>
-      <v-col cols="12" sm="6">
-        <v-carousel cycle>
-          <v-carousel-item
-            v-for="(item,index) in fotos"
-            :key="index"
-            :src="getImage(item.src)"
-            reverse-transition="fade-transition"
-            transition="fade-transition"
-          ></v-carousel-item>
-        </v-carousel>
-      </v-col>
+    <div
+      v-viewer="{movable: false}"
+      class="d-flex flex-nowrap justify-space-between"
+      style="overflow-x: auto;"
+    >
+      <v-card flat v-for="(item,i) in fotos" :key="i" class="mx-2">
+        <img :src="getImage(item.src)" contain width="270" height="150" style="cursor: pointer" />
+      </v-card>
+    </div>
 
-      <v-col cols="12" sm="6">
-        <v-list>
-          <v-subheader class="text-h6">Kelengkapan Dokumen</v-subheader>
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_stnk.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>STNK</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }}</v-list-item-action>
-          </v-list-item>
-
-          <v-divider></v-divider>
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_lembar_pajak.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>Lembar Pajak</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.lembar_pajak ? "ADA" : "TIDAK" }}</v-list-item-action>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_bpkb.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>BPKB</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.lembar_bpkb ? "ADA" : "TIDAK" }}</v-list-item-action>
-          </v-list-item>
-
-          <v-dialog v-model="dialog_dokumen" max-width="350">
-            <v-card>
-              <v-card-title primary-title>Daftar Dokumen</v-card-title>
-              <v-list>
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title>Surat Tanda Nomer Kendaraan</v-list-item-title>
-                  </v-list-item-content>
-                  <v-list-item-action>
-                    <v-checkbox v-model="unitMokas.lembar_stnk" readonly></v-checkbox>
-                  </v-list-item-action>
-                </v-list-item>
-
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title>Surat Ketetapan Pajak</v-list-item-title>
-                  </v-list-item-content>
-                  <v-list-item-action>
-                    <v-checkbox v-model="unitMokas.lembar_pajak" readonly></v-checkbox>
-                  </v-list-item-action>
-                </v-list-item>
-
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title>Buku Pemilik Kendaraan Bermotor</v-list-item-title>
-                  </v-list-item-content>
-                  <v-list-item-action>
-                    <v-checkbox v-model="unitMokas.lembar_bpkb" readonly></v-checkbox>
-                  </v-list-item-action>
-                </v-list-item>
-              </v-list>
-            </v-card>
-          </v-dialog>
-        </v-list>
-
-        <v-divider></v-divider>
-
-        <v-card flat>
-          <v-card-title class="layout justify-center">
-            <div class="headline text-center">Detail Motor</div>
-          </v-card-title>
-
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_id_iklan.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>ID Motor</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.id }}</v-list-item-action>
-          </v-list-item>
-          <v-divider></v-divider>
-
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_merek.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>Merk</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.merk }}</v-list-item-action>
-          </v-list-item>
-
-          <v-divider></v-divider>
-
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_tipe.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>Tipe</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.type }}</v-list-item-action>
-          </v-list-item>
-
-          <v-divider></v-divider>
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_tahun.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>Tahun</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.tahun }}</v-list-item-action>
-          </v-list-item>
-          <v-divider></v-divider>
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_odometer.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>Odometer</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.odometer }} KM</v-list-item-action>
-          </v-list-item>
-
-          <v-divider></v-divider>
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_warna.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>Warna</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.warna }}</v-list-item-action>
-          </v-list-item>
-
-          <v-divider></v-divider>
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_cc_mesin.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>CC Mesin</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.odometer }} CC</v-list-item-action>
-          </v-list-item>
-
-          <v-divider></v-divider>
-
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_transmisi.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>Transmisi</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.transmisi }}</v-list-item-action>
-          </v-list-item>
-
-          <v-divider></v-divider>
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_jenis_motor.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>Jenis Motor</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.jenis_motor }}</v-list-item-action>
-          </v-list-item>
-
-          <v-divider></v-divider>
-
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_lokasi_samsat.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>Lokasi Samsat</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.lokasi_samsat }}</v-list-item-action>
-          </v-list-item>
-
-          <v-divider></v-divider>
-
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/icons/icon_lokasi.png"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>Lokasi</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>{{ unitMokas.lokasi }}</v-list-item-action>
-          </v-list-item>
-        </v-card>
-      </v-col>
-    </v-row>
-
-    <v-row dense v-if="!guest">
-      <v-col cols="12">
-        <div v-if="unitMokas.id_mst_motor_bekas_status == 1">
-          <v-btn block color="teal" :to="'/tambah-iklan?id=' + unitMokas.id">Iklankan</v-btn>
-        </div>
-
-        <div
-          v-if="unitMokas.id_mst_motor_bekas_status == 2 || unitMokas.id_mst_motor_bekas_status == 4"
-        >
-          <v-btn
-            block
-            color="teal"
-            :to="'/detail_iklan/' + iklan.id_iklan"
-            v-if="hits.id_mst_iklan_type != 2"
-          >Lihat Iklan</v-btn>
-          <v-btn block color="teal" :to="'/detail_paket/' + iklan.id_iklan" v-else>Lihat Iklan</v-btn>
-        </div>
-      </v-col>
-    </v-row>
-  </div>
+    <detail-unit :unitMokas="unitMokas" />
+  </v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import "viewerjs/dist/viewer.css";
+import Viewer from "v-viewer";
+import Vue from "vue";
+Vue.use(Viewer);
 
 export default {
-  name: "detail_unit",
+  name: "unit-mokas",
+  components: {
+    DetailUnit: () =>
+      import(
+        /* webpackChunkName: "detail-unit" */ "@/components/DetailUnit.vue"
+      ),
+  },
   data() {
     return {
       id: this.$route.params.id,
@@ -342,8 +101,8 @@ export default {
     ...mapActions({
       setAlert: "alert/set",
     }),
-    async unit_mokas() {
-      await this.axios
+    unit_mokas() {
+      this.axios
         .get("/produk/v3/unit_mokas", {
           params: {
             id: this.id,

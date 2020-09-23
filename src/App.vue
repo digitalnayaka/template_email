@@ -1,149 +1,131 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      width="270"
-      src="/img/gradient2.png"
-      height="100%"
-      dark
-    >
-      <div class="pa-2" v-if="guest">
-        <v-btn dark block color="teal" class="mb-1" @click="setDialogComponent('login')">
-          <v-icon left>mdi-lock</v-icon>Masuk
-        </v-btn>
-
-        <v-btn block color="success" @click="setDialogComponent('daftar')">
-          <v-icon left>mdi-account</v-icon>Daftar
-        </v-btn>
-      </div>
-
-      <div v-else>
-        <v-list dense>
-          <v-list-item>
-            <v-list-item-avatar size="80">
-              <v-img src="/img/profile.png" contain v-if="user.photo == null"></v-img>
-              <v-img :src="getImage(user.photo)" contain v-else></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>{{ user.nama }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-
-        <v-divider></v-divider>
-      </div>
-
-      <v-list>
-        <v-list-item to="/" exact>
-          <v-list-item-icon>
-            <v-icon left>mdi-home</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-      <v-list-group
-        v-for="item in menus"
-        :key="item.id"
-        :prepend-icon="item.module_icon"
-        no-action
-        color="red"
-      >
-        <template v-slot:activator>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.module_name"></v-list-item-title>
-          </v-list-item-content>
-        </template>
-
-        <v-list-item
-          v-for="subItem in item.menu"
-          :key="subItem.id"
-          :to="subItem.menu_route"
-          color="red"
-        >
-          <v-list-item-content>
-            <v-list-item-title v-text="subItem.menu_name"></v-list-item-title>
-          </v-list-item-content>
-
-          <v-list-item-icon>
-            <v-icon left v-text="subItem.menu_icon"></v-icon>
-          </v-list-item-icon>
-        </v-list-item>
-      </v-list-group>
-      <!-- <v-list>
-        <v-list-item to="/akun" v-if="!guest">
-          <v-list-item-icon>
-            <v-icon left>mdi-account-box</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>Detail Akun</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list> -->
-      <v-list>
-        <v-list-item to="/report" v-if="!guest && user.id_mst_user_type != 1">
-          <v-list-item-icon>
-            <v-icon left>mdi-book-open-outline</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>Report</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-      <template v-slot:append v-if="!guest">
-        <div class="pa-2">
-          <v-btn block color="red" dark @click="signOut">
-            <v-icon left>mdi-logout</v-icon>Keluar
-          </v-btn>
-        </div>
-      </template>
-    </v-navigation-drawer>
-
-    <alert />
-
-    <v-app-bar app color="teal" dark v-if="isHome">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
-        <v-img src="img/logo-tulisan.png" width="150px" contain></v-img>
+    <v-app-bar app clipped-left color="teal" dark v-if="$vuetify.breakpoint.smAndUp || isHome">
+      <v-toolbar-title style="width: 230px" class="ml-0 pl-4">
+        <a href="/">
+          <v-img src="/img/logo-tulisan.png" width="200" contain></v-img>
+        </a>
       </v-toolbar-title>
 
+      <!-- <v-btn icon>
+        <v-icon>mdi-apps</v-icon>
+      </v-btn>-->
+
       <v-text-field
-        :slot="$vuetify.breakpoint.xsOnly ? 'extension' : 'default'"
         flat
         solo-inverted
         hide-details
         prepend-inner-icon="mdi-magnify"
-        label="Cari"
+        label="Search"
+        :slot="$vuetify.breakpoint.xsOnly ? 'extension' : 'default'"
         @click="setDialogComponent('search')"
-        contain
       ></v-text-field>
 
-      <v-spacer></v-spacer>
+      <div class="d-flex" v-if="guest">
+        <v-btn
+          rounded
+          outlined
+          :x-small="$vuetify.breakpoint.xsOnly ? true : false"
+          class="mx-2"
+          @click="setDialogComponent('login')"
+        >Masuk</v-btn>
 
-      <v-btn icon to="/iklan_favorit">
-        <v-icon>mdi-heart-outline</v-icon>
-      </v-btn>
+        <v-btn
+          rounded
+          :x-small="$vuetify.breakpoint.xsOnly ? true : false"
+          color="green accent-4"
+          @click="setDialogComponent('daftar')"
+        >Daftar</v-btn>
+      </div>
 
-      <v-btn icon to="/notifikasi" class="mr-0">
-        <v-badge color="orange" overlap v-if="countNotif > 0">
-          <template v-slot:badge>
-            <span>{{ countNotif }}</span>
+      <div v-else>
+        <!-- <v-btn icon>
+          <v-icon>mdi-heart-outline</v-icon>
+        </v-btn>
+
+        <v-btn icon>
+          <v-icon>mdi-bell</v-icon>
+        </v-btn>-->
+
+        <v-menu
+          :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
+          :close-on-content-click="content"
+          offset-y
+          transition="slide-y-transition"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn large text v-bind="attrs" v-on="on">
+              <v-avatar size="32px" item>
+                <v-img :src="getImage(user.photo)" alt="Avatar"></v-img>
+              </v-avatar>
+              <span class="text-caption mx-2">{{ user.nama.split(' ', 1)[0] }}</span>
+            </v-btn>
           </template>
 
-          <v-icon>mdi-bell-outline</v-icon>
-        </v-badge>
-        <v-icon v-else>mdi-bell-outline</v-icon>
-      </v-btn>
+          <v-card>
+            <v-list>
+              <v-list-item to="/account/edit">
+                <v-list-item-avatar>
+                  <v-img :src="getImage(user.photo)" alt="Avatar"></v-img>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                  <v-list-item-title>{{ user.nama }}</v-list-item-title>
+                  <v-list-item-subtitle v-if="user.id_mst_user_type == 2">{{ user.user_type }} User</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+
+            <v-divider></v-divider>
+
+            <v-tabs v-model="tab" grow slider-color="teal" @change="content = false">
+              <v-tab class="text-caption">Toko</v-tab>
+              <v-tab class="text-caption">Aktivitas</v-tab>
+            </v-tabs>
+
+            <v-tabs-items v-model="tab">
+              <v-tab-item>
+                <v-row no-gutters>
+                  <v-col cols="6">
+                    <v-list dense>
+                      <v-list-item to="/garasi/add-unit" @click="content = true">
+                        <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
+                      </v-list-item>
+
+                      <v-list-item to="/garasi/manage-unit">
+                        <v-list-item-subtitle>Garasi</v-list-item-subtitle>
+                      </v-list-item>
+                    </v-list>
+                  </v-col>
+
+                  <v-col cols="6">
+                    <v-list dense>
+                      <v-list-item to="/toko/add-ads">
+                        <v-list-item-subtitle>Tambah Iklan</v-list-item-subtitle>
+                      </v-list-item>
+
+                      <v-list-item to="/toko/manage-ads">
+                        <v-list-item-subtitle>Iklan</v-list-item-subtitle>
+                      </v-list-item>
+                    </v-list>
+                  </v-col>
+                </v-row>
+              </v-tab-item>
+            </v-tabs-items>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn color="red" dark small @click="signOut">
+                <v-icon left>mdi-logout</v-icon>Keluar
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
+      </div>
     </v-app-bar>
+
+    <alert />
 
     <keep-alive>
       <v-dialog
@@ -153,30 +135,23 @@
         transition="dialogbottom-transition"
         persistent
       >
-        <component :is="currentComponent" @closed="setDialogStatus"></component>
+        <component :is="currentComponent" :utc="utc" :timezone="waktu" @closed="setDialogStatus"></component>
       </v-dialog>
     </keep-alive>
 
     <v-main>
       <v-container fluid>
         <v-slide-y-transition>
-          <router-view></router-view>
+          <router-view :utc="utc" :timezone="waktu"></router-view>
         </v-slide-y-transition>
       </v-container>
     </v-main>
-
-    <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-      <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
-    </v-btn>
   </v-app>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import VueGeolocation from "vue-browser-geolocation";
-import Vue from "vue";
-
-Vue.use(VueGeolocation);
+import moment from "moment-timezone";
 
 export default {
   name: "App",
@@ -191,10 +166,10 @@ export default {
       import(/* webpackChunkName: "daftar" */ "@/components/Daftar.vue"),
   },
   data: () => ({
-    drawer: true,
-    menus: [],
-    countNotif: 0,
-    notif: "",
+    content: false,
+    tab: 0,
+    utc: moment().utcOffset() / 60 - 7,
+    waktu: "",
   }),
   methods: {
     ...mapActions({
@@ -203,76 +178,18 @@ export default {
       setAlert: "alert/set",
       setDialogStatus: "dialog/setStatus",
       setDialogComponent: "dialog/setComponent",
+      setAds: "ads/setAds",
     }),
-    getModules() {
-      this.axios
-        .get("/setup/v3/drawer", {
-          params: {
-            user_id: this.guest == true ? 0 : this.user.id,
-          },
-        })
-        .then((response) => {
-          let { data } = response.data;
-          this.menus = data;
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          console.log(responses.api_message);
-        });
-    },
-    getNotif() {
-      if (!this.guest) {
-        this.axios
-          .get("/log/v3/log/notifikasi", {
-            params: {
-              id_user: this.user.id,
-              is_read: false,
-              limit: 1,
-            },
-          })
-          .then((response) => {
-            let { data } = response;
-            this.countNotif = data.count;
-          })
-          .catch((error) => {
-            let responses = error.response;
-            let data = responses.data;
-            this.setAlert({
-              status: true,
-              color: "error",
-              text: data.api_message,
-            });
-          });
+    timezone() {
+      if (this.utc == 0) {
+        this.waktu = "WIB";
       }
-    },
-    oneSignal() {
-      let OneSignal = window.OneSignal || [];
-
-      OneSignal.push(() => {
-        OneSignal.init({
-          appId: "9af3274a-447f-482f-bca6-ec68dc143418",
-          notifyButton: {
-            enable: true,
-          },
-        });
-
-        OneSignal.on("subscriptionChange", (isSubscribed) => {
-          console.log("The user's subscription state is now:", isSubscribed);
-          if (isSubscribed) {
-            this.$router.go();
-          }
-        });
-
-        OneSignal.getUserId().then((userId) => {
-          console.log("OneSignal User ID:", userId);
-          this.notif = userId + "[web]";
-        });
-      });
-    },
-    geolocation() {
-      this.$getLocation({
-        enableHighAccuracy: true,
-      });
+      if (this.utc == 1) {
+        this.waktu = "WITA";
+      }
+      if (this.utc == 2) {
+        this.waktu = "WIT";
+      }
     },
     signOut(e) {
       var r = confirm("Apakah anda yakin akan keluar?");
@@ -288,17 +205,12 @@ export default {
           color: "success",
           text: "Logout successfully",
         });
-        this.getModules();
         this.countNotif = [];
-        // this.$router.push({ path: "/" });
       }
     },
   },
-  created() {
-    this.getModules();
-    this.oneSignal();
-    this.geolocation();
-    this.getNotif();
+  mounted() {
+    this.timezone();
   },
   computed: {
     ...mapGetters({
@@ -306,6 +218,7 @@ export default {
       guest: "auth/guest",
       dialogStatus: "dialog/status",
       currentComponent: "dialog/component",
+      adsID: "ads/adsID"
     }),
     isHome() {
       return this.$route.path === "/";
@@ -318,13 +231,11 @@ export default {
         this.setDialogStatus(value);
       },
     },
+    breakpoint: {
+      get() {
+        return this.$vuetify.breakpoint;
+      },
+    },
   },
 };
 </script>
-
-<style>
-a.primary--text {
-  color: #e5e9ec !important;
-  caret-color: #f4f4f4 !important;
-}
-</style>

@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <v-app-bar app color="teal" dark>
+  <v-card flat>
+    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <h1>Jadwal Tawar Bersama</h1>
+    <v-card-title>Jadwal Tawar Bersama</v-card-title>
 
     <v-tabs background-color="teal" dark grow>
       <v-tabs-slider color="yellow"></v-tabs-slider>
@@ -14,13 +14,67 @@
       <v-tab>Kalendar</v-tab>
 
       <v-tab-item>
-        <v-container fluid>
-          <v-row dense v-if="jadwal.length > 0">
-            <v-col cols="12" sm="6" v-for="(item,index) in jadwal" :key="index">
-              <v-card :to="'/list_lelang/' + item.id_app_user + '?tgl=' + item.date.substr(0,10)">
+        <v-row v-if="jadwal.length > 0">
+          <v-col cols="12" sm="6" v-for="(item,index) in jadwal" :key="index">
+            <v-card :to="'/list_lelang/' + item.id_app_user + '?tgl=' + item.date.substr(0,10)">
+              <v-list>
+                <v-list-item>
+                  <v-list-item-avatar size="80">
+                    <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
+                    <v-img :src="getImage(item.photo)" v-else></v-img>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <v-img
+                        src="/img/verified.png"
+                        width="20"
+                        height="20"
+                        v-if="item.id_mst_user_type == 2"
+                        class="float-left"
+                      ></v-img>
+                      {{ item.nama }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle>{{ item.total_iklan }} Iklan | {{ item.date | dateFormat }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+
+        <div align="center" v-else>
+          <p class="display-1">Tidak ada data</p>
+          <p>Tidak ada jadwal tawar bersama di tanggal ini</p>
+        </div>
+
+        <v-pagination v-model="page" @input="jadwalLelang" :length="lengthPage" :total-visible="5"></v-pagination>
+      </v-tab-item>
+
+      <v-tab-item>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-date-picker
+              ref="picker"
+              v-model="date"
+              full-width
+              @click:date="selectDate()"
+              :events="arrayEvents"
+              event-color="green lighten-1"
+            ></v-date-picker>
+          </v-col>
+
+          <v-col cols="12" sm="6">
+            <div v-if="iklan.length > 0">
+              <v-card
+                class="ma-2"
+                v-for="(item,index) in iklan"
+                :key="index"
+                :to="'/list_lelang/'+item.id_app_user+'?tgl='+date"
+              >
                 <v-list>
                   <v-list-item>
-                    <v-list-item-avatar size="80">
+                    <v-list-item-avatar>
                       <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
                       <v-img :src="getImage(item.photo)" v-else></v-img>
                     </v-list-item-avatar>
@@ -41,86 +95,24 @@
                   </v-list-item>
                 </v-list>
               </v-card>
-            </v-col>
-          </v-row>
+            </div>
 
-          <div align="center" v-else>
-            <p class="display-1">Tidak ada data</p>
-            <p>Tidak ada jadwal tawar bersama di tanggal ini</p>
-          </div>
+            <div align="center" v-else>
+              <p class="display-1">Tidak ada data</p>
+              <p>Tidak ada jadwal tawar bersama di tanggal ini</p>
+            </div>
 
-          <v-pagination
-            v-model="page"
-            @input="jadwalLelang"
-            :length="lengthPage"
-            :total-visible="5"
-          ></v-pagination>
-        </v-container>
-      </v-tab-item>
-
-      <v-tab-item>
-        <v-container fluid>
-          <v-row dense>
-            <v-col cols="12" sm="6">
-              <v-date-picker
-                ref="picker"
-                v-model="date"
-                full-width
-                @click:date="selectDate()"
-                :events="arrayEvents"
-                event-color="green lighten-1"
-              ></v-date-picker>
-            </v-col>
-            <v-col cols="12" sm="6" xs="6">
-              <div v-if="iklan.length > 0">
-                <v-card
-                  class="ma-2"
-                  v-for="(item,index) in iklan"
-                  :key="index"
-                  :to="'/list_lelang/'+item.id_app_user+'?tgl='+date"
-                >
-                  <v-list>
-                    <v-list-item>
-                      <v-list-item-avatar>
-                        <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
-                        <v-img :src="getImage(item.photo)" v-else></v-img>
-                      </v-list-item-avatar>
-
-                      <v-list-item-content>
-                        <v-list-item-title>
-                          <v-img
-                            src="/img/verified.png"
-                            width="20"
-                            height="20"
-                            v-if="item.id_mst_user_type == 2"
-                            class="float-left"
-                          ></v-img>
-                          {{ item.nama }}
-                        </v-list-item-title>
-                        <v-list-item-subtitle>{{ item.total_iklan }} Iklan | {{ item.date | dateFormat }}</v-list-item-subtitle>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
-                </v-card>
-              </div>
-
-              <div align="center" v-else>
-                <p class="display-1">Tidak ada data</p>
-                <p>Tidak ada jadwal tawar bersama di tanggal ini</p>
-              </div>
-
-              <v-pagination
-                v-model="page2"
-                @input="listIklan"
-                :length="lengthPage2"
-                :total-visible="5"
-              ></v-pagination>
-            </v-col>
-          </v-row>
-        </v-container>
+            <v-pagination
+              v-model="page2"
+              @input="listIklan"
+              :length="lengthPage2"
+              :total-visible="5"
+            ></v-pagination>
+          </v-col>
+        </v-row>
       </v-tab-item>
     </v-tabs>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -142,7 +134,7 @@ export default {
     lengthPage2: 0,
     limit2: 20,
     offset2: 0,
-    total2: 0
+    total2: 0,
   }),
   methods: {
     jadwalLelang() {
@@ -153,17 +145,17 @@ export default {
           params: {
             id_mst_iklan_status: 1,
             offset: offset,
-            limit: this.limit
-          }
+            limit: this.limit,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.jadwal = data;
 
           this.total = this.jadwal.length;
           this.lengthPage = Math.ceil(this.total / this.limit);
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -177,17 +169,17 @@ export default {
             tanggal_mulai: this.date,
             id_mst_iklan_status: 1,
             offset: offset2,
-            limit: this.limit2
-          }
+            limit: this.limit2,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.iklan = data;
 
           this.total2 = this.iklan.length;
           this.lengthPage2 = Math.ceil(this.total2 / this.limit2);
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
@@ -195,7 +187,7 @@ export default {
     functionEvents() {
       this.axios
         .get("/iklan/v3/iklan_cal_event_jadwal_tb")
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
 
           this.event = data;
@@ -208,14 +200,14 @@ export default {
           }
           this.arrayEvents = date;
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
         });
     },
     selectDate() {
       this.listIklan(this.date);
-    }
+    },
   },
   created() {
     this.jadwalLelang();
@@ -223,9 +215,9 @@ export default {
     this.functionEvents();
   },
   filters: {
-    dateFormat: date => {
+    dateFormat: (date) => {
       return moment.utc(date).format("DD MMM YYYY");
-    }
-  }
+    },
+  },
 };
 </script>
