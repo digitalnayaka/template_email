@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-carousel cycle hide-delimiters height="280">
       <v-carousel-item
-        v-for="(item,index) in banners"
+        v-for="(item, index) in banners"
         :key="index"
         :src="getImage(item.foto)"
         reverse-transition="fade-transition"
@@ -11,16 +11,17 @@
         hide-delimiter-background
         show-arrows-on-hover
         contain
+        :to="'/detail-banner/' + item.id"
       ></v-carousel-item>
     </v-carousel>
 
     <v-row>
       <v-col cols="3" align="center" v-for="item in categories" :key="item.id">
-        <v-card :to="'/category/'+ item.category_route" flat>
-          <v-img :src="item.category_image" width="100" height="100" contain></v-img>
+        <v-card flat :to="'/category/' + item.route">
+          <v-img :src="item.image" width="100" height="100" contain></v-img>
         </v-card>
 
-        <h5>{{ item.category_name }}</h5>
+        <h5>{{ item.name }}</h5>
       </v-col>
     </v-row>
 
@@ -30,24 +31,28 @@
       <div class="scrolling-wrapper-flexbox mx-2" v-if="jadwal.length > 0">
         <v-card
           class="card ma-2"
-          v-for="(item,index) in jadwal"
+          v-for="(item, index) in jadwal"
           contain
           :key="index"
-          :to="{ 
+          :to="{
             path: '/list-lelang/' + item.nama,
-            query: { tgl: item.date.substr(0,10) } 
+            query: { tgl: item.date.substr(0, 10) },
           }"
         >
           <v-list>
             <v-list-item>
               <v-list-item-avatar size="70">
-                <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
+                <v-icon x-large v-if="item.photo == 'null'"
+                  >mdi-account-circle</v-icon
+                >
                 <v-img :src="getImage(item.photo)" v-else></v-img>
               </v-list-item-avatar>
 
               <v-list-item-content>
                 <v-btn small color="teal" dark rounded>
-                  <v-list-item-title>{{ item.date | dateFormat }}</v-list-item-title>
+                  <v-list-item-title>{{
+                    item.date | dateFormat
+                  }}</v-list-item-title>
                 </v-btn>
               </v-list-item-content>
             </v-list-item>
@@ -75,7 +80,8 @@
         to="/jadwal"
         :small="$vuetify.breakpoint.xsOnly ? true : false"
         class="mt-4"
-      >Jadwal Tawar Bersama Selengkapnya</v-btn>
+        >Jadwal Tawar Bersama Selengkapnya</v-btn
+      >
     </v-container>
 
     <v-divider class="my-2"></v-divider>
@@ -99,7 +105,12 @@
       </v-col>
 
       <v-col cols="12" align="center">
-        <v-btn dark color="teal" :to="{ path: '/category/mokas', query: { tb: true } }">Lihat Semua</v-btn>
+        <v-btn
+          dark
+          color="teal"
+          :to="{ path: '/category/mokas', query: { tb: true } }"
+          >Lihat Semua</v-btn
+        >
       </v-col>
     </v-row>
 
@@ -120,9 +131,11 @@
         <h2>Apa itu SiMotor?</h2>
 
         <div class="text-justify">
-          Sepeda motor sudah menjadi gaya hidup atau lifestyle masyarakat di Indonesia, benar nggak?
-          Oleh karena itu, kebutuhan akan sepeda motor juga meningkat dan kamu pasti ingin motor yang bagus dan berkualitas kan?
-          Disinilah SiMotor hadir sebagai jawaban. Beli motor jadi semakin mudah, cepat, dan berkualitas.
+          Sepeda motor sudah menjadi gaya hidup atau lifestyle masyarakat di
+          Indonesia, benar nggak? Oleh karena itu, kebutuhan akan sepeda motor
+          juga meningkat dan kamu pasti ingin motor yang bagus dan berkualitas
+          kan? Disinilah SiMotor hadir sebagai jawaban. Beli motor jadi semakin
+          mudah, cepat, dan berkualitas.
         </div>
 
         <v-card class="d-inline-block mx-auto">
@@ -163,19 +176,25 @@
             <v-img src="/img/harga pas.png" width="120" contain></v-img>
 
             <div class="text-justify">
-              Harga pas berguna banget untuk kamu yang nggak mau ribet menawar unit.
-              Kamu hanya perlu memilih unit motor yang kamu butuhkan lalu segera hubungi penjual iklan unit tersebut.
+              Harga pas berguna banget untuk kamu yang nggak mau ribet menawar
+              unit. Kamu hanya perlu memilih unit motor yang kamu butuhkan lalu
+              segera hubungi penjual iklan unit tersebut.
             </div>
           </v-col>
 
           <v-col cols="12" sm="6">
             <h2>Tawar Bersama</h2>
 
-            <v-img src="/img/tawar bersama (paketan).png" width="120" contain></v-img>
+            <v-img
+              src="/img/tawar bersama (paketan).png"
+              width="120"
+              contain
+            ></v-img>
 
-            <div
-              class="text-justify"
-            >Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan penawaran sehingga harga yang kamu dapat sesuai dengan isi dompet.</div>
+            <div class="text-justify">
+              Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan
+              penawaran sehingga harga yang kamu dapat sesuai dengan isi dompet.
+            </div>
           </v-col>
         </v-row>
 
@@ -197,7 +216,32 @@ export default {
   },
   data: () => ({
     banners: [],
-    categories: [],
+    categories: [
+      {
+        id: 1,
+        image: "/img/icons/mokas.png",
+        name: "Motor Bekas",
+        route: "mokas",
+      },
+      {
+        id: 2,
+        image: "/img/icons/motorbaru.png",
+        name: "Motor Baru",
+        route: "motor_baru",
+      },
+      {
+        id: 3,
+        image: "/img/icons/tiket.png",
+        name: "Tiket Tawar Bersama",
+        route: "ticket",
+      },
+      {
+        id: 4,
+        image: "/img/icons/bengkel.png",
+        name: "Bengkel",
+        route: "bengkel",
+      },
+    ],
     jadwal: [],
     tbBerlangsung: [],
   }),
@@ -267,7 +311,7 @@ export default {
   },
   created() {
     this.showBanners();
-    this.showCategories();
+    // this.showCategories();
     this.jadwalLelang();
     this.TBBerlangsung();
   },

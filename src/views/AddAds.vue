@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-app-bar app color="teal" dark>
+    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -20,7 +20,7 @@
             <v-card>
               <v-card-title>Pilih Jenis Iklan</v-card-title>
 
-              <v-list>
+              <v-list :three-line="$vuetify.breakpoint.xsOnly ? true : false">
                 <div v-for="item in jenisIklan" :key="item.id">
                   <v-list-item @click="id == undefined ? step2(item.id) : stepSkip(item.id)">
                     <v-list-item-avatar tile size="50">
@@ -28,7 +28,7 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <v-list-item-title class="body-1">{{ item.name }}</v-list-item-title>
+                      <v-list-item-title>{{ item.name }}</v-list-item-title>
                       <v-list-item-subtitle>{{ item.desc }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
@@ -74,7 +74,7 @@
                 @keyup.enter="getUnitMokas"
               ></v-text-field>
 
-              <v-list>
+              <v-list :three-line="$vuetify.breakpoint.xsOnly ? true : false">
                 <v-list-item-group v-model="selected" :multiple="multiple">
                   <template v-for="(item,i) in unitMokas">
                     <v-list-item
@@ -84,7 +84,7 @@
                       color="indigo"
                     >
                       <template v-slot:default="{ active }">
-                        <v-list-item-avatar tile size="80">
+                        <v-list-item-avatar tile size="50">
                           <v-img :src="getImage(item.foto_1)" contain></v-img>
                         </v-list-item-avatar>
 
@@ -147,7 +147,7 @@
                     dark
                     small
                     class="mt-1"
-                    @click="deskripsi_iklan = selected.deskripsi"
+                    @click="setDeskripsi"
                   >Gunakan deskripsi unit</v-btn>
                 </v-col>
               </v-row>
@@ -162,12 +162,12 @@
                 outlined
                 dense
                 :rules="amountRules"
-                :counter="11"
+                maxlength="11"
                 v-money="money"
               ></v-text-field>
 
               <div v-if="selectedIklan != 1">
-                <div class="subtitle-1">Kelipatan Tawaran</div>
+                <div class="text-h6">Kelipatan Tawaran</div>
 
                 <v-item-group v-model="kelipatan" mandatory>
                   <v-row>
@@ -219,7 +219,7 @@
                 <v-list>
                   <v-list-item>
                     <v-list-item-content>
-                      <h3>Gunakan Tiket</h3>
+                      <v-list-item-title>Gunakan Tiket</v-list-item-title>
                       <v-list-item-subtitle>Isikan jumlah iklan tiket, minimal 1 Tiket</v-list-item-subtitle>
                     </v-list-item-content>
 
@@ -234,22 +234,22 @@
                   </v-list-item>
 
                   <v-list-item v-if="tiket">
-                    <v-list-item-content>
-                      <v-text-field
-                        outlined
-                        :autofocus="tiket ? true : false"
-                        v-model="jumlahtiket"
-                        label="Jumlah Tiket"
-                        :rules="jumlahRules"
-                        v-mask="mask"
-                      ></v-text-field>
-                    </v-list-item-content>
+                    <v-text-field
+                      v-model="jumlahtiket"
+                      label="Jumlah Tiket"
+                      outlined
+                      dense
+                      :autofocus="tiket ? true : false"
+                      :rules="jumlahRules"
+                      v-mask="mask"
+                    ></v-text-field>
                   </v-list-item>
                 </v-list>
 
-                <v-row dense>
-                  <v-col cols="6">
+                <v-row>
+                  <v-col cols="12" sm="6">
                     <div>Tanggal Mulai Tawar Bersama</div>
+
                     <v-datetime-picker
                       v-model="tglMulaiTB"
                       @input="dateTimeRange"
@@ -259,17 +259,20 @@
                       <template slot="dateIcon">
                         <v-icon>mdi-calendar</v-icon>
                       </template>
+
                       <template slot="timeIcon">
                         <v-icon>mdi-clock</v-icon>
                       </template>
+
                       <template slot="actions" slot-scope="{ parent }">
                         <v-btn color="success darken-1" @click="parent.okHandler">OK</v-btn>
                       </template>
                     </v-datetime-picker>
                   </v-col>
 
-                  <v-col cols="6">
+                  <v-col cols="12" sm="6">
                     <div>Tanggal Selesai Tawar Bersama</div>
+
                     <v-datetime-picker
                       v-model="tglSelesaiTB"
                       :datePickerProps="datePickerProps"
@@ -280,9 +283,11 @@
                       <template slot="dateIcon">
                         <v-icon>mdi-calendar</v-icon>
                       </template>
+
                       <template slot="timeIcon">
                         <v-icon>mdi-clock</v-icon>
                       </template>
+
                       <template slot="actions" slot-scope="{ parent }">
                         <v-btn color="success darken-1" @click="parent.okHandler">OK</v-btn>
                       </template>
@@ -321,7 +326,8 @@ import { mask } from "vue-the-mask";
 Vue.use(DatetimePicker, VueGeolocation);
 
 export default {
-  name: "tambah_iklan",
+  name: "add-ads",
+  props: ["utc", "timezone"],
   directives: { money: VMoney, mask },
   beforeRouteLeave(to, from, next) {
     if (!this.submit) {
@@ -392,9 +398,7 @@ export default {
       tbDateRules: [],
       valid: true,
       submit: false,
-      utc: moment().utcOffset() / 60 - 7,
-      suffix: {},
-      waktu: "",
+      suffix: { suffix: this.timezone },
       thumbnail: "",
       page: 1,
       lengthPage: 0,
@@ -408,6 +412,7 @@ export default {
   methods: {
     ...mapActions({
       setAlert: "alert/set",
+      setAds: "ads/setAds",
     }),
     getJenisIklan() {
       this.axios
@@ -415,6 +420,7 @@ export default {
           params: {
             limit: this.user.id_mst_user_type == 1 ? 1 : 3,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -455,6 +461,7 @@ export default {
             offset: offset,
             limit: this.limit,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -472,6 +479,11 @@ export default {
       if (this.multiple == false) {
         this.selectedUnit = item;
         this.e1 = 3;
+      }
+    },
+    setDeskripsi() {
+      if (this.selected.deskripsi != null) {
+        this.deskripsi_iklan = this.selected.deskripsi;
       }
     },
     dateTimeRange() {
@@ -494,28 +506,18 @@ export default {
       var h = duration._data.hours;
       var m = duration._data.minutes;
 
-      if (this.utc == 0) {
-        this.waktu = "WIB";
-      }
-      if (this.utc == 1) {
-        this.waktu = "WITA";
-      }
-      if (this.utc == 2) {
-        this.waktu = "WIT";
-      }
-
       if (check == true) {
         this.textFieldProps = {
           rules: [
             h < 0 || "Tanggal Selesai harus lebih besar dari Tanggal Mulai",
             m < 0 || "Tanggal Selesai harus lebih besar dari Tanggal Mulai",
           ],
-          suffix: this.waktu,
+          suffix: this.timezone,
         };
       } else {
         this.textFieldProps = {
           rules: [],
-          suffix: this.waktu,
+          suffix: this.timezone,
         };
       }
     },
@@ -567,7 +569,10 @@ export default {
                 color: "success",
                 text: data.api_message,
               });
-              this.$router.push({ path: "/iklan" });
+              this.setAds(data.data.id);
+              let urlSeller = this.user.nama.toLowerCase().replaceAll(" ", "-");
+              let urlJudul = data.data.judul.toLowerCase().replaceAll(" ", "-");
+              this.$router.push("/produk/" + urlSeller + "/" + urlJudul);
             })
             .catch((error) => {
               let responses = error.response.data;
@@ -619,7 +624,10 @@ export default {
                 color: "success",
                 text: data.api_message,
               });
-              this.$router.push({ path: "/iklan" });
+              this.setAds(data.data.id);
+              let urlSeller = this.user.nama.toLowerCase().replaceAll(" ", "-");
+              let urlJudul = data.data.judul.toLowerCase().replaceAll(" ", "-");
+              this.$router.push("/produk/" + urlSeller + "/" + urlJudul);
             })
             .catch((error) => {
               let responses = error.response.data;
@@ -641,7 +649,6 @@ export default {
           for (i = 0; i < this.selected.length; i++) {
             formData.append("id_motor_bekas", this.selected[i].id);
           }
-          // formData.append("photo", this.thumbnail);
           formData.append("judul", this.judul_iklan);
           formData.append("deskripsi", this.deskripsi_iklan);
           formData.append("harga_awal", amount2);
@@ -676,7 +683,10 @@ export default {
                 color: "success",
                 text: data.api_message,
               });
-              this.$router.push({ path: "/iklan" });
+              this.setAds(data.data.id);
+              let urlSeller = this.user.nama.toLowerCase().replaceAll(" ", "-");
+              let urlJudul = data.data.judul.toLowerCase().replaceAll(" ", "-");
+              this.$router.push("/produk/" + urlSeller + "/" + urlJudul);
             })
             .catch((error) => {
               let responses = error.response.data;
@@ -695,15 +705,6 @@ export default {
     this.getUnitMokas();
     this.watchLocation();
     this.dateTimeRange();
-    if (this.utc == 0) {
-      this.suffix = { suffix: "WIB" };
-    }
-    if (this.utc == 1) {
-      this.suffix = { suffix: "WITA" };
-    }
-    if (this.utc == 2) {
-      this.suffix = { suffix: "WIT" };
-    }
     if (this.id != "") {
       this.axios
         .get("/produk/v3/unit_mokas", {
@@ -713,6 +714,7 @@ export default {
             id_mst_motor_bekas_status: 1,
             limit: 1,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -728,6 +730,7 @@ export default {
   computed: {
     ...mapGetters({
       user: "auth/user",
+      adsID: "ads/adsID",
     }),
   },
   watch: {

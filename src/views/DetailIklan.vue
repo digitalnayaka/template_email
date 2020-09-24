@@ -8,7 +8,9 @@
       <v-spacer></v-spacer>
 
       <div v-if="!guest">
-        <div v-if="user.id == iklan.id_app_user && hits.id_mst_iklan_status == 1">
+        <div
+          v-if="user.id == iklan.id_app_user && hits.id_mst_iklan_status == 1"
+        >
           <v-btn icon>
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
@@ -44,7 +46,7 @@
       <v-col cols="12" sm="6">
         <v-carousel cycle hide-delimiter-background height="300">
           <v-carousel-item
-            v-for="(item,index) in fotos"
+            v-for="(item, index) in fotos"
             :key="index"
             :src="getImage(item.src)"
             reverse-transition="fade-transition"
@@ -56,7 +58,12 @@
 
       <v-col cols="12" sm="6">
         <div class="d-flex align-center" v-if="appuser.id_mst_user_type == 2">
-          <img src="/img/verified.png" width="15px" height="15px" alt="verified" />
+          <img
+            src="/img/verified.png"
+            width="15px"
+            height="15px"
+            alt="verified"
+          />
           <span class="ml-1 teal--text text-subtitle-2">Verified Seller</span>
         </div>
 
@@ -84,16 +91,18 @@
           </v-col>
 
           <v-col cols="6" class="orange--text">
-            <div
-              v-if="iklan.id_mst_iklan_jenis == 1"
-            >Rp {{ Number(hits.harga).toLocaleString('id-ID') }}</div>
+            <div v-if="iklan.id_mst_iklan_jenis == 1">
+              Rp {{ Number(hits.harga).toLocaleString("id-ID") }}
+            </div>
 
             <div v-else>
-              <div
-                v-if="liveBid.length == 0"
-              >Rp {{ Number(hits.harga_awal).toLocaleString('id-ID') }}</div>
+              <div v-if="liveBid.length == 0">
+                Rp {{ Number(hits.harga_awal).toLocaleString("id-ID") }}
+              </div>
 
-              <div v-else>Rp {{ Number(hits.harga_awal).toLocaleString('id-ID') }}</div>
+              <div v-else>
+                Rp {{ Number(hits.harga_awal).toLocaleString("id-ID") }}
+              </div>
             </div>
           </v-col>
 
@@ -109,7 +118,12 @@
                 height="25"
                 v-if="liveBid.length == 0"
               />
-              <img src="/img/icons/harga_sekarang.png" width="100" height="25" v-else />
+              <img
+                src="/img/icons/harga_sekarang.png"
+                width="100"
+                height="25"
+                v-else
+              />
             </div>
           </v-col>
         </v-row>
@@ -128,7 +142,9 @@
     <v-list two-line>
       <v-list-item>
         <v-list-item-avatar size="50">
-          <v-icon x-large v-if="appuser.photo == 'null'">mdi-account-circle</v-icon>
+          <v-icon x-large v-if="appuser.photo == 'null'"
+            >mdi-account-circle</v-icon
+          >
           <v-img :src="getImage(appuser.photo)" v-else></v-img>
         </v-list-item-avatar>
 
@@ -144,14 +160,42 @@
           <v-list-item-subtitle>Penjual</v-list-item-subtitle>
 
           <div class="d-flex d-sm-none" v-if="!guest">
-            <v-btn x-small color="teal" dark @click="dialogHubungi = true" class="mx-2">Hubungi</v-btn>
-            <v-btn x-small color="teal" dark :to="'/chat/' + appuser.id" class="mx-2">Pesan</v-btn>
+            <v-btn
+              x-small
+              color="teal"
+              dark
+              @click="dialogHubungi = true"
+              class="mx-2"
+              >Hubungi</v-btn
+            >
+            <v-btn
+              x-small
+              color="teal"
+              dark
+              :to="'/chat/' + appuser.id"
+              class="mx-2"
+              >Pesan</v-btn
+            >
           </div>
         </v-list-item-content>
 
         <div class="d-none d-sm-flex" v-if="!guest">
-          <v-btn color="teal" small dark @click="dialogHubungi = true" class="mx-2">Hubungi</v-btn>
-          <v-btn color="teal" small dark :to="'/chat/' + appuser.id" class="mx-2">Pesan</v-btn>
+          <v-btn
+            color="teal"
+            small
+            dark
+            @click="dialogHubungi = true"
+            class="mx-2"
+            >Hubungi</v-btn
+          >
+          <v-btn
+            color="teal"
+            small
+            dark
+            :to="'/chat/' + appuser.id"
+            class="mx-2"
+            >Pesan</v-btn
+          >
         </div>
       </v-list-item>
     </v-list>
@@ -173,7 +217,11 @@
       </v-tab-item>
 
       <v-tab-item>
-        <detail-unit :unitMokas="unitMokas" v-if="hits.id_mst_iklan_type == 1" />
+        <detail-unit
+          :unitMokas="unitMokas"
+          :hits="hits"
+          v-if="hits.id_mst_iklan_type == 1"
+        />
 
         <div v-else>
           <v-row>
@@ -190,9 +238,9 @@
                     <v-list-item-title>Jumlah Motor</v-list-item-title>
                   </v-list-item-content>
 
-                  <v-list-item-action
-                    v-if="iklan.motor_bekas != undefined"
-                  >{{ iklan.motor_bekas.length }}</v-list-item-action>
+                  <v-list-item-action v-if="iklan.motor_bekas != undefined">{{
+                    iklan.motor_bekas.length
+                  }}</v-list-item-action>
                 </v-list-item>
 
                 <v-divider></v-divider>
@@ -206,7 +254,9 @@
                     <v-list-item-title>Lokasi Motor</v-list-item-title>
                   </v-list-item-content>
 
-                  <v-list-item-action>{{ unitMokas.lokasi }}</v-list-item-action>
+                  <v-list-item-action>{{
+                    unitMokas.lokasi
+                  }}</v-list-item-action>
                 </v-list-item>
 
                 <v-divider></v-divider>
@@ -225,17 +275,31 @@
           </v-row>
 
           <v-row>
-            <v-col cols="6" sm="3" lg="2" v-for="(item,i) in motorBekas" :key="i">
+            <v-col
+              cols="6"
+              sm="3"
+              lg="2"
+              v-for="(item, i) in motorBekas"
+              :key="i"
+            >
               <v-card :to="'/detail_unit/' + item.id">
-                <v-img :src="getImage(item.foto_1)" height="230" contain></v-img>
+                <v-img
+                  :src="getImage(item.foto_1)"
+                  height="230"
+                  contain
+                ></v-img>
 
                 <v-divider></v-divider>
 
                 <v-list dense>
                   <v-list-item>
                     <v-list-item-content>
-                      <v-list-item-title>{{ item.merk }} {{ item.type }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ item.tahun }}</v-list-item-subtitle>
+                      <v-list-item-title
+                        >{{ item.merk }} {{ item.type }}</v-list-item-title
+                      >
+                      <v-list-item-subtitle>{{
+                        item.tahun
+                      }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -250,27 +314,45 @@
           <v-col cols="12" sm="6">
             <v-card class="d-flex justify-space-between align-center" flat>
               <v-card align="center">
-                <v-card-subtitle class="teal accent-4 white--text">Tanggal Mulai</v-card-subtitle>
-                <div>{{ hits.tanggal_mulai | dateFormat}}</div>
-                <div>{{ hits.tanggal_mulai | timeFormat}} {{ timezone }}</div>
+                <v-card-subtitle class="teal accent-4 white--text"
+                  >Tanggal Mulai</v-card-subtitle
+                >
+                <div>{{ hits.tanggal_mulai | dateFormat }}</div>
+                <div>{{ hits.tanggal_mulai | timeFormat }} {{ timezone }}</div>
               </v-card>
-              <v-img src="/img/icons/gradient.jpg" width="100" height="60"></v-img>
+              <v-img
+                src="/img/icons/gradient.jpg"
+                width="100"
+                height="60"
+              ></v-img>
 
               <v-card align="center">
-                <v-card-subtitle class="red accent-4 white--text">Tanggal Selesai</v-card-subtitle>
-                <div>{{ hits.tanggal_selesai | dateFormat}}</div>
-                <div>{{ hits.tanggal_selesai | timeFormat}} {{ timezone }}</div>
+                <v-card-subtitle class="red accent-4 white--text"
+                  >Tanggal Selesai</v-card-subtitle
+                >
+                <div>{{ hits.tanggal_selesai | dateFormat }}</div>
+                <div>
+                  {{ hits.tanggal_selesai | timeFormat }} {{ timezone }}
+                </div>
               </v-card>
             </v-card>
           </v-col>
 
           <v-col cols="12" sm="6" class="pa-0">
-            <div class="teal--text" align="center" v-if="start == false && end == false">
+            <div
+              class="teal--text"
+              align="center"
+              v-if="start == false && end == false"
+            >
               Tawar Bersama segera dimulai:
               <flip-countdown :deadline="hits.tanggal_mulai"></flip-countdown>
             </div>
 
-            <div class="teal--text" align="center" v-if="start == true && end == false">
+            <div
+              class="teal--text"
+              align="center"
+              v-if="start == true && end == false"
+            >
               Tawar Bersama berlangsung:
               <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
             </div>
@@ -284,8 +366,17 @@
                   dark
                   @click="dialogInfo = true"
                   class="mx-2"
-                  v-if="liveBid.length > 0 && (liveBid[0].IdAppUser == user.id || iklan.id_app_user == user.id)"
-                >{{ liveBid[0].IdAppUser == user.id ? "Anda menang, klik disini" : "Info Pemenang" }}</v-btn>
+                  v-if="
+                    liveBid.length > 0 &&
+                    (liveBid[0].IdAppUser == user.id ||
+                      iklan.id_app_user == user.id)
+                  "
+                  >{{
+                    liveBid[0].IdAppUser == user.id
+                      ? "Anda menang, klik disini"
+                      : "Info Pemenang"
+                  }}</v-btn
+                >
 
                 <v-dialog v-model="dialogInfo" persistent max-width="500px">
                   <v-card>
@@ -300,23 +391,33 @@
                     </v-toolbar>
 
                     <div v-if="!guest">
-                      <v-card-title
-                        v-if="hits.id_app_user == user.id"
-                      >Segera hubungi pemenang iklan Anda</v-card-title>
+                      <v-card-title v-if="hits.id_app_user == user.id"
+                        >Segera hubungi pemenang iklan Anda</v-card-title
+                      >
                     </div>
 
-                    <v-btn value="left" tile color="white" v-if="liveBid.length > 0">
+                    <v-btn
+                      value="left"
+                      tile
+                      color="white"
+                      v-if="liveBid.length > 0"
+                    >
                       <div v-if="!guest">
                         <a
                           :href="'/chat/' + iklan.id_app_user"
                           v-if="liveBid[0].IdAppUser == user.id"
-                        >Chat Penjual</a>
+                          >Chat Penjual</a
+                        >
                       </div>
-                      <a :href="'/chat/' + liveBid[0].IdAppUser" v-else>Chat Pemenang</a>
+                      <a :href="'/chat/' + liveBid[0].IdAppUser" v-else
+                        >Chat Pemenang</a
+                      >
                     </v-btn>
 
                     <v-btn value="center" tile color="white">
-                      <a :href="'/detail_transaksi/' + orders.id">Detail Transaksi</a>
+                      <a :href="'/detail_transaksi/' + orders.id"
+                        >Detail Transaksi</a
+                      >
                     </v-btn>
                   </v-card>
                 </v-dialog>
@@ -337,7 +438,10 @@
                   <v-list-item-title>Jenis Iklan</v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action>{{ iklan.mst_iklan_jenis }} {{ iklan.mst_iklan_type }}</v-list-item-action>
+                <v-list-item-action
+                  >{{ iklan.mst_iklan_jenis }}
+                  {{ iklan.mst_iklan_type }}</v-list-item-action
+                >
               </v-list-item>
 
               <v-divider></v-divider>
@@ -351,7 +455,9 @@
                   <v-list-item-title>Tiket</v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action>{{ iklan.jumlah_tiket > 0 ? "Ya" : "Tidak" }}</v-list-item-action>
+                <v-list-item-action>{{
+                  iklan.jumlah_tiket > 0 ? "Ya" : "Tidak"
+                }}</v-list-item-action>
               </v-list-item>
 
               <v-divider></v-divider>
@@ -365,7 +471,9 @@
                   <v-list-item-title>Jml Tiket</v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action>{{ iklan.jumlah_tiket }}</v-list-item-action>
+                <v-list-item-action>{{
+                  iklan.jumlah_tiket
+                }}</v-list-item-action>
               </v-list-item>
             </v-list>
           </v-col>
@@ -381,7 +489,12 @@
                   <v-list-item-title>Harga Awal</v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action>Rp {{ Number(iklan.harga_awal).toLocaleString("id-ID") }}</v-list-item-action>
+                <v-list-item-action
+                  >Rp
+                  {{
+                    Number(iklan.harga_awal).toLocaleString("id-ID")
+                  }}</v-list-item-action
+                >
               </v-list-item>
 
               <v-divider></v-divider>
@@ -395,7 +508,12 @@
                   <v-list-item-title>Kelipatan</v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action>Rp {{ Number(iklan.kelipatan).toLocaleString("id-ID") }}</v-list-item-action>
+                <v-list-item-action
+                  >Rp
+                  {{
+                    Number(iklan.kelipatan).toLocaleString("id-ID")
+                  }}</v-list-item-action
+                >
               </v-list-item>
             </v-list>
           </v-col>
@@ -404,8 +522,8 @@
 
       <v-tab-item v-if="liveBid.length > 0">
         <v-list>
-          <v-list-item v-for="(item,i) in liveBid.slice(0,5)" :key="item.Bid">
-            <v-list-item-icon class="mx-0" v-if="i+1 == 1">
+          <v-list-item v-for="(item, i) in liveBid.slice(0, 5)" :key="item.Bid">
+            <v-list-item-icon class="mx-0" v-if="i + 1 == 1">
               <v-icon large color="orange">mdi-star</v-icon>
             </v-list-item-icon>
 
@@ -415,13 +533,22 @@
 
             <v-list-item-content>
               <v-list-item-title>
-                <span>Oleh: {{ !guest && user.id == item.IdAppUser ? "Anda" : item.IdUniq }}</span>
+                <span
+                  >Oleh:
+                  {{
+                    !guest && user.id == item.IdAppUser ? "Anda" : item.IdUniq
+                  }}</span
+                >
               </v-list-item-title>
-              <v-list-item-subtitle>{{ item.CreatedAt.toDate() | datediff }}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{
+                item.CreatedAt.toDate() | datediff
+              }}</v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
-              <v-chip color="red" dark>Rp {{ Number(item.Bid).toLocaleString('id-ID') }}</v-chip>
+              <v-chip color="red" dark
+                >Rp {{ Number(item.Bid).toLocaleString("id-ID") }}</v-chip
+              >
             </v-list-item-action>
           </v-list-item>
         </v-list>
@@ -453,7 +580,15 @@ export default {
   props: ["utc", "timezone"],
   beforeRouteLeave(to, from, next) {
     this.title = "SiMotor";
+    this.$nextTick(() => {
+      next();
+    });
+  },
+  beforeRouteUpdate(to, from, next) {
+    // this.$nextTick(() => {
+    this.getDtlIklan();
     next();
+    // });
   },
   data() {
     return {
@@ -508,12 +643,13 @@ export default {
           this.hits = hits[0]._source;
           this.getUser(this.hits.id_app_user);
           this.unit_mokas(this.hits.unit_motor_bekas[0].id);
-          if (this.hits.id_mst_iklan_jenis === 1) {
+          if (this.hits.id_mst_iklan_jenis == 1) {
             this.getHP(this.adsID);
           } else {
             this.getTB(this.adsID);
           }
           this.title = this.hits.judul;
+          this.items = [];
           this.items.push(
             {
               text: "Home",
@@ -552,6 +688,7 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.unitMokas = data[0];
+          this.fotos = [];
           this.fotos.push(
             { src: this.unitMokas.foto_1 },
             { src: this.unitMokas.foto_2 },
@@ -947,9 +1084,9 @@ export default {
     },
   },
   created() {
-    this.$nextTick(() => {
-      this.getDtlIklan();
-    });
+    // this.$nextTick(() => {
+    this.getDtlIklan();
+    // });
     this.GetBid();
     if (!this.guest) {
       this.getOrder();

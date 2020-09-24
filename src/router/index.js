@@ -57,7 +57,14 @@ const routes = [
           auth: true
         }
       },
-
+      {
+        path: '/toko/manage-ads',
+        name: 'ManageAds',
+        component: () => import(/* webpackChunkName: "manage-ads" */ '../views/ManageAds.vue'),
+        meta: {
+          auth: true
+        }
+      },
     ],
   },
   {
@@ -88,6 +95,38 @@ const routes = [
     path: '/toko/add-ads',
     name: 'AddAds',
     component: () => import(/* webpackChunkName: "add-ads" */ '../views/AddAds.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/category/ticket',
+    name: 'Ticket',
+    component: () => import(/* webpackChunkName: "ticket" */ '../views/Ticket.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/get-ticket',
+    name: 'GetTicket',
+    component: () => import(/* webpackChunkName: "get-ticket" */ '../views/BeliTiket.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/refund-ticket',
+    name: 'RefundTicket',
+    component: () => import(/* webpackChunkName: "refund-ticket" */ '../views/RefundTiket.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/detail-banner/:id',
+    name: 'DetailBanner',
+    component: () => import(/* webpackChunkName: "detail-banner" */ '../views/DetailBanner.vue'),
     meta: {
       auth: true
     }

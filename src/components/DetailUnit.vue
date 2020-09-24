@@ -203,22 +203,15 @@
         </v-list-item>
       </v-list>
 
-      <div v-if="unitMokas.id_mst_motor_bekas_status == 1">
+      <!-- <div v-if="unitMokas.id_mst_motor_bekas_status == 1">
         <v-btn block color="teal" dark :to="'/toko/add-ads?id=' + unitMokas.id">Iklankan</v-btn>
       </div>
       <br />
-
       <div
         v-if="unitMokas.id_mst_motor_bekas_status == 2 || unitMokas.id_mst_motor_bekas_status == 4"
       >
-        <v-btn
-          block
-          color="teal"
-          dark
-          :to="'/produk/' + unitMokas.appuser"
-          v-if="hits.id_mst_iklan_type != 2"
-        >Lihat Iklan</v-btn>
-      </div>
+        <v-btn block color="teal" dark :to="'/produk/' + urlSeller + '/' + urlJudul">Lihat Iklan</v-btn>
+      </div> -->
     </v-col>
   </v-row>
 </template>
@@ -226,6 +219,10 @@
 <script>
 export default {
   name: "detail-unit",
-  props: ["unitMokas"],
+  props: ["unitMokas", "hits"],
+  // data: () => ({
+  //   urlSeller: this.unitMokas.appuser.toLowerCase().replace(" ", "-"),
+  //   urlJudul: this.hits.judul.toLowerCase().replace(" ", "-"),
+  // }),
 };
 </script>

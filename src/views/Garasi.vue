@@ -6,7 +6,12 @@
       </v-btn>
     </v-app-bar>
 
-    <v-data-table :headers="headers" :items="garasi" :search="search" class="elevation-1">
+    <v-data-table
+      :headers="headers"
+      :items="garasi"
+      :search="search"
+      class="elevation-1"
+    >
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>Daftar Unit</v-toolbar-title>
@@ -15,7 +20,12 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn color="teal" dark class="mb-2 text-caption" to="/garasi/add-unit">
+          <v-btn
+            color="teal"
+            dark
+            class="mb-2 text-caption"
+            to="/garasi/add-unit"
+          >
             <v-icon left>mdi-plus</v-icon>Tambah Unit
           </v-btn>
 
@@ -26,20 +36,43 @@
             label="Search"
             class="mt-7"
             slot="extension"
-          ></v-text-field>
+            clearable
+          >
+            <template v-slot:append>
+              <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon v-bind="attrs" v-on="on">mdi-filter</v-icon>
+                </template>
+
+                <v-list dense>
+                  <v-list-item-group v-model="value" color="primary">
+                    <v-list-item
+                      v-for="item in items"
+                      :key="item.id"
+                      @click="filter"
+                    >
+                      <v-list-item-subtitle>
+                        {{ item.status }}
+                      </v-list-item-subtitle>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </v-menu>
+            </template>
+          </v-text-field>
         </v-toolbar>
       </template>
 
       <template v-slot:item.type="{ item }">
-        <v-list class="d-inline-flex">
+        <v-list>
           <v-list-item :to="'/garasi/detail-unit/' + item.id">
-            <v-list-item-avatar>
+            <v-list-item-avatar tile size="50">
               <v-img :src="getImage(item.foto_1)"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title>{{item.type}}</v-list-item-title>
-              <v-list-item-subtitle>{{item.merk}}</v-list-item-subtitle>
+              <v-list-item-title>{{ item.type }}</v-list-item-title>
+              <v-list-item-subtitle>{{ item.merk }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -50,7 +83,9 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn small outlined color="teal" dark v-bind="attrs" v-on="on">
               Atur
-              <v-icon right v-if="attrs['aria-expanded'] === 'false'">mdi-chevron-down</v-icon>
+              <v-icon right v-if="attrs['aria-expanded'] === 'false'"
+                >mdi-chevron-down</v-icon
+              >
               <v-icon right v-else>mdi-chevron-up</v-icon>
             </v-btn>
           </template>
@@ -93,6 +128,8 @@ export default {
   name: "garasi",
   data: () => ({
     search: "",
+    value: 0,
+    items: [],
     headers: [
       { text: "Info Unit", value: "type" },
       { text: "Nomor Polisi", value: "nomor_polisi" },
@@ -123,11 +160,15 @@ export default {
       var params = new URLSearchParams();
 
       params.set("id_app_user", this.user.id);
-      params.set("id_mst_motor_bekas_status", 1);
-      params.append("id_mst_motor_bekas_status", 2);
-      params.append("id_mst_motor_bekas_status", 3);
-      params.append("id_mst_motor_bekas_status", 5);
-      params.set("search", this.search);
+      if (this.value == 0) {
+        params.set("id_mst_motor_bekas_status", 1);
+        params.append("id_mst_motor_bekas_status", 2);
+        params.append("id_mst_motor_bekas_status", 3);
+        params.append("id_mst_motor_bekas_status", 5);
+      } else {
+        params.set("id_mst_motor_bekas_status", this.value);
+      }
+      params.set("search", this.search == null ? "" : this.search);
       params.set("offset", offset);
       params.set("limit", this.limit);
 
@@ -199,9 +240,28 @@ export default {
           });
       }
     },
+    filter() {
+      this.$nextTick(() => {
+        this.daftarProduk();
+      });
+    },
+    getStatus() {
+      this.axios
+        .get("/produk/v3/mst_motor_bekas_status")
+        .then((response) => {
+          let { data } = response.data;
+          this.items = data;
+          this.items.splice(0, 0, { id: 0, status: "Semua" });
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
   },
   created() {
     this.daftarProduk();
+    this.getStatus();
   },
 };
 </script>

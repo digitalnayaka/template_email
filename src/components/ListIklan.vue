@@ -1,59 +1,113 @@
 <template>
   <v-container fluid>
-    <v-card outlined tile @click="go(item._source.app_user, item._source.judul, item._source.id)">
+    <v-card
+      outlined
+      tile
+      @click="go(item._source.app_user, item._source.judul, item._source.id)"
+    >
       <v-img :src="getThumb(item._source.photo)" height="230" contain>
         <v-card-title>
           <v-chip
             small
             :color="item._source.id_mst_iklan_jenis == 1 ? 'teal' : 'red'"
             dark
-          >{{ item._source.mst_iklan_jenis }}</v-chip>
+            >{{ item._source.mst_iklan_jenis }}</v-chip
+          >
 
           <v-chip
             small
             color="orange"
             dark
-            v-if="item._source.id_mst_iklan_jenis > 1 && item._source.id_mst_iklan_type == 1"
-          >{{ item._source.mst_iklan_type }}</v-chip>
+            v-if="
+              item._source.id_mst_iklan_jenis > 1 &&
+              item._source.id_mst_iklan_type == 1
+            "
+            >{{ item._source.mst_iklan_type }}</v-chip
+          >
 
           <v-chip
             small
             color="pink"
             dark
-            v-if="item._source.id_mst_iklan_jenis > 1 && item._source.id_mst_iklan_type == 2"
-          >{{ item._source.mst_iklan_type }}</v-chip>
+            v-if="
+              item._source.id_mst_iklan_jenis > 1 &&
+              item._source.id_mst_iklan_type == 2
+            "
+            >{{ item._source.mst_iklan_type }}</v-chip
+          >
 
-          <v-chip small color="green" dark v-if="item._source.is_verified == true">Tiket</v-chip>
+          <v-chip
+            small
+            color="green"
+            dark
+            v-if="item._source.is_verified == true"
+            >Tiket</v-chip
+          >
         </v-card-title>
       </v-img>
 
       <v-list dense>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-black">{{ item._source.judul }}</v-list-item-title>
+            <v-list-item-title class="font-weight-black">{{
+              item._source.judul
+            }}</v-list-item-title>
 
             <v-list-item-subtitle
-              v-if="item._source.harga_saat_ini == null && item._source.id_mst_iklan_jenis == 1"
-            >Harga</v-list-item-subtitle>
+              v-if="
+                item._source.harga_saat_ini == null &&
+                item._source.id_mst_iklan_jenis == 1
+              "
+              >Harga</v-list-item-subtitle
+            >
             <v-list-item-subtitle
-              v-if="item._source.harga_saat_ini == null && item._source.id_mst_iklan_jenis > 1"
-            >Harga awal</v-list-item-subtitle>
+              v-if="
+                item._source.harga_saat_ini == null &&
+                item._source.id_mst_iklan_jenis > 1
+              "
+              >Harga awal</v-list-item-subtitle
+            >
             <v-list-item-subtitle
-              v-if="item._source.harga_saat_ini != null && item._source.id_mst_iklan_jenis > 1"
-            >Harga saat ini</v-list-item-subtitle>
+              v-if="
+                item._source.harga_saat_ini != null &&
+                item._source.id_mst_iklan_jenis > 1
+              "
+              >Harga saat ini</v-list-item-subtitle
+            >
 
             <v-list-item-subtitle
               class="red--text"
-              v-if="item._source.harga_saat_ini == null && item._source.id_mst_iklan_jenis == 1"
-            >Rp {{ Number(item._source.harga).toLocaleString('id-ID') }}</v-list-item-subtitle>
+              v-if="
+                item._source.harga_saat_ini == null &&
+                item._source.id_mst_iklan_jenis == 1
+              "
+              >Rp
+              {{
+                Number(item._source.harga).toLocaleString("id-ID")
+              }}</v-list-item-subtitle
+            >
             <v-list-item-subtitle
               class="red--text"
-              v-if="item._source.harga_saat_ini == null && item._source.id_mst_iklan_jenis > 1"
-            >Rp {{ Number(item._source.harga_awal).toLocaleString('id-ID') }}</v-list-item-subtitle>
+              v-if="
+                item._source.harga_saat_ini == null &&
+                item._source.id_mst_iklan_jenis > 1
+              "
+              >Rp
+              {{
+                Number(item._source.harga_awal).toLocaleString("id-ID")
+              }}</v-list-item-subtitle
+            >
             <v-list-item-subtitle
               class="red--text"
-              v-if="item._source.harga_saat_ini != null && item._source.id_mst_iklan_jenis > 1"
-            >Rp {{ Number(item._source.harga_saat_ini).toLocaleString('id-ID') }}</v-list-item-subtitle>
+              v-if="
+                item._source.harga_saat_ini != null &&
+                item._source.id_mst_iklan_jenis > 1
+              "
+              >Rp
+              {{
+                Number(item._source.harga_saat_ini).toLocaleString("id-ID")
+              }}</v-list-item-subtitle
+            >
 
             <v-list-item-subtitle>
               <v-avatar size="16" item>
@@ -64,7 +118,8 @@
 
             <v-list-item-subtitle v-if="item._source.id_mst_iklan_jenis == 2">
               <v-icon small>mdi-calendar</v-icon>
-              {{ item._source.tanggal_mulai | dateTimeFormat(utc) }} {{ timezone }}
+              {{ item._source.tanggal_mulai | dateTimeFormat(utc) }}
+              {{ timezone }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -86,8 +141,8 @@ export default {
     }),
     go(seller, judul, id) {
       this.setAds(id);
-      let urlSeller = seller.toLowerCase().replace(" ", "-");
-      let urlJudul = judul.toLowerCase().replace(" ", "-");
+      let urlSeller = seller.toLowerCase().replaceAll(" ", "-");
+      let urlJudul = judul.toLowerCase().replaceAll(" ", "-");
       this.$router.push("/produk/" + urlSeller + "/" + urlJudul);
     },
   },

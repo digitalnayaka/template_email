@@ -1,6 +1,12 @@
 <template>
   <v-app>
-    <v-app-bar app clipped-left color="teal" dark v-if="$vuetify.breakpoint.smAndUp || isHome">
+    <v-app-bar
+      app
+      clipped-left
+      color="teal"
+      dark
+      v-if="$vuetify.breakpoint.smAndUp || isHome"
+    >
       <v-toolbar-title style="width: 230px" class="ml-0 pl-4">
         <a href="/">
           <v-img src="/img/logo-tulisan.png" width="200" contain></v-img>
@@ -28,24 +34,33 @@
           :x-small="$vuetify.breakpoint.xsOnly ? true : false"
           class="mx-2"
           @click="setDialogComponent('login')"
-        >Masuk</v-btn>
+          >Masuk</v-btn
+        >
 
         <v-btn
           rounded
           :x-small="$vuetify.breakpoint.xsOnly ? true : false"
           color="green accent-4"
           @click="setDialogComponent('daftar')"
-        >Daftar</v-btn>
+          >Daftar</v-btn
+        >
       </div>
 
-      <div v-else>
+      <div class="d-flex align-center" v-else>
         <!-- <v-btn icon>
           <v-icon>mdi-heart-outline</v-icon>
-        </v-btn>
+        </v-btn> -->
 
-        <v-btn icon>
-          <v-icon>mdi-bell</v-icon>
-        </v-btn>-->
+        <v-btn icon to="/notifikasi">
+          <v-badge color="orange" overlap v-if="countNotif > 0">
+            <template v-slot:badge>
+              <span>{{ countNotif }}</span>
+            </template>
+
+            <v-icon>mdi-bell-outline</v-icon>
+          </v-badge>
+          <v-icon v-else>mdi-bell-outline</v-icon>
+        </v-btn>
 
         <v-menu
           :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
@@ -58,7 +73,9 @@
               <v-avatar size="32px" item>
                 <v-img :src="getImage(user.photo)" alt="Avatar"></v-img>
               </v-avatar>
-              <span class="text-caption mx-2">{{ user.nama.split(' ', 1)[0] }}</span>
+              <span class="text-caption mx-2">{{
+                user.nama.split(" ", 1)[0]
+              }}</span>
             </v-btn>
           </template>
 
@@ -71,14 +88,21 @@
 
                 <v-list-item-content>
                   <v-list-item-title>{{ user.nama }}</v-list-item-title>
-                  <v-list-item-subtitle v-if="user.id_mst_user_type == 2">{{ user.user_type }} User</v-list-item-subtitle>
+                  <v-list-item-subtitle v-if="user.id_mst_user_type == 2"
+                    >{{ user.user_type }} User</v-list-item-subtitle
+                  >
                 </v-list-item-content>
               </v-list-item>
             </v-list>
 
             <v-divider></v-divider>
 
-            <v-tabs v-model="tab" grow slider-color="teal" @change="content = false">
+            <v-tabs
+              v-model="tab"
+              grow
+              slider-color="teal"
+              @change="content = false"
+            >
               <v-tab class="text-caption">Toko</v-tab>
               <v-tab class="text-caption">Aktivitas</v-tab>
             </v-tabs>
@@ -88,11 +112,17 @@
                 <v-row no-gutters>
                   <v-col cols="6">
                     <v-list dense>
-                      <v-list-item to="/garasi/add-unit" @click="content = true">
+                      <v-list-item
+                        to="/garasi/add-unit"
+                        @click="content = true"
+                      >
                         <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
                       </v-list-item>
 
-                      <v-list-item to="/garasi/manage-unit">
+                      <v-list-item
+                        to="/garasi/manage-unit"
+                        @click="content = true"
+                      >
                         <v-list-item-subtitle>Garasi</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
@@ -100,12 +130,19 @@
 
                   <v-col cols="6">
                     <v-list dense>
-                      <v-list-item to="/toko/add-ads">
-                        <v-list-item-subtitle>Tambah Iklan</v-list-item-subtitle>
+                      <v-list-item to="/toko/add-ads" @click="content = true">
+                        <v-list-item-subtitle
+                          >Tambah Iklan</v-list-item-subtitle
+                        >
                       </v-list-item>
 
-                      <v-list-item to="/toko/manage-ads">
-                        <v-list-item-subtitle>Iklan</v-list-item-subtitle>
+                      <v-list-item
+                        to="/toko/manage-ads"
+                        @click="content = true"
+                      >
+                        <v-list-item-subtitle
+                          >Daftar Iklan</v-list-item-subtitle
+                        >
                       </v-list-item>
                     </v-list>
                   </v-col>
@@ -135,7 +172,12 @@
         transition="dialogbottom-transition"
         persistent
       >
-        <component :is="currentComponent" :utc="utc" :timezone="waktu" @closed="setDialogStatus"></component>
+        <component
+          :is="currentComponent"
+          :utc="utc"
+          :timezone="waktu"
+          @closed="setDialogStatus"
+        ></component>
       </v-dialog>
     </keep-alive>
 
@@ -152,6 +194,10 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment-timezone";
+import VueGeolocation from "vue-browser-geolocation";
+import Vue from "vue";
+
+Vue.use(VueGeolocation);
 
 export default {
   name: "App",
@@ -166,6 +212,7 @@ export default {
       import(/* webpackChunkName: "daftar" */ "@/components/Daftar.vue"),
   },
   data: () => ({
+    countNotif: 0,
     content: false,
     tab: 0,
     utc: moment().utcOffset() / 60 - 7,
@@ -191,6 +238,36 @@ export default {
         this.waktu = "WIT";
       }
     },
+    geolocation() {
+      this.$getLocation({
+        enableHighAccuracy: true,
+      });
+    },
+    getNotif() {
+      if (!this.guest) {
+        this.axios
+          .get("/log/v3/log/notifikasi", {
+            params: {
+              id_user: this.user.id,
+              is_read: false,
+              limit: 1,
+            },
+          })
+          .then((response) => {
+            let { data } = response;
+            this.countNotif = data.count;
+          })
+          .catch((error) => {
+            let responses = error.response;
+            let data = responses.data;
+            this.setAlert({
+              status: true,
+              color: "error",
+              text: data.api_message,
+            });
+          });
+      }
+    },
     signOut(e) {
       var r = confirm("Apakah anda yakin akan keluar?");
       if (r == true) {
@@ -209,16 +286,13 @@ export default {
       }
     },
   },
-  mounted() {
-    this.timezone();
-  },
   computed: {
     ...mapGetters({
       user: "auth/user",
       guest: "auth/guest",
       dialogStatus: "dialog/status",
       currentComponent: "dialog/component",
-      adsID: "ads/adsID"
+      adsID: "ads/adsID",
     }),
     isHome() {
       return this.$route.path === "/";
@@ -236,6 +310,11 @@ export default {
         return this.$vuetify.breakpoint;
       },
     },
+  },
+  created() {
+    this.timezone();
+    this.geolocation();
+    this.getNotif();
   },
 };
 </script>

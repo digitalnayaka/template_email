@@ -4,68 +4,47 @@
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
-
-      <v-spacer></v-spacer>
-
-      <!-- <div v-if="!guest">
-        <div v-if="user.id == unitMokas.id_app_user">
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on }">
-              <v-btn icon class="mx-2" v-on="on" @click="getBarcode">
-                <v-icon large>mdi-barcode-scan</v-icon>
-              </v-btn>
-            </template>
-            <span>Barcode</span>
-          </v-tooltip>
-
-          <v-dialog v-model="dialog">
-            <v-card v-html="barcode"></v-card>
-          </v-dialog>
-
-          <v-btn
-            icon
-            class="mx-2"
-            v-if="unitMokas.id_mst_motor_bekas_status == 1 || unitMokas.id_mst_motor_bekas_status == 3 || unitMokas.id_mst_motor_bekas_status == 5"
-          >
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn icon class="mx-2" v-on="on" :to="'/edit_unit/' + id">
-                  <v-icon large>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-              <span>Edit</span>
-            </v-tooltip>
-          </v-btn>
-
-          <v-btn
-            icon
-            class="mx-2"
-            v-if="unitMokas.id_mst_motor_bekas_status == 1 || unitMokas.id_mst_motor_bekas_status == 3"
-          >
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn icon class="mx-2" v-on="on" @click="deleteUnit">
-                  <v-icon large>mdi-trash-can</v-icon>
-                </v-btn>
-              </template>
-              <span>Delete</span>
-            </v-tooltip>
-          </v-btn>
-        </div>
-      </div>-->
     </v-app-bar>
 
     <div
-      v-viewer="{movable: false}"
+      v-viewer="{ movable: false }"
       class="d-flex flex-nowrap justify-space-between"
-      style="overflow-x: auto;"
+      style="overflow-x: auto"
     >
-      <v-card flat v-for="(item,i) in fotos" :key="i" class="mx-2">
-        <img :src="getImage(item.src)" contain width="270" height="150" style="cursor: pointer" />
+      <v-card flat v-for="(item, i) in fotos" :key="i" class="mx-2">
+        <img
+          :src="getImage(item.src)"
+          contain
+          width="270"
+          height="150"
+          style="cursor: pointer"
+        />
       </v-card>
     </div>
 
     <detail-unit :unitMokas="unitMokas" />
+
+    <div v-if="unitMokas.id_mst_motor_bekas_status == 1">
+      <v-btn block color="teal" dark :to="'/toko/add-ads?id=' + unitMokas.id">
+        Iklankan
+      </v-btn>
+    </div>
+
+    <div
+      v-if="
+        unitMokas.id_mst_motor_bekas_status == 2 ||
+        unitMokas.id_mst_motor_bekas_status == 4
+      "
+    >
+      <v-btn
+        block
+        color="teal"
+        dark
+        @click="go"
+        v-if="hits.id_mst_iklan_type != 2"
+        >Lihat Iklan</v-btn
+      >
+    </div>
   </v-container>
 </template>
 
@@ -91,7 +70,6 @@ export default {
       iklan: [],
       hits: [],
       fotos: [],
-      dokumen: [],
       dialog_dokumen: false,
       barcode: null,
       dialog: false,
@@ -100,6 +78,7 @@ export default {
   methods: {
     ...mapActions({
       setAlert: "alert/set",
+      setAds: "ads/setAds",
     }),
     unit_mokas() {
       this.axios
@@ -126,19 +105,6 @@ export default {
             { src: foto4 },
             { src: foto5 }
           );
-
-          let stnk = this.unitMokas.lembar_stnk;
-          let bpkb = this.unitMokas.lembar_bpkb;
-          let pajak = this.unitMokas.lembar_pajak;
-          if (stnk == true) {
-            this.dokumen.push(stnk);
-          }
-          if (bpkb == true) {
-            this.dokumen.push(bpkb);
-          }
-          if (pajak == true) {
-            this.dokumen.push(pajak);
-          }
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -228,9 +194,12 @@ export default {
           });
       }
     },
-  },
-  created() {
-    this.unit_mokas();
+    go() {
+      this.setAds(this.hits.id);
+      let urlSeller = this.unitMokas.nama_user.toLowerCase().replaceAll(" ", "-");
+      let urlJudul = this.hits.judul.toLowerCase().replaceAll(" ", "-");
+      this.$router.push("/produk/" + urlSeller + "/" + urlJudul);
+    },
   },
   computed: {
     ...mapGetters({
@@ -238,12 +207,8 @@ export default {
       guest: "auth/guest",
     }),
   },
-  filters: {
-    countDoc(doc) {
-      if (doc !== null) {
-        return true;
-      }
-    },
+  created() {
+    this.unit_mokas();
   },
 };
 </script>
