@@ -1,5 +1,11 @@
 <template>
   <v-container fluid>
+    <v-app-bar app color="teal" dark class="d-none">
+      <v-btn icon @click.stop="$router.go(-1)">
+        <v-icon>mdi-arrow-left-circle</v-icon>
+      </v-btn>
+    </v-app-bar>
+
     <v-carousel cycle hide-delimiters height="280">
       <v-carousel-item
         v-for="(item, index) in banners"

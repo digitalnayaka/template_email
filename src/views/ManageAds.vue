@@ -60,14 +60,7 @@
 
       <template v-slot:item._source.judul="{ item }">
         <v-list>
-          <v-list-item
-            :to="
-              '/produk/' +
-              item._source.app_user.toLowerCase().replace(' ', '-') +
-              '/' +
-              item._source.judul.toLowerCase().replace(' ', '-')
-            "
-          >
+          <v-list-item @click="go(item)">
             <v-list-item-avatar tile size="50">
               <v-img :src="getImage(item._source.photo)"></v-img>
             </v-list-item-avatar>
@@ -228,14 +221,10 @@ export default {
     total: 0,
     lengthPage: 0,
   }),
-  computed: {
-    ...mapGetters({
-      user: "auth/user",
-    }),
-  },
   methods: {
     ...mapActions({
       setAlert: "alert/set",
+      setAds: "ads/setAds",
     }),
     daftarIklan() {
       var offset = (this.page - 1) * this.limit;
@@ -344,6 +333,17 @@ export default {
           });
       }
     },
+    go(item) {
+      this.setAds(item._source.id);
+      let urlSeller = item._source.app_user.toLowerCase().replaceAll(" ", "-");
+      let urlJudul = item._source.judul.toLowerCase().replaceAll(" ", "-");
+      this.$router.push("/produk/" + urlSeller + "/" + urlJudul);
+    },
+  },
+  computed: {
+    ...mapGetters({
+      user: "auth/user",
+    }),
   },
   created() {
     this.daftarIklan();

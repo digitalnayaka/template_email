@@ -25,6 +25,7 @@
         label="Search"
         :slot="$vuetify.breakpoint.xsOnly ? 'extension' : 'default'"
         @click="setDialogComponent('search')"
+        class="mx-2"
       ></v-text-field>
 
       <div class="d-flex" v-if="guest">
@@ -51,7 +52,7 @@
           <v-icon>mdi-heart-outline</v-icon>
         </v-btn> -->
 
-        <v-btn icon to="/notifikasi">
+        <v-btn icon to="/notification">
           <v-badge color="orange" overlap v-if="countNotif > 0">
             <template v-slot:badge>
               <span>{{ countNotif }}</span>

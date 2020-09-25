@@ -110,7 +110,15 @@ const routes = [
   {
     path: '/get-ticket',
     name: 'GetTicket',
-    component: () => import(/* webpackChunkName: "get-ticket" */ '../views/BeliTiket.vue'),
+    component: () => import(/* webpackChunkName: "get-ticket" */ '../views/BuyTicket.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/upload-bukti/:id',
+    name: 'UploadBukti',
+    component: () => import(/* webpackChunkName: "upload-bukti" */ '../views/UploadBukti.vue'),
     meta: {
       auth: true
     }
@@ -127,6 +135,22 @@ const routes = [
     path: '/detail-banner/:id',
     name: 'DetailBanner',
     component: () => import(/* webpackChunkName: "detail-banner" */ '../views/DetailBanner.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/notification',
+    name: 'Notifcation',
+    component: () => import(/* webpackChunkName: "notification" */ '../views/Notifikasi.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/bantuan',
+    name: 'Bantuan',
+    component: () => import(/* webpackChunkName: "bantuan" */ '../views/Bantuan.vue'),
     meta: {
       auth: true
     }
