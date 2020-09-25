@@ -654,17 +654,17 @@ export default {
             {
               text: "Home",
               disabled: false,
-              href: "/",
+              to: "/",
             },
             {
               text: "Mokas",
               disabled: false,
-              href: "/category/mokas",
+              to: "/category/mokas",
             },
             {
               text: this.hits.mst_iklan_jenis,
               disabled: false,
-              href: "/category/mokas?jenis=" + this.hits.id_mst_iklan_jenis,
+              to: "/category/mokas?jenis=" + this.hits.id_mst_iklan_jenis,
             },
             {
               text: this.hits.judul,

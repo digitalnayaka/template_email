@@ -2,19 +2,23 @@
   <v-card>
     <v-container fluid>
       <div v-if="countCart === 0">
-        <v-alert outlined color="warning" icon="mdi-cart-off">Anda belum memilih tiket!</v-alert>
+        <v-alert outlined color="warning" icon="mdi-cart-off"
+          >Anda belum memilih tiket!</v-alert
+        >
       </div>
 
       <v-list v-if="countCart > 0">
         <template v-for="(item, index) in carts">
-          <v-list-item :key="'cart'+index">
+          <v-list-item :key="'cart' + index">
             <v-list-item-avatar tile size="80">
               <v-img src="/img/tiket.png"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
               <v-list-item-title>{{ item.judul }}</v-list-item-title>
-              <v-list-item-subtitle>Jumlah: {{ item.qty }} Tiket</v-list-item-subtitle>
+              <v-list-item-subtitle
+                >Jumlah: {{ item.qty }} Tiket</v-list-item-subtitle
+              >
             </v-list-item-content>
 
             <v-list-item-action>
@@ -46,12 +50,14 @@
             <v-flex pa-1 xs6>
               Total Harga* ({{ totalQuantity }} items)
               <br />
-              <span class="title">Rp. {{ totalPrice.toLocaleString('id-ID') }}</span>
+              <span class="title"
+                >Rp. {{ totalPrice.toLocaleString("id-ID") }}</span
+              >
             </v-flex>
 
             <v-flex pa-1 xs6 text-right align-self-center>
               <v-btn
-              dark
+                dark
                 color="teal"
                 @click="dialog = true"
                 :loading="loading"
@@ -65,11 +71,15 @@
       </v-card>
 
       <div class="ma-2">
-        <div
-          class="red--text"
-        >(*Total harga akan ditambah 3 digit angka unik. Lakukan pembayaran sesuai dengan nominal yang tertera.)</div>
+        <div class="red--text">
+          (*Total harga akan ditambah 3 digit angka unik. Lakukan pembayaran
+          sesuai dengan nominal yang tertera.)
+        </div>
 
-        <div>Setelah Anda melakukan pembayaran, tiket Anda akan masuk dalam waktu 2x24 jam.</div>
+        <div>
+          Setelah Anda melakukan pembayaran, tiket Anda akan masuk dalam waktu
+          2x24 jam.
+        </div>
       </div>
 
       <v-dialog v-model="dialog" width="250" persistent>
@@ -81,7 +91,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="red" dark @click="dialog = false">Tidak</v-btn>
-            <v-btn color="primary" dark @click="buy">Ya</v-btn>
+            <v-btn color="primary" dark @click="buy" :loading="loading">Ya</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -139,7 +149,7 @@ export default {
             text: data.api_message,
           });
           this.setCart([]);
-          this.$router.push({ path: "/upload_bukti/" + data.data.id });
+          this.$router.push({ path: "/upload-bukti/" + data.data.id });
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -157,3 +167,42 @@ export default {
   },
 };
 </script>
+
+<style>
+.custom-loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>

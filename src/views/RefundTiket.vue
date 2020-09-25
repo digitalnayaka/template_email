@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container fluid>
     <v-app-bar app color="teal" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
@@ -21,7 +21,7 @@
                   class="text-left"
                 >Tiket yang tersedia dapat Anda refund. Silahkan refund dengan klik tombol dibawah ini:</h5>
 
-                <v-dialog v-model="dialog" fullscreen width="500">
+                <v-dialog v-model="dialog" fullscreen>
                   <template v-slot:activator="{ on, attrs }">
                     <div align="right" class="mt-4">
                       <v-btn dark v-bind="attrs" v-on="on" @click="open" color="teal darken-2">
@@ -92,7 +92,7 @@
                                       <v-list-item-subtitle>Masa Berlaku</v-list-item-subtitle>
                                       <v-list-item-title
                                         class="red--text text-caption"
-                                      >{{ item.expired_at | dateTimeFormat(utc) }} {{ waktu }}</v-list-item-title>
+                                      >{{ item.expired_at | dateTimeFormat(utc) }} {{ timezone }}</v-list-item-title>
                                     </v-list-item-content>
                                   </v-list-item>
                                 </v-list>
@@ -176,6 +176,7 @@
                   <v-icon>mdi-close</v-icon>
                 </v-btn>
               </v-toolbar>
+
               <v-card-text>
                 <v-form ref="form" v-model="valid">
                   <v-row dense>
@@ -231,7 +232,7 @@
         </v-container>
       </v-card>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -240,6 +241,7 @@ import moment from "moment-timezone";
 
 export default {
   name: "refund",
+  props: ["utc", "timezone"],
   data: () => ({
     dialog: false,
     qty: 0,
@@ -267,8 +269,6 @@ export default {
     totalTersedia: 0,
     limit: 15,
     offset: 0,
-    utc: moment().utcOffset() / 60 - 7,
-    waktu: "",
   }),
   methods: {
     ...mapActions({
@@ -378,7 +378,7 @@ export default {
             color: "success",
             text: data.api_message,
           });
-          this.$router.go(-1);
+          this.$router.push("/category/ticket");
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -471,16 +471,6 @@ export default {
     this.getRekening();
     this.getBank();
     this.tiketTersedia();
-
-    if (this.utc == 0) {
-      this.waktu = "WIB";
-    }
-    if (this.utc == 1) {
-      this.waktu = "WITA";
-    }
-    if (this.utc == 2) {
-      this.waktu = "WIT";
-    }
   },
   computed: {
     ...mapGetters({

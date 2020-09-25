@@ -16,7 +16,9 @@
 
             <v-list-item-content>
               <v-list-item-title>{{ user.nama }}</v-list-item-title>
-              <v-list-item-subtitle v-if="user.id_mst_user_type == 2">{{ user.user_type }} User</v-list-item-subtitle>
+              <v-list-item-subtitle v-if="user.id_mst_user_type == 2"
+                >{{ user.user_type }} User</v-list-item-subtitle
+              >
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -46,13 +48,17 @@
         >
           <template v-slot:activator>
             <v-list-item-content>
-              <v-list-item-title>{{item.title}}</v-list-item-title>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </template>
 
-          <v-list-item v-for="subItem in item.items" :key="subItem.title" :to="subItem.route">
+          <v-list-item
+            v-for="subItem in item.items"
+            :key="subItem.title"
+            :to="subItem.route"
+          >
             <v-list-item-content>
-              <v-list-item-title>{{subItem.title}}</v-list-item-title>
+              <v-list-item-title>{{ subItem.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
@@ -92,9 +98,7 @@ export default {
       {
         icon: "mdi-clipboard-text",
         title: "Penjualan",
-        items: [
-          { title: "List Penjualan", route: "/toko/add-ads" },
-        ],
+        items: [{ title: "List Penjualan", route: "/toko/add-ads" }],
       },
       {
         icon: "mdi-emoticon",
@@ -106,17 +110,17 @@ export default {
       },
     ],
   }),
+  computed: {
+    ...mapGetters({
+      user: "auth/user",
+    }),
+  },
   methods: {
     ...mapActions({
       setAlert: "alert/set",
     }),
   },
   created() {},
-  computed: {
-    ...mapGetters({
-      user: "auth/user",
-    }),
-  },
 };
 </script>
 
