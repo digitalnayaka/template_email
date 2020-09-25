@@ -330,7 +330,7 @@ export default {
   props: ["utc", "timezone"],
   directives: { money: VMoney, mask },
   beforeRouteLeave(to, from, next) {
-    if (!this.submit) {
+    if (this.judul_iklan != "") {
       const answer = window.confirm(
         "Do you really want to leave? you have unsaved changes!"
       );
@@ -397,7 +397,6 @@ export default {
       formRules: [(v) => !!v || "Field is required"],
       tbDateRules: [],
       valid: true,
-      submit: false,
       suffix: { suffix: this.timezone },
       thumbnail: "",
       page: 1,

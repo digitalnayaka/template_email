@@ -12,6 +12,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
   },
   {
+    path: '/detail-banner/:id',
+    name: 'DetailBanner',
+    component: () => import(/* webpackChunkName: "detail-banner" */ '../views/DetailBanner.vue')
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
@@ -223,6 +228,14 @@ const routes = [
     path: '/toko/add-ads',
     name: 'AddAds',
     component: () => import(/* webpackChunkName: "add-ads" */ '../views/AddAds.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/category/Ticket',
+    name: 'Ticket',
+    component: () => import(/* webpackChunkName: "ticket" */ '../views/Ticket.vue'),
     meta: {
       auth: true
     }
