@@ -16,12 +16,14 @@
         ></v-file-input>
 
         <div class="text-center">
-          <v-btn id="buttonid" width="260" small class="mt-4" @click="uploadAvatar">Pilih Foto</v-btn>
+          <v-btn id="buttonid" block small class="mt-4" @click="uploadAvatar">Pilih Foto</v-btn>
         </div>
 
         <v-card-text class="text-caption">Ekstensi file yang diperbolehkan: .JPG .JPEG .PNG</v-card-text>
       </v-card>
+
       <br />
+      
       <v-card outlined width="800" class="pa-2" align="center">
         <v-list-item-avatar tile size="100">
           <v-img src="/img/icons/ic_tiket.png"></v-img>
@@ -155,7 +157,9 @@
           </v-row>
         </v-form>
       </v-card>
+
       <br />
+
       <div>
         <v-card outlined width="800" class="pa-2">
           <div>

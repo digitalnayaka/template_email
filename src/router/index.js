@@ -65,108 +65,96 @@ const routes = [
     }
   },
   {
-    path: '/chat_list',
-    name: 'chat_list',
-    component: () => import(/* webpackChunkName: "chat_list" */ '../views/ChatList.vue'),
+    path: '/chat-list',
+    name: 'ChatList',
+    component: () => import(/* webpackChunkName: "chat-list" */ '../views/ChatList.vue'),
     meta: {
       Auth: true
     }
   },
   {
-    path: '/iklan_favorit',
-    name: 'iklan_favorit',
-    component: () => import(/* webpackChunkName: "iklan_favorit" */ '../views/IklanFavorit.vue'),
+    path: '/iklan-favorit',
+    name: 'IklanFavorit',
+    component: () => import(/* webpackChunkName: "iklan-favorit" */ '../views/IklanFavorit.vue'),
     meta: {
       Auth: true
     }
   },
   {
-    path: '/tawar_bersama',
-    name: 'tawar_bersama',
-    component: () => import(/* webpackChunkName: "tawar_bersama" */ '../views/TransaksiTB.vue'),
+    path: '/tawar-bersama',
+    name: 'TransaksiTB',
+    component: () => import(/* webpackChunkName: "tawar-bersama" */ '../views/TransaksiTB.vue'),
     meta: {
       Auth: true
     }
   },
   {
-    path: '/syarat_ketentuan',
-    name: 'syarat_ketentuan',
-    component: () => import(/* webpackChunkName: "syarat_ketentuan" */ '../views/SyaratKetentuan.vue'),
+    path: '/syarat-ketentuan',
+    name: 'SyaratKetentuan',
+    component: () => import(/* webpackChunkName: "syarat-ketentuan" */ '../views/SyaratKetentuan.vue'),
   },
   {
-    path: '/larangan_iklan',
-    name: 'larangan_iklan',
-    component: () => import(/* webpackChunkName: "larangan_iklan" */ '../views/LaranganIklan.vue'),
+    path: '/larangan-iklan',
+    name: 'LaranganIklan',
+    component: () => import(/* webpackChunkName: "larangan-iklan" */ '../views/LaranganIklan.vue'),
   },
   {
     path: '/kebijakan_privasi',
-    name: 'kebijakan_privasi',
-    component: () => import(/* webpackChunkName: "kebijakan_privasi" */ '../views/KebijakanPrivasi.vue'),
+    name: 'KebijakanPrivasi',
+    component: () => import(/* webpackChunkName: "kebijakan-privasi" */ '../views/KebijakanPrivasi.vue'),
   },
   {
-    path: '/panduan_pembeli',
-    name: 'panduan_pembeli',
-    component: () => import(/* webpackChunkName: "panduan_pembeli" */ '../views/PanduanBuyer.vue'),
+    path: '/panduan-pembeli',
+    name: 'PanduanBuyer',
+    component: () => import(/* webpackChunkName: "panduan-pembeli" */ '../views/PanduanBuyer.vue'),
   },
 
   {
-    path: '/panduan_penjual',
-    name: 'panduan_penjual',
-    component: () => import(/* webpackChunkName: "panduan_penjual" */ '../views/PanduanSeller.vue'),
+    path: '/panduan-penjual',
+    name: 'PanduanSeller',
+    component: () => import(/* webpackChunkName: "panduan-penjual" */ '../views/PanduanSeller.vue'),
   },
   {
-    path: '/kode_etik',
-    name: 'kode_etik',
-    component: () => import(/* webpackChunkName: "kode_etik" */ '../views/KodeEtik.vue'),
+    path: '/kode-etik',
+    name: 'KodeEtik',
+    component: () => import(/* webpackChunkName: "kode-etik" */ '../views/KodeEtik.vue'),
   },
   {
-    path: '/category/motor_baru',
-    name: 'motor_baru',
+    path: '/category/motor-baru',
+    name: 'MotorBaru',
     component: () => import(/* webpackChunkName: "motor_baru" */ '../views/MotorBaru.vue'),
     meta: {
       Auth: true
     }
   },
   {
-    path: '/pengaturan',
-    name: 'pengaturan',
-    component: () => import(/* webpackChunkName: "pengaturan" */ '../views/Pengaturan.vue'),
+    path: '/refund-tiket',
+    name: 'RefundTiket',
+    component: () => import(/* webpackChunkName: "refund-tiket" */ '../views/RefundTiket.vue'),
     meta: {
       Auth: true
     }
   },
-  {
-    path: '/refund_tiket',
-    name: 'refund_tiket',
-    component: () => import(/* webpackChunkName: "refund_tiket" */ '../views/RefundTiket.vue'),
-    meta: {
-      Auth: true
-    }
-  },
-
   {
     path: '/report',
-    name: 'report',
+    name: 'Report',
     component: () => import(/* webpackChunkName: "report" */ '../views/Report.vue'),
     meta: {
       Auth: true
     }
   },
-
   {
     path: '/toko/review',
-    name: 'review',
-    component: () => import(/* webpackChunkName: "toko/review" */ '../views/Review.vue'),
+    name: 'Review',
+    component: () => import(/* webpackChunkName: "review" */ '../views/Review.vue'),
     meta: {
       Auth: true
     }
   },
-
-
   {
-    path: '/upload_bukti/:id',
-    name: 'upload_bukti',
-    component: () => import(/* webpackChunkName: "upload_bukti" */ '../views/UploadBukti.vue'),
+    path: '/upload-bukti/:id',
+    name: 'UploadBukti',
+    component: () => import(/* webpackChunkName: "upload-bukti" */ '../views/UploadBukti.vue'),
     meta: {
       Auth: true
     }
@@ -197,7 +185,14 @@ const routes = [
           auth: true
         }
       },
-
+      {
+        path: '/toko/manage-ads',
+        name: 'ManageAds',
+        component: () => import(/* webpackChunkName: "manage-ads" */ '../views/ManageAds.vue'),
+        meta: {
+          auth: true
+        }
+      },
     ],
   },
   {

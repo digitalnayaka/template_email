@@ -81,7 +81,7 @@ export default {
     items: [
       {
         icon: "mdi-garage",
-        title: "Penjual",
+        title: "Garasi",
         items: [
           { title: "Tambah Unit", route: "/garasi/add-unit" },
           { title: "Daftar Unit", route: "/garasi/manage-unit" },

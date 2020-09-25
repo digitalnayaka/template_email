@@ -13,10 +13,6 @@
         </a>
       </v-toolbar-title>
 
-      <!-- <v-btn icon>
-        <v-icon>mdi-apps</v-icon>
-      </v-btn>-->
-
       <v-text-field
         flat
         solo-inverted
@@ -51,7 +47,7 @@
           <v-icon>mdi-heart-outline</v-icon>
         </v-btn> -->
 
-        <v-btn icon to="/notifikasi">
+        <v-btn icon to="/notification">
           <v-badge color="orange" overlap v-if="countNotif > 0">
             <template v-slot:badge>
               <span>{{ countNotif }}</span>
@@ -61,6 +57,7 @@
           </v-badge>
           <v-icon v-else>mdi-bell-outline</v-icon>
         </v-btn>
+
         <v-menu
           :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
           :close-on-content-click="content"
@@ -70,13 +67,12 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn large text v-bind="attrs" v-on="on">
               <v-avatar size="32px" item>
-                <v-icon>mdi-menu</v-icon>
+                <v-img :src="getImage(user.photo)" alt="Avatar"></v-img>
               </v-avatar>
-              <span class="text-caption mx-2">Menu</span>
+              <span class="text-caption mx-2">{{
+                user.nama.split(" ", 1)[0]
+              }}</span>
             </v-btn>
-            <!-- <v-btn icon to="/iklan_favorit"> 
-          <v-icon>mdi-heart-outline</v-icon>
-            </v-btn>-->
           </template>
 
           <v-card>
@@ -97,11 +93,14 @@
 
             <v-divider></v-divider>
 
-            <v-tabs v-model="tab" grow slider-color="teal" @change="content = false">
-              <v-tab class="text-caption">Pembeli</v-tab>
-              <v-tab class="text-caption">Penjual</v-tab>
-              <v-tab class="text-caption">Transaksi</v-tab>
-              <v-tab class="text-caption">Lainnya</v-tab>
+            <v-tabs
+              v-model="tab"
+              grow
+              slider-color="teal"
+              @change="content = false"
+            >
+              <v-tab class="text-caption">Toko</v-tab>
+              <v-tab class="text-caption">Aktivitas</v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab">
@@ -109,26 +108,10 @@
                 <v-row no-gutters>
                   <v-col cols="6">
                     <v-list dense>
-                      <v-list-item>
-                        <v-list-item-subtitle>Aktivitas Pembeli</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item>
-                        <v-list-item-subtitle>Iklan Diikuti</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-                </v-row>
-              </v-tab-item>
-              <v-tab-item>
-                <v-row no-gutters>
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item to="/garasi/add-unit" @click="content = true">
+                      <v-list-item
+                        to="/garasi/add-unit"
+                        @click="content = true"
+                      >
                         <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
                       </v-list-item>
 
@@ -137,9 +120,6 @@
                         @click="content = true"
                       >
                         <v-list-item-subtitle>Garasi</v-list-item-subtitle>
-                      </v-list-item>
-                      <v-list-item>
-                        <v-list-item-subtitle>Aktivitas Penjual</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
                   </v-col>
@@ -159,51 +139,6 @@
                         <v-list-item-subtitle
                           >Daftar Iklan</v-list-item-subtitle
                         >
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-                </v-row>
-              </v-tab-item>
-              <v-tab-item>
-                <v-row no-gutters>
-                  <v-col cols="6">
-                    <v-list dense>
-                      
-                      <v-list-item to="/tawar_bersama" >
-                        <v-list-item-subtitle>Tawar Bersama Pembeli</v-list-item-subtitle>
-                      </v-list-item>
-                       <v-list-item to="/tawar_bersama" >
-                        <v-list-item-subtitle>Tawar Bersama Penjual</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item to="/category/tiket">
-                        <v-list-item-subtitle>Tiket</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-                </v-row>
-              </v-tab-item>
-              <v-tab-item>
-                <v-row no-gutters>
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item to="/report">
-                        <v-list-item-subtitle>Report</v-list-item-subtitle>
-                      </v-list-item>
-                       <v-list-item to="/about">
-                        <v-list-item-subtitle>Tentang Aplikasi</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item to="/bantuan">
-                        <v-list-item-subtitle>Bantuan</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
                   </v-col>
@@ -251,7 +186,13 @@
     </v-main>
 
     <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-      <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
+      <v-img
+        to="/bantuan"
+        src="/img/icons/ic_bantuan.png"
+        width="50"
+        height="50"
+        contain
+      ></v-img>
     </v-btn>
   </v-app>
 </template>
