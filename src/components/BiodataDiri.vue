@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12" sm="4">
-      <v-card outlined width="300" class="pa-2">
+      <v-card outlined width="800" class="pa-2">
         <v-img :src="getImage(user.photo)" contain></v-img>
 
         <v-file-input
@@ -21,120 +21,207 @@
 
         <v-card-text class="text-caption">Ekstensi file yang diperbolehkan: .JPG .JPEG .PNG</v-card-text>
       </v-card>
+      <br />
+      <v-card outlined width="800" class="pa-2" align="center">
+        <v-list-item-avatar tile size="100">
+          <v-img src="/img/icons/ic_tiket.png"></v-img>
+        </v-list-item-avatar>
+
+        <v-list-item-content class="text-center">
+          <v-list-item-subtitle class="text-h6">(jumlah tiket) Tersedia</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-card>
     </v-col>
 
     <v-col cols="12" sm="8">
-      <div class="font-weight-bold">Ubah Biodata Diri</div>
+      <v-card outlined width="800" class="pa-2">
+        <div class="font-weight-bold">Ubah Biodata Diri</div>
 
-      <v-form ref="form" v-model="valid">
-        <v-row>
-          <v-col cols="5">Nama</v-col>
-          <v-col cols="7">
-            <div v-if="!ubahNama">
-              {{ user.nama }}
-              <a href="javascript:void(0)" @click="ubahNama = true">Ubah</a>
+        <v-form ref="form" v-model="valid">
+          <v-row>
+            <v-col cols="5">Nama</v-col>
+            <v-col cols="7">
+              <div v-if="!ubahNama">
+                {{ user.nama }}
+                <a href="javascript:void(0)" @click="ubahNama = true">
+                  <v-icon>mdi-pencil</v-icon>
+                </a>
+              </div>
+
+              <div v-else>
+                <v-text-field
+                  v-model="formNama"
+                  outlined
+                  dense
+                  append-icon="mdi-content-save"
+                  append-outer-icon="mdi-close"
+                  @click:append-outer="ubahNama = false"
+                  @click:append="saveData('nama', formNama)"
+                  :rules="namaRules"
+                ></v-text-field>
+              </div>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="5">Nomor Handphone</v-col>
+            <v-col cols="7">{{ user.nomor_hp }}</v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="5">Nomor Whatsapp</v-col>
+            <v-col cols="7">
+              <div v-if="!ubahWA">
+                {{ user.nomor_whatsapp }}
+                <a href="javascript:void(0)" @click="ubahWA = true">
+                  <v-icon>mdi-pencil</v-icon>
+                </a>
+              </div>
+
+              <div v-else>
+                <v-text-field
+                  v-model="formNomorWA"
+                  outlined
+                  dense
+                  append-icon="mdi-content-save"
+                  append-outer-icon="mdi-close"
+                  @click:append-outer="ubahWA = false"
+                  @click:append="saveData('nomor_whatsapp', formNomorWA)"
+                  :rules="waRules"
+                ></v-text-field>
+              </div>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="5">Kota</v-col>
+            <v-col cols="7">
+              <div v-if="!ubahKota">
+                {{ user.kota }}
+                <a href="javascript:void(0)" @click="ubahKota = true">
+                  <v-icon>mdi-pencil</v-icon>
+                </a>
+              </div>
+
+              <div v-else>
+                <v-text-field
+                  v-model="formKota"
+                  outlined
+                  dense
+                  append-icon="mdi-content-save"
+                  append-outer-icon="mdi-close"
+                  @click:append-outer="ubahKota = false"
+                  @click:append="saveData('kota', formKota)"
+                  :rules="kotaRules"
+                ></v-text-field>
+              </div>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="5">Deskripsi Penjual</v-col>
+            <v-col cols="7">
+              <div v-if="!ubahDeskripsi">
+                {{ user.deskripsi }}
+                <a href="javascript:void(0)" @click="ubahDeskripsi = true">
+                  <v-icon>mdi-pencil</v-icon>
+                </a>
+              </div>
+
+              <div v-else>
+                <v-text-field
+                  v-model="formDeskripsi"
+                  outlined
+                  dense
+                  append-icon="mdi-content-save"
+                  append-outer-icon="mdi-close"
+                  @click:append-outer="ubahDeskripsi = false"
+                  @click:append="saveData('deskripsi', formDeskripsi)"
+                  :rules="deskripsiRules"
+                ></v-text-field>
+              </div>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="5">Email</v-col>
+            <v-col cols="7">
+              <div v-if="formEmail !== null">{{ user.email }}</div>
+
+              <div v-else>
+                <section id="firebaseui-auth-container"></section>
+              </div>
+            </v-col>
+          </v-row>
+        </v-form>
+      </v-card>
+      <br />
+      <div>
+        <v-card outlined width="800" class="pa-2">
+          <div>
+            <div class="font-weight-bold" align="leftt">
+              Pesanan Anda
+              <v-list-item-action align="right">
+                <v-btn color="#0277BD" text dark>
+                  Lihat Riwayat Pesanan
+                  <v-icon>mdi-arrow-right-drop-circle-outline</v-icon>
+                </v-btn>
+              </v-list-item-action>
             </div>
+          </div>
+          <v-list-item-content class="text-center">
+            <v-row>
+              <v-col cols="4">
+                <v-icon>mdi-cart</v-icon>
+              </v-col>
 
-            <div v-else>
-              <v-text-field
-                v-model="formNama"
-                outlined
-                dense
-                append-icon="mdi-content-save"
-                append-outer-icon="mdi-close"
-                @click:append-outer="ubahNama = false"
-                @click:append="saveData('nama', formNama)"
-                :rules="namaRules"
-              ></v-text-field>
+              <v-col cols="4">
+                <v-icon>mdi-cart</v-icon>
+              </v-col>
+              <v-col cols="4">
+                <v-icon>mdi-cart</v-icon>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="4">Status</v-col>
+              <v-col cols="4">Status</v-col>
+              <v-col cols="4">Status</v-col>
+            </v-row>
+          </v-list-item-content>
+        </v-card>
+      </div>
+      <br />
+      <div>
+        <v-card outlined width="800" class="pa-2">
+          <div>
+            <div class="font-weight-bold" align="leftt">
+              Rating Anda adalah (jumlah)
+              <v-list-item-action align="right">
+                <v-btn color="#0277BD" text dark>
+                  Lihat Semua
+                  <v-icon>mdi-arrow-right-drop-circle-outline</v-icon>
+                </v-btn>
+              </v-list-item-action>
             </div>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="5">Nomor Handphone</v-col>
-          <v-col cols="7">{{ user.nomor_hp }}</v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="5">Nomor Whatsapp</v-col>
-          <v-col cols="7">
-            <div v-if="!ubahWA">
-              {{ user.nomor_whatsapp }}
-              <a href="javascript:void(0)" @click="ubahWA = true">Ubah</a>
-            </div>
-
-            <div v-else>
-              <v-text-field
-                v-model="formNomorWA"
-                outlined
-                dense
-                append-icon="mdi-content-save"
-                append-outer-icon="mdi-close"
-                @click:append-outer="ubahWA = false"
-                @click:append="saveData('nomor_whatsapp', formNomorWA)"
-                :rules="waRules"
-              ></v-text-field>
-            </div>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="5">Kota</v-col>
-          <v-col cols="7">
-            <div v-if="!ubahKota">
-              {{ user.kota }}
-              <a href="javascript:void(0)" @click="ubahKota = true">Ubah</a>
-            </div>
-
-            <div v-else>
-              <v-text-field
-                v-model="formKota"
-                outlined
-                dense
-                append-icon="mdi-content-save"
-                append-outer-icon="mdi-close"
-                @click:append-outer="ubahKota = false"
-                @click:append="saveData('kota', formKota)"
-                :rules="kotaRules"
-              ></v-text-field>
-            </div>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="5">Deskripsi Penjual</v-col>
-          <v-col cols="7">
-            <div v-if="!ubahDeskripsi">
-              {{ user.deskripsi }}
-              <a href="javascript:void(0)" @click="ubahDeskripsi = true">Ubah</a>
-            </div>
-
-            <div v-else>
-              <v-text-field
-                v-model="formDeskripsi"
-                outlined
-                dense
-                append-icon="mdi-content-save"
-                append-outer-icon="mdi-close"
-                @click:append-outer="ubahDeskripsi = false"
-                @click:append="saveData('deskripsi', formDeskripsi)"
-                :rules="deskripsiRules"
-              ></v-text-field>
-            </div>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="5">Email</v-col>
-          <v-col cols="7">
-            <div v-if="formEmail !== null">{{ user.email }}</div>
-
-            <div v-else>
-              <section id="firebaseui-auth-container"></section>
-            </div>
-          </v-col>
-        </v-row>
-      </v-form>
+          </div>
+          <v-list-item-content class="text-center">
+            <v-row>
+              <v-col cols="4">Oleh : (nama_user)</v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-card-text>
+                  ipsum dolor sit amet, consectetur adipiscing elit.
+                  Mauris porta tortor eget massa dignissim pulvinar. Fusce turpis eros, congue ac pharetra quis, auctor in dolor.
+                  Duis a risus id nisl ultrices pharetra non eget purus. Mauris vitae odio neque.
+                  Aenean interdum massa in sem consequat, efficitur tempor sapien facilisis.
+                  Vivamus fermentum ornare ante, a sollicitudin metus mattis elementum. Donec tempus mi mauris, nec dapibus ipsum posuere nec.
+                </v-card-text>
+              </v-col>
+            </v-row>
+          </v-list-item-content>
+        </v-card>
+      </div>
     </v-col>
   </v-row>
 </template>

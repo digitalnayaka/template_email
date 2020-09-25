@@ -41,7 +41,7 @@
           contain
           :key="index"
           :to="{
-            path: '/list-lelang/' + item.nama,
+            path: '/list-tb/' + item.nama,
             query: { tgl: item.date.substr(0, 10) },
           }"
         >

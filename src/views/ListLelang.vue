@@ -22,8 +22,155 @@
     ></v-text-field>
 
     <br />
+    <!-- <v-list two-line>
+      <v-list-item>
+        <v-list-item-avatar size="50">
+          <v-icon x-large v-if="appuser.photo == 'null'">mdi-account-circle</v-icon>
+          <v-img :src="getImage(appuser.photo)" v-else></v-img>
+        </v-list-item-avatar>
 
-    <v-card outlined tile>
+        <v-list-item-content>
+          <v-list-item-title class="font-weight-bold">
+            <div class="d-flex align-center">
+              <span class="mx-1">{{ appuser.nama }}</span>
+              <v-avatar size="16" item>
+                <v-img src="/img/verified.png" alt="verified"></v-img>
+              </v-avatar>
+            </div>
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            <v-avatar size="16" item>
+              <v-img src="/img/icons/icon_lokasi.png" alt="verified"></v-img>
+            </v-avatar>
+            {{appuser.kota}}
+          </v-list-item-subtitle>
+
+          <v-list-item-subtitle v-if="!guest">
+            <v-btn x-small color="teal" dark @click="dialogHubungi = true" class="mx-2">Hubungi</v-btn>
+            <v-btn x-small color="teal" dark :to="'/chat/' + appuser.id" class="mx-2">Pesan</v-btn>
+            <v-btn x-small color="teal" dark @click="dialogBio = true" class="mx-2">Info Penjual</v-btn>
+          </v-list-item-subtitle>
+        </v-list-item-content>
+<v-list-item-content>
+          <v-list-item-title class="font-weight-bold">
+            <div class="d-flex align-center">
+             sfaf
+            </div>
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            <v-avatar size="16" item>
+              <v-img src="/img/icons/icon_lokasi.png" alt="verified"></v-img>
+            </v-avatar>
+            {{appuser.kota}}
+          </v-list-item-subtitle>
+
+          <v-list-item-subtitle v-if="!guest">
+            <v-btn x-small color="teal" dark @click="dialogHubungi = true" class="mx-2">Hubungi</v-btn>
+            <v-btn x-small color="teal" dark :to="'/chat/' + appuser.id" class="mx-2">Pesan</v-btn>
+            <v-btn x-small color="teal" dark @click="dialogBio = true" class="mx-2">Info Penjual</v-btn>
+          </v-list-item-subtitle>
+        </v-list-item-content>
+  
+      </v-list-item>
+    </v-list>-->
+    <v-row>
+      <v-col cols="12" sm="6">
+        <div class="d-flex align-center">
+          <v-list-item-avatar size="80">
+            <v-icon x-large v-if="appuser.photo == 'null'">mdi-account-circle</v-icon>
+            <v-img :src="getImage(appuser.photo)" v-else></v-img>
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title class="font-weight-bold">
+              <div class="d-flex align-center">
+                <span class="mx-1">{{ appuser.nama }}</span>
+                <v-avatar size="16" item>
+                  <v-img src="/img/verified.png" alt="verified"></v-img>
+                </v-avatar>
+              </div>
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              <v-avatar size="16" item>
+                <v-img src="/img/icons/icon_lokasi.png" alt="verified"></v-img>
+              </v-avatar>
+              {{appuser.kota}}
+            </v-list-item-subtitle>
+
+            <v-list-item-subtitle v-if="!guest">
+              <v-btn x-small color="teal" dark @click="dialogHubungi = true" class="mx-2">Hubungi</v-btn>
+              <v-btn x-small color="teal" dark :to="'/chat/' + appuser.id" class="mx-2">Pesan</v-btn>
+              <v-btn x-small color="teal" dark @click="dialogBio = true" class="mx-2">Info Penjual</v-btn>
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </div>
+      </v-col>
+
+      <v-col cols="12" sm="6">
+        <v-list-item-content>
+          <div class="d-flex align-center">
+            <v-list-item-title class="teal--text text-subtitle-2">Penilaian Unit</v-list-item-title>
+          </div>
+          <v-list-item-subtitle>
+            3.5/5.0
+            <v-avatar size="16" item>
+              <v-icon>mdi-star-outline</v-icon>
+            </v-avatar>
+            <v-icon>mdi-circle-medium</v-icon>
+            <span>x Dilihat</span>
+            <v-btn text small color="primary">Lihat Statistik Penjual</v-btn>
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-col>
+    </v-row>
+    <v-dialog v-model="dialogHubungi" persistent max-width="500px">
+      <v-card>
+        <v-toolbar dark color="teal">
+          <v-toolbar-title>Hubungi</v-toolbar-title>
+
+          <div class="flex-grow-1"></div>
+
+          <v-btn icon @click="dialogHubungi = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+
+        <v-card-title>Tanyakan lebih lanjut kepada penjual</v-card-title>
+
+        <div align="center">
+          <v-btn tile color="white" class="mx-2">
+            <a :href="'tel:' + appuser.nomor_hp">Telepon</a>
+          </v-btn>
+
+          <v-btn tile color="white" class="mx-2">
+            <a :href="'sms:' + appuser.nomor_hp">SMS</a>
+          </v-btn>
+
+          <v-btn tile color="white" class="mx-2">
+            <a
+              :href="'https://api.whatsapp.com/send?phone=' + appuser.nomor_hp + '&text=Hai, saya dari aplikasi SiMotor'"
+            >WhatsApp Now</a>
+          </v-btn>
+        </div>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="dialogBio" persistent max-width="500px">
+      <v-card>
+        <v-toolbar dark color="teal">
+          <v-toolbar-title>Info Penjual</v-toolbar-title>
+
+          <div class="flex-grow-1"></div>
+
+          <v-btn icon @click="dialogBio = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+
+        <v-card-text>{{ appuser.deskripsi }}</v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- <v-card outlined tile>
       <v-list>
         <v-list-item>
           <v-list-item-avatar size="100">
@@ -33,25 +180,19 @@
 
           <v-list-item-content>
             <v-list-item-title class="font-weight-black">
+              {{ appuser.nama }}
               <v-avatar size="16" item>
                 <v-img src="/img/verified.png" alt="verified"></v-img>
+               
               </v-avatar>
-              {{ appuser.nama }}
+               <span class="ml-1 teal--text text-subtitle-2">Premium Seller</span>
             </v-list-item-title>
 
             <v-list-item-subtitle
               v-if="appuser.nomor_hp != undefined"
             >{{ appuser.nomor_hp.slice(0, -6) }}xxxxxxx</v-list-item-subtitle>
 
-            <v-list-item-title class="font-weight-black">
-              Tanggal:
-              <span class="subtitle-2">{{ tanggal_mulai | dateFormat }}</span>
-            </v-list-item-title>
-
-            <div class="d-flex d-sm-none">
-              <v-btn x-small color="teal" dark @click="dialogHubungi = true" class="mx-2">Hubungi</v-btn>
-              <v-btn x-small color="teal" dark :to="'/chat/' + appuser.id" class="mx-2">Pesan</v-btn>
-            </div>
+         
           </v-list-item-content>
 
           <div class="d-none d-sm-flex">
@@ -93,7 +234,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-card>
+    </v-card>-->
 
     <h2 class="mt-2">Tawar Bersama Hari ini</h2>
 
