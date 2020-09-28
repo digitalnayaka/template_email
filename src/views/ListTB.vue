@@ -6,8 +6,140 @@
       </v-btn>
     </v-app-bar>
 
-    <v-text-field
+    <v-card outlined>
+      <v-row>
+        <v-col cols="12" sm="6">
+          <v-list>
+            <v-list-item>
+              <v-list-item-avatar size="100">
+                <v-icon x-large v-if="appuser.photo == 'null'"
+                  >mdi-account-circle</v-icon
+                >
+                <v-img :src="getImage(appuser.photo)" v-else></v-img>
+              </v-list-item-avatar>
+
+              <v-list-item-content>
+                <v-list-item-title class="font-weight-bold">
+                  <div class="d-flex align-center">
+                    <span class="mx-1">{{ appuser.nama }}</span>
+
+                    <v-avatar size="16" item>
+                      <v-img src="/img/verified.png" alt="verified"></v-img>
+                    </v-avatar>
+                  </div>
+                </v-list-item-title>
+
+                <v-list-item-subtitle>
+                  <v-icon>mdi-google-maps</v-icon> {{ appuser.kota }}
+                </v-list-item-subtitle>
+
+                <div v-if="!guest && $vuetify.breakpoint.smAndUp">
+                  <v-btn
+                    small
+                    color="teal"
+                    dark
+                    @click="dialogHubungi = true"
+                    class="ma-1"
+                    >Hubungi</v-btn
+                  >
+                  <v-btn
+                    small
+                    color="teal"
+                    dark
+                    :to="'/chat/' + appuser.id"
+                    class="ma-1"
+                    >Pesan</v-btn
+                  >
+                  <v-btn
+                    small
+                    color="teal"
+                    dark
+                    @click="dialogBio = true"
+                    class="ma-1"
+                    >Info Penjual</v-btn
+                  >
+                </div>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+
+          <div v-if="!guest && $vuetify.breakpoint.xsOnly">
+            <v-btn
+              small
+              color="teal"
+              dark
+              @click="dialogHubungi = true"
+              class="ma-1"
+              >Hubungi</v-btn
+            >
+            <v-btn
+              small
+              color="teal"
+              dark
+              :to="'/chat/' + appuser.id"
+              class="ma-1"
+              >Pesan</v-btn
+            >
+            <v-btn
+              small
+              color="teal"
+              dark
+              @click="dialogBio = true"
+              class="ma-1"
+              >Info Penjual</v-btn
+            >
+          </div>
+        </v-col>
+
+        <v-col cols="12" sm="6">
+          <v-row>
+            <v-col cols="12" sm="6" class="text-center">
+              <div class="text-h5">Unit Terjual</div>
+              10
+            </v-col>
+
+            <v-col cols="12" sm="6">
+              <div class="text-h5 text-center">Kualitas Unit</div>
+              <div class="d-flex align-center justify-center">
+                <span class="font-weight-bold mr-2">3.5</span>
+                <star-rating
+                  :rating="3.5"
+                  read-only
+                  :show-rating="false"
+                  :round-start-rating="false"
+                  :star-size="30"
+                  inline
+                ></star-rating>
+              </div>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <v-tabs
+      v-model="tab"
+      background-color="cyan"
+      dark
+      slider-color="yellow"
+      show-arrows
+      class="mt-2"
+    >
+      <v-tab>Unit</v-tab>
+      <v-tab>Ulasan</v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item>
+        <v-card>
+          
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+
+    <!-- <v-text-field
       outlined
+      dense
       hide-details
       flat
       label="Search"
@@ -19,9 +151,8 @@
       autofocus
       clearable
       @click:clear="clear"
-    ></v-text-field>
+    ></v-text-field> -->
 
-    <br />
     <!-- <v-list two-line>
       <v-list-item>
         <v-list-item-avatar size="50">
@@ -73,7 +204,7 @@
   
       </v-list-item>
     </v-list>-->
-    <v-row>
+    <!-- <v-row>
       <v-col cols="12" sm="6">
         <div class="d-flex align-center">
           <v-list-item-avatar size="80">
@@ -169,7 +300,7 @@
 
         <v-card-text>{{ appuser.deskripsi }}</v-card-text>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
     <!-- <v-card outlined tile>
       <v-list>
         <v-list-item>
@@ -236,9 +367,9 @@
       </v-dialog>
     </v-card>-->
 
-    <h2 class="mt-2">Tawar Bersama Hari ini</h2>
+    <!-- <h2 class="mt-2">Tawar Bersama Hari ini</h2> -->
 
-    <v-alert
+    <!-- <v-alert
       :value="hits.length == 0 && (keyword != '' || keyword != null)"
       color="warning"
     >Sorry, but no results were found.</v-alert>
@@ -275,19 +406,21 @@
           </v-list-item>
         </v-list>
       </v-sheet>
-    </v-bottom-sheet>
+    </v-bottom-sheet> -->
   </v-container>
 </template>
 
 <script>
 import moment from "moment-timezone";
+import StarRating from "vue-star-rating";
 
 export default {
   name: "listLelang",
   props: ["utc", "timezone"],
   components: {
-    ListIklan: () =>
-      import(/* webpackChunkName: "list_iklan" */ "@/components/ListIklan.vue"),
+    StarRating,
+    // ListIklan: () =>
+    //   import(/* webpackChunkName: "list_iklan" */ "@/components/ListIklan.vue"),
   },
   data() {
     return {
@@ -295,6 +428,7 @@ export default {
       tanggal_mulai: this.$route.query.tgl,
       hits: [],
       appuser: [],
+      tab: 0,
       keyword: "",
       page: 1,
       lengthPage: 0,

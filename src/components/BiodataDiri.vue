@@ -21,18 +21,6 @@
 
         <v-card-text class="text-caption">Ekstensi file yang diperbolehkan: .JPG .JPEG .PNG</v-card-text>
       </v-card>
-
-      <br />
-      
-      <v-card outlined width="800" class="pa-2" align="center">
-        <v-list-item-avatar tile size="100">
-          <v-img src="/img/icons/ic_tiket.png"></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-content class="text-center">
-          <v-list-item-subtitle class="text-h6">(jumlah tiket) Tersedia</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-card>
     </v-col>
 
     <v-col cols="12" sm="8">
@@ -157,75 +145,6 @@
           </v-row>
         </v-form>
       </v-card>
-
-      <br />
-
-      <div>
-        <v-card outlined width="800" class="pa-2">
-          <div>
-            <div class="font-weight-bold" align="leftt">
-              Pesanan Anda
-              <v-list-item-action align="right">
-                <v-btn color="#0277BD" text dark>
-                  Lihat Riwayat Pesanan
-                  <v-icon>mdi-arrow-right-drop-circle-outline</v-icon>
-                </v-btn>
-              </v-list-item-action>
-            </div>
-          </div>
-          <v-list-item-content class="text-center">
-            <v-row>
-              <v-col cols="4">
-                <v-icon>mdi-cart</v-icon>
-              </v-col>
-
-              <v-col cols="4">
-                <v-icon>mdi-cart</v-icon>
-              </v-col>
-              <v-col cols="4">
-                <v-icon>mdi-cart</v-icon>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="4">Status</v-col>
-              <v-col cols="4">Status</v-col>
-              <v-col cols="4">Status</v-col>
-            </v-row>
-          </v-list-item-content>
-        </v-card>
-      </div>
-      <br />
-      <div>
-        <v-card outlined width="800" class="pa-2">
-          <div>
-            <div class="font-weight-bold" align="leftt">
-              Rating Anda adalah (jumlah)
-              <v-list-item-action align="right">
-                <v-btn color="#0277BD" text dark>
-                  Lihat Semua
-                  <v-icon>mdi-arrow-right-drop-circle-outline</v-icon>
-                </v-btn>
-              </v-list-item-action>
-            </div>
-          </div>
-          <v-list-item-content class="text-center">
-            <v-row>
-              <v-col cols="4">Oleh : (nama_user)</v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="12">
-                <v-card-text>
-                  ipsum dolor sit amet, consectetur adipiscing elit.
-                  Mauris porta tortor eget massa dignissim pulvinar. Fusce turpis eros, congue ac pharetra quis, auctor in dolor.
-                  Duis a risus id nisl ultrices pharetra non eget purus. Mauris vitae odio neque.
-                  Aenean interdum massa in sem consequat, efficitur tempor sapien facilisis.
-                  Vivamus fermentum ornare ante, a sollicitudin metus mattis elementum. Donec tempus mi mauris, nec dapibus ipsum posuere nec.
-                </v-card-text>
-              </v-col>
-            </v-row>
-          </v-list-item-content>
-        </v-card>
-      </div>
     </v-col>
   </v-row>
 </template>

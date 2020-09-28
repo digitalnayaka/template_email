@@ -77,7 +77,7 @@
 
           <v-card>
             <v-list>
-              <v-list-item to="/account/edit">
+              <v-list-item to="/account/edit" @click="content = true">
                 <v-list-item-avatar>
                   <v-img :src="getImage(user.photo)" alt="Avatar"></v-img>
                 </v-list-item-avatar>

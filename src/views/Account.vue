@@ -37,6 +37,16 @@
               <v-list-item-title>Profile</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-list-item to="/account/ticket">
+            <v-list-item-icon>
+              <v-icon>mdi-ticket</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Tiket</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list-item-group>
 
         <v-list-group

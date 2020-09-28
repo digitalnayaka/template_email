@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/list-tb/:id',
     name: 'ListTB',
-    component: () => import(/* webpackChunkName: "list-lelang" */ '../views/ListLelang.vue'),
+    component: () => import(/* webpackChunkName: "list-tb" */ '../views/ListTB.vue'),
   },
   {
     path: '/jadwal',
@@ -178,6 +178,14 @@ const routes = [
         path: '/account/edit',
         name: 'profile',
         component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
+        meta: {
+          auth: true
+        }
+      },
+      {
+        path: '/account/ticket',
+        name: 'AccountTicket',
+        component: () => import(/* webpackChunkName: "account-ticket" */ '../views/AccountTicket.vue'),
         meta: {
           auth: true
         }

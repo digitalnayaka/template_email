@@ -330,7 +330,7 @@ export default {
   props: ["utc", "timezone"],
   directives: { money: VMoney, mask },
   beforeRouteLeave(to, from, next) {
-    if (this.judul_iklan != "") {
+    if (this.judul_iklan != "" && this.submit == false) {
       const answer = window.confirm(
         "Do you really want to leave? you have unsaved changes!"
       );
@@ -406,6 +406,7 @@ export default {
       total: 0,
       loader: null,
       loading: false,
+      submit: false,
     };
   },
   methods: {
