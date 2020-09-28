@@ -91,6 +91,59 @@
           </div>
         </v-col>
 
+        <v-dialog v-model="dialogHubungi" persistent max-width="500px">
+          <v-card>
+            <v-toolbar dark color="teal">
+              <v-toolbar-title>Hubungi</v-toolbar-title>
+
+              <div class="flex-grow-1"></div>
+
+              <v-btn icon @click="dialogHubungi = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-toolbar>
+
+            <v-card-title>Tanyakan lebih lanjut kepada penjual</v-card-title>
+
+            <div align="center">
+              <v-btn tile color="white" class="mx-2">
+                <a :href="'tel:' + appuser.nomor_hp">Telepon</a>
+              </v-btn>
+
+              <v-btn tile color="white" class="mx-2">
+                <a :href="'sms:' + appuser.nomor_hp">SMS</a>
+              </v-btn>
+
+              <v-btn tile color="white" class="mx-2">
+                <a
+                  :href="
+                    'https://api.whatsapp.com/send?phone=' +
+                    appuser.nomor_hp +
+                    '&text=Hai, saya dari aplikasi SiMotor'
+                  "
+                  >WhatsApp Now</a
+                >
+              </v-btn>
+            </div>
+          </v-card>
+        </v-dialog>
+
+        <v-dialog v-model="dialogBio" persistent max-width="500px">
+          <v-card>
+            <v-toolbar dark color="teal">
+              <v-toolbar-title>Info Penjual</v-toolbar-title>
+
+              <div class="flex-grow-1"></div>
+
+              <v-btn icon @click="dialogBio = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-toolbar>
+
+            <v-card-text>{{ appuser.deskripsi }}</v-card-text>
+          </v-card>
+        </v-dialog>
+
         <v-col cols="12" sm="6">
           <v-row>
             <v-col cols="12" sm="6" class="text-center">
@@ -125,14 +178,115 @@
       show-arrows
       class="mt-2"
     >
-      <v-tab>Unit</v-tab>
+      <v-tab>Iklan</v-tab>
       <v-tab>Ulasan</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
       <v-tab-item>
         <v-card>
-          
+          <v-row>
+            <v-col cols="12" sm="3">
+              <v-card outlined class="ml-2">
+                <v-list subheader>
+                  <v-subheader>Etalase</v-subheader>
+
+                  <v-list-item-group v-model="menu" color="primary">
+                    <v-list-item @click="allUnit">
+                      <v-list-item-title> Semua Iklan </v-list-item-title>
+                    </v-list-item>
+
+                    <v-list-item @click="daftarTB">
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          Tawar Bersama hari ini
+                        </v-list-item-title>
+                        <v-list-item-subtitle>
+                          {{ tanggal_mulai }}
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </v-card>
+            </v-col>
+
+            <v-col cols="12" sm="9">
+              <v-text-field
+                outlined
+                dense
+                hide-details
+                flat
+                label="Search"
+                prepend-inner-icon="mdi-magnify"
+                v-model="keyword"
+                @keyup.enter="daftarTB"
+                append-icon="mdi-filter"
+                @click:append="sheet = !sheet"
+                autofocus
+                clearable
+                @click:clear="clear"
+                class="mr-2"
+              >
+              </v-text-field>
+
+              <v-bottom-sheet v-model="sheet">
+                <v-sheet height="170">
+                  <v-list dense>
+                    <v-list-item>
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          <h3>Filter</h3>
+                        </v-list-item-title>
+                        <v-list-item-subtitle
+                          >Urutkan Berdasarkan</v-list-item-subtitle
+                        >
+                      </v-list-item-content>
+                    </v-list-item>
+
+                    <v-list-item>
+                      <v-radio-group v-model="order" row dense>
+                        <v-radio
+                          label="Postingan Terbaru"
+                          value="posting_terbaru"
+                        ></v-radio>
+                        <v-radio
+                          label="Tawar Bersama dimulai"
+                          value="tanggal_mulai"
+                        ></v-radio>
+                      </v-radio-group>
+                    </v-list-item>
+
+                    <v-list-item>
+                      <v-btn block shaped color="success" @click="saveFilter"
+                        >Simpan</v-btn
+                      >
+                    </v-list-item>
+                  </v-list>
+                </v-sheet>
+              </v-bottom-sheet>
+
+              <v-row>
+                <v-col
+                  cols="6"
+                  sm="3"
+                  lg="2"
+                  class="pa-0"
+                  v-for="item in hits"
+                  :key="item._source.id"
+                >
+                  <list-iklan :item="item" :utc="utc" :timezone="timezone" />
+                </v-col>
+              </v-row>
+
+              <v-pagination
+                v-model="page"
+                @input="daftarTB"
+                :length="lengthPage"
+                :total-visible="5"
+              ></v-pagination>
+            </v-col>
+          </v-row>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -411,6 +565,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import moment from "moment-timezone";
 import StarRating from "vue-star-rating";
 
@@ -419,26 +574,34 @@ export default {
   props: ["utc", "timezone"],
   components: {
     StarRating,
-    // ListIklan: () =>
-    //   import(/* webpackChunkName: "list_iklan" */ "@/components/ListIklan.vue"),
+    ListIklan: () =>
+      import(/* webpackChunkName: "list_iklan" */ "@/components/ListIklan.vue"),
+  },
+  beforeRouteLeave(to, from, next) {
+    this.title = "SiMotor";
+    this.$nextTick(() => {
+      next();
+    });
   },
   data() {
     return {
-      id: this.$route.params.id,
+      title: this.$route.params.id,
       tanggal_mulai: this.$route.query.tgl,
+      init: [],
       hits: [],
       appuser: [],
+      dialogHubungi: false,
+      dialogBio: false,
+      sheet: false,
       tab: 0,
+      menu: 1,
       keyword: "",
       page: 1,
       lengthPage: 0,
       limit: 20,
-      dialogHubungi: false,
       offset: 0,
       total: 0,
-      sheet: false,
       order: "tanggal_mulai",
-      title: this.$route.params.id,
     };
   },
   methods: {
@@ -446,13 +609,61 @@ export default {
       this.title = "SiMotor";
       this.$router.go(-1);
     },
-    listLelang() {
+    initialize() {
       var offset = (this.page - 1) * this.limit;
 
       this.axios
         .get("/search/v3/search", {
           params: {
-            app_user: this.id,
+            tanggal_mulai: this.tanggal_mulai,
+            id_mst_iklan_status: 1,
+            sort: this.order,
+            search: this.title,
+            offset: offset,
+            limit: this.limit,
+          },
+        })
+        .then((response) => {
+          let data = response.data;
+          let { hits } = data.hits;
+          this.init = hits;
+
+          this.sellerInfo();
+
+          this.total = data.hits.total.value;
+          this.lengthPage = Math.ceil(this.total / this.limit);
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    sellerInfo() {
+      this.axios
+        .get("/user/v3/user", {
+          params: {
+            id: this.init[0]._source.id_app_user,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.appuser = data[0];
+
+          this.daftarTB();
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    daftarTB() {
+      var offset = (this.page - 1) * this.limit;
+
+      this.axios
+        .get("/search/v3/search", {
+          params: {
+            id_app_user: this.appuser.id,
             tanggal_mulai: this.tanggal_mulai,
             id_mst_iklan_status: 1,
             sort: this.order,
@@ -466,29 +677,8 @@ export default {
           let { hits } = data.hits;
           this.hits = hits;
 
-          if (this.appuser.length == 0) {
-            this.getUser();
-          }
-
           this.total = data.hits.total.value;
           this.lengthPage = Math.ceil(this.total / this.limit);
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          console.log(responses.api_message);
-        });
-    },
-    getUser() {
-      this.axios
-        .get("/user/v3/user", {
-          params: {
-            id: this.hits[0]._source.id_app_user,
-            limit: 1,
-          },
-        })
-        .then((response) => {
-          let { data } = response.data;
-          this.appuser = data[0];
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -501,7 +691,7 @@ export default {
       this.axios
         .get("/search/v3/search", {
           params: {
-            app_user: this.id,
+            id_app_user: this.appuser.id,
             tanggal_mulai: this.tanggal_mulai,
             id_mst_iklan_status: 1,
             sort: this.order,
@@ -523,12 +713,45 @@ export default {
         });
     },
     saveFilter() {
-      this.listLelang();
+      this.daftarTB();
       this.sheet = false;
     },
+    allUnit() {
+      var offset = (this.page - 1) * this.limit;
+
+      this.axios
+        .get("/search/v3/search", {
+          params: {
+            id_app_user: this.appuser.id,
+            id_mst_iklan_status: 1,
+            sort: this.order,
+            search: this.keyword,
+            offset: offset,
+            limit: this.limit,
+          },
+        })
+        .then((response) => {
+          let data = response.data;
+          let { hits } = data.hits;
+          this.hits = hits;
+
+          this.total = data.hits.total.value;
+          this.lengthPage = Math.ceil(this.total / this.limit);
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+  },
+  computed: {
+    ...mapGetters({
+      user: "auth/user",
+      guest: "auth/guest",
+    }),
   },
   created() {
-    this.listLelang();
+    this.initialize();
   },
   watch: {
     title: {
