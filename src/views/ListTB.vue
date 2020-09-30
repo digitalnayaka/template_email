@@ -130,10 +130,10 @@
 
         <v-dialog v-model="dialogBio" persistent max-width="500px">
           <v-card>
-            <v-toolbar dark color="teal">
+            <v-toolbar dark color="teal" dense>
               <v-toolbar-title>Info Penjual</v-toolbar-title>
 
-              <div class="flex-grow-1"></div>
+              <v-spacer></v-spacer>
 
               <v-btn icon @click="dialogBio = false">
                 <v-icon>mdi-close</v-icon>

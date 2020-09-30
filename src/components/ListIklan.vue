@@ -3,7 +3,7 @@
     <v-card
       outlined
       tile
-      @click="go(item._source.app_user, item._source.judul, item._source.id)"
+      :href="'/iklan/' + item._source.id"
     >
       <v-img :src="getThumb(item._source.photo)" height="230" contain>
         <v-card-title>

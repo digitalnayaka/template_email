@@ -88,7 +88,7 @@ const routes = [
   {
     path: '/tawar-bersama',
     name: 'TransaksiTB',
-    component: () => import(/* webpackChunkName: "tawar-bersama" */ '../views/TransaksiTB.vue'),
+    component: () => import(/* webpackChunkName: "tawar-bersama" */ '../views/TawarBersama.vue'),
     meta: {
       Auth: true
     }
@@ -165,7 +165,7 @@ const routes = [
     }
   },
   {
-    path: '/produk/:seller/:id',
+    path: '/iklan/:id',
     name: 'Iklan',
     component: () => import(/* webpackChunkName: "iklan" */ '../views/DetailIklan.vue'),
   },
@@ -244,6 +244,14 @@ const routes = [
     path: '/category/Ticket',
     name: 'Ticket',
     component: () => import(/* webpackChunkName: "ticket" */ '../views/Ticket.vue'),
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/tes',
+    name: 'tes',
+    component: () => import(/* webpackChunkName: "tes" */ '../views/tes.vue'),
     meta: {
       auth: true
     }

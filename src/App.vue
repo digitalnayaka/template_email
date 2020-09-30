@@ -47,7 +47,7 @@
           <v-icon>mdi-heart-outline</v-icon>
         </v-btn> -->
 
-        <v-btn icon to="/notification">
+        <!-- <v-btn icon to="/notification">
           <v-badge color="orange" overlap v-if="countNotif > 0">
             <template v-slot:badge>
               <span>{{ countNotif }}</span>
@@ -56,7 +56,79 @@
             <v-icon>mdi-bell-outline</v-icon>
           </v-badge>
           <v-icon v-else>mdi-bell-outline</v-icon>
-        </v-btn>
+        </v-btn> -->
+
+        <v-menu
+          :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
+          :close-on-content-click="content"
+          offset-y
+          transition="slide-y-transition"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn large icon v-bind="attrs" v-on="on">
+              <v-icon>mdi-bell-outline</v-icon>
+            </v-btn>
+          </template>
+
+          <v-card width="300">
+            <v-card-title> Notifikasi </v-card-title>
+
+            <v-divider></v-divider>
+
+            <v-tabs
+              v-model="tab2"
+              grow
+              slider-color="teal"
+              @change="content = false"
+            >
+              <v-tab class="text-caption">Transaksi</v-tab>
+              <v-tab class="text-caption">Update</v-tab>
+            </v-tabs>
+
+            <v-tabs-items v-model="tab2">
+              <v-tab-item>
+                <v-card flat>
+                  <v-card-subtitle>Pembelian</v-card-subtitle>
+
+                  <div class="d-flex justify-space-around text-center text-caption">
+                    <div>
+                      <v-icon>mdi-heart</v-icon>
+                      <div>Menunggu Pembayaran</div>
+                    </div>
+
+                    <div>
+                      <v-icon>mdi-heart</v-icon>
+                      <div>Menunggu Verifikasi</div>
+                    </div>
+
+                    <div>
+                      <v-icon>mdi-heart</v-icon>
+                      <div>Pembayaran Diverifikasi</div>
+                    </div>
+                  </div>
+
+                  <v-divider class="mt-4"></v-divider>
+
+                  <v-card-subtitle>Penjualan</v-card-subtitle>
+
+                  <div class="d-flex justify-space-around">
+                    <v-icon>mdi-diamond</v-icon>
+                    <v-icon>mdi-diamond</v-icon>
+                    <v-icon>mdi-diamond</v-icon>
+                  </div>
+                </v-card>
+              </v-tab-item>
+            </v-tabs-items>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn color="red" dark small @click="signOut">
+                <v-icon left>mdi-logout</v-icon>Keluar
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
 
         <v-menu
           :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
@@ -144,6 +216,18 @@
                   </v-col>
                 </v-row>
               </v-tab-item>
+
+              <v-tab-item>
+                <v-list dense>
+                  <v-list-item to="/tawar-bersama" @click="content = true">
+                    <v-list-item-subtitle>Pembeli</v-list-item-subtitle>
+                  </v-list-item>
+
+                  <v-list-item to="/aktivitas-iklan" @click="content = true">
+                    <v-list-item-subtitle>Penjual</v-list-item-subtitle>
+                  </v-list-item>
+                </v-list>
+              </v-tab-item>
             </v-tabs-items>
 
             <v-card-actions>
@@ -221,6 +305,7 @@ export default {
     countNotif: 0,
     content: false,
     tab: 0,
+    tab2: 0,
     utc: moment().utcOffset() / 60 - 7,
     waktu: "",
   }),

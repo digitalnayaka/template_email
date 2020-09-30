@@ -130,6 +130,75 @@
 
         <v-divider></v-divider>
 
+        <div align="center" v-if="start == true && end == true">
+          <h2 class="teal--text" v-if="hits.id_mst_iklan_jenis > 1">
+            Tawar Bersama selesai
+          </h2>
+
+          <div v-if="!guest">
+            <v-btn
+              color="teal"
+              dark
+              @click="dialogInfo = true"
+              class="mx-2"
+              v-if="
+                liveBid.length > 0 &&
+                (liveBid[0].IdAppUser == user.id ||
+                  iklan.id_app_user == user.id)
+              "
+              >{{
+                liveBid[0].IdAppUser == user.id
+                  ? "Anda menang, klik disini"
+                  : "Info Pemenang"
+              }}</v-btn
+            >
+
+            <v-dialog v-model="dialogInfo" persistent max-width="500px">
+              <v-card>
+                <v-toolbar color="teal darken-3" dark>
+                  <v-toolbar-title>Info Pemenang Iklan</v-toolbar-title>
+
+                  <div class="flex-grow-1"></div>
+
+                  <v-btn icon @click="dialogInfo = false">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                </v-toolbar>
+
+                <div v-if="!guest">
+                  <v-card-title v-if="hits.id_app_user == user.id"
+                    >Segera hubungi pemenang iklan Anda</v-card-title
+                  >
+                </div>
+
+                <v-btn
+                  value="left"
+                  tile
+                  color="white"
+                  v-if="liveBid.length > 0"
+                >
+                  <div v-if="!guest">
+                    <a
+                      :href="'/chat/' + iklan.id_app_user"
+                      v-if="liveBid[0].IdAppUser == user.id"
+                      >Chat Penjual</a
+                    >
+                  </div>
+                  <a :href="'/chat/' + liveBid[0].IdAppUser" v-else
+                    >Chat Pemenang</a
+                  >
+                </v-btn>
+
+                <v-btn value="center" tile color="white">
+                  <a :href="'/detail_transaksi/' + orders.id"
+                    >Detail Transaksi</a
+                  >
+                </v-btn>
+              </v-card>
+            </v-dialog>
+          </div>
+        </div>
+
         <!-- <div class="mt-2">
           <div class="font-weight-bold text-h6 blue-grey--text">Deskripsi</div>
           <div class="text-subtitle-2">{{ hits.deskripsi }}</div>
@@ -184,7 +253,7 @@
             color="teal"
             small
             dark
-            @click="dialogHubungi = true"
+            @click="dialogInfo2 = true"
             class="mx-2"
             >Hubungi</v-btn
           >
@@ -197,6 +266,43 @@
             >Pesan</v-btn
           >
         </div>
+
+        <v-dialog v-model="dialogInfo2" persistent max-width="500px">
+          <v-card>
+            <v-toolbar dark color="teal">
+              <v-toolbar-title>Hubungi</v-toolbar-title>
+
+              <div class="flex-grow-1"></div>
+
+              <v-btn icon @click="dialogInfo2 = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-toolbar>
+
+            <v-card-title>Tanyakan lebih lanjut kepada penjual</v-card-title>
+
+            <div align="center">
+              <v-btn tile color="white" class="mx-2">
+                <a :href="'tel:' + appuser.nomor_hp">Telepon</a>
+              </v-btn>
+
+              <v-btn tile color="white" class="mx-2">
+                <a :href="'sms:' + appuser.nomor_hp">SMS</a>
+              </v-btn>
+
+              <v-btn tile color="white" class="mx-2">
+                <a
+                  :href="
+                    'https://api.whatsapp.com/send?phone=' +
+                    appuser.nomor_hp +
+                    '&text=Hai, saya dari aplikasi SiMotor'
+                  "
+                  >WhatsApp Now</a
+                >
+              </v-btn>
+            </div>
+          </v-card>
+        </v-dialog>
       </v-list-item>
     </v-list>
 
@@ -554,6 +660,147 @@
         </v-list>
       </v-tab-item>
     </v-tabs-items>
+
+    <v-divider></v-divider>
+
+    <div class="text-center my-2" v-if="iklan.id_mst_iklan_jenis > 1">
+      Tanggal Diiklankan: {{ iklan.created_at | dateTimeFormat(utc) }}
+      {{ timezone }}
+    </div>
+
+    <div class="text-center my-2" v-else>
+      Tanggal Expired: {{ iklan.expired_at | dateTimeFormat(utc) }}
+      {{ timezone }}
+    </div>
+
+    <div v-if="iklan.id_mst_iklan_jenis > 1 && start == true && end == false">
+      <div v-if="!guest">
+        <div v-if="iklan.id_app_user != user.id">
+          <v-btn
+            block
+            color="teal"
+            dark
+            @click="ikutTB"
+            v-if="iklan.id_mst_iklan_status == 1"
+            >Ikut Tawar Bersama</v-btn
+          >
+        </div>
+      </div>
+    </div>
+
+    <v-bottom-sheet v-model="sheet">
+      <v-sheet>
+        <v-container fluid v-if="useTiket">
+          <h2 class="text-center my-4 red--text">
+            {{ iklan.jumlah_tiket }} Tiket dibutuhkan
+          </h2>
+
+          <div class="text-center my-4">
+            Untuk dapat mengikuti iklan ini perlu memakai tiket. Gunakan Tiket
+            Tawar Bersama pada iklan ini?
+            <br />Catatan: <br />1. Pastikan masa kadaluarsa tiket Anda melebihi
+            waktu selesai tawar bersama iklan ini. <br />2. Tiket Anda akan
+            tetap terpakai untuk mengikuti iklan Tawar Bersama ini meskipun Anda
+            tidak melakukan penawaran
+          </div>
+          <h2 class="text-center my-4 green--text">
+            Jumlah tiket tersedia milik Anda: {{ totalTiket.tersedia }} Tiket
+          </h2>
+          <v-btn block color="primary" class="my-4" @click="konfirmasiTiket"
+            >Gunakan Tiket Anda</v-btn
+          >
+        </v-container>
+
+        <v-container fluid v-if="noTiket">
+          <h2 class="text-center my-4">Oops!</h2>
+
+          <div class="text-center my-4">
+            Dengan mengikuti iklan Tawar Bersama ini Anda terdaftar sebagai
+            peserta iklan ini meskipun Anda tidak melakukan penawaran
+            <br />Apakah Anda setuju?
+          </div>
+
+          <v-btn block color="success" class="my-4" @click="konfirmasiNonTiket"
+            >Setuju, mengikuti Tawar Bersama</v-btn
+          >
+        </v-container>
+
+        <v-list v-if="ikutPenawaran">
+          <v-list-item>
+            <v-list-item-content>
+              <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Harga Awal</v-list-item-title>
+              <v-list-item-subtitle
+                >Rp
+                {{
+                  Number(iklan.harga_awal).toLocaleString("id-ID")
+                }}</v-list-item-subtitle
+              >
+            </v-list-item-content>
+
+            <v-divider vertical class="mx-2"></v-divider>
+
+            <v-list-item-content>
+              <v-list-item-title>Kelipatan Tawaran</v-list-item-title>
+              <v-list-item-subtitle
+                >Rp
+                {{
+                  Number(iklan.kelipatan).toLocaleString("id-ID")
+                }}</v-list-item-subtitle
+              >
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-icon>
+              <v-btn icon @click="minus">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+            </v-list-item-icon>
+
+            <v-list-item-content align="center">
+              <v-list-item-subtitle>Nominal Penawaran</v-list-item-subtitle>
+
+              <v-list-item-title class="font-weight-black">
+                Rp {{ Number(bid).toLocaleString("id-ID") }}
+              </v-list-item-title>
+            </v-list-item-content>
+
+            <v-list-item-action>
+              <v-btn icon @click="bid += iklan.kelipatan">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+
+          <v-list-item>
+            <v-btn block dark color="teal" @click="bidding"
+              >Konfirmasi Penawaran</v-btn
+            >
+          </v-list-item>
+        </v-list>
+      </v-sheet>
+    </v-bottom-sheet>
+
+    <div v-if="iklan.id_mst_iklan_jenis == 1">
+      <div v-if="!guest">
+        <div v-if="iklan.id_app_user == user.id">
+          <v-btn
+            block
+            color="teal"
+            dark
+            @click="terjual"
+            v-if="iklan.id_mst_iklan_status != 2"
+            >Set Iklan Terjual</v-btn
+          >
+        </div>
+      </div>
+    </div>
   </v-container>
 </template>
 
@@ -584,15 +831,9 @@ export default {
       next();
     });
   },
-  beforeRouteUpdate(to, from, next) {
-    // this.$nextTick(() => {
-    this.getDtlIklan();
-    next();
-    // });
-  },
   data() {
     return {
-      id: this.adsID,
+      id: this.$route.params.id,
       items: [],
       tab: 0,
       hits: [],
@@ -628,12 +869,13 @@ export default {
   methods: {
     ...mapActions({
       setAlert: "alert/set",
+      setAds: "ads/setAds",
     }),
     getDtlIklan() {
       this.axios
         .get("/search/v3/search", {
           params: {
-            id: this.adsID,
+            id: this.id,
             limit: 1,
           },
         })
@@ -644,12 +886,11 @@ export default {
           this.getUser(this.hits.id_app_user);
           this.unit_mokas(this.hits.unit_motor_bekas[0].id);
           if (this.hits.id_mst_iklan_jenis == 1) {
-            this.getHP(this.adsID);
+            this.getHP(this.id);
           } else {
-            this.getTB(this.adsID);
+            this.getTB(this.id);
           }
           this.title = this.hits.judul;
-          this.items = [];
           this.items.push(
             {
               text: "Home",
@@ -827,7 +1068,7 @@ export default {
       if (r == true) {
         let formData = new FormData();
 
-        formData.append("id_iklan", this.adsID);
+        formData.append("id_iklan", this.id);
         formData.append("id_app_user", this.user.id);
         formData.append("id_tiket", this.tiket.id);
 
@@ -864,7 +1105,7 @@ export default {
       if (r == true) {
         let formData = new FormData();
 
-        formData.append("id_iklan", this.adsID);
+        formData.append("id_iklan", this.id);
         formData.append("id_app_user", this.user.id);
 
         this.axios
@@ -895,7 +1136,7 @@ export default {
     ikutTB() {
       let formData = new FormData();
 
-      formData.append("id_iklan", this.adsID);
+      formData.append("id_iklan", this.id);
       formData.append("id_app_user", this.user.id);
 
       this.axios
@@ -935,7 +1176,7 @@ export default {
     GetBid() {
       db.collection("tawar_bersama")
         .doc("iklan")
-        .collection(String(this.adsID))
+        .collection(String(this.id))
         .limit(5)
         .orderBy("Bid", "desc")
         .onSnapshot((querySnapshot) => {
@@ -957,7 +1198,7 @@ export default {
     },
     bidding() {
       let formData = new FormData();
-      formData.append("id_iklan", this.adsID);
+      formData.append("id_iklan", this.id);
       formData.append("bid", this.bid);
       formData.append("id_app_user", this.user.id);
 
@@ -974,6 +1215,7 @@ export default {
           });
           this.sheet = false;
           this.playSound("/audio/bid.mpeg");
+          this.tab = 3;
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -989,7 +1231,7 @@ export default {
       if (r == true) {
         let formData = new FormData();
 
-        formData.append("id", this.adsID);
+        formData.append("id", this.id);
         formData.append("id_mst_iklan_status", 2);
 
         this.axios
@@ -1021,7 +1263,7 @@ export default {
       this.axios
         .get("/transaksi/v3/order", {
           params: {
-            id_iklan: this.adsID,
+            id_iklan: this.id,
           },
           headers: { Authorization: "Bearer " + this.user.token },
         })
@@ -1101,7 +1343,6 @@ export default {
     ...mapGetters({
       user: "auth/user",
       guest: "auth/guest",
-      adsID: "ads/adsID",
     }),
     now: function () {
       return this.time;

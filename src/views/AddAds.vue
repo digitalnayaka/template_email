@@ -9,7 +9,9 @@
     <v-stepper v-model="e1">
       <v-stepper-header>
         <template v-for="n in steps">
-          <v-stepper-step :key="`${n}-step`" :complete="e1 > n" :step="n">Tahap {{ n }}</v-stepper-step>
+          <v-stepper-step :key="`${n}-step`" :complete="e1 > n" :step="n"
+            >Tahap {{ n }}</v-stepper-step
+          >
           <v-divider v-if="n !== steps" :key="n"></v-divider>
         </template>
       </v-stepper-header>
@@ -22,14 +24,20 @@
 
               <v-list :three-line="$vuetify.breakpoint.xsOnly ? true : false">
                 <div v-for="item in jenisIklan" :key="item.id">
-                  <v-list-item @click="id == undefined ? step2(item.id) : stepSkip(item.id)">
+                  <v-list-item
+                    @click="
+                      id == undefined ? step2(item.id) : stepSkip(item.id)
+                    "
+                  >
                     <v-list-item-avatar tile size="50">
                       <v-img :src="item.icon" contain></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
                       <v-list-item-title>{{ item.name }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ item.desc }}</v-list-item-subtitle>
+                      <v-list-item-subtitle>{{
+                        item.desc
+                      }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
 
@@ -76,7 +84,7 @@
 
               <v-list :three-line="$vuetify.breakpoint.xsOnly ? true : false">
                 <v-list-item-group v-model="selected" :multiple="multiple">
-                  <template v-for="(item,i) in unitMokas">
+                  <template v-for="(item, i) in unitMokas">
                     <v-list-item
                       :key="item.id"
                       :value="item"
@@ -89,13 +97,21 @@
                         </v-list-item-avatar>
 
                         <v-list-item-content>
-                          <v-list-item-title v-html="item.type"></v-list-item-title>
-                          <v-list-item-subtitle v-html="item.nomor_polisi"></v-list-item-subtitle>
-                          <v-list-item-subtitle v-html="item.tahun"></v-list-item-subtitle>
+                          <v-list-item-title
+                            v-html="item.type"
+                          ></v-list-item-title>
+                          <v-list-item-subtitle
+                            v-html="item.nomor_polisi"
+                          ></v-list-item-subtitle>
+                          <v-list-item-subtitle
+                            v-html="item.tahun"
+                          ></v-list-item-subtitle>
                         </v-list-item-content>
 
                         <v-list-item-action>
-                          <v-icon v-if="!active" color="grey lighten-1" large>mdi-star</v-icon>
+                          <v-icon v-if="!active" color="grey lighten-1" large
+                            >mdi-star</v-icon
+                          >
                           <v-icon v-else color="yellow" large>mdi-star</v-icon>
                         </v-list-item-action>
                       </template>
@@ -141,14 +157,20 @@
                   ></v-textarea>
                 </v-col>
 
-                <v-col cols="12" sm="4" class="text-right" v-if="selectedIklan < 3">
+                <v-col
+                  cols="12"
+                  sm="4"
+                  class="text-right"
+                  v-if="selectedIklan < 3"
+                >
                   <v-btn
                     color="teal"
                     dark
                     small
                     class="mt-1"
                     @click="setDeskripsi"
-                  >Gunakan deskripsi unit</v-btn>
+                    >Gunakan deskripsi unit</v-btn
+                  >
                 </v-col>
               </v-row>
 
@@ -173,18 +195,28 @@
                   <v-row>
                     <v-col cols="12" sm="4">
                       <v-item v-slot:default="{ active, toggle }" value="50000">
-                        <v-card :color="active ? 'teal' : ''" dark @click="toggle">
+                        <v-card
+                          :color="active ? 'teal' : ''"
+                          dark
+                          @click="toggle"
+                        >
                           <v-card-title>Rp 50.000</v-card-title>
 
                           <v-scroll-y-transition>
-                            <div v-if="active" class="display-3 flex-grow-1 text-center"></div>
+                            <div
+                              v-if="active"
+                              class="display-3 flex-grow-1 text-center"
+                            ></div>
                           </v-scroll-y-transition>
                         </v-card>
                       </v-item>
                     </v-col>
 
                     <v-col cols="12" sm="4">
-                      <v-item v-slot:default="{ active, toggle }" value="100000">
+                      <v-item
+                        v-slot:default="{ active, toggle }"
+                        value="100000"
+                      >
                         <v-card
                           :color="active ? 'teal' : ''"
                           class="d-flex align-center"
@@ -193,13 +225,19 @@
                         >
                           <v-card-title>Rp 100.000</v-card-title>
                           <v-scroll-y-transition>
-                            <div v-if="active" class="display-3 flex-grow-1 text-center"></div>
+                            <div
+                              v-if="active"
+                              class="display-3 flex-grow-1 text-center"
+                            ></div>
                           </v-scroll-y-transition>
                         </v-card>
                       </v-item>
                     </v-col>
                     <v-col cols="12" sm="4">
-                      <v-item v-slot:default="{ active, toggle }" value="150000">
+                      <v-item
+                        v-slot:default="{ active, toggle }"
+                        value="150000"
+                      >
                         <v-card
                           :color="active ? 'teal' : ''"
                           class="d-flex align-center"
@@ -208,7 +246,10 @@
                         >
                           <v-card-title>Rp 150.000</v-card-title>
                           <v-scroll-y-transition>
-                            <div v-if="active" class="display-3 flex-grow-1 text-center"></div>
+                            <div
+                              v-if="active"
+                              class="display-3 flex-grow-1 text-center"
+                            ></div>
                           </v-scroll-y-transition>
                         </v-card>
                       </v-item>
@@ -220,7 +261,10 @@
                   <v-list-item>
                     <v-list-item-content>
                       <v-list-item-title>Gunakan Tiket</v-list-item-title>
-                      <v-list-item-subtitle>Isikan jumlah iklan tiket, minimal 1 Tiket</v-list-item-subtitle>
+                      <v-list-item-subtitle
+                        >Isikan jumlah iklan tiket, minimal 1
+                        Tiket</v-list-item-subtitle
+                      >
                     </v-list-item-content>
 
                     <v-list-item-action>
@@ -254,7 +298,7 @@
                       v-model="tglMulaiTB"
                       @input="dateTimeRange"
                       :textFieldProps="suffix"
-                      :timePickerProps="{format:'24hr'}"
+                      :timePickerProps="{ format: '24hr' }"
                     >
                       <template slot="dateIcon">
                         <v-icon>mdi-calendar</v-icon>
@@ -265,7 +309,11 @@
                       </template>
 
                       <template slot="actions" slot-scope="{ parent }">
-                        <v-btn color="success darken-1" @click="parent.okHandler">OK</v-btn>
+                        <v-btn
+                          color="success darken-1"
+                          @click="parent.okHandler"
+                          >OK</v-btn
+                        >
                       </template>
                     </v-datetime-picker>
                   </v-col>
@@ -277,7 +325,7 @@
                       v-model="tglSelesaiTB"
                       :datePickerProps="datePickerProps"
                       :textFieldProps="textFieldProps"
-                      :timePickerProps="{format:'24hr'}"
+                      :timePickerProps="{ format: '24hr' }"
                       @input="checkDateTB"
                     >
                       <template slot="dateIcon">
@@ -289,7 +337,11 @@
                       </template>
 
                       <template slot="actions" slot-scope="{ parent }">
-                        <v-btn color="success darken-1" @click="parent.okHandler">OK</v-btn>
+                        <v-btn
+                          color="success darken-1"
+                          @click="parent.okHandler"
+                          >OK</v-btn
+                        >
                       </template>
                     </v-datetime-picker>
                   </v-col>
@@ -298,14 +350,20 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="teal" dark @click="id == undefined ? e1 = 2 : e1 = 1">Sebelumnya</v-btn>
+                <v-btn
+                  color="teal"
+                  dark
+                  @click="id == undefined ? (e1 = 2) : (e1 = 1)"
+                  >Sebelumnya</v-btn
+                >
                 <v-btn
                   color="teal"
                   class="white--text"
                   :disabled="!valid"
                   @click="storeItem"
                   :loading="loading"
-                >Iklankan</v-btn>
+                  >Iklankan</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-stepper-content>
@@ -569,10 +627,7 @@ export default {
                 color: "success",
                 text: data.api_message,
               });
-              this.setAds(data.data.id);
-              let urlSeller = this.user.nama.toLowerCase().replaceAll(" ", "-");
-              let urlJudul = data.data.judul.toLowerCase().replaceAll(" ", "-");
-              this.$router.push("/produk/" + urlSeller + "/" + urlJudul);
+              this.$router.push("/iklan/" + data.data.id);
             })
             .catch((error) => {
               let responses = error.response.data;
@@ -624,10 +679,7 @@ export default {
                 color: "success",
                 text: data.api_message,
               });
-              this.setAds(data.data.id);
-              let urlSeller = this.user.nama.toLowerCase().replaceAll(" ", "-");
-              let urlJudul = data.data.judul.toLowerCase().replaceAll(" ", "-");
-              this.$router.push("/produk/" + urlSeller + "/" + urlJudul);
+              this.$router.push("/iklan/" + data.data.id);
             })
             .catch((error) => {
               let responses = error.response.data;
@@ -683,10 +735,7 @@ export default {
                 color: "success",
                 text: data.api_message,
               });
-              this.setAds(data.data.id);
-              let urlSeller = this.user.nama.toLowerCase().replaceAll(" ", "-");
-              let urlJudul = data.data.judul.toLowerCase().replaceAll(" ", "-");
-              this.$router.push("/produk/" + urlSeller + "/" + urlJudul);
+              this.$router.push("/iklan/" + data.data.id);
             })
             .catch((error) => {
               let responses = error.response.data;
