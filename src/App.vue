@@ -109,7 +109,7 @@
                 <v-row no-gutters>
                   <v-col cols="6">
                     <v-list dense>
-                      <v-list-item>
+                      <v-list-item to="/aktivitas/pembeli">
                         <v-list-item-subtitle>Aktivitas Pembeli</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
@@ -119,6 +119,9 @@
                     <v-list dense>
                       <v-list-item>
                         <v-list-item-subtitle>Iklan Diikuti</v-list-item-subtitle>
+                      </v-list-item>
+                        <v-list-item to="/iklan_favorit">
+                        <v-list-item-subtitle>Iklan Favorit</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
                   </v-col>

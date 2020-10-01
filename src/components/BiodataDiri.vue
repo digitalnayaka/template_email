@@ -197,7 +197,7 @@
             <div class="font-weight-bold" align="leftt">
               Rating Anda adalah (jumlah)
               <v-list-item-action align="right">
-                <v-btn color="#0277BD" text dark>
+                <v-btn color="#0277BD" text dark to="/toko/review">
                   Lihat Semua
                   <v-icon>mdi-arrow-right-drop-circle-outline</v-icon>
                 </v-btn>

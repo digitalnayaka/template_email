@@ -81,7 +81,7 @@ export default {
     items: [
       {
         icon: "mdi-garage",
-        title: "Penjual",
+        title: "Unit",
         items: [
           { title: "Tambah Unit", route: "/garasi/add-unit" },
           { title: "Daftar Unit", route: "/garasi/manage-unit" },
@@ -104,7 +104,7 @@ export default {
         icon: "mdi-emoticon",
         title: "Kata Pembeli",
         items: [
-          { title: "Ulasan", route: "/toko/add-ads" },
+          { title: "Ulasan", route: "/toko/review" },
           { title: "Komplain", route: "/toko/manage-ads" },
         ],
       },

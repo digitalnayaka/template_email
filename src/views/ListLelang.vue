@@ -117,7 +117,7 @@
               <v-icon>mdi-star-outline</v-icon>
             </v-avatar>
             <v-icon>mdi-circle-medium</v-icon>
-            <span>x Dilihat</span>
+
             <v-btn text small color="primary">Lihat Statistik Penjual</v-btn>
           </v-list-item-subtitle>
         </v-list-item-content>
