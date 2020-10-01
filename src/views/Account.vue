@@ -37,6 +37,16 @@
               <v-list-item-title>Profile</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-list-item to="/chat-list'">
+            <v-list-item-icon>
+              <v-icon>mdi-chat-outline</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Chat</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list-item-group>
 
         <v-list-group
@@ -98,7 +108,8 @@ export default {
       {
         icon: "mdi-clipboard-text",
         title: "Penjualan",
-        items: [{ title: "List Penjualan", route: "/toko/add-ads" }],
+        items: [{ title: "List Penjualan", route: "/toko/add-ads" },
+        { title: "Report", route: "/report" }],
       },
       {
         icon: "mdi-emoticon",
@@ -106,6 +117,15 @@ export default {
         items: [
           { title: "Ulasan", route: "/toko/review" },
           { title: "Komplain", route: "/toko/manage-ads" },
+        ],
+      },
+       {
+        icon: "mdi-help",
+        title: "Tentang SiMotor",
+        items: [
+          { title: "Tentang SiMotor", route: "/about" },
+          { title: "Bantuan", route: "/bantuan" },
+         
         ],
       },
     ],

@@ -13,10 +13,6 @@
         </a>
       </v-toolbar-title>
 
-      <!-- <v-btn icon>
-        <v-icon>mdi-apps</v-icon>
-      </v-btn>-->
-
       <v-text-field
         flat
         solo-inverted
@@ -51,7 +47,7 @@
           <v-icon>mdi-heart-outline</v-icon>
         </v-btn> -->
 
-        <v-btn icon to="/notifikasi">
+        <!-- <v-btn icon to="/notification">
           <v-badge color="orange" overlap v-if="countNotif > 0">
             <template v-slot:badge>
               <span>{{ countNotif }}</span>
@@ -60,7 +56,80 @@
             <v-icon>mdi-bell-outline</v-icon>
           </v-badge>
           <v-icon v-else>mdi-bell-outline</v-icon>
-        </v-btn>
+        </v-btn> -->
+
+        <v-menu
+          :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
+          :close-on-content-click="content"
+          offset-y
+          transition="slide-y-transition"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn large icon v-bind="attrs" v-on="on">
+              <v-icon>mdi-bell-outline</v-icon>
+            </v-btn>
+          </template>
+
+          <v-card width="300">
+            <v-card-title> Notifikasi </v-card-title>
+
+            <v-divider></v-divider>
+
+            <v-tabs
+              v-model="tab2"
+              grow
+              slider-color="teal"
+              @change="content = false"
+            >
+              <v-tab class="text-caption">Transaksi</v-tab>
+              <v-tab class="text-caption">Update</v-tab>
+            </v-tabs>
+
+            <v-tabs-items v-model="tab2">
+              <v-tab-item>
+                <v-card flat>
+                  <v-card-subtitle>Pembelian</v-card-subtitle>
+
+                  <div class="d-flex justify-space-around text-center text-caption">
+                    <div>
+                      <v-icon>mdi-heart</v-icon>
+                      <div>Menunggu Pembayaran</div>
+                    </div>
+
+                    <div>
+                      <v-icon>mdi-heart</v-icon>
+                      <div>Menunggu Verifikasi</div>
+                    </div>
+
+                    <div>
+                      <v-icon>mdi-heart</v-icon>
+                      <div>Pembayaran Diverifikasi</div>
+                    </div>
+                  </div>
+
+                  <v-divider class="mt-4"></v-divider>
+
+                  <v-card-subtitle>Penjualan</v-card-subtitle>
+
+                  <div class="d-flex justify-space-around">
+                    <v-icon>mdi-diamond</v-icon>
+                    <v-icon>mdi-diamond</v-icon>
+                    <v-icon>mdi-diamond</v-icon>
+                  </div>
+                </v-card>
+              </v-tab-item>
+            </v-tabs-items>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn color="red" dark small @click="signOut">
+                <v-icon left>mdi-logout</v-icon>Keluar
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
+
         <v-menu
           :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
           :close-on-content-click="content"
@@ -70,18 +139,17 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn large text v-bind="attrs" v-on="on">
               <v-avatar size="32px" item>
-                <v-icon>mdi-menu</v-icon>
+                <v-img :src="getImage(user.photo)" alt="Avatar"></v-img>
               </v-avatar>
-              <span class="text-caption mx-2">Menu</span>
+              <span class="text-caption mx-2">{{
+                user.nama.split(" ", 1)[0]
+              }}</span>
             </v-btn>
-            <!-- <v-btn icon to="/iklan_favorit"> 
-          <v-icon>mdi-heart-outline</v-icon>
-            </v-btn>-->
           </template>
 
           <v-card>
             <v-list>
-              <v-list-item to="/account/edit">
+              <v-list-item to="/account/edit" @click="content = true">
                 <v-list-item-avatar>
                   <v-img :src="getImage(user.photo)" alt="Avatar"></v-img>
                 </v-list-item-avatar>
@@ -97,11 +165,14 @@
 
             <v-divider></v-divider>
 
-            <v-tabs v-model="tab" grow slider-color="teal" @change="content = false">
-              <v-tab class="text-caption">Pembeli</v-tab>
-              <v-tab class="text-caption">Penjual</v-tab>
-              <v-tab class="text-caption">Transaksi</v-tab>
-              <v-tab class="text-caption">Lainnya</v-tab>
+            <v-tabs
+              v-model="tab"
+              grow
+              slider-color="teal"
+              @change="content = false"
+            >
+              <v-tab class="text-caption">Toko</v-tab>
+              <v-tab class="text-caption">Aktivitas</v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab">
@@ -141,9 +212,6 @@
                       >
                         <v-list-item-subtitle>Garasi</v-list-item-subtitle>
                       </v-list-item>
-                      <v-list-item>
-                        <v-list-item-subtitle>Aktivitas Penjual</v-list-item-subtitle>
-                      </v-list-item>
                     </v-list>
                   </v-col>
 
@@ -167,50 +235,17 @@
                   </v-col>
                 </v-row>
               </v-tab-item>
-              <v-tab-item>
-                <v-row no-gutters>
-                  <v-col cols="6">
-                    <v-list dense>
-                      
-                      <v-list-item to="/tawar_bersama" >
-                        <v-list-item-subtitle>Tawar Bersama Pembeli</v-list-item-subtitle>
-                      </v-list-item>
-                       <v-list-item to="/tawar_bersama" >
-                        <v-list-item-subtitle>Tawar Bersama Penjual</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
 
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item to="/category/tiket">
-                        <v-list-item-subtitle>Tiket</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-                </v-row>
-              </v-tab-item>
               <v-tab-item>
-                <v-row no-gutters>
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item to="/report">
-                        <v-list-item-subtitle>Report</v-list-item-subtitle>
-                      </v-list-item>
-                       <v-list-item to="/about">
-                        <v-list-item-subtitle>Tentang Aplikasi</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
+                <v-list dense>
+                  <v-list-item to="/tawar-bersama" @click="content = true">
+                    <v-list-item-subtitle>Pembeli</v-list-item-subtitle>
+                  </v-list-item>
 
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item to="/bantuan">
-                        <v-list-item-subtitle>Bantuan</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-                </v-row>
+                  <v-list-item to="/aktivitas-iklan" @click="content = true">
+                    <v-list-item-subtitle>Penjual</v-list-item-subtitle>
+                  </v-list-item>
+                </v-list>
               </v-tab-item>
             </v-tabs-items>
 
@@ -254,7 +289,13 @@
     </v-main>
 
     <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-      <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
+      <v-img
+        to="/bantuan"
+        src="/img/icons/ic_bantuan.png"
+        width="50"
+        height="50"
+        contain
+      ></v-img>
     </v-btn>
   </v-app>
 </template>
@@ -283,6 +324,7 @@ export default {
     countNotif: 0,
     content: false,
     tab: 0,
+    tab2: 0,
     utc: moment().utcOffset() / 60 - 7,
     waktu: "",
   }),
