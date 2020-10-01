@@ -11,10 +11,12 @@
       :items="garasi"
       :search="search"
       class="elevation-1"
+      hide-default-footer
+      :page="page"
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Daftar Unit</v-toolbar-title>
+          <v-toolbar-title>Daftar Unit ({{total}})</v-toolbar-title>
 
           <v-divider class="mx-4" inset vertical></v-divider>
 
@@ -49,7 +51,7 @@
                     <v-list-item
                       v-for="item in items"
                       :key="item.id"
-                      @click="filter"
+                      @click="filter(item.id)"
                     >
                       <v-list-item-subtitle>
                         {{ item.status }}
@@ -101,13 +103,25 @@
               </v-dialog>
             </v-list-item>
 
-            <v-list-item :to="'/garasi/edit-unit/' + item.id">
+            <v-list-item
+              :disabled="
+                item.id_mst_motor_bekas_status == 1
+                  ? false
+                  : item.id_mst_motor_bekas_status == 5
+                  ? false
+                  : true
+              "
+              :to="'/garasi/edit-unit/' + item.id"
+            >
               <v-list-item-title class="d-flex align-center">
                 <v-icon small class="mr-2">mdi-pencil</v-icon>Edit
               </v-list-item-title>
             </v-list-item>
 
-            <v-list-item @click="deleteUnit(item)">
+            <v-list-item
+              :disabled="item.id_mst_motor_bekas_status == 1 ? false : true"
+              @click="deleteUnit(item)"
+            >
               <v-list-item-title class="d-flex align-center">
                 <v-icon small class="mr-2">mdi-delete</v-icon>Hapus
               </v-list-item-title>
@@ -118,6 +132,13 @@
 
       <template v-slot:no-data>Belum ada unit.</template>
     </v-data-table>
+
+    <v-pagination
+      v-model="page"
+      @input="daftarProduk"
+      :length="lengthPage"
+      :total-visible="5"
+    ></v-pagination>
   </v-card>
 </template>
 
@@ -160,12 +181,7 @@ export default {
       var params = new URLSearchParams();
 
       params.set("id_app_user", this.user.id);
-      if (this.value == 0) {
-        params.set("id_mst_motor_bekas_status", 1);
-        params.append("id_mst_motor_bekas_status", 2);
-        params.append("id_mst_motor_bekas_status", 3);
-        params.append("id_mst_motor_bekas_status", 5);
-      } else {
+      if (this.value > 0) {
         params.set("id_mst_motor_bekas_status", this.value);
       }
       params.set("search", this.search == null ? "" : this.search);
@@ -240,8 +256,9 @@ export default {
           });
       }
     },
-    filter() {
+    filter(id) {
       this.$nextTick(() => {
+        this.value = id;
         this.daftarProduk();
       });
     },

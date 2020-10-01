@@ -6,6 +6,18 @@
       </v-btn>
     </v-app-bar>
 
+    <h2>Daftar Penjualan</h2>
+
+    <v-chip-group v-model="chip" mandatory active-class="primary--text">
+      <div class="d-flex align-center">
+        <h4 class="mr-2">Status</h4>
+
+        <v-chip v-for="tag in tags" :key="tag">
+          {{ tag }}
+        </v-chip>
+      </div>
+    </v-chip-group>
+
     <v-data-table
       :headers="headers"
       :items="hits"
@@ -14,52 +26,6 @@
       hide-default-footer
       :page="page"
     >
-      <template v-slot:top>
-        <v-toolbar flat>
-          <v-toolbar-title>Daftar Iklan ({{total}})</v-toolbar-title>
-
-          <v-divider class="mx-4" inset vertical></v-divider>
-
-          <v-spacer></v-spacer>
-
-          <v-btn color="teal" dark class="mb-2 text-caption" to="/toko/add-ads">
-            <v-icon left>mdi-plus</v-icon>Tambah Iklan
-          </v-btn>
-
-          <v-text-field
-            v-model="search"
-            outlined
-            dense
-            label="Search"
-            class="mt-7"
-            slot="extension"
-            clearable
-          >
-            <template v-slot:append>
-              <v-menu offset-y>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon v-bind="attrs" v-on="on">mdi-filter</v-icon>
-                </template>
-
-                <v-list dense>
-                  <v-list-item-group v-model="value" color="primary">
-                    <v-list-item
-                      v-for="item in items"
-                      :key="item.id"
-                      @click="filter(item.id)"
-                    >
-                      <v-list-item-subtitle>
-                        {{ item.status }}
-                      </v-list-item-subtitle>
-                    </v-list-item>
-                  </v-list-item-group>
-                </v-list>
-              </v-menu>
-            </template>
-          </v-text-field>
-        </v-toolbar>
-      </template>
-
       <template v-slot:item._source.judul="{ item }">
         <v-list>
           <v-list-item :to="'/iklan/' + item._source.id">
@@ -170,6 +136,16 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "manage-ads",
   data: () => ({
+    chip: 0,
+    tags: [
+      "Menunggu Persetujuan",
+      "Menunggu Pembayaran",
+      "Menunggu Verifikasi",
+      "Ditolak",
+      "Pembayaran Diverifikasi",
+      "Dibatalkan",
+      "Expired",
+    ],
     search: "",
     value: 0,
     items: [],

@@ -43,9 +43,9 @@
       </div>
 
       <div class="d-flex align-center" v-else>
-        <!-- <v-btn icon>
+        <v-btn icon>
           <v-icon>mdi-heart-outline</v-icon>
-        </v-btn> -->
+        </v-btn>
 
         <!-- <v-btn icon to="/notification">
           <v-badge color="orange" overlap v-if="countNotif > 0">
@@ -70,7 +70,7 @@
             </v-btn>
           </template>
 
-          <v-card width="300">
+          <v-card width="330">
             <v-card-title> Notifikasi </v-card-title>
 
             <v-divider></v-divider>
@@ -82,7 +82,7 @@
               @change="content = false"
             >
               <v-tab class="text-caption">Transaksi</v-tab>
-              <v-tab class="text-caption">Update</v-tab>
+              <!-- <v-tab class="text-caption">Update</v-tab> -->
             </v-tabs>
 
             <v-tabs-items v-model="tab2">
@@ -90,21 +90,29 @@
                 <v-card flat>
                   <v-card-subtitle>Pembelian</v-card-subtitle>
 
+                  <div class="d-flex justify-space-around">
+                    <v-btn icon>
+                      <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+
+                    <v-btn icon>
+                      <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+
+                    <v-btn icon>
+                      <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+
+                    <v-btn icon>
+                      <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+                  </div>
+
                   <div class="d-flex justify-space-around text-center text-caption">
-                    <div>
-                      <v-icon>mdi-heart</v-icon>
-                      <div>Menunggu Pembayaran</div>
-                    </div>
-
-                    <div>
-                      <v-icon>mdi-heart</v-icon>
-                      <div>Menunggu Verifikasi</div>
-                    </div>
-
-                    <div>
-                      <v-icon>mdi-heart</v-icon>
-                      <div>Pembayaran Diverifikasi</div>
-                    </div>
+                    <div>Menunggu Persetujuan</div>
+                    <div>Menunggu Pembayaran</div>
+                    <div>Menunggu Verifikasi</div>
+                    <div>Pembayaran Diverifikasi</div>
                   </div>
 
                   <v-divider class="mt-4"></v-divider>
@@ -112,9 +120,28 @@
                   <v-card-subtitle>Penjualan</v-card-subtitle>
 
                   <div class="d-flex justify-space-around">
-                    <v-icon>mdi-diamond</v-icon>
-                    <v-icon>mdi-diamond</v-icon>
-                    <v-icon>mdi-diamond</v-icon>
+                    <v-btn icon to="/toko/order">
+                      <v-icon>mdi-diamond</v-icon>
+                    </v-btn>
+
+                    <v-btn icon>
+                      <v-icon>mdi-diamond</v-icon>
+                    </v-btn>
+
+                    <v-btn icon>
+                      <v-icon>mdi-diamond</v-icon>
+                    </v-btn>
+
+                    <v-btn icon>
+                      <v-icon>mdi-diamond</v-icon>
+                    </v-btn>
+                  </div>
+
+                  <div class="d-flex justify-space-around text-center text-caption">
+                    <div>Menunggu Persetujuan</div>
+                    <div>Menunggu Pembayaran</div>
+                    <div>Menunggu Verifikasi</div>
+                    <div>Pembayaran Diverifikasi</div>
                   </div>
                 </v-card>
               </v-tab-item>
@@ -287,16 +314,6 @@
         </v-slide-y-transition>
       </v-container>
     </v-main>
-
-    <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-      <v-img
-        to="/bantuan"
-        src="/img/icons/ic_bantuan.png"
-        width="50"
-        height="50"
-        contain
-      ></v-img>
-    </v-btn>
   </v-app>
 </template>
 
