@@ -207,6 +207,16 @@
         <h5>2020 © Digital Nayaka Abhinaya. All Rights Reserved.</h5>
       </div>
     </v-container>
+
+    <v-btn bottom color="white" dark fab fixed right to="/bantuan">
+      <v-img
+        to="/bantuan"
+        src="/img/icons/ic_bantuan.png"
+        width="50"
+        height="50"
+        contain
+      ></v-img>
+    </v-btn>
   </v-container>
 </template>
 

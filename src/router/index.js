@@ -179,7 +179,7 @@ const routes = [
         name: 'profile',
         component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
         meta: {
-          auth: true
+          Auth: true
         }
       },
       {
@@ -187,7 +187,7 @@ const routes = [
         name: 'AccountTicket',
         component: () => import(/* webpackChunkName: "account-ticket" */ '../views/AccountTicket.vue'),
         meta: {
-          auth: true
+          Auth: true
         }
       },
       {
@@ -195,7 +195,7 @@ const routes = [
         name: 'ManageUnit',
         component: () => import(/* webpackChunkName: "manage-unit" */ '../views/Garasi.vue'),
         meta: {
-          auth: true
+          Auth: true
         }
       },
       {
@@ -203,7 +203,15 @@ const routes = [
         name: 'ManageAds',
         component: () => import(/* webpackChunkName: "manage-ads" */ '../views/ManageAds.vue'),
         meta: {
-          auth: true
+          Auth: true
+        }
+      },
+      {
+        path: '/toko/order',
+        name: 'Order',
+        component: () => import(/* webpackChunkName: "order" */ '../views/Order.vue'),
+        meta: {
+          Auth: true
         }
       },
     ],
@@ -213,7 +221,7 @@ const routes = [
     name: 'AddUnit',
     component: () => import(/* webpackChunkName: "add-unit" */ '../views/AddUnit.vue'),
     meta: {
-      auth: true
+      Auth: true
     },
   },
   {
@@ -221,7 +229,7 @@ const routes = [
     name: 'EditUnit',
     component: () => import(/* webpackChunkName: "edit-unit" */ '../views/EditUnit.vue'),
     meta: {
-      auth: true
+      Auth: true
     }
   },
   {
@@ -229,7 +237,7 @@ const routes = [
     name: 'DetailUnit',
     component: () => import(/* webpackChunkName: "detail-unit" */ '../views/UnitMokas.vue'),
     meta: {
-      auth: true
+      Auth: true
     }
   },
   {
@@ -237,7 +245,7 @@ const routes = [
     name: 'AddAds',
     component: () => import(/* webpackChunkName: "add-ads" */ '../views/AddAds.vue'),
     meta: {
-      auth: true
+      Auth: true
     }
   },
   {
@@ -245,15 +253,31 @@ const routes = [
     name: 'Ticket',
     component: () => import(/* webpackChunkName: "ticket" */ '../views/Ticket.vue'),
     meta: {
-      auth: true
+      Auth: true
     }
   },
   {
-    path: '/tes',
-    name: 'tes',
-    component: () => import(/* webpackChunkName: "tes" */ '../views/tes.vue'),
+    path: '/detail-transaksi/:id',
+    name: 'DetailTransaksi',
+    component: () => import(/* webpackChunkName: "detail-transaksi" */ '../views/DetailTransaksi.vue'),
     meta: {
-      auth: true
+      Auth: true
+    }
+  },
+  {
+    path: '/tb-selesai/:id',
+    name: 'TBSelesai',
+    component: () => import(/* webpackChunkName: "tb-selesai" */ '../views/TBSelesai.vue'),
+    meta: {
+      Auth: true
+    }
+  },
+  {
+    path: '/aktivitas-iklan',
+    name: 'AktivitasIklan',
+    component: () => import(/* webpackChunkName: "aktivitas-iklan" */ '../views/AktivitasIklan.vue'),
+    meta: {
+      Auth: true
     }
   },
 ]

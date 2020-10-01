@@ -66,7 +66,7 @@
         <v-card
           v-for="item in selesai"
           :key="item.id_iklan"
-          :to="item.id_order == 0 ? '/tawar_bersama_selesai/' + item.id_iklan : '/detail_transaksi/' + item.id_order"
+          :to="item.id_order == 0 ? '/tb-selesai/' + item.id_iklan : '/detail-transaksi/' + item.id_order"
           class="my-4"
         >
           <v-toolbar dense flat>

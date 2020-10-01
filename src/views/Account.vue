@@ -1,11 +1,5 @@
 <template>
   <v-container fluid>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
-      <v-btn icon @click.stop="$router.go(-1)">
-        <v-icon>mdi-arrow-left-circle</v-icon>
-      </v-btn>
-    </v-app-bar>
-
     <v-navigation-drawer app clipped>
       <template v-slot:prepend>
         <v-list two-line>
@@ -108,7 +102,7 @@ export default {
       {
         icon: "mdi-clipboard-text",
         title: "Penjualan",
-        items: [{ title: "List Penjualan", route: "/toko/add-ads" }],
+        items: [{ title: "List Penjualan", route: "/toko/order" }],
       },
       {
         icon: "mdi-emoticon",
