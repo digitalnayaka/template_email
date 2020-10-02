@@ -9,11 +9,11 @@
     <h2>Daftar Penjualan</h2>
 
     <v-chip-group v-model="chip" mandatory active-class="primary--text">
-      <div class="d-flex align-center">
+      <div class="d-flex flex-nowrap align-center">
         <h4 class="mr-2">Status</h4>
 
-        <v-chip v-for="tag in tags" :key="tag">
-          {{ tag }}
+        <v-chip v-for="tag in tags" :key="tag.id">
+          {{ tag.text }}
         </v-chip>
       </div>
     </v-chip-group>
@@ -138,13 +138,14 @@ export default {
   data: () => ({
     chip: 0,
     tags: [
-      "Menunggu Persetujuan",
-      "Menunggu Pembayaran",
-      "Menunggu Verifikasi",
-      "Ditolak",
-      "Pembayaran Diverifikasi",
-      "Dibatalkan",
-      "Expired",
+      { id: 0, text: "Semua" },
+      { id: 10, text: "Menunggu Persetujuan" },
+      { id: 1, text: "Menunggu Pembayaran" },
+      { id: 4, text: "Menunggu Verifikasi" },
+      { id: 6, text: "Ditolak" },
+      { id: 2, text: "Pembayaran Diverifikasi" },
+      { id: 5, text: "Dibatalkan" },
+      { id: 3, text: "Expired" },
     ],
     search: "",
     value: 0,
