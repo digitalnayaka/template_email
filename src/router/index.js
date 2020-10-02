@@ -156,6 +156,34 @@ const routes = [
       Auth: true
     }
   },
+
+  {
+    path: '/beri-ulasan',
+    name: 'beri-ulasan',
+    component: () => import(/* webpackChunkName: "beri-ulasan" */ '../views/TulisReview.vue'),
+    meta: {
+      Auth: true
+    }
+  },
+
+  {
+    path: '/aktivitas/pembeli',
+    name: 'aktivitas/pembeli',
+    component: () => import(/* webpackChunkName: "aktivitas/pembeli" */ '../views/AktivitasPembeli.vue'),
+    meta: {
+      Auth: true
+    }
+  },
+
+  {
+    path: '/detail-transaksi/:id',
+    name: 'detail-transaksi',
+    component: () => import(/* webpackChunkName: "detail-transaksi" */ '../views/DetailTransaksi.vue'),
+    meta: {
+      Auth: true
+    }
+  },
+ 
   {
     path: '/upload-bukti/:id',
     name: 'UploadBukti',

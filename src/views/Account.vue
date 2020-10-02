@@ -44,13 +44,13 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/account/ticket">
+          <v-list-item to="/chat-list'">
             <v-list-item-icon>
-              <v-icon>mdi-ticket</v-icon>
+              <v-icon>mdi-chat-outline</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>Tiket</v-list-item-title>
+              <v-list-item-title>Chat</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -98,7 +98,7 @@ export default {
     items: [
       {
         icon: "mdi-garage",
-        title: "Garasi",
+        title: "Unit",
         items: [
           { title: "Tambah Unit", route: "/garasi/add-unit" },
           { title: "Daftar Unit", route: "/garasi/manage-unit" },
@@ -115,14 +115,24 @@ export default {
       {
         icon: "mdi-clipboard-text",
         title: "Penjualan",
-        items: [{ title: "List Penjualan", route: "/toko/order" }],
+        items: [{ title: "List Penjualan", route: "/toko/add-ads" },
+        { title: "Report", route: "/report" }],
       },
       {
         icon: "mdi-emoticon",
         title: "Kata Pembeli",
         items: [
-          { title: "Ulasan", route: "/toko/add-ads" },
+          { title: "Ulasan", route: "/toko/review" },
           { title: "Komplain", route: "/toko/manage-ads" },
+        ],
+      },
+       {
+        icon: "mdi-help",
+        title: "Tentang SiMotor",
+        items: [
+          { title: "Tentang SiMotor", route: "/about" },
+          { title: "Bantuan", route: "/bantuan" },
+         
         ],
       },
     ],
