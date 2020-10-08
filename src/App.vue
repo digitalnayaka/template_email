@@ -198,8 +198,8 @@
               slider-color="teal"
               @change="content = false"
             >
-              <v-tab class="text-caption">Toko</v-tab>
-              <v-tab class="text-caption">Aktivitas</v-tab>
+              <v-tab class="text-caption">Pembeli</v-tab>
+              <v-tab class="text-caption">Penjual</v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab">
@@ -208,7 +208,7 @@
                   <v-col cols="6">
                     <v-list dense>
                       <v-list-item to="/aktivitas/pembeli">
-                        <v-list-item-subtitle>Aktivitas Pembeli</v-list-item-subtitle>
+                        <v-list-item-subtitle>Aktivitas</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
                   </v-col>
@@ -229,6 +229,9 @@
                 <v-row no-gutters>
                   <v-col cols="6">
                     <v-list dense>
+                       <v-list-item>
+                        <v-list-item-subtitle>Aktivitas</v-list-item-subtitle>
+                      </v-list-item>
                       <v-list-item to="/garasi/add-unit" @click="content = true">
                         <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
                       </v-list-item>
@@ -314,6 +317,12 @@
         </v-slide-y-transition>
       </v-container>
     </v-main>
+ <v-btn bottom color="white" dark fab fixed right to="/bantuan">
+      <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
+    </v-btn>
+    <v-footer>
+      <Footer/>
+    </v-footer>
   </v-app>
 </template>
 
@@ -336,6 +345,8 @@ export default {
       import(/* webpackChunkName: "login" */ "@/components/Login.vue"),
     Daftar: () =>
       import(/* webpackChunkName: "daftar" */ "@/components/Daftar.vue"),
+      Footer: () =>
+      import(/* webpackChunkName: "footer" */ "@/components/Footer.vue")
   },
   data: () => ({
     countNotif: 0,

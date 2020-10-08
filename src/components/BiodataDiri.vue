@@ -32,8 +32,12 @@
             <v-col cols="5">Nama</v-col>
             <v-col cols="7">
               <div v-if="!ubahNama">
+                :
                 {{ user.nama }}
-                <a href="javascript:void(0)" @click="ubahNama = true">
+                <a
+                  href="javascript:void(0)"
+                  @click="ubahNama = true"
+                >
                   <v-icon>mdi-pencil</v-icon>
                 </a>
               </div>
@@ -55,15 +59,19 @@
 
           <v-row>
             <v-col cols="5">Nomor Handphone</v-col>
-            <v-col cols="7">{{ user.nomor_hp }}</v-col>
+            <v-col cols="7">: {{ user.nomor_hp }}</v-col>
           </v-row>
 
           <v-row>
             <v-col cols="5">Nomor Whatsapp</v-col>
             <v-col cols="7">
               <div v-if="!ubahWA">
+                :
                 {{ user.nomor_whatsapp }}
-                <a href="javascript:void(0)" @click="ubahWA = true">
+                <a
+                  href="javascript:void(0)"
+                  @click="ubahWA = true"
+                >
                   <v-icon>mdi-pencil</v-icon>
                 </a>
               </div>
@@ -87,8 +95,12 @@
             <v-col cols="5">Kota</v-col>
             <v-col cols="7">
               <div v-if="!ubahKota">
+                :
                 {{ user.kota }}
-                <a href="javascript:void(0)" @click="ubahKota = true">
+                <a
+                  href="javascript:void(0)"
+                  @click="ubahKota = true"
+                >
                   <v-icon>mdi-pencil</v-icon>
                 </a>
               </div>
@@ -109,11 +121,15 @@
           </v-row>
 
           <v-row>
-            <v-col cols="5">Deskripsi Penjual</v-col>
+            <v-col cols="5">Deskripsi</v-col>
             <v-col cols="7">
               <div v-if="!ubahDeskripsi">
+                :
                 {{ user.deskripsi }}
-                <a href="javascript:void(0)" @click="ubahDeskripsi = true">
+                <a
+                  href="javascript:void(0)"
+                  @click="ubahDeskripsi = true"
+                >
                   <v-icon>mdi-pencil</v-icon>
                 </a>
               </div>
@@ -136,7 +152,7 @@
           <v-row>
             <v-col cols="5">Email</v-col>
             <v-col cols="7">
-              <div v-if="formEmail !== null">{{ user.email }}</div>
+              <div v-if="formEmail !== null">: {{ user.email }}</div>
 
               <div v-else>
                 <section id="firebaseui-auth-container"></section>
@@ -145,6 +161,7 @@
           </v-row>
         </v-form>
       </v-card>
+
       <br />
       <div>
         <v-card outlined width="800" class="pa-2">

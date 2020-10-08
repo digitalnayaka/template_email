@@ -64,7 +64,7 @@
             height="15px"
             alt="verified"
           />
-          <span class="ml-1 teal--text text-subtitle-2">Verified Seller</span>
+          <span class="ml-1 teal--text text-subtitle-2">Premium Seller</span>
         </div>
 
         <div class="text-h5 font-weight-bold">{{ hits.judul }}</div>

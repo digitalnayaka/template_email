@@ -85,14 +85,7 @@ const routes = [
       Auth: true
     }
   },
-  {
-    path: '/tawar-bersama',
-    name: 'TransaksiTB',
-    component: () => import(/* webpackChunkName: "tawar-bersama" */ '../views/TawarBersama.vue'),
-    meta: {
-      Auth: true
-    }
-  },
+  
   {
     path: '/syarat-ketentuan',
     name: 'SyaratKetentuan',
@@ -235,6 +228,14 @@ const routes = [
         }
       },
       {
+        path: '/toko/info',
+        name: 'InformasiPenjual',
+        component: () => import(/* webpackChunkName: "informasi-penjual" */ '../views/InfoPenjual.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
         path: '/toko/order',
         name: 'Order',
         component: () => import(/* webpackChunkName: "order" */ '../views/Order.vue'),
@@ -308,6 +309,7 @@ const routes = [
       Auth: true
     }
   },
+  
 ]
 
 const router = new VueRouter({

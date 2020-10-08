@@ -203,7 +203,7 @@
                     </v-list-item>
                   </v-list>
 
-                  <v-card-actions>
+                  <v-card-actions >
                     <v-spacer></v-spacer>
                     <v-btn
                       class="teal darken-1 white--text"

@@ -1,6 +1,15 @@
 <template>
+<nav>
   <v-container fluid>
-    <v-navigation-drawer app clipped>
+    <!-- <v-toolbar flat app>
+      <v-toolbar-side-icon class="grey--text" @click="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title class="text-uppercase grey--text">
+        <span>Menu</span>
+      </v-toolbar-title>
+    </v-toolbar> -->
+
+    <v-navigation-drawer app clipped v-model="drawer">
+      
       <template v-slot:prepend>
         <v-list two-line>
           <v-list-item>
@@ -10,9 +19,7 @@
 
             <v-list-item-content>
               <v-list-item-title>{{ user.nama }}</v-list-item-title>
-              <v-list-item-subtitle v-if="user.id_mst_user_type == 2"
-                >{{ user.user_type }} User</v-list-item-subtitle
-              >
+              <v-list-item-subtitle v-if="user.id_mst_user_type == 2">{{ user.user_type }} User</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -28,11 +35,11 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>Profile</v-list-item-title>
+              <v-list-item-title>Profil</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/chat-list'">
+          <v-list-item to="/chat-list">
             <v-list-item-icon>
               <v-icon>mdi-chat-outline</v-icon>
             </v-list-item-icon>
@@ -56,11 +63,7 @@
             </v-list-item-content>
           </template>
 
-          <v-list-item
-            v-for="subItem in item.items"
-            :key="subItem.title"
-            :to="subItem.route"
-          >
+          <v-list-item v-for="subItem in item.items" :key="subItem.title" :to="subItem.route">
             <v-list-item-content>
               <v-list-item-title>{{ subItem.title }}</v-list-item-title>
             </v-list-item-content>
@@ -73,6 +76,7 @@
       <router-view></router-view>
     </v-slide-y-transition>
   </v-container>
+</nav>
 </template>
 
 <script>
@@ -82,6 +86,7 @@ export default {
   name: "account",
   data: () => ({
     menu: 0,
+    drawer: true,
     items: [
       {
         icon: "mdi-garage",
@@ -102,8 +107,11 @@ export default {
       {
         icon: "mdi-clipboard-text",
         title: "Penjualan",
-        items: [{ title: "List Penjualan", route: "/toko/add-ads" },
-        { title: "Report", route: "/report" }],
+        items: [
+          { title: "Informasi Penjual", route: "/toko/info" },
+          { title: "List Penjualan", route: "/toko/add-ads" },
+          { title: "Report", route: "/report" },
+        ],
       },
       {
         icon: "mdi-emoticon",
@@ -113,13 +121,12 @@ export default {
           { title: "Komplain", route: "/toko/manage-ads" },
         ],
       },
-       {
+      {
         icon: "mdi-help",
         title: "Tentang SiMotor",
         items: [
           { title: "Tentang SiMotor", route: "/about" },
           { title: "Bantuan", route: "/bantuan" },
-         
         ],
       },
     ],

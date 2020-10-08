@@ -48,17 +48,17 @@
           <v-list>
             <v-list-item>
               <v-list-item-avatar size="70">
-                <v-icon x-large v-if="item.photo == 'null'"
-                  >mdi-account-circle</v-icon
-                >
+                <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
                 <v-img :src="getImage(item.photo)" v-else></v-img>
               </v-list-item-avatar>
 
               <v-list-item-content>
                 <v-btn small color="teal" dark rounded>
-                  <v-list-item-title>{{
+                  <v-list-item-title>
+                    {{
                     item.date | dateFormat
-                  }}</v-list-item-title>
+                    }}
+                  </v-list-item-title>
                 </v-btn>
               </v-list-item-content>
             </v-list-item>
@@ -86,8 +86,7 @@
         to="/jadwal"
         :small="$vuetify.breakpoint.xsOnly ? true : false"
         class="mt-4"
-        >Jadwal Tawar Bersama Selengkapnya</v-btn
-      >
+      >Jadwal Tawar Bersama Selengkapnya</v-btn>
     </v-container>
 
     <v-divider class="my-2"></v-divider>
@@ -111,12 +110,7 @@
       </v-col>
 
       <v-col cols="12" align="center">
-        <v-btn
-          dark
-          color="teal"
-          :to="{ path: '/category/mokas', query: { tb: true } }"
-          >Lihat Semua</v-btn
-        >
+        <v-btn dark color="teal" :to="{ path: '/category/mokas', query: { tb: true } }">Lihat Semua</v-btn>
       </v-col>
     </v-row>
 
@@ -191,11 +185,7 @@
           <v-col cols="12" sm="6">
             <h2>Tawar Bersama</h2>
 
-            <v-img
-              src="/img/tawar bersama (paketan).png"
-              width="120"
-              contain
-            ></v-img>
+            <v-img src="/img/tawar bersama (paketan).png" width="120" contain></v-img>
 
             <div class="text-justify">
               Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan
@@ -203,20 +193,10 @@
             </div>
           </v-col>
         </v-row>
-
-        <h5>2020 © Digital Nayaka Abhinaya. All Rights Reserved.</h5>
       </div>
     </v-container>
 
-    <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-      <v-img
-        to="/bantuan"
-        src="/img/icons/ic_bantuan.png"
-        width="50"
-        height="50"
-        contain
-      ></v-img>
-    </v-btn>
+   
   </v-container>
 </template>
 
