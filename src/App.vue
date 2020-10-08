@@ -43,7 +43,7 @@
       </div>
 
       <div class="d-flex align-center" v-else>
-        <v-btn icon>
+        <v-btn icon to="/favourite">
           <v-icon>mdi-heart-outline</v-icon>
         </v-btn>
 
@@ -66,12 +66,22 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn large icon v-bind="attrs" v-on="on">
-              <v-icon>mdi-bell-outline</v-icon>
+              <v-badge color="orange" overlap v-if="countNotif > 0">
+                <template v-slot:badge>
+                  <span>{{ countNotif }}</span>
+                </template>
+
+                <v-icon>mdi-bell-outline</v-icon>
+              </v-badge>
+
+              <v-icon v-else>mdi-bell-outline</v-icon>
             </v-btn>
           </template>
 
           <v-card width="330">
-            <v-card-title> Notifikasi </v-card-title>
+            <v-card flat to="/notification">
+              <v-card-title> Notifikasi </v-card-title>
+            </v-card>
 
             <v-divider></v-divider>
 
@@ -81,15 +91,13 @@
               slider-color="teal"
               @change="content = false"
             >
-              <v-tab class="text-caption">Transaksi</v-tab>
-              <!-- <v-tab class="text-caption">Update</v-tab> -->
+              <v-tab class="text-caption">Pembelian</v-tab>
+              <v-tab class="text-caption">Penjualan</v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab2">
               <v-tab-item>
                 <v-card flat>
-                  <v-card-subtitle>Pembelian</v-card-subtitle>
-
                   <div class="d-flex justify-space-around">
                     <v-btn icon>
                       <v-icon>mdi-heart</v-icon>
@@ -108,19 +116,21 @@
                     </v-btn>
                   </div>
 
-                  <div class="d-flex justify-space-around text-center text-caption">
+                  <div
+                    class="d-flex justify-space-around text-center text-caption"
+                  >
                     <div>Menunggu Persetujuan</div>
                     <div>Menunggu Pembayaran</div>
                     <div>Menunggu Verifikasi</div>
                     <div>Pembayaran Diverifikasi</div>
                   </div>
+                </v-card>
+              </v-tab-item>
 
-                  <v-divider class="mt-4"></v-divider>
-
-                  <v-card-subtitle>Penjualan</v-card-subtitle>
-
+              <v-tab-item>
+                <v-card flat>
                   <div class="d-flex justify-space-around">
-                    <v-btn icon to="/toko/order">
+                    <v-btn icon to="/toko/order?id=10">
                       <v-icon>mdi-diamond</v-icon>
                     </v-btn>
 
@@ -137,7 +147,9 @@
                     </v-btn>
                   </div>
 
-                  <div class="d-flex justify-space-around text-center text-caption">
+                  <div
+                    class="d-flex justify-space-around text-center text-caption"
+                  >
                     <div>Menunggu Persetujuan</div>
                     <div>Menunggu Pembayaran</div>
                     <div>Menunggu Verifikasi</div>
@@ -198,7 +210,7 @@
               slider-color="teal"
               @change="content = false"
             >
-              <v-tab class="text-caption">Toko</v-tab>
+              <v-tab class="text-caption">Penjualan</v-tab>
               <v-tab class="text-caption">Aktivitas</v-tab>
             </v-tabs>
 
@@ -207,29 +219,10 @@
                 <v-row no-gutters>
                   <v-col cols="6">
                     <v-list dense>
-                      <v-list-item to="/aktivitas/pembeli">
-                        <v-list-item-subtitle>Aktivitas Pembeli</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item>
-                        <v-list-item-subtitle>Iklan Diikuti</v-list-item-subtitle>
-                      </v-list-item>
-                        <v-list-item to="/iklan_favorit">
-                        <v-list-item-subtitle>Iklan Favorit</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-                </v-row>
-              </v-tab-item>
-              <v-tab-item>
-                <v-row no-gutters>
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item to="/garasi/add-unit" @click="content = true">
+                      <v-list-item
+                        to="/garasi/add-unit"
+                        @click="content = true"
+                      >
                         <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
                       </v-list-item>
 
@@ -265,7 +258,7 @@
 
               <v-tab-item>
                 <v-list dense>
-                  <v-list-item to="/tawar-bersama" @click="content = true">
+                  <v-list-item to="/activity/buyer" @click="content = true">
                     <v-list-item-subtitle>Pembeli</v-list-item-subtitle>
                   </v-list-item>
 

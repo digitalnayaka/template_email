@@ -7,7 +7,7 @@
         </v-btn>
 
         <v-spacer></v-spacer>
-        
+
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-app-bar>
     </div>
@@ -44,7 +44,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/chat-list'">
+          <v-list-item to="/chat-list">
             <v-list-item-icon>
               <v-icon>mdi-chat-outline</v-icon>
             </v-list-item-icon>
@@ -82,7 +82,7 @@
     </v-navigation-drawer>
 
     <v-slide-y-transition>
-      <router-view></router-view>
+      <router-view :utc="utc" :timezone="timezone"></router-view>
     </v-slide-y-transition>
   </v-container>
 </template>
@@ -92,8 +92,9 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "account",
+  props: ["utc", "timezone"],
   data: () => ({
-    drawer: false,
+    drawer: true,
     menu: 0,
     items: [
       {
@@ -115,8 +116,10 @@ export default {
       {
         icon: "mdi-clipboard-text",
         title: "Penjualan",
-        items: [{ title: "List Penjualan", route: "/toko/add-ads" },
-        { title: "Report", route: "/report" }],
+        items: [
+          { title: "List Penjualan", route: "/toko/order" },
+          { title: "Report", route: "/report" },
+        ],
       },
       {
         icon: "mdi-emoticon",
@@ -126,13 +129,12 @@ export default {
           { title: "Komplain", route: "/toko/manage-ads" },
         ],
       },
-       {
+      {
         icon: "mdi-help",
         title: "Tentang SiMotor",
         items: [
           { title: "Tentang SiMotor", route: "/about" },
           { title: "Bantuan", route: "/bantuan" },
-         
         ],
       },
     ],

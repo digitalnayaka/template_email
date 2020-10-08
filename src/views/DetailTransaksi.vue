@@ -1,143 +1,99 @@
 <template>
-  <div>
+  <v-container fluid>
     <v-app-bar app color="teal" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="back">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <div align="center">
-      <v-card class="d-inline-block mx-auto">
-        <v-container fluid>
-          <h1>Detail Transaksi</h1>
+    <h1 class="text-center">Detail Transaksi</h1>
 
-          <v-card flat align="center" color="grey lighten-3">
-            <v-avatar size="16" tile>
-              <v-img src="/img/error.png"></v-img>
-            </v-avatar>Selalu waspada terhadap pihak yang tidak bertanggung jawab. Pastikan bukti pembayaran yang diupload sudah benar.
-          </v-card>
+    <v-card flat>
+      <v-card flat align="center" color="grey lighten-3">
+        <v-avatar size="16" tile>
+          <v-img src="/img/error.png"></v-img>
+        </v-avatar>
+        Selalu waspada terhadap pihak yang tidak bertanggung jawab. Pastikan
+        bukti pembayaran yang diupload sudah benar.
+      </v-card>
 
-          <v-container fluid class="text-center" v-if="orders.id_mst_pembayaran_status == 1">
-            <h2>Batas Waktu Pembayaran</h2>
+      <v-container
+        fluid
+        class="text-center"
+        v-if="orders.id_mst_pembayaran_status == 1"
+      >
+        <h2>Batas Waktu Pembayaran</h2>
 
-            <flip-countdown :deadline="countdown"></flip-countdown>
+        <flip-countdown :deadline="countdown"></flip-countdown>
 
-            <v-card
-              flat
-              color="grey lighten-3"
-            >Sebelum: {{ orders.expired_at | dateTimeFormat(utc) }} {{ waktu }}</v-card>
-          </v-container>
+        <v-card flat color="grey lighten-3">
+          Sebelum: {{ orders.expired_at | dateTimeFormat(utc) }}
+          {{ waktu }}
+        </v-card>
+      </v-container>
 
-          <v-divider></v-divider>
+      <v-divider></v-divider>
 
-          <v-layout row wrap>
-            <v-flex xs12 md6 lg6>
-              <h2 class="text-center">Informasi Tagihan</h2>
-              <v-card width="500" height="400" align="left">
-                <v-container fluid>
-                  <v-list>
-                    <v-list-item>
-                      <v-list-item-title>Nomor Order:</v-list-item-title>
-                      <v-list-item-title>{{ orders.no_order }}</v-list-item-title>
-                    </v-list-item>
-                    <v-list-item>
-                      <v-list-item-title>Status:</v-list-item-title>
-                      <v-list-item-title
-                        class="font-weight-black orange--text"
-                        v-if="orders.id_mst_pembayaran_status == 1"
-                      >{{ orders.pembayaran_status }}</v-list-item-title>
+      <v-row no-gutters align="center" class="mt-2">
+        <v-col cols="12" sm="6">
+          <h2 class="text-center">Informasi Tagihan</h2>
 
-                      <v-list-item-title
-                        class="font-weight-black blue--text"
-                        v-if="orders.id_mst_pembayaran_status == 2"
-                      >{{ orders.pembayaran_status }}</v-list-item-title>
+          <v-card>
+            <v-list>
+              <v-list-item>
+                <v-list-item-title>Nomor Order:</v-list-item-title>
+                <v-list-item-title>{{ orders.no_order }}</v-list-item-title>
+              </v-list-item>
 
-                      <v-list-item-title
-                        class="font-weight-black red--text"
-                        v-if="orders.id_mst_pembayaran_status == 3"
-                      >{{ orders.pembayaran_status }}</v-list-item-title>
+              <v-list-item>
+                <v-list-item-title>Status:</v-list-item-title>
+                <v-list-item-title class="font-weight-black">
+                  {{ orders.pembayaran_status }}
+                </v-list-item-title>
+              </v-list-item>
 
-                      <v-list-item-title
-                        class="font-weight-black teal--text"
-                        v-if="orders.id_mst_pembayaran_status == 4"
-                      >{{ orders.pembayaran_status }}</v-list-item-title>
+              <v-list-item>
+                <v-list-item-title>Tanggal Order:</v-list-item-title>
+                <v-list-item-title>
+                  {{ orders.created_at | dateTimeFormat(utc) }}
+                  {{ timezone }}
+                </v-list-item-title>
+              </v-list-item>
 
-                      <v-list-item-title
-                        class="font-weight-black red--text"
-                        v-if="orders.id_mst_pembayaran_status == 5"
-                      >{{ orders.pembayaran_status }}</v-list-item-title>
+              <v-list-item v-if="orders.id_mst_pembayaran_status == 6">
+                <v-list-item-title>Alasan Ditolak:</v-list-item-title>
+                <v-list-item-title>{{ orders.note }}</v-list-item-title>
+              </v-list-item>
 
-                      <v-list-item-title
-                        class="font-weight-black red--text"
-                        v-if="orders.id_mst_pembayaran_status == 6"
-                      >{{ orders.pembayaran_status }}</v-list-item-title>
-                    </v-list-item>
+              <v-list-item v-if="orders.id_mst_pembayaran_note == 1">
+                <v-list-item-title>Detail Alasan:</v-list-item-title>
+                <v-list-item-title class="font-weight-black red--text">
+                  {{ orders.note_detail }}
+                </v-list-item-title>
+              </v-list-item>
 
-                    <v-list-item>
-                      <v-list-item-title>Tanggal Order:</v-list-item-title>
-                      <v-list-item-title>{{ orders.created_at | dateTimeFormat }} WIB</v-list-item-title>
-                    </v-list-item>
+              <v-list-item>
+                <v-list-item-title>Nama Penjual:</v-list-item-title>
+                <v-list-item-title>{{ orders.nama_penjual }}</v-list-item-title>
+              </v-list-item>
 
-                    <!-- <v-list-item>
-                <v-list-item-title>Status Tagihan:</v-list-item-title>
+              <v-list-item>
+                <v-list-item-title>Metode Pembayaran:</v-list-item-title>
+                <v-list-item-title>{{ orders.metode }}</v-list-item-title>
+              </v-list-item>
 
-                <v-list-item-title
-                  class="font-weight-black orange--text"
-                  v-if="orders.id_mst_pembayaran_status == 1"
-                >{{ orders.pembayaran_status }}</v-list-item-title>
-                <v-list-item-title
-                  class="font-weight-black blue--text"
-                  v-if="orders.id_mst_pembayaran_status == 2"
-                >{{ orders.pembayaran_status }}</v-list-item-title>
-                <v-list-item-title
-                  class="font-weight-black red--text"
-                  v-if="orders.id_mst_pembayaran_status == 3"
-                >{{ orders.pembayaran_status }}</v-list-item-title>
-                <v-list-item-title
-                  class="font-weight-black teal--text"
-                  v-if="orders.id_mst_pembayaran_status == 4"
-                >{{ orders.pembayaran_status }}</v-list-item-title>
-                <v-list-item-title
-                  class="font-weight-black red--text"
-                  v-if="orders.id_mst_pembayaran_status == 5"
-                >{{ orders.pembayaran_status }}</v-list-item-title>
-                <v-list-item-title
-                  class="font-weight-black red--text"
-                  v-if="orders.id_mst_pembayaran_status == 6"
-                >{{ orders.pembayaran_status }}</v-list-item-title>
-                    </v-list-item>-->
+              <v-divider></v-divider>
 
-                    <v-list-item v-if="orders.id_mst_pembayaran_status == 6">
-                      <v-list-item-title>Alasan Ditolak:</v-list-item-title>
-                      <v-list-item-title>{{ orders.note}}</v-list-item-title>
-                    </v-list-item>
+              <v-list-item>
+                <v-list-item-title>Total Harga:</v-list-item-title>
+                <v-list-item-title class="font-weight-black">
+                  Rp
+                  {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}
+                </v-list-item-title>
+              </v-list-item>
+            </v-list>
 
-                    <v-list-item v-if="orders.id_mst_pembayaran_note == 1">
-                      <v-list-item-title>Detail Alasan:</v-list-item-title>
-                      <v-list-item-title class="font-weight-black red--text">{{ orders.note_detail}}</v-list-item-title>
-                    </v-list-item>
-
-                    <v-list-item>
-                      <v-list-item-title>Nama Penjual:</v-list-item-title>
-                      <v-list-item-title>{{ orders.nama_penjual }}</v-list-item-title>
-                    </v-list-item>
-
-                    <v-list-item>
-                      <v-list-item-title>Metode Pembayaran:</v-list-item-title>
-                      <v-list-item-title>{{ orders.metode }}</v-list-item-title>
-                    </v-list-item>
-                    <v-divider></v-divider>
-                    <v-list-item>
-                      <v-list-item-title>Total Harga:</v-list-item-title>
-                      <v-list-item-title>
-                        <h3
-                          class="font-weight-black"
-                        >Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</h3>
-                      </v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-container>
-                <!-- <v-btn
+            <!-- <v-btn
                   class="d-block my-2 pa-2 primary white--text text-center"
                   :to="'/chat/' + orders.id_pembeli"
                   v-if="orders.id_penjual == user.id"
@@ -149,198 +105,275 @@
                   :to="'/chat/' + orders.id_penjual"
                   v-else
                 >Tanya Penjual</v-btn>-->
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    :to="'/chat/' + orders.id_pembeli"
-                    v-if="orders.id_penjual == user.id"
-                    class="primary darken-1 white--text"
-                  >Tanya Pembeli</v-btn>
-                  <v-btn
-                    :to="'/chat/' + orders.id_penjual"
-                    class="orange darken-1 white--text"
-                    v-else
-                  >Tanya Penjual</v-btn>
-                  <v-btn color="primary">Lihat Detail</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-flex>
-
-            <v-flex xs12 md6 lg6>
-              <h2 class="text-center">Informasi Produk</h2>
-
-              <v-card width="500" height="400" align="left">
-                <v-container fluid>
-                  <v-list>
-                    <v-list-item>
-                      <v-list-item-title>
-                        <v-img :src="getImage(iklan.photo)" contain width="150" height="150"></v-img>
-                      </v-list-item-title>
-                      <v-list-item-subtitle>
-                        <v-list-item-action>
-                          <v-btn color="#0277BD" :to="'/iklan/' + orders.id_iklan" text dark>
-                            Lihat Iklan
-                            <v-icon>mdi-arrow-right</v-icon>
-                          </v-btn>
-                        </v-list-item-action>
-                      </v-list-item-subtitle>
-                      <br />
-                    </v-list-item>
-                    <v-list-item align="center">
-                      <v-list-item-title class="font-weight-black">{{ iklan.judul }}</v-list-item-title>
-                    </v-list-item>
-
-                    <v-list-item align="center">
-                      <v-list-item-title>Jumlah:</v-list-item-title>
-                      <v-list-item-title>{{ orders.jumlah }} Unit</v-list-item-title>
-                    </v-list-item>
-                    <v-divider></v-divider>
-                    <v-list-item align="center">
-                      <v-list-item-title>Total Harga:</v-list-item-title>
-                      <v-list-item-title>
-                        <h3>Rp {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}</h3>
-                      </v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn
-                      class="teal darken-1 white--text"
-                      @click="formPenawaran"
-                      v-if="orders.id_mst_order_status != 3"
-                    >Lihat Form Penawaran</v-btn>
-
-                    <v-dialog v-model="dialog">
-                      <v-card v-html="penawaran"></v-card>
-                    </v-dialog>
-                  </v-card-actions>
-                </v-container>
-              </v-card>
-            </v-flex>
-          </v-layout>
-          <div align="center">
-            <div v-if="orders.id_mst_order_status != 3">
-              <h2 align="center">Bukti Pembayaran</h2>
-              <p
-                v-if="orders.id_penjual != user.id"
-              >Anda wajib melakukan konfirmasi pembayaran agar tiket dapat diproses.</p>
-              <p
-                v-if="orders.id_penjual == user.id"
-              >Sebelum melakukan konfirmasi, perhatikan baik-baik foto yang dikirimkan oleh pembeli.</p>
-
-              <image-uploader
-                v-model="buktiBayar"
-                :quality="0.7"
-                :scaleRatio="0.5"
-                accept="image/*"
-                :preview="false"
-                :className="['fileinput', { 'fileinput--loaded': hasImage }]"
-                :capture="false"
-                :debug="0"
-                :autoRotate="true"
-                outputFormat="blob"
-                @input="onFileChange"
-                id="foto"
-                v-if="orders.id_mst_pembayaran_status == 1 && user.id != orders.id_penjual"
-              >
-                <label for="foto" slot="upload-label">
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-card
-                        flat
-                        width="300"
-                        height="200"
-                        :color="!hasImage ? 'grey lighten-3' : 'transparent'"
-                        class="d-flex align-center justify-center"
-                        v-on="on"
-                      >
-                        <v-icon x-large v-if="!hasImage">mdi-file-upload</v-icon>
-
-                        <v-img :src="previewUrl" contain v-else></v-img>
-                      </v-card>
-                    </template>
-                    <span>Pilih Foto</span>
-                  </v-tooltip>
-                </label>
-              </image-uploader>
-
-              <v-img
-                :src="gambar"
-                contain
-                class="mx-2"
-                width="300"
-                height="200"
-                v-if="orders.id_mst_pembayaran_status > 1"
-              ></v-img>
-
-              <p>*Pastikan gambar yang diupload jelas dan terbaca</p>
-
-              <v-divider></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
 
               <v-btn
-                rounded
-                color="primary"
-                @click="upload"
-                v-if="orders.id_mst_pembayaran_status == 1 && orders.id_penjual != user.id"
-                :disabled="hasImage ? false : true"
-              >Konfirmasi Pembayaran</v-btn>
-
-              <v-btn
-                rounded
+                color="orange"
                 dark
-                color="teal"
-                @click="dialogKonfirmasi = true"
-                v-if="orders.id_mst_pembayaran_status == 4 && orders.id_penjual == user.id"
-              >Konfirmasi Pembayaran</v-btn>
+                :to="'/chat/' + orders.id_pembeli"
+                v-if="orders.id_penjual == user.id"
+              >
+                Tanya Pembeli
+              </v-btn>
 
-              <v-dialog v-model="dialogKonfirmasi" width="250" persistent>
+              <v-btn
+                color="orange"
+                dark
+                :to="'/chat/' + orders.id_penjual"
+                v-else
+              >
+                Tanya Penjual
+              </v-btn>
+
+              <v-btn color="primary" @click.stop="statusOrder = true">
+                Lihat Detail
+              </v-btn>
+
+              <v-dialog v-model="statusOrder" width="500">
                 <v-card>
-                  <v-container fluid>Yakin ingin mengkonfirmasi pembayaran berikut?</v-container>
+                  <v-card-title>Status Order</v-card-title>
 
                   <v-divider></v-divider>
 
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="red" dark @click="dialogTolak = true">Tolak</v-btn>
-                    <v-btn color="primary" dark @click="konfirmasi">Konfirmasi</v-btn>
-                  </v-card-actions>
+                  <v-timeline dense>
+                    <v-timeline-item>timeline item</v-timeline-item>
+                    <v-timeline-item> timeline item </v-timeline-item>
+                    <v-timeline-item>timeline item</v-timeline-item>
+                  </v-timeline>
                 </v-card>
               </v-dialog>
+            </v-card-actions>
+          </v-card>
+        </v-col>
 
-              <v-dialog v-model="dialogTolak" persistent max-width="500px">
-                <v-card>
-                  <v-toolbar dark color="teal darken-3">
-                    <v-toolbar-title>Tolak Serah Terima</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-btn icon @click="dialogTolak = false">
-                      <v-icon>mdi-close</v-icon>
-                    </v-btn>
-                  </v-toolbar>
+        <v-col cols="12" sm="6">
+          <h2 class="text-center">Informasi Produk</h2>
 
-                  <v-select
-                    v-model="note"
-                    :items="noteTolak"
-                    item-text="note"
-                    item-value="id"
-                    label="Alasan Tolak (Wajib Dipilih)"
-                    solo
-                    class="px-2 pt-2"
-                  ></v-select>
+          <v-card height="357">
+            <br />
+            <br />
+            <v-list>
+              <v-list-item>
+                <v-list-item-avatar tile size="100">
+                  <v-img :src="getImage(iklan.photo)" contain></v-img>
+                </v-list-item-avatar>
 
-                  <v-card-text v-if="note == 1">
-                    <v-textarea label="Alasan Menolak" v-model="noteDetail" rows="1" auto-grow></v-textarea>
-                  </v-card-text>
+                <v-list-item-content>
+                  <v-list-item-title class="font-weight-bold">
+                    {{ iklan.judul }}
+                  </v-list-item-title>
 
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="red darken-1" dark @click="dialogTolak = false">Cancel</v-btn>
-                    <v-btn color="blue darken-1" dark @click="konfirmasiTolak">Tolak</v-btn>
-                  </v-card-actions>
-                </v-card>
+                  <v-list-item-subtitle class="teal--text">
+                    Rp {{ Number(orders.harga).toLocaleString("id-ID") }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+
+                <v-list-item-action>
+                  <v-btn
+                    text
+                    color="primary"
+                    dark
+                    :to="'/iklan/' + orders.id_iklan"
+                  >
+                    Lihat Iklan
+                    <v-icon right>mdi-chevron-right</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </v-list-item>
+
+              <v-list-item align="center">
+                <v-list-item-title>Jumlah:</v-list-item-title>
+                <v-list-item-title>{{ orders.jumlah }} Unit</v-list-item-title>
+              </v-list-item>
+
+              <v-divider></v-divider>
+
+              <v-list-item align="center">
+                <v-list-item-title>Total Harga:</v-list-item-title>
+                <v-list-item-title class="font-weight-bold">
+                  Rp
+                  {{ Number(orders.total_pembayaran).toLocaleString("id-ID") }}
+                </v-list-item-title>
+              </v-list-item>
+            </v-list>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn
+                color="teal"
+                dark
+                @click="formPenawaran"
+                v-if="orders.id_mst_order_status != 3"
+                >Lihat Form Penawaran</v-btn
+              >
+
+              <v-dialog v-model="dialog">
+                <v-card v-html="penawaran"></v-card>
               </v-dialog>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
 
-              <!-- <v-dialog v-model="dialogTerima" persistent max-width="500px">
+      <br />
+
+      <div align="center">
+        <div
+          v-if="
+            orders.id_mst_order_status != 3 &&
+            orders.id_mst_pembayaran_status != 10
+          "
+        >
+          <h2 align="center">Bukti Pembayaran</h2>
+          <p v-if="orders.id_penjual != user.id">
+            Anda wajib melakukan konfirmasi pembayaran agar tiket dapat
+            diproses.
+          </p>
+          <p v-if="orders.id_penjual == user.id">
+            Sebelum melakukan konfirmasi, perhatikan baik-baik foto yang
+            dikirimkan oleh pembeli.
+          </p>
+
+          <image-uploader
+            v-model="buktiBayar"
+            :quality="0.7"
+            :scaleRatio="0.5"
+            accept="image/*"
+            :preview="false"
+            :className="['fileinput', { 'fileinput--loaded': hasImage }]"
+            :autoRotate="true"
+            outputFormat="blob"
+            @input="onFileChange"
+            id="foto"
+            v-if="
+              orders.id_mst_pembayaran_status == 1 &&
+              user.id != orders.id_penjual
+            "
+          >
+            <label for="foto" slot="upload-label">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-card
+                    flat
+                    width="300"
+                    height="200"
+                    :color="!hasImage ? 'grey lighten-3' : 'transparent'"
+                    class="d-flex align-center justify-center"
+                    v-on="on"
+                  >
+                    <v-icon x-large v-if="!hasImage">mdi-file-upload</v-icon>
+
+                    <v-img :src="previewUrl" contain v-else></v-img>
+                  </v-card>
+                </template>
+                <span>Pilih Foto</span>
+              </v-tooltip>
+            </label>
+          </image-uploader>
+
+          <v-img
+            :src="gambar"
+            contain
+            class="mx-2"
+            width="300"
+            height="200"
+            v-if="orders.id_mst_pembayaran_status > 1"
+          ></v-img>
+
+          <p>*Pastikan gambar yang diupload jelas dan terbaca</p>
+
+          <v-divider></v-divider>
+
+          <v-btn
+            rounded
+            color="primary"
+            @click="upload"
+            v-if="
+              orders.id_mst_pembayaran_status == 1 &&
+              orders.id_penjual != user.id
+            "
+            :disabled="hasImage ? false : true"
+          >
+            Konfirmasi Pembayaran
+          </v-btn>
+
+          <v-btn
+            rounded
+            dark
+            color="teal"
+            @click="dialogKonfirmasi = true"
+            v-if="
+              orders.id_mst_pembayaran_status == 4 &&
+              orders.id_penjual == user.id
+            "
+          >
+            Konfirmasi Pembayaran
+          </v-btn>
+
+          <v-dialog v-model="dialogKonfirmasi" width="250" persistent>
+            <v-card>
+              <v-container fluid>
+                Yakin ingin mengkonfirmasi pembayaran berikut?
+              </v-container>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="red" dark @click="dialogTolak = true">
+                  Tolak
+                </v-btn>
+                <v-btn color="primary" dark @click="konfirmasi">
+                  Konfirmasi
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
+          <v-dialog v-model="dialogTolak" persistent max-width="500px">
+            <v-card>
+              <v-toolbar dark color="teal darken-3">
+                <v-toolbar-title>Tolak Serah Terima</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon @click="dialogTolak = false">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </v-toolbar>
+
+              <v-select
+                v-model="note"
+                :items="noteTolak"
+                item-text="note"
+                item-value="id"
+                label="Alasan Tolak (Wajib Dipilih)"
+                solo
+                class="px-2 pt-2"
+              ></v-select>
+
+              <v-card-text v-if="note == 1">
+                <v-textarea
+                  label="Alasan Menolak"
+                  v-model="noteDetail"
+                  rows="1"
+                  auto-grow
+                ></v-textarea>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="red darken-1" dark @click="dialogTolak = false">
+                  Cancel
+                </v-btn>
+                <v-btn color="blue darken-1" dark @click="konfirmasiTolak">
+                  Tolak
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
+          <!-- <v-dialog v-model="dialogTerima" persistent max-width="500px">
                 <v-card>
                   <v-toolbar dark color="teal darken-3">
                     <v-toolbar-title>Terima Moderasi</v-toolbar-title>
@@ -357,12 +390,10 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>-->
-            </div>
-          </div>
-        </v-container>
-      </v-card>
-    </div>
-  </div>
+        </div>
+      </div>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -373,13 +404,13 @@ import ImageUploader from "vue-image-upload-resize";
 
 export default {
   name: "detailTransaksi",
+  props: ["utc", "timezone"],
   components: { FlipCountdown, ImageUploader },
   data: () => ({
     orders: [],
     iklans: 0,
     countdown: 0,
-    utc: moment().utcOffset() / 60 - 7,
-    waktu: "",
+    statusOrder: false,
     buktiBayar: null,
     previewUrl: "",
     hasImage: false,
@@ -418,7 +449,9 @@ export default {
 
           this.getIklan(this.orders.id_iklan);
 
-          this.dtlPembayaran();
+          if (this.id_mst_pembayaran_status == 4) {
+            this.dtlPembayaran();
+          }
 
           if (
             this.user.id != this.orders.id_pembeli &&
@@ -629,16 +662,6 @@ export default {
   mounted() {
     this.getOrder();
     this.detailTolak();
-
-    if (this.utc == 0) {
-      this.waktu = "WIB";
-    }
-    if (this.utc == 1) {
-      this.waktu = "WITA";
-    }
-    if (this.utc == 2) {
-      this.waktu = "WIT";
-    }
   },
   computed: {
     ...mapGetters({

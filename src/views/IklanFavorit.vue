@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="teal" dark>
+    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -10,7 +10,7 @@
 
     <v-container fluid class="ma-0 pa-0" grid-list-sm>
       <v-row>
-        <v-col cols="6" sm="2" md="3" v-for="item in hits" :key="item._source.id">
+        <v-col cols="6" sm="3" lg="2" v-for="item in hits" :key="item._source.id">
           <list-iklan :item="item" />
         </v-col>
       </v-row>

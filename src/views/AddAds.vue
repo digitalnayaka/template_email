@@ -627,7 +627,8 @@ export default {
                 color: "success",
                 text: data.api_message,
               });
-              this.$router.push("/iklan/" + data.data.id);
+              // this.$router.push("/iklan/" + data.data.id);
+              window.location.href = "/iklan/" + data.data.id;
             })
             .catch((error) => {
               let responses = error.response.data;
@@ -679,7 +680,8 @@ export default {
                 color: "success",
                 text: data.api_message,
               });
-              this.$router.push("/iklan/" + data.data.id);
+              // this.$router.push("/iklan/" + data.data.id);
+               window.location.href = "/iklan/" + data.data.id;
             })
             .catch((error) => {
               let responses = error.response.data;
@@ -735,7 +737,8 @@ export default {
                 color: "success",
                 text: data.api_message,
               });
-              this.$router.push("/iklan/" + data.data.id);
+              // this.$router.push("/iklan/" + data.data.id);
+               window.location.href = "/iklan/" + data.data.id;
             })
             .catch((error) => {
               let responses = error.response.data;

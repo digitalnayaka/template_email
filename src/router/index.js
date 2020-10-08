@@ -62,22 +62,6 @@ const routes = [
     }
   },
   {
-    path: '/chat/:id',
-    name: 'chat',
-    component: () => import(/* webpackChunkName: "chat" */ '../views/Chat.vue'),
-    meta: {
-      Auth: true
-    }
-  },
-  {
-    path: '/chat-list',
-    name: 'ChatList',
-    component: () => import(/* webpackChunkName: "chat-list" */ '../views/ChatList.vue'),
-    meta: {
-      Auth: true
-    }
-  },
-  {
     path: '/iklan-favorit',
     name: 'IklanFavorit',
     component: () => import(/* webpackChunkName: "iklan-favorit" */ '../views/IklanFavorit.vue'),
@@ -86,9 +70,9 @@ const routes = [
     }
   },
   {
-    path: '/tawar-bersama',
-    name: 'TransaksiTB',
-    component: () => import(/* webpackChunkName: "tawar-bersama" */ '../views/TawarBersama.vue'),
+    path: '/activity/buyer',
+    name: 'BuyerActivity',
+    component: () => import(/* webpackChunkName: "buyer-activity" */ '../views/BuyerActivity.vue'),
     meta: {
       Auth: true
     }
@@ -149,15 +133,6 @@ const routes = [
     }
   },
   {
-    path: '/toko/review',
-    name: 'Review',
-    component: () => import(/* webpackChunkName: "review" */ '../views/Review.vue'),
-    meta: {
-      Auth: true
-    }
-  },
-
-  {
     path: '/beri-ulasan',
     name: 'beri-ulasan',
     component: () => import(/* webpackChunkName: "beri-ulasan" */ '../views/TulisReview.vue'),
@@ -203,6 +178,22 @@ const routes = [
     component: () => import(/* webpackChunkName: "account" */ '../views/Account.vue'),
     children: [
       {
+        path: '/chat-list',
+        name: 'ChatList',
+        component: () => import(/* webpackChunkName: "chat-list" */ '../views/ChatList.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
+        path: '/chat/:id',
+        name: 'chat',
+        component: () => import(/* webpackChunkName: "chat" */ '../views/Chat.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
         path: '/account/edit',
         name: 'profile',
         component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
@@ -238,6 +229,14 @@ const routes = [
         path: '/toko/order',
         name: 'Order',
         component: () => import(/* webpackChunkName: "order" */ '../views/Order.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
+        path: '/toko/review',
+        name: 'Review',
+        component: () => import(/* webpackChunkName: "review" */ '../views/Review.vue'),
         meta: {
           Auth: true
         }
@@ -304,6 +303,22 @@ const routes = [
     path: '/aktivitas-iklan',
     name: 'AktivitasIklan',
     component: () => import(/* webpackChunkName: "aktivitas-iklan" */ '../views/AktivitasIklan.vue'),
+    meta: {
+      Auth: true
+    }
+  },
+  {
+    path: '/notification',
+    name: 'Notifikasi',
+    component: () => import(/* webpackChunkName: "notification" */ '../views/Notifikasi.vue'),
+    meta: {
+      Auth: true
+    }
+  },
+  {
+    path: '/favourite',
+    name: 'Favourite',
+    component: () => import(/* webpackChunkName: "favourite" */ '../views/IklanFavorit.vue'),
     meta: {
       Auth: true
     }
