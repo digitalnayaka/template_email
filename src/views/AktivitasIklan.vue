@@ -22,7 +22,7 @@
           <v-card
             v-for="item in tawarBersama"
             :key="item.id_iklan"
-            :to="item.id_mst_pembayaran_status == 0 ? '/detail_iklan/' + item.id : '/detail_transaksi/' + item.id_order"
+            :to="item.id_mst_pembayaran_status == 0 ? '/iklan/' + item.id : '/detail-transaksi/' + item.id_order"
             class="my-4"
           >
             <v-toolbar dense flat>

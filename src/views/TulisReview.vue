@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card>
     <v-app-bar app color="teal" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
@@ -63,5 +63,5 @@
       
     </div>
     
-  </div>
+  </v-card>
 </template>

@@ -1,15 +1,19 @@
 <template>
 <nav>
   <v-container fluid>
-    <!-- <v-toolbar flat app>
-      <v-toolbar-side-icon class="grey--text" @click="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title class="text-uppercase grey--text">
-        <span>Menu</span>
-      </v-toolbar-title>
-    </v-toolbar> -->
+    <div class="d-flex d-sm-none">
+      <v-app-bar app color="teal" dark>
+        <v-btn icon @click.stop="$router.go(-1)">
+          <v-icon>mdi-arrow-left-circle</v-icon>
+        </v-btn>
 
-    <v-navigation-drawer app clipped v-model="drawer">
-      
+        <v-spacer></v-spacer>
+
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      </v-app-bar>
+    </div>
+
+    <v-navigation-drawer v-model="drawer" app clipped>
       <template v-slot:prepend>
         <v-list two-line>
           <v-list-item>
@@ -73,7 +77,7 @@
     </v-navigation-drawer>
 
     <v-slide-y-transition>
-      <router-view></router-view>
+      <router-view :utc="utc" :timezone="timezone"></router-view>
     </v-slide-y-transition>
   </v-container>
 </nav>
@@ -84,7 +88,9 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "account",
+  props: ["utc", "timezone"],
   data: () => ({
+    drawer: true,
     menu: 0,
     drawer: true,
     items: [

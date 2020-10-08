@@ -4,36 +4,6 @@
       <v-btn icon @click.stop="back">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
-
-      <v-spacer></v-spacer>
-
-      <div v-if="!guest">
-        <div
-          v-if="user.id == iklan.id_app_user && hits.id_mst_iklan_status == 1"
-        >
-          <v-btn icon>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn icon class="mx-2" v-on="on" @click="deleteIklan">
-                  <v-icon>mdi-trash-can</v-icon>
-                </v-btn>
-              </template>
-              <span>Delete</span>
-            </v-tooltip>
-          </v-btn>
-
-          <v-btn icon>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn icon class="mx-2" v-on="on" :to="'/edit_iklan/' + id">
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-              <span>Edit</span>
-            </v-tooltip>
-          </v-btn>
-        </div>
-      </div>
     </v-app-bar>
 
     <v-breadcrumbs :items="items" class="pa-0 d-none d-sm-flex">
@@ -80,7 +50,7 @@
             inline
           ></star-rating>
           <v-icon>mdi-circle-medium</v-icon>
-          <span>{{ iklan.log_iklan_view }}x Dilihat</span>
+          <span v-if="iklan.log_iklan_view > 0">{{ iklan.log_iklan_view }}x Dilihat</span>
         </div>
 
         <v-divider class="mt-2"></v-divider>
@@ -129,75 +99,6 @@
         </v-row>
 
         <v-divider></v-divider>
-
-        <div align="center" v-if="start == true && end == true">
-          <h2 class="teal--text" v-if="hits.id_mst_iklan_jenis > 1">
-            Tawar Bersama selesai
-          </h2>
-
-          <div v-if="!guest">
-            <v-btn
-              color="teal"
-              dark
-              @click="dialogInfo = true"
-              class="mx-2"
-              v-if="
-                liveBid.length > 0 &&
-                (liveBid[0].IdAppUser == user.id ||
-                  iklan.id_app_user == user.id)
-              "
-              >{{
-                liveBid[0].IdAppUser == user.id
-                  ? "Anda menang, klik disini"
-                  : "Info Pemenang"
-              }}</v-btn
-            >
-
-            <v-dialog v-model="dialogInfo" persistent max-width="500px">
-              <v-card>
-                <v-toolbar color="teal darken-3" dark>
-                  <v-toolbar-title>Info Pemenang Iklan</v-toolbar-title>
-
-                  <div class="flex-grow-1"></div>
-
-                  <v-btn icon @click="dialogInfo = false">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                </v-toolbar>
-
-                <div v-if="!guest">
-                  <v-card-title v-if="hits.id_app_user == user.id"
-                    >Segera hubungi pemenang iklan Anda</v-card-title
-                  >
-                </div>
-
-                <v-btn
-                  value="left"
-                  tile
-                  color="white"
-                  v-if="liveBid.length > 0"
-                >
-                  <div v-if="!guest">
-                    <a
-                      :href="'/chat/' + iklan.id_app_user"
-                      v-if="liveBid[0].IdAppUser == user.id"
-                      >Chat Penjual</a
-                    >
-                  </div>
-                  <a :href="'/chat/' + liveBid[0].IdAppUser" v-else
-                    >Chat Pemenang</a
-                  >
-                </v-btn>
-
-                <v-btn value="center" tile color="white">
-                  <a :href="'/detail_transaksi/' + orders.id"
-                    >Detail Transaksi</a
-                  >
-                </v-btn>
-              </v-card>
-            </v-dialog>
-          </div>
-        </div>
 
         <!-- <div class="mt-2">
           <div class="font-weight-bold text-h6 blue-grey--text">Deskripsi</div>
@@ -521,7 +422,7 @@
                     </v-btn>
 
                     <v-btn value="center" tile color="white">
-                      <a :href="'/detail_transaksi/' + orders.id"
+                      <a :href="'/detail-transaksi/' + orders.id"
                         >Detail Transaksi</a
                       >
                     </v-btn>
