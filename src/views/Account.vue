@@ -92,7 +92,6 @@ export default {
   data: () => ({
     drawer: true,
     menu: 0,
-    drawer: true,
     items: [
       {
         icon: "mdi-garage",
