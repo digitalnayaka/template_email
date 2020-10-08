@@ -34,7 +34,7 @@
 
       <v-list dense>
         <v-list-item-group v-model="menu" color="primary">
-          <v-list-item to="/account/edit">
+          <!-- <v-list-item to="/account/edit">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
@@ -42,42 +42,94 @@
             <v-list-item-content>
               <v-list-item-title>Profile</v-list-item-title>
             </v-list-item-content>
-          </v-list-item>
+          </v-list-item> -->
 
-          <v-list-item to="/chat-list">
-            <v-list-item-icon>
-              <v-icon>mdi-chat-outline</v-icon>
-            </v-list-item-icon>
+          <div v-for="item in items" :key="item.id">
+            <v-list-item :to="item.route" v-if="item.id == 1">
+              <v-list-item-icon>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>Chat</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-group
+              v-if="item.id == 2 || item.id == 3"
+              :prepend-icon="item.icon"
+              no-action
+            >
+              <template v-slot:activator>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </template>
+
+              <v-list-item
+                v-for="subItem in item.items"
+                :key="subItem.title"
+                :to="subItem.route"
+              >
+                <v-list-item-content>
+                  <v-list-item-title>{{ subItem.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-group>
+
+            <v-list-group v-if="item.id == 4" :prepend-icon="item.icon">
+              <template v-slot:activator>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </template>
+
+              <v-list-group
+                v-for="item in penjualan"
+                :key="item.title"
+                no-action
+                sub-group
+              >
+                <template v-slot:activator>
+                  <v-list-item-content>
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                  </v-list-item-content>
+
+                  <v-list-item-icon>
+                    <v-icon>{{ item.icon }}</v-icon>
+                  </v-list-item-icon>
+                </template>
+
+                <v-list-item
+                  v-for="subItem in item.items"
+                  :key="subItem.title"
+                  :value="subItem.route"
+                  :to="subItem.route"
+                >
+                  <v-list-item-content>
+                    <v-list-item-title>{{ subItem.title }}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-group>
+            </v-list-group>
+
+            <v-list-group
+              v-if="item.id == 5"
+              :prepend-icon="item.icon"
+              no-action
+            >
+              <template v-slot:activator>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </template>
+
+              <v-list-item
+                v-for="subItem in item.items"
+                :key="subItem.title"
+                :to="subItem.route"
+              >
+                <v-list-item-content>
+                  <v-list-item-title>{{ subItem.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-group>
+          </div>
         </v-list-item-group>
-
-        <v-list-group
-          v-for="item in items"
-          :key="item.title"
-          v-model="item.active"
-          :prepend-icon="item.icon"
-          no-action
-        >
-          <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </template>
-
-          <v-list-item
-            v-for="subItem in item.items"
-            :key="subItem.title"
-            :to="subItem.route"
-          >
-            <v-list-item-content>
-              <v-list-item-title>{{ subItem.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-group>
       </v-list>
     </v-navigation-drawer>
 
@@ -98,8 +150,46 @@ export default {
     menu: 0,
     items: [
       {
+        id: 1,
+        icon: "mdi-account",
+        title: "Profile",
+        route: "/account/edit",
+      },
+      {
+        id: 2,
+        icon: "mdi-email-multiple",
+        title: "Kotak Masuk",
+        items: [
+          { title: "Chat", route: "/chat-list" },
+          { title: "Ulasan", route: "/product/review" },
+          { title: "Notifikasi", route: "/notification" },
+        ],
+      },
+      {
+        id: 3,
+        icon: "mdi-shopping",
+        title: "Pembelian",
+        items: [{ title: "Daftar Transaksi", route: "/activity/buyer" }],
+      },
+      {
+        id: 4,
+        icon: "mdi-currency-usd-circle",
+        title: "Penjualan",
+      },
+      {
+        id: 5,
+        icon: "mdi-help",
+        title: "About Us",
+        items: [
+          { title: "Tentang SiMotor", route: "/about" },
+          { title: "Bantuan", route: "/bantuan" },
+        ],
+      },
+    ],
+    penjualan: [
+      {
         icon: "mdi-garage",
-        title: "Unit",
+        title: "Garasi",
         items: [
           { title: "Tambah Unit", route: "/garasi/add-unit" },
           { title: "Daftar Unit", route: "/garasi/manage-unit" },
@@ -127,14 +217,6 @@ export default {
         items: [
           { title: "Ulasan", route: "/toko/review" },
           { title: "Komplain", route: "/toko/manage-ads" },
-        ],
-      },
-      {
-        icon: "mdi-help",
-        title: "Tentang SiMotor",
-        items: [
-          { title: "Tentang SiMotor", route: "/about" },
-          { title: "Bantuan", route: "/bantuan" },
         ],
       },
     ],

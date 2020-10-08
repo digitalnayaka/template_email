@@ -28,7 +28,7 @@
 
         <v-card flat color="grey lighten-3">
           Sebelum: {{ orders.expired_at | dateTimeFormat(utc) }}
-          {{ waktu }}
+          {{ timezone }}
         </v-card>
       </v-container>
 
@@ -217,6 +217,16 @@
         </v-col>
       </v-row>
 
+      <v-btn
+        block
+        color="primary"
+        class="mt-4"
+        @click="konfirmasiPenjual"
+        v-if="orders.id_mst_pembayaran_status == 10"
+      >
+        Konfirmasi Penjualan
+      </v-btn>
+
       <br />
 
       <div align="center">
@@ -227,10 +237,12 @@
           "
         >
           <h2 align="center">Bukti Pembayaran</h2>
+
           <p v-if="orders.id_penjual != user.id">
             Anda wajib melakukan konfirmasi pembayaran agar tiket dapat
             diproses.
           </p>
+
           <p v-if="orders.id_penjual == user.id">
             Sebelum melakukan konfirmasi, perhatikan baik-baik foto yang
             dikirimkan oleh pembeli.
@@ -258,7 +270,7 @@
                   <v-card
                     flat
                     width="300"
-                    height="200"
+                    height="300"
                     :color="!hasImage ? 'grey lighten-3' : 'transparent'"
                     class="d-flex align-center justify-center"
                     v-on="on"
@@ -287,8 +299,9 @@
           <v-divider></v-divider>
 
           <v-btn
-            rounded
+            block
             color="primary"
+            class="mt-4"
             @click="upload"
             v-if="
               orders.id_mst_pembayaran_status == 1 &&
@@ -449,7 +462,7 @@ export default {
 
           this.getIklan(this.orders.id_iklan);
 
-          if (this.id_mst_pembayaran_status == 4) {
+          if (this.orders.id_mst_pembayaran_status == 4) {
             this.dtlPembayaran();
           }
 
@@ -483,6 +496,32 @@ export default {
           let responses = error.response.data;
           console.log(responses);
         });
+    },
+    konfirmasiPenjual() {
+      var r = confirm("Yakin ingin mengkonfirmasi penjualan berikut?");
+      if (r == true) {
+        let formData = new FormData();
+
+        formData.set("id", this.orders.id);
+
+        this.axios
+          .post("/transaksi/v3/konfirmasi_persetujuan_penjual", formData, {
+            headers: { Authorization: "Bearer " + this.user.token },
+          })
+          .then((response) => {
+            let { data } = response;
+            this.setAlert({
+              status: true,
+              color: "success",
+              text: data.api_message,
+            });
+            this.getOrder();
+          })
+          .catch((error) => {
+            let responses = error.response.data;
+            console.log(responses);
+          });
+      }
     },
     onFileChange() {
       if (!this.buktiBayar) {
