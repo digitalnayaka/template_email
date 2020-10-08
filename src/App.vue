@@ -307,6 +307,10 @@
         </v-slide-y-transition>
       </v-container>
     </v-main>
+
+    <v-footer>
+      <Footer />
+    </v-footer>
   </v-app>
 </template>
 
@@ -329,6 +333,8 @@ export default {
       import(/* webpackChunkName: "login" */ "@/components/Login.vue"),
     Daftar: () =>
       import(/* webpackChunkName: "daftar" */ "@/components/Daftar.vue"),
+    Footer: () =>
+      import(/* webpackChunkName: "footer" */ "@/components/Footer.vue"),
   },
   data: () => ({
     countNotif: 0,

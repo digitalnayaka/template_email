@@ -56,9 +56,9 @@
 
               <v-list-item-content>
                 <v-btn small color="teal" dark rounded>
-                  <v-list-item-title>{{
-                    item.date | dateFormat
-                  }}</v-list-item-title>
+                  <v-list-item-title>
+                    {{ item.date | dateFormat }}
+                  </v-list-item-title>
                 </v-btn>
               </v-list-item-content>
             </v-list-item>
@@ -203,8 +203,6 @@
             </div>
           </v-col>
         </v-row>
-
-        <h5>2020 © Digital Nayaka Abhinaya. All Rights Reserved.</h5>
       </div>
     </v-container>
 

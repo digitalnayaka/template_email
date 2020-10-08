@@ -234,6 +234,14 @@ const routes = [
         }
       },
       {
+        path: '/toko/info',
+        name: 'InformasiPenjual',
+        component: () => import(/* webpackChunkName: "informasi-penjual" */ '../views/InfoPenjual.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
         path: '/toko/order',
         name: 'Order',
         component: () => import(/* webpackChunkName: "order" */ '../views/Order.vue'),

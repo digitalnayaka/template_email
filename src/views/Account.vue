@@ -1,4 +1,5 @@
 <template>
+<nav>
   <v-container fluid>
     <div class="d-flex d-sm-none">
       <v-app-bar app color="teal" dark>
@@ -22,9 +23,7 @@
 
             <v-list-item-content>
               <v-list-item-title>{{ user.nama }}</v-list-item-title>
-              <v-list-item-subtitle v-if="user.id_mst_user_type == 2"
-                >{{ user.user_type }} User</v-list-item-subtitle
-              >
+              <v-list-item-subtitle v-if="user.id_mst_user_type == 2">{{ user.user_type }} User</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -40,7 +39,7 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>Profile</v-list-item-title>
+              <v-list-item-title>Profil</v-list-item-title>
             </v-list-item-content>
           </v-list-item> -->
 
@@ -137,6 +136,7 @@
       <router-view :utc="utc" :timezone="timezone"></router-view>
     </v-slide-y-transition>
   </v-container>
+</nav>
 </template>
 
 <script>
@@ -207,7 +207,8 @@ export default {
         icon: "mdi-clipboard-text",
         title: "Penjualan",
         items: [
-          { title: "List Penjualan", route: "/toko/order" },
+          { title: "Informasi Penjual", route: "/toko/info" },
+          { title: "List Penjualan", route: "/toko/add-ads" },
           { title: "Report", route: "/report" },
         ],
       },

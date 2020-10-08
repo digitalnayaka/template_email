@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="teal" dark>
+    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -9,13 +9,26 @@
     <v-tabs background-color="teal" dark grow>
       <v-tabs-slider color="yellow"></v-tabs-slider>
       <v-tab>Berlangsung</v-tab>
-      <v-tab>Selesai</v-tab>
+      <v-tab>Riwayat</v-tab>
 
       <v-tab-item>
+          <br/>
+        <v-text-field
+          outlined
+          dense
+          hide-details
+          flat
+          label="Search"
+          prepend-inner-icon="mdi-magnify"
+          autofocus
+          clearable
+          class="mr-2"
+        ></v-text-field>
+
         <v-card
           v-for="item in berlangsung"
           :key="item.id_iklan"
-          :to="'/detail_iklan/' + item.id_iklan"
+          :to="'/iklan/' + item.id_iklan"
           class="my-4"
         >
           <v-toolbar dense flat>
@@ -63,10 +76,22 @@
       </v-tab-item>
 
       <v-tab-item>
+          <br/>
+          <v-text-field
+          outlined
+          dense
+          hide-details
+          flat
+          label="Search"
+          prepend-inner-icon="mdi-magnify"
+          autofocus
+          clearable
+          class="mr-2"
+        ></v-text-field>
         <v-card
           v-for="item in selesai"
           :key="item.id_iklan"
-          :to="item.id_order == 0 ? '/tawar_bersama_selesai/' + item.id_iklan : '/detail-transaksi/' + item.id_order"
+          :to="item.id_order == 0 ? '/tb-selesai/' + item.id_iklan : '/detail-transaksi/' + item.id_order"
           class="my-4"
         >
           <v-toolbar dense flat>
@@ -157,7 +182,7 @@ export default {
   methods: {
     getTBBerlangsung() {
       this.axios
-        .get("/bid/v3/iklan_tb_peserta", {
+        .get("/bid/v3/aktivitas_pembeli_berlangsung", {
           params: {
             id_app_user: this.user.id,
             id_mst_iklan_status: 1,
@@ -195,7 +220,7 @@ export default {
       };
 
       this.axios
-        .get("/bid/v3/iklan_tb_peserta", request)
+        .get("/bid/v3/aktivitas_pembeli_riwayat", request)
         .then((response) => {
           let { data } = response.data;
           this.selesai = data;
