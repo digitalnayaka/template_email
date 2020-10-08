@@ -1,12 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      clipped-left
-      color="teal"
-      dark
-      v-if="$vuetify.breakpoint.smAndUp || isHome"
-    >
+    <v-app-bar app clipped-left color="teal" dark v-if="$vuetify.breakpoint.smAndUp || isHome">
       <v-toolbar-title style="width: 230px" class="ml-0 pl-4">
         <a href="/">
           <v-img src="/img/logo-tulisan.png" width="200" contain></v-img>
@@ -30,16 +24,14 @@
           :x-small="$vuetify.breakpoint.xsOnly ? true : false"
           class="mx-2"
           @click="setDialogComponent('login')"
-          >Masuk</v-btn
-        >
+        >Masuk</v-btn>
 
         <v-btn
           rounded
           :x-small="$vuetify.breakpoint.xsOnly ? true : false"
           color="green accent-4"
           @click="setDialogComponent('daftar')"
-          >Daftar</v-btn
-        >
+        >Daftar</v-btn>
       </div>
 
       <div class="d-flex align-center" v-else>
@@ -56,7 +48,7 @@
             <v-icon>mdi-bell-outline</v-icon>
           </v-badge>
           <v-icon v-else>mdi-bell-outline</v-icon>
-        </v-btn> -->
+        </v-btn>-->
 
         <v-menu
           :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
@@ -80,17 +72,12 @@
 
           <v-card width="330">
             <v-card flat to="/notification">
-              <v-card-title> Notifikasi </v-card-title>
+              <v-card-title>Notifikasi</v-card-title>
             </v-card>
 
             <v-divider></v-divider>
 
-            <v-tabs
-              v-model="tab2"
-              grow
-              slider-color="teal"
-              @change="content = false"
-            >
+            <v-tabs v-model="tab2" grow slider-color="teal" @change="content = false">
               <v-tab class="text-caption">Pembelian</v-tab>
               <v-tab class="text-caption">Penjualan</v-tab>
             </v-tabs>
@@ -116,9 +103,7 @@
                     </v-btn>
                   </div>
 
-                  <div
-                    class="d-flex justify-space-around text-center text-caption"
-                  >
+                  <div class="d-flex justify-space-around text-center text-caption">
                     <div>Menunggu Persetujuan</div>
                     <div>Menunggu Pembayaran</div>
                     <div>Menunggu Verifikasi</div>
@@ -147,9 +132,7 @@
                     </v-btn>
                   </div>
 
-                  <div
-                    class="d-flex justify-space-around text-center text-caption"
-                  >
+                  <div class="d-flex justify-space-around text-center text-caption">
                     <div>Menunggu Persetujuan</div>
                     <div>Menunggu Pembayaran</div>
                     <div>Menunggu Verifikasi</div>
@@ -180,9 +163,11 @@
               <v-avatar size="32px" item>
                 <v-img :src="getImage(user.photo)" alt="Avatar"></v-img>
               </v-avatar>
-              <span class="text-caption mx-2">{{
+              <span class="text-caption mx-2">
+                {{
                 user.nama.split(" ", 1)[0]
-              }}</span>
+                }}
+              </span>
             </v-btn>
           </template>
 
@@ -195,21 +180,14 @@
 
                 <v-list-item-content>
                   <v-list-item-title>{{ user.nama }}</v-list-item-title>
-                  <v-list-item-subtitle v-if="user.id_mst_user_type == 2"
-                    >{{ user.user_type }} User</v-list-item-subtitle
-                  >
+                  <v-list-item-subtitle v-if="user.id_mst_user_type == 2">{{ user.user_type }} User</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
 
             <v-divider></v-divider>
 
-            <v-tabs
-              v-model="tab"
-              grow
-              slider-color="teal"
-              @change="content = false"
-            >
+            <v-tabs v-model="tab" grow slider-color="teal" @change="content = false">
               <v-tab class="text-caption">Penjualan</v-tab>
               <v-tab class="text-caption">Aktivitas</v-tab>
             </v-tabs>
@@ -219,17 +197,11 @@
                 <v-row no-gutters>
                   <v-col cols="6">
                     <v-list dense>
-                      <v-list-item
-                        to="/garasi/add-unit"
-                        @click="content = true"
-                      >
+                      <v-list-item to="/garasi/add-unit" @click="content = true">
                         <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
                       </v-list-item>
 
-                      <v-list-item
-                        to="/garasi/manage-unit"
-                        @click="content = true"
-                      >
+                      <v-list-item to="/garasi/manage-unit" @click="content = true">
                         <v-list-item-subtitle>Garasi</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
@@ -238,18 +210,11 @@
                   <v-col cols="6">
                     <v-list dense>
                       <v-list-item to="/toko/add-ads" @click="content = true">
-                        <v-list-item-subtitle
-                          >Tambah Iklan</v-list-item-subtitle
-                        >
+                        <v-list-item-subtitle>Tambah Iklan</v-list-item-subtitle>
                       </v-list-item>
 
-                      <v-list-item
-                        to="/toko/manage-ads"
-                        @click="content = true"
-                      >
-                        <v-list-item-subtitle
-                          >Daftar Iklan</v-list-item-subtitle
-                        >
+                      <v-list-item to="/toko/manage-ads" @click="content = true">
+                        <v-list-item-subtitle>Daftar Iklan</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
                   </v-col>
@@ -291,12 +256,7 @@
         transition="dialogbottom-transition"
         persistent
       >
-        <component
-          :is="currentComponent"
-          :utc="utc"
-          :timezone="waktu"
-          @closed="setDialogStatus"
-        ></component>
+        <component :is="currentComponent" :utc="utc" :timezone="waktu" @closed="setDialogStatus"></component>
       </v-dialog>
     </keep-alive>
 
@@ -307,11 +267,9 @@
         </v-slide-y-transition>
       </v-container>
     </v-main>
- <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-      <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
-    </v-btn>
+
     <v-footer>
-      <Footer/>
+      <Footer />
     </v-footer>
   </v-app>
 </template>
@@ -335,8 +293,8 @@ export default {
       import(/* webpackChunkName: "login" */ "@/components/Login.vue"),
     Daftar: () =>
       import(/* webpackChunkName: "daftar" */ "@/components/Daftar.vue"),
-      Footer: () =>
-      import(/* webpackChunkName: "footer" */ "@/components/Footer.vue")
+    Footer: () =>
+      import(/* webpackChunkName: "footer" */ "@/components/Footer.vue"),
   },
   data: () => ({
     countNotif: 0,
