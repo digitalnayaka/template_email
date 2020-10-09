@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <h4>Rata-rata rating unit</h4>
+    <!-- <h4>Rata-rata rating unit</h4>
 
     <div class="d-flex align-center">
       <v-icon color="yellow" x-large class="mr-2">mdi-star</v-icon>
@@ -91,9 +91,9 @@
       @input="daftarIklan"
       :length="lengthPage"
       :total-visible="5"
-    ></v-pagination>
+    ></v-pagination> -->
 
-    <!-- <div>
+    <div>
       <div class="display-1 font-weight-bold text-center">Rating Anda</div>
       <div class="display-1 font-weight-bold text-center">
         4.5 / 5.0
@@ -140,7 +140,7 @@
           </v-list-item-content>
         </v-list>
       </v-card>
-    </div> -->
+    </div>
   </v-card>
 </template>
 

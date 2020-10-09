@@ -28,7 +28,7 @@
     "vue-chat-scroll": "^1.4.0",
     "vue-image-upload-resize": "^2.3.0",
     "vue-router": "^3.4.6",
-    "vue-star-rating": "^1.6.3",
+    "vue-star-rating": "^1.7.0",
     "vue-template-compiler": "^2.6.12",
     "vue-the-mask": "^0.11.1",
     "vue2-flip-countdown": "^0.10.0",

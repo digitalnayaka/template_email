@@ -6,6 +6,8 @@
       </v-btn>
     </v-app-bar>
 
+    <div class="text-h4 mb-2">Daftar Transaksi</div>
+
     <v-tabs background-color="teal" dark grow>
       <v-tabs-slider color="yellow"></v-tabs-slider>
       <v-tab>Berlangsung</v-tab>

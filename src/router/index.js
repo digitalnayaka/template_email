@@ -194,6 +194,14 @@ const routes = [
         }
       },
       {
+        path: '/product/review',
+        name: 'ProductReview',
+        component: () => import(/* webpackChunkName: "product-review" */ '../views/ProductReview.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
         path: '/notification',
         name: 'Notifikasi',
         component: () => import(/* webpackChunkName: "notification" */ '../views/Notifikasi.vue'),

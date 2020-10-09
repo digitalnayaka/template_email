@@ -178,7 +178,12 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn large text v-bind="attrs" v-on="on">
               <v-avatar size="32px" item>
-                <v-img :src="getImage(user.photo)" alt="Avatar"></v-img>
+                <v-img
+                  src="/img/profile.png"
+                  contain
+                  v-if="user.photo == null"
+                ></v-img>
+                <v-img :src="getImage(user.photo)" alt="Avatar" v-else></v-img>
               </v-avatar>
               <span class="text-caption mx-2">{{
                 user.nama.split(" ", 1)[0]
@@ -190,7 +195,16 @@
             <v-list>
               <v-list-item to="/account/edit" @click="content = true">
                 <v-list-item-avatar>
-                  <v-img :src="getImage(user.photo)" alt="Avatar"></v-img>
+                  <v-img
+                    src="/img/profile.png"
+                    contain
+                    v-if="user.photo == null"
+                  ></v-img>
+                  <v-img
+                    :src="getImage(user.photo)"
+                    alt="Avatar"
+                    v-else
+                  ></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -257,15 +271,30 @@
               </v-tab-item>
 
               <v-tab-item>
-                <v-list dense>
-                  <v-list-item to="/activity/buyer" @click="content = true">
-                    <v-list-item-subtitle>Pembeli</v-list-item-subtitle>
-                  </v-list-item>
+                <v-row no-gutters>
+                  <v-col cols="6">
+                    <v-list dense>
+                      <v-list-item to="/activity/buyer" @click="content = true">
+                        <v-list-item-subtitle>Pembeli</v-list-item-subtitle>
+                      </v-list-item>
 
-                  <v-list-item to="/aktivitas-iklan" @click="content = true">
-                    <v-list-item-subtitle>Penjual</v-list-item-subtitle>
-                  </v-list-item>
-                </v-list>
+                      <v-list-item
+                        to="/aktivitas-iklan"
+                        @click="content = true"
+                      >
+                        <v-list-item-subtitle>Penjual</v-list-item-subtitle>
+                      </v-list-item>
+                    </v-list>
+                  </v-col>
+
+                  <v-col cols="6">
+                    <v-list dense>
+                      <v-list-item to="/product/review" @click="content = true">
+                        <v-list-item-subtitle>Ulasan</v-list-item-subtitle>
+                      </v-list-item>
+                    </v-list>
+                  </v-col>
+                </v-row>
               </v-tab-item>
             </v-tabs-items>
 
