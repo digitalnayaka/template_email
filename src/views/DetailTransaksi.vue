@@ -325,8 +325,15 @@
             Konfirmasi Pembayaran
           </v-btn>
 
-          <v-dialog v-model="dialogKonfirmasi" width="250" persistent>
+          <v-dialog v-model="dialogKonfirmasi" width="500" persistent>
             <v-card>
+                 <v-toolbar dark color="teal darken-3">
+          <v-toolbar-title>Konfirmasi Pembayaran</v-toolbar-title>
+          <div class="flex-grow-1"></div>
+          <v-btn icon @click="dialogKonfirmasi = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
               <v-container fluid>
                 Yakin ingin mengkonfirmasi pembayaran berikut?
               </v-container>
