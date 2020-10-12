@@ -70,14 +70,6 @@ const routes = [
     }
   },
   {
-    path: '/activity/buyer',
-    name: 'BuyerActivity',
-    component: () => import(/* webpackChunkName: "buyer-activity" */ '../views/BuyerActivity.vue'),
-    meta: {
-      Auth: true
-    }
-  },
-  {
     path: '/syarat-ketentuan',
     name: 'SyaratKetentuan',
     component: () => import(/* webpackChunkName: "syarat-ketentuan" */ '../views/SyaratKetentuan.vue'),
@@ -158,7 +150,7 @@ const routes = [
       Auth: true
     }
   },
- 
+
   {
     path: '/upload-bukti/:id',
     name: 'UploadBukti',
@@ -178,6 +170,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "account" */ '../views/Account.vue'),
     children: [
       {
+        path: '/account/edit',
+        name: 'profile',
+        component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
         path: '/chat-list',
         name: 'ChatList',
         component: () => import(/* webpackChunkName: "chat-list" */ '../views/ChatList.vue'),
@@ -194,9 +194,17 @@ const routes = [
         }
       },
       {
-        path: '/account/edit',
-        name: 'profile',
-        component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
+        path: '/notification',
+        name: 'Notifikasi',
+        component: () => import(/* webpackChunkName: "notification" */ '../views/Notifikasi.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
+        path: '/activity/buyer',
+        name: 'BuyerActivity',
+        component: () => import(/* webpackChunkName: "buyer-activity" */ '../views/BuyerActivity.vue'),
         meta: {
           Auth: true
         }
@@ -311,14 +319,6 @@ const routes = [
     path: '/aktivitas-iklan',
     name: 'AktivitasIklan',
     component: () => import(/* webpackChunkName: "aktivitas-iklan" */ '../views/AktivitasIklan.vue'),
-    meta: {
-      Auth: true
-    }
-  },
-  {
-    path: '/notification',
-    name: 'Notifikasi',
-    component: () => import(/* webpackChunkName: "notification" */ '../views/Notifikasi.vue'),
     meta: {
       Auth: true
     }
