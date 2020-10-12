@@ -594,7 +594,7 @@ export default {
       dialogBio: false,
       sheet: false,
       tab: 0,
-      menu: 1,
+      menu: this.tanggal_mulai == undefined ? 0 : 1,
       keyword: "",
       page: 1,
       lengthPage: 0,
@@ -615,7 +615,7 @@ export default {
       this.axios
         .get("/search/v3/search", {
           params: {
-            tanggal_mulai: this.tanggal_mulai,
+            tanggal_mulai: this.tanggal_mulai == undefined ? '' : this.tanggal_mulai,
             id_mst_iklan_status: 1,
             sort: this.order,
             search: this.title,
