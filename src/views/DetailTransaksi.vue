@@ -222,7 +222,7 @@
         color="primary"
         class="mt-4"
         @click="konfirmasiPenjual"
-        v-if="orders.id_mst_pembayaran_status == 10"
+        v-if="orders.id_mst_pembayaran_status == 10 && orders.id_penjual == user.id"
       >
         Konfirmasi Penjualan
       </v-btn>
