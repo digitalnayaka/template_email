@@ -200,7 +200,12 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-
+<v-btn
+                color="blue"
+                dark
+                
+                >Beri Ulasan</v-btn
+              >
               <v-btn
                 color="teal"
                 dark

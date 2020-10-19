@@ -30,67 +30,62 @@
         <h5>{{ item.name }}</h5>
       </v-col>
     </v-row>
+    <v-card color="teal lighten-4">
+      <v-container fluid class="text-center">
+        <h2>Jadwal Tawar Bersama</h2>
 
-    <v-container fluid class="text-center">
-      <h2>Jadwal Tawar Bersama</h2>
-
-      <div class="scrolling-wrapper-flexbox mx-2" v-if="jadwal.length > 0">
-        <v-card
-          class="card ma-2"
-          v-for="(item, index) in jadwal"
-          contain
-          :key="index"
-          :to="{
+        <div class="scrolling-wrapper-flexbox mx-2" v-if="jadwal.length > 0">
+          <v-card
+            class="card ma-2"
+            v-for="(item, index) in jadwal"
+            contain
+            :key="index"
+            :to="{
             path: '/list-tb/' + item.nama,
             query: { tgl: item.date.substr(0, 10) },
           }"
-        >
-          <v-list>
-            <v-list-item>
-              <v-list-item-avatar size="70">
-                <v-icon x-large v-if="item.photo == 'null'"
-                  >mdi-account-circle</v-icon
-                >
-                <v-img :src="getImage(item.photo)" v-else></v-img>
-              </v-list-item-avatar>
+          >
+            <v-list>
+              <v-list-item>
+                <v-list-item-avatar size="70">
+                  <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
+                  <v-img :src="getImage(item.photo)" v-else></v-img>
+                </v-list-item-avatar>
 
-              <v-list-item-content>
-                <v-btn small color="teal" dark rounded>
-                  <v-list-item-title>
-                    {{ item.date | dateFormat }}
-                  </v-list-item-title>
-                </v-btn>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
+                <v-list-item-content>
+                  <v-btn small color="teal" dark rounded>
+                    <v-list-item-title>{{ item.date | dateFormat }}</v-list-item-title>
+                  </v-btn>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
 
-          <v-divider></v-divider>
+            <v-divider></v-divider>
 
-          <v-avatar size="16" v-if="item.id_mst_user_type == 2">
-            <v-img src="/img/verified.png" alt="verified"></v-img>
-          </v-avatar>
+            <v-avatar size="16" v-if="item.id_mst_user_type == 2">
+              <v-img src="/img/verified.png" alt="verified"></v-img>
+            </v-avatar>
 
-          <span class="font-weight-bold">{{ item.nama }}</span>
+            <span class="font-weight-bold">{{ item.nama }}</span>
 
-          <div>{{ item.total_iklan }} Iklan Tayang</div>
-        </v-card>
-      </div>
+            <div>{{ item.total_iklan }} Iklan Tayang</div>
+          </v-card>
+        </div>
 
-      <div v-else>
-        <p class="display-2">Tidak ada data</p>
-      </div>
+        <div v-else>
+          <p class="display-2">Tidak ada data</p>
+        </div>
 
-      <v-btn
-        dark
-        color="teal"
-        to="/jadwal"
-        :small="$vuetify.breakpoint.xsOnly ? true : false"
-        class="mt-4"
-        >Jadwal Tawar Bersama Selengkapnya</v-btn
-      >
-    </v-container>
-
-    <v-divider class="my-2"></v-divider>
+        <v-btn
+          dark
+          color="teal"
+          to="/jadwal"
+          :small="$vuetify.breakpoint.xsOnly ? true : false"
+          class="mt-4"
+        >Jadwal Tawar Bersama Selengkapnya</v-btn>
+      </v-container>
+    </v-card>
+    <!-- <v-divider class="my-2"></v-divider> -->
 
     <div class="text-center">
       <h2>Tawar Bersama Berlangsung</h2>
@@ -111,12 +106,7 @@
       </v-col>
 
       <v-col cols="12" align="center">
-        <v-btn
-          dark
-          color="teal"
-          :to="{ path: '/category/mokas', query: { tb: true } }"
-          >Lihat Semua</v-btn
-        >
+        <v-btn dark color="teal" :to="{ path: '/category/mokas', query: { tb: true } }">Lihat Semua</v-btn>
       </v-col>
     </v-row>
 
@@ -124,9 +114,7 @@
       <p class="display-2">Tidak ada data</p>
     </v-row>
 
-    <v-divider class="mt-4"></v-divider>
-
-    <v-row justify="center">
+    <!-- <v-row justify="center">
       <v-col cols="12" sm="6" align="center">
         <v-img src="/img/app-min.png" width="280" contain></v-img>
       </v-col>
@@ -163,11 +151,9 @@
           </v-container>
         </v-card>
       </v-col>
-    </v-row>
+    </v-row>-->
 
-    <v-divider></v-divider>
-
-    <v-container fluid>
+    <!-- <v-container fluid>
       <div align="center">
         <v-img src="/img/icon.png" width="90"></v-img>
 
@@ -204,16 +190,41 @@
           </v-col>
         </v-row>
       </div>
-    </v-container>
+    </v-container>-->
+    <v-divider class="my-2"></v-divider>
+    <v-card color="teal lighten-4">
+      <v-container fluid class="text-center">
+        <h2>Artikel Terbaru</h2>
 
+        <div class="scrolling-wrapper-flexbox mx-2">
+          <v-card class="card ma-2">
+            <v-list>
+              <v-list-item>
+                <!-- <v-list-item-avatar size="70">
+                <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
+                <v-img :src="getImage(item.photo)" v-else></v-img>
+                </v-list-item-avatar>-->
+
+                <v-list-item-content>
+                  <span>by</span>
+                  <v-list-item-title class="font-weight-bold">Judul</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+
+            <v-divider></v-divider>
+
+            <!-- <v-avatar size="16" v-if="item.id_mst_user_type == 2">
+            <v-img src="/img/verified.png" alt="verified"></v-img>
+            </v-avatar>-->
+          </v-card>
+        </div>
+
+        <v-btn dark color="teal" to="/jadwal" class="mt-4">Lihat Semua Artikel</v-btn>
+      </v-container>
+    </v-card>
     <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-      <v-img
-        to="/bantuan"
-        src="/img/icons/ic_bantuan.png"
-        width="50"
-        height="50"
-        contain
-      ></v-img>
+      <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
     </v-btn>
   </v-container>
 </template>

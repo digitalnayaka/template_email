@@ -35,7 +35,7 @@
               </v-list-item-title>
 
               <v-list-item-subtitle class="d-inline-flex">
-                <div class="red pa-1">Penjual</div>
+                <div class="blue white--text pa-1">Penjual</div>
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -98,7 +98,7 @@
         <v-divider vertical></v-divider>
 
         <v-list subheader>
-          <v-subheader> Daftar Produk </v-subheader>
+          <v-subheader class="font-weight-bold"> Daftar Produk </v-subheader>
 
           <v-list-item>
             <v-list-item-avatar tile size="80">
@@ -189,8 +189,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="teal" @click="ulas = true">Kembali</v-btn>
-            <v-btn color="teal">Kirim</v-btn>
+            <v-btn color="teal" dark @click="ulas = true">Kembali</v-btn>
+            <v-btn color="teal" dark>Simpan</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

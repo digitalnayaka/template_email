@@ -38,7 +38,9 @@
         <v-btn icon to="/favourite">
           <v-icon>mdi-heart-outline</v-icon>
         </v-btn>
-
+        <v-btn icon to="/chat-list">
+          <v-icon>mdi-chat-outline</v-icon>
+        </v-btn>
         <!-- <v-btn icon to="/notification">
           <v-badge color="orange" overlap v-if="countNotif > 0">
             <template v-slot:badge>
@@ -161,11 +163,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn large text v-bind="attrs" v-on="on">
               <v-avatar size="32px" item>
-                <v-img
-                  src="/img/profile.png"
-                  contain
-                  v-if="user.photo == null"
-                ></v-img>
+                <v-img src="/img/profile.png" contain v-if="user.photo == null"></v-img>
                 <v-img :src="getImage(user.photo)" alt="Avatar" v-else></v-img>
               </v-avatar>
               <span class="text-caption mx-2">
@@ -180,16 +178,8 @@
             <v-list>
               <v-list-item to="/account/edit" @click="content = true">
                 <v-list-item-avatar>
-                  <v-img
-                    src="/img/profile.png"
-                    contain
-                    v-if="user.photo == null"
-                  ></v-img>
-                  <v-img
-                    :src="getImage(user.photo)"
-                    alt="Avatar"
-                    v-else
-                  ></v-img>
+                  <v-img src="/img/profile.png" contain v-if="user.photo == null"></v-img>
+                  <v-img :src="getImage(user.photo)" alt="Avatar" v-else></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -243,10 +233,7 @@
                         <v-list-item-subtitle>Pembeli</v-list-item-subtitle>
                       </v-list-item>
 
-                      <v-list-item
-                        to="/aktivitas-iklan"
-                        @click="content = true"
-                      >
+                      <v-list-item to="/aktivitas-iklan" @click="content = true">
                         <v-list-item-subtitle>Penjual</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>

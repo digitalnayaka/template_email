@@ -170,7 +170,7 @@ export default {
         title: "Kotak Masuk",
         items: [
           { title: "Chat", route: "/chat-list" },
-          { title: "Ulasan", route: "/product/review" },
+         
           { title: "Notifikasi", route: "/notification" },
         ],
       },
