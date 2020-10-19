@@ -3,14 +3,22 @@
     <v-divider></v-divider>
 
     <div class="d-flex justify-space-between grey lighten-3 pa-2">
-      <div v-if="item.id == selected.id">Penjual: {{ item.app_user_name }}</div>
+      <div v-if="selected != null">
+        Penjual: {{ item.review.app_user_name_penjual }}
+      </div>
+
+      <div v-else>
+        <a :href="'/detail-transaksi/' + item.review.id_order">
+          Nomor Order: {{ item.review.id_order }}
+        </a>
+      </div>
 
       <div>Pesanan selesai:</div>
     </div>
 
     <v-divider></v-divider>
 
-    <v-row dense v-if="ulas">
+    <v-row dense v-if="selected == null">
       <v-col cols="12" sm="6">
         <v-list>
           <v-list-item>
@@ -18,10 +26,10 @@
               <v-img
                 src="/img/profile.png"
                 contain
-                v-if="item.app_user_foto == null"
+                v-if="item.review.app_user_foto_penjual == null"
               ></v-img>
               <v-img
-                :src="getImage(item.app_user_foto)"
+                :src="getImage(item.review.app_user_foto_penjual)"
                 alt="Avatar"
                 v-else
               ></v-img>
@@ -29,13 +37,13 @@
 
             <v-list-item-content>
               <v-list-item-title>
-                <a :href="'/list-tb/' + item.app_user_name">{{
-                  item.app_user_name
+                <a :href="'/list-tb/' + item.review.app_user_name_penjual">{{
+                  item.review.app_user_name_penjual
                 }}</a>
               </v-list-item-title>
 
               <v-list-item-subtitle class="d-inline-flex">
-                <div class="red pa-1">Penjual</div>
+                <div class="red pa-1 white--text">Penjual</div>
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -46,7 +54,7 @@
         <div class="ma-2 text-center" v-if="point == 0">
           <div>
             Bagaimana pengalaman Anda berbelanja di
-            {{ item.app_user_name }} ini?
+            {{ item.review.app_user_name_penjual }} ini?
           </div>
 
           <v-item-group v-model="point" class="d-flex justify-center">
@@ -102,11 +110,15 @@
 
           <v-list-item>
             <v-list-item-avatar tile size="80">
-              <v-icon x-large> mdi-account-circle </v-icon>
+              <v-img :src="getImage(item.review.foto_iklan)" contain></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title> Judul Iklan </v-list-item-title>
+              <v-list-item-title>
+                <a :href="'/iklan/' + item.review.id_iklan">
+                  {{ item.order.iklan.judul }}
+                </a>
+              </v-list-item-title>
 
               <v-list-item-subtitle v-if="rating == 0"
                 >Belum diulas</v-list-item-subtitle
@@ -126,7 +138,7 @@
             </v-list-item-content>
 
             <v-list-item-action class="d-none d-sm-flex" v-if="rating == 0">
-              <v-btn color="teal" dark small @click="ulas = false">
+              <v-btn color="teal" dark small @click="tulisReview(item.review)">
                 Tulis Ulasan
               </v-btn>
             </v-list-item-action>
@@ -140,9 +152,7 @@
         <v-list three-line>
           <v-list-item>
             <v-list-item-avatar tile size="80">
-              <v-img
-                src="https://cdn0-production-images-kly.akamaized.net/2518s27bL6dAQWx7KOVpvJupf_g=/1280x720/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2998570/original/077697500_1576569534-Honda_blade.jpg"
-              ></v-img>
+              <v-img :src="getImage(item.review.foto_iklan)" contain></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -189,8 +199,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="teal" @click="ulas = true">Kembali</v-btn>
-            <v-btn color="teal">Kirim</v-btn>
+            <v-btn color="teal" dark @click="selected = null">Kembali</v-btn>
+            <v-btn color="teal" dark @click="sendReview">Kirim</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -208,7 +218,7 @@ export default {
   props: ["item"],
   data: () => ({
     ulas: true,
-    selected: [],
+    selected: null,
     review: [],
     point: "",
     points: [
@@ -247,6 +257,39 @@ export default {
         alert("Point anda: " + item.point);
       }
     },
+    tulisReview(item) {
+      this.selected = item;
+    },
+    sendReview(){
+      var r = confirm("Yakin dengan ulasan berikut?");
+      if (r == true) {
+        let formData = new FormData();
+
+        formData.set("id_iklan", this.selected.id_iklan);
+        formData.set("id_app_user", this.user.id);
+        formData.set("ratting_iklan", this.rating);
+        formData.set("ratting_user", this.point);
+        formData.set("review", this.deskripsiUlasan);
+
+        this.axios
+          .post("/transaksi/v3/review", formData, {
+            headers: { Authorization: "Bearer " + this.user.token },
+          })
+          .then((response) => {
+            let { data } = response;
+            this.setAlert({
+              status: true,
+              color: "success",
+              text: data.api_message,
+            });
+            this.getOrder();
+          })
+          .catch((error) => {
+            let responses = error.response.data;
+            console.log(responses);
+          });
+      }
+    }
   },
   computed: {
     ...mapGetters({
@@ -257,7 +300,8 @@ export default {
 </script>
 
 <style>
-a:link, a:visited {
+a:link,
+a:visited {
   color: teal;
 }
 </style>

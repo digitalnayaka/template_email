@@ -218,6 +218,22 @@ const routes = [
         }
       },
       {
+        path: '/buy/order',
+        name: 'BuyerOrder',
+        component: () => import(/* webpackChunkName: "buyer-order" */ '../views/BuyerOrder.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
+        path: '/activity/seller',
+        name: 'SellerActivity',
+        component: () => import(/* webpackChunkName: "seller-activity" */ '../views/SellerActivity.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
         path: '/account/ticket',
         name: 'AccountTicket',
         component: () => import(/* webpackChunkName: "account-ticket" */ '../views/AccountTicket.vue'),
@@ -250,9 +266,9 @@ const routes = [
         }
       },
       {
-        path: '/toko/order',
-        name: 'Order',
-        component: () => import(/* webpackChunkName: "order" */ '../views/Order.vue'),
+        path: '/sell/order',
+        name: 'SellerOrder',
+        component: () => import(/* webpackChunkName: "seller-order" */ '../views/SellerOrder.vue'),
         meta: {
           Auth: true
         }

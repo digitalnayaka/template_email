@@ -178,7 +178,10 @@ export default {
         id: 3,
         icon: "mdi-shopping",
         title: "Pembeli",
-        items: [{ title: "Daftar Transaksi", route: "/activity/buyer" }],
+        items: [
+          { title: "Aktivitas", route: "/activity/buyer" },
+          { title: "Transaksi", route: "/buy/order" },
+        ],
       },
       {
         id: 4,
@@ -217,7 +220,7 @@ export default {
         title: "Penjualan",
         items: [
           { title: "Informasi Penjual", route: "/toko/info" },
-          { title: "List Penjualan", route: "/toko/order" },
+          { title: "List Penjualan", route: "/sell/order" },
           { title: "Report", route: "/report" },
         ],
       },

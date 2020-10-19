@@ -25,8 +25,8 @@
           <v-card
             outlined
             class="mt-2 mb-4"
-            v-for="item in review"
-            :key="item.id"
+            v-for="item in detailReview"
+            :key="item.review.id_order"
           >
             <list-review :item="item" />
           </v-card>
@@ -54,16 +54,67 @@ export default {
   data: () => ({
     tab: 0,
     review: [],
+    order: [],
+    detailReview: [],
+    page: 0,
+    limit: 20,
+    total: 0,
+    lengthPage: 0,
   }),
   methods: {
     getReview() {
+      var offset = (this.page - 1) * this.limit;
+
       this.axios
-        .get("/transaksi/v3/review", {
+        .get("/transaksi/v3/belum_review", {
+          params: {
+            id_pembeli: this.user.id,
+            offset: offset,
+            limit: this.limit,
+          },
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
           this.review = data;
+          this.getOrder();
+
+          this.total = response.data.count;
+          this.lengthPage =
+            this.total == 0 ? 1 : Math.ceil(this.total / this.limit);
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    getOrder() {
+      let params = new URLSearchParams();
+
+      for (let i = 0; i < this.review.length; i++) {
+        params.append("id", this.review[i].id_order);
+      }
+
+      let request = {
+        params: params,
+        headers: { Authorization: "Bearer " + this.user.token },
+      };
+
+      this.axios
+        .get("/transaksi/v3/order", request)
+        .then((response) => {
+          let { data } = response.data;
+          this.order = data;
+
+          for (let i = 0; i < this.review.length; i++) {
+            let order = this.order.filter(
+              (item) => item.id == this.review[i].id_order
+            );
+            this.detailReview.push({
+              review: this.review[i],
+              order: order[0],
+            });
+          }
         })
         .catch((error) => {
           let responses = error.response.data;

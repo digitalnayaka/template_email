@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-app-bar app color="teal" dark>
+  <v-container fluid>
+    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -13,31 +13,44 @@
 
           <v-card flat align="center" color="grey lighten-3">
             <v-avatar size="16" tile>
-              <v-img src="/img/error.png"></v-img>
-            </v-avatar>Selalu waspada terhadap pihak yang tidak bertanggung jawab. Pastikan bukti pembayaran yang diupload sudah benar.
+              <v-img src="/img/error.png"></v-img> </v-avatar
+            >Selalu waspada terhadap pihak yang tidak bertanggung jawab.
+            Pastikan bukti pembayaran yang diupload sudah benar.
           </v-card>
           <v-card flat align="center">
-            <h1 class="red--text">Maaf! Anda belum memenangkan Tawar Bersama berikut</h1>
+            <h1 class="red--text">
+              Maaf! Anda belum memenangkan Tawar Bersama berikut
+            </h1>
           </v-card>
           <v-list>
             <v-list-item>
               <v-list-item-icon>
-                <v-img :src="getImage(hits.photo)" contain width="500" height="300"></v-img>
+                <v-img
+                  :src="getImage(hits.photo)"
+                  contain
+                  width="500"
+                  height="300"
+                ></v-img>
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title><h4> {{ hits.judul }} </h4></v-list-item-title>
+                <v-list-item-title
+                  ><h4>{{ hits.judul }}</h4></v-list-item-title
+                >
 
-                <v-list-item-subtitle
-                  class="red--text"
-                >Harga Akhir: Rp {{ Number(iklan.bid_tertinggi).toLocaleString("id-ID") }}</v-list-item-subtitle>
+                <v-list-item-subtitle class="red--text"
+                  >Harga Akhir: Rp
+                  {{
+                    Number(iklan.bid_tertinggi).toLocaleString("id-ID")
+                  }}</v-list-item-subtitle
+                >
               </v-list-item-content>
             </v-list-item>
           </v-list>
         </v-container>
       </v-card>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>

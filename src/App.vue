@@ -91,28 +91,71 @@
               slider-color="teal"
               @change="content = false"
             >
-              <v-tab class="text-caption">Pembelian</v-tab>
-              <v-tab class="text-caption">Penjualan</v-tab>
+              <v-tab class="text-caption">Tawar Bersama</v-tab>
+              <v-tab class="text-caption">Tiket</v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab2">
               <v-tab-item>
                 <v-card flat>
+                  <div class="d-flex justify-space-between">
+                    <v-card-subtitle>Pembelian</v-card-subtitle>
+                    <v-card-subtitle>
+                      <a href="/buy/order?id=0">Semua</a>
+                    </v-card-subtitle>
+                  </div>
+
                   <div class="d-flex justify-space-around">
-                    <v-btn icon>
+                    <v-btn icon href="/buy/order?id=10">
                       <v-icon>mdi-heart</v-icon>
                     </v-btn>
 
-                    <v-btn icon>
+                    <v-btn icon href="/buy/order?id=1">
                       <v-icon>mdi-heart</v-icon>
                     </v-btn>
 
-                    <v-btn icon>
+                    <v-btn icon href="/buy/order?id=4">
                       <v-icon>mdi-heart</v-icon>
                     </v-btn>
 
-                    <v-btn icon>
+                    <v-btn icon href="/buy/order?id=2">
                       <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+                  </div>
+
+                  <div
+                    class="d-flex justify-space-around text-center text-caption"
+                  >
+                    <div>Menunggu Persetujuan</div>
+                    <div>Menunggu Pembayaran</div>
+                    <div>Menunggu Verifikasi</div>
+                    <div>Pembayaran Diverifikasi</div>
+                  </div>
+
+                  <v-divider></v-divider>
+
+                  <div class="d-flex justify-space-between">
+                    <v-card-subtitle>Penjualan</v-card-subtitle>
+                    <v-card-subtitle>
+                      <a href="/sell/order?id=0">Semua</a>
+                    </v-card-subtitle>
+                  </div>
+
+                  <div class="d-flex justify-space-around">
+                    <v-btn icon href="/sell/order?id=10">
+                      <v-icon>mdi-diamond</v-icon>
+                    </v-btn>
+
+                    <v-btn icon href="/sell/order?id=1">
+                      <v-icon>mdi-diamond</v-icon>
+                    </v-btn>
+
+                    <v-btn icon href="/sell/order?id=4">
+                      <v-icon>mdi-diamond</v-icon>
+                    </v-btn>
+
+                    <v-btn icon href="/sell/order?id=2">
+                      <v-icon>mdi-diamond</v-icon>
                     </v-btn>
                   </div>
 
@@ -279,7 +322,7 @@
                       </v-list-item>
 
                       <v-list-item
-                        to="/aktivitas-iklan"
+                        to="/activity/seller"
                         @click="content = true"
                       >
                         <v-list-item-subtitle>Penjual</v-list-item-subtitle>
