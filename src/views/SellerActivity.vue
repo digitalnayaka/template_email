@@ -89,28 +89,6 @@
                 {{ item.status_all.status_aktivitas }}
               </div>
             </v-col>
-
-            <v-col cols="12" sm="6">
-              <v-btn
-                block
-                color="red"
-                dark
-                @click="getBid(item)"
-                v-if="item.id_mst_status_pemenang == 1"
-              >
-                Tingkatkan tawaran
-              </v-btn>
-
-              <v-btn
-                block
-                color="teal"
-                dark
-                @click="getBid(item)"
-                v-if="item.id_mst_status_pemenang == 3"
-              >
-                Tingkatkan tawaran
-              </v-btn>
-            </v-col>
           </v-row>
         </v-card>
       </v-tab-item>

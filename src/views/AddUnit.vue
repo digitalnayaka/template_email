@@ -9,7 +9,9 @@
     <v-stepper v-model="e1">
       <v-stepper-header>
         <template v-for="n in steps">
-          <v-stepper-step :key="`${n}-step`" :complete="e1 > n" :step="n">Tahap {{ n }}</v-stepper-step>
+          <v-stepper-step :key="`${n}-step`" :complete="e1 > n" :step="n"
+            >Tahap {{ n }}</v-stepper-step
+          >
           <v-divider v-if="n !== steps" :key="n"></v-divider>
         </template>
       </v-stepper-header>
@@ -20,7 +22,7 @@
             <v-card-title>Pilih Foto Motor Anda</v-card-title>
 
             <div class="d-flex flex-wrap justify-space-around text-center">
-              <div v-for="(item) in list" :key="item.id">
+              <div v-for="item in list" :key="item.id">
                 <image-uploader
                   v-model="item.foto"
                   :quality="0.7"
@@ -30,10 +32,10 @@
                   :className="['fileinput', { 'fileinput--loaded': hasImage }]"
                   :autoRotate="true"
                   outputFormat="blob"
-                  @input="setImage('foto'+item.id)"
-                  :id="'foto'+item.id"
+                  @input="setImage('foto' + item.id)"
+                  :id="'foto' + item.id"
                 >
-                  <label :for="'foto'+item.id" slot="upload-label">
+                  <label :for="'foto' + item.id" slot="upload-label">
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on }">
                         <v-img
@@ -48,7 +50,7 @@
                     </v-tooltip>
                   </label>
                 </image-uploader>
-                {{item.label}}
+                {{ item.label }}
               </div>
             </div>
 
@@ -59,7 +61,8 @@
                 color="primary"
                 :disabled="countRules.length >= 5 ? false : true"
                 @click="e1 = 2"
-              >Selanjutnya</v-btn>
+                >Selanjutnya</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-stepper-content>
@@ -70,11 +73,16 @@
 
             <div
               class="d-flex flex-nowrap justify-space-between text-center mb-4"
-              style="overflow-x: auto;"
+              style="overflow-x: auto"
             >
-              <v-card flat v-for="(item) in list" :key="item.id" class="mx-2">
-                <v-img :src="item.previewUrl" contain width="170" height="170"></v-img>
-                <v-chip small left color="red" dark>{{item.label}}</v-chip>
+              <v-card flat v-for="item in list" :key="item.id" class="mx-2">
+                <v-img
+                  :src="item.previewUrl"
+                  contain
+                  width="170"
+                  height="170"
+                ></v-img>
+                <v-chip small left color="red" dark>{{ item.label }}</v-chip>
               </v-card>
             </div>
 
@@ -122,7 +130,9 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="primary" @click="e1 = 1">Sebelumnya</v-btn>
-                <v-btn color="primary" :disabled="!valid1" @click="e1 = 3">Selanjutnya</v-btn>
+                <v-btn color="primary" :disabled="!valid1" @click="e1 = 3"
+                  >Selanjutnya</v-btn
+                >
               </v-card-actions>
             </v-form>
           </v-card>
@@ -133,7 +143,13 @@
             <v-card>
               <v-card-title>Isi Detail Motor Anda</v-card-title>
 
-              <v-text-field v-model="warna" label="Warna Motor" outlined dense :rules="warnaRules"></v-text-field>
+              <v-text-field
+                v-model="warna"
+                label="Warna Motor"
+                outlined
+                dense
+                :rules="warnaRules"
+              ></v-text-field>
 
               <v-autocomplete
                 v-model="odometer"
@@ -205,11 +221,18 @@
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title>Lembar Pajak Ada</v-list-item-title>
-                    <v-list-item-subtitle>Anda memiliki lembar Surat Ketetapan Pajak untuk motor berikut</v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      >Anda memiliki lembar Surat Ketetapan Pajak untuk motor
+                      berikut</v-list-item-subtitle
+                    >
                   </v-list-item-content>
 
                   <v-list-item-action>
-                    <v-switch v-model="pajak" input-value="true" color="teal"></v-switch>
+                    <v-switch
+                      v-model="pajak"
+                      input-value="true"
+                      color="teal"
+                    ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
 
@@ -236,8 +259,15 @@
 
                     <v-date-picker v-model="tglPajak">
                       <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.menu.save(tglPajak)">OK</v-btn>
+                      <v-btn text color="primary" @click="menu = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="$refs.menu.save(tglPajak)"
+                        >OK</v-btn
+                      >
                     </v-date-picker>
                   </v-menu>
                 </v-list-item>
@@ -245,11 +275,18 @@
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title>Lembar STNK Ada</v-list-item-title>
-                    <v-list-item-subtitle>Anda memiliki lembar Surat Tanda Nomor Kendaraan untuk motor berikut</v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      >Anda memiliki lembar Surat Tanda Nomor Kendaraan untuk
+                      motor berikut</v-list-item-subtitle
+                    >
                   </v-list-item-content>
 
                   <v-list-item-action>
-                    <v-switch v-model="stnk" input-value="true" color="teal"></v-switch>
+                    <v-switch
+                      v-model="stnk"
+                      input-value="true"
+                      color="teal"
+                    ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
 
@@ -276,8 +313,15 @@
 
                     <v-date-picker v-model="tglSTNK">
                       <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.menu.save(tglSTNK)">OK</v-btn>
+                      <v-btn text color="primary" @click="menu = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="$refs.menu.save(tglSTNK)"
+                        >OK</v-btn
+                      >
                     </v-date-picker>
                   </v-menu>
                 </v-list-item>
@@ -285,11 +329,18 @@
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title>Lembar BPKB Ada</v-list-item-title>
-                    <v-list-item-subtitle>Anda memiliki Buku Pemilik Kendaraan Bermotor (BPKB) untuk motor berikut</v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      >Anda memiliki Buku Pemilik Kendaraan Bermotor (BPKB)
+                      untuk motor berikut</v-list-item-subtitle
+                    >
                   </v-list-item-content>
 
                   <v-list-item-action>
-                    <v-switch v-model="bpkb" input-value="true" color="teal"></v-switch>
+                    <v-switch
+                      v-model="bpkb"
+                      input-value="true"
+                      color="teal"
+                    ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
 
@@ -299,11 +350,18 @@
                   <v-list-item-content>
                     <v-list-item-title>Deskripsi Unit</v-list-item-title>
                     <v-list-item-subtitle>Opsional</v-list-item-subtitle>
-                    <v-list-item-subtitle>Deskripsikan unit anda secara singkat dan jelas.</v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      >Deskripsikan unit anda secara singkat dan
+                      jelas.</v-list-item-subtitle
+                    >
                   </v-list-item-content>
 
                   <v-list-item-action>
-                    <v-switch v-model="desc" input-value="true" color="teal"></v-switch>
+                    <v-switch
+                      v-model="desc"
+                      input-value="true"
+                      color="teal"
+                    ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
 
@@ -324,16 +382,28 @@
                   <v-list-item-content>
                     <v-list-item-title>Kode Barcode</v-list-item-title>
                     <v-list-item-subtitle>Opsional</v-list-item-subtitle>
-                    <v-list-item-subtitle>Anda dapat memasukan kode barcode untuk mempermudah pencarian unit anda.</v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      >Anda dapat memasukan kode barcode untuk mempermudah
+                      pencarian unit anda.</v-list-item-subtitle
+                    >
                   </v-list-item-content>
 
                   <v-list-item-action>
-                    <v-switch v-model="scan" input-value="true" color="success"></v-switch>
+                    <v-switch
+                      v-model="scan"
+                      input-value="true"
+                      color="success"
+                    ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
 
                 <v-list-item v-if="scan">
-                  <v-text-field v-model="barcode" label="Contoh: 1234xxx" outlined dense></v-text-field>
+                  <v-text-field
+                    v-model="barcode"
+                    label="Contoh: 1234xxx"
+                    outlined
+                    dense
+                  ></v-text-field>
                 </v-list-item>
               </v-list>
 
@@ -345,7 +415,8 @@
                   :disabled="valid1 == valid2 ? false : true"
                   @click="storeItem"
                   :loading="loading"
-                >Simpan</v-btn>
+                  >Simpan</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-form>
@@ -362,9 +433,7 @@ import ImageUploader from "vue-image-upload-resize";
 
 export default {
   name: "add-unit",
-  components: {
-    ImageUploader,
-  },
+  components: { ImageUploader },
   directives: { mask },
   beforeRouteLeave(to, from, next) {
     if (this.countRules.length > 0 && this.valid2 == false) {

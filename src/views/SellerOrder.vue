@@ -106,9 +106,9 @@
               outlined
               color="teal"
               dark
-              :to="'/chat/' + item.id_penjual"
+              :to="'/chat/' + item.id_pembeli"
             >
-              Hubungi Penjual
+              Hubungi Pembeli
             </v-btn>
           </v-card-actions>
         </v-card>

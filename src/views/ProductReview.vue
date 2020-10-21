@@ -26,14 +26,21 @@
             outlined
             class="mt-2 mb-4"
             v-for="item in detailReview"
-            :key="item.review.id_order"
+            :key="item.order.id"
           >
             <list-review :item="item" />
           </v-card>
         </v-tab-item>
 
         <v-tab-item>
-          <list-review />
+          <v-card
+            outlined
+            class="mt-2 mb-4"
+            v-for="item in detailUlasan"
+            :key="item.order.id"
+          >
+            <my-review :item="item" />
+          </v-card>
         </v-tab-item>
       </v-tabs-items>
     </v-card>
@@ -50,12 +57,17 @@ export default {
       import(
         /* webpackChunkName: "list-review" */ "@/components/ListReview.vue"
       ),
+    MyReview: () =>
+      import(/* webpackChunkName: "my-review" */ "@/components/MyReview.vue"),
   },
   data: () => ({
     tab: 0,
     review: [],
     order: [],
     detailReview: [],
+    ulasanSaya: [],
+    orderSaya: [],
+    detailUlasan: [],
     page: 0,
     limit: 20,
     total: 0,
@@ -63,7 +75,7 @@ export default {
   }),
   methods: {
     getReview() {
-      var offset = (this.page - 1) * this.limit;
+      let offset = (this.page - 1) * this.limit;
 
       this.axios
         .get("/transaksi/v3/belum_review", {
@@ -121,6 +133,65 @@ export default {
           console.log(responses.api_message);
         });
     },
+    myReview() {
+      let offset = (this.page - 1) * this.limit;
+
+      this.axios
+        .get("/transaksi/v3/review", {
+          params: {
+            id_app_user: this.user.id,
+            offset: offset,
+            limit: this.limit,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.ulasanSaya = data;
+          this.getOrderUlasan();
+
+          this.total = response.data.count;
+          this.lengthPage =
+            this.total == 0 ? 1 : Math.ceil(this.total / this.limit);
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    getOrderUlasan() {
+      let params = new URLSearchParams();
+
+      for (let i = 0; i < this.ulasanSaya.length; i++) {
+        params.append("id_iklan", this.ulasanSaya[i].id_iklan);
+      }
+
+      let request = {
+        params: params,
+        headers: { Authorization: "Bearer " + this.user.token },
+      };
+
+      this.axios
+        .get("/transaksi/v3/order", request)
+        .then((response) => {
+          let { data } = response.data;
+          this.orderSaya = data;
+
+          for (let i = 0; i < this.review.length; i++) {
+            let order = this.orderSaya.filter(
+              (item) => item.id_iklan == this.ulasanSaya[i].id_iklan
+            );
+            this.detailUlasan.push({
+              review: this.ulasanSaya[i],
+              order: order[0],
+            });
+          }
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
   },
   computed: {
     ...mapGetters({
@@ -129,6 +200,7 @@ export default {
   },
   created() {
     this.getReview();
+    this.myReview();
   },
 };
 </script>

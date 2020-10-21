@@ -220,7 +220,8 @@ export default {
         title: "Penjualan",
         items: [
           { title: "Informasi Penjual", route: "/toko/info" },
-          { title: "List Penjualan", route: "/sell/order" },
+          { title: "Aktivitas", route: "/activity/seller" },
+          { title: "Transaksi", route: "/sell/order" },
           { title: "Report", route: "/report" },
         ],
       },
@@ -228,7 +229,7 @@ export default {
         icon: "mdi-emoticon",
         title: "Kata Pembeli",
         items: [
-          { title: "Ulasan", route: "/toko/review" },
+          { title: "Ulasan", route: "/buyer-review" },
           { title: "Komplain", route: "/toko/manage-ads" },
         ],
       },
