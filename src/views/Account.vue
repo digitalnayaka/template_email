@@ -179,7 +179,7 @@ export default {
         icon: "mdi-shopping",
         title: "Pembeli",
         items: [
-          { title: "Aktivitas", route: "/activity/buyer" },
+          { title: "Aktivitas Pembeli", route: "/activity/buyer" },
           { title: "Transaksi", route: "/buy/order" },
         ],
       },
@@ -191,7 +191,7 @@ export default {
       {
         id: 5,
         icon: "mdi-help",
-        title: "About Us",
+        title: "Tentang",
         items: [
           { title: "Tentang SiMotor", route: "/about" },
           { title: "Bantuan", route: "/bantuan" },
@@ -220,7 +220,7 @@ export default {
         title: "Penjualan",
         items: [
           { title: "Informasi Penjual", route: "/toko/info" },
-          { title: "List Penjualan", route: "/sell/order" },
+          { title: "Transaksi Penjual", route: "/sell/order" },
           { title: "Report", route: "/report" },
         ],
       },

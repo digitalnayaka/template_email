@@ -3,7 +3,7 @@
     <v-container fluid>
       <h3>Umum</h3>
       <v-row align="center">
-        <v-col cols="12" sm="8" >
+        <v-col cols="12" sm="8">
           <h5>Informasi Umum</h5>
           <v-textarea outlined clearable name="input-7-4" label="Masukkan Informasi Umum"></v-textarea>
         </v-col>

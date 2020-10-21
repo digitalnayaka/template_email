@@ -14,7 +14,7 @@
 
     <v-row>
       <v-col cols="12" sm="6">
-        <v-carousel cycle hide-delimiter-background height="300">
+        <v-carousel cycle hide-delimiter-background height="300" >
           <v-carousel-item
             v-for="(item, index) in fotos"
             :key="index"
@@ -219,7 +219,26 @@
     <v-tabs-items v-model="tab">
       <v-tab-item>
         <v-card flat>
+          <v-card-title class="font-weight-bold">Deskripsi Iklan:</v-card-title>
           <v-card-text>{{ hits.deskripsi }}</v-card-text>
+           <v-card-title class="font-weight-bold">Catatan & Kebijakan Penjual</v-card-title>
+            <v-card-text class="font-weight-bold">Slogan: {{ appuser.slogan }}</v-card-text>
+            <v-row justify="center">
+              <v-expansion-panels>
+                <v-expansion-panel>
+                  <v-expansion-panel-header class="font-weight-bold">Kebijakan :</v-expansion-panel-header>
+                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-row>
+             <v-row justify="center">
+              <v-expansion-panels>
+                <v-expansion-panel>
+                  <v-expansion-panel-header class="font-weight-bold">Catatan 1:</v-expansion-panel-header>
+                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-row>
         </v-card>
       </v-tab-item>
 

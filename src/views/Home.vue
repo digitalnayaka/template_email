@@ -192,12 +192,12 @@
       </div>
     </v-container>-->
     <v-divider class="my-2"></v-divider>
-    <v-card color="teal lighten-4">
-      <v-container fluid class="text-center">
+    <v-card color="teal lighten-4 text-center">
+      <v-container fluid >
         <h2>Artikel Terbaru</h2>
 
-        <div class="scrolling-wrapper-flexbox mx-2">
-          <v-card class="card ma-2">
+        <div class="scrolling-wrapper-flexbox mx-2" >
+          <v-card class="card ma-2" max-width="250">
             <v-list>
               <v-list-item>
                 <!-- <v-list-item-avatar size="70">
@@ -206,7 +206,8 @@
                 </v-list-item-avatar>-->
 
                 <v-list-item-content>
-                  <span>by</span>
+                   <v-img src="/img/test.png" max-width="250"></v-img>
+                  <span>by: Author</span>
                   <v-list-item-title class="font-weight-bold">Judul</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>

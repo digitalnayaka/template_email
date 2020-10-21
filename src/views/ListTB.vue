@@ -12,9 +12,7 @@
           <v-list>
             <v-list-item>
               <v-list-item-avatar size="100">
-                <v-icon x-large v-if="appuser.photo == 'null'"
-                  >mdi-account-circle</v-icon
-                >
+                <v-icon x-large v-if="appuser.photo == 'null'">mdi-account-circle</v-icon>
                 <v-img :src="getImage(appuser.photo)" v-else></v-img>
               </v-list-item-avatar>
 
@@ -30,64 +28,23 @@
                 </v-list-item-title>
 
                 <v-list-item-subtitle>
-                  <v-icon>mdi-google-maps</v-icon> {{ appuser.kota }}
+                  <v-icon>mdi-google-maps</v-icon>
+                  {{ appuser.kota }}
                 </v-list-item-subtitle>
 
                 <div v-if="!guest && $vuetify.breakpoint.smAndUp">
-                  <v-btn
-                    small
-                    color="teal"
-                    dark
-                    @click="dialogHubungi = true"
-                    class="ma-1"
-                    >Hubungi</v-btn
-                  >
-                  <v-btn
-                    small
-                    color="teal"
-                    dark
-                    :to="'/chat/' + appuser.id"
-                    class="ma-1"
-                    >Pesan</v-btn
-                  >
-                  <v-btn
-                    small
-                    color="teal"
-                    dark
-                    @click="dialogBio = true"
-                    class="ma-1"
-                    >Info Penjual</v-btn
-                  >
+                  <v-btn small color="teal" dark @click="dialogHubungi = true" class="ma-1">Hubungi</v-btn>
+                  <v-btn small color="teal" dark :to="'/chat/' + appuser.id" class="ma-1">Pesan</v-btn>
+                  <v-btn small color="teal" dark @click="dialogBio = true" class="ma-1">Info Penjual</v-btn>
                 </div>
               </v-list-item-content>
             </v-list-item>
           </v-list>
 
           <div v-if="!guest && $vuetify.breakpoint.xsOnly">
-            <v-btn
-              small
-              color="teal"
-              dark
-              @click="dialogHubungi = true"
-              class="ma-1"
-              >Hubungi</v-btn
-            >
-            <v-btn
-              small
-              color="teal"
-              dark
-              :to="'/chat/' + appuser.id"
-              class="ma-1"
-              >Pesan</v-btn
-            >
-            <v-btn
-              small
-              color="teal"
-              dark
-              @click="dialogBio = true"
-              class="ma-1"
-              >Info Penjual</v-btn
-            >
+            <v-btn small color="teal" dark @click="dialogHubungi = true" class="ma-1">Hubungi</v-btn>
+            <v-btn small color="teal" dark :to="'/chat/' + appuser.id" class="ma-1">Pesan</v-btn>
+            <v-btn small color="teal" dark @click="dialogBio = true" class="ma-1">Info Penjual</v-btn>
           </div>
         </v-col>
 
@@ -121,14 +78,13 @@
                     appuser.nomor_hp +
                     '&text=Hai, saya dari aplikasi SiMotor'
                   "
-                  >WhatsApp Now</a
-                >
+                >WhatsApp Now</a>
               </v-btn>
             </div>
           </v-card>
         </v-dialog>
 
-        <v-dialog v-model="dialogBio" persistent max-width="500px">
+        <v-dialog v-model="dialogBio" persistent max-width="800px">
           <v-card>
             <v-toolbar dark color="teal" dense>
               <v-toolbar-title>Info Penjual</v-toolbar-title>
@@ -139,16 +95,37 @@
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </v-toolbar>
-
-            <v-card-text>{{ appuser.deskripsi }}</v-card-text>
+            <v-card-title class="font-weight-bold">Informasi Penjual</v-card-title>
+            <v-card-text class="font-weight-bold">Nama Penjual : {{ appuser.nama}}</v-card-text>
+            <v-card-text class="font-weight-bold">Lokasi : {{ appuser.kota}}</v-card-text>
+            <v-card-text class="font-weight-bold">No Telp : {{ appuser.nomor_hp}}</v-card-text>
+            <v-card-text class="font-weight-bold">Deskripsi Penjual: {{ appuser.deskripsi }}</v-card-text>
+            <v-divider></v-divider>
+            <v-card-title class="font-weight-bold">Catatan & Kebijakan Penjual</v-card-title>
+            <v-card-text class="font-weight-bold">Slogan: {{ appuser.slogan }}</v-card-text>
+            <v-row justify="center">
+              <v-expansion-panels inset>
+                <v-expansion-panel>
+                  <v-expansion-panel-header class="font-weight-bold">Kebijakan :</v-expansion-panel-header>
+                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-row>
+             <v-row justify="center">
+              <v-expansion-panels inset>
+                <v-expansion-panel>
+                  <v-expansion-panel-header class="font-weight-bold">Catatan 1:</v-expansion-panel-header>
+                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-row>
           </v-card>
         </v-dialog>
 
         <v-col cols="12" sm="6">
           <v-row>
             <v-col cols="12" sm="6" class="text-center">
-              <div class="text-h5">Unit Terjual</div>
-              10
+              <div class="text-h5">Unit Terjual</div>10
             </v-col>
 
             <v-col cols="12" sm="6">
@@ -193,17 +170,13 @@
 
                   <v-list-item-group v-model="menu" color="primary">
                     <v-list-item @click="allUnit">
-                      <v-list-item-title> Semua Iklan </v-list-item-title>
+                      <v-list-item-title>Semua Iklan</v-list-item-title>
                     </v-list-item>
 
                     <v-list-item @click="daftarTB">
                       <v-list-item-content>
-                        <v-list-item-title>
-                          Tawar Bersama hari ini
-                        </v-list-item-title>
-                        <v-list-item-subtitle>
-                          {{ tanggal_mulai }}
-                        </v-list-item-subtitle>
+                        <v-list-item-title>Tawar Bersama hari ini</v-list-item-title>
+                        <v-list-item-subtitle>{{ tanggal_mulai }}</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
                   </v-list-item-group>
@@ -227,8 +200,7 @@
                 clearable
                 @click:clear="clear"
                 class="mr-2"
-              >
-              </v-text-field>
+              ></v-text-field>
 
               <v-bottom-sheet v-model="sheet">
                 <v-sheet height="170">
@@ -238,29 +210,19 @@
                         <v-list-item-title>
                           <h3>Filter</h3>
                         </v-list-item-title>
-                        <v-list-item-subtitle
-                          >Urutkan Berdasarkan</v-list-item-subtitle
-                        >
+                        <v-list-item-subtitle>Urutkan Berdasarkan</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
 
                     <v-list-item>
                       <v-radio-group v-model="order" row dense>
-                        <v-radio
-                          label="Postingan Terbaru"
-                          value="posting_terbaru"
-                        ></v-radio>
-                        <v-radio
-                          label="Tawar Bersama dimulai"
-                          value="tanggal_mulai"
-                        ></v-radio>
+                        <v-radio label="Postingan Terbaru" value="posting_terbaru"></v-radio>
+                        <v-radio label="Tawar Bersama dimulai" value="tanggal_mulai"></v-radio>
                       </v-radio-group>
                     </v-list-item>
 
                     <v-list-item>
-                      <v-btn block shaped color="success" @click="saveFilter"
-                        >Simpan</v-btn
-                      >
+                      <v-btn block shaped color="success" @click="saveFilter">Simpan</v-btn>
                     </v-list-item>
                   </v-list>
                 </v-sheet>
@@ -305,7 +267,7 @@
       autofocus
       clearable
       @click:clear="clear"
-    ></v-text-field> -->
+    ></v-text-field>-->
 
     <!-- <v-list two-line>
       <v-list-item>
@@ -454,7 +416,7 @@
 
         <v-card-text>{{ appuser.deskripsi }}</v-card-text>
       </v-card>
-    </v-dialog> -->
+    </v-dialog>-->
     <!-- <v-card outlined tile>
       <v-list>
         <v-list-item>
@@ -560,7 +522,7 @@
           </v-list-item>
         </v-list>
       </v-sheet>
-    </v-bottom-sheet> -->
+    </v-bottom-sheet>-->
   </v-container>
 </template>
 
@@ -615,7 +577,8 @@ export default {
       this.axios
         .get("/search/v3/search", {
           params: {
-            tanggal_mulai: this.tanggal_mulai == undefined ? '' : this.tanggal_mulai,
+            tanggal_mulai:
+              this.tanggal_mulai == undefined ? "" : this.tanggal_mulai,
             id_mst_iklan_status: 1,
             sort: this.order,
             search: this.title,

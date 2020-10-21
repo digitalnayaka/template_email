@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-footer padless>
-      <v-card flat tile class="text-center flex">
+      <v-card flat tile class="text-center flex" color="transparent">
         <!-- <v-flex xs12 md6 lg6>
           <v-row justify="center" no-gutters>
             <v-col cols="6">
@@ -24,8 +24,6 @@
         </v-flex>-->
         {{ new Date().getFullYear() }} —
         <strong>Digital Nayaka Abhinaya. All Rights Reserved.</strong>
-
-        <v-divider></v-divider>
       </v-card>
     </v-footer>
   </v-container>
