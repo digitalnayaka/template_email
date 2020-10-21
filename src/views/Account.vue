@@ -228,7 +228,7 @@ export default {
         icon: "mdi-emoticon",
         title: "Kata Pembeli",
         items: [
-          { title: "Ulasan", route: "/toko/review" },
+          { title: "Ulasan", route: "/buyer-review" },
           { title: "Komplain", route: "/toko/manage-ads" },
         ],
       },

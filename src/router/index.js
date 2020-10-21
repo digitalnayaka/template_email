@@ -274,9 +274,9 @@ const routes = [
         }
       },
       {
-        path: '/toko/review',
-        name: 'Review',
-        component: () => import(/* webpackChunkName: "review" */ '../views/Review.vue'),
+        path: '/buyer-review',
+        name: 'BuyerReview',
+        component: () => import(/* webpackChunkName: "buyer-review" */ '../views/BuyerReview.vue'),
         meta: {
           Auth: true
         }

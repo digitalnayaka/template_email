@@ -117,7 +117,15 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn small outlined color="teal" dark :to="'/chat/' + item.id_penjual">Hubungi Penjual</v-btn>
+            <v-btn
+              small
+              outlined
+              color="teal"
+              dark
+              :to="'/chat/' + item.id_pembeli"
+            >
+              Hubungi Pembeli
+            </v-btn>
           </v-card-actions>
         </v-card>
 
