@@ -80,28 +80,69 @@
             <v-divider></v-divider>
 
             <v-tabs v-model="tab2" grow slider-color="teal" @change="content = false">
-              <v-tab class="text-caption">Pembelian</v-tab>
-              <v-tab class="text-caption">Penjualan</v-tab>
+              <v-tab class="text-caption">Tawar Bersama</v-tab>
+              <v-tab class="text-caption">Tiket</v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab2">
               <v-tab-item>
                 <v-card flat>
+                  <div class="d-flex justify-space-between">
+                    <v-card-subtitle>Pembelian</v-card-subtitle>
+                    <v-card-subtitle>
+                      <a href="/buy/order?id=0">Semua</a>
+                    </v-card-subtitle>
+                  </div>
+
                   <div class="d-flex justify-space-around">
-                    <v-btn icon>
-                      <v-icon>mdi-heart</v-icon>
+                    <v-btn icon href="/buy/order?id=10">
+                      <img src="/img/icons/menunggu_persetujuan.png" width="30px" height="30px" alt="menunggu persetujuan" />
                     </v-btn>
 
-                    <v-btn icon>
-                      <v-icon>mdi-heart</v-icon>
+                    <v-btn icon href="/buy/order?id=1">
+                      <img src="/img/icons/menunggu_pembayaran.png" width="30px" height="30px" alt="menunggu pembayaran" />
                     </v-btn>
 
-                    <v-btn icon>
-                      <v-icon>mdi-heart</v-icon>
+                    <v-btn icon href="/buy/order?id=4">
+                       <img src="/img/icons/menunggu_verifikasi.png" width="30px" height="30px" alt="menunggu verifikasi" />
                     </v-btn>
 
-                    <v-btn icon>
-                      <v-icon>mdi-heart</v-icon>
+                    <v-btn icon href="/buy/order?id=2">
+                      <img src="/img/icons/pembayaran_diverifikasi.png" width="30px" height="30px" alt="pembayaran diverifikasi" />
+                    </v-btn>
+                  </div>
+
+                  <div class="d-flex justify-space-around text-center text-caption">
+                    <div>Menunggu Persetujuan</div>
+                    <div>Menunggu Pembayaran</div>
+                    <div>Menunggu Verifikasi</div>
+                    <div>Pembayaran Diverifikasi</div>
+                  </div>
+
+                  <v-divider></v-divider>
+
+                  <div class="d-flex justify-space-between">
+                    <v-card-subtitle>Penjualan</v-card-subtitle>
+                    <v-card-subtitle>
+                      <a href="/sell/order?id=0">Semua</a>
+                    </v-card-subtitle>
+                  </div>
+
+                  <div class="d-flex justify-space-around">
+                    <v-btn icon href="/sell/order?id=10">
+                     <img src="/img/icons/menunggu_persetujuan.png" width="30px" height="30px" alt="menunggu persetujuan" />
+                    </v-btn>
+
+                    <v-btn icon href="/sell/order?id=1">
+                      <img src="/img/icons/menunggu_pembayaran.png" width="30px" height="30px" alt="menunggu pembayaran" />
+                    </v-btn>
+
+                    <v-btn icon href="/sell/order?id=4">
+                       <img src="/img/icons/menunggu_verifikasi.png" width="30px" height="30px" alt="menunggu verifikasi" />
+                    </v-btn>
+
+                    <v-btn icon href="/sell/order?id=2">
+                       <img src="/img/icons/pembayaran_diverifikasi.png" width="30px" height="30px" alt="pembayaran diverifikasi" />
                     </v-btn>
                   </div>
 
@@ -118,19 +159,19 @@
                 <v-card flat>
                   <div class="d-flex justify-space-around">
                     <v-btn icon to="/toko/order?id=10">
-                      <v-icon>mdi-diamond</v-icon>
+                       <img src="/img/icons/menunggu_persetujuan.png" width="30px" height="30px" alt="menunggu persetujuan" />
                     </v-btn>
 
                     <v-btn icon>
-                      <v-icon>mdi-diamond</v-icon>
+                      <img src="/img/icons/menunggu_pembayaran.png" width="30px" height="30px" alt="menunggu pembayaran" />
                     </v-btn>
 
                     <v-btn icon>
-                      <v-icon>mdi-diamond</v-icon>
+                       <img src="/img/icons/menunggu_verifikasi.png" width="30px" height="30px" alt="menunggu verifikasi" />
                     </v-btn>
 
                     <v-btn icon>
-                      <v-icon>mdi-diamond</v-icon>
+                       <img src="/img/icons/pembayaran_diverifikasi.png" width="30px" height="30px" alt="pembayaran diverifikasi" />
                     </v-btn>
                   </div>
 
@@ -233,7 +274,7 @@
                         <v-list-item-subtitle>Pembeli</v-list-item-subtitle>
                       </v-list-item>
 
-                      <v-list-item to="/aktivitas-iklan" @click="content = true">
+                      <v-list-item to="/activity/seller" @click="content = true">
                         <v-list-item-subtitle>Penjual</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>

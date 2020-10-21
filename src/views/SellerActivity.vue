@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <div class="text-h4 mb-2">Aktivitas Pembeli</div>
+    <div class="text-h4 mb-2">Aktivitas Penjual</div>
 
     <v-tabs background-color="teal" dark grow>
       <v-tabs-slider color="yellow"></v-tabs-slider>
@@ -56,22 +56,14 @@
                 <v-list>
                   <v-list-item>
                     <v-list-item-content>
-                      <v-list-item-title
-                        v-if="item.id_mst_status_pemenang == 1"
-                      >
-                        Tawaran anda
+                      <v-list-item-title>
+                        {{ item.status_all.status_aktivitas }}
                       </v-list-item-title>
 
-                      <v-list-item-title
-                        v-if="item.id_mst_status_pemenang == 3"
-                      >
-                        Tawaran saat ini
-                      </v-list-item-title>
-
-                      <v-list-item-subtitle>
+                      <!-- <v-list-item-subtitle>
                         Rp
                         {{ Number(item.bid_tertinggi).toLocaleString("id-ID") }}
-                      </v-list-item-subtitle>
+                      </v-list-item-subtitle> -->
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -121,68 +113,6 @@
             </v-col>
           </v-row>
         </v-card>
-
-        <v-bottom-sheet v-model="sheet">
-          <v-sheet>
-            <v-list>
-              <v-list-item>
-                <v-list-item-content>
-                  <flip-countdown
-                    :deadline="selected.tanggal_selesai | dateTimeFormat(utc)"
-                  ></flip-countdown>
-                </v-list-item-content>
-              </v-list-item>
-
-              <v-list-item class="text-center">
-                <v-list-item-content>
-                  <v-list-item-title>Harga Awal</v-list-item-title>
-                  <v-list-item-subtitle>
-                    Rp
-                    {{ Number(selected.harga_awal).toLocaleString("id-ID") }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-divider vertical class="mx-2"></v-divider>
-
-                <v-list-item-content>
-                  <v-list-item-title>Kelipatan Tawaran</v-list-item-title>
-                  <v-list-item-subtitle>
-                    Rp
-                    {{ Number(selected.kelipatan).toLocaleString("id-ID") }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-btn icon @click="minus">
-                    <v-icon>mdi-minus</v-icon>
-                  </v-btn>
-                </v-list-item-icon>
-
-                <v-list-item-content align="center">
-                  <v-list-item-subtitle>Nominal Penawaran</v-list-item-subtitle>
-
-                  <v-list-item-title class="font-weight-black">
-                    Rp {{ Number(bid).toLocaleString("id-ID") }}
-                  </v-list-item-title>
-                </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-btn icon @click="bid += selected.kelipatan">
-                    <v-icon>mdi-plus</v-icon>
-                  </v-btn>
-                </v-list-item-action>
-              </v-list-item>
-
-              <v-list-item>
-                <v-btn block dark color="teal" @click="bidding">
-                  Konfirmasi Penawaran
-                </v-btn>
-              </v-list-item>
-            </v-list>
-          </v-sheet>
-        </v-bottom-sheet>
       </v-tab-item>
 
       <v-tab-item>
@@ -223,7 +153,7 @@
                     </v-list-item-icon>
 
                     <v-list-item-subtitle class="text-caption">
-                      Anda Menang
+                      Ada pemenang
                     </v-list-item-subtitle>
                   </v-list-item>
 
@@ -233,7 +163,7 @@
                     </v-list-item-icon>
 
                     <v-list-item-subtitle class="text-caption">
-                      Anda Kalah
+                      Tidak ada pemenang
                     </v-list-item-subtitle>
                   </v-list-item>
                 </v-list-item-group>
@@ -247,8 +177,8 @@
             flat
             :to="
               item.id_order == 0
-                ? '/tb-selesai/' + item.id_iklan
-                : '/iklan/' + item.id_iklan
+                ? '/tb-selesai/' + item.id
+                : '/iklan/' + item.id
             "
           >
             <v-toolbar dense flat color="grey lighten-3" class="red--text">
@@ -286,11 +216,13 @@
                 <v-list>
                   <v-list-item>
                     <v-list-item-content>
-                      <v-list-item-title> Tawaran anda </v-list-item-title>
+                      <v-list-item-title>
+                        {{ item.bid == 0 ? "Tidak ada penawaran" : "Penawaran terakhir" }}
+                      </v-list-item-title>
 
                       <v-list-item-subtitle>
                         Rp
-                        {{ Number(item.bid_tertinggi).toLocaleString("id-ID") }}
+                        {{ Number(item.bid).toLocaleString("id-ID") }}
                       </v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
@@ -304,15 +236,15 @@
           <v-row align="center" no-gutters>
             <v-col cols="12" sm="6">
               <div
-                class="pa-2 text-center teal--text"
+                class="pa-2 text-center red--text"
                 v-if="item.id_mst_status_pemenang == 2"
               >
                 {{ item.status_all.status_aktivitas }}
               </div>
 
               <div
-                class="pa-2 text-center red--text"
-                v-if="item.id_mst_status_pemenang == 4"
+                class="pa-2 text-center teal--text"
+                v-if="item.id_mst_status_pemenang == 1"
               >
                 {{ item.status_all.status_aktivitas }}
               </div>
@@ -325,9 +257,9 @@
                 color="teal"
                 dark
                 @click="chat(item)"
-                v-if="item.id_mst_status_pemenang == 2"
+                v-if="item.id_mst_status_pemenang == 1"
               >
-                Hubungi Penjual
+                Hubungi Pembeli
               </v-btn>
             </v-col>
           </v-row>
@@ -448,16 +380,12 @@ import { mapGetters, mapActions } from "vuex";
 import moment from "moment-timezone";
 import Vue from "vue";
 import VueCountdown from "@chenfengyuan/vue-countdown";
-import FlipCountdown from "vue2-flip-countdown";
-import "firebase/firestore";
-import { db } from "../main";
 
 Vue.component(VueCountdown.name, VueCountdown);
 
 export default {
-  name: "buyer-activity",
+  name: "seller-activity",
   props: ["utc", "timezone"],
-  components: { FlipCountdown },
   data() {
     return {
       berlangsung: [],
@@ -486,9 +414,10 @@ export default {
     }),
     getTBBerlangsung() {
       this.axios
-        .get("/bid/v3/aktivitas_pembeli_berlangsung", {
+        .get("/iklan/v3/aktivitas_penjual_berlangsung", {
           params: {
             id_app_user: this.user.id,
+            limit: 20,
           },
           headers: { Authorization: "Bearer " + this.user.token },
         })
@@ -523,66 +452,6 @@ export default {
 
       return props;
     },
-    getBid(item) {
-      this.sheet = true;
-      this.selected = item;
-
-      db.collection("tawar_bersama")
-        .doc("iklan")
-        .collection(String(item.id_iklan))
-        .orderBy("Bid", "desc")
-        .onSnapshot((querySnapshot) => {
-          let bidder = [];
-          querySnapshot.forEach((doc) => {
-            bidder.push(doc.data());
-            this.minBid = bidder[0].Bid;
-            this.penawaran = Number(this.minBid) + Number(item.kelipatan);
-            this.bid = this.penawaran;
-          });
-          this.liveBid = bidder;
-        });
-    },
-    minus() {
-      if (this.bid > this.penawaran) {
-        this.bid -= this.selected.kelipatan;
-      }
-    },
-    playSound(sound) {
-      if (sound) {
-        var audio = new Audio(sound);
-        audio.play();
-      }
-    },
-    bidding() {
-      let formData = new FormData();
-      formData.set("id_iklan", this.selected.id_iklan);
-      formData.set("bid", this.bid);
-      formData.set("id_app_user", this.user.id);
-
-      this.axios
-        .post("/bid/v3/iklan_tb_bid", formData, {
-          headers: { Authorization: "Bearer " + this.user.token },
-        })
-        .then((response) => {
-          let { data } = response;
-          this.setAlert({
-            status: true,
-            color: "success",
-            text: data.api_message,
-          });
-          this.sheet = false;
-          this.playSound("/audio/bid.mpeg");
-          this.sheet = false;
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          this.setAlert({
-            status: true,
-            color: "error",
-            text: responses.api_message,
-          });
-        });
-    },
     getTBSelesai() {
       var offset = (this.page - 1) * this.limit;
 
@@ -604,7 +473,7 @@ export default {
       };
 
       this.axios
-        .get("/bid/v3/aktivitas_pembeli_riwayat", request)
+        .get("/iklan/v3/aktivitas_penjual_riwayat", request)
         .then((response) => {
           let { data } = response.data;
           this.selesai = data;
@@ -627,7 +496,7 @@ export default {
       this.getTBSelesai();
     },
     chat(item) {
-      this.$router.push("/chat/" + item.id_app_penjual);
+      this.$router.push("/chat/" + item.id_app_pemenang);
     },
   },
   created() {

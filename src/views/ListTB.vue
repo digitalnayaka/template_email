@@ -594,7 +594,7 @@ export default {
       dialogBio: false,
       sheet: false,
       tab: 0,
-      menu: this.tanggal_mulai == undefined ? 0 : 1,
+      menu: this.$route.query.tgl == undefined ? 0 : 1,
       keyword: "",
       page: 1,
       lengthPage: 0,

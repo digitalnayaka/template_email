@@ -39,7 +39,7 @@
           <h2 class="text-center">Informasi Tagihan</h2>
 
           <v-card>
-            <v-list>
+            <v-list dense>
               <v-list-item>
                 <v-list-item-title>Nomor Order:</v-list-item-title>
                 <v-list-item-title>{{ orders.no_order }}</v-list-item-title>
@@ -130,16 +130,42 @@
                 Lihat Detail
               </v-btn>
 
-              <v-dialog v-model="statusOrder" width="500">
+              <v-dialog v-model="statusOrder" width="660">
                 <v-card>
                   <v-card-title>Status Order</v-card-title>
 
                   <v-divider></v-divider>
 
                   <v-timeline dense>
-                    <v-timeline-item>timeline item</v-timeline-item>
-                    <v-timeline-item> timeline item </v-timeline-item>
-                    <v-timeline-item>timeline item</v-timeline-item>
+                    <v-timeline-item v-for="item in log" :key="item.id">
+                      <div class="d-flex">
+                        <div class="flex-column mr-4">
+                          <div
+                            :class="
+                              item.updated_by_type == 1
+                                ? 'teal white--text'
+                                : item.updated_by_type == 3
+                                ? 'orange white--text'
+                                : 'grey white--text'
+                            "
+                          >
+                            <div class="mx-2">
+                              {{ item.updated_by_type_nama }}
+                            </div>
+                          </div>
+
+                          <div class="text-right">
+                            {{ item.created_at | dateTimeFormat(utc) }}
+                            {{ timezone }}
+                          </div>
+                        </div>
+
+                        <div class="flex-column">
+                          <div>{{ item.pembayaran_status }}</div>
+                          <div class="text-caption">{{ item.aktivitas }}</div>
+                        </div>
+                      </div>
+                    </v-timeline-item>
                   </v-timeline>
                 </v-card>
               </v-dialog>
@@ -150,9 +176,7 @@
         <v-col cols="12" sm="6">
           <h2 class="text-center">Informasi Produk</h2>
 
-          <v-card height="357">
-            <br />
-            <br />
+          <v-card :height="orders.id_mst_order_status == 3 ? 350 : 310">
             <v-list>
               <v-list-item>
                 <v-list-item-avatar tile size="100">
@@ -227,7 +251,9 @@
         color="primary"
         class="mt-4"
         @click="konfirmasiPenjual"
-        v-if="orders.id_mst_pembayaran_status == 10 && orders.id_penjual == user.id"
+        v-if="
+          orders.id_mst_pembayaran_status == 10 && orders.id_penjual == user.id
+        "
       >
         Konfirmasi Penjualan
       </v-btn>
@@ -306,7 +332,7 @@
           <v-btn
             block
             color="primary"
-            class="mt-4"
+            class="my-4"
             @click="upload"
             v-if="
               orders.id_mst_pembayaran_status == 1 &&
@@ -321,6 +347,7 @@
             rounded
             dark
             color="teal"
+            class="my-4"
             @click="dialogKonfirmasi = true"
             v-if="
               orders.id_mst_pembayaran_status == 4 &&
@@ -416,6 +443,36 @@
                 </v-card>
               </v-dialog>-->
         </div>
+
+        <v-btn
+          block
+          color="teal"
+          dark
+          to="/product/review"
+          v-if="
+            orders.id_pembeli == user.id &&
+            (orders.id_mst_pembayaran_status == 2 ||
+              orders.id_mst_pembayaran_status == 5 ||
+              orders.id_mst_pembayaran_status == 11)
+          "
+        >
+          Ulas
+        </v-btn>
+
+        <div v-if="orders.id_mst_order_status != 3">
+          <v-btn
+            block
+            color="red"
+            dark
+            @click="batalkan"
+            v-if="
+              orders.id_mst_pembayaran_status != 2 &&
+              orders.id_mst_pembayaran_status != 3
+            "
+          >
+            Batalkan
+          </v-btn>
+        </div>
       </div>
     </v-card>
   </v-container>
@@ -450,6 +507,7 @@ export default {
     note: "",
     noteTolak: [],
     noteDetail: "",
+    log: [],
   }),
   methods: {
     ...mapActions({
@@ -474,7 +532,10 @@ export default {
 
           this.getIklan(this.orders.id_iklan);
 
-          if (this.orders.id_mst_pembayaran_status == 4) {
+          if (
+            this.orders.id_mst_pembayaran_status == 4 ||
+            this.orders.id_mst_pembayaran_status == 2
+          ) {
             this.dtlPembayaran();
           }
 
@@ -709,10 +770,62 @@ export default {
           });
       }
     },
+    batalkan() {
+      var r = confirm("Yakin ingin membatalkan order berikut?");
+      if (r == true) {
+        let formData = new FormData();
+
+        formData.append("id", this.orders.id);
+        formData.append("id_app_user", this.user.id);
+        formData.append("id_mst_pembayaran_note", 1);
+        formData.append("note_detail", "Membatalkan Tiket");
+
+        this.axios
+          .post("/transaksi/v3/batalkan_pembelian", formData, {
+            headers: { Authorization: "Bearer " + this.user.token },
+          })
+          .then((response) => {
+            let { data } = response;
+            this.setAlert({
+              status: true,
+              color: "success",
+              text: data.api_message,
+            });
+            this.getOrder();
+          })
+          .catch((error) => {
+            let responses = error.response.data;
+            this.setAlert({
+              status: true,
+              color: "success",
+              text: responses.api_message,
+            });
+          });
+      }
+    },
+    logStatus() {
+      this.axios
+        .get("/log/v3/log/transaksi", {
+          params: {
+            id_order: this.$route.params.id,
+            limit: 20,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.log = data;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
   },
   mounted() {
     this.getOrder();
     this.detailTolak();
+    this.logStatus();
   },
   computed: {
     ...mapGetters({
