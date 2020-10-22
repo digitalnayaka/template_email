@@ -40,7 +40,7 @@
         <div class="text-h5 font-weight-bold">{{ hits.judul }}</div>
 
         <div class="d-flex align-center text-caption text-sm-body-2">
-          <span>3.5</span>
+          <!-- <span>3.5</span>
           <star-rating
             :rating="3.5"
             read-only
@@ -49,7 +49,7 @@
             :star-size="20"
             inline
           ></star-rating>
-          <v-icon>mdi-circle-medium</v-icon>
+          <v-icon>mdi-circle-medium</v-icon> -->
           <span v-if="iklan.log_iklan_view > 0">{{ iklan.log_iklan_view }}x Dilihat</span>
         </div>
 
@@ -220,9 +220,13 @@
       <v-tab-item>
         <v-card flat>
           <v-card-title class="font-weight-bold">Deskripsi Iklan:</v-card-title>
+
           <v-card-text>{{ hits.deskripsi }}</v-card-text>
+
            <v-card-title class="font-weight-bold">Catatan & Kebijakan Penjual</v-card-title>
+
             <v-card-text class="font-weight-bold">Slogan: {{ appuser.slogan }}</v-card-text>
+
             <v-row justify="center">
               <v-expansion-panels>
                 <v-expansion-panel>
@@ -231,6 +235,7 @@
                 </v-expansion-panel>
               </v-expansion-panels>
             </v-row>
+            
              <v-row justify="center">
               <v-expansion-panels>
                 <v-expansion-panel>
@@ -730,7 +735,7 @@ import "firebase/firestore";
 import { db } from "../main";
 import moment from "moment-timezone";
 import FlipCountdown from "vue2-flip-countdown";
-import StarRating from "vue-star-rating";
+// import StarRating from "vue-star-rating";
 
 const fmt = "YYYY-MM-DD HH:mm:ss";
 
@@ -738,7 +743,7 @@ export default {
   name: "detail_iklan",
   components: {
     FlipCountdown,
-    StarRating,
+    // StarRating,
     DetailUnit: () =>
       import(
         /* webpackChunkName: "detail-unit" */ "@/components/DetailUnit.vue"

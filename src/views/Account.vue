@@ -170,7 +170,7 @@ export default {
         title: "Kotak Masuk",
         items: [
           { title: "Chat", route: "/chat-list" },
-         
+          { title: "Ulasan", route: "/product/review" },
           { title: "Notifikasi", route: "/notification" },
         ],
       },
@@ -179,7 +179,7 @@ export default {
         icon: "mdi-shopping",
         title: "Pembeli",
         items: [
-          { title: "Aktivitas Pembeli", route: "/activity/buyer" },
+          { title: "Aktivitas", route: "/activity/buyer" },
           { title: "Transaksi", route: "/buy/order" },
         ],
       },
@@ -191,7 +191,7 @@ export default {
       {
         id: 5,
         icon: "mdi-help",
-        title: "Tentang",
+        title: "About Us",
         items: [
           { title: "Tentang SiMotor", route: "/about" },
           { title: "Bantuan", route: "/bantuan" },
@@ -219,18 +219,15 @@ export default {
         icon: "mdi-clipboard-text",
         title: "Penjualan",
         items: [
-          { title: "Informasi Penjual", route: "/toko/info" },
-          { title: "Transaksi Penjual", route: "/sell/order" },
+          { title: "Aktivitas", route: "/activity/seller" },
+          { title: "Transaksi", route: "/sell/order" },
           { title: "Report", route: "/report" },
         ],
       },
       {
         icon: "mdi-emoticon",
         title: "Kata Pembeli",
-        items: [
-          { title: "Ulasan", route: "/buyer-review" },
-          { title: "Komplain", route: "/toko/manage-ads" },
-        ],
+        items: [{ title: "Ulasan", route: "/buyer-review" }],
       },
     ],
   }),
@@ -244,7 +241,17 @@ export default {
       setAlert: "alert/set",
     }),
   },
-  created() {},
+  created() {
+    if (
+      this.$route.path == "/chat-list" ||
+      this.$route.path == "/product/review" ||
+      this.$route.path == "/notification"
+    ) {
+      this.$nextTick(() => {
+        this.menu = 1;
+      });
+    }
+  },
 };
 </script>
 

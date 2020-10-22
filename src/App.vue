@@ -1,6 +1,12 @@
 <template>
   <v-app>
-    <v-app-bar app clipped-left color="teal" dark v-if="$vuetify.breakpoint.smAndUp || isHome">
+    <v-app-bar
+      app
+      clipped-left
+      color="teal"
+      dark
+      v-if="$vuetify.breakpoint.smAndUp || isHome"
+    >
       <v-toolbar-title style="width: 230px" class="ml-0 pl-4">
         <a href="/">
           <v-img src="/img/logo-tulisan.png" width="200" contain></v-img>
@@ -24,14 +30,16 @@
           :x-small="$vuetify.breakpoint.xsOnly ? true : false"
           class="mx-2"
           @click="setDialogComponent('login')"
-        >Masuk</v-btn>
+          >Masuk</v-btn
+        >
 
         <v-btn
           rounded
           :x-small="$vuetify.breakpoint.xsOnly ? true : false"
           color="green accent-4"
           @click="setDialogComponent('daftar')"
-        >Daftar</v-btn>
+          >Daftar</v-btn
+        >
       </div>
 
       <div class="d-flex align-center" v-else>
@@ -79,7 +87,12 @@
 
             <v-divider></v-divider>
 
-            <v-tabs v-model="tab2" grow slider-color="teal" @change="content = false">
+            <v-tabs
+              v-model="tab2"
+              grow
+              slider-color="teal"
+              @change="content = false"
+            >
               <v-tab class="text-caption">Tawar Bersama</v-tab>
               <v-tab class="text-caption">Tiket</v-tab>
             </v-tabs>
@@ -96,23 +109,45 @@
 
                   <div class="d-flex justify-space-around">
                     <v-btn icon href="/buy/order?id=10">
-                      <img src="/img/icons/menunggu_persetujuan.png" width="30px" height="30px" alt="menunggu persetujuan" />
+                      <img
+                        src="/img/icons/menunggu_persetujuan.png"
+                        width="30px"
+                        height="30px"
+                        alt="menunggu persetujuan"
+                      />
                     </v-btn>
 
                     <v-btn icon href="/buy/order?id=1">
-                      <img src="/img/icons/menunggu_pembayaran.png" width="30px" height="30px" alt="menunggu pembayaran" />
+                      <img
+                        src="/img/icons/menunggu_pembayaran.png"
+                        width="30px"
+                        height="30px"
+                        alt="menunggu pembayaran"
+                      />
                     </v-btn>
 
                     <v-btn icon href="/buy/order?id=4">
-                       <img src="/img/icons/menunggu_verifikasi.png" width="30px" height="30px" alt="menunggu verifikasi" />
+                      <img
+                        src="/img/icons/menunggu_verifikasi.png"
+                        width="30px"
+                        height="30px"
+                        alt="menunggu verifikasi"
+                      />
                     </v-btn>
 
                     <v-btn icon href="/buy/order?id=2">
-                      <img src="/img/icons/pembayaran_diverifikasi.png" width="30px" height="30px" alt="pembayaran diverifikasi" />
+                      <img
+                        src="/img/icons/pembayaran_diverifikasi.png"
+                        width="30px"
+                        height="30px"
+                        alt="pembayaran diverifikasi"
+                      />
                     </v-btn>
                   </div>
 
-                  <div class="d-flex justify-space-around text-center text-caption">
+                  <div
+                    class="d-flex justify-space-around text-center text-caption"
+                  >
                     <div>Menunggu Persetujuan</div>
                     <div>Menunggu Pembayaran</div>
                     <div>Menunggu Verifikasi</div>
@@ -130,23 +165,45 @@
 
                   <div class="d-flex justify-space-around">
                     <v-btn icon href="/sell/order?id=10">
-                     <img src="/img/icons/menunggu_persetujuan.png" width="30px" height="30px" alt="menunggu persetujuan" />
+                      <img
+                        src="/img/icons/menunggu_persetujuan.png"
+                        width="30px"
+                        height="30px"
+                        alt="menunggu persetujuan"
+                      />
                     </v-btn>
 
                     <v-btn icon href="/sell/order?id=1">
-                      <img src="/img/icons/menunggu_pembayaran.png" width="30px" height="30px" alt="menunggu pembayaran" />
+                      <img
+                        src="/img/icons/menunggu_pembayaran.png"
+                        width="30px"
+                        height="30px"
+                        alt="menunggu pembayaran"
+                      />
                     </v-btn>
 
                     <v-btn icon href="/sell/order?id=4">
-                       <img src="/img/icons/menunggu_verifikasi.png" width="30px" height="30px" alt="menunggu verifikasi" />
+                      <img
+                        src="/img/icons/menunggu_verifikasi.png"
+                        width="30px"
+                        height="30px"
+                        alt="menunggu verifikasi"
+                      />
                     </v-btn>
 
                     <v-btn icon href="/sell/order?id=2">
-                       <img src="/img/icons/pembayaran_diverifikasi.png" width="30px" height="30px" alt="pembayaran diverifikasi" />
+                      <img
+                        src="/img/icons/pembayaran_diverifikasi.png"
+                        width="30px"
+                        height="30px"
+                        alt="pembayaran diverifikasi"
+                      />
                     </v-btn>
                   </div>
 
-                  <div class="d-flex justify-space-around text-center text-caption">
+                  <div
+                    class="d-flex justify-space-around text-center text-caption"
+                  >
                     <div>Menunggu Persetujuan</div>
                     <div>Menunggu Pembayaran</div>
                     <div>Menunggu Verifikasi</div>
@@ -155,7 +212,7 @@
                 </v-card>
               </v-tab-item>
 
-              <v-tab-item>
+              <!-- <v-tab-item>
                 <v-card flat>
                   <div class="d-flex justify-space-around">
                     <v-btn icon to="/toko/order?id=10">
@@ -182,7 +239,7 @@
                     <div>Pembayaran Diverifikasi</div>
                   </div>
                 </v-card>
-              </v-tab-item>
+              </v-tab-item> -->
             </v-tabs-items>
 
             <v-card-actions>
@@ -204,13 +261,15 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn large text v-bind="attrs" v-on="on">
               <v-avatar size="32px" item>
-                <v-img src="/img/profile.png" contain v-if="user.photo == null"></v-img>
+                <v-img
+                  src="/img/profile.png"
+                  contain
+                  v-if="user.photo == null"
+                ></v-img>
                 <v-img :src="getImage(user.photo)" alt="Avatar" v-else></v-img>
               </v-avatar>
               <span class="text-caption mx-2">
-                {{
-                user.nama.split(" ", 1)[0]
-                }}
+                {{ user.nama.split(" ", 1)[0] }}
               </span>
             </v-btn>
           </template>
@@ -219,20 +278,35 @@
             <v-list>
               <v-list-item to="/account/edit" @click="content = true">
                 <v-list-item-avatar>
-                  <v-img src="/img/profile.png" contain v-if="user.photo == null"></v-img>
-                  <v-img :src="getImage(user.photo)" alt="Avatar" v-else></v-img>
+                  <v-img
+                    src="/img/profile.png"
+                    contain
+                    v-if="user.photo == null"
+                  ></v-img>
+                  <v-img
+                    :src="getImage(user.photo)"
+                    alt="Avatar"
+                    v-else
+                  ></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
                   <v-list-item-title>{{ user.nama }}</v-list-item-title>
-                  <v-list-item-subtitle v-if="user.id_mst_user_type == 2">{{ user.user_type }} User</v-list-item-subtitle>
+                  <v-list-item-subtitle v-if="user.id_mst_user_type == 2"
+                    >{{ user.user_type }} User</v-list-item-subtitle
+                  >
                 </v-list-item-content>
               </v-list-item>
             </v-list>
 
             <v-divider></v-divider>
 
-            <v-tabs v-model="tab" grow slider-color="teal" @change="content = false">
+            <v-tabs
+              v-model="tab"
+              grow
+              slider-color="teal"
+              @change="content = false"
+            >
               <v-tab class="text-caption">Penjualan</v-tab>
               <v-tab class="text-caption">Aktivitas</v-tab>
             </v-tabs>
@@ -242,11 +316,17 @@
                 <v-row no-gutters>
                   <v-col cols="6">
                     <v-list dense>
-                      <v-list-item to="/garasi/add-unit" @click="content = true">
+                      <v-list-item
+                        to="/garasi/add-unit"
+                        @click="content = true"
+                      >
                         <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
                       </v-list-item>
 
-                      <v-list-item to="/garasi/manage-unit" @click="content = true">
+                      <v-list-item
+                        to="/garasi/manage-unit"
+                        @click="content = true"
+                      >
                         <v-list-item-subtitle>Garasi</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
@@ -255,11 +335,18 @@
                   <v-col cols="6">
                     <v-list dense>
                       <v-list-item to="/toko/add-ads" @click="content = true">
-                        <v-list-item-subtitle>Tambah Iklan</v-list-item-subtitle>
+                        <v-list-item-subtitle
+                          >Tambah Iklan</v-list-item-subtitle
+                        >
                       </v-list-item>
 
-                      <v-list-item to="/toko/manage-ads" @click="content = true">
-                        <v-list-item-subtitle>Daftar Iklan</v-list-item-subtitle>
+                      <v-list-item
+                        to="/toko/manage-ads"
+                        @click="content = true"
+                      >
+                        <v-list-item-subtitle
+                          >Daftar Iklan</v-list-item-subtitle
+                        >
                       </v-list-item>
                     </v-list>
                   </v-col>
@@ -274,7 +361,10 @@
                         <v-list-item-subtitle>Pembeli</v-list-item-subtitle>
                       </v-list-item>
 
-                      <v-list-item to="/activity/seller" @click="content = true">
+                      <v-list-item
+                        to="/activity/seller"
+                        @click="content = true"
+                      >
                         <v-list-item-subtitle>Penjual</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
@@ -313,7 +403,12 @@
         transition="dialogbottom-transition"
         persistent
       >
-        <component :is="currentComponent" :utc="utc" :timezone="waktu" @closed="setDialogStatus"></component>
+        <component
+          :is="currentComponent"
+          :utc="utc"
+          :timezone="waktu"
+          @closed="setDialogStatus"
+        ></component>
       </v-dialog>
     </keep-alive>
 
