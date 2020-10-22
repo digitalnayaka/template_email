@@ -223,7 +223,7 @@
           <v-card-text>{{ hits.deskripsi }}</v-card-text>
            <v-card-title class="font-weight-bold">Catatan & Kebijakan Penjual</v-card-title>
             <v-card-text class="font-weight-bold">Slogan: {{ appuser.slogan }}</v-card-text>
-            <v-row justify="center">
+            <v-row justify="center" >
               <v-expansion-panels>
                 <v-expansion-panel>
                   <v-expansion-panel-header class="font-weight-bold">Kebijakan :</v-expansion-panel-header>
@@ -784,6 +784,7 @@ export default {
       appuser: [],
       title: "",
       loading: true,
+      catatan:[],
     };
   },
   methods: {
@@ -932,6 +933,22 @@ export default {
             this.penawaran = Number(this.minBid) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
           }
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+       getCatatan() {
+      this.axios
+        .get("/user/v3/user/catatan_penjual", {
+          params: { 
+            id_app_user: this.user.id
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.catatan = data;
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -1248,6 +1265,7 @@ export default {
   created() {
     // this.$nextTick(() => {
     this.getDtlIklan();
+    this.getCatatan();
     // });
     this.GetBid();
     if (!this.guest) {

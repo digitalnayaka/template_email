@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <h2>Daftar Penjualan</h2>
+    <h2>Transaksi Saya</h2>
 
     <v-tabs v-model="tab" background-color="cyan" dark slider-color="teal" show-arrows>
       <v-tab>Tawar Bersama</v-tab>

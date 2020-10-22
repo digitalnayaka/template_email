@@ -41,20 +41,24 @@
             contain
             :key="index"
             :to="{
-            path: '/list-tb/' + item.nama,
-            query: { tgl: item.date.substr(0, 10) },
-          }"
+              path: '/list-tb/' + item.nama,
+              query: { tgl: item.date.substr(0, 10) },
+            }"
           >
             <v-list>
               <v-list-item>
                 <v-list-item-avatar size="70">
-                  <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
+                  <v-icon x-large v-if="item.photo == 'null'"
+                    >mdi-account-circle</v-icon
+                  >
                   <v-img :src="getImage(item.photo)" v-else></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
                   <v-btn small color="teal" dark rounded>
-                    <v-list-item-title>{{ item.date | dateFormat }}</v-list-item-title>
+                    <v-list-item-title>{{
+                      item.date | dateFormat
+                    }}</v-list-item-title>
                   </v-btn>
                 </v-list-item-content>
               </v-list-item>
@@ -82,7 +86,8 @@
           to="/jadwal"
           :small="$vuetify.breakpoint.xsOnly ? true : false"
           class="mt-4"
-        >Jadwal Tawar Bersama Selengkapnya</v-btn>
+          >Jadwal Tawar Bersama Selengkapnya</v-btn
+        >
       </v-container>
     </v-card>
     <!-- <v-divider class="my-2"></v-divider> -->
@@ -106,7 +111,12 @@
       </v-col>
 
       <v-col cols="12" align="center">
-        <v-btn dark color="teal" :to="{ path: '/category/mokas', query: { tb: true } }">Lihat Semua</v-btn>
+        <v-btn
+          dark
+          color="teal"
+          :to="{ path: '/category/mokas', query: { tb: true } }"
+          >Lihat Semua</v-btn
+        >
       </v-col>
     </v-row>
 
@@ -193,39 +203,58 @@
     </v-container>-->
     <v-divider class="my-2"></v-divider>
     <v-card color="teal lighten-4 text-center">
-      <v-container fluid >
+      <v-container fluid>
         <h2>Artikel Terbaru</h2>
 
-        <div class="scrolling-wrapper-flexbox mx-2" >
-          <v-card class="card ma-2" max-width="250">
+        <div class="scrolling-wrapper-flexbox mx-2">
+          <v-card
+            max-width="300px"
+            max-height="300px"
+            v-for="item in artikel"
+            contain
+            :key="item.id"
+          >
             <v-list>
               <v-list-item>
-                <!-- <v-list-item-avatar size="70">
-                <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
-                <v-img :src="getImage(item.photo)" v-else></v-img>
-                </v-list-item-avatar>-->
-
-                <v-list-item-content>
-                   <v-img src="/img/test.png" max-width="250"></v-img>
-                  <span>by: Author</span>
-                  <v-list-item-title class="font-weight-bold">Judul</v-list-item-title>
-                </v-list-item-content>
+                <v-list>
+                  <v-icon
+                    x-large
+                    v-if="item.cover_image == 'null'"
+                    max-width="250px"
+                    max-height="250px"
+                    >mdi-account-circle</v-icon
+                  >
+                  <v-img
+                    :src="getImage(item.cover_image)"
+                    max-width="250px"
+                    max-height="250px"
+                    contain
+                    v-else
+                  ></v-img>
+                </v-list>
               </v-list-item>
             </v-list>
-
-            <v-divider></v-divider>
-
-            <!-- <v-avatar size="16" v-if="item.id_mst_user_type == 2">
-            <v-img src="/img/verified.png" alt="verified"></v-img>
-            </v-avatar>-->
+            <!-- <span class="font-weight-bold">{{  }}</span> -->
+            <v-list-item-content>
+              <span> Tanggal: {{ item.publish_date | dateFormat }} </span>
+            </v-list-item-content>
+            <v-card-title>{{ item.title }}</v-card-title>
           </v-card>
         </div>
 
-        <v-btn dark color="teal" to="/jadwal" class="mt-4">Lihat Semua Artikel</v-btn>
+        <v-btn dark color="teal" href="http://devlmu.com:333/" class="mt-4"
+          >Lihat Semua Artikel</v-btn
+        >
       </v-container>
     </v-card>
     <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-      <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
+      <v-img
+        to="/bantuan"
+        src="/img/icons/ic_bantuan.png"
+        width="50"
+        height="50"
+        contain
+      ></v-img>
     </v-btn>
   </v-container>
 </template>
@@ -270,6 +299,7 @@ export default {
     ],
     jadwal: [],
     tbBerlangsung: [],
+    artikel: [],
   }),
   methods: {
     showBanners() {
@@ -296,6 +326,23 @@ export default {
           console.log(responses.api_message);
         });
     },
+    artikelBerita() {
+      this.axios
+        .get("/produk/v3/berita/umum", {
+          params: {
+            limit: 4,
+            offset: 0,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.artikel = data;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
     jadwalLelang() {
       this.axios
         .get("/iklan/v3/iklan_jadwal_tb", {
@@ -313,6 +360,7 @@ export default {
           console.log(responses.api_message);
         });
     },
+
     TBBerlangsung() {
       this.axios
         .get("/search/v3/search", {
@@ -339,6 +387,7 @@ export default {
     this.showBanners();
     // this.showCategories();
     this.jadwalLelang();
+    this.artikelBerita();
     this.TBBerlangsung();
   },
   filters: {
