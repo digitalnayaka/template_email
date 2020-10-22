@@ -148,7 +148,6 @@
                     dense
                     rows="3"
                     no-resize
-                    width="500"
                   ></v-textarea>
 
                   <v-card-actions>
@@ -250,7 +249,7 @@ export default {
       this.axios
         .get("/transaksi/v3/belum_review", {
           params: {
-            id_penjual: 80,
+            id_penjual: this.user.id,
             offset: offset,
             limit: this.limit,
           },
@@ -271,23 +270,19 @@ export default {
         });
     },
     rating() {
-      // let params = new URLSearchParams();
+      let params = new URLSearchParams();
 
-      // for (let i = 0; i < this.review.length; i++) {
-      //   params.append("id_iklan", this.review[i].id_iklan);
-      // }
+      for (let i = 0; i < this.review.length; i++) {
+        params.append("id_iklan", this.review[i].id_iklan);
+      }
 
-      // let request = {
-      //   params: params,
-      //   headers: { Authorization: "Bearer " + this.user.token },
-      // };
+      let request = {
+        params: params,
+        headers: { Authorization: "Bearer " + this.user.token },
+      };
 
       this.axios
-        .get("/transaksi/v3/review", {
-          params: {
-            id_iklan: 5153,
-          },
-        })
+        .get("/transaksi/v3/review", request)
         .then((response) => {
           let { data } = response.data;
           this.notReview = data;

@@ -30,6 +30,7 @@
         <h5>{{ item.name }}</h5>
       </v-col>
     </v-row>
+
     <v-card color="teal lighten-4">
       <v-container fluid class="text-center">
         <h2>Jadwal Tawar Bersama</h2>
@@ -202,6 +203,7 @@
       </div>
     </v-container>-->
     <v-divider class="my-2"></v-divider>
+
     <v-card color="teal lighten-4 text-center">
       <v-container fluid>
         <h2>Artikel Terbaru</h2>
@@ -247,6 +249,7 @@
         >
       </v-container>
     </v-card>
+
     <v-btn bottom color="white" dark fab fixed right to="/bantuan">
       <v-img
         to="/bantuan"
