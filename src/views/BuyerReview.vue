@@ -312,7 +312,7 @@ export default {
               color: "success",
               text: data.api_message,
             });
-            this.getOrder();
+            this.getReview();
           })
           .catch((error) => {
             let responses = error.response.data;
