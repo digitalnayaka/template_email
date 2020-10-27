@@ -248,60 +248,6 @@ export default {
       setAlert: "alert/set",
     }),
   },
-  created() {
-    if (
-      this.$route.path == "/chat-list" ||
-      this.$route.path == "/product/review" ||
-      this.$route.path == "/notification"
-    ) {
-      this.$nextTick(() => {
-        this.menu = 1;
-      });
-    }
-
-    if (
-      this.$route.path == "/activity/buyer" ||
-      this.$route.path == "/buy/order"
-    ) {
-      this.$nextTick(() => {
-        this.menu = 5;
-      });
-    }
-
-    if (this.$route.path == "/about" || this.$route.path == "/bantuan") {
-      this.$nextTick(() => {
-        this.menu = 13;
-      });
-    }
-
-    if (this.$route.path == "/garasi/manage-unit") {
-      this.$nextTick(() => {
-        this.menu = 9;
-      });
-    }
-
-    if (this.$route.path == "/toko/manage-ads") {
-      this.$nextTick(() => {
-        this.menu = 10;
-      });
-    }
-
-    if (
-      this.$route.path == "/activity/seller" ||
-      this.$route.path == "/sell/order" ||
-      this.$route.path == "/report"
-    ) {
-      this.$nextTick(() => {
-        this.menu = 11;
-      });
-    }
-
-    if (this.$route.path == "/buyer-review") {
-      this.$nextTick(() => {
-        this.menu = 12;
-      });
-    }
-  },
 };
 </script>
 

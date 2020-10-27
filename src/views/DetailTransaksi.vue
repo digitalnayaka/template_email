@@ -224,12 +224,7 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-<v-btn
-                color="blue"
-                dark
-                
-                >Beri Ulasan</v-btn
-              >
+              <v-btn color="blue" dark>Beri Ulasan</v-btn>
               <v-btn
                 color="teal"
                 dark
@@ -316,14 +311,16 @@
             </label>
           </image-uploader>
 
-          <v-img
-            :src="gambar"
-            contain
-            class="mx-2"
-            width="300"
-            height="200"
-            v-if="orders.id_mst_pembayaran_status > 1"
-          ></v-img>
+          <div v-viewer="{ movable: false }">
+            <img
+              :src="gambar"
+              contain
+              class="mx-2"
+              width="300"
+              height="200"
+              v-if="orders.id_mst_pembayaran_status > 1"
+            />
+          </div>
 
           <p>*Pastikan gambar yang diupload jelas dan terbaca</p>
 
@@ -359,13 +356,16 @@
 
           <v-dialog v-model="dialogKonfirmasi" width="500" persistent>
             <v-card>
-                 <v-toolbar dark color="teal darken-3">
-          <v-toolbar-title>Konfirmasi Pembayaran</v-toolbar-title>
-          <div class="flex-grow-1"></div>
-          <v-btn icon @click="dialogKonfirmasi = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar>
+              <v-toolbar dark color="teal darken-3">
+                <v-toolbar-title>Konfirmasi Pembayaran</v-toolbar-title>
+
+                <v-spacer></v-spacer>
+
+                <v-btn icon @click="dialogKonfirmasi = false">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </v-toolbar>
+
               <v-container fluid>
                 Yakin ingin mengkonfirmasi pembayaran berikut?
               </v-container>
@@ -483,6 +483,10 @@ import { mapGetters, mapActions } from "vuex";
 import FlipCountdown from "vue2-flip-countdown";
 import moment from "moment-timezone";
 import ImageUploader from "vue-image-upload-resize";
+import "viewerjs/dist/viewer.css";
+import Viewer from "v-viewer";
+import Vue from "vue";
+Vue.use(Viewer);
 
 export default {
   name: "detailTransaksi",
