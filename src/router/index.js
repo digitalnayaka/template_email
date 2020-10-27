@@ -340,9 +340,9 @@ const routes = [
     }
   },
   {
-    path: '/favourite',
-    name: 'Favourite',
-    component: () => import(/* webpackChunkName: "favourite" */ '../views/IklanFavorit.vue'),
+    path: '/favorite',
+    name: 'Favorite',
+    component: () => import(/* webpackChunkName: "favorite" */ '../views/IklanFavorit.vue'),
     meta: {
       Auth: true
     }

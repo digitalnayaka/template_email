@@ -67,6 +67,7 @@
                 v-if="item.id == 2 || item.id == 3"
                 :prepend-icon="item.icon"
                 no-action
+                :value="true"
               >
                 <template v-slot:activator>
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -83,7 +84,11 @@
                 </v-list-item>
               </v-list-group>
 
-              <v-list-group v-if="item.id == 4" :prepend-icon="item.icon">
+              <v-list-group
+                v-if="item.id == 4"
+                :prepend-icon="item.icon"
+                :value="true"
+              >
                 <template v-slot:activator>
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </template>
@@ -93,6 +98,7 @@
                   :key="item.title"
                   no-action
                   sub-group
+                  :value="true"
                 >
                   <template v-slot:activator>
                     <v-list-item-content>
@@ -107,7 +113,6 @@
                   <v-list-item
                     v-for="subItem in item.items"
                     :key="subItem.title"
-                    :value="subItem.route"
                     :to="subItem.route"
                   >
                     <v-list-item-content>
@@ -121,6 +126,7 @@
                 v-if="item.id == 5"
                 :prepend-icon="item.icon"
                 no-action
+                :value="true"
               >
                 <template v-slot:activator>
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -157,6 +163,7 @@ export default {
   data: () => ({
     drawer: true,
     menu: 0,
+    menu2: 0,
     items: [
       {
         id: 1,
@@ -169,9 +176,9 @@ export default {
         icon: "mdi-email-multiple",
         title: "Kotak Masuk",
         items: [
-          { title: "Chat", route: "/chat-list" },
-          
-          { title: "Notifikasi", route: "/notification" },
+          { id: 6, title: "Chat", route: "/chat-list" },
+          { id: 7, title: "Penilaian", route: "/product/review" },
+          { id: 8, title: "Notifikasi", route: "/notification" },
         ],
       },
       {
@@ -179,9 +186,8 @@ export default {
         icon: "mdi-shopping",
         title: "Pembeli",
         items: [
-          { title: "Aktivitas", route: "/activity/buyer" },
-          { title: "Transaksi", route: "/buy/order" },
-          { title: "Penilaian Pembeli", route: "/product/review" }
+          { id: 9, title: "Aktivitas", route: "/activity/buyer" },
+          { id: 10, title: "Transaksi", route: "/buy/order" },
         ],
       },
       {
@@ -194,8 +200,8 @@ export default {
         icon: "mdi-help",
         title: "About Us",
         items: [
-          { title: "Tentang SiMotor", route: "/about" },
-          { title: "Bantuan", route: "/bantuan" },
+          { id: 11, title: "Tentang SiMotor", route: "/about" },
+          { id: 12, title: "Bantuan", route: "/bantuan" },
         ],
       },
     ],
@@ -204,31 +210,31 @@ export default {
         icon: "mdi-garage",
         title: "Garasi",
         items: [
-          { title: "Tambah Unit", route: "/garasi/add-unit" },
-          { title: "Daftar Unit", route: "/garasi/manage-unit" },
+          { id: 13, title: "Tambah Unit", route: "/garasi/add-unit" },
+          { id: 14, title: "Daftar Unit", route: "/garasi/manage-unit" },
         ],
       },
       {
         icon: "mdi-store",
         title: "Iklan",
         items: [
-          { title: "Tambah Iklan", route: "/toko/add-ads" },
-          { title: "Daftar Iklan", route: "/toko/manage-ads" },
+          { id: 15, title: "Tambah Iklan", route: "/toko/add-ads" },
+          { id: 16, title: "Daftar Iklan", route: "/toko/manage-ads" },
         ],
       },
       {
         icon: "mdi-clipboard-text",
         title: "Penjualan",
         items: [
-          { title: "Aktivitas", route: "/activity/seller" },
-          { title: "Transaksi", route: "/sell/order" },
-          { title: "Report", route: "/report" },
+          { id: 17, title: "Aktivitas", route: "/activity/seller" },
+          { id: 18, title: "Transaksi", route: "/sell/order" },
+          { id: 19, title: "Report", route: "/report" },
         ],
       },
       {
         icon: "mdi-emoticon",
         title: "Penilaian",
-        items: [{ title: "Penilaian Penjual", route: "/buyer-review" }],
+        items: [{ id: 20, title: "Penilaian Penjual", route: "/buyer-review" }],
       },
     ],
   }),
@@ -250,6 +256,49 @@ export default {
     ) {
       this.$nextTick(() => {
         this.menu = 1;
+      });
+    }
+
+    if (
+      this.$route.path == "/activity/buyer" ||
+      this.$route.path == "/buy/order"
+    ) {
+      this.$nextTick(() => {
+        this.menu = 5;
+      });
+    }
+
+    if (this.$route.path == "/about" || this.$route.path == "/bantuan") {
+      this.$nextTick(() => {
+        this.menu = 13;
+      });
+    }
+
+    if (this.$route.path == "/garasi/manage-unit") {
+      this.$nextTick(() => {
+        this.menu = 9;
+      });
+    }
+
+    if (this.$route.path == "/toko/manage-ads") {
+      this.$nextTick(() => {
+        this.menu = 10;
+      });
+    }
+
+    if (
+      this.$route.path == "/activity/seller" ||
+      this.$route.path == "/sell/order" ||
+      this.$route.path == "/report"
+    ) {
+      this.$nextTick(() => {
+        this.menu = 11;
+      });
+    }
+
+    if (this.$route.path == "/buyer-review") {
+      this.$nextTick(() => {
+        this.menu = 12;
       });
     }
   },

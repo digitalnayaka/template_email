@@ -7,7 +7,7 @@
       dark
       v-if="$vuetify.breakpoint.smAndUp || isHome"
     >
-      <v-toolbar-title style="width: 230px" class="ml-0 pl-4">
+      <v-toolbar-title style="width: 230" class="ml-0 mr-2 pl-4">
         <a href="/">
           <v-img src="/img/logo-tulisan.png" width="200" contain></v-img>
         </a>
@@ -43,23 +43,6 @@
       </div>
 
       <div class="d-flex align-center" v-else>
-        <v-btn icon to="/favourite">
-          <v-icon>mdi-heart-outline</v-icon>
-        </v-btn>
-        <v-btn icon to="/chat-list">
-          <v-icon>mdi-chat-outline</v-icon>
-        </v-btn>
-        <!-- <v-btn icon to="/notification">
-          <v-badge color="orange" overlap v-if="countNotif > 0">
-            <template v-slot:badge>
-              <span>{{ countNotif }}</span>
-            </template>
-
-            <v-icon>mdi-bell-outline</v-icon>
-          </v-badge>
-          <v-icon v-else>mdi-bell-outline</v-icon>
-        </v-btn>-->
-
         <v-menu
           :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
           :close-on-content-click="content"
@@ -67,7 +50,7 @@
           transition="slide-y-transition"
         >
           <template v-slot:activator="{ on, attrs }">
-            <v-btn large icon v-bind="attrs" v-on="on">
+            <v-btn large icon v-bind="attrs" v-on="on" class="mr-2">
               <v-badge color="orange" overlap v-if="countNotif > 0">
                 <template v-slot:badge>
                   <span>{{ countNotif }}</span>
@@ -82,7 +65,16 @@
 
           <v-card width="330">
             <v-card flat to="/notification">
-              <v-card-title>Notifikasi</v-card-title>
+              <v-card-title>
+                <div class="d-flex align-center">
+                  Notifikasi
+                  <v-chip class="ml-2" color="red" dark small>
+                    {{ countNotif }}
+                  </v-chip>
+                </div>
+                <v-spacer></v-spacer>
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-card-title>
             </v-card>
 
             <v-divider></v-divider>
@@ -109,38 +101,83 @@
 
                   <div class="d-flex justify-space-around">
                     <v-btn icon href="/buy/order?id=10">
+                      <v-badge
+                        color="red"
+                        overlap
+                        v-if="buyerOrders.menunggu_persetujuan > 0"
+                      >
+                        <template v-slot:badge>
+                          <span>{{ buyerOrders.menunggu_persetujuan }}</span>
+                        </template>
+
+                        <img
+                          src="/img/icons/menunggu_persetujuan.png"
+                          width="30"
+                          height="30"
+                          alt="menunggu persetujuan"
+                        />
+                      </v-badge>
+
                       <img
                         src="/img/icons/menunggu_persetujuan.png"
-                        width="30px"
-                        height="30px"
+                        width="30"
+                        height="30"
                         alt="menunggu persetujuan"
+                        v-else
                       />
                     </v-btn>
 
                     <v-btn icon href="/buy/order?id=1">
+                      <v-badge
+                        color="red"
+                        overlap
+                        v-if="buyerOrders.menunggu_pembayaran > 0"
+                      >
+                        <template v-slot:badge>
+                          <span>{{ buyerOrders.menunggu_pembayaran }}</span>
+                        </template>
+
+                        <img
+                          src="/img/icons/menunggu_pembayaran.png"
+                          width="30"
+                          height="30"
+                          alt="menunggu pembayaran"
+                        />
+                      </v-badge>
+
                       <img
                         src="/img/icons/menunggu_pembayaran.png"
-                        width="30px"
-                        height="30px"
+                        width="30"
+                        height="30"
                         alt="menunggu pembayaran"
+                        v-else
                       />
                     </v-btn>
 
                     <v-btn icon href="/buy/order?id=4">
+                      <v-badge
+                        color="red"
+                        overlap
+                        v-if="buyerOrders.menunggu_verifikasi > 0"
+                      >
+                        <template v-slot:badge>
+                          <span>{{ buyerOrders.menunggu_verifikasi }}</span>
+                        </template>
+
+                        <img
+                          src="/img/icons/menunggu_verifikasi.png"
+                          width="30"
+                          height="30"
+                          alt="pembayaran diverifikasi"
+                        />
+                      </v-badge>
+
                       <img
                         src="/img/icons/menunggu_verifikasi.png"
-                        width="30px"
-                        height="30px"
-                        alt="menunggu verifikasi"
-                      />
-                    </v-btn>
-
-                    <v-btn icon href="/buy/order?id=2">
-                      <img
-                        src="/img/icons/pembayaran_diverifikasi.png"
-                        width="30px"
-                        height="30px"
-                        alt="pembayaran diverifikasi"
+                        width="30"
+                        height="30"
+                        alt="menunggu diverifikasi"
+                        v-else
                       />
                     </v-btn>
                   </div>
@@ -151,10 +188,9 @@
                     <div>Menunggu Persetujuan</div>
                     <div>Menunggu Pembayaran</div>
                     <div>Menunggu Verifikasi</div>
-                    <div>Pembayaran Diverifikasi</div>
                   </div>
 
-                  <v-divider></v-divider>
+                  <v-divider class="mt-2"></v-divider>
 
                   <div class="d-flex justify-space-between">
                     <v-card-subtitle>Penjualan</v-card-subtitle>
@@ -163,40 +199,85 @@
                     </v-card-subtitle>
                   </div>
 
-                  <div class="d-flex justify-space-around">
+                   <div class="d-flex justify-space-around">
                     <v-btn icon href="/sell/order?id=10">
+                      <v-badge
+                        color="red"
+                        overlap
+                        v-if="sellerOrders.menunggu_persetujuan > 0"
+                      >
+                        <template v-slot:badge>
+                          <span>{{ sellerOrders.menunggu_persetujuan }}</span>
+                        </template>
+
+                        <img
+                          src="/img/icons/menunggu_persetujuan.png"
+                          width="30"
+                          height="30"
+                          alt="menunggu persetujuan"
+                        />
+                      </v-badge>
+
                       <img
                         src="/img/icons/menunggu_persetujuan.png"
-                        width="30px"
-                        height="30px"
+                        width="30"
+                        height="30"
                         alt="menunggu persetujuan"
+                        v-else
                       />
                     </v-btn>
 
                     <v-btn icon href="/sell/order?id=1">
+                      <v-badge
+                        color="red"
+                        overlap
+                        v-if="sellerOrders.menunggu_pembayaran > 0"
+                      >
+                        <template v-slot:badge>
+                          <span>{{ sellerOrders.menunggu_pembayaran }}</span>
+                        </template>
+
+                        <img
+                          src="/img/icons/menunggu_pembayaran.png"
+                          width="30"
+                          height="30"
+                          alt="menunggu pembayaran"
+                        />
+                      </v-badge>
+
                       <img
                         src="/img/icons/menunggu_pembayaran.png"
-                        width="30px"
-                        height="30px"
+                        width="30"
+                        height="30"
                         alt="menunggu pembayaran"
+                        v-else
                       />
                     </v-btn>
 
                     <v-btn icon href="/sell/order?id=4">
+                      <v-badge
+                        color="red"
+                        overlap
+                        v-if="sellerOrders.menunggu_verifikasi > 0"
+                      >
+                        <template v-slot:badge>
+                          <span>{{ sellerOrders.menunggu_verifikasi }}</span>
+                        </template>
+
+                        <img
+                          src="/img/icons/menunggu_verifikasi.png"
+                          width="30"
+                          height="30"
+                          alt="menunggu verifikasi"
+                        />
+                      </v-badge>
+
                       <img
                         src="/img/icons/menunggu_verifikasi.png"
-                        width="30px"
-                        height="30px"
+                        width="30"
+                        height="30"
                         alt="menunggu verifikasi"
-                      />
-                    </v-btn>
-
-                    <v-btn icon href="/sell/order?id=2">
-                      <img
-                        src="/img/icons/pembayaran_diverifikasi.png"
-                        width="30px"
-                        height="30px"
-                        alt="pembayaran diverifikasi"
+                        v-else
                       />
                     </v-btn>
                   </div>
@@ -207,7 +288,6 @@
                     <div>Menunggu Persetujuan</div>
                     <div>Menunggu Pembayaran</div>
                     <div>Menunggu Verifikasi</div>
-                    <div>Pembayaran Diverifikasi</div>
                   </div>
                 </v-card>
               </v-tab-item>
@@ -216,19 +296,19 @@
                 <v-card flat>
                   <div class="d-flex justify-space-around">
                     <v-btn icon to="/toko/order?id=10">
-                       <img src="/img/icons/menunggu_persetujuan.png" width="30px" height="30px" alt="menunggu persetujuan" />
+                       <img src="/img/icons/menunggu_persetujuan.png" width="30" height="30" alt="menunggu persetujuan" />
                     </v-btn>
 
                     <v-btn icon>
-                      <img src="/img/icons/menunggu_pembayaran.png" width="30px" height="30px" alt="menunggu pembayaran" />
+                      <img src="/img/icons/menunggu_pembayaran.png" width="30" height="30" alt="menunggu pembayaran" />
                     </v-btn>
 
                     <v-btn icon>
-                       <img src="/img/icons/menunggu_verifikasi.png" width="30px" height="30px" alt="menunggu verifikasi" />
+                       <img src="/img/icons/menunggu_verifikasi.png" width="30" height="30" alt="menunggu verifikasi" />
                     </v-btn>
 
                     <v-btn icon>
-                       <img src="/img/icons/pembayaran_diverifikasi.png" width="30px" height="30px" alt="pembayaran diverifikasi" />
+                       <img src="/img/icons/pembayaran_diverifikasi.png" width="30" height="30" alt="pembayaran diverifikasi" />
                     </v-btn>
                   </div>
 
@@ -254,13 +334,54 @@
 
         <v-menu
           :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
-          :close-on-content-click="content"
+          offset-y
+          transition="slide-y-transition"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn large icon v-bind="attrs" v-on="on">
+              <v-badge color="orange" overlap>
+                <template v-slot:badge>
+                  <span>{{ chats.length + review.length }}</span>
+                </template>
+
+                <v-icon>mdi-email</v-icon>
+              </v-badge>
+            </v-btn>
+          </template>
+
+          <v-card width="120">
+            <v-list dense>
+              <v-list-item to="/chat-list">
+                <v-list-item-subtitle>Chat</v-list-item-subtitle>
+
+                <v-list-item-action>
+                  <v-avatar color="red" size="25">
+                    <span class="white--text">{{ chats.length }}</span>
+                  </v-avatar>
+                </v-list-item-action>
+              </v-list-item>
+
+              <v-list-item href="/product/review">
+                <v-list-item-subtitle>Ulasan</v-list-item-subtitle>
+
+                <v-list-item-action>
+                  <v-avatar color="red" size="25">
+                    <span class="white--text">{{ review.length }}</span>
+                  </v-avatar>
+                </v-list-item-action>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-menu>
+
+        <v-menu
+          :open-on-hover="$vuetify.breakpoint.xsOnly ? false : true"
           offset-y
           transition="slide-y-transition"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn large text v-bind="attrs" v-on="on">
-              <v-avatar size="32px" item>
+              <v-avatar size="32" item>
                 <v-img
                   src="/img/profile.png"
                   contain
@@ -276,7 +397,7 @@
 
           <v-card>
             <v-list>
-              <v-list-item to="/account/edit" @click="content = true">
+              <v-list-item to="/account/edit">
                 <v-list-item-avatar>
                   <v-img
                     src="/img/profile.png"
@@ -292,16 +413,70 @@
 
                 <v-list-item-content>
                   <v-list-item-title>{{ user.nama }}</v-list-item-title>
-                  <v-list-item-subtitle v-if="user.id_mst_user_type == 2"
-                    >{{ user.user_type }} User</v-list-item-subtitle
-                  >
+                  <v-list-item-subtitle v-if="user.id_mst_user_type == 2">
+                    {{ user.user_type }} User
+                  </v-list-item-subtitle>
                 </v-list-item-content>
+
+                <v-list-item-action>
+                  <v-icon>mdi-chevron-right</v-icon>
+                </v-list-item-action>
               </v-list-item>
             </v-list>
 
             <v-divider></v-divider>
 
-            <v-tabs
+            <v-row no-gutters>
+              <v-col cols="6">
+                <v-list dense>
+                  <v-list-item to="/garasi/add-unit">
+                    <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
+                  </v-list-item>
+
+                  <v-list-item href="/garasi/manage-unit">
+                    <v-list-item-subtitle>Garasi</v-list-item-subtitle>
+                  </v-list-item>
+
+                  <v-list-item to="/toko/add-ads">
+                    <v-list-item-subtitle>Tambah Iklan</v-list-item-subtitle>
+                  </v-list-item>
+
+                  <v-list-item href="/toko/manage-ads">
+                    <v-list-item-subtitle>Daftar Iklan</v-list-item-subtitle>
+                  </v-list-item>
+                </v-list>
+              </v-col>
+
+              <v-col cols="6" class="d-flex">
+                <v-divider vertical></v-divider>
+
+                <v-list dense>
+                  <v-list-item href="/buy/order?id=0">
+                    <v-list-item-subtitle> Pembelian </v-list-item-subtitle>
+                  </v-list-item>
+
+                  <v-list-item to="/favorite">
+                    <v-list-item-subtitle> Favorit </v-list-item-subtitle>
+                  </v-list-item>
+
+                  <v-list-item href="/activity/buyer">
+                    <v-list-item-subtitle>
+                      Aktivitas Pembeli
+                    </v-list-item-subtitle>
+                  </v-list-item>
+
+                  <v-list-item href="/activity/seller">
+                    <v-list-item-subtitle>
+                      Aktivitas Penjual
+                    </v-list-item-subtitle>
+                  </v-list-item>
+                </v-list>
+              </v-col>
+            </v-row>
+
+            <v-divider></v-divider>
+
+            <!-- <v-tabs
               v-model="tab"
               grow
               slider-color="teal"
@@ -324,7 +499,7 @@
                       </v-list-item>
 
                       <v-list-item
-                        to="/garasi/manage-unit"
+                        href="/garasi/manage-unit"
                         @click="content = true"
                       >
                         <v-list-item-subtitle>Garasi</v-list-item-subtitle>
@@ -341,7 +516,7 @@
                       </v-list-item>
 
                       <v-list-item
-                        to="/toko/manage-ads"
+                        href="/toko/manage-ads"
                         @click="content = true"
                       >
                         <v-list-item-subtitle
@@ -357,12 +532,15 @@
                 <v-row no-gutters>
                   <v-col cols="6">
                     <v-list dense>
-                      <v-list-item to="/activity/buyer" @click="content = true">
+                      <v-list-item
+                        href="/activity/buyer"
+                        @click="content = true"
+                      >
                         <v-list-item-subtitle>Pembeli</v-list-item-subtitle>
                       </v-list-item>
 
                       <v-list-item
-                        to="/activity/seller"
+                        href="/activity/seller"
                         @click="content = true"
                       >
                         <v-list-item-subtitle>Penjual</v-list-item-subtitle>
@@ -372,14 +550,17 @@
 
                   <v-col cols="6">
                     <v-list dense>
-                      <v-list-item to="/product/review" @click="content = true">
+                      <v-list-item
+                        href="/product/review"
+                        @click="content = true"
+                      >
                         <v-list-item-subtitle>Ulasan</v-list-item-subtitle>
                       </v-list-item>
                     </v-list>
                   </v-col>
                 </v-row>
               </v-tab-item>
-            </v-tabs-items>
+            </v-tabs-items> -->
 
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -430,6 +611,8 @@
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment-timezone";
 import VueGeolocation from "vue-browser-geolocation";
+import "firebase/firestore";
+import { db } from "./main";
 import Vue from "vue";
 
 Vue.use(VueGeolocation);
@@ -450,6 +633,18 @@ export default {
   },
   data: () => ({
     countNotif: 0,
+    chats: [],
+    review: [],
+    buyerOrders: {
+      menunggu_persetujuan: 0,
+      menunggu_pembayaran: 0,
+      pembayaran_diverifikasi: 0,
+    },
+    sellerOrders: {
+      menunggu_persetujuan: 0,
+      menunggu_pembayaran: 0,
+      menunggu_verifikasi: 0,
+    },
     content: false,
     tab: 0,
     tab2: 0,
@@ -482,29 +677,172 @@ export default {
       });
     },
     getNotif() {
-      if (!this.guest) {
-        this.axios
-          .get("/log/v3/log/notifikasi", {
-            params: {
-              id_user: this.user.id,
-              is_read: false,
-              limit: 1,
-            },
-          })
-          .then((response) => {
-            let { data } = response;
-            this.countNotif = data.count;
-          })
-          .catch((error) => {
-            let responses = error.response;
-            let data = responses.data;
-            this.setAlert({
-              status: true,
-              color: "error",
-              text: data.api_message,
-            });
+      this.axios
+        .get("/log/v3/log/notifikasi", {
+          params: {
+            id_user: this.user.id,
+            is_read: false,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.countNotif = data.count;
+        })
+        .catch((error) => {
+          let responses = error.response;
+          let data = responses.data;
+          this.setAlert({
+            status: true,
+            color: "error",
+            text: data.api_message,
           });
-      }
+        });
+    },
+    getChats() {
+      db.collection("chat")
+        .doc(String(this.user.id))
+        .collection("user_messages")
+        .where("Seen", "==", false)
+        .onSnapshot((querySnapshot) => {
+          let messages = [];
+          querySnapshot.forEach((doc) => {
+            messages.push(doc.data());
+          });
+          this.chats = messages;
+        });
+    },
+    getReview() {
+      this.axios
+        .get("/transaksi/v3/belum_review", {
+          params: {
+            id_pembeli: this.user.id,
+            limit: 1,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.review = data;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    menungguPersetujuanB() {
+      this.axios
+        .get("/transaksi/v3/order", {
+          params: {
+            id_pembeli: this.user.id,
+            id_mst_order_jenis_iklan: 2,
+            id_mst_pembayaran_status: 10,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.buyerOrders.menunggu_persetujuan = data.count;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    menungguPembayaranB() {
+      this.axios
+        .get("/transaksi/v3/order", {
+          params: {
+            id_pembeli: this.user.id,
+            id_mst_order_jenis_iklan: 2,
+            id_mst_pembayaran_status: 1,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.buyerOrders.menunggu_pembayaran = data.count;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    menungguVerifikasiB() {
+      this.axios
+        .get("/transaksi/v3/order", {
+          params: {
+            id_pembeli: this.user.id,
+            id_mst_order_jenis_iklan: 2,
+            id_mst_pembayaran_status: 4,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.sellerOrders.menunggu_verifikasi = data.count;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    menungguPersetujuanS() {
+      this.axios
+        .get("/transaksi/v3/order", {
+          params: {
+            id_penjual: this.user.id,
+            id_mst_order_jenis_iklan: 2,
+            id_mst_pembayaran_status: 10,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.sellerOrders.menunggu_persetujuan = data.count;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    menungguPembayaranS() {
+      this.axios
+        .get("/transaksi/v3/order", {
+          params: {
+            id_penjual: this.user.id,
+            id_mst_order_jenis_iklan: 2,
+            id_mst_pembayaran_status: 1,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.sellerOrders.menunggu_pembayaran = data.count;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    menungguVerifikasiS() {
+      this.axios
+        .get("/transaksi/v3/order", {
+          params: {
+            id_penjual: this.user.id,
+            id_mst_order_jenis_iklan: 2,
+            id_mst_pembayaran_status: 4,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.sellerOrders.menunggu_verifikasi = data.count;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
     },
     signOut(e) {
       var r = confirm("Apakah anda yakin akan keluar?");
@@ -520,7 +858,8 @@ export default {
           color: "success",
           text: "Logout successfully",
         });
-        this.countNotif = [];
+        window.location.href = "/";
+        // this.countNotif = [];
       }
     },
   },
@@ -552,7 +891,25 @@ export default {
   created() {
     this.timezone();
     this.geolocation();
-    this.getNotif();
+    if (!this.guest) {
+      this.getNotif();
+      this.getChats();
+      this.getReview();
+      this.menungguPersetujuanB();
+      this.menungguPembayaranB();
+      this.menungguVerifikasiB();
+      this.menungguPersetujuanS();
+      this.menungguPembayaranS();
+      this.menungguVerifikasiS();
+    }
   },
 };
 </script>
+
+<style scooped>
+a:link,
+a:visited {
+  color: teal;
+  text-decoration: none;
+}
+</style>
