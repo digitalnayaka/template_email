@@ -176,7 +176,7 @@
         <v-col cols="12" sm="6" md="6">
           <h2 class="text-center">Informasi Produk</h2>
 
-          <v-card :height="orders.id_mst_order_status == 3 ? 310 : 300">
+          <v-card :height="orders.id_mst_order_status == 3 ? 310 : 310">
             <v-list>
               <v-list-item align="center">
                 <v-list-item-avatar tile size="100">
@@ -191,7 +191,7 @@
                   <h3 class="teal--text" align="center">
                     Rp {{ Number(orders.harga).toLocaleString("id-ID") }}
                   </h3>
-                   <v-list-item-action>
+                  
                     <v-btn
                       text
                       color="primary"
@@ -201,7 +201,7 @@
                       Lihat Iklan
                       <v-icon right>mdi-chevron-right</v-icon>
                     </v-btn>
-                  </v-list-item-action>
+                  
                 </v-list-item-content>
               </v-list-item>
              

@@ -116,7 +116,9 @@
           <v-divider></v-divider>
 
           <v-card-actions>
+            
             <v-spacer></v-spacer>
+              <v-btn small color="teal" dark :to="'/' ">Beri Ulasan</v-btn>
             <v-btn small color="teal" dark :to="'/chat/' + item.id_penjual">Hubungi Penjual</v-btn>
           </v-card-actions>
         </v-card>

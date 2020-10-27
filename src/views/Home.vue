@@ -22,12 +22,11 @@
     </v-carousel>
 
     <v-row>
-      <v-col cols="3" align="center" v-for="item in categories" :key="item.id">
+     <v-col cols="6" align="center" v-for="item in categories" :key="item.id">
         <v-card flat :to="'/category/' + item.route">
-          <v-img :src="item.image" width="100" height="100" contain></v-img>
+          <v-img :src="item.image" width="500" height="150" contain></v-img>
+          <h5>{{ item.name }}</h5>
         </v-card>
-
-        <h5>{{ item.name }}</h5>
       </v-col>
     </v-row>
 
@@ -269,28 +268,28 @@ export default {
     categories: [
       {
         id: 1,
-        image: "/img/icons/mokas.png",
+        image: "/img/icons/mokas2.png",
         name: "Motor Bekas",
         route: "mokas",
       },
-      {
-        id: 2,
-        image: "/img/icons/motorbaru.png",
-        name: "Motor Baru",
-        route: "motor_baru",
-      },
+      // {
+      //   id: 2,
+      //   image: "/img/icons/motorbaru.png",
+      //   name: "Motor Baru",
+      //   route: "motor_baru",
+      // },
       {
         id: 3,
         image: "/img/icons/tiket.png",
         name: "Tiket Tawar Bersama",
         route: "ticket",
       },
-      {
-        id: 4,
-        image: "/img/icons/bengkel.png",
-        name: "Bengkel",
-        route: "bengkel",
-      },
+      // {
+      //   id: 4,
+      //   image: "/img/icons/bengkel.png",
+      //   name: "Bengkel",
+      //   route: "bengkel",
+      // },
     ],
     jadwal: [],
     tbBerlangsung: [],
