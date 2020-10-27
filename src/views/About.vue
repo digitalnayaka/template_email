@@ -34,7 +34,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/syarat_ketentuan">
+          <v-list-item to="/syarat-ketentuan">
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon>mdi-clipboard-outline</v-icon>Ketentuan Penggunaan

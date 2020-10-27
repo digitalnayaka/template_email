@@ -100,9 +100,10 @@
             <v-card-text class="font-weight-bold">Lokasi : {{ appuser.kota}}</v-card-text>
             <v-card-text class="font-weight-bold">No Telp : {{ appuser.nomor_hp}}</v-card-text>
             <v-card-text class="font-weight-bold">Deskripsi Penjual: {{ appuser.deskripsi }}</v-card-text>
+             <v-card-text class="font-weight-bold">Slogan: {{ appuser.slogan }}</v-card-text>
             <v-divider></v-divider>
             <v-card-title class="font-weight-bold">Catatan & Kebijakan Penjual</v-card-title>
-            <v-card-text class="font-weight-bold">Slogan: {{ appuser.slogan }}</v-card-text>
+           
             <v-row justify="center">
               <v-expansion-panels inset>
                 <v-expansion-panel>
@@ -157,6 +158,7 @@
     >
       <v-tab>Iklan</v-tab>
       <v-tab>Ulasan</v-tab>
+      <v-tab>Info Penjual </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
@@ -250,6 +252,66 @@
             </v-col>
           </v-row>
         </v-card>
+      </v-tab-item>
+      <v-tab-item> 
+        <v-card>
+        
+            <v-card-title class="font-weight-bold">Informasi Penjual</v-card-title>
+            <v-card-text class="font-weight-bold">Nama Penjual : {{ appuser.nama}}</v-card-text>
+            <v-card-text class="font-weight-bold">Lokasi : {{ appuser.kota}}</v-card-text>
+            <v-card-text class="font-weight-bold">No Telp : {{ appuser.nomor_hp}}</v-card-text>
+            <v-card-text class="font-weight-bold">Deskripsi Penjual: {{ appuser.deskripsi }}</v-card-text>
+             <v-card-text class="font-weight-bold">Slogan: {{ appuser.slogan }}</v-card-text>
+            <v-divider></v-divider>
+            <v-card-title class="font-weight-bold">Catatan & Kebijakan Penjual</v-card-title>
+           
+            <v-row justify="center">
+              <v-expansion-panels inset>
+                <v-expansion-panel>
+                  <v-expansion-panel-header class="font-weight-bold">Kebijakan :</v-expansion-panel-header>
+                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-row>
+             <v-row justify="center">
+              <v-expansion-panels inset>
+                <v-expansion-panel>
+                  <v-expansion-panel-header class="font-weight-bold">Catatan 1:</v-expansion-panel-header>
+                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-row>
+          </v-card>
+      </v-tab-item>
+
+       <v-tab-item> 
+        <v-card>
+            <v-card-title class="font-weight-bold">Informasi Penjual</v-card-title>
+            <v-card-text class="font-weight-bold">Nama Penjual : {{ appuser.nama}}</v-card-text>
+            <v-card-text class="font-weight-bold">Lokasi : {{ appuser.kota}}</v-card-text>
+            <v-card-text class="font-weight-bold">No Telp : {{ appuser.nomor_hp}}</v-card-text>
+            <v-card-text class="font-weight-bold">Deskripsi Penjual: {{ appuser.deskripsi }}</v-card-text>
+             <v-card-text class="font-weight-bold">Slogan: {{ appuser.slogan }}</v-card-text>
+            <v-divider></v-divider>
+            <v-card-title class="font-weight-bold">Catatan & Kebijakan Penjual</v-card-title>
+           
+            <v-row justify="center">
+              <v-expansion-panels inset>
+                <v-expansion-panel>
+                  <v-expansion-panel-header class="font-weight-bold">Kebijakan :</v-expansion-panel-header>
+                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-row>
+             <v-row justify="center">
+              <v-expansion-panels inset>
+                <v-expansion-panel>
+                  <v-expansion-panel-header class="font-weight-bold">Catatan 1:</v-expansion-panel-header>
+                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-row>
+          </v-card>
       </v-tab-item>
     </v-tabs-items>
 

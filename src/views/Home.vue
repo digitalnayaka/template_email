@@ -207,43 +207,35 @@
     <v-card color="teal lighten-4 text-center">
       <v-container fluid>
         <h2>Artikel Terbaru</h2>
+        <h4>Yuk cek artikel terbaru di SiMotor</h4>
+        <br />
+        <v-row align="center" dense>
+          <v-col cols="6" sm="4" lg="2
+          " v-for="item in artikel" :key="item.id">
+            <v-card outlined tile href="http://devlmu.com:333/" width="200">
+              <div align="center">
+                <v-img
+                  align="center"
+                  width="300"
+                  height="200"
+                  :src="getImage(item.cover_image)"
+                  
+                ></v-img>
+              </div>
 
-        <div class="scrolling-wrapper-flexbox mx-2">
-          <v-card
-            max-width="300px"
-            max-height="300px"
-            v-for="item in artikel"
-            contain
-            :key="item.id"
-          >
-            <v-list>
-              <v-list-item>
-                <v-list>
-                  <v-icon
-                    x-large
-                    v-if="item.cover_image == 'null'"
-                    max-width="250px"
-                    max-height="250px"
-                    >mdi-account-circle</v-icon
-                  >
-                  <v-img
-                    :src="getImage(item.cover_image)"
-                    max-width="250px"
-                    max-height="250px"
-                    contain
-                    v-else
-                  ></v-img>
-                </v-list>
-              </v-list-item>
-            </v-list>
-            <!-- <span class="font-weight-bold">{{  }}</span> -->
-            <v-list-item-content>
-              <span> Tanggal: {{ item.publish_date | dateFormat }} </span>
-            </v-list-item-content>
-            <v-card-title>{{ item.title }}</v-card-title>
-          </v-card>
-        </div>
-
+              <v-list class="ma-0 pa-0">
+                <v-list-item>
+                  <v-list-item-content>
+                   
+                    <v-list-item-title >Tanggal: {{ item.publish_date | dateFormat }}</v-list-item-title>
+                    <v-list-item-subtitle> By: </v-list-item-subtitle>
+                   <v-list-item-title class="font-weight-black"> {{ item.title }} </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
         <v-btn dark color="teal" href="http://devlmu.com:333/" class="mt-4"
           >Lihat Semua Artikel</v-btn
         >
@@ -333,7 +325,7 @@ export default {
       this.axios
         .get("/produk/v3/berita/umum", {
           params: {
-            limit: 4,
+            limit: 6,
             offset: 0,
           },
         })

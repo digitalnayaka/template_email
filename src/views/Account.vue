@@ -170,7 +170,7 @@ export default {
         title: "Kotak Masuk",
         items: [
           { title: "Chat", route: "/chat-list" },
-          { title: "Ulasan", route: "/product/review" },
+          
           { title: "Notifikasi", route: "/notification" },
         ],
       },
@@ -181,6 +181,7 @@ export default {
         items: [
           { title: "Aktivitas", route: "/activity/buyer" },
           { title: "Transaksi", route: "/buy/order" },
+          { title: "Penilaian Pembeli", route: "/product/review" }
         ],
       },
       {
@@ -226,8 +227,8 @@ export default {
       },
       {
         icon: "mdi-emoticon",
-        title: "Kata Pembeli",
-        items: [{ title: "Ulasan", route: "/buyer-review" }],
+        title: "Penilaian",
+        items: [{ title: "Penilaian Penjual", route: "/buyer-review" }],
       },
     ],
   }),

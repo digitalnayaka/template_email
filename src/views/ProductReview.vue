@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <div class="text-h4 mb-2">Ulasan</div>
+    <div class="text-h4 mb-2">Penilaian</div>
 
     <v-card flat>
       <v-tabs
@@ -16,8 +16,8 @@
         slider-color="yellow"
         show-arrows
       >
-        <v-tab>Menunggu Diulas</v-tab>
-        <v-tab>Ulasan Saya</v-tab>
+        <v-tab>Belum Dinilai</v-tab>
+        <v-tab>Sudah Dinilai</v-tab>
       </v-tabs>
 
       <v-tabs-items v-model="tab">
