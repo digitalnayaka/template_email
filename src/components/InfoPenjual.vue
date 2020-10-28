@@ -33,9 +33,7 @@
       >
         Tambah Catatan
       </v-btn>
-      <v-btn color="teal" dark small @click="openDialog('Tambah Kebijakan')">
-        Tambah Kebijakan
-      </v-btn>
+     
 
       <v-dialog v-model="dialog" width="500">
         <v-card>
@@ -108,10 +106,14 @@
     </v-expansion-panels>
 
     <br />
-
+<div class="d-flex flex-wrap align-center"> 
     <h3>Kebijakan</h3>
-
+    <v-spacer> </v-spacer>
+ <v-btn color="teal" dark small class="mx-2" @click="openDialog('Tambah Kebijakan')">
+        Tambah Kebijakan
+      </v-btn>
     <div v-html="kebijakan.deskripsi"></div>
+</div>
   </div>
 
   <!-- <div>
@@ -230,6 +232,7 @@ export default {
     type: 0,
     jenis: "post",
     selected: [],
+    deskripsi:""
   }),
   methods: {
     ...mapActions({

@@ -229,21 +229,31 @@
 
            
             <v-row justify="center" >
-              <v-expansion-panels>
-                <v-expansion-panel>
-                  <v-expansion-panel-header class="font-weight-bold">Kebijakan :</v-expansion-panel-header>
-                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
-            </v-row>
-            
-             <v-row justify="center">
-              <v-expansion-panels>
-                <v-expansion-panel>
-                  <v-expansion-panel-header class="font-weight-bold">Catatan 1:</v-expansion-panel-header>
-                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
+             <v-expansion-panels focusable inset>
+            <v-expansion-panel v-for="item in catatan" :key="item.id">
+              <v-expansion-panel-header>
+                <b>{{ item.judul }}</b>
+              </v-expansion-panel-header>
+
+              <v-expansion-panel-content>
+                <div v-html="item.deskripsi"></div>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <br />
+
+          <v-expansion-panels focusable inset v-if="kebijakan != undefined">
+            <v-expansion-panel>
+              <v-expansion-panel-header class="font-weight-bold">
+                Kebijakan:
+              </v-expansion-panel-header>
+
+              <v-expansion-panel-content>
+                <div v-html="kebijakan.deskripsi"></div>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
             </v-row>
 
          
@@ -799,6 +809,7 @@ export default {
       title: "",
       loading: true,
       catatan:[],
+      kebijakan:[]
     };
   },
   methods: {
@@ -956,13 +967,33 @@ export default {
        getCatatan() {
       this.axios
         .get("/user/v3/user/catatan_penjual", {
-          params: { 
-            id_app_user: this.user.id
+          params: {
+            id_app_user: this.appuser.id,
+            type_catatan: 2,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
           this.catatan = data;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    getKebijakan() {
+      this.axios
+        .get("/user/v3/user/catatan_penjual", {
+          params: {
+            id_app_user: this.appuser.id,
+            type_catatan: 1,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.kebijakan = data[0];
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -1280,6 +1311,7 @@ export default {
     // this.$nextTick(() => {
     this.getDtlIklan();
     this.getCatatan();
+    this.getKebijakan();
     // });
     this.GetBid();
     if (!this.guest) {

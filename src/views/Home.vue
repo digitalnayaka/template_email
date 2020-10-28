@@ -280,7 +280,7 @@ export default {
       // },
       {
         id: 3,
-        image: "/img/icons/tiket.png",
+        image: "/img/icons/tiket2.png",
         name: "Tiket Tawar Bersama",
         route: "ticket",
       },
@@ -327,6 +327,7 @@ export default {
             limit: 6,
             offset: 0,
           },
+          
         })
         .then((response) => {
           let { data } = response.data;
