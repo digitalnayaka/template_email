@@ -125,6 +125,11 @@
 
         <v-pagination v-model="page" @input="filterStatus" :length="lengthPage" :total-visible="5"></v-pagination>
       </v-tab-item>
+
+      <v-tab-item>
+        Daftar Transaksi Tiket
+<TicketTransaction />
+      </v-tab-item>
     </v-tabs-items>
   </div>
 </template>
@@ -138,6 +143,11 @@ import moment from "moment-timezone";
 export default {
   name: "buyer-order",
   props: ["utc", "timezone"],
+  components: { 
+    TicketTransaction: () =>
+      import(
+        /* webpackChunkName: "ticket-transaction" */ "@/components/TicketTransaction.vue" ),
+  },
   data() {
     return {
       tab: 0,

@@ -8,7 +8,13 @@
 
     <h2>Transaksi Saya</h2>
 
-    <v-tabs v-model="tab" background-color="cyan" dark slider-color="teal" show-arrows>
+    <v-tabs
+      v-model="tab"
+      background-color="cyan"
+      dark
+      slider-color="teal"
+      show-arrows
+    >
       <v-tab>Tawar Bersama</v-tab>
       <v-tab>Tiket</v-tab>
     </v-tabs>
@@ -19,9 +25,16 @@
           <div class="d-flex flex-nowrap align-center">
             <h4 class="mr-2">Status</h4>
 
-            <v-chip v-for="tag in tags" :key="tag.id" :value="tag.id" @click="filterStatus">
+            <v-chip
+              v-for="tag in tags"
+              :key="tag.id"
+              :value="tag.id"
+              @click="filterStatus"
+            >
               {{ tag.text }}
-              <span class="ml-1" v-if="tag.id == chip">({{ orders.length }})</span>
+              <span class="ml-1" v-if="tag.id == chip"
+                >({{ orders.length }})</span
+              >
             </v-chip>
           </div>
         </v-chip-group>
@@ -42,35 +55,39 @@
               <div
                 class="orange--text"
                 v-if="item.id_mst_pembayaran_status == 1"
-              >{{ item.pembayaran_status }}</div>
+              >
+                {{ item.pembayaran_status }}
+              </div>
               <div
                 class="green--text"
                 v-if="item.id_mst_pembayaran_status == 2"
-              >{{ item.pembayaran_status }}</div>
-              <div
-                class="red--text"
-                v-if="item.id_mst_pembayaran_status == 3"
-              >{{ item.pembayaran_status }}</div>
+              >
+                {{ item.pembayaran_status }}
+              </div>
+              <div class="red--text" v-if="item.id_mst_pembayaran_status == 3">
+                {{ item.pembayaran_status }}
+              </div>
               <div
                 class="orange--text"
                 v-if="item.id_mst_pembayaran_status == 4"
-              >{{ item.pembayaran_status }}</div>
-              <div
-                class="red--text"
-                v-if="item.id_mst_pembayaran_status == 6"
-              >{{ item.pembayaran_status }}</div>
+              >
+                {{ item.pembayaran_status }}
+              </div>
+              <div class="red--text" v-if="item.id_mst_pembayaran_status == 6">
+                {{ item.pembayaran_status }}
+              </div>
               <div
                 class="orange--text"
                 v-if="item.id_mst_pembayaran_status == 10"
-              >{{ item.pembayaran_status }}</div>
-              <div
-                class="red--text"
-                v-if="item.id_mst_pembayaran_status == 11"
-              >{{ item.pembayaran_status }}</div>
-              <div
-                class="red--text"
-                v-if="item.id_mst_pembayaran_status == 12"
-              >{{ item.pembayaran_status }}</div>
+              >
+                {{ item.pembayaran_status }}
+              </div>
+              <div class="red--text" v-if="item.id_mst_pembayaran_status == 11">
+                {{ item.pembayaran_status }}
+              </div>
+              <div class="red--text" v-if="item.id_mst_pembayaran_status == 12">
+                {{ item.pembayaran_status }}
+              </div>
             </v-col>
           </v-row>
 
@@ -88,7 +105,9 @@
                     <v-list-item-subtitle>Tawar Bersama</v-list-item-subtitle>
 
                     <v-list-item-title>
-                      <a :href="'/iklan/' + item.id_iklan">{{ item.iklan.judul }}</a>
+                      <a :href="'/iklan/' + item.id_iklan">{{
+                        item.iklan.judul
+                      }}</a>
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
@@ -104,7 +123,7 @@
                     <v-list-item-title>
                       Rp
                       {{
-                      Number(item.total_pembayaran).toLocaleString("id-ID")
+                        Number(item.total_pembayaran).toLocaleString("id-ID")
                       }}
                     </v-list-item-title>
                   </v-list-item-content>
@@ -129,7 +148,17 @@
           </v-card-actions>
         </v-card>
 
-        <v-pagination v-model="page" @input="filterStatus" :length="lengthPage" :total-visible="5"></v-pagination>
+        <v-pagination
+          v-model="page"
+          @input="filterStatus"
+          :length="lengthPage"
+          :total-visible="5"
+        ></v-pagination>
+      </v-tab-item>
+
+      <v-tab-item>
+        Daftar Transaksi Tiket
+        <TicketTransaction />
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -142,6 +171,12 @@ import moment from "moment-timezone";
 export default {
   name: "seller-order",
   props: ["utc", "timezone"],
+  components: { 
+    TicketTransaction: () =>
+      import(
+        /* webpackChunkName: "ticket-transaction" */ "@/components/TicketTransaction.vue" ),
+
+  },
   data() {
     return {
       tab: 0,

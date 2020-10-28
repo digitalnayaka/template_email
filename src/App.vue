@@ -639,7 +639,7 @@ export default {
       import(/* webpackChunkName: "daftar" */ "@/components/Daftar.vue"),
     Footer: () =>
       import(/* webpackChunkName: "footer" */ "@/components/Footer.vue"),
-      NotifikasiAll: () =>
+    NotifikasiAll: () =>
       import(/* webpackChunkName: "footer" */ "@/views/Notifikasi.vue"),
   },
   data: () => ({
