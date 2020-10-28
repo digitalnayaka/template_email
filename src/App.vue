@@ -53,7 +53,12 @@
             <v-btn large icon v-bind="attrs" v-on="on" class="mr-2">
               <v-badge color="orange" overlap v-if="countNotif > 0">
                 <template v-slot:badge>
-                  <span>{{ countNotif }}</span>
+                  <span>{{
+                    countNotif +
+                    buyerOrders.menunggu_persetujuan +
+                    buyerOrders.menunggu_pembayaran +
+                    buyerOrders.menunggu_verifikasi
+                  }}</span>
                 </template>
 
                 <v-icon>mdi-bell-outline</v-icon>
@@ -203,7 +208,7 @@
                     </v-card-subtitle>
                   </div>
 
-                   <div class="d-flex justify-space-around">
+                  <div class="d-flex justify-space-around">
                     <v-btn icon href="/sell/order?id=10">
                       <v-badge
                         color="red"
@@ -644,7 +649,7 @@ export default {
     buyerOrders: {
       menunggu_persetujuan: 0,
       menunggu_pembayaran: 0,
-      pembayaran_diverifikasi: 0,
+      menunggu_verifikasi: 0,
     },
     sellerOrders: {
       menunggu_persetujuan: 0,
@@ -786,7 +791,7 @@ export default {
         })
         .then((response) => {
           let { data } = response;
-          this.sellerOrders.menunggu_verifikasi = data.count;
+          this.buyerOrders.menunggu_verifikasi = data.count;
         })
         .catch((error) => {
           let responses = error.response.data;
