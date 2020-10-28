@@ -129,67 +129,6 @@
           </v-card>
         </v-dialog>
 
-        <v-dialog v-model="dialogBio" persistent max-width="800px">
-          <v-card>
-            <v-toolbar dark color="teal" dense>
-              <v-toolbar-title>Info Penjual</v-toolbar-title>
-
-              <v-spacer></v-spacer>
-
-              <v-btn icon @click="dialogBio = false">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-toolbar>
-
-            <v-card-title class="font-weight-bold">
-              Informasi Penjual
-            </v-card-title>
-
-            <v-card-text>
-              <div>Nama Penjual : {{ appuser.nama }}</div>
-              <div>Lokasi : {{ appuser.kota }}</div>
-              <div>No Telp : {{ appuser.nomor_hp }}</div>
-              <div>Deskripsi Penjual: {{ appuser.deskripsi }}</div>
-            </v-card-text>
-
-            <v-divider></v-divider>
-
-            <v-card-title class="font-weight-bold">
-              Catatan & Kebijakan Penjual
-            </v-card-title>
-
-            <v-card-text class="font-weight-bold">
-              Slogan: {{ slogan }}
-            </v-card-text>
-
-            <v-expansion-panels focusable inset>
-              <v-expansion-panel v-for="item in catatan" :key="item.id">
-                <v-expansion-panel-header>
-                  <b>{{ item.judul }}</b>
-                </v-expansion-panel-header>
-
-                <v-expansion-panel-content>
-                  <div v-html="item.deskripsi"></div>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-
-            <br />
-
-            <v-expansion-panels focusable inset v-if="kebijakan != undefined">
-              <v-expansion-panel>
-                <v-expansion-panel-header class="font-weight-bold">
-                  Kebijakan:
-                </v-expansion-panel-header>
-
-                <v-expansion-panel-content>
-                  <div v-html="kebijakan.deskripsi"></div>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-          </v-card>
-        </v-dialog>
-
         <v-col cols="12" sm="6">
           <v-row>
             <v-col cols="12" sm="6" class="text-center">
@@ -226,6 +165,7 @@
     >
       <v-tab>Iklan</v-tab>
       <v-tab>Ulasan</v-tab>
+      <v-tab>Info Penjual </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
@@ -332,6 +272,56 @@
               ></v-pagination>
             </v-col>
           </v-row>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item> ulasan </v-tab-item>
+
+      <v-tab-item>
+        <v-card>
+          <v-card-title class="font-weight-bold">
+            Informasi Penjual
+          </v-card-title>
+
+          <v-card-text>
+            <div>Nama Penjual : {{ appuser.nama }}</div>
+            <div>Lokasi : {{ appuser.kota }}</div>
+            <div>No Telp : {{ appuser.nomor_hp }}</div>
+            <div class="font-weight-bold">Deskripsi Penjual: {{ appuser.deskripsi }}</div>
+            <div class="font-weight-bold"> Slogan: {{ slogan }} </div>
+          </v-card-text>
+          
+
+          <v-divider></v-divider>
+
+          <v-card-title class="font-weight-bold">
+            Catatan & Kebijakan Penjual
+          </v-card-title>
+
+          <v-expansion-panels focusable inset>
+            <v-expansion-panel v-for="item in catatan" :key="item.id">
+              <v-expansion-panel-header>
+                <b>{{ item.judul }}</b>
+              </v-expansion-panel-header>
+
+              <v-expansion-panel-content>
+                <div v-html="item.deskripsi"></div>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <br />
+
+          <v-expansion-panels focusable inset v-if="kebijakan != undefined">
+            <v-expansion-panel>
+              <v-expansion-panel-header class="font-weight-bold">
+                Kebijakan:
+              </v-expansion-panel-header>
+
+              <v-expansion-panel-content>
+                <div v-html="kebijakan.deskripsi"></div>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </v-card>
       </v-tab-item>
     </v-tabs-items>

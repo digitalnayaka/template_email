@@ -27,89 +27,7 @@
       </v-col>
 
       <v-col cols="12" sm="6">
-        <div class="d-flex align-center" v-if="appuser.id_mst_user_type == 2">
-          <img
-            src="/img/verified.png"
-            width="15px"
-            height="15px"
-            alt="verified"
-          />
-          <span class="ml-1 teal--text text-subtitle-2">Premium Seller</span>
-        </div>
-
-        <div class="text-h5 font-weight-bold">{{ hits.judul }}</div>
-
-        <div class="d-flex align-center text-caption text-sm-body-2">
-          <!-- <span>3.5</span>
-          <star-rating
-            :rating="3.5"
-            read-only
-            :show-rating="false"
-            :round-start-rating="false"
-            :star-size="20"
-            inline
-          ></star-rating>
-          <v-icon>mdi-circle-medium</v-icon> -->
-          <span v-if="iklan.log_iklan_view > 0">{{ iklan.log_iklan_view }}x Dilihat</span>
-        </div>
-
-        <v-divider class="mt-2"></v-divider>
-
-        <v-row class="font-weight-bold text-subtitle-1 text-sm-h5">
-          <v-col cols="3">
-            <div class="blue-grey--text">Harga</div>
-          </v-col>
-
-          <v-col cols="6" class="orange--text">
-            <div v-if="iklan.id_mst_iklan_jenis == 1">
-              Rp {{ Number(hits.harga).toLocaleString("id-ID") }}
-            </div>
-
-            <div v-else>
-              <div v-if="liveBid.length == 0">
-                Rp {{ Number(hits.harga_awal).toLocaleString("id-ID") }}
-              </div>
-
-              <div v-else>
-                Rp {{ Number(hits.harga_awal).toLocaleString("id-ID") }}
-              </div>
-            </div>
-          </v-col>
-
-          <v-col cols="3" class="text-right">
-            <div v-if="iklan.id_mst_iklan_jenis == 1">
-              <img src="/img/icons/hargapas.png" width="100" height="25" />
-            </div>
-
-            <div v-else>
-              <img
-                src="/img/icons/harga_awal.png"
-                width="100"
-                height="25"
-                v-if="liveBid.length == 0"
-              />
-              <img
-                src="/img/icons/harga_sekarang.png"
-                width="100"
-                height="25"
-                v-else
-              />
-            </div>
-          </v-col>
-        </v-row>
-
-        <v-divider></v-divider>
-
-        <!-- <div class="mt-2">
-          <div class="font-weight-bold text-h6 blue-grey--text">Deskripsi</div>
-          <div class="text-subtitle-2">{{ hits.deskripsi }}</div>
-        </div>-->
-      </v-col>
-    </v-row>
-
-    <v-divider></v-divider>
-
-    <v-list two-line>
+           <v-list two-line>
       <v-list-item>
         <v-list-item-avatar size="50">
           <v-icon x-large v-if="appuser.photo == 'null'"
@@ -126,8 +44,20 @@
               </v-avatar>
               <span class="mx-1">{{ appuser.nama }}</span>
             </div>
+             <!-- <div class="d-flex align-center" v-if="appuser.id_mst_user_type == 2">
+          <img
+            src="/img/verified.png"
+            width="15px"
+            height="15px"
+            alt="verified"
+          />
+          <span class="ml-1 teal--text text-subtitle-2">Premium Seller</span>
+        </div> -->
+        
           </v-list-item-title>
           <v-list-item-subtitle>Penjual</v-list-item-subtitle>
+          <v-list-item-subtitle>Slogan: {{ appuser.slogan }}</v-list-item-subtitle>
+         
 
           <div class="d-flex d-sm-none" v-if="!guest">
             <v-btn
@@ -206,11 +136,86 @@
         </v-dialog>
       </v-list-item>
     </v-list>
+        
+
+        <div class="text-h5 font-weight-bold">{{ hits.judul }}</div>
+
+        <div class="d-flex align-center text-caption text-sm-body-2">
+          <!-- <span>3.5</span>
+          <star-rating
+            :rating="3.5"
+            read-only
+            :show-rating="false"
+            :round-start-rating="false"
+            :star-size="20"
+            inline
+          ></star-rating>
+          <v-icon>mdi-circle-medium</v-icon> -->
+          <span v-if="iklan.log_iklan_view > 0">{{ iklan.log_iklan_view }}x Dilihat</span>
+        </div>
+
+        <v-divider class="mt-2"></v-divider>
+
+        <v-row class="font-weight-bold text-subtitle-1 text-sm-h5">
+          <v-col cols="3">
+            <span class="blue-grey--text">Harga</span>
+          </v-col>
+
+          <v-col cols="6" class="orange--text">
+            <div v-if="iklan.id_mst_iklan_jenis == 1">
+              Rp {{ Number(hits.harga).toLocaleString("id-ID") }}
+            </div>
+
+            <div v-else>
+              <div v-if="liveBid.length == 0">
+                Rp {{ Number(hits.harga_awal).toLocaleString("id-ID") }}
+              </div>
+
+              <div v-else>
+                Rp {{ Number(hits.harga_awal).toLocaleString("id-ID") }}
+              </div>
+            </div>
+          </v-col>
+
+          <v-col cols="3" class="text-right">
+            <div v-if="iklan.id_mst_iklan_jenis == 1">
+              <img src="/img/icons/hargapas.png" width="100" height="25" />
+            </div>
+
+            <div v-else>
+              <img
+                src="/img/icons/harga_awal.png"
+                width="100"
+                height="25"
+                v-if="liveBid.length == 0"
+              />
+              <img
+                src="/img/icons/harga_sekarang.png"
+                width="100"
+                height="25"
+                v-else
+              />
+            </div>
+          </v-col>
+        </v-row>
+
+        <v-divider></v-divider>
+
+        <!-- <div class="mt-2">
+          <div class="font-weight-bold text-h6 blue-grey--text">Deskripsi</div>
+          <div class="text-subtitle-2">{{ hits.deskripsi }}</div>
+        </div>-->
+      </v-col>
+    </v-row>
+
+    <v-divider></v-divider>
+
+ 
 
     <v-divider></v-divider>
 
     <v-tabs v-model="tab" color="teal" slider-color="teal" show-arrows>
-      <v-tab>Deskripsi</v-tab>
+      <v-tab>Info Penjual</v-tab>
       <v-tab>Detail Iklan</v-tab>
       <v-tab v-if="hits.id_mst_iklan_jenis == 2">Info Tawar Bersama</v-tab>
       <v-tab v-if="hits.id_mst_iklan_jenis == 2">Penawaran</v-tab>
@@ -219,31 +224,39 @@
     <v-tabs-items v-model="tab">
       <v-tab-item>
         <v-card flat>
-          <v-card-title class="font-weight-bold">Deskripsi Iklan:</v-card-title>
+        
+          <v-card-title class="font-weight-bold">Catatan & Kebijakan Penjual</v-card-title>
 
-          <v-card-text>{{ hits.deskripsi }}</v-card-text>
+           
+            <v-row justify="center" >
+             <v-expansion-panels focusable inset>
+            <v-expansion-panel v-for="item in catatan" :key="item.id">
+              <v-expansion-panel-header>
+                <b>{{ item.judul }}</b>
+              </v-expansion-panel-header>
 
-           <v-card-title class="font-weight-bold">Catatan & Kebijakan Penjual</v-card-title>
+              <v-expansion-panel-content>
+                <div v-html="item.deskripsi"></div>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
 
-            <v-card-text class="font-weight-bold">Slogan: {{ appuser.slogan }}</v-card-text>
+          <br />
 
-            <v-row justify="center">
-              <v-expansion-panels>
-                <v-expansion-panel>
-                  <v-expansion-panel-header class="font-weight-bold">Kebijakan :</v-expansion-panel-header>
-                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
+          <v-expansion-panels focusable inset v-if="kebijakan != undefined">
+            <v-expansion-panel>
+              <v-expansion-panel-header class="font-weight-bold">
+                Kebijakan:
+              </v-expansion-panel-header>
+
+              <v-expansion-panel-content>
+                <div v-html="kebijakan.deskripsi"></div>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
             </v-row>
-            
-             <v-row justify="center">
-              <v-expansion-panels>
-                <v-expansion-panel>
-                  <v-expansion-panel-header class="font-weight-bold">Catatan 1:</v-expansion-panel-header>
-                  <v-expansion-panel-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
-            </v-row>
+
+         
         </v-card>
       </v-tab-item>
 
@@ -343,8 +356,14 @@
       <v-tab-item>
         <v-row class="d-flex align-center">
           <v-col cols="12" sm="6">
+             <v-card-title class="font-weight-bold">Deskripsi Iklan:</v-card-title>
+
+          <v-card-text>{{ hits.deskripsi }}</v-card-text>
             <v-card class="d-flex justify-space-between align-center" flat>
+             
+          
               <v-card align="center">
+                
                 <v-card-subtitle class="teal accent-4 white--text"
                   >Tanggal Mulai</v-card-subtitle
                 >
@@ -789,6 +808,8 @@ export default {
       appuser: [],
       title: "",
       loading: true,
+      catatan:[],
+      kebijakan:[]
     };
   },
   methods: {
@@ -937,6 +958,42 @@ export default {
             this.penawaran = Number(this.minBid) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
           }
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+       getCatatan() {
+      this.axios
+        .get("/user/v3/user/catatan_penjual", {
+          params: {
+            id_app_user: this.appuser.id,
+            type_catatan: 2,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.catatan = data;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    getKebijakan() {
+      this.axios
+        .get("/user/v3/user/catatan_penjual", {
+          params: {
+            id_app_user: this.appuser.id,
+            type_catatan: 1,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.kebijakan = data[0];
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -1253,6 +1310,8 @@ export default {
   created() {
     // this.$nextTick(() => {
     this.getDtlIklan();
+    this.getCatatan();
+    this.getKebijakan();
     // });
     this.GetBid();
     if (!this.guest) {

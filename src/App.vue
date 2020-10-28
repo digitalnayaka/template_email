@@ -354,7 +354,7 @@
             </v-btn>
           </template>
 
-          <v-card width="120">
+          <v-card width="150">
             <v-list dense>
               <v-list-item to="/chat-list">
                 <v-list-item-subtitle>Chat</v-list-item-subtitle>
@@ -367,7 +367,7 @@
               </v-list-item>
 
               <v-list-item href="/product/review">
-                <v-list-item-subtitle>Ulasan</v-list-item-subtitle>
+                <v-list-item-subtitle>Penilaian</v-list-item-subtitle>
 
                 <v-list-item-action>
                   <v-avatar color="red" size="25">

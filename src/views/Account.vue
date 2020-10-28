@@ -177,7 +177,7 @@ export default {
         title: "Kotak Masuk",
         items: [
           { id: 6, title: "Chat", route: "/chat-list" },
-          { id: 7, title: "Ulasan", route: "/product/review" },
+          { id: 7, title: "Penilaian", route: "/product/review" },
           { id: 8, title: "Notifikasi", route: "/notification" },
         ],
       },
@@ -233,8 +233,8 @@ export default {
       },
       {
         icon: "mdi-emoticon",
-        title: "Kata Pembeli",
-        items: [{ id: 20, title: "Ulasan", route: "/buyer-review" }],
+        title: "Penilaian",
+        items: [{ id: 20, title: "Penilaian Penjual", route: "/buyer-review" }],
       },
     ],
   }),

@@ -38,7 +38,7 @@
         <v-col cols="12" sm="6">
           <h2 class="text-center">Informasi Tagihan</h2>
 
-          <v-card>
+          <v-card max-height="500">
             <v-list dense>
               <v-list-item>
                 <v-list-item-title>Nomor Order:</v-list-item-title>
@@ -173,27 +173,25 @@
           </v-card>
         </v-col>
 
-        <v-col cols="12" sm="6">
+        <v-col cols="12" sm="6" md="6">
           <h2 class="text-center">Informasi Produk</h2>
 
-          <v-card :height="orders.id_mst_order_status == 3 ? 350 : 310">
+          <v-card :height="orders.id_mst_order_status == 3 ? 310 : 310">
             <v-list>
-              <v-list-item>
+              <v-list-item align="center">
                 <v-list-item-avatar tile size="100">
                   <v-img :src="getImage(iklan.photo)" contain></v-img>
                 </v-list-item-avatar>
 
-                <v-list-item-content>
-                  <v-list-item-title class="font-weight-bold">
+                <v-list-item-content align="center">
+                  <h3 class="font-weight-bold">
                     {{ iklan.judul }}
-                  </v-list-item-title>
+                  </h3>
 
-                  <v-list-item-subtitle class="teal--text">
+                  <h3 class="teal--text" align="center">
                     Rp {{ Number(orders.harga).toLocaleString("id-ID") }}
-                  </v-list-item-subtitle>
-                </v-list-item-content>
+                  </h3>
 
-                <v-list-item-action>
                   <v-btn
                     text
                     color="primary"
@@ -203,7 +201,7 @@
                     Lihat Iklan
                     <v-icon right>mdi-chevron-right</v-icon>
                   </v-btn>
-                </v-list-item-action>
+                </v-list-item-content>
               </v-list-item>
 
               <v-list-item align="center">
@@ -224,7 +222,6 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue" dark>Beri Ulasan</v-btn>
               <v-btn
                 color="teal"
                 dark
@@ -365,7 +362,6 @@
                   <v-icon>mdi-close</v-icon>
                 </v-btn>
               </v-toolbar>
-
               <v-container fluid>
                 Yakin ingin mengkonfirmasi pembayaran berikut?
               </v-container>

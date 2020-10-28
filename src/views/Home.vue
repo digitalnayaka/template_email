@@ -22,12 +22,11 @@
     </v-carousel>
 
     <v-row>
-      <v-col cols="3" align="center" v-for="item in categories" :key="item.id">
+     <v-col cols="6" align="center" v-for="item in categories" :key="item.id">
         <v-card flat :to="'/category/' + item.route">
-          <v-img :src="item.image" width="100" height="100" contain></v-img>
+          <v-img :src="item.image" width="500" height="150" contain></v-img>
+          <h5>{{ item.name }}</h5>
         </v-card>
-
-        <h5>{{ item.name }}</h5>
       </v-col>
     </v-row>
 
@@ -42,20 +41,24 @@
             contain
             :key="index"
             :to="{
-            path: '/list-tb/' + item.nama,
-            query: { tgl: item.date.substr(0, 10) },
-          }"
+              path: '/list-tb/' + item.nama,
+              query: { tgl: item.date.substr(0, 10) },
+            }"
           >
             <v-list>
               <v-list-item>
                 <v-list-item-avatar size="70">
-                  <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
+                  <v-icon x-large v-if="item.photo == 'null'"
+                    >mdi-account-circle</v-icon
+                  >
                   <v-img :src="getImage(item.photo)" v-else></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
                   <v-btn small color="teal" dark rounded>
-                    <v-list-item-title>{{ item.date | dateFormat }}</v-list-item-title>
+                    <v-list-item-title>{{
+                      item.date | dateFormat
+                    }}</v-list-item-title>
                   </v-btn>
                 </v-list-item-content>
               </v-list-item>
@@ -83,7 +86,8 @@
           to="/jadwal"
           :small="$vuetify.breakpoint.xsOnly ? true : false"
           class="mt-4"
-        >Jadwal Tawar Bersama Selengkapnya</v-btn>
+          >Jadwal Tawar Bersama Selengkapnya</v-btn
+        >
       </v-container>
     </v-card>
     <!-- <v-divider class="my-2"></v-divider> -->
@@ -107,7 +111,12 @@
       </v-col>
 
       <v-col cols="12" align="center">
-        <v-btn dark color="teal" :to="{ path: '/category/mokas', query: { tb: true } }">Lihat Semua</v-btn>
+        <v-btn
+          dark
+          color="teal"
+          :to="{ path: '/category/mokas', query: { tb: true } }"
+          >Lihat Semua</v-btn
+        >
       </v-col>
     </v-row>
 
@@ -195,40 +204,51 @@
     <v-divider class="my-2"></v-divider>
 
     <v-card color="teal lighten-4 text-center">
-      <v-container fluid >
+      <v-container fluid>
         <h2>Artikel Terbaru</h2>
+        <h4>Yuk cek artikel terbaru di SiMotor</h4>
+        <br />
+        <v-row align="center" dense>
+          <v-col cols="6" sm="4" lg="2
+          " v-for="item in artikel" :key="item.id">
+            <v-card outlined tile href="http://devlmu.com:333/" width="200">
+              <div align="center">
+                <v-img
+                  align="center"
+                  width="300"
+                  height="200"
+                  :src="getImage(item.cover_image)"
+                  
+                ></v-img>
+              </div>
 
-        <div class="scrolling-wrapper-flexbox mx-2" >
-          <v-card class="card ma-2" max-width="250">
-            <v-list>
-              <v-list-item>
-                <!-- <v-list-item-avatar size="70">
-                <v-icon x-large v-if="item.photo == 'null'">mdi-account-circle</v-icon>
-                <v-img :src="getImage(item.photo)" v-else></v-img>
-                </v-list-item-avatar>-->
-
-                <v-list-item-content>
-                   <v-img src="/img/test.png" max-width="250"></v-img>
-                  <span>by: Author</span>
-                  <v-list-item-title class="font-weight-bold">Judul</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-
-            <v-divider></v-divider>
-
-            <!-- <v-avatar size="16" v-if="item.id_mst_user_type == 2">
-            <v-img src="/img/verified.png" alt="verified"></v-img>
-            </v-avatar>-->
-          </v-card>
-        </div>
-
-        <v-btn dark color="teal" to="/jadwal" class="mt-4">Lihat Semua Artikel</v-btn>
+              <v-list class="ma-0 pa-0">
+                <v-list-item>
+                  <v-list-item-content>
+                   
+                    <v-list-item-title >Tanggal: {{ item.publish_date | dateFormat }}</v-list-item-title>
+                    <v-list-item-subtitle> By: </v-list-item-subtitle>
+                   <v-list-item-title class="font-weight-black"> {{ item.title }} </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+        <v-btn dark color="teal" href="http://devlmu.com:333/" class="mt-4"
+          >Lihat Semua Artikel</v-btn
+        >
       </v-container>
     </v-card>
 
     <v-btn bottom color="white" dark fab fixed right to="/bantuan">
-      <v-img to="/bantuan" src="/img/icons/ic_bantuan.png" width="50" height="50" contain></v-img>
+      <v-img
+        to="/bantuan"
+        src="/img/icons/ic_bantuan.png"
+        width="50"
+        height="50"
+        contain
+      ></v-img>
     </v-btn>
   </v-container>
 </template>
@@ -248,31 +268,32 @@ export default {
     categories: [
       {
         id: 1,
-        image: "/img/icons/mokas.png",
+        image: "/img/icons/mokas2.png",
         name: "Motor Bekas",
         route: "mokas",
       },
-      {
-        id: 2,
-        image: "/img/icons/motorbaru.png",
-        name: "Motor Baru",
-        route: "motor_baru",
-      },
+      // {
+      //   id: 2,
+      //   image: "/img/icons/motorbaru.png",
+      //   name: "Motor Baru",
+      //   route: "motor_baru",
+      // },
       {
         id: 3,
-        image: "/img/icons/tiket.png",
+        image: "/img/icons/tiket2.png",
         name: "Tiket Tawar Bersama",
         route: "ticket",
       },
-      {
-        id: 4,
-        image: "/img/icons/bengkel.png",
-        name: "Bengkel",
-        route: "bengkel",
-      },
+      // {
+      //   id: 4,
+      //   image: "/img/icons/bengkel.png",
+      //   name: "Bengkel",
+      //   route: "bengkel",
+      // },
     ],
     jadwal: [],
     tbBerlangsung: [],
+    artikel: [],
   }),
   methods: {
     showBanners() {
@@ -299,6 +320,24 @@ export default {
           console.log(responses.api_message);
         });
     },
+    artikelBerita() {
+      this.axios
+        .get("/produk/v3/berita/umum", {
+          params: {
+            limit: 6,
+            offset: 0,
+          },
+          
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.artikel = data;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
     jadwalLelang() {
       this.axios
         .get("/iklan/v3/iklan_jadwal_tb", {
@@ -316,6 +355,7 @@ export default {
           console.log(responses.api_message);
         });
     },
+
     TBBerlangsung() {
       this.axios
         .get("/search/v3/search", {
@@ -342,6 +382,7 @@ export default {
     this.showBanners();
     // this.showCategories();
     this.jadwalLelang();
+    this.artikelBerita();
     this.TBBerlangsung();
   },
   filters: {
