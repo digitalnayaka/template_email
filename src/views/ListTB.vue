@@ -129,12 +129,12 @@
           </v-card>
         </v-dialog>
 
-        <v-col cols="12" sm="6">
+        <!-- <v-col cols="12" sm="6">
           <v-row>
-            <!-- <v-col cols="12" sm="6" class="text-center">
+            <v-col cols="12" sm="6" class="text-center">
               <div class="text-h5">Unit Terjual</div>
               10
-            </v-col> -->
+            </v-col>
 
             <v-col cols="12" sm="6">
               <div class="text-h5 text-center">Kualitas Unit</div>
@@ -151,7 +151,7 @@
               </div>
             </v-col>
           </v-row>
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-card>
 
@@ -771,13 +771,13 @@
 <script>
 import { mapGetters } from "vuex";
 import moment from "moment-timezone";
-import StarRating from "vue-star-rating";
+// import StarRating from "vue-star-rating";
 
 export default {
   name: "listLelang",
   props: ["utc", "timezone"],
   components: {
-    StarRating,
+    // StarRating,
     ListIklan: () =>
       import(/* webpackChunkName: "list_iklan" */ "@/components/ListIklan.vue"),
   },
