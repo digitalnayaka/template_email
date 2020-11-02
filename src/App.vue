@@ -655,6 +655,7 @@ export default {
     tab2: 0,
     utc: moment().utcOffset() / 60 - 7,
     waktu: "",
+    notif: "",
   }),
   methods: {
     ...mapActions({
@@ -675,6 +676,30 @@ export default {
       if (this.utc == 2) {
         this.waktu = "WIT";
       }
+    },
+    oneSignal() {
+      let OneSignal = window.OneSignal || [];
+
+      OneSignal.push(() => {
+        OneSignal.init({
+          appId: "9af3274a-447f-482f-bca6-ec68dc143418",
+          notifyButton: {
+            enable: true,
+          },
+        });
+
+        OneSignal.on("subscriptionChange", (isSubscribed) => {
+          console.log("The user's subscription state is now:", isSubscribed);
+          if (isSubscribed) {
+            window.location.href = "/"
+          }
+        });
+
+        OneSignal.getUserId().then((userId) => {
+          console.log("OneSignal User ID:", userId);
+          this.notif = userId + "[web]";
+        });
+      });
     },
     geolocation() {
       this.$getLocation({
@@ -895,6 +920,7 @@ export default {
   },
   created() {
     this.timezone();
+    this.oneSignal();
     this.geolocation();
     if (!this.guest) {
       this.getNotif();
