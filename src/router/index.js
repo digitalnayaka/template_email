@@ -117,14 +117,6 @@ const routes = [
     }
   },
   {
-    path: '/report',
-    name: 'Report',
-    component: () => import(/* webpackChunkName: "report" */ '../views/Report.vue'),
-    meta: {
-      Auth: true
-    }
-  },
-  {
     path: '/beri-ulasan',
     name: 'beri-ulasan',
     component: () => import(/* webpackChunkName: "beri-ulasan" */ '../views/TulisReview.vue'),
@@ -261,6 +253,14 @@ const routes = [
         path: '/sell/order',
         name: 'SellerOrder',
         component: () => import(/* webpackChunkName: "seller-order" */ '../views/SellerOrder.vue'),
+        meta: {
+          Auth: true
+        }
+      },
+      {
+        path: '/report',
+        name: 'Report',
+        component: () => import(/* webpackChunkName: "report" */ '../views/Report.vue'),
         meta: {
           Auth: true
         }

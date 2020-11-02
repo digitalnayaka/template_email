@@ -149,6 +149,49 @@
           :total-visible="5"
         ></v-pagination>
       </v-tab-item>
+
+      <v-tab-item>
+        <v-tabs v-model="subTab2" grow>
+          <v-tab>Tiket Didapat</v-tab>
+          <v-tab>Refund Tiket</v-tab>
+
+          <v-tab-item>
+            <div v-if="group.length > 0">
+              <ticket-transaction
+                :group="group"
+                :utc="utc"
+                :timezone="timezone"
+                type="pembelian"
+              />
+
+              <v-pagination
+                v-model="pagePembelian"
+                @input="loadData"
+                :length="lengthPagePembelian"
+                :total-visible="5"
+              ></v-pagination>
+            </div>
+          </v-tab-item>
+
+          <v-tab-item>
+            <div v-if="group2.length > 0">
+              <ticket-transaction
+                :group="group2"
+                :utc="utc"
+                :timezone="timezone"
+                type="refund"
+              />
+
+              <v-pagination
+                v-model="pageRF"
+                @input="listRefund"
+                :length="lengthPageRF"
+                :total-visible="5"
+              ></v-pagination>
+            </div>
+          </v-tab-item>
+        </v-tabs>
+      </v-tab-item>
     </v-tabs-items>
   </div>
 </template>
@@ -162,6 +205,12 @@ import moment from "moment-timezone";
 export default {
   name: "buyer-order",
   props: ["utc", "timezone"],
+  components: {
+    TicketTransaction: () =>
+      import(
+        /* webpackChunkName: "ticket-transaction" */ "@/components/TicketTransaction.vue"
+      ),
+  },
   data() {
     return {
       tab: 0,
@@ -182,6 +231,19 @@ export default {
       limit: 20,
       total: 0,
       lengthPage: 0,
+      subTab2: 0,
+      pagePembelian: 1,
+      lengthPagePembelian: 0,
+      totalPembelian: 0,
+      tickets: [],
+      orderStatus: [],
+      group: [],
+      pageRF: 1,
+      lengthPageRF: 0,
+      totalRF: 0,
+      refunds: [],
+      refundStatus: [],
+      group2: [],
     };
   },
   methods: {
@@ -226,6 +288,121 @@ export default {
         this.getTransaksi();
       });
     },
+    loadData() {
+      var offset = (this.pagePembelian - 1) * this.limit;
+
+      this.axios
+        .get("/transaksi/v3/order", {
+          params: {
+            id_pembeli: this.user.id,
+            id_penjual: 1,
+            id_mst_order_type: 1,
+            offset: offset,
+            limit: this.limit,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.tickets = data.data;
+
+          this.totalPembelian = data.count;
+          this.lengthPagePembelian =
+            this.totalPembelian == 0
+              ? 1
+              : Math.ceil(this.totalPembelian / this.limit);
+
+          this.orderStatus = [];
+
+          const map = new Map();
+          for (const item of this.tickets) {
+            if (!map.has(item.id_mst_pembayaran_status)) {
+              map.set(item.id_mst_pembayaran_status, true);
+              this.orderStatus.push({
+                id_mst_pembayaran_status: item.id_mst_pembayaran_status,
+                pembayaran_status: item.pembayaran_status,
+              });
+            }
+          }
+
+          this.group = [];
+
+          for (let index = 0; index < this.orderStatus.length; index++) {
+            const id_mst_pembayaran_status = this.orderStatus[index]
+              .id_mst_pembayaran_status;
+            const pembayaran_status = this.orderStatus[index].pembayaran_status;
+
+            let found = this.tickets.filter(
+              (element) =>
+                element.id_mst_pembayaran_status == id_mst_pembayaran_status
+            );
+            this.group.push({
+              id_mst_pembayaran_status: id_mst_pembayaran_status,
+              pembayaran_status: pembayaran_status,
+              found,
+            });
+          }
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    listRefund() {
+      var offset = (this.pageRF - 1) * this.limit;
+
+      this.axios
+        .get("/transaksi/v3/order", {
+          params: {
+            id_penjual: this.user.id,
+            id_pembeli: 1,
+            id_mst_order_type: 2,
+            offset: offset,
+            limit: this.limit,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.refunds = data.data;
+
+          this.totalRF = data.count;
+          this.lengthPageRF =
+            this.totalRF == 0 ? 1 : Math.ceil(this.totalRF / this.limit);
+
+          const map = new Map();
+          for (const item of this.refunds) {
+            if (!map.has(item.id_mst_pembayaran_status)) {
+              map.set(item.id_mst_pembayaran_status, true);
+              this.refundStatus.push({
+                id_mst_pembayaran_status: item.id_mst_pembayaran_status,
+                pembayaran_status: item.pembayaran_status,
+              });
+            }
+          }
+
+          for (let index = 0; index < this.refundStatus.length; index++) {
+            const id_mst_pembayaran_status = this.refundStatus[index]
+              .id_mst_pembayaran_status;
+            const pembayaran_status = this.refundStatus[index]
+              .pembayaran_status;
+
+            let found = this.refunds.filter(
+              (element) =>
+                element.id_mst_pembayaran_status == id_mst_pembayaran_status
+            );
+            this.group2.push({
+              id_mst_pembayaran_status: id_mst_pembayaran_status,
+              pembayaran_status: pembayaran_status,
+              found,
+            });
+          }
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
   },
   computed: {
     ...mapGetters({
@@ -234,6 +411,8 @@ export default {
   },
   created() {
     this.getTransaksi();
+    this.loadData();
+    this.listRefund();
   },
   filters: {
     dateTimeFormat: (date, utc) => {
