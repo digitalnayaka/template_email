@@ -15,15 +15,15 @@
         color="primary"
         @click="postSlogan"
         :disabled="slogan == null ? true : false"
-        >Simpan</v-btn
       >
+        Simpan
+      </v-btn>
     </div>
 
     <br />
 
     <div class="d-flex flex-wrap align-center">
       <h3 class="mr-auto">Catatan</h3>
-
       <v-btn
         color="teal"
         dark
@@ -33,7 +33,6 @@
       >
         Tambah Catatan
       </v-btn>
-     
 
       <v-dialog v-model="dialog" width="500">
         <v-card>
@@ -106,14 +105,31 @@
     </v-expansion-panels>
 
     <br />
-<div class="d-flex flex-wrap align-center"> 
     <h3>Kebijakan</h3>
-    <v-spacer> </v-spacer>
- <v-btn color="teal" dark small class="mx-2" @click="openDialog('Tambah Kebijakan')">
+    <div class="d-flex flex-wrap align-center">
+      <v-btn
+        color="teal"
+        dark
+        small
+        class="mx-2"
+        @click="openDialog('Tambah Kebijakan')"
+      >
         Tambah Kebijakan
       </v-btn>
-    <div v-html="kebijakan.deskripsi"></div>
-</div>
+    </div>
+
+    <v-expansion-panels focusable>
+      <div v-html="kebijakan.deskripsi"></div>
+      <div v-if="kebijakan != ''">
+        <v-btn x-small outlined class="mx-2" @click="edit(kebijakan)">
+          <v-icon left>mdi-pencil</v-icon> Ubah
+        </v-btn>
+
+        <v-btn x-small outlined class="mx-2" @click="deleteCatatan(kebijakan)">
+          <v-icon left>mdi-delete</v-icon> Hapus
+        </v-btn>
+      </div>
+    </v-expansion-panels>
   </div>
 </template>
 
@@ -142,7 +158,6 @@ export default {
     type: 0,
     jenis: "post",
     selected: [],
-    deskripsi:""
   }),
   methods: {
     ...mapActions({
@@ -158,7 +173,9 @@ export default {
         })
         .then((response) => {
           let { data } = response.data;
-          this.slogan = data[0].slogan;
+          if (data.length > 0) {
+            this.slogan = data[0].slogan;
+          }
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -208,8 +225,12 @@ export default {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
-          let { data } = response.data;
-          this.catatan = data;
+          let { data } = response;
+          if (data.count > 0) {
+            this.catatan = data.data;
+          } else {
+            this.catatan = [];
+          }
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -226,8 +247,12 @@ export default {
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
-          let { data } = response.data;
-          this.kebijakan = data[0];
+          let { data } = response;
+          if (data.count > 0) {
+            this.kebijakan = data.data[0];
+          } else {
+            this.kebijakan = [];
+          }
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -257,6 +282,7 @@ export default {
           this.judul = "";
           this.content = "";
           this.getCatatan();
+          this.getKebijakan();
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -271,9 +297,8 @@ export default {
       this.selected = item;
       this.dialog = true;
       this.jenis = "edit";
-      this.title =
-        item.type_catatan == 1 ? "Tambah Catatan" : "Tambah Kebijakan";
-      if (this.title == "Tambah Kebijakan") {
+      this.title = item.type_catatan == 1 ? "Edit Catatan" : "Edit Kebijakan";
+      if (this.title == "Edit Kebijakan") {
         this.type = 1;
       } else {
         this.type = 2;
@@ -303,6 +328,7 @@ export default {
           this.judul = "";
           this.content = "";
           this.getCatatan();
+          this.getKebijakan();
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -331,6 +357,7 @@ export default {
               text: data.api_message,
             });
             this.getCatatan();
+            this.getKebijakan();
           })
           .catch((error) => {
             let responses = error.response.data;

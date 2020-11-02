@@ -191,20 +191,19 @@
                   <h3 class="teal--text" align="center">
                     Rp {{ Number(orders.harga).toLocaleString("id-ID") }}
                   </h3>
-                  
-                    <v-btn
-                      text
-                      color="primary"
-                      dark
-                      :to="'/iklan/' + orders.id_iklan"
-                    >
-                      Lihat Iklan
-                      <v-icon right>mdi-chevron-right</v-icon>
-                    </v-btn>
-                  
+
+                  <v-btn
+                    text
+                    color="primary"
+                    dark
+                    :to="'/iklan/' + orders.id_iklan"
+                  >
+                    Lihat Iklan
+                    <v-icon right>mdi-chevron-right</v-icon>
+                  </v-btn>
                 </v-list-item-content>
               </v-list-item>
-             
+
               <v-list-item align="center">
                 <v-list-item-title>Jumlah:</v-list-item-title>
                 <v-list-item-title>{{ orders.jumlah }} Unit</v-list-item-title>
@@ -223,7 +222,6 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue" dark>Beri Ulasan</v-btn>
               <v-btn
                 color="teal"
                 dark

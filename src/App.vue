@@ -68,7 +68,7 @@
             </v-btn>
           </template>
 
-          <v-card width="400">
+          <v-card width="330">
             <v-card flat to="/notification">
               <v-card-title>
                 <div class="d-flex align-center">
@@ -90,15 +90,11 @@
               slider-color="teal"
               @change="content = false"
             >
-             <v-tab class="text-caption">Semua</v-tab>
-              <v-tab class="text-caption">Iklan</v-tab>
-               <v-tab class="text-caption">Transaksi</v-tab>
-                <v-tab class="text-caption">Unit</v-tab>
+              <v-tab class="text-caption">Tawar Bersama</v-tab>
               <v-tab class="text-caption">Tiket</v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab2">
-              
               <v-tab-item>
                 <v-card flat>
                   <div class="d-flex justify-space-between">
@@ -358,7 +354,7 @@
             </v-btn>
           </template>
 
-          <v-card width="120">
+          <v-card width="150">
             <v-list dense>
               <v-list-item to="/chat-list">
                 <v-list-item-subtitle>Chat</v-list-item-subtitle>
@@ -639,8 +635,6 @@ export default {
       import(/* webpackChunkName: "daftar" */ "@/components/Daftar.vue"),
     Footer: () =>
       import(/* webpackChunkName: "footer" */ "@/components/Footer.vue"),
-    NotifikasiAll: () =>
-      import(/* webpackChunkName: "footer" */ "@/views/Notifikasi.vue"),
   },
   data: () => ({
     countNotif: 0,

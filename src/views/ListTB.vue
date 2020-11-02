@@ -51,14 +51,14 @@
                     class="ma-1"
                     >Pesan</v-btn
                   >
-                  <v-btn
+                  <!-- <v-btn
                     small
                     color="teal"
                     dark
                     @click="dialogBio = true"
                     class="ma-1"
                     >Info Penjual</v-btn
-                  >
+                  > -->
                 </div>
               </v-list-item-content>
             </v-list-item>
@@ -131,10 +131,10 @@
 
         <v-col cols="12" sm="6">
           <v-row>
-            <v-col cols="12" sm="6" class="text-center">
+            <!-- <v-col cols="12" sm="6" class="text-center">
               <div class="text-h5">Unit Terjual</div>
               10
-            </v-col>
+            </v-col> -->
 
             <v-col cols="12" sm="6">
               <div class="text-h5 text-center">Kualitas Unit</div>
