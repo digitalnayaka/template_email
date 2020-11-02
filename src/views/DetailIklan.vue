@@ -61,6 +61,7 @@
               <h5>Rating Penjual:  <v-avatar size="16" item>
                     <v-img src="/img/icons/emoji_netral.png" alt="verified"></v-img>
                   </v-avatar>Biasa</h5>
+                  
               
               <div class="d-flex d-sm-none" v-if="!guest">
                 <v-btn

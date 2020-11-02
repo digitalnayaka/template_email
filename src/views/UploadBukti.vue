@@ -212,7 +212,7 @@
 
       <v-divider></v-divider>
 
-      <div
+      <div align="center"
         v-if="orders.id_mst_order_status != 3 && orders.id_mst_order_type == 1"
       >
         <h2>Konfirmasi Pembelian</h2>
