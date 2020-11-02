@@ -54,15 +54,50 @@
           <span class="ml-1 teal--text text-subtitle-2">Premium Seller</span>
         </div> -->
               </v-list-item-title>
+
               <v-list-item-subtitle>Penjual</v-list-item-subtitle>
-              <v-list-item-title>
+
+              <v-list-item-subtitle>
                 Slogan: {{ appuser.slogan }}
-              </v-list-item-title>
-              <h5>Rating Penjual:  <v-avatar size="16" item>
-                    <v-img src="/img/icons/emoji_netral.png" alt="verified"></v-img>
-                  </v-avatar>Biasa</h5>
-                  
-              
+              </v-list-item-subtitle>
+
+              <h5>
+                Rating Penjual:
+
+                <!-- <v-icon color="red" v-if="avg.ratting_user == 1">
+                  mdi-emoticon-angry-outline
+                </v-icon> -->
+                <v-avatar size="16" item>
+                  <v-img
+                    src="/img/icons/emoji_tidakpuas.png"
+                    alt="rating"
+                    v-if="avg.ratting_user == 1"
+                  ></v-img>
+                </v-avatar>
+                <!-- <v-icon color="orange" v-if="avg.ratting_user == 2">
+                  mdi-emoticon-neutral-outline
+                </v-icon> -->
+                <v-avatar size="16" item>
+                  <v-img
+                    src="/img/icons/emoji_netral.png"
+                    alt="rating"
+                    v-if="avg.ratting_user == 2"
+                  ></v-img>
+                </v-avatar>
+
+                <v-avatar size="16" item>
+                  <v-img
+                    src="/img/icons/emoji_puas.png"
+                    alt="rating"
+                    v-if="avg.ratting_user == 3"
+                  ></v-img>
+                </v-avatar>
+              </h5>
+              <h5>
+                <v-icon color="yellow" v-for="n in avg.ratting_iklan" :key="n">
+                  mdi-star
+                </v-icon>
+              </h5>
               <div class="d-flex d-sm-none" v-if="!guest">
                 <v-btn
                   x-small
@@ -825,6 +860,7 @@ export default {
       loading: true,
       catatan: [],
       kebijakan: [],
+      avg: [],
     };
   },
   methods: {
@@ -846,8 +882,6 @@ export default {
           this.hits = hits[0]._source;
           this.getUser(this.hits.id_app_user);
           this.unit_mokas(this.hits.unit_motor_bekas[0].id);
-          this.getCatatan();
-          this.getKebijakan();
           if (this.hits.id_mst_iklan_jenis == 1) {
             this.getHP(this.id);
           } else {
@@ -1313,6 +1347,26 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.appuser = data[0];
+
+          this.getCatatan();
+          this.getKebijakan();
+          this.reviewAvg();
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
+        });
+    },
+    reviewAvg() {
+      this.axios
+        .get("/transaksi/v3/review_avg", {
+          params: {
+            id_penjual: this.appuser.id,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.avg = data[0];
         })
         .catch((error) => {
           let responses = error.response.data;
