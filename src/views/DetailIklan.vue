@@ -14,7 +14,7 @@
 
     <v-row>
       <v-col cols="12" sm="6">
-        <v-carousel cycle hide-delimiter-background height="300" >
+        <v-carousel cycle hide-delimiter-background height="300">
           <v-carousel-item
             v-for="(item, index) in fotos"
             :key="index"
@@ -27,24 +27,24 @@
       </v-col>
 
       <v-col cols="12" sm="6">
-           <v-list two-line>
-      <v-list-item>
-        <v-list-item-avatar size="50">
-          <v-icon x-large v-if="appuser.photo == 'null'"
-            >mdi-account-circle</v-icon
-          >
-          <v-img :src="getImage(appuser.photo)" v-else></v-img>
-        </v-list-item-avatar>
+        <v-list two-line>
+          <v-list-item>
+            <v-list-item-avatar size="50">
+              <v-icon x-large v-if="appuser.photo == 'null'">
+                mdi-account-circle
+              </v-icon>
+              <v-img :src="getImage(appuser.photo)" v-else></v-img>
+            </v-list-item-avatar>
 
-        <v-list-item-content>
-          <v-list-item-title class="font-weight-bold">
-            <div class="d-flex align-center">
-              <v-avatar size="16" item>
-                <v-img src="/img/verified.png" alt="verified"></v-img>
-              </v-avatar>
-              <span class="mx-1">{{ appuser.nama }}</span>
-            </div>
-             <!-- <div class="d-flex align-center" v-if="appuser.id_mst_user_type == 2">
+            <v-list-item-content>
+              <v-list-item-title class="font-weight-bold">
+                <div class="d-flex align-center">
+                  <v-avatar size="16" item>
+                    <v-img src="/img/verified.png" alt="verified"></v-img>
+                  </v-avatar>
+                  <span class="mx-1">{{ appuser.nama }}</span>
+                </div>
+                <!-- <div class="d-flex align-center" v-if="appuser.id_mst_user_type == 2">
           <img
             src="/img/verified.png"
             width="15px"
@@ -53,90 +53,96 @@
           />
           <span class="ml-1 teal--text text-subtitle-2">Premium Seller</span>
         </div> -->
-        
-          </v-list-item-title>
-          <v-list-item-subtitle>Penjual</v-list-item-subtitle>
-          <v-list-item-subtitle>Slogan: {{ appuser.slogan }}</v-list-item-subtitle>
-         
+              </v-list-item-title>
+              <v-list-item-subtitle>Penjual</v-list-item-subtitle>
+              <v-list-item-subtitle>
+                Slogan: {{ appuser.slogan }}
+              </v-list-item-subtitle>
 
-          <div class="d-flex d-sm-none" v-if="!guest">
-            <v-btn
-              x-small
-              color="teal"
-              dark
-              @click="dialogHubungi = true"
-              class="mx-2"
-              >Hubungi</v-btn
-            >
-            <v-btn
-              x-small
-              color="teal"
-              dark
-              :to="'/chat/' + appuser.id"
-              class="mx-2"
-              >Pesan</v-btn
-            >
-          </div>
-        </v-list-item-content>
-
-        <div class="d-none d-sm-flex" v-if="!guest">
-          <v-btn
-            color="teal"
-            small
-            dark
-            @click="dialogInfo2 = true"
-            class="mx-2"
-            >Hubungi</v-btn
-          >
-          <v-btn
-            color="teal"
-            small
-            dark
-            :to="'/chat/' + appuser.id"
-            class="mx-2"
-            >Pesan</v-btn
-          >
-        </div>
-
-        <v-dialog v-model="dialogInfo2" persistent max-width="500px">
-          <v-card>
-            <v-toolbar dark color="teal">
-              <v-toolbar-title>Hubungi</v-toolbar-title>
-
-              <div class="flex-grow-1"></div>
-
-              <v-btn icon @click="dialogInfo2 = false">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-toolbar>
-
-            <v-card-title>Tanyakan lebih lanjut kepada penjual</v-card-title>
-
-            <div align="center">
-              <v-btn tile color="white" class="mx-2">
-                <a :href="'tel:' + appuser.nomor_hp">Telepon</a>
-              </v-btn>
-
-              <v-btn tile color="white" class="mx-2">
-                <a :href="'sms:' + appuser.nomor_hp">SMS</a>
-              </v-btn>
-
-              <v-btn tile color="white" class="mx-2">
-                <a
-                  :href="
-                    'https://api.whatsapp.com/send?phone=' +
-                    appuser.nomor_hp +
-                    '&text=Hai, saya dari aplikasi SiMotor'
-                  "
-                  >WhatsApp Now</a
+              <div class="d-flex d-sm-none" v-if="!guest">
+                <v-btn
+                  x-small
+                  color="teal"
+                  dark
+                  @click="dialogHubungi = true"
+                  class="mx-2"
                 >
+                  Hubungi
+                </v-btn>
+                <v-btn
+                  x-small
+                  color="teal"
+                  dark
+                  :to="'/chat/' + appuser.id"
+                  class="mx-2"
+                >
+                  Pesan
+                </v-btn>
+              </div>
+            </v-list-item-content>
+
+            <div class="d-none d-sm-flex" v-if="!guest">
+              <v-btn
+                color="teal"
+                small
+                dark
+                @click="dialogInfo2 = true"
+                class="mx-2"
+              >
+                Hubungi
+              </v-btn>
+              <v-btn
+                color="teal"
+                small
+                dark
+                :to="'/chat/' + appuser.id"
+                class="mx-2"
+              >
+                Pesan
               </v-btn>
             </div>
-          </v-card>
-        </v-dialog>
-      </v-list-item>
-    </v-list>
-        
+
+            <v-dialog v-model="dialogInfo2" persistent max-width="500px">
+              <v-card>
+                <v-toolbar dark color="teal">
+                  <v-toolbar-title>Hubungi</v-toolbar-title>
+
+                  <div class="flex-grow-1"></div>
+
+                  <v-btn icon @click="dialogInfo2 = false">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                </v-toolbar>
+
+                <v-card-title>
+                  Tanyakan lebih lanjut kepada penjual
+                </v-card-title>
+
+                <div align="center">
+                  <v-btn tile color="white" class="mx-2">
+                    <a :href="'tel:' + appuser.nomor_hp">Telepon</a>
+                  </v-btn>
+
+                  <v-btn tile color="white" class="mx-2">
+                    <a :href="'sms:' + appuser.nomor_hp">SMS</a>
+                  </v-btn>
+
+                  <v-btn tile color="white" class="mx-2">
+                    <a
+                      :href="
+                        'https://api.whatsapp.com/send?phone=' +
+                        appuser.nomor_hp +
+                        '&text=Hai, saya dari aplikasi SiMotor'
+                      "
+                    >
+                      WhatsApp Now
+                    </a>
+                  </v-btn>
+                </div>
+              </v-card>
+            </v-dialog>
+          </v-list-item>
+        </v-list>
 
         <div class="text-h5 font-weight-bold">{{ hits.judul }}</div>
 
@@ -151,7 +157,9 @@
             inline
           ></star-rating>
           <v-icon>mdi-circle-medium</v-icon> -->
-          <span v-if="iklan.log_iklan_view > 0">{{ iklan.log_iklan_view }}x Dilihat</span>
+          <span v-if="iklan.log_iklan_view > 0">
+            {{ iklan.log_iklan_view }}x Dilihat
+          </span>
         </div>
 
         <v-divider class="mt-2"></v-divider>
@@ -210,8 +218,6 @@
 
     <v-divider></v-divider>
 
- 
-
     <v-divider></v-divider>
 
     <v-tabs v-model="tab" color="teal" slider-color="teal" show-arrows>
@@ -224,39 +230,37 @@
     <v-tabs-items v-model="tab">
       <v-tab-item>
         <v-card flat>
-        
-          <v-card-title class="font-weight-bold">Catatan & Kebijakan Penjual</v-card-title>
+          <v-card-title class="font-weight-bold">
+            Catatan & Kebijakan Penjual
+          </v-card-title>
 
-           
-            <v-row justify="center" >
-             <v-expansion-panels focusable inset>
-            <v-expansion-panel v-for="item in catatan" :key="item.id">
-              <v-expansion-panel-header>
-                <b>{{ item.judul }}</b>
-              </v-expansion-panel-header>
+          <v-row justify="center">
+            <v-expansion-panels focusable inset>
+              <v-expansion-panel v-for="item in catatan" :key="item.id">
+                <v-expansion-panel-header>
+                  <b>{{ item.judul }}</b>
+                </v-expansion-panel-header>
 
-              <v-expansion-panel-content>
-                <div v-html="item.deskripsi"></div>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
+                <v-expansion-panel-content>
+                  <div v-html="item.deskripsi"></div>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
 
-          <br />
+            <br />
 
-          <v-expansion-panels focusable inset v-if="kebijakan != undefined">
-            <v-expansion-panel>
-              <v-expansion-panel-header class="font-weight-bold">
-                Kebijakan:
-              </v-expansion-panel-header>
+            <v-expansion-panels focusable inset v-if="kebijakan != undefined">
+              <v-expansion-panel>
+                <v-expansion-panel-header class="font-weight-bold">
+                  Kebijakan:
+                </v-expansion-panel-header>
 
-              <v-expansion-panel-content>
-                <div v-html="kebijakan.deskripsi"></div>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
-            </v-row>
-
-         
+                <v-expansion-panel-content>
+                  <div v-html="kebijakan.deskripsi"></div>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+          </v-row>
         </v-card>
       </v-tab-item>
 
@@ -282,9 +286,9 @@
                     <v-list-item-title>Jumlah Motor</v-list-item-title>
                   </v-list-item-content>
 
-                  <v-list-item-action v-if="iklan.motor_bekas != undefined">{{
-                    iklan.motor_bekas.length
-                  }}</v-list-item-action>
+                  <v-list-item-action v-if="iklan.motor_bekas != undefined">
+                    {{ iklan.motor_bekas.length }}
+                  </v-list-item-action>
                 </v-list-item>
 
                 <v-divider></v-divider>
@@ -298,9 +302,9 @@
                     <v-list-item-title>Lokasi Motor</v-list-item-title>
                   </v-list-item-content>
 
-                  <v-list-item-action>{{
-                    unitMokas.lokasi
-                  }}</v-list-item-action>
+                  <v-list-item-action>
+                    {{ unitMokas.lokasi }}
+                  </v-list-item-action>
                 </v-list-item>
 
                 <v-divider></v-divider>
@@ -338,12 +342,13 @@
                 <v-list dense>
                   <v-list-item>
                     <v-list-item-content>
-                      <v-list-item-title
-                        >{{ item.merk }} {{ item.type }}</v-list-item-title
-                      >
-                      <v-list-item-subtitle>{{
-                        item.tahun
-                      }}</v-list-item-subtitle>
+                      <v-list-item-title>
+                        {{ item.merk }} {{ item.type }}
+                      </v-list-item-title>
+
+                      <v-list-item-subtitle>
+                        {{ item.tahun }}
+                      </v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -356,20 +361,23 @@
       <v-tab-item>
         <v-row class="d-flex align-center">
           <v-col cols="12" sm="6">
-             <v-card-title class="font-weight-bold">Deskripsi Iklan:</v-card-title>
+            <v-card-title class="font-weight-bold">
+              Deskripsi Iklan:
+            </v-card-title>
 
-          <v-card-text>{{ hits.deskripsi }}</v-card-text>
+            <v-card-text>{{ hits.deskripsi }}</v-card-text>
+
             <v-card class="d-flex justify-space-between align-center" flat>
-             
-          
               <v-card align="center">
-                
-                <v-card-subtitle class="teal accent-4 white--text"
-                  >Tanggal Mulai</v-card-subtitle
-                >
+                <v-card-subtitle class="teal accent-4 white--text">
+                  Tanggal Mulai
+                </v-card-subtitle>
+
                 <div>{{ hits.tanggal_mulai | dateFormat }}</div>
+
                 <div>{{ hits.tanggal_mulai | timeFormat }} {{ timezone }}</div>
               </v-card>
+
               <v-img
                 src="/img/icons/gradient.jpg"
                 width="100"
@@ -377,10 +385,12 @@
               ></v-img>
 
               <v-card align="center">
-                <v-card-subtitle class="red accent-4 white--text"
-                  >Tanggal Selesai</v-card-subtitle
-                >
+                <v-card-subtitle class="red accent-4 white--text">
+                  Tanggal Selesai
+                </v-card-subtitle>
+
                 <div>{{ hits.tanggal_selesai | dateFormat }}</div>
+
                 <div>
                   {{ hits.tanggal_selesai | timeFormat }} {{ timezone }}
                 </div>
@@ -421,12 +431,13 @@
                     (liveBid[0].IdAppUser == user.id ||
                       iklan.id_app_user == user.id)
                   "
-                  >{{
+                >
+                  {{
                     liveBid[0].IdAppUser == user.id
                       ? "Anda menang, klik disini"
                       : "Info Pemenang"
-                  }}</v-btn
-                >
+                  }}
+                </v-btn>
 
                 <v-dialog v-model="dialogInfo" persistent max-width="500px">
                   <v-card>
@@ -456,18 +467,19 @@
                         <a
                           :href="'/chat/' + iklan.id_app_user"
                           v-if="liveBid[0].IdAppUser == user.id"
-                          >Chat Penjual</a
                         >
+                          Chat Penjual
+                        </a>
                       </div>
-                      <a :href="'/chat/' + liveBid[0].IdAppUser" v-else
-                        >Chat Pemenang</a
-                      >
+                      <a :href="'/chat/' + liveBid[0].IdAppUser" v-else>
+                        Chat Pemenang
+                      </a>
                     </v-btn>
 
                     <v-btn value="center" tile color="white">
-                      <a :href="'/detail-transaksi/' + orders.id"
-                        >Detail Transaksi</a
-                      >
+                      <a :href="'/detail-transaksi/' + orders.id">
+                        Detail Transaksi
+                      </a>
                     </v-btn>
                   </v-card>
                 </v-dialog>
@@ -488,10 +500,10 @@
                   <v-list-item-title>Jenis Iklan</v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action
-                  >{{ iklan.mst_iklan_jenis }}
-                  {{ iklan.mst_iklan_type }}</v-list-item-action
-                >
+                <v-list-item-action>
+                  {{ iklan.mst_iklan_jenis }}
+                  {{ iklan.mst_iklan_type }}
+                </v-list-item-action>
               </v-list-item>
 
               <v-divider></v-divider>
@@ -505,9 +517,9 @@
                   <v-list-item-title>Tiket</v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action>{{
-                  iklan.jumlah_tiket > 0 ? "Ya" : "Tidak"
-                }}</v-list-item-action>
+                <v-list-item-action>
+                  {{ iklan.jumlah_tiket > 0 ? "Ya" : "Tidak" }}
+                </v-list-item-action>
               </v-list-item>
 
               <v-divider></v-divider>
@@ -521,9 +533,9 @@
                   <v-list-item-title>Jml Tiket</v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action>{{
-                  iklan.jumlah_tiket
-                }}</v-list-item-action>
+                <v-list-item-action>
+                  {{ iklan.jumlah_tiket }}
+                </v-list-item-action>
               </v-list-item>
             </v-list>
           </v-col>
@@ -539,12 +551,10 @@
                   <v-list-item-title>Harga Awal</v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action
-                  >Rp
-                  {{
-                    Number(iklan.harga_awal).toLocaleString("id-ID")
-                  }}</v-list-item-action
-                >
+                <v-list-item-action>
+                  Rp
+                  {{ Number(iklan.harga_awal).toLocaleString("id-ID") }}
+                </v-list-item-action>
               </v-list-item>
 
               <v-divider></v-divider>
@@ -558,12 +568,10 @@
                   <v-list-item-title>Kelipatan</v-list-item-title>
                 </v-list-item-content>
 
-                <v-list-item-action
-                  >Rp
-                  {{
-                    Number(iklan.kelipatan).toLocaleString("id-ID")
-                  }}</v-list-item-action
-                >
+                <v-list-item-action>
+                  Rp
+                  {{ Number(iklan.kelipatan).toLocaleString("id-ID") }}
+                </v-list-item-action>
               </v-list-item>
             </v-list>
           </v-col>
@@ -583,22 +591,22 @@
 
             <v-list-item-content>
               <v-list-item-title>
-                <span
-                  >Oleh:
+                <span>
+                  Oleh:
                   {{
                     !guest && user.id == item.IdAppUser ? "Anda" : item.IdUniq
-                  }}</span
-                >
+                  }}
+                </span>
               </v-list-item-title>
-              <v-list-item-subtitle>{{
-                item.CreatedAt.toDate() | datediff
-              }}</v-list-item-subtitle>
+              <v-list-item-subtitle>
+                {{ item.CreatedAt.toDate() | datediff }}
+              </v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
-              <v-chip color="red" dark
-                >Rp {{ Number(item.Bid).toLocaleString("id-ID") }}</v-chip
-              >
+              <v-chip color="red" dark>
+                Rp {{ Number(item.Bid).toLocaleString("id-ID") }}
+              </v-chip>
             </v-list-item-action>
           </v-list-item>
         </v-list>
@@ -647,12 +655,14 @@
             tetap terpakai untuk mengikuti iklan Tawar Bersama ini meskipun Anda
             tidak melakukan penawaran
           </div>
+
           <h2 class="text-center my-4 green--text">
             Jumlah tiket tersedia milik Anda: {{ totalTiket.tersedia }} Tiket
           </h2>
-          <v-btn block color="primary" class="my-4" @click="konfirmasiTiket"
-            >Gunakan Tiket Anda</v-btn
-          >
+
+          <v-btn block color="primary" class="my-4" @click="konfirmasiTiket">
+            Gunakan Tiket Anda
+          </v-btn>
         </v-container>
 
         <v-container fluid v-if="noTiket">
@@ -664,9 +674,9 @@
             <br />Apakah Anda setuju?
           </div>
 
-          <v-btn block color="success" class="my-4" @click="konfirmasiNonTiket"
-            >Setuju, mengikuti Tawar Bersama</v-btn
-          >
+          <v-btn block color="success" class="my-4" @click="konfirmasiNonTiket">
+            Setuju, mengikuti Tawar Bersama
+          </v-btn>
         </v-container>
 
         <v-list v-if="ikutPenawaran">
@@ -723,9 +733,9 @@
           </v-list-item>
 
           <v-list-item>
-            <v-btn block dark color="teal" @click="bidding"
-              >Konfirmasi Penawaran</v-btn
-            >
+            <v-btn block dark color="teal" @click="bidding">
+              Konfirmasi Penawaran
+            </v-btn>
           </v-list-item>
         </v-list>
       </v-sheet>
@@ -740,8 +750,9 @@
             dark
             @click="terjual"
             v-if="iklan.id_mst_iklan_status != 2"
-            >Set Iklan Terjual</v-btn
           >
+            Set Iklan Terjual
+          </v-btn>
         </div>
       </div>
     </div>
@@ -808,8 +819,8 @@ export default {
       appuser: [],
       title: "",
       loading: true,
-      catatan:[],
-      kebijakan:[]
+      catatan: [],
+      kebijakan: [],
     };
   },
   methods: {
@@ -964,11 +975,11 @@ export default {
           console.log(responses.api_message);
         });
     },
-       getCatatan() {
+    getCatatan() {
       this.axios
         .get("/user/v3/user/catatan_penjual", {
           params: {
-            id_app_user: this.appuser.id,
+            id_app_user: this.user.id,
             type_catatan: 2,
           },
           headers: { Authorization: "Bearer " + this.user.token },
@@ -986,7 +997,7 @@ export default {
       this.axios
         .get("/user/v3/user/catatan_penjual", {
           params: {
-            id_app_user: this.appuser.id,
+            id_app_user: this.user.id,
             type_catatan: 1,
           },
           headers: { Authorization: "Bearer " + this.user.token },

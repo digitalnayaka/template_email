@@ -15,7 +15,6 @@
         dark
         slider-color="yellow"
         show-arrows
-        
       >
         <v-tab>Kotak Masuk Penilaian</v-tab>
         <v-tab>Penilaian Pembeli</v-tab>
@@ -29,159 +28,146 @@
             v-for="item in notReview"
             :key="item.id"
           >
-            <div class="d-flex justify-space-between grey lighten-3 pa-2">
-              <div>
-                {{ item.app_user_name_pembeli }}
-              </div>
-            </div>
-
-            <v-divider></v-divider>
-
             <v-row no-gutters>
-              <v-col cols="12" sm="6">
-                <v-list>
-                  <v-list-item>
-                    <v-list-item-avatar tile size="70">
-                      <v-img :src="getImage(item.foto_iklan)" contain></v-img>
-                    </v-list-item-avatar>
+              <v-col cols="12" sm="2">
+                <div class="pa-2" align="center">
+                  <v-img
+                    :src="getImage(item.foto_iklan)"
+                    contain
+                    max-width="250"
+                    max-height="150"
+                  ></v-img>
 
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        <a :href="'/iklan/' + item.id_iklan">
-                          {{ item.judul_iklan }}
-                        </a>
-                      </v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
+                  <a :href="'/iklan/' + item.id_iklan">
+                    {{ item.judul_iklan }}
+                  </a>
+                </div>
+              </v-col>
 
-                <v-divider></v-divider>
+              <v-col cols="12" sm="10" class="d-flex">
+                <v-divider vertical></v-divider>
 
-                <v-row no-gutters>
-                  <v-col cols="6" align="center">
-                    <div>Penilaian <b>Pembeli:</b></div>
+                <div class="flex-column flex-grow-1">
+                  <v-list>
+                    <v-list-item>
+                      <v-list-item-avatar tile>
+                        <v-icon v-if="item.app_user_foto_pembeli == ''">
+                          mdi-account-circle
+                        </v-icon>
 
-                    <div class="d-flex justify-center">
-                      <div class="flex-column">
-                        <div v-if="item.ratting_user == 1">
-                          <v-icon x-large color="red">
+                        <v-img
+                          :src="getImage(item.app_user_foto_pembeli)"
+                          v-else
+                        ></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          {{ item.app_user_name_pembeli }}
+                        </v-list-item-title>
+
+                        <v-list-item-subtitle>
+                          <span class="cyan pa-1 white--text text-caption mr-1">
+                            Pembeli
+                          </span>
+
+                          <v-icon color="red" v-if="item.ratting_user == 1">
                             mdi-emoticon-angry-outline
                           </v-icon>
 
-                          <div>Kecewa</div>
-                        </div>
-
-                        <div v-if="item.ratting_user == 2">
-                          <v-icon x-large color="orange">
+                          <v-icon color="orange" v-if="item.ratting_user == 2">
                             mdi-emoticon-neutral-outline
                           </v-icon>
 
-                          <div>Netral</div>
-                        </div>
-
-                        <div v-if="item.ratting_user == 3">
-                          <v-icon x-large color="teal">
+                          <v-icon color="teal" v-if="item.ratting_user == 3">
                             mdi-emoticon-happy-outline
                           </v-icon>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
 
-                          <div>Puas</div>
-                        </div>
-                      </div>
+                  <div class="mx-4">
+                    <v-icon
+                      color="yellow"
+                      v-for="n in item.ratting_iklan"
+                      :key="n"
+                    >
+                      mdi-star
+                    </v-icon>
+
+                    <div>{{ item.review }}</div>
+
+                    <div
+                      v-viewer="{ movable: false }"
+                      class="d-flex flex-wrap mt-2"
+                    >
+                      <v-card flat class="mx-1" v-if="item.foto_1 != ''">
+                        <img
+                          :src="getImage(item.foto_1)"
+                          contain
+                          width="130"
+                          height="80"
+                          style="cursor: pointer"
+                        />
+                      </v-card>
+
+                      <v-card flat class="mx-1" v-if="item.foto_2 != ''">
+                        <img
+                          :src="getImage(item.foto_2)"
+                          contain
+                          width="130"
+                          height="80"
+                          style="cursor: pointer"
+                        />
+                      </v-card>
+
+                      <v-card flat class="mx-1" v-if="item.foto_3 != ''">
+                        <img
+                          :src="getImage(item.foto_3)"
+                          contain
+                          width="130"
+                          height="80"
+                          style="cursor: pointer"
+                        />
+                      </v-card>
+
+                      <v-card flat class="mx-1" v-if="item.foto_4 != ''">
+                        <img
+                          :src="getImage(item.foto_4)"
+                          contain
+                          width="130"
+                          height="80"
+                          style="cursor: pointer"
+                        />
+                      </v-card>
+
+                      <v-card flat class="mx-1" v-if="item.foto_5 != ''">
+                        <img
+                          :src="getImage(item.foto_5)"
+                          contain
+                          width="130"
+                          height="80"
+                          style="cursor: pointer"
+                        />
+                      </v-card>
                     </div>
-                  </v-col>
-
-                  <v-col cols="6" class="d-flex">
-                    <v-divider vertical></v-divider>
-
-                    <div class="d-flex mx-2">
-                      <div class="flex-column">
-                        <div>Rating <b>Pembeli:</b></div>
-
-                        <div class="d-flex align-center">
-                          <v-icon x-large color="yellow">mdi-star</v-icon>
-                          <div class="text-h3">{{ item.ratting_iklan }}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </v-col>
-                </v-row>
-              </v-col>
-
-              <v-col cols="12" sm="6" class="d-flex">
-                <v-divider vertical></v-divider>
-
-                <div class="ma-2 flex-grow-1">
-                  <div>Ulasan <b>Pembeli:</b></div>
-
-                  <div>{{ item.review }}</div>
-
-                  <div
-                    v-viewer="{ movable: false }"
-                    class="d-flex flex-wrap mt-2"
-                  >
-                    <v-card flat class="mx-1" v-if="item.foto_1 != ''">
-                      <img
-                        :src="getImage(item.foto_1)"
-                        contain
-                        width="130"
-                        height="80"
-                        style="cursor: pointer"
-                      />
-                    </v-card>
-
-                    <v-card flat class="mx-1" v-if="item.foto_2 != ''">
-                      <img
-                        :src="getImage(item.foto_2)"
-                        contain
-                        width="130"
-                        height="80"
-                        style="cursor: pointer"
-                      />
-                    </v-card>
-
-                    <v-card flat class="mx-1" v-if="item.foto_3 != ''">
-                      <img
-                        :src="getImage(item.foto_3)"
-                        contain
-                        width="130"
-                        height="80"
-                        style="cursor: pointer"
-                      />
-                    </v-card>
-
-                    <v-card flat class="mx-1" v-if="item.foto_4 != ''">
-                      <img
-                        :src="getImage(item.foto_4)"
-                        contain
-                        width="130"
-                        height="80"
-                        style="cursor: pointer"
-                      />
-                    </v-card>
-
-                    <v-card flat class="mx-1" v-if="item.foto_5 != ''">
-                      <img
-                        :src="getImage(item.foto_5)"
-                        contain
-                        width="130"
-                        height="80"
-                        style="cursor: pointer"
-                      />
-                    </v-card>
                   </div>
+
+                  <v-divider></v-divider>
 
                   <v-btn
                     color="teal"
                     dark
                     small
-                    class="mb-2"
+                    class="ma-4"
                     @click="selected = item"
                     v-if="selected.length == 0"
                   >
                     Balas Ulasan
                   </v-btn>
 
-                  <div v-if="selected.id == item.id">
+                  <div class="ma-4" v-if="selected.id == item.id">
                     <v-textarea
                       v-model="reply"
                       placeholder="Tulis deskripsi Anda mengenai produk ini..."
@@ -220,148 +206,160 @@
             v-for="item in ulasanSaya"
             :key="item.id"
           >
-            <div class="d-flex justify-space-between grey lighten-3 pa-2">
-              <div>
-                {{ item.app_user_name_pembeli }}
-              </div>
-            </div>
-
-            <v-divider></v-divider>
-
             <v-row no-gutters>
-              <v-col cols="12" sm="6">
-                <v-list>
-                  <v-list-item>
-                    <v-list-item-avatar tile size="70">
-                      <v-img :src="getImage(item.foto_iklan)" contain></v-img>
-                    </v-list-item-avatar>
+              <v-col cols="12" sm="2">
+                <div class="pa-2" align="center">
+                  <v-img
+                    :src="getImage(item.foto_iklan)"
+                    contain
+                    max-width="250"
+                    max-height="150"
+                  ></v-img>
 
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        <a :href="'/iklan/' + item.id_iklan">
-                          {{ item.judul_iklan }}
-                        </a>
-                      </v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
+                  <a :href="'/iklan/' + item.id_iklan">
+                    {{ item.judul_iklan }}
+                  </a>
+                </div>
+              </v-col>
 
-                <v-divider></v-divider>
+              <v-col cols="12" sm="10" class="d-flex">
+                <v-divider vertical></v-divider>
 
-                <v-row no-gutters>
-                  <v-col cols="6" align="center">
-                    <div>Penilaian <b>Pembeli:</b></div>
+                <div class="flex-column flex-grow-1">
+                  <v-list>
+                    <v-list-item>
+                      <v-list-item-avatar tile>
+                        <v-icon v-if="item.app_user_foto_pembeli == ''">
+                          mdi-account-circle
+                        </v-icon>
 
-                    <div class="d-flex justify-center">
-                      <div class="flex-column">
-                        <div v-if="item.ratting_user == 1">
-                          <v-icon x-large color="red">
+                        <v-img
+                          :src="getImage(item.app_user_foto_pembeli)"
+                          v-else
+                        ></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          {{ item.app_user_name_pembeli }}
+                        </v-list-item-title>
+
+                        <v-list-item-subtitle>
+                          <span class="cyan pa-1 white--text text-caption mr-1">
+                            Pembeli
+                          </span>
+
+                          <v-icon color="red" v-if="item.ratting_user == 1">
                             mdi-emoticon-angry-outline
                           </v-icon>
 
-                          <div>Kecewa</div>
-                        </div>
-
-                        <div v-if="item.ratting_user == 2">
-                          <v-icon x-large color="orange">
+                          <v-icon color="orange" v-if="item.ratting_user == 2">
                             mdi-emoticon-neutral-outline
                           </v-icon>
 
-                          <div>Netral</div>
-                        </div>
-
-                        <div v-if="item.ratting_user == 3">
-                          <v-icon x-large color="teal">
+                          <v-icon color="teal" v-if="item.ratting_user == 3">
                             mdi-emoticon-happy-outline
                           </v-icon>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
 
-                          <div>Puas</div>
-                        </div>
-                      </div>
+                  <div class="mx-4">
+                    <v-icon
+                      color="yellow"
+                      v-for="n in item.ratting_iklan"
+                      :key="n"
+                    >
+                      mdi-star
+                    </v-icon>
+
+                    <div>{{ item.review }}</div>
+
+                    <div
+                      v-viewer="{ movable: false }"
+                      class="d-flex flex-wrap mt-2"
+                    >
+                      <v-card flat class="mx-1" v-if="item.foto_1 != ''">
+                        <img
+                          :src="getImage(item.foto_1)"
+                          contain
+                          width="130"
+                          height="80"
+                          style="cursor: pointer"
+                        />
+                      </v-card>
+
+                      <v-card flat class="mx-1" v-if="item.foto_2 != ''">
+                        <img
+                          :src="getImage(item.foto_2)"
+                          contain
+                          width="130"
+                          height="80"
+                          style="cursor: pointer"
+                        />
+                      </v-card>
+
+                      <v-card flat class="mx-1" v-if="item.foto_3 != ''">
+                        <img
+                          :src="getImage(item.foto_3)"
+                          contain
+                          width="130"
+                          height="80"
+                          style="cursor: pointer"
+                        />
+                      </v-card>
+
+                      <v-card flat class="mx-1" v-if="item.foto_4 != ''">
+                        <img
+                          :src="getImage(item.foto_4)"
+                          contain
+                          width="130"
+                          height="80"
+                          style="cursor: pointer"
+                        />
+                      </v-card>
+
+                      <v-card flat class="mx-1" v-if="item.foto_5 != ''">
+                        <img
+                          :src="getImage(item.foto_5)"
+                          contain
+                          width="130"
+                          height="80"
+                          style="cursor: pointer"
+                        />
+                      </v-card>
                     </div>
-                  </v-col>
-
-                  <v-col cols="6" class="d-flex">
-                    <v-divider vertical></v-divider>
-
-                    <div class="d-flex mx-2">
-                      <div class="flex-column">
-                        <div>Rating <b>Pembeli:</b></div>
-
-                        <div class="d-flex align-center">
-                          <v-icon x-large color="yellow">mdi-star</v-icon>
-                          <div class="text-h3">{{ item.ratting_iklan }}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </v-col>
-                </v-row>
-              </v-col>
-
-              <v-col cols="12" sm="6" class="d-flex">
-                <v-divider vertical></v-divider>
-
-                <div class="ma-2 flex-grow-1">
-                  <div>Ulasan <b>Pembeli:</b></div>
-
-                  <div>{{ item.review }}</div>
-
-                  <div
-                    v-viewer="{ movable: false }"
-                    class="d-flex flex-wrap mt-2"
-                  >
-                    <v-card flat class="mx-1" v-if="item.foto_1 != ''">
-                      <img
-                        :src="getImage(item.foto_1)"
-                        contain
-                        width="130"
-                        height="80"
-                        style="cursor: pointer"
-                      />
-                    </v-card>
-
-                    <v-card flat class="mx-1" v-if="item.foto_2 != ''">
-                      <img
-                        :src="getImage(item.foto_2)"
-                        contain
-                        width="130"
-                        height="80"
-                        style="cursor: pointer"
-                      />
-                    </v-card>
-
-                    <v-card flat class="mx-1" v-if="item.foto_3 != ''">
-                      <img
-                        :src="getImage(item.foto_3)"
-                        contain
-                        width="130"
-                        height="80"
-                        style="cursor: pointer"
-                      />
-                    </v-card>
-
-                    <v-card flat class="mx-1" v-if="item.foto_4 != ''">
-                      <img
-                        :src="getImage(item.foto_4)"
-                        contain
-                        width="130"
-                        height="80"
-                        style="cursor: pointer"
-                      />
-                    </v-card>
-
-                    <v-card flat class="mx-1" v-if="item.foto_5 != ''">
-                      <img
-                        :src="getImage(item.foto_5)"
-                        contain
-                        width="130"
-                        height="80"
-                        style="cursor: pointer"
-                      />
-                    </v-card>
                   </div>
 
-                  <div>Ulasan <b>Saya:</b></div>
+                  <v-divider></v-divider>
+
+                  <v-list>
+                    <v-list-item>
+                      <v-list-item-avatar tile>
+                        <v-icon v-if="item.app_user_foto_penjual == ''">
+                          mdi-account-circle
+                        </v-icon>
+
+                        <v-img
+                          :src="getImage(item.app_user_foto_penjual)"
+                          v-else
+                        ></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          {{ item.app_user_name_penjual }}
+                        </v-list-item-title>
+
+                        <v-list-item-subtitle>
+                          <span class="red pa-1 white--text text-caption mr-1">
+                            Penjual
+                          </span>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
 
                   <div>{{ item.Reply }}</div>
                 </div>
@@ -371,60 +369,12 @@
         </v-tab-item>
       </v-tabs-items>
     </v-card>
-
-    <!-- <div>
-      <div class="display-1 font-weight-bold text-center">Rating Anda</div>
-      <div class="display-1 font-weight-bold text-center">
-        4.5 / 5.0
-        <v-icon>mdi-star-outline</v-icon>
-      </div>
-      <br />
-
-      <v-card outlined width="500" height="200">
-        <v-list>
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-img src="/img/profile.png"></v-img>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title>oleh: xxxx</v-list-item-title>
-              <v-list-item-subtitle>
-                <v-icon>mdi-star-outline</v-icon>
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item-content class="text-center">
-            <v-row>
-              <v-col cols="6">
-                <v-list-item-content>
-                  <v-list-item-title>
-                    <v-list-item-avatar tile size="100">
-                      <v-img src="/img/vario.png"></v-img>
-                    </v-list-item-avatar>
-                  </v-list-item-title>
-                  <v-list-item-title>28 sept 2020</v-list-item-title>
-                </v-list-item-content>
-              </v-col>
-
-              <v-col cols="6">
-                <v-list-item-title class="font-weight-bold">Judul Iklan</v-list-item-title>
-                <v-list-item-subtitle>
-                  Lorem Ipsum is simply dummy
-                  text of the printing and typesetting....
-                </v-list-item-subtitle>
-                <v-btn outlined color="primary">balas</v-btn>
-              </v-col>
-            </v-row>
-          </v-list-item-content>
-        </v-list>
-      </v-card>
-    </div> -->
   </v-card>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import moment from "moment-timezone";
 import "viewerjs/dist/viewer.css";
 import Viewer from "v-viewer";
 import Vue from "vue";
@@ -432,6 +382,7 @@ Vue.use(Viewer);
 
 export default {
   name: "buyer-review",
+  props: ["utc", "timezone"],
   data: () => ({
     tab: 0,
     review: [],
@@ -559,6 +510,11 @@ export default {
   created() {
     this.getReview();
     this.myReview();
+  },
+  filters: {
+    dateTimeFormat: (date, utc) => {
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY, HH:mm");
+    },
   },
 };
 </script>
