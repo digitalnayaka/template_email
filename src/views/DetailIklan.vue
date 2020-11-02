@@ -864,9 +864,6 @@ export default {
           this.hits = hits[0]._source;
           this.getUser(this.hits.id_app_user);
           this.unit_mokas(this.hits.unit_motor_bekas[0].id);
-          this.getCatatan();
-          this.getKebijakan();
-          this.reviewAvg();
           if (this.hits.id_mst_iklan_jenis == 1) {
             this.getHP(this.id);
           } else {
@@ -1332,6 +1329,10 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.appuser = data[0];
+
+          this.getCatatan();
+          this.getKebijakan();
+          this.reviewAvg();
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -1347,7 +1348,7 @@ export default {
         })
         .then((response) => {
           let { data } = response.data;
-          this.avg = data;
+          this.avg = data[0];
         })
         .catch((error) => {
           let responses = error.response.data;
