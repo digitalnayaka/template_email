@@ -40,9 +40,13 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <v-list-item-subtitle>Tawar Bersama {{ item.type }}</v-list-item-subtitle>
+                      <v-list-item-subtitle
+                        >Tawar Bersama {{ item.type }}</v-list-item-subtitle
+                      >
 
-                      <v-list-item-title class="teal--text font-weight-bold">{{ item.judul }}</v-list-item-title>
+                      <v-list-item-title class="teal--text font-weight-bold">{{
+                        item.judul
+                      }}</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -52,9 +56,13 @@
                 <v-list>
                   <v-list-item>
                     <v-list-item-content>
-                      <v-list-item-title v-if="item.id_mst_status_pemenang == 1">Tawaran anda</v-list-item-title>
+                      <v-list-item-title v-if="item.id_mst_status_pemenang == 1"
+                        >Tawaran anda</v-list-item-title
+                      >
 
-                      <v-list-item-title v-if="item.id_mst_status_pemenang == 3">Tawaran saat ini</v-list-item-title>
+                      <v-list-item-title v-if="item.id_mst_status_pemenang == 3"
+                        >Tawaran saat ini</v-list-item-title
+                      >
 
                       <v-list-item-subtitle>
                         Rp
@@ -74,12 +82,16 @@
               <div
                 class="pa-2 text-center teal--text"
                 v-if="item.id_mst_status_pemenang == 1"
-              >{{ item.status_all.status_aktivitas }}</div>
+              >
+                {{ item.status_all.status_aktivitas }}
+              </div>
 
               <div
                 class="pa-2 text-center red--text"
                 v-if="item.id_mst_status_pemenang == 3"
-              >{{ item.status_all.status_aktivitas }}</div>
+              >
+                {{ item.status_all.status_aktivitas }}
+              </div>
             </v-col>
 
             <v-col cols="12" sm="6">
@@ -89,7 +101,8 @@
                 dark
                 @click="getBid(item)"
                 v-if="item.id_mst_status_pemenang == 1"
-              >Tingkatkan tawaran</v-btn>
+                >Tingkatkan tawaran</v-btn
+              >
 
               <v-btn
                 block
@@ -97,7 +110,8 @@
                 dark
                 @click="getBid(item)"
                 v-if="item.id_mst_status_pemenang == 3"
-              >Tingkatkan tawaran</v-btn>
+                >Tingkatkan tawaran</v-btn
+              >
             </v-col>
           </v-row>
         </v-card>
@@ -107,7 +121,9 @@
             <v-list>
               <v-list-item>
                 <v-list-item-content>
-                  <flip-countdown :deadline="selected.tanggal_selesai | dateTimeFormat(utc)"></flip-countdown>
+                  <flip-countdown
+                    :deadline="selected.tanggal_selesai | dateTimeFormat(utc)"
+                  ></flip-countdown>
                 </v-list-item-content>
               </v-list-item>
 
@@ -141,9 +157,10 @@
                 <v-list-item-content align="center">
                   <v-list-item-subtitle>Nominal Penawaran</v-list-item-subtitle>
 
-                  <v-list-item-title
-                    class="font-weight-black"
-                  >Rp {{ Number(bid).toLocaleString("id-ID") }}</v-list-item-title>
+                  <v-list-item-title class="font-weight-black"
+                    >Rp
+                    {{ Number(bid).toLocaleString("id-ID") }}</v-list-item-title
+                  >
                 </v-list-item-content>
 
                 <v-list-item-action>
@@ -154,7 +171,9 @@
               </v-list-item>
 
               <v-list-item>
-                <v-btn block dark color="teal" @click="bidding">Konfirmasi Penawaran</v-btn>
+                <v-btn block dark color="teal" @click="bidding"
+                  >Konfirmasi Penawaran</v-btn
+                >
               </v-list-item>
             </v-list>
           </v-sheet>
@@ -185,26 +204,38 @@
                 <v-list-item-group color="primary" mandatory>
                   <v-list-item @click="doFilter(null)">
                     <v-list-item-icon>
-                      <v-icon>mdi-eye</v-icon>
+                       <v-avatar size="25" item>
+                      <v-img src="/img/icons/semua.png"></v-img>
+                       </v-avatar>
                     </v-list-item-icon>
 
-                    <v-list-item-subtitle class="text-caption">Semua</v-list-item-subtitle>
+                    <v-list-item-subtitle class="text-caption"
+                      >Semua</v-list-item-subtitle
+                    >
                   </v-list-item>
 
                   <v-list-item @click="doFilter(true)">
                     <v-list-item-icon>
-                      <v-icon>mdi-cash</v-icon>
+                      <v-avatar size="25" item>
+                        <v-img src="/img/icons/menang.png"></v-img>
+                      </v-avatar>
                     </v-list-item-icon>
 
-                    <v-list-item-subtitle class="text-caption">Anda Menang</v-list-item-subtitle>
+                    <v-list-item-subtitle class="text-caption"
+                      >Anda Menang</v-list-item-subtitle
+                    >
                   </v-list-item>
 
                   <v-list-item @click="doFilter(false)">
                     <v-list-item-icon>
-                      <v-icon>mdi-cash-remove</v-icon>
+                      <v-avatar size="25" item>
+                        <v-img src="/img/icons/kalah.png"></v-img>
+                      </v-avatar>
                     </v-list-item-icon>
 
-                    <v-list-item-subtitle class="text-caption">Anda Kalah</v-list-item-subtitle>
+                    <v-list-item-subtitle class="text-caption"
+                      >Anda Kalah</v-list-item-subtitle
+                    >
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
@@ -226,7 +257,9 @@
 
               <v-spacer></v-spacer>
 
-              <div>{{ item.tanggal_selesai | dateTimeFormat(utc) }} {{ timezone }}</div>
+              <div>
+                {{ item.tanggal_selesai | dateTimeFormat(utc) }} {{ timezone }}
+              </div>
             </v-toolbar>
 
             <v-row align="center" no-gutters>
@@ -238,9 +271,13 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <v-list-item-subtitle>Tawar Bersama {{ item.type }}</v-list-item-subtitle>
+                      <v-list-item-subtitle
+                        >Tawar Bersama {{ item.type }}</v-list-item-subtitle
+                      >
 
-                      <v-list-item-title class="teal--text font-weight-bold">{{ item.judul }}</v-list-item-title>
+                      <v-list-item-title class="teal--text font-weight-bold">{{
+                        item.judul
+                      }}</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -270,13 +307,16 @@
               <div
                 class="pa-2 text-center teal--text font-weight-bold"
                 v-if="item.id_mst_status_pemenang == 2"
-              >{{ item.status_all.status_aktivitas }}</div>
+              >
+                {{ item.status_all.status_aktivitas }}
+              </div>
 
               <div
                 class="pa-2 text-center red--text font-weight-bold"
                 v-if="item.id_mst_status_pemenang == 4"
-              >{{ item.status_all.status_aktivitas }}</div>
-              
+              >
+                {{ item.status_all.status_aktivitas }}
+              </div>
             </v-col>
 
             <v-col cols="12" sm="6">
@@ -286,12 +326,18 @@
                 dark
                 @click="chat(item)"
                 v-if="item.id_mst_status_pemenang == 2"
-              >Hubungi Penjual</v-btn>
+                >Hubungi Penjual</v-btn
+              >
             </v-col>
           </v-row>
         </v-card>
 
-        <v-pagination v-model="page" @input="getTBSelesai" :length="lengthPage" :total-visible="5"></v-pagination>
+        <v-pagination
+          v-model="page"
+          @input="getTBSelesai"
+          :length="lengthPage"
+          :total-visible="5"
+        ></v-pagination>
       </v-tab-item>
 
       <!-- <v-tab-item>

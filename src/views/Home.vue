@@ -227,7 +227,7 @@
                   <v-list-item-content>
                    
                     <v-list-item-title >Tanggal: {{ item.publish_date | dateFormat }}</v-list-item-title>
-                    <v-list-item-subtitle> By: </v-list-item-subtitle>
+                    <!-- <v-list-item-subtitle> By: </v-list-item-subtitle> -->
                    <v-list-item-title class="font-weight-black"> {{ item.title }} </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>

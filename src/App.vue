@@ -457,7 +457,7 @@
 
                 <v-list dense>
                   <v-list-item href="/buy/order?id=0">
-                    <v-list-item-subtitle> Pembelian </v-list-item-subtitle>
+                    <v-list-item-subtitle> Transaksi </v-list-item-subtitle>
                   </v-list-item>
 
                   <v-list-item to="/favorite">
