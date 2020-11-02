@@ -42,10 +42,11 @@
           </template>
         </v-list-item-group> -->
         <v-tabs
-          v-model="tab2"
+          v-model="tab"
           grow
           slider-color="teal"
-          @change="content = false"
+          show-arrows
+          @change="getNotif"
         >
           <v-tab class="text-caption">Semua</v-tab>
           <v-tab class="text-caption">Iklan</v-tab>
@@ -53,8 +54,9 @@
           <v-tab class="text-caption">Unit</v-tab>
           <v-tab class="text-caption">Tiket</v-tab>
         </v-tabs>
-        <v-tabs-items v-model="tab2">
-          <v-tabs-item>
+
+        <v-tabs-items v-model="tab">
+          <v-tab-item>
             <v-list-item-group v-model="model" multiple>
               <template v-for="(item, i) in notif">
                 <v-list-item
@@ -103,12 +105,169 @@
                     </v-list-item-action-text>
                   </template>
                 </v-list-item>
-              </template> </v-list-item-group
-          ></v-tabs-item>
-          <v-tabs-item>llalal
-          </v-tabs-item>
+              </template>
+            </v-list-item-group>
+          </v-tab-item>
+
+          <v-tab-item>
+            <v-list-item-group v-model="model" multiple>
+              <template v-for="(item, i) in notif">
+                <v-list-item
+                  :key="i"
+                  @click="read(item.id, item.id_modul, item.id_data)"
+                  :value="item.is_read"
+                  active-class="deep-purple--text text--accent-4"
+                >
+                  <template v-slot:default="{ active }">
+                    <v-list-item-avatar>
+                      <v-img
+                        src="/img/icons/unit.png"
+                        v-if="item.id_modul == 4"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/transaksi.png"
+                        v-if="item.id_modul == 3"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/iklan.png"
+                        v-if="item.id_modul == 1"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/iklan.png"
+                        v-if="item.id_modul == 5"
+                      ></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.judul }}</v-list-item-title>
+
+                      <v-list-item-subtitle>{{
+                        item.deskripsi
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-action class="overline teal--text">{{
+                      item.created_at | dateFormat
+                    }}</v-list-item-action>
+
+                    <v-list-item-action-text style="display: none">
+                      <v-checkbox
+                        :input-value="active"
+                        color="deep-purple accent-4"
+                      ></v-checkbox>
+                    </v-list-item-action-text>
+                  </template>
+                </v-list-item>
+              </template>
+            </v-list-item-group>
+          </v-tab-item>
+
+          <v-tab-item>
+            <v-list-item-group v-model="model" multiple>
+              <template v-for="(item, i) in notif">
+                <v-list-item
+                  :key="i"
+                  @click="read(item.id, item.id_modul, item.id_data)"
+                  :value="item.is_read"
+                  active-class="deep-purple--text text--accent-4"
+                >
+                  <template v-slot:default="{ active }">
+                    <v-list-item-avatar>
+                      <v-img
+                        src="/img/icons/unit.png"
+                        v-if="item.id_modul == 4"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/transaksi.png"
+                        v-if="item.id_modul == 3"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/iklan.png"
+                        v-if="item.id_modul == 1"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/iklan.png"
+                        v-if="item.id_modul == 5"
+                      ></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.judul }}</v-list-item-title>
+
+                      <v-list-item-subtitle>{{
+                        item.deskripsi
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-action class="overline teal--text">{{
+                      item.created_at | dateFormat
+                    }}</v-list-item-action>
+
+                    <v-list-item-action-text style="display: none">
+                      <v-checkbox
+                        :input-value="active"
+                        color="deep-purple accent-4"
+                      ></v-checkbox>
+                    </v-list-item-action-text>
+                  </template>
+                </v-list-item>
+              </template>
+            </v-list-item-group>
+          </v-tab-item>
+
+          <v-tab-item>
+            <v-list-item-group v-model="model" multiple>
+              <template v-for="(item, i) in notif">
+                <v-list-item
+                  :key="i"
+                  @click="read(item.id, item.id_modul, item.id_data)"
+                  :value="item.is_read"
+                  active-class="deep-purple--text text--accent-4"
+                >
+                  <template v-slot:default="{ active }">
+                    <v-list-item-avatar>
+                      <v-img
+                        src="/img/icons/unit.png"
+                        v-if="item.id_modul == 4"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/transaksi.png"
+                        v-if="item.id_modul == 3"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/iklan.png"
+                        v-if="item.id_modul == 1"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/iklan.png"
+                        v-if="item.id_modul == 5"
+                      ></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.judul }}</v-list-item-title>
+
+                      <v-list-item-subtitle>{{
+                        item.deskripsi
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-action class="overline teal--text">{{
+                      item.created_at | dateFormat
+                    }}</v-list-item-action>
+
+                    <v-list-item-action-text style="display: none">
+                      <v-checkbox
+                        :input-value="active"
+                        color="deep-purple accent-4"
+                      ></v-checkbox>
+                    </v-list-item-action-text>
+                  </template>
+                </v-list-item>
+              </template>
+            </v-list-item-group>
+          </v-tab-item>
         </v-tabs-items>
-         
       </v-list>
 
       <v-pagination
@@ -137,27 +296,52 @@ import moment from "moment-timezone";
 export default {
   name: "notifikasi",
   data: () => ({
+    tab: 0,
+    modul: 0,
     notif: [],
+    notifIklan: [],
     model: [false],
     page: 1,
     lengthPage: 0,
     limit: 20,
     offset: 0,
     total: 0,
-    tab2: 0,
   }),
   methods: {
     getNotif() {
       var offset = (this.page - 1) * this.limit;
 
+      let params = new URLSearchParams();
+
+      params.set("id_user", this.user.id);
+      if (this.tab > 0) {
+        if (this.tab == 1) {
+          this.modul = 1;
+          params.set("id_modul", this.modul);
+        }
+        if (this.tab == 2) {
+          this.modul = 3;
+          params.set("id_modul", this.modul);
+        }
+        if (this.tab == 3) {
+          this.modul = 4;
+          params.set("id_modul", this.modul);
+        }
+        if (this.tab == 4) {
+          this.modul = 7;
+          params.set("id_modul", this.modul);
+        }
+      }
+      params.set("offset", offset);
+      params.set("limit", this.limit);
+
+      let request = {
+        params: params,
+        headers: { Authorization: "Bearer " + this.user.token },
+      };
+
       this.axios
-        .get("/log/v3/log/notifikasi", {
-          params: {
-            id_user: this.user.id,
-            offset: offset,
-            limit: this.limit,
-          },
-        })
+        .get("/log/v3/log/notifikasi", request)
         .then((response) => {
           let { data } = response;
           this.notif = data.data;
