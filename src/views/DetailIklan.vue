@@ -842,6 +842,8 @@ export default {
           this.hits = hits[0]._source;
           this.getUser(this.hits.id_app_user);
           this.unit_mokas(this.hits.unit_motor_bekas[0].id);
+          this.getCatatan();
+          this.getKebijakan();
           if (this.hits.id_mst_iklan_jenis == 1) {
             this.getHP(this.id);
           } else {
@@ -979,7 +981,7 @@ export default {
       this.axios
         .get("/user/v3/user/catatan_penjual", {
           params: {
-            id_app_user: this.user.id,
+            id_app_user: this.appuser.id,
             type_catatan: 2,
           },
           headers: { Authorization: "Bearer " + this.user.token },
@@ -997,7 +999,7 @@ export default {
       this.axios
         .get("/user/v3/user/catatan_penjual", {
           params: {
-            id_app_user: this.user.id,
+            id_app_user: this.appuser.id,
             type_catatan: 1,
           },
           headers: { Authorization: "Bearer " + this.user.token },
@@ -1321,8 +1323,6 @@ export default {
   created() {
     // this.$nextTick(() => {
     this.getDtlIklan();
-    this.getCatatan();
-    this.getKebijakan();
     // });
     this.GetBid();
     if (!this.guest) {
