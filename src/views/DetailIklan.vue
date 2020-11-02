@@ -55,10 +55,13 @@
         </div> -->
               </v-list-item-title>
               <v-list-item-subtitle>Penjual</v-list-item-subtitle>
-              <v-list-item-subtitle>
+              <v-list-item-title>
                 Slogan: {{ appuser.slogan }}
-              </v-list-item-subtitle>
-
+              </v-list-item-title>
+              <h5>Rating Penjual:  <v-avatar size="16" item>
+                    <v-img src="/img/icons/emoji_netral.png" alt="verified"></v-img>
+                  </v-avatar>Biasa</h5>
+              
               <div class="d-flex d-sm-none" v-if="!guest">
                 <v-btn
                   x-small
