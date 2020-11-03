@@ -57,29 +57,47 @@
 
               <v-list-item-subtitle>Penjual</v-list-item-subtitle>
 
-              <v-list-item-title>
+              <v-list-item-subtitle>
                 Slogan: {{ appuser.slogan }}
-              </v-list-item-title>
+              </v-list-item-subtitle>
 
               <h5>
                 Rating Penjual:
+
+                <!-- <v-icon color="red" v-if="avg.ratting_user == 1">
+                  mdi-emoticon-angry-outline
+                </v-icon> -->
+                <v-avatar size="16" item>
+                  <v-img
+                    src="/img/icons/emoji_tidakpuas.png"
+                    alt="rating"
+                    v-if="avg.ratting_user == 1"
+                  ></v-img>
+                </v-avatar>
+                <!-- <v-icon color="orange" v-if="avg.ratting_user == 2">
+                  mdi-emoticon-neutral-outline
+                </v-icon> -->
+                <v-avatar size="16" item>
+                  <v-img
+                    src="/img/icons/emoji_netral.png"
+                    alt="rating"
+                    v-if="avg.ratting_user == 2"
+                  ></v-img>
+                </v-avatar>
+
+                <v-avatar size="16" item>
+                  <v-img
+                    src="/img/icons/emoji_puas.png"
+                    alt="rating"
+                    v-if="avg.ratting_user == 3"
+                  ></v-img>
+                </v-avatar>
+              </h5>
+              <h5>
                 <v-icon color="yellow" v-for="n in avg.ratting_iklan" :key="n">
                   mdi-star
                 </v-icon>
-
-                <v-icon color="red" v-if="avg.ratting_user == 1">
-                  mdi-emoticon-angry-outline
-                </v-icon>
-
-                <v-icon color="orange" v-if="avg.ratting_user == 2">
-                  mdi-emoticon-neutral-outline
-                </v-icon>
-
-                <v-icon color="teal" v-if="avg.ratting_user == 3">
-                  mdi-emoticon-happy-outline
-                </v-icon>
               </h5>
-
               <div class="d-flex d-sm-none" v-if="!guest">
                 <v-btn
                   x-small

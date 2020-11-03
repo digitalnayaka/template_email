@@ -68,9 +68,13 @@
                   @click="toggle"
                   v-on:click="setPoint(item)"
                 >
-                  <v-icon x-large :color="active ? item.color : ''">
-                    {{ item.icon }}
-                  </v-icon>
+                 <v-img
+                      :src="item.img"
+                      contain
+                      :width="30"
+                      :height="30"
+                      v-on="on"
+                    ></v-img>
                 </v-btn>
               </v-item>
 
@@ -237,8 +241,14 @@
                   <span>Pilih Foto</span>
                 </v-tooltip>
               </label>
+              
             </image-uploader>
+            
           </div>
+          
+              <v-list-item-subtitle>
+               Silahkan bagikan foto produk Anda
+              </v-list-item-subtitle>
         </div>
       </v-col>
 
@@ -291,21 +301,21 @@ export default {
     points: [
       {
         id: 1,
-        icon: "mdi-emoticon-angry-outline",
+        img: "/img/icons/emoji_tidakpuas.png",
         color: "red",
         text: "Tidak Puas",
         point: -1,
       },
       {
         id: 2,
-        icon: "mdi-emoticon-neutral-outline",
+       img: "/img/icons/emoji_netral.png",
         color: "orange",
         text: "Netral",
         point: 1,
       },
       {
         id: 3,
-        icon: "mdi-emoticon-happy-outline",
+        img: "/img/icons/emoji_puas.png",
         color: "teal",
         text: "Puas",
         point: 2,
@@ -317,32 +327,32 @@ export default {
       {
         id: 1,
         foto: null,
-        previewUrl: "/img/icons/thumbnail/utama.png",
-        label: "Utama",
+        previewUrl: "/img/icons/camera.png",
+        label: "Foto 1",
       },
       {
         id: 2,
         foto: null,
-        previewUrl: "/img/icons/thumbnail/depan.png",
-        label: "Depan",
+        previewUrl: "/img/icons/camera.png",
+        label: "Foto 2",
       },
       {
         id: 3,
         foto: null,
-        previewUrl: "/img/icons/thumbnail/samping.png",
-        label: "Samping",
+        previewUrl: "/img/icons/camera.png",
+        label: "Foto 3",
       },
       {
         id: 4,
         foto: null,
-        previewUrl: "/img/icons/thumbnail/atas.png",
-        label: "Atas",
+        previewUrl: "/img/icons/camera.png",
+        label: "Foto 4",
       },
       {
         id: 5,
         foto: null,
-        previewUrl: "/img/icons/thumbnail/detail.png",
-        label: "Detail",
+        previewUrl: "/img/icons/camera.png",
+        label: "Foto 5",
       },
     ],
     hasImage: false,

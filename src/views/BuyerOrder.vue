@@ -31,7 +31,15 @@
               :value="tag.id"
               @click="filterStatus"
             >
+             <v-img
+                      :src="tag.img"
+                      contain
+                      :width="25"
+                      :height="25"
+                      v-on="on"
+                    ></v-img>
               {{ tag.text }}
+
               <span class="ml-1" v-if="tag.id == chip"
                 >({{ orders.length }})</span
               >
@@ -216,14 +224,14 @@ export default {
       tab: 0,
       chip: Number(this.$route.query.id),
       tags: [
-        { id: 0, text: "Semua" },
-        { id: 10, text: "Menunggu Persetujuan" },
-        { id: 1, text: "Menunggu Pembayaran" },
-        { id: 4, text: "Menunggu Verifikasi" },
-        { id: 6, text: "Ditolak" },
-        { id: 2, text: "Pembayaran Diverifikasi" },
-        { id: 5, text: "Dibatalkan" },
-        { id: 3, text: "Expired" },
+        { id: 0, img: "/img/icons/semua.png", text: "Semua" },
+        { id: 10, img: "/img/icons/menunggu_persetujuan.png", text: "Menunggu Persetujuan" },
+        { id: 1, img: "/img/icons/menunggu_pembayaran.png", text: "Menunggu Pembayaran" },
+        { id: 4, img: "/img/icons/menunggu_verifikasi.png", text: "Menunggu Verifikasi" },
+        { id: 6, img: "/img/icons/ditolak.png", text: "Ditolak" },
+        { id: 2, img: "/img/icons/pembayaran_diverifikasi.png",text: "Pembayaran Diverifikasi" },
+        { id: 5, img: "/img/icons/dibatalkan.png",text: "Dibatalkan" },
+        { id: 3, img: "/img/icons/expired.png", text: "Expired" },
       ],
       orders: [],
       page: 1,
