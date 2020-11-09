@@ -124,83 +124,6 @@
       <p class="display-2">Tidak ada data</p>
     </v-row>
 
-    <!-- <v-row justify="center">
-      <v-col cols="12" sm="6" align="center">
-        <v-img src="/img/app-min.png" width="280" contain></v-img>
-      </v-col>
-
-      <v-col cols="12" sm="6" align="center">
-        <v-img src="/img/mobilehand.png" width="92" contain></v-img>
-
-        <h2>Apa itu SiMotor?</h2>
-
-        <div class="text-justify">
-          Sepeda motor sudah menjadi gaya hidup atau lifestyle masyarakat di
-          Indonesia, benar nggak? Oleh karena itu, kebutuhan akan sepeda motor
-          juga meningkat dan kamu pasti ingin motor yang bagus dan berkualitas
-          kan? Disinilah SiMotor hadir sebagai jawaban. Beli motor jadi semakin
-          mudah, cepat, dan berkualitas.
-        </div>
-
-        <v-card class="d-inline-block mx-auto">
-          <v-container fluid>
-            <v-img src="/img/banner.png" contain></v-img>
-            <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
-
-            <a
-              href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
-              target="_blank"
-            >
-              <v-img
-                src="/img/playstore.png"
-                width="162"
-                href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
-                target="_blank"
-              ></v-img>
-            </a>
-          </v-container>
-        </v-card>
-      </v-col>
-    </v-row>-->
-
-    <!-- <v-container fluid>
-      <div align="center">
-        <v-img src="/img/icon.png" width="90"></v-img>
-
-        <h4>Apa aja fitur unggulan SiMotor?</h4>
-
-        <h2>Fitur SiMotor</h2>
-
-        <v-row>
-          <v-col cols="12" sm="6">
-            <h2>Harga Pas</h2>
-
-            <v-img src="/img/harga pas.png" width="120" contain></v-img>
-
-            <div class="text-justify">
-              Harga pas berguna banget untuk kamu yang nggak mau ribet menawar
-              unit. Kamu hanya perlu memilih unit motor yang kamu butuhkan lalu
-              segera hubungi penjual iklan unit tersebut.
-            </div>
-          </v-col>
-
-          <v-col cols="12" sm="6">
-            <h2>Tawar Bersama</h2>
-
-            <v-img
-              src="/img/tawar bersama (paketan).png"
-              width="120"
-              contain
-            ></v-img>
-
-            <div class="text-justify">
-              Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan
-              penawaran sehingga harga yang kamu dapat sesuai dengan isi dompet.
-            </div>
-          </v-col>
-        </v-row>
-      </div>
-    </v-container>-->
     <v-divider class="my-2"></v-divider>
 
     <v-card color="teal lighten-4 text-center">
@@ -240,13 +163,89 @@
         >
       </v-container>
     </v-card>
+    <v-row justify="center">
+      <v-col cols="12" sm="6" align="center">
+        <v-img src="/img/app-min.png" width="280" contain></v-img>
+      </v-col>
 
-    <v-btn bottom color="white" dark fab fixed right to="/bantuan">
+      <v-col cols="12" sm="6" align="center">
+        <v-img src="/img/mobilehand.png" width="92" contain></v-img>
+
+        <h2>Apa itu SiMotor?</h2>
+
+        <div class="text-justify">
+          Sepeda motor sudah menjadi gaya hidup atau lifestyle masyarakat di
+          Indonesia, benar nggak? Oleh karena itu, kebutuhan akan sepeda motor
+          juga meningkat dan kamu pasti ingin motor yang bagus dan berkualitas
+          kan? Disinilah SiMotor hadir sebagai jawaban. Beli motor jadi semakin
+          mudah, cepat, dan berkualitas.
+        </div>
+
+        <v-card class="d-inline-block mx-auto">
+          <v-container fluid>
+            <v-img src="/img/banner.png" contain></v-img>
+            <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
+
+            <a
+              href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
+              target="_blank"
+            >
+              <v-img
+                src="/img/playstore.png"
+                width="162"
+                href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
+                target="_blank"
+              ></v-img>
+            </a>
+          </v-container>
+        </v-card>
+      </v-col>
+    </v-row>
+<v-divider> </v-divider>
+    <v-container fluid>
+      <div align="center">
+        <v-img src="/img/icon.png" width="90"></v-img>
+
+        <h4>Apa aja fitur unggulan SiMotor?</h4>
+
+        <h2>Fitur SiMotor</h2>
+
+        <v-row>
+          <v-col cols="12" sm="6">
+            <h2>Harga Pas</h2>
+
+            <v-img src="/img/harga pas.png" width="120" contain></v-img>
+
+            <div class="text-justify">
+              Harga pas berguna banget untuk kamu yang nggak mau ribet menawar
+              unit. Kamu hanya perlu memilih unit motor yang kamu butuhkan lalu
+              segera hubungi penjual iklan unit tersebut.
+            </div>
+          </v-col>
+
+          <v-col cols="12" sm="6">
+            <h2>Tawar Bersama</h2>
+
+            <v-img
+              src="/img/tawar bersama (paketan).png"
+              width="120"
+              contain
+            ></v-img>
+
+            <div class="text-justify">
+              Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan
+              penawaran sehingga harga yang kamu dapat sesuai dengan isi dompet.
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
+    <v-btn bottom color="pink" dark fab fixed right to="/bantuan">
       <v-img
         to="/bantuan"
-        src="/img/icons/ic_bantuan.png"
-        width="50"
-        height="50"
+        src="/img/icons/bantuan.png"
+        width="100"
+        height="100"
         contain
       ></v-img>
     </v-btn>

@@ -61,7 +61,7 @@
 
           <v-item-group v-model="point" class="d-flex justify-center">
             <div class="flex-column" v-for="item in points" :key="item.id">
-              <v-item v-slot:default="{ active, toggle }" :value="item.id">
+              <v-item v-slot:default="{ toggle }" :value="item.id">
                 <v-btn
                   icon
                   class="mx-3"
