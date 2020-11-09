@@ -109,7 +109,7 @@ const routes = [
     }
   },
   {
-    path: '/refund-tiket',
+    path: '/refund-ticket',
     name: 'RefundTiket',
     component: () => import(/* webpackChunkName: "refund-tiket" */ '../views/RefundTiket.vue'),
     meta: {

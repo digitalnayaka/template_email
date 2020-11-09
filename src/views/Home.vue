@@ -24,7 +24,7 @@
     <v-row>
      <v-col cols="6" align="center" v-for="item in categories" :key="item.id">
         <v-card flat :to="'/category/' + item.route">
-          <v-img :src="item.image" width="500" height="150" contain></v-img>
+          <v-img :src="item.image" width="500" height="150" contain ></v-img>
           <h5>{{ item.name }}</h5>
         </v-card>
       </v-col>
@@ -126,22 +126,22 @@
 
     <v-divider class="my-2"></v-divider>
 
-    <v-card color="teal lighten-4 text-center">
+    <v-card color="teal lighten-4 text-center"  flat rounded>
       <v-container fluid>
         <h2>Artikel Terbaru</h2>
         <h4>Yuk cek artikel terbaru di SiMotor</h4>
         <br />
-        <v-row align="center" dense>
+        <v-row align="center" dense  justify="space-around">
           <v-col cols="6" sm="4" lg="2
           " v-for="item in artikel" :key="item.id">
-            <v-card outlined tile href="http://devlmu.com:333/" width="200">
+            <v-card flat class="rounded-lg" href="http://devlmu.com:333/" width="300">
               <div align="center">
                 <v-img
+                 class="rounded-lg"
                   align="center"
                   width="300"
                   height="200"
                   :src="getImage(item.cover_image)"
-                  
                 ></v-img>
               </div>
 
@@ -165,11 +165,11 @@
     </v-card>
     <v-row justify="center">
       <v-col cols="12" sm="6" align="center">
-        <v-img src="/img/app-min.png" width="280" contain></v-img>
+        <v-img src="/img/app-min.webp" width="280" contain></v-img>
       </v-col>
 
       <v-col cols="12" sm="6" align="center">
-        <v-img src="/img/mobilehand.png" width="92" contain></v-img>
+        <v-img src="/img/mobilehand.webp" width="92" contain></v-img>
 
         <h2>Apa itu SiMotor?</h2>
 
@@ -183,7 +183,7 @@
 
         <v-card class="d-inline-block mx-auto">
           <v-container fluid>
-            <v-img src="/img/banner.png" contain></v-img>
+            <v-img src="/img/banner.webp" contain></v-img>
             <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
 
             <a
@@ -204,7 +204,7 @@
 <v-divider> </v-divider>
     <v-container fluid>
       <div align="center">
-        <v-img src="/img/icon.png" width="90"></v-img>
+        <v-img src="/img/logo-sm.webp" width="90"></v-img>
 
         <h4>Apa aja fitur unggulan SiMotor?</h4>
 
@@ -214,7 +214,7 @@
           <v-col cols="12" sm="6">
             <h2>Harga Pas</h2>
 
-            <v-img src="/img/harga pas.png" width="120" contain></v-img>
+            <v-img src="/img/hargapas.webp" width="120" contain></v-img>
 
             <div class="text-justify">
               Harga pas berguna banget untuk kamu yang nggak mau ribet menawar
@@ -227,7 +227,7 @@
             <h2>Tawar Bersama</h2>
 
             <v-img
-              src="/img/tawar bersama (paketan).png"
+              src="/img/tawar bersama (paketan).webp"
               width="120"
               contain
             ></v-img>
@@ -267,7 +267,7 @@ export default {
     categories: [
       {
         id: 1,
-        image: "/img/icons/mokas2.png",
+        image: "/img/mokas2.webp",
         name: "Motor Bekas",
         route: "mokas",
       },
@@ -279,7 +279,7 @@ export default {
       // },
       {
         id: 3,
-        image: "/img/icons/tiket2.png",
+        image: "/img/tiket_tb.webp",
         name: "Tiket Tawar Bersama",
         route: "ticket",
       },

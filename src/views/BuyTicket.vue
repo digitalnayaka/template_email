@@ -21,8 +21,9 @@
         </v-btn>
       </v-app-bar>
     </div>
-
+  
     <div align="center">
+      
       <div class="text-h5 text-sm-h4">Dapatkan Tiket Tawar Bersama</div>
       <div>Silahkan pilih paket yang tersedia</div>
     </div>
@@ -50,7 +51,7 @@
             </v-list-item>
           </v-list>
 
-          <v-btn block color="teal" dark>Beli</v-btn>
+          <v-btn block color="teal" dark>Pilih</v-btn>
         </v-card>
       </v-col>
     </v-row>

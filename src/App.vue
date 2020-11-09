@@ -434,21 +434,23 @@
             <v-row no-gutters>
               <v-col cols="6">
                 <v-list dense>
+                  <v-list-item href="/garasi/manage-unit">
+                    <v-list-item-subtitle>Garasi</v-list-item-subtitle>
+                  </v-list-item>
+                    <v-list-item href="/toko/manage-ads">
+                    <v-list-item-subtitle>Iklan</v-list-item-subtitle>
+                  </v-list-item>
                   <v-list-item to="/garasi/add-unit">
                     <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
                   </v-list-item>
 
-                  <v-list-item href="/garasi/manage-unit">
-                    <v-list-item-subtitle>Garasi</v-list-item-subtitle>
-                  </v-list-item>
+                  
 
                   <v-list-item to="/toko/add-ads">
                     <v-list-item-subtitle>Tambah Iklan</v-list-item-subtitle>
                   </v-list-item>
 
-                  <v-list-item href="/toko/manage-ads">
-                    <v-list-item-subtitle>Daftar Iklan</v-list-item-subtitle>
-                  </v-list-item>
+                
                 </v-list>
               </v-col>
 

@@ -166,20 +166,9 @@ export default {
     menu2: 0,
     items: [
       {
-        id: 1,
-        icon: "mdi-account",
-        title: "Profile",
-        route: "/account/edit",
-      },
-      {
-        id: 2,
-        icon: "mdi-email-multiple",
-        title: "Kotak Masuk",
-        items: [
-          { id: 6, title: "Chat", route: "/chat-list" },
-          { id: 7, title: "Penilaian", route: "/product/review" },
-          { id: 8, title: "Notifikasi", route: "/notification" },
-        ],
+        id: 4,
+        icon: "mdi-currency-usd-circle",
+        title: "Penjual",
       },
       {
         id: 3,
@@ -190,10 +179,23 @@ export default {
           { id: 10, title: "Transaksi", route: "/buy/order" },
         ],
       },
+
       {
-        id: 4,
-        icon: "mdi-currency-usd-circle",
-        title: "Penjual",
+        id: 2,
+        icon: "mdi-email-multiple",
+        title: "Kotak Masuk",
+        items: [
+          { id: 6, title: "Chat", route: "/chat-list" },
+          { id: 7, title: "Penilaian", route: "/product/review" },
+          { id: 8, title: "Notifikasi", route: "/notification" },
+        ],
+      },
+
+      {
+        id: 1,
+        icon: "mdi-account",
+        title: "Akun",
+        route: "/account/edit",
       },
       {
         id: 5,

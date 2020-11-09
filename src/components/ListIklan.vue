@@ -1,11 +1,17 @@
 <template>
   <v-container fluid>
     <v-card
+      class="rounded-lg"
       outlined
       tile
       :href="'/iklan/' + item._source.id"
     >
-      <v-img :src="getThumb(item._source.photo)" height="230" contain>
+      <v-img
+        :src="getThumb(item._source.photo)"
+        height="230"
+        contain
+        class="rounded-lg"
+      >
         <v-card-title>
           <v-chip
             small

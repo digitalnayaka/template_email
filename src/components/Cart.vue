@@ -11,7 +11,7 @@
         <template v-for="(item, index) in carts">
           <v-list-item :key="'cart' + index">
             <v-list-item-avatar tile size="80">
-              <v-img src="/img/tiket.png"></v-img>
+              <v-img src="/img/icons/ic_tiket.png"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -63,7 +63,7 @@
                 :loading="loading"
                 :disabled="totalQuantity == 0"
               >
-                <v-icon>mdi-cart-arrow-right</v-icon>&nbsp; Bayar
+                <v-icon>mdi-cart-arrow-right</v-icon>&nbsp; Dapatkan
               </v-btn>
             </v-flex>
           </v-layout>
@@ -71,27 +71,35 @@
       </v-card>
 
       <div class="ma-2">
-        <div class="red--text">
+        <!-- <div class="red--text">
           (*Total harga akan ditambah 3 digit angka unik. Lakukan pembayaran
           sesuai dengan nominal yang tertera.)
-        </div>
+        </div> -->
 
         <div>
-          Setelah Anda melakukan pembayaran, tiket Anda akan masuk dalam waktu
+          Setelah Anda melakukan konfirmasi pembayaran, tiket Anda akan masuk dalam waktu
           2x24 jam.
         </div>
       </div>
 
-      <v-dialog v-model="dialog" width="250" persistent>
+      <v-dialog v-model="dialog" width="500" persistent>
         <v-card>
-          <v-container fluid>Apakah Anda yakin membeli paket ini?</v-container>
+          <v-container fluid
+            ><h3>Dapatkan Tiket Tawar Bersama</h3>
+            <v-card-subtitle class="font-weight-bold red--text" >
+              Masa berlaku tiket adalah 3 bulan dari tanggal pembelian tiket.
+            </v-card-subtitle>
+            <v-card-text>Apakah Anda yakin membeli paket ini?</v-card-text>
+          </v-container>
 
           <v-divider></v-divider>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="red" dark @click="dialog = false">Tidak</v-btn>
-            <v-btn color="primary" dark @click="buy" :loading="loading">Ya</v-btn>
+            <v-btn color="red" dark @click="dialog = false">Batalkan</v-btn>
+            <v-btn color="teal" dark @click="buy" :loading="loading"
+              >Lanjutkan</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-dialog>

@@ -244,6 +244,92 @@
               />
             </div>
           </v-col>
+          <div
+            class="teal--text"
+            align="center"
+            v-if="start == false && end == false"
+          >
+            Tawar Bersama segera dimulai:
+            <flip-countdown :deadline="hits.tanggal_mulai"></flip-countdown>
+          </div>
+
+          <div
+            class="teal--text"
+            align="center"
+            v-if="start == true && end == false"
+          >
+            Tawar Bersama berlangsung:
+            <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
+          </div>
+
+          <div align="center" v-if="start == true && end == true">
+            <h2 class="teal--text">Tawar Bersama selesai</h2>
+
+            <div v-if="!guest">
+              <v-btn
+                color="teal"
+                dark
+                @click="dialogInfo = true"
+                class="mx-2"
+                v-if="
+                  liveBid.length > 0 &&
+                  (liveBid[0].IdAppUser == user.id ||
+                    iklan.id_app_user == user.id)
+                "
+              >
+                {{
+                  liveBid[0].IdAppUser == user.id
+                    ? "Anda menang, klik disini"
+                    : "Info Pemenang"
+                }}
+              </v-btn>
+
+              <v-dialog v-model="dialogInfo" persistent max-width="500px">
+                <v-card>
+                  <v-toolbar color="teal darken-3" dark>
+                    <v-toolbar-title>Info Pemenang Iklan</v-toolbar-title>
+
+                    <div class="flex-grow-1"></div>
+
+                    <v-btn icon @click="dialogInfo = false">
+                      <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                  </v-toolbar>
+
+                  <div v-if="!guest">
+                    <v-card-title v-if="hits.id_app_user == user.id"
+                      >Segera hubungi pemenang iklan Anda</v-card-title
+                    >
+                  </div>
+
+                  <v-btn
+                    value="left"
+                    tile
+                    color="white"
+                    v-if="liveBid.length > 0"
+                  >
+                    <div v-if="!guest">
+                      <a
+                        :href="'/chat/' + iklan.id_app_user"
+                        v-if="liveBid[0].IdAppUser == user.id"
+                      >
+                        Chat Penjual
+                      </a>
+                    </div>
+                    <a :href="'/chat/' + liveBid[0].IdAppUser" v-else>
+                      Chat Pemenang
+                    </a>
+                  </v-btn>
+
+                  <v-btn value="center" tile color="white">
+                    <a :href="'/detail-transaksi/' + orders.id">
+                      Detail Transaksi
+                    </a>
+                  </v-btn>
+                </v-card>
+              </v-dialog>
+            </div>
+          </div>
         </v-row>
 
         <v-divider></v-divider>
@@ -260,49 +346,13 @@
     <v-divider></v-divider>
 
     <v-tabs v-model="tab" color="teal" slider-color="teal" show-arrows>
-      <v-tab>Info Penjual</v-tab>
-      <v-tab>Detail Iklan</v-tab>
+      <v-tab>Spesifikasi</v-tab>
       <v-tab v-if="hits.id_mst_iklan_jenis == 2">Info Tawar Bersama</v-tab>
       <v-tab v-if="hits.id_mst_iklan_jenis == 2">Penawaran</v-tab>
+      <v-tab>Info Penjual</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item>
-        <v-card flat>
-          <v-card-title class="font-weight-bold">
-            Catatan & Kebijakan Penjual
-          </v-card-title>
-
-          <v-row justify="center">
-            <v-expansion-panels focusable inset>
-              <v-expansion-panel v-for="item in catatan" :key="item.id">
-                <v-expansion-panel-header>
-                  <b>{{ item.judul }}</b>
-                </v-expansion-panel-header>
-
-                <v-expansion-panel-content>
-                  <div v-html="item.deskripsi"></div>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-
-            <br />
-
-            <v-expansion-panels focusable inset v-if="kebijakan != undefined">
-              <v-expansion-panel>
-                <v-expansion-panel-header class="font-weight-bold">
-                  Kebijakan:
-                </v-expansion-panel-header>
-
-                <v-expansion-panel-content>
-                  <div v-html="kebijakan.deskripsi"></div>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-          </v-row>
-        </v-card>
-      </v-tab-item>
-
       <v-tab-item>
         <detail-unit
           :unitMokas="unitMokas"
@@ -396,7 +446,41 @@
           </v-row>
         </div>
       </v-tab-item>
+      <v-tab-item>
+        <v-card flat>
+          <v-card-title class="font-weight-bold">
+            Catatan & Kebijakan Penjual
+          </v-card-title>
 
+          <v-row justify="center">
+            <v-expansion-panels focusable inset>
+              <v-expansion-panel v-for="item in catatan" :key="item.id">
+                <v-expansion-panel-header>
+                  <b>{{ item.judul }}</b>
+                </v-expansion-panel-header>
+
+                <v-expansion-panel-content>
+                  <div v-html="item.deskripsi"></div>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+
+            <br />
+
+            <v-expansion-panels focusable inset v-if="kebijakan != undefined">
+              <v-expansion-panel>
+                <v-expansion-panel-header class="font-weight-bold">
+                  Kebijakan:
+                </v-expansion-panel-header>
+
+                <v-expansion-panel-content>
+                  <div v-html="kebijakan.deskripsi"></div>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+          </v-row>
+        </v-card>
+      </v-tab-item>
       <v-tab-item>
         <v-row class="d-flex align-center">
           <v-col cols="12" sm="6">
