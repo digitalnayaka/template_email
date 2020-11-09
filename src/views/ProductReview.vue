@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <div class="text-h4 mb-2">Penilaian</div>
+    <div class="text-h4 mb-2">Ulasan Pembelian</div>
 
     <v-card flat>
       <v-tabs

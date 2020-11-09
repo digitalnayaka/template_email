@@ -21,19 +21,56 @@
               <v-list-item-content>
                 <v-list-item-title class="font-weight-bold">
                   <div class="d-flex align-center">
-                    <span class="mx-1">{{ appuser.nama }}</span>
-
                     <v-avatar size="16" item>
                       <v-img src="/img/verified.png" alt="verified"></v-img>
                     </v-avatar>
+                    <span class="mx-1">{{ appuser.nama }}</span>
                   </div>
                 </v-list-item-title>
 
-                <v-list-item-subtitle>
-                  <v-icon>mdi-google-maps</v-icon>
-                  {{ appuser.kota }}
+                <v-list-item-subtitle class="teal--text">
+                  {{ slogan }}
                 </v-list-item-subtitle>
+                <h5>
+                  Rating Penjual:
 
+                  <!-- <v-icon color="red" v-if="avg.ratting_user == 1">
+                  mdi-emoticon-angry-outline
+                </v-icon> -->
+                  <v-avatar size="16" item>
+                    <v-img
+                      src="/img/icons/emoji_tidakpuas.png"
+                      alt="rating"
+                      v-if="avg.ratting_user == 1"
+                    ></v-img>
+                  </v-avatar>
+
+                  <v-avatar size="16" item>
+                    <v-img
+                      src="/img/icons/emoji_netral.png"
+                      alt="rating"
+                      v-if="avg.ratting_user == 2"
+                    ></v-img> 
+                  </v-avatar>
+                 
+
+                  <v-avatar size="16" item>
+                    <v-img
+                      src="/img/icons/emoji_puas.png"
+                      alt="rating"
+                      v-if="avg.ratting_user == 3"
+                    ></v-img>
+                  </v-avatar>
+                </h5>
+                <h5>
+                  <v-icon
+                    color="yellow"
+                    v-for="n in avg.ratting_iklan"
+                    :key="n"
+                  >
+                    mdi-star
+                  </v-icon>
+                </h5>
                 <div v-if="!guest && $vuetify.breakpoint.smAndUp">
                   <v-btn
                     small
@@ -810,6 +847,7 @@ export default {
       catatan: [],
       kebijakan: [],
       ulasanSaya: [],
+      avg: [],
     };
   },
   methods: {
@@ -864,6 +902,7 @@ export default {
           this.getCatatan();
           this.getKebijakan();
           this.myReview();
+          this.reviewAvg();
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -921,6 +960,22 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+        });
+    },
+    reviewAvg() {
+      this.axios
+        .get("/transaksi/v3/review_avg", {
+          params: {
+            id_penjual: this.appuser.id,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.avg = data[0];
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
         });
     },
     daftarTB() {
@@ -1043,6 +1098,7 @@ export default {
   },
   created() {
     this.initialize();
+    
   },
   watch: {
     title: {

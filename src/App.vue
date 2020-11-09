@@ -116,7 +116,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_persetujuan.png"
+                          src="/img/icons/menunggu_persetujuan.webp"
                           width="30"
                           height="30"
                           alt="menunggu persetujuan"
@@ -124,7 +124,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_persetujuan.png"
+                        src="/img/icons/menunggu_persetujuan.webp"
                         width="30"
                         height="30"
                         alt="menunggu persetujuan"
@@ -143,7 +143,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_pembayaran.png"
+                          src="/img/icons/menunggu_pembayaran.webp"
                           width="30"
                           height="30"
                           alt="menunggu pembayaran"
@@ -151,7 +151,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_pembayaran.png"
+                        src="/img/icons/menunggu_pembayaran.webp"
                         width="30"
                         height="30"
                         alt="menunggu pembayaran"
@@ -170,7 +170,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_verifikasi.png"
+                          src="/img/icons/menunggu_verifikasi.webp"
                           width="30"
                           height="30"
                           alt="pembayaran diverifikasi"
@@ -178,7 +178,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_verifikasi.png"
+                        src="/img/icons/menunggu_verifikasi.webp"
                         width="30"
                         height="30"
                         alt="menunggu diverifikasi"
@@ -216,7 +216,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_persetujuan.png"
+                          src="/img/icons/menunggu_persetujuan.webp"
                           width="30"
                           height="30"
                           alt="menunggu persetujuan"
@@ -224,7 +224,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_persetujuan.png"
+                        src="/img/icons/menunggu_persetujuan.webp"
                         width="30"
                         height="30"
                         alt="menunggu persetujuan"
@@ -243,7 +243,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_pembayaran.png"
+                          src="/img/icons/menunggu_pembayaran.webp"
                           width="30"
                           height="30"
                           alt="menunggu pembayaran"
@@ -251,7 +251,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_pembayaran.png"
+                        src="/img/icons/menunggu_pembayaran.webp"
                         width="30"
                         height="30"
                         alt="menunggu pembayaran"
@@ -270,7 +270,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_verifikasi.png"
+                          src="/img/icons/menunggu_verifikasi.webp"
                           width="30"
                           height="30"
                           alt="menunggu verifikasi"
@@ -278,7 +278,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_verifikasi.png"
+                        src="/img/icons/menunggu_verifikasi.webp"
                         width="30"
                         height="30"
                         alt="menunggu verifikasi"
@@ -437,20 +437,16 @@
                   <v-list-item href="/garasi/manage-unit">
                     <v-list-item-subtitle>Garasi</v-list-item-subtitle>
                   </v-list-item>
-                    <v-list-item href="/toko/manage-ads">
+                  <v-list-item href="/toko/manage-ads">
                     <v-list-item-subtitle>Iklan</v-list-item-subtitle>
                   </v-list-item>
                   <v-list-item to="/garasi/add-unit">
                     <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
                   </v-list-item>
 
-                  
-
                   <v-list-item to="/toko/add-ads">
                     <v-list-item-subtitle>Tambah Iklan</v-list-item-subtitle>
                   </v-list-item>
-
-                
                 </v-list>
               </v-col>
 
@@ -693,7 +689,7 @@ export default {
         OneSignal.on("subscriptionChange", (isSubscribed) => {
           console.log("The user's subscription state is now:", isSubscribed);
           if (isSubscribed) {
-            window.location.href = "/"
+            window.location.href = "/";
           }
         });
 

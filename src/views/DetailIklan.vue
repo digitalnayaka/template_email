@@ -74,9 +74,7 @@
                     v-if="avg.ratting_user == 1"
                   ></v-img>
                 </v-avatar>
-                <!-- <v-icon color="orange" v-if="avg.ratting_user == 2">
-                  mdi-emoticon-neutral-outline
-                </v-icon> -->
+                
                 <v-avatar size="16" item>
                   <v-img
                     src="/img/icons/emoji_netral.png"
@@ -395,53 +393,47 @@
                     {{ unitMokas.lokasi }}
                   </v-list-item-action>
                 </v-list-item>
-
-                <v-divider></v-divider>
-
-                <v-list-item>
-                  <v-list-item-avatar>
-                    <v-img src="/img/icons/icon_list.png"></v-img>
-                  </v-list-item-avatar>
-
-                  <v-list-item-content>
-                    <v-list-item-title>Daftar Paket Motor:</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
               </v-list>
             </v-col>
-          </v-row>
 
-          <v-row>
-            <v-col
-              cols="6"
-              sm="3"
-              lg="2"
-              v-for="(item, i) in motorBekas"
-              :key="i"
-            >
-              <v-card :to="'/garasi/detail-unit/' + item.id">
-                <v-img
-                  :src="getImage(item.foto_1)"
-                  height="230"
-                  contain
-                ></v-img>
+            <v-divider></v-divider>
+            <v-col cols="12" sm="6">
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-img src="/img/icons/icon_list.png"></v-img>
+                </v-list-item-avatar>
 
-                <v-divider></v-divider>
+                <v-list-item-content>
+                  <v-list-item-title>Daftar Paket Motor:</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-row>
+                <v-col v-for="(item, i) in motorBekas" :key="i">
+                  <v-card :to="'/garasi/detail-unit/' + item.id" class="rounded-lg">
+                    <v-img
+                      :src="getImage(item.foto_1)"
+                      height="230"
+                      contain
+                    ></v-img>
 
-                <v-list dense>
-                  <v-list-item>
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        {{ item.merk }} {{ item.type }}
-                      </v-list-item-title>
+                    <v-divider></v-divider>
 
-                      <v-list-item-subtitle>
-                        {{ item.tahun }}
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-              </v-card>
+                    <v-list dense>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>
+                            {{ item.merk }} {{ item.type }}
+                          </v-list-item-title>
+
+                          <v-list-item-subtitle>
+                            {{ item.tahun }}
+                          </v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list>
+                  </v-card>
+                </v-col>
+              </v-row>
             </v-col>
           </v-row>
         </div>
@@ -783,7 +775,13 @@
             Jumlah tiket tersedia milik Anda: {{ totalTiket.tersedia }} Tiket
           </h2>
 
-          <v-btn block color="primary" class="my-4" @click="konfirmasiTiket" v-if="totalTiket.tersedia > 0">
+          <v-btn
+            block
+            color="primary"
+            class="my-4"
+            @click="konfirmasiTiket"
+            v-if="totalTiket.tersedia > 0"
+          >
             Gunakan Tiket Anda
           </v-btn>
         </v-container>
