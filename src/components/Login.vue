@@ -27,9 +27,20 @@
                 autofocus
               ></v-text-field>
 
-              <v-text-field v-model="phone" outlined v-bind:style="{ display: 'none' }"></v-text-field>
+              <v-text-field
+                v-model="phone"
+                outlined
+                v-bind:style="{ display: 'none' }"
+              ></v-text-field>
 
-              <v-btn block color="teal" :disabled="!valid" @click="logincheck">Selanjutnya</v-btn>
+              <v-btn
+                block
+                color="teal"
+                class="white--text"
+                :disabled="!valid"
+                @click="logincheck"
+                >Selanjutnya</v-btn
+              >
 
               <div class="d-flex align-center pt-5">
                 <v-divider></v-divider>
@@ -39,7 +50,8 @@
                 <v-divider></v-divider>
               </div>
 
-              <section id="firebaseui-auth-container"></section>Belum punya akun SiMotor?
+              <section id="firebaseui-auth-container"></section>
+              Belum punya akun SiMotor?
               <a @click="setDialogComponent('daftar')">Daftar</a>
             </div>
 
@@ -55,13 +67,22 @@
                 autofocus
               ></v-text-field>
 
-              <v-text-field v-model="otp" outlined v-bind:style="{ display: 'none' }"></v-text-field>
+              <v-text-field
+                v-model="otp"
+                outlined
+                v-bind:style="{ display: 'none' }"
+              ></v-text-field>
 
               <p v-if="countdown">
-                Tidak menerima kode?
-                Tunggu
-                <countdown ref="countdown" :time="60 * 1000" @end="countdown = !countdown">
-                  <template slot-scope="props">{{ props.seconds }} Detik.</template>
+                Tidak menerima kode? Tunggu
+                <countdown
+                  ref="countdown"
+                  :time="60 * 1000"
+                  @end="countdown = !countdown"
+                >
+                  <template slot-scope="props"
+                    >{{ props.seconds }} Detik.</template
+                  >
                 </countdown>
               </p>
 
@@ -70,7 +91,9 @@
                 <a @click="resend">Resend</a>
               </p>
 
-              <v-btn block color="primary" @click="login" :disabled="!valid">Submit</v-btn>
+              <v-btn block color="primary" @click="login" :disabled="!valid"
+                >Submit</v-btn
+              >
 
               <br />
 
@@ -189,8 +212,9 @@ export default {
           this.otp = "";
           this.otpDisplay = false;
           this.phoneDisplay = true;
-          this.$root.$children[0].getModules();
-          this.$root.$children[0].getNotif();
+          window.location.href = "/";
+          // this.$root.$children[0].getModules();
+          // this.$root.$children[0].getNotif();
           // this.$router.go("/");
         })
         .catch((error) => {

@@ -15,7 +15,10 @@
         <a :href="'/detail-transaksi/' + item.order.id">{{ item.order.id }}</a>
       </div>
 
-      <!-- <div>Pesanan selesai:</div> -->
+      <div>
+        Pesanan selesai: {{ item.review.dates | dateTimeFormat(utc) }}
+        {{ timezone }}
+      </div>
     </div>
 
     <v-divider></v-divider>
@@ -265,11 +268,12 @@
 import { mapGetters, mapActions } from "vuex";
 import StarRating from "vue-star-rating";
 import ImageUploader from "vue-image-upload-resize";
+import moment from "moment-timezone";
 
 export default {
   name: "list-review",
   components: { StarRating, ImageUploader },
-  props: ["item"],
+  props: ["item", "utc", "timezone"],
   data: () => ({
     ulas: true,
     selected: null,
@@ -344,7 +348,7 @@ export default {
       if (r == true) {
         this.point = item.point;
       } else {
-        this.point = 0
+        this.point = 0;
       }
     },
     tulisReview(item) {
@@ -429,6 +433,11 @@ export default {
     ...mapGetters({
       user: "auth/user",
     }),
+  },
+  filters: {
+    dateTimeFormat: (date, utc) => {
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY HH:mm");
+    },
   },
 };
 </script>

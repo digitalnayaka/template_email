@@ -28,7 +28,7 @@
             v-for="item in detailReview"
             :key="item.order.id"
           >
-            <list-review :item="item" />
+            <list-review :item="item" :utc="utc" :timezone="timezone" />
           </v-card>
         </v-tab-item>
 
@@ -39,7 +39,7 @@
             v-for="item in detailUlasan"
             :key="item.order.id"
           >
-            <my-review :item="item" />
+            <my-review :item="item" :utc="utc" :timezone="timezone" />
           </v-card>
         </v-tab-item>
       </v-tabs-items>
@@ -52,6 +52,7 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "product-review",
+  props: ["utc", "timezone"],
   components: {
     ListReview: () =>
       import(
@@ -68,7 +69,7 @@ export default {
     ulasanSaya: [],
     orderSaya: [],
     detailUlasan: [],
-    page: 0,
+    page: 1,
     limit: 20,
     total: 0,
     lengthPage: 0,
@@ -177,7 +178,7 @@ export default {
           let { data } = response.data;
           this.orderSaya = data;
 
-          for (let i = 0; i < this.review.length; i++) {
+          for (let i = 0; i < this.ulasanSaya.length; i++) {
             let order = this.orderSaya.filter(
               (item) => item.id_iklan == this.ulasanSaya[i].id_iklan
             );

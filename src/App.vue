@@ -116,7 +116,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_persetujuan.png"
+                          src="/img/icons/menunggu_persetujuan.webp"
                           width="30"
                           height="30"
                           alt="menunggu persetujuan"
@@ -124,7 +124,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_persetujuan.png"
+                        src="/img/icons/menunggu_persetujuan.webp"
                         width="30"
                         height="30"
                         alt="menunggu persetujuan"
@@ -143,7 +143,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_pembayaran.png"
+                          src="/img/icons/menunggu_pembayaran.webp"
                           width="30"
                           height="30"
                           alt="menunggu pembayaran"
@@ -151,7 +151,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_pembayaran.png"
+                        src="/img/icons/menunggu_pembayaran.webp"
                         width="30"
                         height="30"
                         alt="menunggu pembayaran"
@@ -170,7 +170,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_verifikasi.png"
+                          src="/img/icons/menunggu_verifikasi.webp"
                           width="30"
                           height="30"
                           alt="pembayaran diverifikasi"
@@ -178,7 +178,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_verifikasi.png"
+                        src="/img/icons/menunggu_verifikasi.webp"
                         width="30"
                         height="30"
                         alt="menunggu diverifikasi"
@@ -216,7 +216,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_persetujuan.png"
+                          src="/img/icons/menunggu_persetujuan.webp"
                           width="30"
                           height="30"
                           alt="menunggu persetujuan"
@@ -224,7 +224,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_persetujuan.png"
+                        src="/img/icons/menunggu_persetujuan.webp"
                         width="30"
                         height="30"
                         alt="menunggu persetujuan"
@@ -243,7 +243,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_pembayaran.png"
+                          src="/img/icons/menunggu_pembayaran.webp"
                           width="30"
                           height="30"
                           alt="menunggu pembayaran"
@@ -251,7 +251,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_pembayaran.png"
+                        src="/img/icons/menunggu_pembayaran.webp"
                         width="30"
                         height="30"
                         alt="menunggu pembayaran"
@@ -270,7 +270,7 @@
                         </template>
 
                         <img
-                          src="/img/icons/menunggu_verifikasi.png"
+                          src="/img/icons/menunggu_verifikasi.webp"
                           width="30"
                           height="30"
                           alt="menunggu verifikasi"
@@ -278,7 +278,7 @@
                       </v-badge>
 
                       <img
-                        src="/img/icons/menunggu_verifikasi.png"
+                        src="/img/icons/menunggu_verifikasi.webp"
                         width="30"
                         height="30"
                         alt="menunggu verifikasi"
