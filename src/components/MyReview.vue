@@ -10,7 +10,10 @@
         </a>
       </div>
 
-      <!-- <div>Pesanan selesai:</div> -->
+      <div>
+        Pesanan selesai: {{ item.review.created_at | dateTimeFormat(utc) }}
+        {{ timezone }}
+      </div>
     </div>
 
     <v-divider></v-divider>
@@ -159,9 +162,16 @@
 </template>
 
 <script>
+import moment from "moment-timezone";
+
 export default {
   name: "my-review",
-  props: ["item"],
+  props: ["item", "utc", "timezone"],
+  filters: {
+    dateTimeFormat: (date, utc) => {
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY HH:mm");
+    },
+  },
 };
 </script>
 

@@ -242,95 +242,96 @@
               />
             </div>
           </v-col>
-          <div
-            class="teal--text"
-            align="center"
-            v-if="start == false && end == false"
-          >
-            Tawar Bersama segera dimulai:
-            <flip-countdown :deadline="hits.tanggal_mulai"></flip-countdown>
-          </div>
 
-          <div
-            class="teal--text"
-            align="center"
-            v-if="start == true && end == false"
-          >
-            Tawar Bersama berlangsung:
-            <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
-          </div>
+          <div v-if="iklan.id_mst_iklan_jenis > 1">
+            <div
+              class="teal--text"
+              align="center"
+              v-if="start == false && end == false"
+            >
+              Tawar Bersama segera dimulai:
+              <flip-countdown :deadline="hits.tanggal_mulai"></flip-countdown>
+            </div>
 
-          <div align="center" v-if="start == true && end == true">
-            <h2 class="teal--text">Tawar Bersama selesai</h2>
+            <div
+              class="teal--text"
+              align="center"
+              v-if="start == true && end == false"
+            >
+              Tawar Bersama berlangsung:
+              <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
+            </div>
 
-            <div v-if="!guest">
-              <v-btn
-                color="teal"
-                dark
-                @click="dialogInfo = true"
-                class="mx-2"
-                v-if="
-                  liveBid.length > 0 &&
-                  (liveBid[0].IdAppUser == user.id ||
-                    iklan.id_app_user == user.id)
-                "
-              >
-                {{
-                  liveBid[0].IdAppUser == user.id
-                    ? "Anda menang, klik disini"
-                    : "Info Pemenang"
-                }}
-              </v-btn>
+            <div align="center" v-if="start == true && end == true">
+              <h2 class="teal--text">Tawar Bersama selesai</h2>
 
-              <v-dialog v-model="dialogInfo" persistent max-width="500px">
-                <v-card>
-                  <v-toolbar color="teal darken-3" dark>
-                    <v-toolbar-title>Info Pemenang Iklan</v-toolbar-title>
+              <div v-if="!guest">
+                <v-btn
+                  color="teal"
+                  dark
+                  @click="dialogInfo = true"
+                  class="mx-2"
+                  v-if="
+                    liveBid.length > 0 &&
+                    (liveBid[0].IdAppUser == user.id ||
+                      iklan.id_app_user == user.id)
+                  "
+                >
+                  {{
+                    liveBid[0].IdAppUser == user.id
+                      ? "Anda menang, klik disini"
+                      : "Info Pemenang"
+                  }}
+                </v-btn>
 
-                    <div class="flex-grow-1"></div>
+                <v-dialog v-model="dialogInfo" persistent max-width="500px">
+                  <v-card>
+                    <v-toolbar color="teal darken-3" dark>
+                      <v-toolbar-title>Info Pemenang Iklan</v-toolbar-title>
 
-                    <v-btn icon @click="dialogInfo = false">
-                      <v-icon>mdi-close</v-icon>
-                    </v-btn>
-                  </v-toolbar>
+                      <div class="flex-grow-1"></div>
 
-                  <div v-if="!guest">
-                    <v-card-title v-if="hits.id_app_user == user.id"
-                      >Segera hubungi pemenang iklan Anda</v-card-title
-                    >
-                  </div>
+                      <v-btn icon @click="dialogInfo = false">
+                        <v-icon>mdi-close</v-icon>
+                      </v-btn>
+                    </v-toolbar>
 
-                  <v-btn
-                    value="left"
-                    tile
-                    color="white"
-                    v-if="liveBid.length > 0"
-                  >
                     <div v-if="!guest">
-                      <a
-                        :href="'/chat/' + iklan.id_app_user"
-                        v-if="liveBid[0].IdAppUser == user.id"
+                      <v-card-title v-if="hits.id_app_user == user.id"
+                        >Segera hubungi pemenang iklan Anda</v-card-title
                       >
-                        Chat Penjual
-                      </a>
                     </div>
-                    <a :href="'/chat/' + liveBid[0].IdAppUser" v-else>
-                      Chat Pemenang
-                    </a>
-                  </v-btn>
 
-                  <v-btn value="center" tile color="white">
-                    <a :href="'/detail-transaksi/' + orders.id">
-                      Detail Transaksi
-                    </a>
-                  </v-btn>
-                </v-card>
-              </v-dialog>
+                    <v-btn
+                      value="left"
+                      tile
+                      color="white"
+                      v-if="liveBid.length > 0"
+                    >
+                      <div v-if="!guest">
+                        <a
+                          :href="'/chat/' + iklan.id_app_user"
+                          v-if="liveBid[0].IdAppUser == user.id"
+                        >
+                          Chat Penjual
+                        </a>
+                      </div>
+                      <a :href="'/chat/' + liveBid[0].IdAppUser" v-else>
+                        Chat Pemenang
+                      </a>
+                    </v-btn>
+
+                    <v-btn value="center" tile color="white">
+                      <a :href="'/detail-transaksi/' + orders.id">
+                        Detail Transaksi
+                      </a>
+                    </v-btn>
+                  </v-card>
+                </v-dialog>
+              </div>
             </div>
           </div>
         </v-row>
-
-        <v-divider></v-divider>
 
         <!-- <div class="mt-2">
           <div class="font-weight-bold text-h6 blue-grey--text">Deskripsi</div>

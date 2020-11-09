@@ -166,29 +166,38 @@
           </v-card>
         </v-dialog>
 
-        <!-- <v-col cols="12" sm="6">
+        <v-col cols="12" sm="6">
           <v-row>
             <v-col cols="12" sm="6" class="text-center">
-              <div class="text-h5">Unit Terjual</div>
-              10
+              <div class="text-h5">Rating Penjual</div>
+
+              <v-icon x-large color="red" v-if="avg.ratting_user == 1">
+                mdi-emoticon-angry-outline
+              </v-icon>
+
+              <v-icon x-large color="orange" v-if="avg.ratting_user == 2">
+                mdi-emoticon-neutral-outline
+              </v-icon>
+
+              <v-icon x-large color="teal" v-if="avg.ratting_user == 3">
+                mdi-emoticon-happy-outline
+              </v-icon>
             </v-col>
 
             <v-col cols="12" sm="6">
-              <div class="text-h5 text-center">Kualitas Unit</div>
+              <div class="text-h5 text-center">Nilai Kualitas Unit</div>
               <div class="d-flex align-center justify-center">
-                <span class="font-weight-bold mr-2">3.5</span>
-                <star-rating
-                  :rating="3.5"
-                  read-only
-                  :show-rating="false"
-                  :round-start-rating="false"
-                  :star-size="30"
-                  inline
-                ></star-rating>
+                <h2 class="mx-2">{{ avg.ratting_iklan }}</h2>
+
+                <v-icon color="yellow" v-for="n in 5" :key="n">
+                  mdi-star
+                </v-icon>
+
+                <div>({{ ulasanSaya.length }} Ulasan)</div>
               </div>
             </v-col>
           </v-row>
-        </v-col> -->
+        </v-col>
       </v-row>
     </v-card>
 
@@ -447,34 +456,38 @@
 
                 <v-divider></v-divider>
 
-                <v-list>
-                  <v-list-item>
-                    <v-list-item-avatar tile>
-                      <v-icon v-if="item.app_user_foto_penjual == ''">
-                        mdi-account-circle
-                      </v-icon>
+                <div v-if="item.Reply != null">
+                  <v-list>
+                    <v-list-item>
+                      <v-list-item-avatar tile>
+                        <v-icon v-if="item.app_user_foto_penjual == ''">
+                          mdi-account-circle
+                        </v-icon>
 
-                      <v-img
-                        :src="getImage(item.app_user_foto_penjual)"
-                        v-else
-                      ></v-img>
-                    </v-list-item-avatar>
+                        <v-img
+                          :src="getImage(item.app_user_foto_penjual)"
+                          v-else
+                        ></v-img>
+                      </v-list-item-avatar>
 
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        {{ item.app_user_name_penjual }}
-                      </v-list-item-title>
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          {{ item.app_user_name_penjual }}
+                        </v-list-item-title>
 
-                      <v-list-item-subtitle>
-                        <span class="red pa-1 white--text text-caption mr-1">
-                          Penjual
-                        </span>
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
+                        <v-list-item-subtitle>
+                          <span class="red pa-1 white--text text-caption mr-1">
+                            Penjual
+                          </span>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
 
-                <div>{{ item.Reply }}</div>
+                  <div class="mx-4 mb-2">
+                    {{ item.Reply[0].reply }}
+                  </div>
+                </div>
               </div>
             </v-col>
           </v-row>
@@ -808,6 +821,10 @@
 <script>
 import { mapGetters } from "vuex";
 import moment from "moment-timezone";
+import "viewerjs/dist/viewer.css";
+import Viewer from "v-viewer";
+import Vue from "vue";
+Vue.use(Viewer);
 // import StarRating from "vue-star-rating";
 
 export default {
@@ -1087,6 +1104,22 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+        });
+    },
+    reviewAvg() {
+      this.axios
+        .get("/transaksi/v3/review_avg", {
+          params: {
+            id_penjual: this.appuser.id,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.avg = data[0];
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
         });
     },
   },
