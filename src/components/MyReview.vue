@@ -10,7 +10,7 @@
         </a>
       </div>
 
-      <div>Pesanan selesai:</div>
+      <!-- <div>Pesanan selesai:</div> -->
     </div>
 
     <v-divider></v-divider>

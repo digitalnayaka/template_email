@@ -40,13 +40,13 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <v-list-item-subtitle
-                        >Tawar Bersama {{ item.type }}</v-list-item-subtitle
-                      >
+                      <v-list-item-subtitle>
+                        Tawar Bersama {{ item.type }}
+                      </v-list-item-subtitle>
 
-                      <v-list-item-title class="teal--text font-weight-bold">{{
-                        item.judul
-                      }}</v-list-item-title>
+                      <v-list-item-title class="teal--text font-weight-bold">
+                        {{ item.judul }}
+                      </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -56,13 +56,17 @@
                 <v-list>
                   <v-list-item>
                     <v-list-item-content>
-                      <v-list-item-title v-if="item.id_mst_status_pemenang == 1"
-                        >Tawaran anda</v-list-item-title
+                      <v-list-item-title
+                        v-if="item.id_mst_status_pemenang == 1"
                       >
+                        Tawaran anda
+                      </v-list-item-title>
 
-                      <v-list-item-title v-if="item.id_mst_status_pemenang == 3"
-                        >Tawaran saat ini</v-list-item-title
+                      <v-list-item-title
+                        v-if="item.id_mst_status_pemenang == 3"
                       >
+                        Tawaran saat ini
+                      </v-list-item-title>
 
                       <v-list-item-subtitle>
                         Rp
@@ -101,8 +105,9 @@
                 dark
                 @click="getBid(item)"
                 v-if="item.id_mst_status_pemenang == 1"
-                >Tingkatkan tawaran</v-btn
               >
+                Tingkatkan tawaran
+              </v-btn>
 
               <v-btn
                 block
@@ -110,8 +115,9 @@
                 dark
                 @click="getBid(item)"
                 v-if="item.id_mst_status_pemenang == 3"
-                >Tingkatkan tawaran</v-btn
               >
+                Tingkatkan tawaran
+              </v-btn>
             </v-col>
           </v-row>
         </v-card>
@@ -204,14 +210,14 @@
                 <v-list-item-group color="primary" mandatory>
                   <v-list-item @click="doFilter(null)">
                     <v-list-item-icon>
-                       <v-avatar size="25" item>
-                      <v-img src="/img/icons/semua.png"></v-img>
-                       </v-avatar>
+                      <v-avatar size="25" item>
+                        <v-img src="/img/icons/semua.png"></v-img>
+                      </v-avatar>
                     </v-list-item-icon>
 
-                    <v-list-item-subtitle class="text-caption"
-                      >Semua</v-list-item-subtitle
-                    >
+                    <v-list-item-subtitle class="text-caption">
+                      Semua
+                    </v-list-item-subtitle>
                   </v-list-item>
 
                   <v-list-item @click="doFilter(true)">
@@ -221,9 +227,9 @@
                       </v-avatar>
                     </v-list-item-icon>
 
-                    <v-list-item-subtitle class="text-caption"
-                      >Anda Menang</v-list-item-subtitle
-                    >
+                    <v-list-item-subtitle class="text-caption">
+                      Anda Menang
+                    </v-list-item-subtitle>
                   </v-list-item>
 
                   <v-list-item @click="doFilter(false)">
@@ -233,9 +239,9 @@
                       </v-avatar>
                     </v-list-item-icon>
 
-                    <v-list-item-subtitle class="text-caption"
-                      >Anda Kalah</v-list-item-subtitle
-                    >
+                    <v-list-item-subtitle class="text-caption">
+                      Anda Kalah
+                    </v-list-item-subtitle>
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
@@ -271,13 +277,13 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                      <v-list-item-subtitle
-                        >Tawar Bersama {{ item.type }}</v-list-item-subtitle
-                      >
+                      <v-list-item-subtitle>
+                        Tawar Bersama {{ item.type }}
+                      </v-list-item-subtitle>
 
-                      <v-list-item-title class="teal--text font-weight-bold">{{
-                        item.judul
-                      }}</v-list-item-title>
+                      <v-list-item-title class="teal--text font-weight-bold">
+                        {{ item.judul }}
+                      </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </v-list>
@@ -326,8 +332,9 @@
                 dark
                 @click="chat(item)"
                 v-if="item.id_mst_status_pemenang == 2"
-                >Hubungi Penjual</v-btn
               >
+                Hubungi Penjual
+              </v-btn>
             </v-col>
           </v-row>
         </v-card>
@@ -571,7 +578,8 @@ export default {
           });
           this.sheet = false;
           this.playSound("/audio/bid.mpeg");
-          this.sheet = false;
+          this.occur = [];
+          this.getTBBerlangsung();
         })
         .catch((error) => {
           let responses = error.response.data;

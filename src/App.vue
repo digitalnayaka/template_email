@@ -91,7 +91,7 @@
               @change="content = false"
             >
               <v-tab class="text-caption">Tawar Bersama</v-tab>
-              <v-tab class="text-caption">Tiket</v-tab>
+              <!-- <v-tab class="text-caption">Tiket</v-tab> -->
             </v-tabs>
 
             <v-tabs-items v-model="tab2">
