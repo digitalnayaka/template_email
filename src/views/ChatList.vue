@@ -17,16 +17,16 @@
             @click="read(item.IdAppUser, item.Pemenang)"
           >
             <v-list-item-avatar size="80">
-              <v-icon large v-if="item.Avatar == 'null'"
-                >mdi-account-circle</v-icon
-              >
-              <v-img :src="getImage(item.Avatar)" v-else></v-img>
+              <v-icon large v-if="item.user.photo == 'null'">
+                mdi-account-circle
+              </v-icon>
+              <v-img :src="getImage(item.user.photo)" v-else></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title class="font-weight-black">{{
-                item.Nama
-              }}</v-list-item-title>
+              <v-list-item-title class="font-weight-black">
+                {{ item.user.nama }}
+              </v-list-item-title>
               <v-list-item-subtitle>{{ item.Messages }}</v-list-item-subtitle>
             </v-list-item-content>
 
@@ -37,20 +37,22 @@
                   color="red"
                   text-color="white"
                   v-if="item.Pemenang"
-                  >Pemenang</v-chip
                 >
+                  Pemenang
+                </v-chip>
 
                 <v-chip
                   x-small
                   color="green"
                   text-color="white"
                   v-if="!item.Seen"
-                  >Belum dibaca</v-chip
                 >
+                  Belum dibaca
+                </v-chip>
               </v-list-item-action-text>
 
               <v-list-item-action-text></v-list-item-action-text>
-              {{ item.Time | datediff }}
+              {{ item.Time.toDate() | datediff }}
             </v-list-item-action>
           </v-list-item>
         </v-list-item-group>
@@ -83,30 +85,9 @@ export default {
         .onSnapshot((querySnapshot) => {
           let messages = [];
           querySnapshot.forEach((doc) => {
-            // this.axios
-            //   .get("/user/v3/user", {
-            //     params: {
-            //       id: doc.data().IdAppUser,
-            //       limit: 1,
-            //     },
-            //   })
-            //   .then((response) => {
-            //     let { data } = response.data;
-            //     const dataa = {
-            //       IdAppUser: doc.data().IdAppUser,
-            //       Messages: doc.data().Messages,
-            //       Pemenang: doc.data().Pemenang,
-            //       Seen: doc.data().Seen,
-            //       Time: doc.data().Time.toDate(),
-            //       Nama: data[0].nama,
-            //       Avatar: data[0].photo,
-            //     };
-            //     messages.push(dataa);
-            //   });
             messages.push(doc.data());
           });
           this.messages = messages;
-          // console.log(this.messages);
           this.getUsers();
         });
     },
@@ -133,11 +114,11 @@ export default {
             const id = this.messages[i].IdAppUser;
 
             let found = this.users.filter((element) => element.id == id);
-            console.log(found);
 
-            this.chats.push({ ...this.messages, found });
-            this.chats = _.orderBy(this.chats, ["Time"], ["desc"]);
+            this.chats.push({ ...this.messages[i], user: found[0] });
           }
+
+          this.chats = _.orderBy(this.chats, ["Time"], ["desc"]);
         })
         .catch((error) => {
           let responses = error.response.data;
