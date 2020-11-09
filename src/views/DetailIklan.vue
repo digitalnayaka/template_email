@@ -219,7 +219,7 @@
               </div>
 
               <div v-else>
-                Rp {{ Number(hits.harga_awal).toLocaleString("id-ID") }}
+                Rp {{ Number(liveBid[0].Bid).toLocaleString("id-ID") }}
               </div>
             </div>
           </v-col>
@@ -419,7 +419,7 @@
               v-for="(item, i) in motorBekas"
               :key="i"
             >
-              <v-card :to="'/detail_unit/' + item.id">
+              <v-card :to="'/garasi/detail-unit/' + item.id">
                 <v-img
                   :src="getImage(item.foto_1)"
                   height="230"
@@ -783,7 +783,7 @@
             Jumlah tiket tersedia milik Anda: {{ totalTiket.tersedia }} Tiket
           </h2>
 
-          <v-btn block color="primary" class="my-4" @click="konfirmasiTiket">
+          <v-btn block color="primary" class="my-4" @click="konfirmasiTiket" v-if="totalTiket.tersedia > 0">
             Gunakan Tiket Anda
           </v-btn>
         </v-container>
@@ -1202,7 +1202,7 @@ export default {
             });
             this.height = 350;
             this.useTiket = !this.useTiket;
-            this.noTiket = !this.noTiket;
+            // this.noTiket = !this.noTiket;
             this.ikutPenawaran = !this.ikutPenawaran;
           })
           .catch((error) => {

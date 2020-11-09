@@ -15,7 +15,7 @@
         <a :href="'/detail-transaksi/' + item.order.id">{{ item.order.id }}</a>
       </div>
 
-      <div>Pesanan selesai:</div>
+      <!-- <div>Pesanan selesai:</div> -->
     </div>
 
     <v-divider></v-divider>
@@ -61,22 +61,9 @@
 
           <v-item-group v-model="point" class="d-flex justify-center">
             <div class="flex-column" v-for="item in points" :key="item.id">
-              <v-item v-slot:default="{ toggle }" :value="item.id">
-                <v-btn
-                  icon
-                  class="mx-3"
-                  @click="toggle"
-                  v-on:click="setPoint(item)"
-                >
-                 <v-img
-                      :src="item.img"
-                      contain
-                      :width="30"
-                      :height="30"
-                      v-on="on"
-                    ></v-img>
-                </v-btn>
-              </v-item>
+              <v-btn icon class="mx-3" v-on:click="setPoint(item)">
+                <v-img :src="item.img" contain width="30" height="30"></v-img>
+              </v-btn>
 
               <div class="text-caption">{{ item.text }}</div>
             </div>
@@ -86,26 +73,20 @@
         <div class="ma-2 text-center" v-else>
           <div>Penilaian Anda</div>
 
-          <div v-if="point == 1">
-            <v-icon x-large :color="points[0].color">
-              {{ points[0].icon }}
-            </v-icon>
+          <div v-if="point == -1">
+            <img :src="points[0].img" width="30" height="30" />
 
             <div class="text-caption">{{ points[0].text }}</div>
           </div>
 
-          <div v-if="point == 2">
-            <v-icon x-large :color="points[1].color">
-              {{ points[1].icon }}
-            </v-icon>
+          <div v-if="point == 1">
+            <img :src="points[1].img" width="30" height="30" />
 
             <div class="text-caption">{{ points[1].text }}</div>
           </div>
 
-          <div v-if="point == 3">
-            <v-icon x-large :color="points[2].color">
-              {{ points[2].icon }}
-            </v-icon>
+          <div v-if="point == 2">
+            <img :src="points[2].img" width="30" height="30" />
 
             <div class="text-caption">{{ points[2].text }}</div>
           </div>
@@ -228,8 +209,6 @@
               <label :for="'foto' + item.id" slot="upload-label">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <!-- <v-icon v-on="on" v-if="item.foto == null">mdi-camera</v-icon> -->
-
                     <v-img
                       :src="item.previewUrl"
                       contain
@@ -241,14 +220,12 @@
                   <span>Pilih Foto</span>
                 </v-tooltip>
               </label>
-              
             </image-uploader>
-            
           </div>
-          
-              <v-list-item-subtitle>
-               Silahkan bagikan foto produk Anda
-              </v-list-item-subtitle>
+
+          <v-list-item-subtitle>
+            Silahkan bagikan foto produk Anda
+          </v-list-item-subtitle>
         </div>
       </v-col>
 
@@ -308,7 +285,7 @@ export default {
       },
       {
         id: 2,
-       img: "/img/icons/emoji_netral.png",
+        img: "/img/icons/emoji_netral.png",
         color: "orange",
         text: "Netral",
         point: 1,
@@ -364,8 +341,10 @@ export default {
     }),
     setPoint(item) {
       let r = confirm("Apakah Anda yakin memberi penilaian " + item.text + "?");
-      if (r == false) {
-        this.point = 0;
+      if (r == true) {
+        this.point = item.point;
+      } else {
+        this.point = 0
       }
     },
     tulisReview(item) {
@@ -419,11 +398,11 @@ export default {
         formData.set("id_app_user", this.user.id);
         formData.set("ratting_iklan", this.rating);
         formData.set("ratting_user", this.point);
-        formData.set("foto_1", this.list[0].foto);
-        formData.set("foto_2", this.list[1].foto);
-        formData.set("foto_3", this.list[2].foto);
-        formData.set("foto_4", this.list[3].foto);
-        formData.set("foto_5", this.list[4].foto);
+        formData.set("foto_1", this.list[0].foto, "foto_1.jpg");
+        formData.set("foto_2", this.list[1].foto, "foto_2.jpg");
+        formData.set("foto_3", this.list[2].foto, "foto_3.jpg");
+        formData.set("foto_4", this.list[3].foto, "foto_4.jpg");
+        formData.set("foto_5", this.list[4].foto, "foto_5.jpg");
         formData.set("review", this.deskripsiUlasan);
 
         this.axios

@@ -296,6 +296,9 @@
 
                     <v-datetime-picker
                       v-model="tglMulaiTB"
+                      :datePickerProps="{
+                        min: today,
+                      }"
                       @input="dateTimeRange"
                       :textFieldProps="suffix"
                       :timePickerProps="{ format: '24hr' }"
@@ -465,6 +468,7 @@ export default {
       loader: null,
       loading: false,
       submit: false,
+      today: moment().format("YYYY-MM-DD HH:mm"),
     };
   },
   methods: {
@@ -681,7 +685,7 @@ export default {
                 text: data.api_message,
               });
               // this.$router.push("/iklan/" + data.data.id);
-               window.location.href = "/iklan/" + data.data.id;
+              window.location.href = "/iklan/" + data.data.id;
             })
             .catch((error) => {
               let responses = error.response.data;
@@ -738,7 +742,7 @@ export default {
                 text: data.api_message,
               });
               // this.$router.push("/iklan/" + data.data.id);
-               window.location.href = "/iklan/" + data.data.id;
+              window.location.href = "/iklan/" + data.data.id;
             })
             .catch((error) => {
               let responses = error.response.data;

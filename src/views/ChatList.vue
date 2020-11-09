@@ -14,23 +14,39 @@
           <v-list-item
             v-for="(item, i) in chats"
             :key="i"
-            @click="read(item.IdAppUser,item.Pemenang)"
+            @click="read(item.IdAppUser, item.Pemenang)"
           >
             <v-list-item-avatar size="80">
-              <v-icon large v-if="item.Avatar == 'null'">mdi-account-circle</v-icon>
+              <v-icon large v-if="item.Avatar == 'null'"
+                >mdi-account-circle</v-icon
+              >
               <v-img :src="getImage(item.Avatar)" v-else></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title class="font-weight-black">{{ item.Nama }}</v-list-item-title>
+              <v-list-item-title class="font-weight-black">{{
+                item.Nama
+              }}</v-list-item-title>
               <v-list-item-subtitle>{{ item.Messages }}</v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action class="teal--text">
               <v-list-item-action-text>
-                <v-chip x-small color="red" text-color="white" v-if="item.Pemenang">Pemenang</v-chip>
+                <v-chip
+                  x-small
+                  color="red"
+                  text-color="white"
+                  v-if="item.Pemenang"
+                  >Pemenang</v-chip
+                >
 
-                <v-chip x-small color="green" text-color="white" v-if="!item.Seen">Belum dibaca</v-chip>
+                <v-chip
+                  x-small
+                  color="green"
+                  text-color="white"
+                  v-if="!item.Seen"
+                  >Belum dibaca</v-chip
+                >
               </v-list-item-action-text>
 
               <v-list-item-action-text></v-list-item-action-text>
@@ -53,7 +69,7 @@ export default {
   name: "chat",
   data: () => ({
     chats: [],
-    item: 0
+    item: 0,
   }),
   methods: {
     async getChats() {
@@ -61,17 +77,17 @@ export default {
         .doc(String(this.user.id))
         .collection("user_messages")
         .orderBy("Time", "desc")
-        .onSnapshot(querySnapshot => {
+        .onSnapshot((querySnapshot) => {
           let messages = [];
-          querySnapshot.forEach(doc => {
+          querySnapshot.forEach((doc) => {
             this.axios
               .get("/user/v3/user", {
                 params: {
                   id: doc.data().IdAppUser,
-                  limit: 1
-                }
+                  limit: 1,
+                },
               })
-              .then(response => {
+              .then((response) => {
                 let { data } = response.data;
                 const dataa = {
                   IdAppUser: doc.data().IdAppUser,
@@ -80,7 +96,7 @@ export default {
                   Seen: doc.data().Seen,
                   Time: doc.data().Time.toDate(),
                   Nama: data[0].nama,
-                  Avatar: data[0].photo
+                  Avatar: data[0].photo,
                 };
                 messages.push(dataa);
               });
@@ -96,29 +112,32 @@ export default {
 
       this.axios
         .post("/user/v3/chat/read", formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then(() => {
           this.$router.push({ path: "/chat/" + id + "?pemenang=" + pemenang });
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses);
         });
-    }
+    },
   },
   created() {
     this.getChats();
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
+      user: "auth/user",
+    }),
+    sortedItems: () => {
+      return this.chats.sort((a, b) => new Date(a.Time) - new Date(b.Time));
+    },
   },
   filters: {
-    datediff: date => {
+    datediff: (date) => {
       return moment.utc(date).from();
-    }
-  }
+    },
+  },
 };
 </script>
