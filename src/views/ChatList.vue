@@ -17,16 +17,16 @@
             @click="read(item.IdAppUser, item.Pemenang)"
           >
             <v-list-item-avatar size="80">
-              <v-icon large v-if="item.Avatar == 'null'"
-                >mdi-account-circle</v-icon
-              >
-              <v-img :src="getImage(item.Avatar)" v-else></v-img>
+              <v-icon large v-if="item.user.photo == 'null'">
+                mdi-account-circle
+              </v-icon>
+              <v-img :src="getImage(item.user.photo)" v-else></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title class="font-weight-black">{{
-                item.Nama
-              }}</v-list-item-title>
+              <v-list-item-title class="font-weight-black">
+                {{ item.user.nama }}
+              </v-list-item-title>
               <v-list-item-subtitle>{{ item.Messages }}</v-list-item-subtitle>
             </v-list-item-content>
 
@@ -37,20 +37,22 @@
                   color="red"
                   text-color="white"
                   v-if="item.Pemenang"
-                  >Pemenang</v-chip
                 >
+                  Pemenang
+                </v-chip>
 
                 <v-chip
                   x-small
                   color="green"
                   text-color="white"
                   v-if="!item.Seen"
-                  >Belum dibaca</v-chip
                 >
+                  Belum dibaca
+                </v-chip>
               </v-list-item-action-text>
 
               <v-list-item-action-text></v-list-item-action-text>
-              {{ item.Time | datediff }}
+              {{ item.Time.toDate() | datediff }}
             </v-list-item-action>
           </v-list-item>
         </v-list-item-group>
@@ -64,15 +66,18 @@ import { mapGetters } from "vuex";
 import moment from "moment-timezone";
 import "firebase/firestore";
 import { db } from "../main";
+import _ from "lodash";
 
 export default {
   name: "chat",
   data: () => ({
+    messages: [],
+    users: [],
     chats: [],
     item: 0,
   }),
   methods: {
-    async getChats() {
+    getChats() {
       db.collection("chat")
         .doc(String(this.user.id))
         .collection("user_messages")
@@ -80,28 +85,44 @@ export default {
         .onSnapshot((querySnapshot) => {
           let messages = [];
           querySnapshot.forEach((doc) => {
-            this.axios
-              .get("/user/v3/user", {
-                params: {
-                  id: doc.data().IdAppUser,
-                  limit: 1,
-                },
-              })
-              .then((response) => {
-                let { data } = response.data;
-                const dataa = {
-                  IdAppUser: doc.data().IdAppUser,
-                  Messages: doc.data().Messages,
-                  Pemenang: doc.data().Pemenang,
-                  Seen: doc.data().Seen,
-                  Time: doc.data().Time.toDate(),
-                  Nama: data[0].nama,
-                  Avatar: data[0].photo,
-                };
-                messages.push(dataa);
-              });
+            messages.push(doc.data());
           });
-          this.chats = messages;
+          this.messages = messages;
+          this.getUsers();
+        });
+    },
+    getUsers() {
+      let params = new URLSearchParams();
+
+      for (let i = 0; i < this.messages.length; i++) {
+        params.append("id", this.messages[i].IdAppUser);
+      }
+      params.set("limit", this.messages.length);
+
+      let request = {
+        params: params,
+        headers: { Authorization: "Bearer " + this.user.token },
+      };
+
+      this.axios
+        .get("/user/v3/user", request)
+        .then((response) => {
+          let { data } = response.data;
+          this.users = data;
+
+          for (let i = 0; i < this.messages.length; i++) {
+            const id = this.messages[i].IdAppUser;
+
+            let found = this.users.filter((element) => element.id == id);
+
+            this.chats.push({ ...this.messages[i], user: found[0] });
+          }
+
+          this.chats = _.orderBy(this.chats, ["Time"], ["desc"]);
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
         });
     },
     read(id, pemenang) {
@@ -130,9 +151,6 @@ export default {
     ...mapGetters({
       user: "auth/user",
     }),
-    sortedItems: () => {
-      return this.chats.sort((a, b) => new Date(a.Time) - new Date(b.Time));
-    },
   },
   filters: {
     datediff: (date) => {
