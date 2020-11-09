@@ -319,6 +319,10 @@
                         >
                       </template>
                     </v-datetime-picker>
+                    <v-list-item-subtitle
+                        >Iklan akan aktif setelah Anda menekan tombol "Iklankan". 
+                        Penawaran akan dimulai berdasarkan tanggal diatas.</v-list-item-subtitle
+                      >
                   </v-col>
 
                   <v-col cols="12" sm="6">

@@ -59,7 +59,7 @@
                     mdi-emoticon-angry-outline
                   </v-icon>
 
-                  <div>Kecewa</div>
+                  <div>Tidak Puas</div>
                 </div>
 
                 <div v-if="item.review.ratting_user == 2">

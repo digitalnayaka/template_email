@@ -16,7 +16,7 @@
       <v-tab-item>
         <v-row v-if="jadwal.length > 0">
           <v-col cols="12" sm="6" v-for="(item,index) in jadwal" :key="index">
-            <v-card :to="'/list-tb/' + item.id_app_user + '?tgl=' + item.date.substr(0,10)">
+            <v-card :to="'/list-tb/' + item.id_app_user + '?tgl=' + item.date.substr(0,10)" class="rounded-lg">
               <v-list>
                 <v-list-item>
                   <v-list-item-avatar size="80">

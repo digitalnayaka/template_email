@@ -15,6 +15,26 @@
 
       <v-card align="center" class="d-inline-block mx-auto">
         <v-list>
+          <v-list-item
+            href="https://www.youtube.com/channel/UCBExlB0xnMoTDT8LwVKg9oA"
+            target="_blank"
+          >
+            <v-list-item-content>
+              <v-list-item-title>
+                <v-icon>mdi-youtube-tv</v-icon>Video Tutorial
+              </v-list-item-title>
+
+              <v-list-item-subtitle>Video tutorial pemakaian aplikasi SiMotor</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item> <v-list-item to="/panduan_pembeli">
+            <v-list-item-content>
+              <v-list-item-title>
+                <v-icon>mdi-help-circle-outline</v-icon>Panduan
+              </v-list-item-title>
+
+              <v-list-item-subtitle>Panduan pemakaian aplikasi SiMotor</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-item to="/chat/1">
             <v-list-item-content>
               <v-list-item-title>

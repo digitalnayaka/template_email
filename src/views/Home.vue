@@ -22,9 +22,9 @@
     </v-carousel>
 
     <v-row>
-     <v-col cols="6" align="center" v-for="item in categories" :key="item.id">
+      <v-col cols="6" align="center" v-for="item in categories" :key="item.id">
         <v-card flat :to="'/category/' + item.route">
-          <v-img :src="item.image" width="500" height="150" contain ></v-img>
+          <v-img :src="item.image" width="500" height="150" contain></v-img>
           <h5>{{ item.name }}</h5>
         </v-card>
       </v-col>
@@ -33,10 +33,11 @@
     <v-card color="teal lighten-4">
       <v-container fluid class="text-center">
         <h2>Jadwal Tawar Bersama</h2>
+        <div>Jangan lewatkan Iklan Tawar Bersama berikut!</div>
 
         <div class="scrolling-wrapper-flexbox mx-2" v-if="jadwal.length > 0">
           <v-card
-            class="card ma-2"
+            class="card ma-2 rounded-lg"
             v-for="(item, index) in jadwal"
             contain
             :key="index"
@@ -126,39 +127,60 @@
 
     <v-divider class="my-2"></v-divider>
 
-    <v-card color="teal lighten-4 text-center"  flat rounded>
+    <v-card color="teal lighten-4 text-center" flat rounded>
       <v-container fluid>
         <h2>Artikel Terbaru</h2>
-        <h4>Yuk cek artikel terbaru di SiMotor</h4>
+        <div>Yuk cek artikel terbaru di SiMotor</div>
         <br />
-        <v-row align="center" dense  justify="space-around">
-          <v-col cols="6" sm="4" lg="2
-          " v-for="item in artikel" :key="item.id">
-            <v-card flat class="rounded-lg" href="http://devlmu.com:333/" width="300">
+        <v-row align="center" dense>
+          <v-col
+            cols="6"
+            sm="4"
+            lg="2
+          "
+            v-for="item in artikel"
+            :key="item.id"
+          >
+            <v-card
+              flat
+              class="rounded-lg"
+              href="http://devlmu.com:333/"
+              target="_blank"
+              width="300"
+            >
               <div align="center">
                 <v-img
-                 class="rounded-lg"
+                  class="rounded-lg"
                   align="center"
                   width="300"
                   height="200"
-                  :src="getImage(item.cover_image)"
+                  :src="getThumb(item.cover_image)"
                 ></v-img>
               </div>
 
               <v-list class="ma-0 pa-0">
                 <v-list-item>
                   <v-list-item-content>
-                   
-                    <v-list-item-title >Tanggal: {{ item.publish_date | dateFormat }}</v-list-item-title>
+                    <v-list-item-title
+                      >Tanggal:
+                      {{ item.publish_date | dateFormat }}</v-list-item-title
+                    >
                     <!-- <v-list-item-subtitle> By: </v-list-item-subtitle> -->
-                   <v-list-item-title class="font-weight-black"> {{ item.title }} </v-list-item-title>
+                    <v-list-item-title class="font-weight-black">
+                      {{ item.title }}
+                    </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
             </v-card>
           </v-col>
         </v-row>
-        <v-btn dark color="teal" href="http://devlmu.com:333/" class="mt-4"
+        <v-btn
+          dark
+          color="teal"
+          href="http://devlmu.com:333/"
+          target="_blank"
+          class="mt-4"
           >Lihat Semua Artikel</v-btn
         >
       </v-container>
@@ -201,7 +223,7 @@
         </v-card>
       </v-col>
     </v-row>
-<v-divider> </v-divider>
+    <v-divider> </v-divider>
     <v-container fluid>
       <div align="center">
         <v-img src="/img/logo-sm.webp" width="90"></v-img>
@@ -326,7 +348,6 @@ export default {
             limit: 6,
             offset: 0,
           },
-          
         })
         .then((response) => {
           let { data } = response.data;
