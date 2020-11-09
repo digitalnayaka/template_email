@@ -64,15 +64,18 @@ import { mapGetters } from "vuex";
 import moment from "moment-timezone";
 import "firebase/firestore";
 import { db } from "../main";
+import _ from "lodash";
 
 export default {
   name: "chat",
   data: () => ({
+    messages: [],
+    users: [],
     chats: [],
     item: 0,
   }),
   methods: {
-    async getChats() {
+    getChats() {
       db.collection("chat")
         .doc(String(this.user.id))
         .collection("user_messages")
@@ -80,28 +83,65 @@ export default {
         .onSnapshot((querySnapshot) => {
           let messages = [];
           querySnapshot.forEach((doc) => {
-            this.axios
-              .get("/user/v3/user", {
-                params: {
-                  id: doc.data().IdAppUser,
-                  limit: 1,
-                },
-              })
-              .then((response) => {
-                let { data } = response.data;
-                const dataa = {
-                  IdAppUser: doc.data().IdAppUser,
-                  Messages: doc.data().Messages,
-                  Pemenang: doc.data().Pemenang,
-                  Seen: doc.data().Seen,
-                  Time: doc.data().Time.toDate(),
-                  Nama: data[0].nama,
-                  Avatar: data[0].photo,
-                };
-                messages.push(dataa);
-              });
+            // this.axios
+            //   .get("/user/v3/user", {
+            //     params: {
+            //       id: doc.data().IdAppUser,
+            //       limit: 1,
+            //     },
+            //   })
+            //   .then((response) => {
+            //     let { data } = response.data;
+            //     const dataa = {
+            //       IdAppUser: doc.data().IdAppUser,
+            //       Messages: doc.data().Messages,
+            //       Pemenang: doc.data().Pemenang,
+            //       Seen: doc.data().Seen,
+            //       Time: doc.data().Time.toDate(),
+            //       Nama: data[0].nama,
+            //       Avatar: data[0].photo,
+            //     };
+            //     messages.push(dataa);
+            //   });
+            messages.push(doc.data());
           });
-          this.chats = messages;
+          this.messages = messages;
+          // console.log(this.messages);
+          this.getUsers();
+        });
+    },
+    getUsers() {
+      let params = new URLSearchParams();
+
+      for (let i = 0; i < this.messages.length; i++) {
+        params.append("id", this.messages[i].IdAppUser);
+      }
+      params.set("limit", this.messages.length);
+
+      let request = {
+        params: params,
+        headers: { Authorization: "Bearer " + this.user.token },
+      };
+
+      this.axios
+        .get("/user/v3/user", request)
+        .then((response) => {
+          let { data } = response.data;
+          this.users = data;
+
+          for (let i = 0; i < this.messages.length; i++) {
+            const id = this.messages[i].IdAppUser;
+
+            let found = this.users.filter((element) => element.id == id);
+            console.log(found);
+
+            this.chats.push({ ...this.messages, found });
+            this.chats = _.orderBy(this.chats, ["Time"], ["desc"]);
+          }
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
         });
     },
     read(id, pemenang) {
@@ -130,9 +170,6 @@ export default {
     ...mapGetters({
       user: "auth/user",
     }),
-    sortedItems: () => {
-      return this.chats.sort((a, b) => new Date(a.Time) - new Date(b.Time));
-    },
   },
   filters: {
     datediff: (date) => {
