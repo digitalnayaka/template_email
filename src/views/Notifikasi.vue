@@ -99,6 +99,14 @@
                         src="/img/icons/tiket_tersedia.webp"
                         v-if="item.id_modul == 12"
                       ></v-img>
+                      <v-img
+                        src="/img/icons/ic_review.webp"
+                        v-if="item.id_modul == 13"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/hampir-expired.webp"
+                        v-if="item.id_modul == 6"
+                      ></v-img>
 
                       <v-img
                         src="/img/icons/ic_review_dibalas.webp"
@@ -284,6 +292,10 @@
                         src="/img/icons/tiket_terpakai.webp"
                         v-if="item.id_modul == 11"
                       ></v-img>
+                      <v-img
+                        src="/img/icons/hampir-expired.webp"
+                        v-if="item.id_modul == 6"
+                      ></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -423,6 +435,12 @@ export default {
             this.$router.push({ path: "/category/ticket" });
           } else if (modul == 12) {
             this.$router.push({ path: "/category/ticket" });
+          } else if (modul == 9) {
+            this.$router.push({ path: "/buyer-review" });
+          } else if (modul == 3) {
+            this.$router.push({ path: "/detail-transaksi/" + data });
+            } else if (modul == 13) {
+            this.$router.push({ path: "/product/review" });
           } else {
             this.$router.push({ path: "/upload-bukti/" + data });
           }

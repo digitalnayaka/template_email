@@ -8,7 +8,7 @@
 
     <div class="text-h4">Ulasan Penjualan</div>
 
-    <v-card flat>
+    <v-card flat color="">
       <v-tabs
         v-model="tab"
         background-color="teal"
@@ -23,6 +23,7 @@
       <v-tabs-items v-model="tab">
         <v-tab-item>
           <v-card
+          color="light-green lighten-5"
             outlined
             class="mt-2 mb-4"
             v-for="item in notReview"
@@ -44,11 +45,11 @@
                 </div>
               </v-col>
 
-              <v-col cols="12" sm="10" class="d-flex">
+              <v-col cols="12" sm="10" class="d-flex" color="">
                 <v-divider vertical></v-divider>
 
-                <div class="flex-column flex-grow-1">
-                  <v-list>
+                <div class="flex-column flex-grow-1" >
+                  <v-list color="light-green lighten-5">
                     <v-list-item>
                       <v-list-item-avatar tile>
                         <v-icon v-if="item.app_user_foto_pembeli == ''">
@@ -197,7 +198,7 @@
                   </div>
 
                   <div v-else>
-                    <v-list>
+                    <v-list color="light-green lighten-5">
                       <v-list-item>
                         <v-list-item-avatar tile>
                           <v-icon v-if="item.app_user_foto_penjual == ''">
@@ -206,7 +207,7 @@
 
                           <v-img
                             :src="getImage(item.app_user_foto_penjual)"
-                            v-else
+                            v-else 
                           ></v-img>
                         </v-list-item-avatar>
 
@@ -250,7 +251,7 @@
                     :src="getImage(item.foto_iklan)"
                     contain
                     max-width="250"
-                    max-height="150"
+                    max-height="150" 
                   ></v-img>
 
                   <a :href="'/iklan/' + item.id_iklan">

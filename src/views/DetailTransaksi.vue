@@ -256,6 +256,7 @@
         <div
           v-if="
             orders.id_mst_order_status != 3 &&
+            
             orders.id_mst_pembayaran_status != 10
           "
         >
@@ -363,7 +364,7 @@
                 </v-btn>
               </v-toolbar>
               <v-container fluid>
-                Yakin ingin mengkonfirmasi pembayaran berikut?
+                Apakah Anda yakin ingin melakukan konfirmasi pembayaran berikut?
               </v-container>
 
               <v-divider></v-divider>

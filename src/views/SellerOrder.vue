@@ -46,6 +46,7 @@
         </v-chip-group>
 
         <v-card
+          color="blue-grey lighten-5"
           outlined
           class="mt-2 mb-4"
           v-for="item in orders"
@@ -59,39 +60,39 @@
 
             <v-col cols="6" align="right">
               <div
-                class="orange--text"
+                class="orange--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 1"
               >
                 {{ item.pembayaran_status }}
               </div>
               <div
-                class="green--text"
+                class="green--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 2"
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 3">
+              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 3">
                 {{ item.pembayaran_status }}
               </div>
               <div
-                class="orange--text"
+                class="orange--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 4"
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 6">
+              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 6">
                 {{ item.pembayaran_status }}
               </div>
               <div
-                class="orange--text"
+                class="orange--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 10"
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 11">
+              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 11">
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 12">
+              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 12">
                 {{ item.pembayaran_status }}
               </div>
             </v-col>
@@ -101,7 +102,7 @@
 
           <v-row dense align="center">
             <v-col cols="12" sm="6">
-              <v-list>
+              <v-list color="blue-grey lighten-5">
                 <v-list-item>
                   <v-list-item-avatar tile size="80">
                     <v-img :src="getImage(item.iklan.photo)" contain></v-img>
@@ -121,7 +122,7 @@
             </v-col>
 
             <v-col cols="12" sm="6">
-              <v-list>
+              <v-list color="blue-grey lighten-5">
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-subtitle>Tawaran Anda</v-list-item-subtitle>
@@ -144,7 +145,6 @@
             <v-spacer></v-spacer>
             <v-btn
               small
-              outlined
               color="teal"
               dark
               :to="'/chat/' + item.id_pembeli"

@@ -320,8 +320,9 @@
                       </template>
                     </v-datetime-picker>
                     <v-list-item-subtitle
-                        >Iklan akan aktif setelah Anda menekan tombol "Iklankan". 
-                        Penawaran akan dimulai berdasarkan tanggal diatas.</v-list-item-subtitle
+                        >Iklan akan aktif setelah Anda menekan tombol "Iklankan". </v-list-item-subtitle>
+                        <v-list-item-subtitle
+                        > Penawaran akan dimulai berdasarkan tanggal diatas.</v-list-item-subtitle
                       >
                   </v-col>
 
@@ -358,7 +359,8 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
-                  color="teal"
+                  color="red"
+                  outlined
                   dark
                   @click="id == undefined ? (e1 = 2) : (e1 = 1)"
                   >Sebelumnya</v-btn
