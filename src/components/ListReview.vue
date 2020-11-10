@@ -59,7 +59,7 @@
         <div class="ma-2 text-center" v-if="point == 0">
           <div>
             Bagaimana pengalaman Anda berbelanja di
-            {{ item.review.app_user_name_penjual }} ini?
+           <b> {{ item.review.app_user_name_penjual }} </b> ini?
           </div>
 
           <v-item-group v-model="point" class="d-flex justify-center">
@@ -103,7 +103,7 @@
           <v-subheader class="font-weight-bold"> Daftar Produk </v-subheader>
 
           <v-list-item>
-            <v-list-item-avatar tile size="80">
+            <v-list-item-avatar tile size="100">
               <v-img :src="getImage(item.order.iklan.photo)" contain></v-img>
             </v-list-item-avatar>
 
@@ -242,13 +242,14 @@
             outlined
             dense
             rows="3"
+           :rules="ulasanRules"
             no-resize
           ></v-textarea>
 
           <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn color="teal" dark @click="selected = null">Kembali</v-btn>
+            <v-btn color="red" outlined dark @click="selected = null">Kembali</v-btn>
 
             <v-btn
               color="teal"
@@ -304,6 +305,11 @@ export default {
     ],
     rating: 0,
     deskripsiUlasan: "",
+     ulasanRules: [
+        (v) => !!v || "Kolom ulasan harus diisi",
+        (v) => v.length >= 10 || "Min 10 karakter",
+        (v) => v.length <= 150 || "Max 150 karakter",
+      ],
     list: [
       {
         id: 1,

@@ -99,6 +99,16 @@
                         src="/img/icons/tiket_tersedia.webp"
                         v-if="item.id_modul == 12"
                       ></v-img>
+
+                      <v-img
+                        src="/img/icons/ic_review_dibalas.webp"
+                        v-if="item.id_modul == 9"
+                      ></v-img>
+
+                       <v-img
+                        src="/img/icons/review_pembeli.webp"
+                        v-if="item.id_modul == 8"
+                      ></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -265,6 +275,14 @@
                       <v-img
                         src="/img/icons/tiket_tersedia.webp"
                         v-if="item.id_modul == 12"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/tiket_expired.webp"
+                        v-if="item.id_modul == 10"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/tiket_terpakai.webp"
+                        v-if="item.id_modul == 11"
                       ></v-img>
                     </v-list-item-avatar>
 

@@ -429,14 +429,14 @@ export default {
       judul_iklan: "",
       judulRules: [
         (v) => !!v || "judul iklan harus diisi",
-        (v) => v.length >= 2 || "Min 2 characters",
-        (v) => v.length <= 70 || "Min 70 characters",
+        (v) => v.length >= 2 || "Min 2 karakter",
+        (v) => v.length <= 70 || "Max 70 karakter",
       ],
       deskripsi_iklan: "",
       descRules: [
         (v) => !!v || "deskripsi unit harus diisi",
-        (v) => v.length >= 2 || "Min 2 characters",
-        (v) => v.length <= 350 || "Min 350 characters",
+        (v) => v.length >= 2 || "Min 2 karakter",
+        (v) => v.length <= 350 || "Max 350 karakter",
       ],
       money: {
         precision: 0,
@@ -446,7 +446,7 @@ export default {
       amount: 0,
       amountRules: [
         (v) => v != 0 || "Field is required",
-        (v) => v.length <= 11 || "Max 11 characters",
+        (v) => v.length <= 11 || "Max 11 karakter",
       ],
       price: 0,
       kelipatan: "",

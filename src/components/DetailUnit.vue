@@ -41,7 +41,7 @@
           <v-list-item-action>{{ unitMokas.status }}</v-list-item-action>
         </v-list-item>
 
-         <v-divider></v-divider>
+        <v-divider></v-divider>
         <v-list-item>
           <v-list-item-avatar>
             <v-img src="/img/icons/icon_tipe.png"></v-img>
@@ -207,12 +207,15 @@
             <v-list-item-title>STNK</v-list-item-title>
           </v-list-item-content>
 
-          <v-list-item-action>{{
-            unitMokas.lembar_stnk ? "ADA" : "TIDAK"
-          }}</v-list-item-action>
-            <v-list-item-action>( {{ unitMokas.tanggal_stnk | dateFormat }} )</v-list-item-action>
+          <v-list-item-action v-if="unitMokas.id_mst_motor_bekas_status == 2"
+            >{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }} (
+            {{ unitMokas.tanggal_stnk | dateFormat }} )</v-list-item-action
+          >
+          <v-list-item-action v-if="unitMokas.id_mst_motor_bekas_status == 1"
+            >{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }} </v-list-item-action
+          >
         </v-list-item>
-
+  
         <v-divider></v-divider>
 
         <v-list-item>
@@ -224,10 +227,13 @@
             <v-list-item-title>Lembar Pajak</v-list-item-title>
           </v-list-item-content>
 
-          <v-list-item-action>{{
+          <v-list-item-action v-if="unitMokas.id_mst_motor_bekas_status == 2">{{
+            unitMokas.lembar_pajak ? "ADA" : "TIDAK"
+          }} ( {{ unitMokas.tanggal_pajak | dateFormat }} )</v-list-item-action>
+
+          <v-list-item-action v-if="unitMokas.id_mst_motor_bekas_status == 1">{{
             unitMokas.lembar_pajak ? "ADA" : "TIDAK"
           }}</v-list-item-action>
-            <v-list-item-action>( {{ unitMokas.tanggal_pajak | dateFormat}} )</v-list-item-action>
         </v-list-item>
 
         <v-divider></v-divider>
@@ -263,7 +269,6 @@
 <script>
 import moment from "moment-timezone";
 export default {
-  
   name: "detail-unit",
   props: ["unitMokas", "hits"],
   // data: () => ({
@@ -271,7 +276,6 @@ export default {
   //   urlJudul: this.hits.judul.toLowerCase().replace(" ", "-"),
   // }),
   filters: {
-    
     dateFormat: (date) => {
       return moment.utc(date).format("DD MMM YYYY");
     },

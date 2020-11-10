@@ -31,7 +31,13 @@
               :value="tag.id"
               @click="filterStatus"
             >
-              <v-img :src="tag.img" contain width="25" height="25" class="mr-1"></v-img>
+              <v-img
+                :src="tag.img"
+                contain
+                width="30"
+                height="30"
+                class="mr-1"
+              ></v-img>
               {{ tag.text }}
               <span class="ml-1" v-if="tag.id == chip">
                 ({{ orders.length }})
@@ -42,7 +48,8 @@
 
         <v-card
           outlined
-          class="mt-2 mb-4"
+          class="mt-2 mb-4 rounded-lg"
+          color="blue-grey lighten-5"
           v-for="item in orders"
           :key="item.id"
           :to="'/detail-transaksi/' + item.id"
@@ -54,39 +61,51 @@
 
             <v-col cols="6" align="right">
               <div
-                class="orange--text"
+                class="orange--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 1"
               >
                 {{ item.pembayaran_status }}
               </div>
               <div
-                class="green--text"
+                class="green--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 2"
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 3">
+              <div
+                class="red--text font-weight-bold"
+                v-if="item.id_mst_pembayaran_status == 3"
+              >
                 {{ item.pembayaran_status }}
               </div>
               <div
-                class="orange--text"
+                class="orange--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 4"
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 6">
+              <div
+                class="red--text font-weight-bold"
+                v-if="item.id_mst_pembayaran_status == 6"
+              >
                 {{ item.pembayaran_status }}
               </div>
               <div
-                class="orange--text"
+                class="orange--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 10"
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 11">
+              <div
+                class="red--text font-weight-bold"
+                v-if="item.id_mst_pembayaran_status == 11"
+              >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 12">
+              <div
+                class="red--text font-weight-bold"
+                v-if="item.id_mst_pembayaran_status == 12"
+              >
                 {{ item.pembayaran_status }}
               </div>
             </v-col>
@@ -96,16 +115,16 @@
 
           <v-row dense align="center">
             <v-col cols="10" sm="6">
-              <v-list>
+              <v-list color="blue-grey lighten-5">
                 <v-list-item>
-                  <v-list-item-avatar tile size="80">
+                  <v-list-item-avatar tile size="100">
                     <v-img :src="getImage(item.iklan.photo)" contain></v-img>
                   </v-list-item-avatar>
 
                   <v-list-item-content>
                     <v-list-item-subtitle>Tawar Bersama</v-list-item-subtitle>
 
-                    <v-list-item-title>
+                    <v-list-item-title class="font-weight-bold">
                       <a :href="'/iklan/' + item.id_iklan">{{
                         item.iklan.judul
                       }}</a>
@@ -116,12 +135,12 @@
             </v-col>
 
             <v-col cols="12" sm="6">
-              <v-list>
+              <v-list  color="blue-grey lighten-5">
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-subtitle>Tawaran Anda</v-list-item-subtitle>
 
-                    <v-list-item-title>
+                    <v-list-item-title class="font-weight-bold">
                       Rp
                       {{
                         Number(item.total_pembayaran).toLocaleString("id-ID")
