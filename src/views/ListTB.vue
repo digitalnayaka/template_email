@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-card outlined>
+    <v-card outlined class="rounded-lg">
       <v-row>
         <v-col cols="12" sm="6">
           <v-list>
@@ -31,12 +31,8 @@
                 <v-list-item-subtitle class="teal--text">
                   {{ slogan }}
                 </v-list-item-subtitle>
-                <h5>
+                <!-- <h5>
                   Rating Penjual:
-
-                  <!-- <v-icon color="red" v-if="avg.ratting_user == 1">
-                  mdi-emoticon-angry-outline
-                </v-icon> -->
                   <v-avatar size="16" item>
                     <v-img
                       src="/img/icons/emoji_tidakpuas.png"
@@ -61,16 +57,8 @@
                       v-if="avg.ratting_user == 3"
                     ></v-img>
                   </v-avatar>
-                </h5>
-                <h5>
-                  <v-icon
-                    color="yellow"
-                    v-for="n in avg.ratting_iklan"
-                    :key="n"
-                  >
-                    mdi-star
-                  </v-icon>
-                </h5>
+                </h5> -->
+
                 <div v-if="!guest && $vuetify.breakpoint.smAndUp">
                   <v-btn
                     small
@@ -171,7 +159,7 @@
             <v-col cols="12" sm="6" class="text-center">
               <div class="text-h5">Rating Penjual</div>
 
-              <v-icon x-large color="red" v-if="avg.ratting_user == 1">
+              <!-- <v-icon x-large color="red" v-if="avg.ratting_user == 1">
                 mdi-emoticon-angry-outline
               </v-icon>
 
@@ -181,7 +169,30 @@
 
               <v-icon x-large color="teal" v-if="avg.ratting_user == 3">
                 mdi-emoticon-happy-outline
-              </v-icon>
+              </v-icon> -->
+              <v-avatar size="32" item>
+                <v-img
+                  src="/img/icons/emoji_tidakpuas.png"
+                  alt="rating"
+                  v-if="avg.ratting_user == 1"
+                ></v-img>
+              </v-avatar>
+
+              <v-avatar size="32" item>
+                <v-img
+                  src="/img/icons/emoji_netral.png"
+                  alt="rating"
+                  v-if="avg.ratting_user == 2"
+                ></v-img>
+              </v-avatar>
+
+              <v-avatar size="32" item>
+                <v-img
+                  src="/img/icons/emoji_puas.png"
+                  alt="rating"
+                  v-if="avg.ratting_user == 3"
+                ></v-img>
+              </v-avatar>
             </v-col>
 
             <v-col cols="12" sm="6">
@@ -324,7 +335,7 @@
       <v-tab-item>
         <v-card
           outlined
-          class="mt-2 mb-4"
+          class="mt-2 mb-4 rounded-lg"
           v-for="item in ulasanSaya"
           :key="item.id"
         >
@@ -332,6 +343,7 @@
             <v-col cols="12" sm="2">
               <div class="pa-2" align="center">
                 <v-img
+                  class="rounded-lg"
                   :src="getImage(item.foto_iklan)"
                   contain
                   max-width="250"
@@ -356,6 +368,7 @@
                       </v-icon>
 
                       <v-img
+                        class="rounded-lg"
                         :src="getImage(item.app_user_foto_pembeli)"
                         v-else
                       ></v-img>
@@ -465,6 +478,7 @@
                         </v-icon>
 
                         <v-img
+                          class="rounded-lg"
                           :src="getImage(item.app_user_foto_penjual)"
                           v-else
                         ></v-img>
@@ -495,7 +509,7 @@
       </v-tab-item>
 
       <v-tab-item>
-        <v-card>
+        <v-card class="rounded-lg">
           <v-card-title class="font-weight-bold">
             Informasi Penjual
           </v-card-title>
@@ -979,22 +993,7 @@ export default {
           console.log(responses.api_message);
         });
     },
-    reviewAvg() {
-      this.axios
-        .get("/transaksi/v3/review_avg", {
-          params: {
-            id_penjual: this.appuser.id,
-          },
-        })
-        .then((response) => {
-          let { data } = response.data;
-          this.avg = data[0];
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          console.log(responses);
-        });
-    },
+
     daftarTB() {
       var offset = (this.page - 1) * this.limit;
 
@@ -1131,7 +1130,6 @@ export default {
   },
   created() {
     this.initialize();
-    
   },
   watch: {
     title: {
