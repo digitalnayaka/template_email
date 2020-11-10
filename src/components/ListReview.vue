@@ -438,7 +438,7 @@ export default {
               color: "success",
               text: data.api_message,
             });
-            this.getOrder();
+            window.location.href = "/product/review";
           })
           .catch((error) => {
             let responses = error.response.data;
