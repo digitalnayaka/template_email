@@ -59,7 +59,7 @@
         <div class="ma-2 text-center" v-if="point == 0">
           <div>
             Bagaimana pengalaman Anda berbelanja di
-           <b> {{ item.review.app_user_name_penjual }} </b> ini?
+            <b> {{ item.review.app_user_name_penjual }} </b> ini?
           </div>
 
           <v-item-group v-model="point" class="d-flex justify-center">
@@ -242,14 +242,16 @@
             outlined
             dense
             rows="3"
-           :rules="ulasanRules"
+            :rules="ulasanRules"
             no-resize
           ></v-textarea>
 
           <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn color="red" outlined dark @click="selected = null">Kembali</v-btn>
+            <v-btn color="red" outlined dark @click="selected = null"
+              >Kembali</v-btn
+            >
 
             <v-btn
               color="teal"
@@ -305,11 +307,11 @@ export default {
     ],
     rating: 0,
     deskripsiUlasan: "",
-     ulasanRules: [
-        (v) => !!v || "Kolom ulasan harus diisi",
-        (v) => v.length >= 10 || "Min 10 karakter",
-        (v) => v.length <= 150 || "Max 150 karakter",
-      ],
+    ulasanRules: [
+      (v) => !!v || "Kolom ulasan harus diisi",
+      (v) => v.length >= 10 || "Min 10 karakter",
+      (v) => v.length <= 150 || "Max 150 karakter",
+    ],
     list: [
       {
         id: 1,
@@ -408,11 +410,21 @@ export default {
         formData.set("id_app_user", this.user.id);
         formData.set("ratting_iklan", this.rating);
         formData.set("ratting_user", this.point);
-        formData.set("foto_1", this.list[0].foto, "foto_1.jpg");
-        formData.set("foto_2", this.list[1].foto, "foto_2.jpg");
-        formData.set("foto_3", this.list[2].foto, "foto_3.jpg");
-        formData.set("foto_4", this.list[3].foto, "foto_4.jpg");
-        formData.set("foto_5", this.list[4].foto, "foto_5.jpg");
+        if (this.list[0].foto != null) {
+          formData.set("foto_1", this.list[0].foto, "foto_1.jpg");
+        }
+        if (this.list[1].foto != null) {
+          formData.set("foto_2", this.list[1].foto, "foto_2.jpg");
+        }
+        if (this.list[2].foto != null) {
+          formData.set("foto_3", this.list[2].foto, "foto_3.jpg");
+        }
+        if (this.list[3].foto != null) {
+          formData.set("foto_4", this.list[3].foto, "foto_4.jpg");
+        }
+        if (this.list[4].foto != null) {
+          formData.set("foto_5", this.list[4].foto, "foto_5.jpg");
+        }
         formData.set("review", this.deskripsiUlasan);
 
         this.axios
