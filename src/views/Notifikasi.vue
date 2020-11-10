@@ -83,58 +83,21 @@
                         src="/img/icons/iklan.png"
                         v-if="item.id_modul == 5"
                       ></v-img>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>{{ item.judul }}</v-list-item-title>
-
-                      <v-list-item-subtitle>{{
-                        item.deskripsi
-                      }}</v-list-item-subtitle>
-                    </v-list-item-content>
-
-                    <v-list-item-action class="overline teal--text">{{
-                      item.created_at | dateFormat
-                    }}</v-list-item-action>
-
-                    <v-list-item-action-text style="display: none">
-                      <v-checkbox
-                        :input-value="active"
-                        color="deep-purple accent-4"
-                      ></v-checkbox>
-                    </v-list-item-action-text>
-                  </template>
-                </v-list-item>
-              </template>
-            </v-list-item-group>
-          </v-tab-item>
-
-          <v-tab-item>
-            <v-list-item-group v-model="model" multiple>
-              <template v-for="(item, i) in notif">
-                <v-list-item
-                  :key="i"
-                  @click="read(item.id, item.id_modul, item.id_data)"
-                  :value="item.is_read"
-                  active-class="deep-purple--text text--accent-4"
-                >
-                  <template v-slot:default="{ active }">
-                    <v-list-item-avatar>
-                      <v-img
-                        src="/img/icons/unit.png"
-                        v-if="item.id_modul == 4"
+                       <v-img
+                        src="/img/icons/tiket_expired.webp"
+                        v-if="item.id_modul == 7"
                       ></v-img>
                       <v-img
-                        src="/img/icons/transaksi.png"
-                        v-if="item.id_modul == 3"
+                        src="/img/icons/tiket_expired.webp"
+                        v-if="item.id_modul == 10"
                       ></v-img>
                       <v-img
-                        src="/img/icons/iklan.png"
-                        v-if="item.id_modul == 1"
+                        src="/img/icons/tiket_terpakai.webp"
+                        v-if="item.id_modul == 11"
                       ></v-img>
                       <v-img
-                        src="/img/icons/iklan.png"
-                        v-if="item.id_modul == 5"
+                        src="/img/icons/tiket_tersedia.webp"
+                        v-if="item.id_modul == 12"
                       ></v-img>
                     </v-list-item-avatar>
 
@@ -173,22 +136,83 @@
                 >
                   <template v-slot:default="{ active }">
                     <v-list-item-avatar>
-                      <v-img
-                        src="/img/icons/unit.png"
-                        v-if="item.id_modul == 4"
-                      ></v-img>
-                      <v-img
-                        src="/img/icons/transaksi.png"
-                        v-if="item.id_modul == 3"
-                      ></v-img>
-                      <v-img
-                        src="/img/icons/iklan.png"
-                        v-if="item.id_modul == 1"
-                      ></v-img>
-                      <v-img
-                        src="/img/icons/iklan.png"
-                        v-if="item.id_modul == 5"
-                      ></v-img>
+                      <v-img src="/img/icons/iklan.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.judul }}</v-list-item-title>
+
+                      <v-list-item-subtitle>{{
+                        item.deskripsi
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-action class="overline teal--text">{{
+                      item.created_at | dateFormat
+                    }}</v-list-item-action>
+
+                    <v-list-item-action-text style="display: none">
+                      <v-checkbox
+                        :input-value="active"
+                        color="deep-purple accent-4"
+                      ></v-checkbox>
+                    </v-list-item-action-text>
+                  </template>
+                </v-list-item>
+              </template>
+            </v-list-item-group>
+          </v-tab-item>
+
+          <v-tab-item>
+            <v-list-item-group v-model="model" multiple>
+              <template v-for="(item, i) in notif">
+                <v-list-item
+                  :key="i"
+                  @click="read(item.id, item.id_modul, item.id_data)"
+                  :value="item.is_read"
+                  active-class="deep-purple--text text--accent-4"
+                >
+                  <template v-slot:default="{ active }">
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/transaksi.png"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.judul }}</v-list-item-title>
+
+                      <v-list-item-subtitle>{{
+                        item.deskripsi
+                      }}</v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-action class="overline teal--text">{{
+                      item.created_at | dateFormat
+                    }}</v-list-item-action>
+
+                    <v-list-item-action-text style="display: none">
+                      <v-checkbox
+                        :input-value="active"
+                        color="deep-purple accent-4"
+                      ></v-checkbox>
+                    </v-list-item-action-text>
+                  </template>
+                </v-list-item>
+              </template>
+            </v-list-item-group>
+          </v-tab-item>
+
+          <v-tab-item>
+            <v-list-item-group v-model="model" multiple>
+              <template v-for="(item, i) in notif">
+                <v-list-item
+                  :key="i"
+                  @click="read(item.id, item.id_modul, item.id_data)"
+                  :value="item.is_read"
+                  active-class="deep-purple--text text--accent-4"
+                >
+                  <template v-slot:default="{ active }">
+                    <v-list-item-avatar>
+                      <v-img src="/img/icons/unit.png"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -227,20 +251,20 @@
                   <template v-slot:default="{ active }">
                     <v-list-item-avatar>
                       <v-img
-                        src="/img/icons/unit.png"
-                        v-if="item.id_modul == 4"
+                        src="/img/icons/tiket_expired.webp"
+                        v-if="item.id_modul == 7"
                       ></v-img>
                       <v-img
-                        src="/img/icons/transaksi.png"
-                        v-if="item.id_modul == 3"
+                        src="/img/icons/tiket_expired.webp"
+                        v-if="item.id_modul == 10"
                       ></v-img>
                       <v-img
-                        src="/img/icons/iklan.png"
-                        v-if="item.id_modul == 1"
+                        src="/img/icons/tiket_terpakai.webp"
+                        v-if="item.id_modul == 11"
                       ></v-img>
                       <v-img
-                        src="/img/icons/iklan.png"
-                        v-if="item.id_modul == 5"
+                        src="/img/icons/tiket_tersedia.webp"
+                        v-if="item.id_modul == 12"
                       ></v-img>
                       <v-img
                         src="/img/icons/tiket_expired.webp"
@@ -336,8 +360,11 @@ export default {
           params.set("id_modul", this.modul);
         }
         if (this.tab == 4) {
-          this.modul = 7;
-          params.set("id_modul", this.modul);
+          // this.modul = [7,10,11,12];
+          params.append("id_modul", 7);
+          params.append("id_modul", 10);
+          params.append("id_modul", 11);
+          params.append("id_modul", 12);
         }
       }
       params.set("offset", offset);
