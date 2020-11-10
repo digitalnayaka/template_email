@@ -57,7 +57,7 @@
 
               <v-list-item-subtitle>Penjual</v-list-item-subtitle>
 
-              <v-list-item-subtitle>
+              <v-list-item-subtitle v-if="appuser.slogan !=null">
                 Slogan: {{ appuser.slogan }}
               </v-list-item-subtitle>
 
@@ -514,7 +514,7 @@
             </v-card>
           </v-col>
 
-          <v-col cols="12" sm="6" class="pa-0">
+          <!-- <v-col cols="12" sm="6" class="pa-0">
             <div
               class="teal--text"
               align="center"
@@ -601,7 +601,7 @@
                 </v-dialog>
               </div>
             </div>
-          </v-col>
+          </v-col> -->
         </v-row>
 
         <v-row>

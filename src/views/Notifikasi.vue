@@ -242,6 +242,14 @@
                         src="/img/icons/iklan.png"
                         v-if="item.id_modul == 5"
                       ></v-img>
+                      <v-img
+                        src="/img/icons/tiket_expired.webp"
+                        v-if="item.id_modul == 10"
+                      ></v-img>
+                      <v-img
+                        src="/img/icons/tiket_terpakai.webp"
+                        v-if="item.id_modul == 11"
+                      ></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>

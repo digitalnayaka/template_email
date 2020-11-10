@@ -171,16 +171,6 @@ export default {
         title: "Akun",
         route: "/account/edit",
       },
-      {
-        id: 2,
-        icon: "mdi-email-multiple",
-        title: "Kotak Masuk",
-        items: [
-          { id: 6, title: "Chat", route: "/chat-list" },
-          { id: 7, title: "Penilaian", route: "/product/review" },
-          { id: 8, title: "Notifikasi", route: "/notification" },
-        ],
-      },
 
       {
         id: 4,
@@ -197,7 +187,16 @@ export default {
         ],
       },
 
-      
+      {
+        id: 2,
+        icon: "mdi-email-multiple",
+        title: "Kotak Masuk",
+        items: [
+          { id: 6, icon:"mdi-account", title: "Chat", route: "/chat-list" },
+          { id: 7, title: "Penilaian", route: "/product/review" },
+          { id: 8, title: "Notifikasi", route: "/notification" },
+        ],
+      },
       
       {
         id: 5,

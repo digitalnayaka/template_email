@@ -109,7 +109,7 @@
               <v-spacer></v-spacer>
 
               <v-btn
-                color="orange"
+                color="teal"
                 dark
                 :to="'/chat/' + orders.id_pembeli"
                 v-if="orders.id_penjual == user.id"
@@ -118,7 +118,7 @@
               </v-btn>
 
               <v-btn
-                color="orange"
+                color="teal"
                 dark
                 :to="'/chat/' + orders.id_penjual"
                 v-else
@@ -126,8 +126,8 @@
                 Tanya Penjual
               </v-btn>
 
-              <v-btn color="primary" @click.stop="statusOrder = true">
-                Lihat Detail
+              <v-btn color="teal" outlined @click.stop="statusOrder = true">
+                Lacak
               </v-btn>
 
               <v-dialog v-model="statusOrder" width="660">
@@ -463,7 +463,8 @@
             @click="batalkan"
             v-if="
               orders.id_mst_pembayaran_status != 2 &&
-              orders.id_mst_pembayaran_status != 3
+              orders.id_mst_pembayaran_status != 3 &&
+              orders.id_mst_pembayaran_status != 4
             "
           >
             Batalkan

@@ -37,7 +37,7 @@
 
         <div class="scrolling-wrapper-flexbox mx-2" v-if="jadwal.length > 0">
           <v-card
-            class="card ma-2 rounded-lg"
+            class="card ma-2 rounded-xl"
             v-for="(item, index) in jadwal"
             contain
             :key="index"
