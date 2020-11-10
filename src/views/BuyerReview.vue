@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <div class="text-h4">Penilaian dari Pembeli</div>
+    <div class="text-h4">Ulasan Penjualan</div>
 
     <v-card flat>
       <v-tabs
@@ -16,8 +16,8 @@
         slider-color="yellow"
         show-arrows
       >
-        <v-tab>Kotak Masuk Penilaian</v-tab>
-        <v-tab>Penilaian Pembeli</v-tab>
+        <v-tab>Kotak Masuk Ulasan</v-tab>
+        <v-tab>Ulasan Penjualan</v-tab>
       </v-tabs>
 
       <v-tabs-items v-model="tab">

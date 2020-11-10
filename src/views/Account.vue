@@ -237,7 +237,7 @@ export default {
       {
         icon: "mdi-emoticon",
         title: "Penilaian",
-        items: [{ id: 20, title: "Penilaian Penjual", route: "/buyer-review" }],
+        items: [{ id: 20, title: "Penilaian Saya", route: "/buyer-review" }],
       },
     ],
   }),
