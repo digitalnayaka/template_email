@@ -406,7 +406,7 @@
               <v-list-item to="/chat-list">
                 <v-list-item-subtitle>Chat</v-list-item-subtitle>
 
-                <v-list-item-action>
+                <v-list-item-action  v-if="chats.length > 0">
                   <v-avatar color="red" size="25">
                     <span class="white--text">{{ chats.length }}</span>
                   </v-avatar>
@@ -416,7 +416,7 @@
               <v-list-item href="/product/review">
                 <v-list-item-subtitle>Penilaian</v-list-item-subtitle>
 
-                <v-list-item-action>
+                <v-list-item-action v-if="review.length > 0">
                   <v-avatar color="red" size="25">
                     <span class="white--text">{{ review.length }}</span>
                   </v-avatar>
