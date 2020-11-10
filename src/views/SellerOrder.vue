@@ -30,13 +30,13 @@
               :value="tag.id"
               @click="filterStatus"
             >
-             <v-img
-                      :src="tag.img"
-                      contain
-                      :width="25"
-                      :height="25"
-                      v-on="on"
-                    ></v-img>
+              <v-img
+                :src="tag.img"
+                contain
+                :width="25"
+                :height="25"
+                v-on="on"
+              ></v-img>
               {{ tag.text }}
               <span class="ml-1" v-if="tag.id == chip"
                 >({{ orders.length }})</span
@@ -177,25 +177,41 @@ import moment from "moment-timezone";
 export default {
   name: "seller-order",
   props: ["utc", "timezone"],
-  components: { 
+  components: {
     TicketTransaction: () =>
       import(
-        /* webpackChunkName: "ticket-transaction" */ "@/components/TicketTransaction.vue" ),
-
+        /* webpackChunkName: "ticket-transaction" */ "@/components/TicketTransaction.vue"
+      ),
   },
   data() {
     return {
       tab: 0,
       chip: Number(this.$route.query.id),
       tags: [
-         { id: 0, img: "/img/icons/semua.png", text: "Semua" },
-        { id: 10, img: "/img/icons/menunggu_persetujuan.png", text: "Menunggu Persetujuan" },
-        { id: 1, img: "/img/icons/menunggu_pembayaran.png", text: "Menunggu Pembayaran" },
-        { id: 4, img: "/img/icons/menunggu_verifikasi.png", text: "Menunggu Verifikasi" },
-        { id: 6, img: "/img/icons/ditolak.png", text: "Ditolak" },
-        { id: 2, img: "/img/icons/pembayaran_diverifikasi.png",text: "Pembayaran Diverifikasi" },
-        { id: 5, img: "/img/icons/dibatalkan.png",text: "Dibatalkan" },
-        { id: 3, img: "/img/icons/expired.png", text: "Expired" },
+        { id: 0, img: "/img/icons/semua.webp", text: "Semua" },
+        {
+          id: 10,
+          img: "/img/icons/menunggu_persetujuan.webp",
+          text: "Menunggu Persetujuan",
+        },
+        {
+          id: 1,
+          img: "/img/icons/menunggu_pembayaran.webp",
+          text: "Menunggu Pembayaran",
+        },
+        {
+          id: 4,
+          img: "/img/icons/menunggu_verifikasi.webp",
+          text: "Menunggu Verifikasi",
+        },
+        { id: 6, img: "/img/icons/ditolak.webp", text: "Ditolak" },
+        {
+          id: 2,
+          img: "/img/icons/pembayaran_diverifikasi.webp",
+          text: "Pembayaran Diverifikasi",
+        },
+        { id: 5, img: "/img/icons/dibatalkan.webp", text: "Dibatalkan" },
+        { id: 3, img: "/img/icons/expired.webp", text: "Expired" },
       ],
       orders: [],
       page: 1,

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="rounded-lg">
     <v-divider></v-divider>
 
     <div class="d-flex justify-space-between grey lighten-3 pa-2">
@@ -52,12 +52,13 @@
               <v-img
                 :src="getImage(item.order.iklan.photo)"
                 contain
+                
                 align="center"
               ></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title>
+              <v-list-item-title >
                 <a :href="'/iklan/' + item.order.id_iklan">
                   {{ item.order.iklan.judul }}
                 </a>
