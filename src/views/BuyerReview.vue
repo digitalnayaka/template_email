@@ -334,34 +334,40 @@
 
                   <v-divider></v-divider>
 
-                  <v-list>
-                    <v-list-item>
-                      <v-list-item-avatar tile>
-                        <v-icon v-if="item.app_user_foto_penjual == ''">
-                          mdi-account-circle
-                        </v-icon>
+                  <div v-if="item.Reply != null">
+                    <v-list>
+                      <v-list-item>
+                        <v-list-item-avatar tile>
+                          <v-icon v-if="item.app_user_foto_penjual == ''">
+                            mdi-account-circle
+                          </v-icon>
 
-                        <v-img
-                          :src="getImage(item.app_user_foto_penjual)"
-                          v-else
-                        ></v-img>
-                      </v-list-item-avatar>
+                          <v-img
+                            :src="getImage(item.app_user_foto_penjual)"
+                            v-else
+                          ></v-img>
+                        </v-list-item-avatar>
 
-                      <v-list-item-content>
-                        <v-list-item-title>
-                          {{ item.app_user_name_penjual }}
-                        </v-list-item-title>
+                        <v-list-item-content>
+                          <v-list-item-title>
+                            {{ item.app_user_name_penjual }}
+                          </v-list-item-title>
 
-                        <v-list-item-subtitle>
-                          <span class="red pa-1 white--text text-caption mr-1">
-                            Penjual
-                          </span>
-                        </v-list-item-subtitle>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
+                          <v-list-item-subtitle>
+                            <span
+                              class="red pa-1 white--text text-caption mr-1"
+                            >
+                              Penjual
+                            </span>
+                          </v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list>
 
-                  <div>{{ item.Reply }}</div>
+                    <div class="mx-4 mb-2">
+                      {{ item.Reply[0].reply }}
+                    </div>
+                  </div>
                 </div>
               </v-col>
             </v-row>
@@ -414,7 +420,9 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.review = data;
-          this.rating();
+          if (this.review.length > 0) {
+            this.rating();
+          }
 
           this.total = response.data.count;
           this.lengthPage =
