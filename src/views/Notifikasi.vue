@@ -83,7 +83,7 @@
                         src="/img/icons/iklan.png"
                         v-if="item.id_modul == 5"
                       ></v-img>
-                       <v-img
+                      <v-img
                         src="/img/icons/tiket_expired.webp"
                         v-if="item.id_modul == 7"
                       ></v-img>
@@ -105,7 +105,7 @@
                         v-if="item.id_modul == 9"
                       ></v-img>
 
-                       <v-img
+                      <v-img
                         src="/img/icons/review_pembeli.webp"
                         v-if="item.id_modul == 8"
                       ></v-img>
@@ -413,6 +413,16 @@ export default {
             this.$router.push({ path: "/iklan/" + data });
           } else if (modul == 4) {
             this.$router.push({ path: "/garasi/detail-unit/" + data });
+          } else if (modul == 8) {
+            this.$router.push({ path: "/buyer-review" });
+          } else if (modul == 7) {
+            this.$router.push({ path: "/category/ticket" });
+          } else if (modul == 10) {
+            this.$router.push({ path: "/category/ticket" });
+          } else if (modul == 11) {
+            this.$router.push({ path: "/category/ticket" });
+          } else if (modul == 12) {
+            this.$router.push({ path: "/category/ticket" });
           } else {
             this.$router.push({ path: "/upload-bukti/" + data });
           }

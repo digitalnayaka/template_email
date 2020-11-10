@@ -17,7 +17,7 @@
         show-arrows
       >
         <v-tab>Kotak Masuk Ulasan</v-tab>
-        <v-tab>Ulasan Penjualan</v-tab>
+        <!-- <v-tab>Ulasan Penjualan</v-tab> -->
       </v-tabs>
 
       <v-tabs-items v-model="tab">
@@ -156,42 +156,79 @@
 
                   <v-divider></v-divider>
 
-                  <v-btn
-                    color="teal"
-                    dark
-                    small
-                    class="ma-4"
-                    @click="selected = item"
-                    v-if="selected.length == 0"
-                  >
-                    Balas Ulasan
-                  </v-btn>
+                  <div v-if="item.Reply == null">
+                    <v-btn
+                      color="teal"
+                      dark
+                      small
+                      class="ma-4"
+                      @click="selected = item"
+                      v-if="selected.length == 0"
+                    >
+                      Balas Ulasan
+                    </v-btn>
 
-                  <div class="ma-4" v-if="selected.id == item.id">
-                    <v-textarea
-                      v-model="reply"
-                      placeholder="Tulis deskripsi Anda mengenai produk ini..."
-                      outlined
-                      dense
-                      rows="3"
-                      no-resize
-                    ></v-textarea>
+                    <div class="ma-4" v-if="selected.id == item.id">
+                      <v-textarea
+                        v-model="reply"
+                        placeholder="Tulis deskripsi Anda mengenai produk ini..."
+                        outlined
+                        dense
+                        rows="3"
+                        no-resize
+                      ></v-textarea>
 
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="teal" dark @click="selected = []"
-                        >Kembali</v-btn
-                      >
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="teal" dark @click="selected = []"
+                          >Kembali</v-btn
+                        >
 
-                      <v-btn
-                        color="teal"
-                        class="white--text"
-                        :disabled="reply == '' ? true : false"
-                        @click="sendReply(item)"
-                      >
-                        Kirim
-                      </v-btn>
-                    </v-card-actions>
+                        <v-btn
+                          color="teal"
+                          class="white--text"
+                          :disabled="reply == '' ? true : false"
+                          @click="sendReply(item)"
+                        >
+                          Kirim
+                        </v-btn>
+                      </v-card-actions>
+                    </div>
+                  </div>
+
+                  <div v-else>
+                    <v-list>
+                      <v-list-item>
+                        <v-list-item-avatar tile>
+                          <v-icon v-if="item.app_user_foto_penjual == ''">
+                            mdi-account-circle
+                          </v-icon>
+
+                          <v-img
+                            :src="getImage(item.app_user_foto_penjual)"
+                            v-else
+                          ></v-img>
+                        </v-list-item-avatar>
+
+                        <v-list-item-content>
+                          <v-list-item-title>
+                            {{ item.app_user_name_penjual }}
+                          </v-list-item-title>
+
+                          <v-list-item-subtitle>
+                            <span
+                              class="red pa-1 white--text text-caption mr-1"
+                            >
+                              Penjual
+                            </span>
+                          </v-list-item-subtitle>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list>
+
+                    <div class="mx-4 mb-2">
+                      {{ item.Reply[0].reply }}
+                    </div>
                   </div>
                 </div>
               </v-col>
@@ -409,7 +446,7 @@ export default {
       let offset = (this.page - 1) * this.limit;
 
       this.axios
-        .get("/transaksi/v3/belum_review", {
+        .get("/transaksi/v3/review", {
           params: {
             id_penjual: this.user.id,
             offset: offset,
@@ -419,10 +456,7 @@ export default {
         })
         .then((response) => {
           let { data } = response.data;
-          this.review = data;
-          if (this.review.length > 0) {
-            this.rating();
-          }
+          this.notReview = data;
 
           this.total = response.data.count;
           this.lengthPage =
@@ -439,6 +473,7 @@ export default {
       for (let i = 0; i < this.review.length; i++) {
         params.append("id_iklan", this.review[i].id_iklan);
       }
+      params.set("Reply", null);
 
       let request = {
         params: params,
