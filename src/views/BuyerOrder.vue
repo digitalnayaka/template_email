@@ -214,7 +214,7 @@ export default {
   },
   data() {
     return {
-      tab: 0,
+      tab: Number(this.$route.query.tab),
       chip: Number(this.$route.query.id),
       tags: [
         { id: 0, img: "/img/icons/semua.webp", text: "Semua" },

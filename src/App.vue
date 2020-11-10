@@ -57,7 +57,9 @@
                     countNotif +
                     buyerOrders.menunggu_persetujuan +
                     buyerOrders.menunggu_pembayaran +
-                    buyerOrders.menunggu_verifikasi
+                    buyerOrders.menunggu_verifikasi +
+                    ticketOrders.menunggu_pembayaran +
+                    ticketOrders.menunggu_verifikasi
                   }}</span>
                 </template>
 
@@ -91,7 +93,7 @@
               @change="content = false"
             >
               <v-tab class="text-caption">Tawar Bersama</v-tab>
-              <!-- <v-tab class="text-caption">Tiket</v-tab> -->
+              <v-tab class="text-caption">Tiket</v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab2">
@@ -297,34 +299,79 @@
                 </v-card>
               </v-tab-item>
 
-              <!-- <v-tab-item>
+              <v-tab-item>
                 <v-card flat>
+                  <div class="d-flex justify-space-between">
+                    <v-card-subtitle>Pembelian</v-card-subtitle>
+                    <v-card-subtitle>
+                      <a href="/buy/order?id=0&tab=1">Semua</a>
+                    </v-card-subtitle>
+                  </div>
+
                   <div class="d-flex justify-space-around">
-                    <v-btn icon to="/toko/order?id=10">
-                       <img src="/img/icons/menunggu_persetujuan.png" width="30" height="30" alt="menunggu persetujuan" />
+                    <v-btn icon href="/buy/order?id=1&tab=1">
+                      <v-badge
+                        color="red"
+                        overlap
+                        v-if="ticketOrders.menunggu_pembayaran > 0"
+                      >
+                        <template v-slot:badge>
+                          <span>{{ ticketOrders.menunggu_pembayaran }}</span>
+                        </template>
+
+                        <img
+                          src="/img/icons/menunggu_pembayaran.webp"
+                          width="30"
+                          height="30"
+                          alt="menunggu pembayaran"
+                        />
+                      </v-badge>
+
+                      <img
+                        src="/img/icons/menunggu_pembayaran.webp"
+                        width="30"
+                        height="30"
+                        alt="menunggu pembayaran"
+                        v-else
+                      />
                     </v-btn>
 
-                    <v-btn icon>
-                      <img src="/img/icons/menunggu_pembayaran.png" width="30" height="30" alt="menunggu pembayaran" />
-                    </v-btn>
+                    <v-btn icon href="/buy/order?id=4&tab=1">
+                      <v-badge
+                        color="red"
+                        overlap
+                        v-if="ticketOrders.menunggu_verifikasi > 0"
+                      >
+                        <template v-slot:badge>
+                          <span>{{ ticketOrders.menunggu_verifikasi }}</span>
+                        </template>
 
-                    <v-btn icon>
-                       <img src="/img/icons/menunggu_verifikasi.png" width="30" height="30" alt="menunggu verifikasi" />
-                    </v-btn>
+                        <img
+                          src="/img/icons/menunggu_verifikasi.webp"
+                          width="30"
+                          height="30"
+                          alt="pembayaran diverifikasi"
+                        />
+                      </v-badge>
 
-                    <v-btn icon>
-                       <img src="/img/icons/pembayaran_diverifikasi.png" width="30" height="30" alt="pembayaran diverifikasi" />
+                      <img
+                        src="/img/icons/menunggu_verifikasi.webp"
+                        width="30"
+                        height="30"
+                        alt="menunggu diverifikasi"
+                        v-else
+                      />
                     </v-btn>
                   </div>
 
-                  <div class="d-flex justify-space-around text-center text-caption">
-                    <div>Menunggu Persetujuan</div>
+                  <div
+                    class="d-flex justify-space-around text-center text-caption"
+                  >
                     <div>Menunggu Pembayaran</div>
                     <div>Menunggu Verifikasi</div>
-                    <div>Pembayaran Diverifikasi</div>
                   </div>
                 </v-card>
-              </v-tab-item> -->
+              </v-tab-item>
             </v-tabs-items>
 
             <v-card-actions>
@@ -437,20 +484,16 @@
                   <v-list-item href="/garasi/manage-unit">
                     <v-list-item-subtitle>Garasi</v-list-item-subtitle>
                   </v-list-item>
-                    <v-list-item href="/toko/manage-ads">
+                  <v-list-item href="/toko/manage-ads">
                     <v-list-item-subtitle>Iklan</v-list-item-subtitle>
                   </v-list-item>
                   <v-list-item to="/garasi/add-unit">
                     <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
                   </v-list-item>
 
-                  
-
                   <v-list-item to="/toko/add-ads">
                     <v-list-item-subtitle>Tambah Iklan</v-list-item-subtitle>
                   </v-list-item>
-
-                
                 </v-list>
               </v-col>
 
@@ -652,6 +695,10 @@ export default {
       menunggu_pembayaran: 0,
       menunggu_verifikasi: 0,
     },
+    ticketOrders: {
+      menunggu_pembayaran: 0,
+      menunggu_verifikasi: 0,
+    },
     content: false,
     tab: 0,
     tab2: 0,
@@ -693,7 +740,7 @@ export default {
         OneSignal.on("subscriptionChange", (isSubscribed) => {
           console.log("The user's subscription state is now:", isSubscribed);
           if (isSubscribed) {
-            window.location.href = "/"
+            window.location.href = "/";
           }
         });
 
@@ -876,6 +923,44 @@ export default {
           console.log(responses.api_message);
         });
     },
+    menungguPembayaranT() {
+      this.axios
+        .get("/transaksi/v3/order", {
+          params: {
+            id_pembeli: this.user.id,
+            id_mst_order_jenis_iklan: 1,
+            id_mst_pembayaran_status: 1,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.ticketOrders.menunggu_pembayaran = data.count;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    menungguVerifikasiT() {
+      this.axios
+        .get("/transaksi/v3/order", {
+          params: {
+            id_pembeli: this.user.id,
+            id_mst_order_jenis_iklan: 1,
+            id_mst_pembayaran_status: 4,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.ticketOrders.menunggu_verifikasi = data.count;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
     signOut(e) {
       var r = confirm("Apakah anda yakin akan keluar?");
       if (r == true) {
@@ -934,6 +1019,8 @@ export default {
       this.menungguPersetujuanS();
       this.menungguPembayaranS();
       this.menungguVerifikasiS();
+      this.menungguPembayaranT();
+      this.menungguVerifikasiT();
     }
   },
 };
