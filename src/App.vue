@@ -18,7 +18,7 @@
         solo-inverted
         hide-details
         prepend-inner-icon="mdi-magnify"
-        label="Search"
+        label="Cari"
         :slot="$vuetify.breakpoint.xsOnly ? 'extension' : 'default'"
         @click="setDialogComponent('search')"
       ></v-text-field>

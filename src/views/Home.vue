@@ -149,7 +149,7 @@
             <v-card
               flat
               class="rounded-lg"
-              href="http://devlmu.com:333/"
+              href="https://blog.simotor.id"
               target="_blank"
               width="300"
             >
@@ -183,7 +183,7 @@
         <v-btn
           dark
           color="teal"
-          href="http://devlmu.com:333/"
+          href="https://blog.simotor.id"
           target="_blank"
           class="mt-4"
           >Lihat Semua Artikel</v-btn
