@@ -48,7 +48,7 @@
                       :key="item.id"
                       @click="filter(item.id)"
                     >
-                      <v-list-item-subtitle>
+                      <v-list-item-subtitle> 
                         {{ item.status }}
                       </v-list-item-subtitle>
                     </v-list-item>
