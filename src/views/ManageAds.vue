@@ -163,7 +163,6 @@
           <v-list dense>
             <v-list-item
               @click="deleteIklan(item)"
-              :disabled="item._source.id_mst_iklan_status == 1 ? false : true"
             >
               <v-list-item-title class="d-flex align-center">
                 <v-icon small class="mr-2">mdi-delete</v-icon>Hapus
@@ -347,7 +346,11 @@ export default {
           })
           .catch((error) => {
             let responses = error.response.data;
-            console.log(responses);
+            this.setAlert({
+              status: true,
+              color: "error",
+              text: responses.api_message,
+            });
           });
       }
     },
