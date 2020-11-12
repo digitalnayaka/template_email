@@ -30,13 +30,13 @@
               :value="tag.id"
               @click="filterStatus"
             >
-             <v-img
-                      :src="tag.img"
-                      contain
-                      :width="25"
-                      :height="25"
-                      v-on="on"
-                    ></v-img>
+              <v-img
+                :src="tag.img"
+                contain
+                :width="25"
+                :height="25"
+                v-on="on"
+              ></v-img>
               {{ tag.text }}
               <span class="ml-1" v-if="tag.id == chip"
                 >({{ orders.length }})</span
@@ -46,6 +46,7 @@
         </v-chip-group>
 
         <v-card
+          color="blue-grey lighten-5"
           outlined
           class="mt-2 mb-4"
           v-for="item in orders"
@@ -59,39 +60,39 @@
 
             <v-col cols="6" align="right">
               <div
-                class="orange--text"
+                class="orange--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 1"
               >
                 {{ item.pembayaran_status }}
               </div>
               <div
-                class="green--text"
+                class="green--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 2"
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 3">
+              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 3">
                 {{ item.pembayaran_status }}
               </div>
               <div
-                class="orange--text"
+                class="orange--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 4"
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 6">
+              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 6">
                 {{ item.pembayaran_status }}
               </div>
               <div
-                class="orange--text"
+                class="orange--text font-weight-bold"
                 v-if="item.id_mst_pembayaran_status == 10"
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 11">
+              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 11">
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text" v-if="item.id_mst_pembayaran_status == 12">
+              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 12">
                 {{ item.pembayaran_status }}
               </div>
             </v-col>
@@ -101,7 +102,7 @@
 
           <v-row dense align="center">
             <v-col cols="12" sm="6">
-              <v-list>
+              <v-list color="blue-grey lighten-5">
                 <v-list-item>
                   <v-list-item-avatar tile size="80">
                     <v-img :src="getImage(item.iklan.photo)" contain></v-img>
@@ -121,7 +122,7 @@
             </v-col>
 
             <v-col cols="12" sm="6">
-              <v-list>
+              <v-list color="blue-grey lighten-5">
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-subtitle>Tawaran Anda</v-list-item-subtitle>
@@ -144,7 +145,6 @@
             <v-spacer></v-spacer>
             <v-btn
               small
-              outlined
               color="teal"
               dark
               :to="'/chat/' + item.id_pembeli"
@@ -177,25 +177,41 @@ import moment from "moment-timezone";
 export default {
   name: "seller-order",
   props: ["utc", "timezone"],
-  components: { 
+  components: {
     TicketTransaction: () =>
       import(
-        /* webpackChunkName: "ticket-transaction" */ "@/components/TicketTransaction.vue" ),
-
+        /* webpackChunkName: "ticket-transaction" */ "@/components/TicketTransaction.vue"
+      ),
   },
   data() {
     return {
       tab: 0,
       chip: Number(this.$route.query.id),
       tags: [
-         { id: 0, img: "/img/icons/semua.png", text: "Semua" },
-        { id: 10, img: "/img/icons/menunggu_persetujuan.png", text: "Menunggu Persetujuan" },
-        { id: 1, img: "/img/icons/menunggu_pembayaran.png", text: "Menunggu Pembayaran" },
-        { id: 4, img: "/img/icons/menunggu_verifikasi.png", text: "Menunggu Verifikasi" },
-        { id: 6, img: "/img/icons/ditolak.png", text: "Ditolak" },
-        { id: 2, img: "/img/icons/pembayaran_diverifikasi.png",text: "Pembayaran Diverifikasi" },
-        { id: 5, img: "/img/icons/dibatalkan.png",text: "Dibatalkan" },
-        { id: 3, img: "/img/icons/expired.png", text: "Expired" },
+        { id: 0, img: "/img/icons/semua.webp", text: "Semua" },
+        {
+          id: 10,
+          img: "/img/icons/menunggu_persetujuan.webp",
+          text: "Menunggu Persetujuan",
+        },
+        {
+          id: 1,
+          img: "/img/icons/menunggu_pembayaran.webp",
+          text: "Menunggu Pembayaran",
+        },
+        {
+          id: 4,
+          img: "/img/icons/menunggu_verifikasi.webp",
+          text: "Menunggu Verifikasi",
+        },
+        { id: 6, img: "/img/icons/ditolak.webp", text: "Ditolak" },
+        {
+          id: 2,
+          img: "/img/icons/pembayaran_diverifikasi.webp",
+          text: "Pembayaran Diverifikasi",
+        },
+        { id: 5, img: "/img/icons/dibatalkan.webp", text: "Dibatalkan" },
+        { id: 3, img: "/img/icons/expired.webp", text: "Expired" },
       ],
       orders: [],
       page: 1,

@@ -70,7 +70,7 @@
                 class="ma-2"
                 v-for="(item,index) in iklan"
                 :key="index"
-                :to="'/list-tb/'+item.id_app_user+'?tgl='+date"
+                :to="'/list-tb/'+ item.nama +'?tgl='+date"
               >
                 <v-list>
                   <v-list-item>

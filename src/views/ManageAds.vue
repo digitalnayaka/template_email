@@ -16,7 +16,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Daftar Iklan ({{total}})</v-toolbar-title>
+          <v-toolbar-title>Daftar Iklan ({{ total }})</v-toolbar-title>
 
           <v-divider class="mx-4" inset vertical></v-divider>
 
@@ -149,6 +149,17 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
+
+          <v-list dense>
+            <v-list-item
+              @click="deleteIklan(item)"
+              :disabled="item._source.id_mst_iklan_status == 1 ? false : true"
+            >
+              <v-list-item-title class="d-flex align-center">
+                <v-icon small class="mr-2">mdi-delete</v-icon>Hapus
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
         </v-menu>
       </template>
 
@@ -302,6 +313,31 @@ export default {
               color: "success",
               text: responses.api_message,
             });
+          });
+      }
+    },
+    deleteIklan(item) {
+      var r = confirm("Apakah anda yakin untuk menghapus iklan ini?");
+      if (r == true) {
+        this.axios
+          .delete("/iklan/v3/iklan", {
+            headers: { Authorization: "Bearer " + this.user.token },
+            params: {
+              id: item._source.id,
+            },
+          })
+          .then((response) => {
+            let { data } = response;
+            this.setAlert({
+              status: true,
+              color: "success",
+              text: data.api_message,
+            });
+            window.location = "/toko/manage-ads";
+          })
+          .catch((error) => {
+            let responses = error.response.data;
+            console.log(responses);
           });
       }
     },

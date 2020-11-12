@@ -57,7 +57,7 @@
 
               <v-list-item-subtitle>Penjual</v-list-item-subtitle>
 
-              <v-list-item-subtitle v-if="appuser.slogan !=null">
+              <v-list-item-subtitle v-if="appuser.slogan != null">
                 Slogan: {{ appuser.slogan }}
               </v-list-item-subtitle>
 
@@ -74,7 +74,7 @@
                     v-if="avg.ratting_user == 1"
                   ></v-img>
                 </v-avatar>
-                
+
                 <v-avatar size="16" item>
                   <v-img
                     src="/img/icons/emoji_netral.png"
@@ -197,6 +197,21 @@
           <span v-if="iklan.log_iklan_view > 0">
             {{ iklan.log_iklan_view }}x Dilihat
           </span>
+          <!-- <div>
+            <v-btn icon>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn icon class="mx-2" v-on="on" @click="favourite">
+                    <v-icon v-if="favorit == undefined"
+                      >mdi-heart-outline</v-icon
+                    >
+                    <v-icon color="red" v-else>mdi-heart</v-icon>
+                  </v-btn>
+                </template>
+                <span>Favorit</span>
+              </v-tooltip>
+            </v-btn>
+          </div> -->
         </div>
 
         <v-divider class="mt-2"></v-divider>
@@ -267,7 +282,7 @@
 
               <div v-if="!guest">
                 <v-btn
-                  color="teal"
+                  color="indigo darken-3"
                   dark
                   @click="dialogInfo = true"
                   class="mx-2"
@@ -410,7 +425,10 @@
               </v-list-item>
               <v-row>
                 <v-col v-for="(item, i) in motorBekas" :key="i">
-                  <v-card :to="'/garasi/detail-unit/' + item.id" class="rounded-lg">
+                  <v-card
+                    :to="'/garasi/detail-unit/' + item.id"
+                    class="rounded-lg"
+                  >
                     <v-img
                       :src="getImage(item.foto_1)"
                       height="230"
@@ -973,12 +991,12 @@ export default {
           this.title = this.hits.judul;
           this.items.push(
             {
-              text: "Home",
+              text: "Beranda",
               disabled: false,
               to: "/",
             },
             {
-              text: "Mokas",
+              text: "Motor Bekas",
               disabled: false,
               to: "/category/mokas",
             },

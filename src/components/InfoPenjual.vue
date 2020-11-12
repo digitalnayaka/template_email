@@ -105,8 +105,9 @@
     </v-expansion-panels>
 
     <br />
-    <h3>Kebijakan</h3>
-    <div class="d-flex flex-wrap align-center">
+   
+    <div class="d-flex flex-wrap">
+        <h3 class="mr-auto">Kebijakan</h3>
       <v-btn
         color="teal"
         dark
@@ -129,7 +130,9 @@
           <v-icon left>mdi-delete</v-icon> Hapus
         </v-btn>
       </div>
+      
     </v-expansion-panels>
+    
   </div>
 </template>
 

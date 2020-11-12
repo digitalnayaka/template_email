@@ -24,8 +24,14 @@
     <v-row>
       <v-col cols="6" align="center" v-for="item in categories" :key="item.id">
         <v-card flat :to="'/category/' + item.route">
-          <v-img :src="item.image" width="500" height="150" contain></v-img>
-          <h5>{{ item.name }}</h5>
+          <v-img
+            :src="item.image"
+            width="500"
+            height="150"
+            contain
+            class="rounded-lg"
+          ></v-img>
+          <h4>{{ item.name }}</h4>
         </v-card>
       </v-col>
     </v-row>
@@ -127,7 +133,7 @@
 
     <v-divider class="my-2"></v-divider>
 
-    <v-card color="teal lighten-4 text-center" flat rounded>
+    <v-card color="teal lighten-4 text-center" flat class="rounded-lg">
       <v-container fluid>
         <h2>Artikel Terbaru</h2>
         <div>Yuk cek artikel terbaru di SiMotor</div>
@@ -135,16 +141,15 @@
         <v-row align="center" dense>
           <v-col
             cols="6"
-            sm="4"
-            lg="2
-          "
+            sm="6"
+            lg="2"
             v-for="item in artikel"
             :key="item.id"
           >
             <v-card
               flat
               class="rounded-lg"
-              href="http://devlmu.com:333/"
+              href="https://blog.simotor.id"
               target="_blank"
               width="300"
             >
@@ -178,7 +183,7 @@
         <v-btn
           dark
           color="teal"
-          href="http://devlmu.com:333/"
+          href="https://blog.simotor.id"
           target="_blank"
           class="mt-4"
           >Lihat Semua Artikel</v-btn

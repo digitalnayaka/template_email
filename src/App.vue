@@ -18,7 +18,7 @@
         solo-inverted
         hide-details
         prepend-inner-icon="mdi-magnify"
-        label="Search"
+        label="Cari"
         :slot="$vuetify.breakpoint.xsOnly ? 'extension' : 'default'"
         @click="setDialogComponent('search')"
       ></v-text-field>
@@ -100,8 +100,10 @@
               <v-tab-item>
                 <v-card flat>
                   <div class="d-flex justify-space-between">
-                    <v-card-subtitle>Pembelian</v-card-subtitle>
-                    <v-card-subtitle>
+                    <v-card-subtitle class="font-weight-bold"
+                      >Pembeli</v-card-subtitle
+                    >
+                    <v-card-subtitle class="font-weight-bold">
                       <a href="/buy/order?id=0">Semua</a>
                     </v-card-subtitle>
                   </div>
@@ -200,8 +202,10 @@
                   <v-divider class="mt-2"></v-divider>
 
                   <div class="d-flex justify-space-between">
-                    <v-card-subtitle>Penjualan</v-card-subtitle>
-                    <v-card-subtitle>
+                    <v-card-subtitle class="font-weight-bold"
+                      >Penjual</v-card-subtitle
+                    >
+                    <v-card-subtitle class="font-weight-bold">
                       <a href="/sell/order?id=0">Semua</a>
                     </v-card-subtitle>
                   </div>
@@ -302,8 +306,10 @@
               <v-tab-item>
                 <v-card flat>
                   <div class="d-flex justify-space-between">
-                    <v-card-subtitle>Pembelian</v-card-subtitle>
-                    <v-card-subtitle>
+                    <v-card-subtitle class="font-weight-bold"
+                      >Pembelian</v-card-subtitle
+                    >
+                    <v-card-subtitle class="font-weight-bold">
                       <a href="/buy/order?id=0&tab=1">Semua</a>
                     </v-card-subtitle>
                   </div>
@@ -406,7 +412,7 @@
               <v-list-item to="/chat-list">
                 <v-list-item-subtitle>Chat</v-list-item-subtitle>
 
-                <v-list-item-action  v-if="chats.length > 0">
+                <v-list-item-action v-if="chats.length > 0">
                   <v-avatar color="red" size="25">
                     <span class="white--text">{{ chats.length }}</span>
                   </v-avatar>
@@ -433,16 +439,18 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn large text v-bind="attrs" v-on="on">
-              <v-avatar size="32" item>
+              <!-- <v-avatar size="32" item>
                 <v-img
                   src="/img/profile.png"
                   contain
                   v-if="user.photo == null"
                 ></v-img>
                 <v-img :src="getImage(user.photo)" alt="Avatar" v-else></v-img>
-              </v-avatar>
+              </v-avatar> -->
+              <v-icon> mdi-menu </v-icon>
               <span class="text-caption mx-2">
-                {{ user.nama.split(" ", 1)[0] }}
+                <!-- {{ user.nama.split(" ", 1)[0] }} -->
+                Menu
               </span>
             </v-btn>
           </template>
@@ -763,6 +771,7 @@ export default {
             is_read: false,
             limit: 1,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;

@@ -184,11 +184,11 @@
 
                 <div class="text-caption">
                   <div v-if="rating == 0">Bagaimana kualitas produk ini?</div>
-                  <div v-if="rating == 1">Sangat Buruk</div>
-                  <div v-if="rating == 2">Buruk</div>
-                  <div v-if="rating == 3">Cukup</div>
-                  <div v-if="rating == 4">Baik</div>
-                  <div v-if="rating == 5">Sangat Baik</div>
+                  <div v-if="rating == 1">Tidak Memuaskan</div>
+                  <div v-if="rating == 2">Kurang Memuaskan</div>
+                  <div v-if="rating == 3">Cukup Memuaskan</div>
+                  <div v-if="rating == 4">Memuaskan</div>
+                  <div v-if="rating == 5">Sangat Memuaskan</div>
                 </div>
               </div>
             </v-list-item-content>
