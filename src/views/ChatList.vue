@@ -109,11 +109,12 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.users = data;
+          this.chats = [];
 
           for (let i = 0; i < this.messages.length; i++) {
-            const id = this.messages[i].IdAppUser;
-
-            let found = this.users.filter((element) => element.id == id);
+            let found = this.users.filter(
+              (element) => element.id == this.messages[i].IdAppUser
+            );
 
             this.chats.push({ ...this.messages[i], user: found[0] });
           }
