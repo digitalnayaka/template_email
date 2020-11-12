@@ -19,7 +19,7 @@ import 'firebase/firestore'
 //   messagingSenderId: "1089890778962",
 //   appId: "1:1089890778962:web:12e78426fa6969e896448b"
 // };
-const firebaseConfig = {
+var firebaseConfig = {
   apiKey: "AIzaSyB2fsNR4-M_6YBO65sF0x9MemAXLY_5gDQ",
   authDomain: "simotor-dna.firebaseapp.com",
   databaseURL: "https://simotor-dna.firebaseio.com",

@@ -771,6 +771,7 @@ export default {
             is_read: false,
             limit: 1,
           },
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;
@@ -826,6 +827,7 @@ export default {
             id_mst_pembayaran_status: 10,
             limit: 1,
           },
+           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;
@@ -845,6 +847,7 @@ export default {
             id_mst_pembayaran_status: 1,
             limit: 1,
           },
+           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;
@@ -864,6 +867,7 @@ export default {
             id_mst_pembayaran_status: 4,
             limit: 1,
           },
+           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;
@@ -883,6 +887,7 @@ export default {
             id_mst_pembayaran_status: 10,
             limit: 1,
           },
+           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;
@@ -902,6 +907,7 @@ export default {
             id_mst_pembayaran_status: 1,
             limit: 1,
           },
+           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;
@@ -921,6 +927,7 @@ export default {
             id_mst_pembayaran_status: 4,
             limit: 1,
           },
+           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;
@@ -940,6 +947,7 @@ export default {
             id_mst_pembayaran_status: 1,
             limit: 1,
           },
+           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;
@@ -959,6 +967,7 @@ export default {
             id_mst_pembayaran_status: 4,
             limit: 1,
           },
+           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response;
