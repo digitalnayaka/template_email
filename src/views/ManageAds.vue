@@ -90,6 +90,21 @@
         <div v-if="item._source.id_mst_iklan_status == 2">
           Terjual
         </div>
+         <div v-if="item._source.id_mst_iklan_status == 3">
+          Serah Terima
+        </div>
+         <div v-if="item._source.id_mst_iklan_status == 4">
+          Expired
+        </div>
+         <div v-if="item._source.id_mst_iklan_status == 6">
+          Belum Terjual
+        </div>
+        <div v-if="item._source.id_mst_iklan_status == 8">
+          Berlangsung
+        </div>
+        <div v-if="item._source.id_mst_iklan_status == 9">
+          Pembelian DIbatalkan
+        </div>
       </template>
 
       <template v-slot:item.actions="{ item }">
@@ -163,10 +178,10 @@
           <v-list dense>
             <v-list-item
               @click="deleteIklan(item)"
-              :disabled="item._source.id_mst_iklan_status == 1 ? false : true"
+              :disabled="item._source.tanggal_mulai < dateTimeFormat ? false : true"
             >
               <v-list-item-title class="d-flex align-center">
-                <v-icon small class="mr-2">mdi-delete</v-icon>Hapus
+                <v-icon small class="mr-2">mdi-delete</v-icon>Hapus {{ item._source.tanggal_mulai }} {{ dateTimeFormat }}
               </v-list-item-title>
             </v-list-item>
           </v-list>
@@ -186,6 +201,7 @@
 </template>
 
 <script>
+import moment from "moment-timezone";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -360,6 +376,14 @@ export default {
   created() {
     this.daftarIklan();
     this.getStatus();
+  },
+filters: {
+    dateFormat: (date) => {
+      return moment.utc(date).format("DD MMM YYYY");
+    },
+    dateTimeFormat: (date, utc) => {
+      return moment.utc(date).add(utc, "h").format("DD MMM, HH:mm");
+    },
   },
 };
 </script>
