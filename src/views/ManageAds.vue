@@ -181,7 +181,7 @@
               :disabled="item._source.tanggal_mulai < dateTimeFormat ? false : true"
             >
               <v-list-item-title class="d-flex align-center">
-                <v-icon small class="mr-2">mdi-delete</v-icon>Hapus {{ item._source.tanggal_mulai }} {{ dateTimeFormat }}
+                <v-icon small class="mr-2">mdi-delete</v-icon>Hapus {{ item._source.tanggal_mulai }}
               </v-list-item-title>
             </v-list-item>
           </v-list>
