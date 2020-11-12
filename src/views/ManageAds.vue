@@ -349,7 +349,7 @@ export default {
             let responses = error.response.data;
             this.setAlert({
               status: true,
-              color: "success",
+              color: "error",
               text: responses.api_message,
             });
           });
