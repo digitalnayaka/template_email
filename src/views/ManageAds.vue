@@ -82,6 +82,16 @@
         <div v-else>Rp {{ item._source.harga.toLocaleString("id-ID") }}</div>
       </template>
 
+      <template v-slot:item._source.id_mst_iklan_status="{ item }">
+        <div v-if="item._source.id_mst_iklan_status == 1">
+          Tayang
+        </div>
+
+        <div v-if="item._source.id_mst_iklan_status == 2">
+          Terjual
+        </div>
+      </template>
+
       <template v-slot:item.actions="{ item }">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
@@ -188,7 +198,7 @@ export default {
       { text: "Info Iklan", value: "_source.judul" },
       { text: "Jenis Iklan", value: "_source.mst_iklan_jenis" },
       { text: "Harga", value: "_source.harga_awal" },
-      { text: "Status", value: "_source.mst_iklan_status" },
+      { text: "Status", value: "_source.id_mst_iklan_status" },
       { text: "Actions", value: "actions", sortable: false },
     ],
     hits: [],
