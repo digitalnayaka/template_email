@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-card
-      class="rounded-lg"
+      class="rounded-lg mx-auto my-12"
       outlined
       tile
       :href="'/iklan/' + item._source.id"
@@ -122,11 +122,11 @@
               {{ item._source.app_user }}
             </v-list-item-subtitle>
 
-            <v-list-item-subtitle v-if="item._source.id_mst_iklan_jenis == 2">
+            <v-list-item-action-text v-if="item._source.id_mst_iklan_jenis == 2">
               <v-icon small>mdi-calendar</v-icon>
               {{ item._source.tanggal_mulai | dateTimeFormat(utc) }}
               {{ timezone }}
-            </v-list-item-subtitle>
+            </v-list-item-action-text>
           </v-list-item-content>
         </v-list-item>
       </v-list>
