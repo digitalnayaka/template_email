@@ -83,19 +83,30 @@
       </template>
 
       <template v-slot:item._source.id_mst_iklan_status="{ item }">
-        <div v-if="item._source.id_mst_iklan_status == 1">
-          Tayang
-        </div>
+        <div v-if="item._source.id_mst_iklan_status == 1">Tayang</div>
 
-        <div v-if="item._source.id_mst_iklan_status == 2">
-          Terjual
+        <div v-if="item._source.id_mst_iklan_status == 2">Terjual</div>
+        <div v-if="item._source.id_mst_iklan_status == 3">Serah Terima</div>
+        <div v-if="item._source.id_mst_iklan_status == 4">Expired</div>
+        <div v-if="item._source.id_mst_iklan_status == 6">Belum Terjual</div>
+        <div v-if="item._source.id_mst_iklan_status == 8">Berlangsung</div>
+        <div v-if="item._source.id_mst_iklan_status == 9">
+          Pembelian DIbatalkan
         </div>
       </template>
 
       <template v-slot:item.actions="{ item }">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn small outlined color="teal" dark v-bind="attrs" v-on="on">
+            <v-btn
+              small
+              @click="HapusIklan(item._source.tanggal_mulai)"
+              outlined
+              color="teal"
+              dark
+              v-bind="attrs"
+              v-on="on"
+            >
               Atur
               <v-icon right v-if="attrs['aria-expanded'] === 'false'"
                 >mdi-chevron-down</v-icon
@@ -161,10 +172,7 @@
           </v-dialog>
 
           <v-list dense>
-            <v-list-item
-              @click="deleteIklan(item)"
-              :disabled="item._source.id_mst_iklan_status == 1 ? false : true"
-            >
+            <v-list-item @click="deleteIklan(item)" :disabled="Timestamp">
               <v-list-item-title class="d-flex align-center">
                 <v-icon small class="mr-2">mdi-delete</v-icon>Hapus
               </v-list-item-title>
@@ -186,11 +194,13 @@
 </template>
 
 <script>
+import moment, { now } from "moment-timezone";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "manage-ads",
   data: () => ({
+    btn: false,
     search: "",
     value: 0,
     items: [],
@@ -214,6 +224,21 @@ export default {
     lengthPage: 0,
   }),
   methods: {
+    HapusIklan(HapusIklan) {
+      var Hapus = new Date();
+      var tggl_mulai = moment(HapusIklan).valueOf();
+      var tggl_skng = Hapus.getTime();
+      console.log("tgl mulai  ", tggl_mulai);
+      console.log("tggl_skng ", tggl_skng);
+
+      if (tggl_mulai < tggl_skng) {
+        this.Timestamp = true;
+        console.log("return ", true);
+      } else {
+        this.Timestamp = false;
+        console.log("return ", false);
+      }
+    },
     ...mapActions({
       setAlert: "alert/set",
       setAds: "ads/setAds",
@@ -347,11 +372,7 @@ export default {
           })
           .catch((error) => {
             let responses = error.response.data;
-            this.setAlert({
-              status: true,
-              color: "error",
-              text: responses.api_message,
-            });
+            console.log(responses);
           });
       }
     },
@@ -360,10 +381,31 @@ export default {
     ...mapGetters({
       user: "auth/user",
     }),
+    TimeNow() {
+      return now;
+    },
+    Timestamp: {
+      // getter
+      get: function () {
+        return this.btn;
+      },
+      // setter
+      set: function (newValue) {
+        this.btn = newValue;
+      },
+    },
   },
   created() {
     this.daftarIklan();
     this.getStatus();
+  },
+  filters: {
+    dateFormat: (date) => {
+      return moment(date).valueOf();
+    },
+    dateTimeFormat: (date, utc) => {
+      return moment.utc(date).add(utc, "h").format("DD MMM, HH:mm");
+    },
   },
 };
 </script>

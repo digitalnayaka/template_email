@@ -17,7 +17,7 @@
         </v-list-item>
 
         <v-divider></v-divider>
-        <v-list-item>
+        <!-- <v-list-item>
           <v-list-item-avatar>
             <v-img src="/img/icons/icon_tipe.png"></v-img>
           </v-list-item-avatar>
@@ -28,8 +28,8 @@
 
           <v-list-item-action>{{ unitMokas.nomor_polisi }}</v-list-item-action>
         </v-list-item>
-        <v-divider></v-divider>
-        <v-list-item>
+        <v-divider></v-divider> -->
+        <!-- <v-list-item>
           <v-list-item-avatar>
             <v-img src="/img/icons/icon_tipe.png"></v-img>
           </v-list-item-avatar>
@@ -39,9 +39,9 @@
           </v-list-item-content>
 
           <v-list-item-action>{{ unitMokas.status }}</v-list-item-action>
-        </v-list-item>
+        </v-list-item> -->
 
-        <v-divider></v-divider>
+        <!-- <v-divider></v-divider>
         <v-list-item>
           <v-list-item-avatar>
             <v-img src="/img/icons/icon_tipe.png"></v-img>
@@ -52,7 +52,7 @@
           </v-list-item-content>
 
           <v-list-item-action>{{ unitMokas.deskripsi }}</v-list-item-action>
-        </v-list-item>
+        </v-list-item> -->
         <v-divider></v-divider>
         <v-list-item>
           <v-list-item-avatar>
@@ -172,7 +172,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>Samsat</v-list-item-title>
+            <v-list-item-title>Lokasi Samsat</v-list-item-title>
           </v-list-item-content>
 
           <v-list-item-action>{{ unitMokas.lokasi_samsat }}</v-list-item-action>
@@ -186,7 +186,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>Lokasi</v-list-item-title>
+            <v-list-item-title>Lokasi Motor</v-list-item-title>
           </v-list-item-content>
 
           <v-list-item-action>{{ unitMokas.lokasi }}</v-list-item-action>
@@ -207,15 +207,25 @@
             <v-list-item-title>STNK</v-list-item-title>
           </v-list-item-content>
 
-          <v-list-item-action v-if="unitMokas.id_mst_motor_bekas_status == 2"
-            >{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }} (
-            {{ unitMokas.tanggal_stnk | dateFormat }} )</v-list-item-action
-          >
-          <v-list-item-action v-if="unitMokas.id_mst_motor_bekas_status == 1"
-            >{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }} </v-list-item-action
-          >
+          <v-list-item-action
+            >{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }}
+          </v-list-item-action>
         </v-list-item>
-  
+        <v-divider> </v-divider>
+        <v-list-item v-if="unitMokas.tanggal_stnk != null">
+          <v-list-item-avatar>
+            <v-img src="/img/icons/icon_stnk.png"></v-img>
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title>Tanggal Selesai STNK</v-list-item-title>
+          </v-list-item-content>
+
+          <v-list-item-action>
+            {{ unitMokas.tanggal_stnk | dateFormat }}
+          </v-list-item-action>
+        </v-list-item>
+
         <v-divider></v-divider>
 
         <v-list-item>
@@ -227,17 +237,30 @@
             <v-list-item-title>Lembar Pajak</v-list-item-title>
           </v-list-item-content>
 
-          <v-list-item-action v-if="unitMokas.id_mst_motor_bekas_status == 2">{{
-            unitMokas.lembar_pajak ? "ADA" : "TIDAK"
-          }} ( {{ unitMokas.tanggal_pajak | dateFormat }} )</v-list-item-action>
+          <v-list-item-action
+            >{{ unitMokas.lembar_pajak ? "ADA" : "TIDAK" }}
+          </v-list-item-action>
 
-          <v-list-item-action v-if="unitMokas.id_mst_motor_bekas_status == 1">{{
+          <!-- <v-list-item-action v-if="unitMokas.id_mst_motor_bekas_status == 1">{{
             unitMokas.lembar_pajak ? "ADA" : "TIDAK"
-          }}</v-list-item-action>
+          }}</v-list-item-action> -->
         </v-list-item>
 
         <v-divider></v-divider>
+        <v-list-item v-if="unitMokas.tanggal_pajak != null">
+          <v-list-item-avatar>
+            <v-img src="/img/icons/icon_lembar_pajak.png"></v-img>
+          </v-list-item-avatar>
 
+          <v-list-item-content>
+            <v-list-item-title>Tanggal Selesai Pajak</v-list-item-title>
+          </v-list-item-content>
+
+          <v-list-item-action>
+            {{ unitMokas.tanggal_pajak | dateFormat }}
+          </v-list-item-action>
+        </v-list-item>
+        <v-divider></v-divider>
         <v-list-item>
           <v-list-item-avatar>
             <v-img src="/img/icons/icon_bpkb.png"></v-img>

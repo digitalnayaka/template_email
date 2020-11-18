@@ -260,7 +260,7 @@
                 dense
                 hide-details
                 flat
-                label="Search"
+                label="Cari"
                 prepend-inner-icon="mdi-magnify"
                 v-model="keyword"
                 @keyup.enter="daftarTB"
