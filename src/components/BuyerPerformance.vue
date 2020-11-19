@@ -1,25 +1,110 @@
 <template>
   <div>
-    <v-row justify="space-around">
-      <v-icon large color="green darken-2"> mdi-domain </v-icon>
+    <v-row align="center" justify="space-around">
+      <v-col cols="3" sm="3" align="center">
+        <div v-if="user.id_type_pinalti !== 3">
+          <v-img
+            src="/img/icons/akun_blokir_gray.webp"
+            width="35"
+            contain
+          ></v-img>
+        </div>
 
-      <v-icon large color="blue darken-2"> mdi-message-text </v-icon>
+        <div v-else>
+          <v-img src="/img/icons/akun_blokir.webp" width="35" contain></v-img>
+        </div>
 
-      <v-icon large color="purple darken-2"> mdi-dialpad </v-icon>
+        <h5>Akun diBlokir</h5>
+      </v-col>
 
-      <v-icon large color="teal darken-2"> mdi-email </v-icon>
+      <v-col cols="3" sm="3" align="center">
+        <div v-if="user.id_type_pinalti == 2">
+          <v-img
+            src="/img/icons/akun_wanprestasi2.webp"
+            width="35"
+            contain
+          ></v-img>
+        </div>
 
-      <v-icon large color="blue-grey darken-2"> mdi-call-split </v-icon>
+        <div v-else>
+          <v-img
+            src="/img/icons/akun_wanprestasi2_gray.webp"
+            width="35"
+            contain
+          ></v-img>
+        </div>
 
-      <v-icon large color="orange darken-2">
-        mdi-arrow-up-bold-box-outline
-      </v-icon>
+        <h5>Wanprestasi 2</h5>
+      </v-col>
+
+      <v-col cols="3" sm="3" align="center">
+        <div v-if="user.id_type_pinalti == 1">
+          <v-img
+            src="/img/icons/akun_wanprestasi1.webp"
+            width="35"
+            contain
+          ></v-img>
+
+          <h5>Wanprestasi 1</h5>
+        </div>
+
+        <div v-else>
+          <v-img
+            src="/img/icons/akun_wanprestasi1_gray.webp"
+            width="35"
+            contain
+          ></v-img>
+
+          <h5>Wanprestasi 1</h5>
+        </div>
+      </v-col>
+
+      <v-col cols="3" sm="3" align="center">
+        <div v-if="user.id_type_pinalti !== 0">
+          <v-img
+            src="/img/icons/akun_aman_gray.webp"
+            width="35"
+            contain
+          ></v-img>
+        </div>
+
+        <div v-else>
+          <v-img src="/img/icons/akun_aman.webp" width="35" contain></v-img>
+        </div>
+
+        <h5>Akun Aman</h5>
+      </v-col>
+
+      <div>
+        <v-alert dense type="success" v-if="user.id_type_pinalti == 0">
+          Selamat Anda Pembeli <strong>TERPERCAYA,</strong> tingkatkan terus
+          transaksi Anda!
+        </v-alert>
+
+        <v-alert dense type="warning" v-if="user.id_type_pinalti == 1">
+          Anda terdeteksi melakukan <strong>1 Kali WANPRESTASI,</strong> Mohon
+          maaf, tiket untuk iklan Anda hangus.
+        </v-alert>
+
+        <v-alert dense type="warning" v-if="user.id_type_pinalti == 2">
+          Anda terdeteksi melakukan <strong>2 Kali WANPRESTASI,</strong> Mohon
+          maaf, akun Anda tidak bisa ikut Tawar Bersama.
+        </v-alert>
+
+        <v-alert dense type="error" v-if="user.id_type_pinalti == 3">
+          Anda terdeteksi melakukan <strong>3 Kali WANPRESTASI,</strong> Mohon
+          maaf, akun Anda diBlokir sampai batas waktu yang ditentukan.
+        </v-alert>
+      </div>
     </v-row>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "buyer-performance",
+  props: ["user"],
+};
 </script>
 
 <style>
