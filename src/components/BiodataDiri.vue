@@ -234,7 +234,6 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.appuser = data[0];
-          this.myReview();
           this.reviewAvg();
         })
         .catch((error) => {
@@ -312,31 +311,6 @@ export default {
             color: "error",
             text: responses.api_message,
           });
-        });
-    },
-    myReview() {
-      let offset = (this.page - 1) * this.limit;
-
-      this.axios
-        .get("/transaksi/v3/review", {
-          params: {
-            id_penjual: this.appuser.id,
-            offset: offset,
-            limit: this.limit,
-          },
-          headers: { Authorization: "Bearer " + this.user.token },
-        })
-        .then((response) => {
-          let { data } = response.data;
-          this.ulasanSaya = data;
-
-          this.total = response.data.count;
-          this.lengthPage =
-            this.total == 0 ? 1 : Math.ceil(this.total / this.limit);
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          console.log(responses.api_message);
         });
     },
     reviewAvg() {
