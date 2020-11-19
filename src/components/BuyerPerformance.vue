@@ -97,13 +97,32 @@
         </v-alert>
       </div>
     </v-row>
+
+    <v-row>
+      <v-col cols="6">
+        Note:
+
+        <ul class="red--text">
+          <li>1 kali gagal Tiket hangus</li>
+
+          <li>2 kali gagal tidak bisa Tawar Bersama selama 2 minggu</li>
+
+          <li>3 kali gagal Akun anda akan diblokir permanen</li>
+        </ul>
+      </v-col>
+
+      <v-col cols="6"><flip-countdown deadline="2021-01-01 00:00:00"></flip-countdown></v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
+import FlipCountdown from "vue2-flip-countdown";
+
 export default {
   name: "buyer-performance",
   props: ["user"],
+  components: { FlipCountdown },
 };
 </script>
 
