@@ -8,7 +8,7 @@
 
     <v-tabs v-model="tab" slider-color="teal" show-arrows>
       <v-tab>Biodata Diri</v-tab>
-      <v-tab>Info Penjual</v-tab>
+      <!-- <v-tab>Info Penjual</v-tab> -->
       <v-tab>Rekening Bank</v-tab>
       <v-tab>Pesan Otomatis</v-tab>
     </v-tabs>
@@ -18,9 +18,9 @@
         <biodata-diri :user="user" />
       </v-tab-item>
 
-      <v-tab-item>
+      <!-- <v-tab-item>
         <info-penjual :user="user" />
-      </v-tab-item>
+      </v-tab-item> -->
 
       <v-tab-item>
         <rekening-bank :user="user" />
@@ -43,10 +43,10 @@ export default {
       import(
         /* webpackChunkName: "biodata-diri" */ "@/components/BiodataDiri.vue"
       ),
-    InfoPenjual: () =>
-      import(
-        /* webpackChunkName: "info-penjual" */ "@/components/InfoPenjual.vue"
-      ),
+    // InfoPenjual: () =>
+    //   import(
+    //     /* webpackChunkName: "info-penjual" */ "@/components/InfoPenjual.vue"
+    //   ),
     RekeningBank: () =>
       import(
         /* webpackChunkName: "rekening-bank" */ "@/components/RekeningBank.vue"

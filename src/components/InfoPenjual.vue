@@ -1,150 +1,214 @@
 <template>
   <div>
-    <h3>Slogan</h3>
+    <v-tabs
+      v-model="tab"
+      background-color="green accent-3"
+      color="teal"
+      slider-color="yellow"
+      show-arrows
+    >
+      <v-tab>Performa Penjualan</v-tab>
+      <v-tab>Performa Pembelian</v-tab>
+    </v-tabs>
 
-    <v-text-field
-      clearable
-      v-model="slogan"
-      placeholder="Masukkan Slogan Anda"
-      outlined
-      dense
-    ></v-text-field>
+    <v-tabs-items v-model="tab" class="pa-4">
+      <v-tab-item>
+        <div class="d-flex align-center">
+          <h3 class="green accent-3 pa-1">
+            {{ avg.ratting_iklan }}
+          </h3>
 
-    <div align="right">
-      <v-btn
-        color="primary"
-        @click="postSlogan"
-        :disabled="slogan == null ? true : false"
-      >
-        Simpan
-      </v-btn>
-    </div>
+          <star-rating
+            :rating="avg.ratting_iklan"
+            read-only
+            :show-rating="false"
+            :round-start-rating="false"
+            :star-size="30"
+            inline
+            class="ml-2"
+          ></star-rating>
 
-    <br />
+          <div v-if="ulasanSaya > 0">( {{ ulasanSaya }} Ulasan )</div>
+        </div>
 
-    <div class="d-flex flex-wrap align-center">
-      <h3 class="mr-auto">Catatan</h3>
-      <v-btn
-        color="teal"
-        dark
-        small
-        class="mx-2"
-        @click="openDialog('Tambah Catatan')"
-      >
-        Tambah Catatan
-      </v-btn>
+        <h3>Slogan</h3>
 
-      <v-dialog v-model="dialog" width="500">
-        <v-card>
-          <v-card-title class="headline grey lighten-2">
-            {{ title }}
-          </v-card-title>
+        <div v-if="!ubahSlogan">
+          {{ slogan }}
+          <a href="javascript:void(0)" @click="ubahSlogan = true">
+            <v-icon>mdi-pencil</v-icon>
+          </a>
+        </div>
 
-          <v-card-text>
-            <h3 class="mt-2">Judul Catatan</h3>
+        <div v-else>
+          <v-text-field
+            clearable
+            v-model="slogan"
+            placeholder="Masukkan Slogan Anda"
+            outlined
+            dense
+          ></v-text-field>
 
-            <v-text-field
-              v-model="judul"
-              placeholder="Masukkan Judul"
-              outlined
-              dense
-              :readonly="readonly"
-            ></v-text-field>
+          <div align="right">
+            <v-btn color="error" @click="ubahSlogan = false" class="mx-2">
+              Cancel
+            </v-btn>
 
-            <h3>Isi Catatan</h3>
-
-            <vue-editor
-              v-model="content"
-              :editorToolbar="customToolbar"
-            ></vue-editor>
-          </v-card-text>
-
-          <v-divider></v-divider>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
             <v-btn
               color="primary"
-              class="white--text"
-              :disabled="judul == '' || content == '' ? true : false"
-              @click="simpan"
+              @click="postSlogan"
+              :disabled="slogan == null ? true : false"
             >
               Simpan
             </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </div>
-
-    <br />
-
-    <v-expansion-panels focusable>
-      <v-expansion-panel v-for="item in catatan" :key="item.id">
-        <v-expansion-panel-header>
-          <div class="d-flex align-center">
-            <b class="mr-auto">{{ item.judul }}</b>
-
-            <div class="mx-2">
-              <v-btn x-small outlined @click="edit(item)">
-                <v-icon left>mdi-pencil</v-icon> Ubah
-              </v-btn>
-            </div>
-
-            <div class="mx-2">
-              <v-btn x-small outlined @click="deleteCatatan(item)">
-                <v-icon left>mdi-delete</v-icon> Hapus
-              </v-btn>
-            </div>
           </div>
-        </v-expansion-panel-header>
+        </div>
 
-        <v-expansion-panel-content>
-          <div v-html="item.deskripsi"></div>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
+        <br />
 
-    <br />
-   
-    <div class="d-flex flex-wrap">
-        <h3 class="mr-auto">Kebijakan</h3>
-      <v-btn
-        color="teal"
-        dark
-        small
-        class="mx-2"
-        @click="openDialog('Tambah Kebijakan')"
-      >
-        Tambah Kebijakan
-      </v-btn>
-    </div>
+        <div class="d-flex flex-wrap align-center">
+          <h3 class="mr-auto">Catatan</h3>
+          <v-btn
+            color="teal"
+            dark
+            small
+            class="mx-2"
+            @click="openDialog('Tambah Catatan')"
+          >
+            Tambah Catatan
+          </v-btn>
 
-    <v-expansion-panels focusable>
-      <div v-html="kebijakan.deskripsi"></div>
-      <div v-if="kebijakan != ''">
-        <v-btn x-small outlined class="mx-2" @click="edit(kebijakan)">
-          <v-icon left>mdi-pencil</v-icon> Ubah
-        </v-btn>
+          <v-dialog v-model="dialog" width="500">
+            <v-card>
+              <v-card-title class="headline grey lighten-2">
+                {{ title }}
+              </v-card-title>
 
-        <v-btn x-small outlined class="mx-2" @click="deleteCatatan(kebijakan)">
-          <v-icon left>mdi-delete</v-icon> Hapus
-        </v-btn>
-      </div>
-      
-    </v-expansion-panels>
-    
+              <v-card-text>
+                <h3 class="mt-2">Judul Catatan</h3>
+
+                <v-text-field
+                  v-model="judul"
+                  placeholder="Masukkan Judul"
+                  outlined
+                  dense
+                  :readonly="readonly"
+                ></v-text-field>
+
+                <h3>Isi Catatan</h3>
+
+                <vue-editor
+                  v-model="content"
+                  :editorToolbar="customToolbar"
+                ></vue-editor>
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="primary"
+                  class="white--text"
+                  :disabled="judul == '' || content == '' ? true : false"
+                  @click="simpan"
+                >
+                  Simpan
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
+
+        <br />
+
+        <v-expansion-panels focusable>
+          <v-expansion-panel v-for="item in catatan" :key="item.id">
+            <v-expansion-panel-header>
+              <div class="d-flex align-center">
+                <b class="mr-auto">{{ item.judul }}</b>
+
+                <div class="mx-2">
+                  <v-btn x-small outlined @click="edit(item)">
+                    <v-icon left>mdi-pencil</v-icon> Ubah
+                  </v-btn>
+                </div>
+
+                <div class="mx-2">
+                  <v-btn x-small outlined @click="deleteCatatan(item)">
+                    <v-icon left>mdi-delete</v-icon> Hapus
+                  </v-btn>
+                </div>
+              </div>
+            </v-expansion-panel-header>
+
+            <v-expansion-panel-content>
+              <div v-html="item.deskripsi"></div>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+
+        <br />
+
+        <div class="d-flex flex-wrap">
+          <h3 class="mr-auto">Kebijakan</h3>
+          <v-btn
+            color="teal"
+            dark
+            small
+            class="mx-2"
+            @click="openDialog('Tambah Kebijakan')"
+          >
+            Tambah Kebijakan
+          </v-btn>
+        </div>
+
+        <div class="d-flex justify-space-between mt-2">
+          <div v-html="kebijakan.deskripsi"></div>
+
+          <div v-if="kebijakan != ''">
+            <v-btn x-small outlined class="mx-2" @click="edit(kebijakan)">
+              <v-icon left>mdi-pencil</v-icon> Ubah
+            </v-btn>
+
+            <v-btn
+              x-small
+              outlined
+              class="mx-2"
+              @click="deleteCatatan(kebijakan)"
+            >
+              <v-icon left>mdi-delete</v-icon> Hapus
+            </v-btn>
+          </div>
+        </div>
+      </v-tab-item>
+
+      <v-tab-item>
+        <buyer-performance :user="user" />
+      </v-tab-item>
+    </v-tabs-items>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
 import { VueEditor } from "vue2-editor";
+import StarRating from "vue-star-rating";
 
 export default {
   name: "info-penjual",
   props: ["user"],
-  components: { VueEditor },
+  components: {
+    StarRating,
+    VueEditor,
+    BuyerPerformance: () =>
+      import(
+        /* webpackChunkName: "buyer-performance" */ "@/components/BuyerPerformance.vue"
+      ),
+  },
   data: () => ({
+    tab: 0,
+    ubahSlogan: false,
     slogan: null,
     dialog: false,
     customToolbar: [
@@ -161,6 +225,8 @@ export default {
     type: 0,
     jenis: "post",
     selected: [],
+    avg: [],
+    ulasanSaya: 0,
   }),
   methods: {
     ...mapActions({
@@ -379,11 +445,47 @@ export default {
         this.updateCatatan();
       }
     },
+    reviewAvg() {
+      this.axios
+        .get("/transaksi/v3/review_avg", {
+          params: {
+            id_penjual: this.user.id,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.avg = data[0];
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses);
+        });
+    },
+    myReview() {
+      this.axios
+        .get("/transaksi/v3/review", {
+          params: {
+            id_penjual: this.user.id,
+            limit: 1,
+          },
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.ulasanSaya = data.count;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
   },
   created() {
     this.getSlogan();
     this.getCatatan();
     this.getKebijakan();
+    this.reviewAvg();
+    this.myReview();
   },
 };
 </script>
