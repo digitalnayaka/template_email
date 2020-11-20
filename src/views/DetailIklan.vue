@@ -27,7 +27,7 @@
       </v-col>
 
       <v-col cols="12" sm="6">
-        <v-list two-line>
+        <v-list>
           <v-list-item>
             <v-list-item-avatar size="50">
               <v-icon x-large v-if="appuser.photo == 'null'">
@@ -39,34 +39,23 @@
             <v-list-item-content>
               <v-list-item-title class="font-weight-bold">
                 <div class="d-flex align-center">
-                  <v-avatar size="16" item>
+                  <v-avatar size="16" item v-if="appuser.id_mst_user_type == 2">
                     <v-img src="/img/verified.png" alt="verified"></v-img>
                   </v-avatar>
+
                   <span class="mx-1">{{ appuser.nama }}</span>
                 </div>
-                <!-- <div class="d-flex align-center" v-if="appuser.id_mst_user_type == 2">
-          <img
-            src="/img/verified.png"
-            width="15px"
-            height="15px"
-            alt="verified"
-          />
-          <span class="ml-1 teal--text text-subtitle-2">Premium Seller</span>
-        </div> -->
               </v-list-item-title>
 
               <v-list-item-subtitle>Penjual</v-list-item-subtitle>
 
-              <v-list-item-subtitle v-if="appuser.slogan != null">
+              <!-- <v-list-item-subtitle v-if="appuser.slogan != null">
                 Slogan: {{ appuser.slogan }}
               </v-list-item-subtitle>
 
               <h5>
                 Rating Penjual:
 
-                <!-- <v-icon color="red" v-if="avg.ratting_user == 1">
-                  mdi-emoticon-angry-outline
-                </v-icon> -->
                 <v-avatar size="16" item>
                   <v-img
                     src="/img/icons/emoji_tidakpuas.png"
@@ -91,11 +80,16 @@
                   ></v-img>
                 </v-avatar>
               </h5>
-              <h5>
-                <v-icon color="yellow" v-for="n in avg.ratting_iklan" :key="n">
-                  mdi-star
-                </v-icon>
-              </h5>
+
+              <star-rating
+                :rating="avg.ratting_iklan"
+                read-only
+                :show-rating="false"
+                :round-start-rating="false"
+                :star-size="20"
+                inline
+              ></star-rating>
+
               <div class="d-flex d-sm-none" v-if="!guest">
                 <v-btn
                   x-small
@@ -115,103 +109,133 @@
                 >
                   Pesan
                 </v-btn>
-              </div>
+              </div> -->
             </v-list-item-content>
-
-            <div class="d-none d-sm-flex" v-if="!guest">
-              <v-btn
-                color="teal"
-                small
-                dark
-                @click="dialogInfo2 = true"
-                class="mx-2"
-              >
-                Hubungi
-              </v-btn>
-              <v-btn
-                color="teal"
-                small
-                dark
-                :to="'/chat/' + appuser.id"
-                class="mx-2"
-              >
-                Pesan
-              </v-btn>
-            </div>
-
-            <v-dialog v-model="dialogInfo2" persistent max-width="500px">
-              <v-card>
-                <v-toolbar dark color="teal">
-                  <v-toolbar-title>Hubungi</v-toolbar-title>
-
-                  <div class="flex-grow-1"></div>
-
-                  <v-btn icon @click="dialogInfo2 = false">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                </v-toolbar>
-
-                <v-card-title>
-                  Tanyakan lebih lanjut kepada penjual
-                </v-card-title>
-
-                <div align="center">
-                  <v-btn tile color="white" class="mx-2">
-                    <a :href="'tel:' + appuser.nomor_hp">Telepon</a>
-                  </v-btn>
-
-                  <v-btn tile color="white" class="mx-2">
-                    <a :href="'sms:' + appuser.nomor_hp">SMS</a>
-                  </v-btn>
-
-                  <v-btn tile color="white" class="mx-2">
-                    <a
-                      :href="
-                        'https://api.whatsapp.com/send?phone=' +
-                        appuser.nomor_hp +
-                        '&text=Hai, saya dari aplikasi SiMotor'
-                      "
-                    >
-                      WhatsApp Now
-                    </a>
-                  </v-btn>
-                </div>
-              </v-card>
-            </v-dialog>
           </v-list-item>
         </v-list>
+
+        <div>Slogan: {{ appuser.slogan }}</div>
+
+        <div class="d-flex align-center justify-space-between">
+          <div>
+            <v-avatar size="32" item>
+              <v-img
+                src="/img/icons/emoji_tidakpuas.png"
+                alt="rating"
+                v-if="avg.ratting_user == 1"
+              ></v-img>
+            </v-avatar>
+
+            <v-avatar size="25" item>
+              <v-img
+                src="/img/icons/emoji_netral.png"
+                alt="rating"
+                v-if="avg.ratting_user == 2"
+              ></v-img>
+            </v-avatar>
+
+            <v-avatar size="32" item>
+              <v-img
+                src="/img/icons/emoji_puas.png"
+                alt="rating"
+                v-if="avg.ratting_user == 3"
+              ></v-img>
+            </v-avatar>
+          </div>
+
+          <div>
+            <star-rating
+              :rating="avg.ratting_iklan"
+              read-only
+              :show-rating="false"
+              :round-start-rating="false"
+              :star-size="20"
+              inline
+              class="pa-0"
+            ></star-rating>
+          </div>
+
+          <v-btn
+            color="teal"
+            small
+            dark
+            @click="dialogInfo2 = true"
+            class="mx-2"
+            v-if="!guest"
+          >
+            Hubungi
+          </v-btn>
+
+          <v-btn
+            color="teal"
+            small
+            dark
+            :to="'/chat/' + appuser.id"
+            class="mx-2"
+            v-if="!guest"
+          >
+            Pesan
+          </v-btn>
+        </div>
+
+        <v-dialog v-model="dialogInfo2" persistent max-width="500px">
+          <v-card>
+            <v-toolbar dark color="teal">
+              <v-toolbar-title>Hubungi</v-toolbar-title>
+
+              <div class="flex-grow-1"></div>
+
+              <v-btn icon @click="dialogInfo2 = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-toolbar>
+
+            <v-card-title> Tanyakan lebih lanjut kepada penjual </v-card-title>
+
+            <div align="center">
+              <v-btn tile color="white" class="mx-2">
+                <a :href="'tel:' + appuser.nomor_hp">Telepon</a>
+              </v-btn>
+
+              <v-btn tile color="white" class="mx-2">
+                <a :href="'sms:' + appuser.nomor_hp">SMS</a>
+              </v-btn>
+
+              <v-btn tile color="white" class="mx-2">
+                <a
+                  :href="
+                    'https://api.whatsapp.com/send?phone=' +
+                    appuser.nomor_hp +
+                    '&text=Hai, saya dari aplikasi SiMotor'
+                  "
+                >
+                  WhatsApp Now
+                </a>
+              </v-btn>
+            </div>
+          </v-card>
+        </v-dialog>
+
+        <v-divider class="my-2"></v-divider>
 
         <div class="text-h5 font-weight-bold">{{ hits.judul }}</div>
 
         <div class="d-flex align-center text-caption text-sm-body-2">
-          <!-- <span>3.5</span>
-          <star-rating
-            :rating="3.5"
-            read-only
-            :show-rating="false"
-            :round-start-rating="false"
-            :star-size="20"
-            inline
-          ></star-rating>
-          <v-icon>mdi-circle-medium</v-icon> -->
           <span v-if="iklan.log_iklan_view > 0">
             {{ iklan.log_iklan_view }}x Dilihat
           </span>
-          <!-- <div>
-            <v-btn icon>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn icon class="mx-2" v-on="on" @click="favourite">
-                    <v-icon v-if="favorit == undefined"
-                      >mdi-heart-outline</v-icon
-                    >
-                    <v-icon color="red" v-else>mdi-heart</v-icon>
-                  </v-btn>
-                </template>
-                <span>Favorit</span>
-              </v-tooltip>
-            </v-btn>
-          </div> -->
+
+          <v-btn icon>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn icon class="mx-2" v-on="on" @click="favourite">
+                  <v-icon v-if="favorit == undefined">mdi-heart-outline</v-icon>
+                  <v-icon color="red" v-else>mdi-heart</v-icon>
+                </v-btn>
+              </template>
+              <span>Favorit</span>
+            </v-tooltip>
+          </v-btn>
         </div>
 
         <v-divider class="mt-2"></v-divider>
@@ -457,6 +481,7 @@
           </v-row>
         </div>
       </v-tab-item>
+
       <v-tab-item>
         <v-card flat>
           <v-card-title class="font-weight-bold">
@@ -492,6 +517,7 @@
           </v-row>
         </v-card>
       </v-tab-item>
+
       <v-tab-item>
         <v-row class="d-flex align-center">
           <v-col cols="12" sm="6">
@@ -905,15 +931,15 @@ import "firebase/firestore";
 import { db } from "../main";
 import moment from "moment-timezone";
 import FlipCountdown from "vue2-flip-countdown";
-// import StarRating from "vue-star-rating";
+import StarRating from "vue-star-rating";
 
 const fmt = "YYYY-MM-DD HH:mm:ss";
 
 export default {
   name: "detail_iklan",
   components: {
+    StarRating,
     FlipCountdown,
-    // StarRating,
     DetailUnit: () =>
       import(
         /* webpackChunkName: "detail-unit" */ "@/components/DetailUnit.vue"
@@ -962,6 +988,7 @@ export default {
       catatan: [],
       kebijakan: [],
       avg: [],
+      favorit: [],
     };
   },
   methods: {
@@ -1474,16 +1501,51 @@ export default {
           console.log(responses);
         });
     },
+    getFavourite() {
+      this.axios
+        .get("/iklan/v3/iklan_favorit", {
+          params: {
+            id_app_user: this.user.id,
+            id_iklan: this.id,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let data = response.data;
+          let { hits } = data.hits;
+          this.favorit = hits[0];
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    favourite() {
+      let formData = new FormData();
+      formData.append("id_iklan", this.id);
+      formData.append("id_app_user", this.user.id);
+
+      this.axios
+        .post("/iklan/v3/iklan_favorit", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then(() => {
+          this.getFavourite();
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
     back() {
       this.$router.go(-1);
       this.title = "SiMotor";
     },
   },
   created() {
-    // this.$nextTick(() => {
     this.getDtlIklan();
-    // });
     this.GetBid();
+    this.getFavourite();
     if (!this.guest) {
       this.getOrder();
     }

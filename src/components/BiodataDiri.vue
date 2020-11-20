@@ -15,14 +15,14 @@
         ></v-file-input>
 
         <div class="text-center">
-          <v-btn id="buttonid" block small class="mt-4" @click="uploadAvatar"
-            >Pilih Foto</v-btn
-          >
+          <v-btn id="buttonid" block small class="mt-4" @click="uploadAvatar">
+            Pilih Foto
+          </v-btn>
         </div>
 
-        <v-card-text class="text-caption"
-          >Ekstensi file yang diperbolehkan: .JPG .JPEG .PNG</v-card-text
-        >
+        <v-card-text class="text-caption">
+          Ekstensi file yang diperbolehkan: .JPG .JPEG .PNG
+        </v-card-text>
       </v-card>
     </v-col>
 
@@ -156,119 +156,10 @@
 
       <br />
     </v-col>
-    <v-tabs
-      v-model="tab"
-      background-color="teal darken-3"
-      dark
-      slider-color="yellow"
-      show-arrows
-      class="mt-2"
-    >
-      <v-tab>Performa Penjual</v-tab>
-      <v-tab>Performa Pembeli</v-tab>
-      <v-tabs-items v-model="tab">
-        <v-tab-item>
-          <div class="text-h5">Rating Penjual</div>
-        </v-tab-item>
-        <v-tab-item>
-          <div class="text-h5 text-center font-weight-bold">
-            Performa Pembeli
-          </div>
-          <v-divider> </v-divider>
 
-          <v-row justify="space-around">
-            <v-col cols="3" sm="3" align="center">
-              <div v-if="user.id_type_pinalti !== 3">
-                <v-img
-                  src="/img/icons/akun_blokir_gray.webp"
-                  width="35"
-                  contain
-                ></v-img>
-              </div>
-              <div v-if="user.id_type_pinalti == 3">
-                <v-img
-                  src="/img/icons/akun_blokir.webp"
-                  width="35"
-                  contain
-                ></v-img>
-              </div>
-              <h5>Akun diBlokir</h5>
-            </v-col>
-
-            <v-col cols="3" sm="3" align="center">
-              <div v-if="user.id_type_pinalti == 2">
-                <v-img
-                  src="/img/icons/akun_wanprestasi2.webp"
-                  width="35"
-                  contain
-                ></v-img>
-              </div>
-              <div v-if="user.id_type_pinalti !== 2">
-                <v-img
-                  src="/img/icons/akun_wanprestasi2_gray.webp"
-                  width="35"
-                  contain
-                ></v-img>
-              </div>
-              <h5>Wanprestasi 2</h5>
-            </v-col>
-
-            <v-col cols="3" sm="3" align="center">
-              <div v-if="user.id_type_pinalti == 1">
-                <v-img
-                  src="/img/icons/akun_wanprestasi1.webp"
-                  width="35"
-                  contain
-                ></v-img>
-
-                <h5>Wanprestasi 1</h5>
-              </div>
-              <div v-if="user.id_type_pinalti !== 1">
-                <v-img
-                  src="/img/icons/akun_wanprestasi1_gray.webp"
-                  width="35"
-                  contain
-                ></v-img>
-
-                <h5>Wanprestasi 1</h5>
-              </div>
-            </v-col>
-
-            <v-col cols="3" sm="3" align="center">
-              <div v-if="user.id_type_pinalti !== 0">
-                <v-img
-                  src="/img/icons/akun_aman_gray.webp"
-                  width="35"
-                  contain
-                ></v-img>
-              </div>
-              <div v-if="user.id_type_pinalti == 0">
-                <v-img
-                  src="/img/icons/akun_aman.webp"
-                  width="35"
-                  contain
-                ></v-img>
-              </div>
-              <h5>Akun Aman</h5>
-            </v-col>
-            <div>
-            <v-alert dense type="success" v-if="user.id_type_pinalti == 0">
-             Selamat!! Anda Pembeli <strong>TERPERCAYA,</strong> tingkatkan terus transaksi Anda!
-            </v-alert>
-             <v-alert dense  type="warning" v-if="user.id_type_pinalti == 1">
-             Oops!! Anda terdeteksi melakukan <strong>1 Kali WANPRESTASI,</strong> Mohon maaf, tiket untuk iklan Anda hangus.
-            </v-alert>
-             <v-alert dense  type="warning" v-if="user.id_type_pinalti == 2">
-              Oops!! Anda terdeteksi melakukan <strong>2 Kali WANPRESTASI,</strong> Mohon maaf, akun Anda tidak bisa ikut Tawar Bersama.
-            </v-alert>
-             <v-alert dense  type="error" v-if="user.id_type_pinalti == 3">
-              Oops!! Anda terdeteksi melakukan <strong>3 Kali WANPRESTASI,</strong> Mohon maaf, akun Anda diBlokir sampai batas waktu yang ditentukan.
-            </v-alert>
-            </div>
-          </v-row>
-        </v-tab-item>
-      </v-tabs-items>
-    </v-tabs>
+    <v-col cols="12">
+      <info-penjual :user="user" />
+    </v-col>
   </v-row>
 </template>
 
@@ -280,6 +171,12 @@ import "firebaseui/dist/firebaseui.css";
 
 export default {
   name: "biodata-diri",
+  components: {
+    InfoPenjual: () =>
+      import(
+        /* webpackChunkName: "biodata-diri" */ "@/components/InfoPenjual.vue"
+      ),
+  },
   props: ["user"],
   data: () => ({
     ubahNama: false,
@@ -337,7 +234,6 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.appuser = data[0];
-          this.myReview();
           this.reviewAvg();
         })
         .catch((error) => {
@@ -415,31 +311,6 @@ export default {
             color: "error",
             text: responses.api_message,
           });
-        });
-    },
-    myReview() {
-      let offset = (this.page - 1) * this.limit;
-
-      this.axios
-        .get("/transaksi/v3/review", {
-          params: {
-            id_penjual: this.appuser.id,
-            offset: offset,
-            limit: this.limit,
-          },
-          headers: { Authorization: "Bearer " + this.user.token },
-        })
-        .then((response) => {
-          let { data } = response.data;
-          this.ulasanSaya = data;
-
-          this.total = response.data.count;
-          this.lengthPage =
-            this.total == 0 ? 1 : Math.ceil(this.total / this.limit);
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          console.log(responses.api_message);
         });
     },
     reviewAvg() {

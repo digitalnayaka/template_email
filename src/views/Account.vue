@@ -42,16 +42,6 @@
 
         <v-list dense>
           <v-list-item-group v-model="menu" color="primary">
-            <!-- <v-list-item to="/account/edit">
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title>Profil</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item> -->
-
             <div v-for="item in items" :key="item.id">
               <v-list-item :to="item.route" v-if="item.id == 1">
                 <v-list-item-icon>
