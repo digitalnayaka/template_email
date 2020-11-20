@@ -2,8 +2,8 @@
   <div>
     <v-tabs
       v-model="tab"
-      background-color="green accent-3"
-      color="teal"
+      background-color="green darken-3"
+      color="white" 
       slider-color="yellow"
       show-arrows
     >

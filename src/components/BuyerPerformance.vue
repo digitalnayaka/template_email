@@ -100,18 +100,19 @@
 
     <v-row>
       <v-col cols="6">
-        Note:
+        Note Wanprestasi:
 
         <ul class="red--text">
           <li>1 kali gagal Tiket hangus</li>
 
-          <li>2 kali gagal tidak bisa Tawar Bersama selama 2 minggu</li>
+          <li>2 kali gagal tidak bisa ikut Tawar Bersama selama 2 minggu</li>
 
-          <li>3 kali gagal Akun anda akan diblokir permanen</li>
+          <li>3 kali gagal Akun anda akan diblokir secara permanen</li>
         </ul>
       </v-col>
 
-      <v-col cols="6"><flip-countdown deadline="2021-01-01 00:00:00"></flip-countdown></v-col>
+      <v-col cols="6" v-if="user.id_type_pinalti == 3 ">Masa blokir akun Anda berakhir pada: <flip-countdown :deadline="user.tanggal_selesai"></flip-countdown></v-col>
+
     </v-row>
   </div>
 </template>

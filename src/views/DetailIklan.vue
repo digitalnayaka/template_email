@@ -114,10 +114,10 @@
           </v-list-item>
         </v-list>
 
-        <div>Slogan: {{ appuser.slogan }}</div>
+        <div v-if="appuser.slogan != null">Slogan: {{ appuser.slogan }} </div>
 
         <div class="d-flex align-center justify-space-between">
-          <div>
+          <div v-if="avg.ratting_user != null">
             <v-avatar size="32" item>
               <v-img
                 src="/img/icons/emoji_tidakpuas.png"
@@ -142,8 +142,7 @@
               ></v-img>
             </v-avatar>
           </div>
-
-          <div>
+          <div v-if="avg.ratting_iklan != null">
             <star-rating
               :rating="avg.ratting_iklan"
               read-only
@@ -154,7 +153,6 @@
               class="pa-0"
             ></star-rating>
           </div>
-
           <v-btn
             color="teal"
             small
