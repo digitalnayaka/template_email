@@ -118,6 +118,7 @@
 
         <div class="d-flex align-center justify-space-between">
           <div v-if="avg.ratting_user != null">
+            
             <v-avatar size="32" item>
               <v-img
                 src="/img/icons/emoji_tidakpuas.png"
@@ -153,6 +154,7 @@
               class="pa-0"
             ></star-rating>
           </div>
+          <div>
           <v-btn
             color="teal"
             small
@@ -174,6 +176,7 @@
           >
             Pesan
           </v-btn>
+          </div>
         </div>
 
         <v-dialog v-model="dialogInfo2" persistent max-width="500px">
