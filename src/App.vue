@@ -397,13 +397,19 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn large icon v-bind="attrs" v-on="on">
-              <v-badge color="orange" overlap>
+              <v-badge
+                color="orange"
+                overlap
+                v-if="chats.length + review.length > 0"
+              >
                 <template v-slot:badge>
                   <span>{{ chats.length + review.length }}</span>
                 </template>
 
                 <v-icon>mdi-email</v-icon>
               </v-badge>
+
+              <v-icon v-else>mdi-email</v-icon>
             </v-btn>
           </template>
 

@@ -114,68 +114,69 @@
           </v-list-item>
         </v-list>
 
-        <div v-if="appuser.slogan != null">Slogan: {{ appuser.slogan }} </div>
+        <div v-if="appuser.slogan != null">Slogan: {{ appuser.slogan }}</div>
 
-        <div class="d-flex align-center justify-space-between">
+        <div class="d-flex align-center justify-space-around">
           <div v-if="avg.ratting_user != null">
-            
-            <v-avatar size="32" item>
-              <v-img
-                src="/img/icons/emoji_tidakpuas.png"
-                alt="rating"
-                v-if="avg.ratting_user == 1"
-              ></v-img>
-            </v-avatar>
+            <div v-if="avg.ratting_user == 1">
+              <v-avatar size="32" item>
+                <v-img
+                  src="/img/icons/emoji_tidakpuas.png"
+                  alt="kecewa"
+                ></v-img>
+              </v-avatar>
 
-            <v-avatar size="25" item>
-              <v-img
-                src="/img/icons/emoji_netral.png"
-                alt="rating"
-                v-if="avg.ratting_user == 2"
-              ></v-img>
-            </v-avatar>
+              Kecewa
+            </div>
 
-            <v-avatar size="32" item>
-              <v-img
-                src="/img/icons/emoji_puas.png"
-                alt="rating"
-                v-if="avg.ratting_user == 3"
-              ></v-img>
-            </v-avatar>
+            <div v-if="avg.ratting_user == 2">
+              <v-avatar size="32" item>
+                <v-img src="/img/icons/emoji_netral.png" alt="netral"></v-img>
+              </v-avatar>
+
+              Netral
+            </div>
+
+            <div v-if="avg.ratting_user == 3">
+              <v-avatar size="32" item>
+                <v-img src="/img/icons/emoji_puas.png" alt="puas"></v-img>
+              </v-avatar>
+
+              Puas
+            </div>
           </div>
+
           <div v-if="avg.ratting_iklan != null">
             <star-rating
               :rating="avg.ratting_iklan"
               read-only
-              :show-rating="false"
               :round-start-rating="false"
               :star-size="20"
               inline
               class="pa-0"
             ></star-rating>
           </div>
-          <div>
-          <v-btn
-            color="teal"
-            small
-            dark
-            @click="dialogInfo2 = true"
-            class="mx-2"
-            v-if="!guest"
-          >
-            Hubungi
-          </v-btn>
 
-          <v-btn
-            color="teal"
-            small
-            dark
-            :to="'/chat/' + appuser.id"
-            class="mx-2"
-            v-if="!guest"
-          >
-            Pesan
-          </v-btn>
+          <div v-if="!guest">
+            <v-btn
+              color="teal"
+              small
+              dark
+              @click="dialogInfo2 = true"
+              class="mx-2"
+            >
+              Hubungi
+            </v-btn>
+
+            <v-btn
+              color="teal"
+              small
+              dark
+              :to="'/chat/' + appuser.id"
+              class="mx-2"
+            >
+              Pesan
+            </v-btn>
           </div>
         </div>
 
@@ -184,7 +185,7 @@
             <v-toolbar dark color="teal">
               <v-toolbar-title>Hubungi</v-toolbar-title>
 
-              <div class="flex-grow-1"></div>
+              <v-spacer></v-spacer>
 
               <v-btn icon @click="dialogInfo2 = false">
                 <v-icon>mdi-close</v-icon>
@@ -193,16 +194,16 @@
 
             <v-card-title> Tanyakan lebih lanjut kepada penjual </v-card-title>
 
-            <div align="center">
-              <v-btn tile color="white" class="mx-2">
+            <div class="d-flex justify-space-around">
+              <v-btn tile color="white" text>
                 <a :href="'tel:' + appuser.nomor_hp">Telepon</a>
               </v-btn>
 
-              <v-btn tile color="white" class="mx-2">
+              <v-btn tile color="white" text>
                 <a :href="'sms:' + appuser.nomor_hp">SMS</a>
               </v-btn>
 
-              <v-btn tile color="white" class="mx-2">
+              <v-btn tile color="white" text>
                 <a
                   :href="
                     'https://api.whatsapp.com/send?phone=' +
@@ -274,6 +275,7 @@
                 height="25"
                 v-if="liveBid.length == 0"
               />
+
               <img
                 src="/img/icons/harga_sekarang.png"
                 width="100"
@@ -282,96 +284,97 @@
               />
             </div>
           </v-col>
+        </v-row>
 
-          <div v-if="iklan.id_mst_iklan_jenis > 1">
-            <div
-              class="teal--text"
-              align="center"
-              v-if="start == false && end == false"
-            >
-              Tawar Bersama segera dimulai:
-              <flip-countdown :deadline="hits.tanggal_mulai"></flip-countdown>
-            </div>
+        <div class="text-center" v-if="iklan.id_mst_iklan_jenis > 1">
+          <div
+            class="teal--text"
+            align="center"
+            v-if="start == false && end == false"
+          >
+            <h2>Tawar Bersama segera dimulai:</h2>
+            <flip-countdown :deadline="hits.tanggal_mulai"></flip-countdown>
+          </div>
 
-            <div
-              class="teal--text"
-              align="center"
-              v-if="start == true && end == false"
-            >
-              Tawar Bersama berlangsung:
-              <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
-            </div>
+          <div
+            class="teal--text"
+            align="center"
+            v-if="start == true && end == false"
+          >
+            <h2>Tawar Bersama berlangsung:</h2>
+            <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
+          </div>
 
-            <div align="center" v-if="start == true && end == true">
-              <h2 class="teal--text">Tawar Bersama selesai</h2>
+          <div align="center" v-if="start == true && end == true">
+            <h2 class="teal--text">Tawar Bersama selesai</h2>
 
-              <div v-if="!guest">
-                <v-btn
-                  color="indigo darken-3"
-                  dark
-                  @click="dialogInfo = true"
-                  class="mx-2"
-                  v-if="
-                    liveBid.length > 0 &&
-                    (liveBid[0].IdAppUser == user.id ||
-                      iklan.id_app_user == user.id)
-                  "
-                >
-                  {{
-                    liveBid[0].IdAppUser == user.id
-                      ? "Anda menang, klik disini"
-                      : "Info Pemenang"
-                  }}
-                </v-btn>
+            <div v-if="!guest">
+              <v-btn
+                color="indigo darken-3"
+                dark
+                @click="dialogInfo = true"
+                class="mx-2"
+                v-if="
+                  liveBid.length > 0 &&
+                  (liveBid[0].IdAppUser == user.id ||
+                    iklan.id_app_user == user.id)
+                "
+              >
+                {{
+                  liveBid[0].IdAppUser == user.id
+                    ? "Anda menang, klik disini"
+                    : "Info Pemenang"
+                }}
+              </v-btn>
 
-                <v-dialog v-model="dialogInfo" persistent max-width="500px">
-                  <v-card>
-                    <v-toolbar color="teal darken-3" dark>
-                      <v-toolbar-title>Info Pemenang Iklan</v-toolbar-title>
+              <v-dialog v-model="dialogInfo" persistent max-width="500px">
+                <v-card>
+                  <v-toolbar color="teal darken-3" dark>
+                    <v-toolbar-title>Info Pemenang Iklan</v-toolbar-title>
 
-                      <div class="flex-grow-1"></div>
+                    <v-spacer></v-spacer>
 
-                      <v-btn icon @click="dialogInfo = false">
-                        <v-icon>mdi-close</v-icon>
-                      </v-btn>
-                    </v-toolbar>
+                    <v-btn icon @click="dialogInfo = false">
+                      <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                  </v-toolbar>
 
+                  <div v-if="!guest">
+                    <v-card-title v-if="hits.id_app_user == user.id">
+                      Segera hubungi pemenang iklan Anda
+                    </v-card-title>
+                  </div>
+
+                  <v-btn
+                    value="left"
+                    tile
+                    color="white"
+                    v-if="liveBid.length > 0"
+                  >
                     <div v-if="!guest">
-                      <v-card-title v-if="hits.id_app_user == user.id"
-                        >Segera hubungi pemenang iklan Anda</v-card-title
+                      <a
+                        :href="'/chat/' + iklan.id_app_user"
+                        v-if="liveBid[0].IdAppUser == user.id"
                       >
+                        Chat Penjual
+                      </a>
                     </div>
 
-                    <v-btn
-                      value="left"
-                      tile
-                      color="white"
-                      v-if="liveBid.length > 0"
-                    >
-                      <div v-if="!guest">
-                        <a
-                          :href="'/chat/' + iklan.id_app_user"
-                          v-if="liveBid[0].IdAppUser == user.id"
-                        >
-                          Chat Penjual
-                        </a>
-                      </div>
-                      <a :href="'/chat/' + liveBid[0].IdAppUser" v-else>
-                        Chat Pemenang
-                      </a>
-                    </v-btn>
+                    <a :href="'/chat/' + liveBid[0].IdAppUser" v-else>
+                      Chat Pemenang
+                    </a>
+                  </v-btn>
 
-                    <v-btn value="center" tile color="white">
-                      <a :href="'/detail-transaksi/' + orders.id">
-                        Detail Transaksi
-                      </a>
-                    </v-btn>
-                  </v-card>
-                </v-dialog>
-              </div>
+                  <v-btn value="center" tile color="white">
+                    <a :href="'/detail-transaksi/' + orders.id">
+                      Detail Transaksi
+                    </a>
+                  </v-btn>
+                </v-card>
+              </v-dialog>
             </div>
           </div>
-        </v-row>
+        </div>
 
         <!-- <div class="mt-2">
           <div class="font-weight-bold text-h6 blue-grey--text">Deskripsi</div>
@@ -382,9 +385,7 @@
 
     <v-divider></v-divider>
 
-    <v-divider></v-divider>
-
-    <v-tabs v-model="tab" color="teal" slider-color="teal" show-arrows>
+    <v-tabs v-model="tab" color="teal" slider-color="yellow" show-arrows>
       <v-tab>Spesifikasi</v-tab>
       <v-tab v-if="hits.id_mst_iklan_jenis == 2">Info Tawar Bersama</v-tab>
       <v-tab v-if="hits.id_mst_iklan_jenis == 2">Penawaran</v-tab>
@@ -520,14 +521,18 @@
       </v-tab-item>
 
       <v-tab-item>
-        <v-row class="d-flex align-center">
+        <v-row align="center">
           <v-col cols="12" sm="6">
-            <v-card-title class="font-weight-bold">
-              Deskripsi Iklan:
-            </v-card-title>
+            <v-card flat>
+              <v-card-title class="font-weight-bold">
+                Deskripsi Iklan:
+              </v-card-title>
 
-            <v-card-text>{{ hits.deskripsi }}</v-card-text>
+              <v-card-text>{{ hits.deskripsi }}</v-card-text>
+            </v-card>
+          </v-col>
 
+          <v-col cols="12" sm="6">
             <v-card class="d-flex justify-space-between align-center" flat>
               <v-card align="center">
                 <v-card-subtitle class="teal accent-4 white--text">
@@ -739,8 +744,8 @@
         </v-row>
       </v-tab-item>
 
-      <v-tab-item v-if="liveBid.length > 0">
-        <v-list>
+      <v-tab-item>
+        <v-list v-if="liveBid.length > 0">
           <v-list-item v-for="(item, i) in liveBid.slice(0, 5)" :key="item.Bid">
             <v-list-item-icon class="mx-0" v-if="i + 1 == 1">
               <v-icon large color="orange">mdi-star</v-icon>
@@ -771,6 +776,16 @@
             </v-list-item-action>
           </v-list-item>
         </v-list>
+
+        <v-card
+          class="d-flex align-center justify-center"
+          flat
+          height="100"
+          tile
+          v-else
+        >
+          <h2>Belum ada penawaran</h2>
+        </v-card>
       </v-tab-item>
     </v-tabs-items>
 
@@ -856,24 +871,20 @@
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title>Harga Awal</v-list-item-title>
-              <v-list-item-subtitle
-                >Rp
-                {{
-                  Number(iklan.harga_awal).toLocaleString("id-ID")
-                }}</v-list-item-subtitle
-              >
+              <v-list-item-subtitle>
+                Rp
+                {{ Number(iklan.harga_awal).toLocaleString("id-ID") }}
+              </v-list-item-subtitle>
             </v-list-item-content>
 
             <v-divider vertical class="mx-2"></v-divider>
 
             <v-list-item-content>
               <v-list-item-title>Kelipatan Tawaran</v-list-item-title>
-              <v-list-item-subtitle
-                >Rp
-                {{
-                  Number(iklan.kelipatan).toLocaleString("id-ID")
-                }}</v-list-item-subtitle
-              >
+              <v-list-item-subtitle>
+                Rp
+                {{ Number(iklan.kelipatan).toLocaleString("id-ID") }}
+              </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 

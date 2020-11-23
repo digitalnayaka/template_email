@@ -7,8 +7,8 @@
       slider-color="yellow"
       show-arrows
     >
-      <v-tab>Performa Penjualan</v-tab>
-      <v-tab>Performa Pembelian</v-tab>
+      <v-tab>Info Penjual</v-tab>
+      <!-- <v-tab>Performa Pembelian</v-tab> -->
     </v-tabs>
 
     <v-tabs-items v-model="tab" class="pa-4">
@@ -183,9 +183,9 @@
         </div>
       </v-tab-item>
 
-      <v-tab-item>
+      <!-- <v-tab-item>
         <buyer-performance :user="user" />
-      </v-tab-item>
+      </v-tab-item> -->
     </v-tabs-items>
   </div>
 </template>
@@ -201,10 +201,10 @@ export default {
   components: {
     StarRating,
     VueEditor,
-    BuyerPerformance: () =>
-      import(
-        /* webpackChunkName: "buyer-performance" */ "@/components/BuyerPerformance.vue"
-      ),
+    // BuyerPerformance: () =>
+    //   import(
+    //     /* webpackChunkName: "buyer-performance" */ "@/components/BuyerPerformance.vue"
+    //   ),
   },
   data: () => ({
     tab: 0,
