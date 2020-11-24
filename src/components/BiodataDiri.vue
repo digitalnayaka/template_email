@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12" sm="4">
       <v-card outlined width="800" class="pa-2 rounded-lg">
-        <v-img :src="getImage(user.photo)" contain></v-img>
+        <v-img :src="getImage(user.photo)" width="200" height="250" contain align="center"></v-img>
         <v-file-input
           id="fileid"
           label="File input"
@@ -157,9 +157,9 @@
       <br />
     </v-col>
 
-    <!-- <v-col cols="12">
+    <v-col cols="12">
       <info-penjual :user="user" />
-    </v-col> -->
+    </v-col>
   </v-row>
 </template>
 
@@ -171,12 +171,12 @@ import "firebaseui/dist/firebaseui.css";
 
 export default {
   name: "biodata-diri",
-  // components: {
-  //   InfoPenjual: () =>
-  //     import(
-  //       /* webpackChunkName: "biodata-diri" */ "@/components/InfoPenjual.vue"
-  //     ),
-  // },
+  components: {
+    InfoPenjual: () =>
+      import(
+        /* webpackChunkName: "biodata-diri" */ "@/components/InfoPenjual.vue"
+      ),
+  },
   props: ["user"],
   data: () => ({
     ubahNama: false,

@@ -114,11 +114,10 @@
           </v-list-item>
         </v-list>
 
-        <div v-if="appuser.slogan != null">Slogan: {{ appuser.slogan }} </div>
+        <div v-if="appuser.slogan != null">Slogan: {{ appuser.slogan }}</div>
 
         <div class="d-flex align-center justify-space-between">
           <div v-if="avg.ratting_user != null">
-            
             <v-avatar size="32" item>
               <v-img
                 src="/img/icons/emoji_tidakpuas.png"
@@ -155,27 +154,27 @@
             ></star-rating>
           </div>
           <div>
-          <v-btn
-            color="teal"
-            small
-            dark
-            @click="dialogInfo2 = true"
-            class="mx-2"
-            v-if="!guest"
-          >
-            Hubungi
-          </v-btn>
+            <v-btn
+              color="teal"
+              small
+              dark
+              @click="dialogInfo2 = true"
+              class="mx-2"
+              v-if="!guest"
+            >
+              Hubungi
+            </v-btn>
 
-          <v-btn
-            color="teal"
-            small
-            dark
-            :to="'/chat/' + appuser.id"
-            class="mx-2"
-            v-if="!guest"
-          >
-            Pesan
-          </v-btn>
+            <v-btn
+              color="teal"
+              small
+              dark
+              :to="'/chat/' + appuser.id"
+              class="mx-2"
+              v-if="!guest"
+            >
+              Pesan
+            </v-btn>
           </div>
         </div>
 
@@ -803,6 +802,97 @@
 
     <v-bottom-sheet v-model="sheet">
       <v-sheet>
+        <h3 class="text-center my-4">Ingin menggunakan fitur Auto Tawar?</h3>
+        <v-row justify="center">
+          <v-btn text color="primary" dark @click.stop="dialogTawar = true">
+            Setuju
+          </v-btn>
+          <v-btn text color="error" dark @click.stop="dialogTawar = true">
+            Tidak
+          </v-btn>
+
+          <v-dialog v-model="dialogTawar" max-width="800">
+            <v-card>
+              <h2 class="text-center my-4">
+                Apakah Anda yakin ingin menggunakan fitur Auto Tawar?
+              </h2>
+
+              <v-list-item>
+                <v-list-item-content>
+                  <flip-countdown
+                    :deadline="hits.tanggal_selesai"
+                  ></flip-countdown>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-btn icon @click="minus">
+                    <v-icon>mdi-minus</v-icon>
+                  </v-btn>
+                </v-list-item-icon>
+
+                <v-list-item-content align="center">
+                  <v-list-item-subtitle>Nominal Penawaran</v-list-item-subtitle>
+
+                  <v-list-item-title class="font-weight-black">
+                    Rp {{ Number(bid).toLocaleString("id-ID") }}
+                  </v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-action>
+                  <v-btn icon @click="bid += iklan.kelipatan">
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </v-list-item>
+
+              <h4 class="text-center my-4">Harga maksimal Tawar Anda</h4>
+              <h3 class="text-center my-4 teal--text">
+                Harga maksimal (kalau belum ada yg tawar = harga awal + 20juta)
+                (kalau ada yg nawar = harga saat ini + 20juta)
+              </h3>
+              <v-card-text class="red--text">
+                Noted: Fitur Auto Tawar tidak menjamin Anda akan memenangkan
+                iklan Tawar Bersama
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn color="primary" rounded @click="KonfirmasiAuto = true">
+                  Konfirmasi
+                </v-btn>
+
+                <v-btn color="red" dark rounded @click="dialogTawar = false">
+                  Batal
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
+          <v-dialog v-model="KonfirmasiAuto" max-width="500">
+            <v-card>
+              
+               <h2 class="text-center my-4">Harga maksimal Auto Tawar</h2>
+              <h3 class="text-center my-4 teal--text">
+                Harga maksimal:  (kalau belum ada yg tawar = harga awal + 20juta)
+                (kalau ada yg nawar = harga saat ini + 20juta)
+              </h3>
+              <v-card-text class="red--text">
+                Noted: Auto Tawar ditandai dengan icon warna hijau pada list tawaran
+              </v-card-text>
+               <v-card-actions>
+                <v-spacer></v-spacer>
+               <v-btn color="primary" rounded @click="KonfirmasiAuto = true">
+                  Konfirmasi
+                </v-btn>
+
+                <v-btn color="red" dark rounded @click="KonfirmasiAuto = false">
+                  Batal
+                </v-btn>
+               </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-row>
         <v-container fluid v-if="useTiket">
           <h2 class="text-center my-4 red--text">
             {{ iklan.jumlah_tiket }} Tiket dibutuhkan
@@ -833,8 +923,8 @@
         </v-container>
 
         <v-container fluid v-if="noTiket">
-          <h2 class="text-center my-4">Oops!</h2>
-
+          <!-- <h2 class="text-center my-4">Oops!</h2> -->
+<v-divider> </v-divider>
           <div class="text-center my-4">
             Dengan mengikuti iklan Tawar Bersama ini Anda terdaftar sebagai
             peserta iklan ini meskipun Anda tidak melakukan penawaran
@@ -990,6 +1080,7 @@ export default {
       kebijakan: [],
       avg: [],
       favorit: [],
+      dialogTawar: false,
     };
   },
   methods: {

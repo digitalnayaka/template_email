@@ -18,6 +18,7 @@
         show-arrows-on-hover
         contain
         :to="'/detail-banner/' + item.id"
+        class="rounded-lg"
       ></v-carousel-item>
     </v-carousel>
 
@@ -294,7 +295,7 @@ export default {
     categories: [
       {
         id: 1,
-        image: "/img/mokas2.webp",
+        image: "/img/icons/mokas2.webp",
         name: "Motor Bekas",
         route: "mokas",
       },
@@ -306,7 +307,7 @@ export default {
       // },
       {
         id: 3,
-        image: "/img/tiket_tb.webp",
+        image: "/img/icons/tiket_tb.webp",
         name: "Tiket Tawar Bersama",
         route: "ticket",
       },
