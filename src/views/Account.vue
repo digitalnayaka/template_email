@@ -54,7 +54,7 @@
               </v-list-item>
 
               <v-list-group
-                v-if="item.id == 2 || item.id == 3"
+                v-if="item.id == 2 || item.id == 4"
                 :prepend-icon="item.icon"
                 no-action
                 :value="true"
@@ -75,7 +75,7 @@
               </v-list-group>
 
               <v-list-group
-                v-if="item.id == 4"
+                v-if="item.id == 3"
                 :prepend-icon="item.icon"
                 :value="true"
               >
@@ -161,14 +161,23 @@ export default {
         title: "Akun",
         route: "/account/edit",
       },
-
       {
-        id: 4,
+        id: 2,
+        icon: "mdi-email-multiple",
+        title: "Kotak Masuk",
+        items: [
+          { id: 6, icon: "mdi-account", title: "Chat", route: "/chat-list" },
+          { id: 7, title: "Penilaian", route: "/product/review" },
+          { id: 8, title: "Notifikasi", route: "/notification" },
+        ],
+      },
+      {
+        id: 3,
         icon: "mdi-currency-usd-circle",
         title: "Penjual",
       },
       {
-        id: 3,
+        id: 4,
         icon: "mdi-shopping",
         title: "Pembeli",
         items: [
@@ -176,18 +185,6 @@ export default {
           { id: 10, title: "Transaksi", route: "/buy/order" },
         ],
       },
-
-      {
-        id: 2,
-        icon: "mdi-email-multiple",
-        title: "Kotak Masuk",
-        items: [
-          { id: 6, icon:"mdi-account", title: "Chat", route: "/chat-list" },
-          { id: 7, title: "Penilaian", route: "/product/review" },
-          { id: 8, title: "Notifikasi", route: "/notification" },
-        ],
-      },
-      
       {
         id: 5,
         icon: "mdi-help",
