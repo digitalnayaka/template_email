@@ -856,9 +856,75 @@
             <br />Apakah Anda setuju?
           </div>
 
-          <v-btn block color="success" class="my-4" @click="konfirmasiNonTiket">
+          <v-btn
+            block
+            color="success"
+            class="my-4"
+            @click="dialogKonfirmasi = true"
+          >
             Setuju, mengikuti Tawar Bersama
           </v-btn>
+
+          <v-dialog v-model="dialogKonfirmasi" max-width="460">
+            <v-card>
+              <div v-if="auto == false">
+                <v-card-title class="headline">
+                  Konfirmasi Mengikuti Tawar Bersama
+                </v-card-title>
+
+                <v-card-text>
+                  Dengan mengikuti iklan Tawar Bersama ini Anda terdaftar
+                  sebagai peserta iklan ini meskipun Anda tidak melakukan
+                  penawaran. Apakah Anda setuju?
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+
+                  <v-btn
+                    color="red darken-1"
+                    text
+                    @click="dialogKonfirmasi = false"
+                  >
+                    Disagree
+                  </v-btn>
+
+                  <v-btn
+                    color="green darken-1"
+                    text
+                    @click="konfirmasiNonTiket()"
+                  >
+                    Agree
+                  </v-btn>
+                </v-card-actions>
+              </div>
+
+              <div v-else>
+                <v-card-title class="headline">
+                  Agan sibuk? <br />
+                  Mau cobain fitur Auto Tawar?
+                </v-card-title>
+
+                <div class="d-flex justify-space-around">
+                  <v-btn
+                    color="red darken-1"
+                    text
+                    @click="dialogKonfirmasi = false"
+                  >
+                    Disagree
+                  </v-btn>
+
+                  <v-btn
+                    color="green darken-1"
+                    text
+                    @click="konfirmasiNonTiket()"
+                  >
+                    Agree
+                  </v-btn>
+                </div>
+              </div>
+            </v-card>
+          </v-dialog>
         </v-container>
 
         <v-list v-if="ikutPenawaran">
@@ -868,7 +934,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item class="text-center">
             <v-list-item-content>
               <v-list-item-title>Harga Awal</v-list-item-title>
               <v-list-item-subtitle>
@@ -1001,6 +1067,8 @@ export default {
       kebijakan: [],
       avg: [],
       favorit: [],
+      dialogKonfirmasi: false,
+      auto: false,
     };
   },
   methods: {
@@ -1272,39 +1340,39 @@ export default {
       }
     },
     konfirmasiNonTiket() {
-      var r = confirm(
-        "Konfirmasi mengikuti Tawar Bersama \nDengan mengikuti iklan Tawar Bersama ini Anda terdaftar sebagai peserta iklan ini meskipun Anda tidak melakukan penawaran. \nApakah Anda setuju?"
-      );
-      if (r == true) {
-        let formData = new FormData();
+      // var r = confirm(
+      //   "Konfirmasi mengikuti Tawar Bersama \nDengan mengikuti iklan Tawar Bersama ini Anda terdaftar sebagai peserta iklan ini meskipun Anda tidak melakukan penawaran. \nApakah Anda setuju?"
+      // );
 
-        formData.append("id_iklan", this.id);
-        formData.append("id_app_user", this.user.id);
+      let formData = new FormData();
 
-        this.axios
-          .post("/bid/v3/konfirmasi_penggunaan_nontiket", formData, {
-            headers: { Authorization: "Bearer " + this.user.token },
-          })
-          .then((response) => {
-            let { data } = response;
-            this.setAlert({
-              status: true,
-              color: "success",
-              text: data.api_message,
-            });
-            this.height = 350;
-            this.noTiket = !this.noTiket;
-            this.ikutPenawaran = !this.ikutPenawaran;
-          })
-          .catch((error) => {
-            let responses = error.response.data;
-            this.setAlert({
-              status: true,
-              color: "error",
-              text: responses.api_message,
-            });
+      formData.append("id_iklan", this.id);
+      formData.append("id_app_user", this.user.id);
+
+      this.axios
+        .post("/bid/v3/konfirmasi_penggunaan_nontiket", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: data.api_message,
           });
-      }
+          this.height = 350;
+          this.noTiket = !this.noTiket;
+          // this.ikutPenawaran = !this.ikutPenawaran;
+          this.auto = true;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          this.setAlert({
+            status: true,
+            color: "error",
+            text: responses.api_message,
+          });
+        });
     },
     ikutTB() {
       let formData = new FormData();
