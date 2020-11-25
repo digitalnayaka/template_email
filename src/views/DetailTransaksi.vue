@@ -453,7 +453,7 @@
               orders.id_mst_pembayaran_status == 11)
           "
         >
-          Ulas
+         Berikan Ulasan
         </v-btn>
 
         <div v-if="orders.id_mst_order_status != 3">
