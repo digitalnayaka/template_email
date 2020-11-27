@@ -113,8 +113,8 @@
         </ul>
       </v-col>
 
-      <v-col cols="6" v-if="user.id_type_pinalti == 3"
-        >Masa blokir akun Anda berakhir pada:
+      <v-col cols="6" v-if="user.id_type_pinalti == 3">
+        Masa blokir akun Anda berakhir pada:
         <flip-countdown deadline="2021-01-01 00:00:00"></flip-countdown>
       </v-col>
     </v-row>

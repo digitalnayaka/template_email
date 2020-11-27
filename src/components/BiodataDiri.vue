@@ -1,166 +1,166 @@
 <template>
-  <v-row>
-    <v-col cols="12" sm="4">
-      <v-card outlined width="800" class="pa-2 rounded-lg">
-        <v-img :src="getImage(user.photo)" width="200" height="250" contain align="center"></v-img>
-        <v-file-input
-          id="fileid"
-          label="File input"
-          v-model="photo"
-          accept="image/*"
-          outlined
-          dense
-          class="d-none"
-          @change="saveData('foto', photo)"
-        ></v-file-input>
+  <div>
+    <v-row>
+      <v-col cols="12" sm="4">
+        <v-card outlined width="800" class="pa-2 rounded-lg">
+          <v-img :src="getImage(user.photo)" contain></v-img>
+          <v-file-input
+            id="fileid"
+            label="File input"
+            v-model="photo"
+            accept="image/*"
+            outlined
+            dense
+            class="d-none"
+            @change="saveData('foto', photo)"
+          ></v-file-input>
 
-        <div class="text-center">
-          <v-btn id="buttonid" block small class="mt-4" @click="uploadAvatar">
-            Pilih Foto
-          </v-btn>
-        </div>
+          <div class="text-center">
+            <v-btn id="buttonid" block small class="mt-4" @click="uploadAvatar">
+              Pilih Foto
+            </v-btn>
+          </div>
 
-        <v-card-text class="text-caption">
-          Ekstensi file yang diperbolehkan: .JPG .JPEG .PNG
-        </v-card-text>
-      </v-card>
-    </v-col>
+          <v-card-text class="text-caption">
+            Ekstensi file yang diperbolehkan: .JPG .JPEG .PNG
+          </v-card-text>
+        </v-card>
+      </v-col>
 
-    <v-col cols="12" sm="8">
-      <v-card outlined width="800" class="pa-2 rounded-lg">
-        <div class="font-weight-bold">Ubah Biodata Diri</div>
+      <v-col cols="12" sm="8">
+        <v-card outlined width="800" class="pa-2 rounded-lg">
+          <div class="font-weight-bold">Ubah Biodata Diri</div>
 
-        <v-form ref="form" v-model="valid">
-          <v-row>
-            <v-col cols="5">Nama</v-col>
-            <v-col cols="7">
-              <div v-if="!ubahNama">
-                :
-                {{ user.nama }}
-                <a href="javascript:void(0)" @click="ubahNama = true">
-                  <v-icon>mdi-pencil</v-icon>
-                </a>
-              </div>
+          <v-form ref="form" v-model="valid">
+            <v-row>
+              <v-col cols="5">Nama</v-col>
+              <v-col cols="7">
+                <div v-if="!ubahNama">
+                  :
+                  {{ user.nama }}
+                  <a href="javascript:void(0)" @click="ubahNama = true">
+                    <v-icon>mdi-pencil</v-icon>
+                  </a>
+                </div>
 
-              <div v-else>
-                <v-text-field
-                  v-model="formNama"
-                  outlined
-                  dense
-                  append-icon="mdi-content-save"
-                  append-outer-icon="mdi-close"
-                  @click:append-outer="ubahNama = false"
-                  @click:append="saveData('nama', formNama)"
-                  :rules="namaRules"
-                ></v-text-field>
-              </div>
-            </v-col>
-          </v-row>
+                <div v-else>
+                  <v-text-field
+                    v-model="formNama"
+                    outlined
+                    dense
+                    append-icon="mdi-content-save"
+                    append-outer-icon="mdi-close"
+                    @click:append-outer="ubahNama = false"
+                    @click:append="saveData('nama', formNama)"
+                    :rules="namaRules"
+                  ></v-text-field>
+                </div>
+              </v-col>
+            </v-row>
 
-          <v-row>
-            <v-col cols="5">Nomor Handphone</v-col>
-            <v-col cols="7">: {{ user.nomor_hp }}</v-col>
-          </v-row>
+            <v-row>
+              <v-col cols="5">Nomor Handphone</v-col>
+              <v-col cols="7">: {{ user.nomor_hp }}</v-col>
+            </v-row>
 
-          <v-row>
-            <v-col cols="5">Nomor Whatsapp</v-col>
-            <v-col cols="7">
-              <div v-if="!ubahWA">
-                :
-                {{ user.nomor_whatsapp }}
-                <a href="javascript:void(0)" @click="ubahWA = true">
-                  <v-icon>mdi-pencil</v-icon>
-                </a>
-              </div>
+            <v-row>
+              <v-col cols="5">Nomor Whatsapp</v-col>
+              <v-col cols="7">
+                <div v-if="!ubahWA">
+                  :
+                  {{ user.nomor_whatsapp }}
+                  <a href="javascript:void(0)" @click="ubahWA = true">
+                    <v-icon>mdi-pencil</v-icon>
+                  </a>
+                </div>
 
-              <div v-else>
-                <v-text-field
-                  v-model="formNomorWA"
-                  outlined
-                  dense
-                  append-icon="mdi-content-save"
-                  append-outer-icon="mdi-close"
-                  @click:append-outer="ubahWA = false"
-                  @click:append="saveData('nomor_whatsapp', formNomorWA)"
-                  :rules="waRules"
-                ></v-text-field>
-              </div>
-            </v-col>
-          </v-row>
+                <div v-else>
+                  <v-text-field
+                    v-model="formNomorWA"
+                    outlined
+                    dense
+                    append-icon="mdi-content-save"
+                    append-outer-icon="mdi-close"
+                    @click:append-outer="ubahWA = false"
+                    @click:append="saveData('nomor_whatsapp', formNomorWA)"
+                    :rules="waRules"
+                  ></v-text-field>
+                </div>
+              </v-col>
+            </v-row>
 
-          <v-row>
-            <v-col cols="5">Kota</v-col>
-            <v-col cols="7">
-              <div v-if="!ubahKota">
-                :
-                {{ user.kota }}
-                <a href="javascript:void(0)" @click="ubahKota = true">
-                  <v-icon>mdi-pencil</v-icon>
-                </a>
-              </div>
+            <v-row>
+              <v-col cols="5">Kota</v-col>
+              <v-col cols="7">
+                <div v-if="!ubahKota">
+                  :
+                  {{ user.kota }}
+                  <a href="javascript:void(0)" @click="ubahKota = true">
+                    <v-icon>mdi-pencil</v-icon>
+                  </a>
+                </div>
 
-              <div v-else>
-                <v-text-field
-                  v-model="formKota"
-                  outlined
-                  dense
-                  append-icon="mdi-content-save"
-                  append-outer-icon="mdi-close"
-                  @click:append-outer="ubahKota = false"
-                  @click:append="saveData('kota', formKota)"
-                  :rules="kotaRules"
-                ></v-text-field>
-              </div>
-            </v-col>
-          </v-row>
+                <div v-else>
+                  <v-text-field
+                    v-model="formKota"
+                    outlined
+                    dense
+                    append-icon="mdi-content-save"
+                    append-outer-icon="mdi-close"
+                    @click:append-outer="ubahKota = false"
+                    @click:append="saveData('kota', formKota)"
+                    :rules="kotaRules"
+                  ></v-text-field>
+                </div>
+              </v-col>
+            </v-row>
 
-          <v-row>
-            <v-col cols="5">Deskripsi</v-col>
-            <v-col cols="7">
-              <div v-if="!ubahDeskripsi">
-                :
-                {{ user.deskripsi }}
-                <a href="javascript:void(0)" @click="ubahDeskripsi = true">
-                  <v-icon>mdi-pencil</v-icon>
-                </a>
-              </div>
+            <v-row>
+              <v-col cols="5">Deskripsi</v-col>
+              <v-col cols="7">
+                <div v-if="!ubahDeskripsi">
+                  :
+                  {{ user.deskripsi }}
+                  <a href="javascript:void(0)" @click="ubahDeskripsi = true">
+                    <v-icon>mdi-pencil</v-icon>
+                  </a>
+                </div>
 
-              <div v-else>
-                <v-text-field
-                  v-model="formDeskripsi"
-                  outlined
-                  dense
-                  append-icon="mdi-content-save"
-                  append-outer-icon="mdi-close"
-                  @click:append-outer="ubahDeskripsi = false"
-                  @click:append="saveData('deskripsi', formDeskripsi)"
-                  :rules="deskripsiRules"
-                ></v-text-field>
-              </div>
-            </v-col>
-          </v-row>
+                <div v-else>
+                  <v-text-field
+                    v-model="formDeskripsi"
+                    outlined
+                    dense
+                    append-icon="mdi-content-save"
+                    append-outer-icon="mdi-close"
+                    @click:append-outer="ubahDeskripsi = false"
+                    @click:append="saveData('deskripsi', formDeskripsi)"
+                    :rules="deskripsiRules"
+                  ></v-text-field>
+                </div>
+              </v-col>
+            </v-row>
 
-          <v-row>
-            <v-col cols="5">Email</v-col>
+            <v-row>
+              <v-col cols="5">Email</v-col>
 
-            <v-col cols="7">
-              <div v-if="formEmail !== null">: {{ user.email }}</div>
+              <v-col cols="7">
+                <div v-if="formEmail !== null">: {{ user.email }}</div>
 
-              <div v-else>
-                <section id="firebaseui-auth-container"></section>
-              </div>
-            </v-col>
-          </v-row>
-        </v-form>
-      </v-card>
+                <div v-else>
+                  <section id="firebaseui-auth-container"></section>
+                </div>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card>
 
-      <br />
-    </v-col>
+        <br />
+      </v-col>
+    </v-row>
 
-    <v-col cols="12">
-      <info-penjual :user="user" />
-    </v-col>
-  </v-row>
+    <info-penjual :user="user" />
+  </div>
 </template>
 
 <script>

@@ -116,8 +116,8 @@
             >
 
             <v-list-item-subtitle>
-              <v-avatar v-if="item._source.id_mst_user_type == 2" size="16" item>
-                <v-img  src="/img/verified.png" alt="verified" ></v-img>
+              <v-avatar size="16" item v-if="item._source.id_mst_user_type == 2">
+                <v-img src="/img/verified.png" alt="verified"></v-img>
               </v-avatar>
               {{ item._source.app_user }}
             </v-list-item-subtitle>

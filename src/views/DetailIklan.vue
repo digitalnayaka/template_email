@@ -48,68 +48,6 @@
               </v-list-item-title>
 
               <v-list-item-subtitle>Penjual</v-list-item-subtitle>
-
-              <!-- <v-list-item-subtitle v-if="appuser.slogan != null">
-                Slogan: {{ appuser.slogan }}
-              </v-list-item-subtitle>
-
-              <h5>
-                Rating Penjual:
-
-                <v-avatar size="16" item>
-                  <v-img
-                    src="/img/icons/emoji_tidakpuas.png"
-                    alt="rating"
-                    v-if="avg.ratting_user == 1"
-                  ></v-img>
-                </v-avatar>
-
-                <v-avatar size="16" item>
-                  <v-img
-                    src="/img/icons/emoji_netral.png"
-                    alt="rating"
-                    v-if="avg.ratting_user == 2"
-                  ></v-img>
-                </v-avatar>
-
-                <v-avatar size="16" item>
-                  <v-img
-                    src="/img/icons/emoji_puas.png"
-                    alt="rating"
-                    v-if="avg.ratting_user == 3"
-                  ></v-img>
-                </v-avatar>
-              </h5>
-
-              <star-rating
-                :rating="avg.ratting_iklan"
-                read-only
-                :show-rating="false"
-                :round-start-rating="false"
-                :star-size="20"
-                inline
-              ></star-rating>
-
-              <div class="d-flex d-sm-none" v-if="!guest">
-                <v-btn
-                  x-small
-                  color="teal"
-                  dark
-                  @click="dialogHubungi = true"
-                  class="mx-2"
-                >
-                  Hubungi
-                </v-btn>
-                <v-btn
-                  x-small
-                  color="teal"
-                  dark
-                  :to="'/chat/' + appuser.id"
-                  class="mx-2"
-                >
-                  Pesan
-                </v-btn>
-              </div> -->
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -118,13 +56,16 @@
 
         <div class="d-flex align-center justify-space-around">
           <div v-if="avg.ratting_user != null">
-            <v-avatar size="32" item>
-              <v-img
-                src="/img/icons/emoji_tidakpuas.png"
-                alt="rating"
-                v-if="avg.ratting_user == 1"
-              ></v-img>
-            </v-avatar>
+            <div v-if="avg.ratting_user == 1">
+              <v-avatar size="32" item>
+                <v-img
+                  src="/img/icons/emoji_tidakpuas.png"
+                  alt="kecewa"
+                ></v-img>
+              </v-avatar>
+
+              Kecewa
+            </div>
 
             <div v-if="avg.ratting_user == 2">
               <v-avatar size="32" item>
@@ -143,7 +84,7 @@
             </div>
           </div>
 
-          <div v-if="avg.ratting_iklan != null">
+          <div>
             <star-rating
               :rating="avg.ratting_iklan"
               read-only
@@ -153,6 +94,7 @@
               class="pa-0"
             ></star-rating>
           </div>
+
           <div>
             <v-btn
               color="teal"
@@ -284,13 +226,15 @@
           </v-col>
         </v-row>
 
-        <div class="text-center" v-if="iklan.id_mst_iklan_jenis > 1">
+        <v-divider></v-divider>
+
+        <div v-if="iklan.id_mst_iklan_jenis > 1">
           <div
             class="teal--text"
             align="center"
             v-if="start == false && end == false"
           >
-            <h2>Tawar Bersama segera dimulai:</h2>
+            Tawar Bersama segera dimulai:
             <flip-countdown :deadline="hits.tanggal_mulai"></flip-countdown>
           </div>
 
@@ -299,7 +243,7 @@
             align="center"
             v-if="start == true && end == false"
           >
-            <h2>Tawar Bersama berlangsung:</h2>
+            Tawar Bersama berlangsung:
             <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
           </div>
 
@@ -330,7 +274,7 @@
                   <v-toolbar color="teal darken-3" dark>
                     <v-toolbar-title>Info Pemenang Iklan</v-toolbar-title>
 
-                    <v-spacer></v-spacer>
+                    <div class="flex-grow-1"></div>
 
                     <v-btn icon @click="dialogInfo = false">
                       <v-icon>mdi-close</v-icon>
@@ -338,9 +282,9 @@
                   </v-toolbar>
 
                   <div v-if="!guest">
-                    <v-card-title v-if="hits.id_app_user == user.id">
-                      Segera hubungi pemenang iklan Anda
-                    </v-card-title>
+                    <v-card-title v-if="hits.id_app_user == user.id"
+                      >Segera hubungi pemenang iklan Anda</v-card-title
+                    >
                   </div>
 
                   <v-btn
@@ -357,7 +301,6 @@
                         Chat Penjual
                       </a>
                     </div>
-
                     <a :href="'/chat/' + liveBid[0].IdAppUser" v-else>
                       Chat Pemenang
                     </a>
@@ -373,17 +316,12 @@
             </div>
           </div>
         </div>
-
-        <!-- <div class="mt-2">
-          <div class="font-weight-bold text-h6 blue-grey--text">Deskripsi</div>
-          <div class="text-subtitle-2">{{ hits.deskripsi }}</div>
-        </div>-->
       </v-col>
     </v-row>
 
     <v-divider></v-divider>
 
-    <v-tabs v-model="tab" color="teal" slider-color="yellow" show-arrows>
+    <v-tabs v-model="tab" color="teal" slider-color="teal" show-arrows>
       <v-tab>Spesifikasi</v-tab>
       <v-tab v-if="hits.id_mst_iklan_jenis == 2">Info Tawar Bersama</v-tab>
       <v-tab v-if="hits.id_mst_iklan_jenis == 2">Penawaran</v-tab>
@@ -782,7 +720,7 @@
           tile
           v-else
         >
-          <h2>Belum ada penawaran</h2>
+          <h2>Belum ada Penawaran</h2>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -806,10 +744,11 @@
             block
             color="teal"
             dark
-            @click="ikutTB"
+            @click="ikutTB()"
             v-if="iklan.id_mst_iklan_status == 1"
-            >Ikut Tawar Bersama</v-btn
           >
+            Ikut Tawar Bersama
+          </v-btn>
         </div>
       </div>
     </div>
@@ -929,11 +868,45 @@
             block
             color="primary"
             class="my-4"
-            @click="konfirmasiTiket"
+            @click="dialogKonfirmasiTiket = true"
             v-if="totalTiket.tersedia > 0"
           >
             Gunakan Tiket Anda
           </v-btn>
+
+          <v-dialog v-model="dialogKonfirmasiTiket" max-width="350">
+            <v-card>
+              <div v-if="auto == false">
+                <v-card-title class="headline">
+                  Konfirmasi Penggunaan Tiket
+                </v-card-title>
+
+                <v-card-text>
+                  Gunakan Tiket Anda untuk iklan ini?
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+
+                  <v-btn
+                    color="red darken-1"
+                    text
+                    @click="dialogKonfirmasiTiket = false"
+                  >
+                    Disagree
+                  </v-btn>
+
+                  <v-btn
+                    color="green darken-1"
+                    text
+                    @click="konfirmasiTiket()"
+                  >
+                    Agree
+                  </v-btn>
+                </v-card-actions>
+              </div>
+            </v-card>
+          </v-dialog>
         </v-container>
 
         <v-container fluid v-if="noTiket">
@@ -945,66 +918,264 @@
             <br />Apakah Anda setuju?
           </div>
 
-          <v-btn block color="success" class="my-4" @click="konfirmasiNonTiket">
+          <v-btn
+            block
+            color="success"
+            class="my-4"
+            @click="dialogKonfirmasi = true"
+          >
             Setuju, mengikuti Tawar Bersama
           </v-btn>
+
+          <v-dialog v-model="dialogKonfirmasi" max-width="460">
+            <v-card>
+              <div v-if="auto == false">
+                <v-card-title class="headline">
+                  Konfirmasi Mengikuti Tawar Bersama
+                </v-card-title>
+
+                <v-card-text>
+                  Dengan mengikuti iklan Tawar Bersama ini Anda terdaftar
+                  sebagai peserta iklan ini meskipun Anda tidak melakukan
+                  penawaran. Apakah Anda setuju?
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+
+                  <v-btn
+                    color="red darken-1"
+                    text
+                    @click="dialogKonfirmasi = false"
+                  >
+                    Disagree
+                  </v-btn>
+
+                  <v-btn
+                    color="green darken-1"
+                    text
+                    @click="konfirmasiNonTiket()"
+                  >
+                    Agree
+                  </v-btn>
+                </v-card-actions>
+              </div>
+            </v-card>
+          </v-dialog>
         </v-container>
 
-        <v-list v-if="ikutPenawaran">
-          <v-list-item>
-            <v-list-item-content>
-              <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
-            </v-list-item-content>
-          </v-list-item>
+        <div v-if="ikutPenawaran">
+          <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
 
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>Harga Awal</v-list-item-title>
-              <v-list-item-subtitle>
-                Rp
-                {{ Number(iklan.harga_awal).toLocaleString("id-ID") }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
+          <v-tabs
+            v-model="tab2"
+            background-color="green darken-3"
+            color="white"
+            slider-color="yellow"
+            show-arrows
+            grow
+          >
+            <v-tab>Tawar Otomatis</v-tab>
+            <v-tab>Tawar Manual</v-tab>
+          </v-tabs>
 
-            <v-divider vertical class="mx-2"></v-divider>
+          <v-tabs-items v-model="tab2">
+            <v-tab-item>
+              <!-- <div>
+              <h3 class="text-center my-4">
+                Ingin menggunakan fitur Auto Tawar?
+              </h3>
 
-            <v-list-item-content>
-              <v-list-item-title>Kelipatan Tawaran</v-list-item-title>
-              <v-list-item-subtitle>
-                Rp
-                {{ Number(iklan.kelipatan).toLocaleString("id-ID") }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
+              <v-row justify="center">
+                <v-btn
+                  text
+                  color="primary"
+                  dark
+                  @click.stop="dialogTawar = true"
+                >
+                  Setuju
+                </v-btn>
 
-          <v-list-item>
-            <v-list-item-icon>
-              <v-btn icon @click="minus">
-                <v-icon>mdi-minus</v-icon>
-              </v-btn>
-            </v-list-item-icon>
+                <v-btn text color="error" dark @click.stop="dialogTawar = true">
+                  Tidak
+                </v-btn>
 
-            <v-list-item-content align="center">
-              <v-list-item-subtitle>Nominal Penawaran</v-list-item-subtitle>
+                <v-dialog v-model="dialogTawar" max-width="800">
+                  <v-card>
+                    <h2 class="text-center my-4">
+                      Apakah Anda yakin ingin menggunakan fitur Auto Tawar?
+                    </h2>
 
-              <v-list-item-title class="font-weight-black">
-                Rp {{ Number(bid).toLocaleString("id-ID") }}
-              </v-list-item-title>
-            </v-list-item-content>
+                    <h4 class="text-center my-4">Harga maksimal Tawar Anda</h4>
 
-            <v-list-item-action>
-              <v-btn icon @click="bid += iklan.kelipatan">
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
-            </v-list-item-action>
-          </v-list-item>
+                    <h3 class="text-center my-4 teal--text">
+                      Harga maksimal (kalau belum ada yg tawar = harga awal +
+                      20juta) (kalau ada yg nawar = harga saat ini + 20juta)
+                    </h3>
 
-          <v-list-item>
-            <v-btn block dark color="teal" @click="bidding">
-              Konfirmasi Penawaran
-            </v-btn>
-          </v-list-item>
-        </v-list>
+                    <v-card-text class="red--text">
+                      Noted: Fitur Auto Tawar tidak menjamin Anda akan
+                      memenangkan iklan Tawar Bersama
+                    </v-card-text>
+
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+
+                      <v-btn
+                        color="primary"
+                        rounded
+                        @click="KonfirmasiAuto = true"
+                      >
+                        Konfirmasi
+                      </v-btn>
+
+                      <v-btn
+                        color="red"
+                        dark
+                        rounded
+                        @click="dialogTawar = false"
+                      >
+                        Batal
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+
+                <v-dialog v-model="KonfirmasiAuto" max-width="500">
+                  <v-card>
+                    <h2 class="text-center my-4">Harga maksimal Auto Tawar</h2>
+                    <h3 class="text-center my-4 teal--text">
+                      Harga maksimal: (kalau belum ada yg tawar = harga awal +
+                      20juta) (kalau ada yg nawar = harga saat ini + 20juta)
+                    </h3>
+                    <v-card-text class="red--text">
+                      Noted: Auto Tawar ditandai dengan icon warna hijau pada
+                      list tawaran
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="primary"
+                        rounded
+                        @click="KonfirmasiAuto = true"
+                      >
+                        Konfirmasi
+                      </v-btn>
+
+                      <v-btn
+                        color="red"
+                        dark
+                        rounded
+                        @click="KonfirmasiAuto = false"
+                      >
+                        Batal
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-row>
+            </div> -->
+
+              <v-container fluid>
+                <div class="text-center">
+                  <v-slider
+                    v-model="slider.val"
+                    :thumb-color="slider.color"
+                    :min="bid"
+                    :max="bid + 20000000"
+                    :step="iklan.kelipatan"
+                  >
+                  </v-slider>
+
+                  <h1>Harga maksimal tawaran anda</h1>
+
+                  <h1>Rp {{ slider.val.toLocaleString("id-ID") }}</h1>
+
+                  <v-btn
+                    color="teal"
+                    dark
+                    @click="autoBid"
+                    v-if="isAuto == null"
+                  >
+                    Aktifkan
+                  </v-btn>
+
+                  <div v-else>
+                    <v-btn color="teal" dark @click="autoBid" class="mx-2">
+                      Ubah
+                    </v-btn>
+
+                    <v-btn color="red" dark @click="offBid" class="mx-2">
+                      Non Aktifkan
+                    </v-btn>
+                  </div>
+                </div>
+
+                <br />
+
+                <div class="red--text">
+                  Noted: <br />
+                  Fitur Tawar Otomatis tidak menjamin anda akan memenangkan
+                  iklan Tawar Bersama
+                </div>
+              </v-container>
+            </v-tab-item>
+
+            <v-tab-item>
+              <v-list>
+                <v-list-item class="text-center">
+                  <v-list-item-content>
+                    <v-list-item-title>Harga Awal</v-list-item-title>
+                    <v-list-item-subtitle>
+                      Rp
+                      {{ Number(iklan.harga_awal).toLocaleString("id-ID") }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+
+                  <v-divider vertical class="mx-2"></v-divider>
+
+                  <v-list-item-content>
+                    <v-list-item-title>Kelipatan Tawaran</v-list-item-title>
+                    <v-list-item-subtitle>
+                      Rp
+                      {{ Number(iklan.kelipatan).toLocaleString("id-ID") }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-btn icon @click="minus">
+                      <v-icon>mdi-minus</v-icon>
+                    </v-btn>
+                  </v-list-item-icon>
+
+                  <v-list-item-content align="center">
+                    <v-list-item-subtitle
+                      >Nominal Penawaran</v-list-item-subtitle
+                    >
+
+                    <v-list-item-title class="font-weight-black">
+                      Rp {{ Number(bid).toLocaleString("id-ID") }}
+                    </v-list-item-title>
+                  </v-list-item-content>
+
+                  <v-list-item-action>
+                    <v-btn icon @click="bid += iklan.kelipatan">
+                      <v-icon>mdi-plus</v-icon>
+                    </v-btn>
+                  </v-list-item-action>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-btn block dark color="teal" @click="bidding">
+                    Konfirmasi Penawaran
+                  </v-btn>
+                </v-list-item>
+              </v-list>
+            </v-tab-item>
+          </v-tabs-items>
+        </div>
       </v-sheet>
     </v-bottom-sheet>
 
@@ -1090,7 +1261,17 @@ export default {
       kebijakan: [],
       avg: [],
       favorit: [],
+      dialogKonfirmasi: false,
+      auto: false,
       dialogTawar: false,
+      KonfirmasiAuto: false,
+      tab2: 0,
+      slider: {
+        val: 0,
+        color: "red",
+      },
+      isAuto: [],
+      dialogKonfirmasiTiket: false,
     };
   },
   methods: {
@@ -1325,10 +1506,10 @@ export default {
         });
     },
     konfirmasiTiket() {
-      var r = confirm(
-        "     Konfirmasi Penggunaan Tiket \nGunakan tiket anda untuk iklan ini?"
-      );
-      if (r == true) {
+      // var r = confirm(
+      //   "     Konfirmasi Penggunaan Tiket \nGunakan tiket anda untuk iklan ini?"
+      // );
+      // if (r == true) {
         let formData = new FormData();
 
         formData.append("id_iklan", this.id);
@@ -1359,42 +1540,43 @@ export default {
               text: responses.api_message,
             });
           });
-      }
+      // }
     },
     konfirmasiNonTiket() {
-      var r = confirm(
-        "Konfirmasi mengikuti Tawar Bersama \nDengan mengikuti iklan Tawar Bersama ini Anda terdaftar sebagai peserta iklan ini meskipun Anda tidak melakukan penawaran. \nApakah Anda setuju?"
-      );
-      if (r == true) {
-        let formData = new FormData();
+      // var r = confirm(
+      //   "Konfirmasi mengikuti Tawar Bersama \nDengan mengikuti iklan Tawar Bersama ini Anda terdaftar sebagai peserta iklan ini meskipun Anda tidak melakukan penawaran. \nApakah Anda setuju?"
+      // );
 
-        formData.append("id_iklan", this.id);
-        formData.append("id_app_user", this.user.id);
+      let formData = new FormData();
 
-        this.axios
-          .post("/bid/v3/konfirmasi_penggunaan_nontiket", formData, {
-            headers: { Authorization: "Bearer " + this.user.token },
-          })
-          .then((response) => {
-            let { data } = response;
-            this.setAlert({
-              status: true,
-              color: "success",
-              text: data.api_message,
-            });
-            this.height = 350;
-            this.noTiket = !this.noTiket;
-            this.ikutPenawaran = !this.ikutPenawaran;
-          })
-          .catch((error) => {
-            let responses = error.response.data;
-            this.setAlert({
-              status: true,
-              color: "error",
-              text: responses.api_message,
-            });
+      formData.append("id_iklan", this.id);
+      formData.append("id_app_user", this.user.id);
+
+      this.axios
+        .post("/bid/v3/konfirmasi_penggunaan_nontiket", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: data.api_message,
           });
-      }
+          this.height = 350;
+          this.noTiket = !this.noTiket;
+          this.ikutPenawaran = !this.ikutPenawaran;
+          this.auto = true;
+          this.dialogKonfirmasi = false;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          this.setAlert({
+            status: true,
+            color: "error",
+            text: responses.api_message,
+          });
+        });
     },
     ikutTB() {
       let formData = new FormData();
@@ -1445,6 +1627,7 @@ export default {
         .onSnapshot((querySnapshot) => {
           let bidder = [];
           querySnapshot.forEach((doc) => {
+            console.log(doc.data());
             bidder.push(doc.data());
             this.minBid = bidder[0].Bid;
             this.penawaran = Number(this.minBid) + Number(this.iklan.kelipatan);
@@ -1643,11 +1826,81 @@ export default {
       this.$router.go(-1);
       this.title = "SiMotor";
     },
+    getAutoBid() {
+      this.axios
+        .get("/bid/v3/pembeli_auto_tawar", {
+          params: {
+            id_app_user: this.user.id,
+            id_iklan: this.id,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          if (data.length == 0) {
+            this.isAuto = null;
+          } else {
+            this.isAuto = data[0];
+            this.slider.val = this.isAuto.max_bid;
+          }
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    autoBid() {
+      let formData = new FormData();
+      formData.append("id_app_user", this.user.id);
+      formData.append("id_iklan", this.id);
+      formData.append("max_bid", this.slider.val);
+
+      this.axios
+        .post("/bid/v3/konfirmasi_auto_tawar ", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: data.api_message,
+          });
+          this.getAutoBid();
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
+    offBid() {
+      let formData = new FormData();
+      formData.append("id_app_user", this.user.id);
+      formData.append("id_iklan", this.id);
+
+      this.axios
+        .post("/bid/v3/off_auto_tawar ", formData, {
+          headers: { Authorization: "Bearer " + this.user.token },
+        })
+        .then((response) => {
+          let { data } = response;
+          this.setAlert({
+            status: true,
+            color: "success",
+            text: data.api_message,
+          });
+          this.getAutoBid();
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+        });
+    },
   },
   created() {
     this.getDtlIklan();
     this.GetBid();
     this.getFavourite();
+    this.getAutoBid();
     if (!this.guest) {
       this.getOrder();
     }
