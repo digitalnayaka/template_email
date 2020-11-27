@@ -396,7 +396,7 @@ if (window.localStorage.getItem("user") === null) {
     index.dispatch('auth/set', localUser);
     index.dispatch("auth/SET_TOKEN", localToken);
   } else {
-    index.dispatch('auth/set', {});
+    index.dispatch('auth/set', null);
     index.dispatch("auth/SET_TOKEN", null);
   }
 }

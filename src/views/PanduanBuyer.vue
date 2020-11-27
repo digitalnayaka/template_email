@@ -35,7 +35,7 @@
                 ‘Sebagai Penjual’
               </p>
               <p class="text-justify">
-                <a href="/panduan_penjual" target="_self">Klik disini</a>
+                <a href="/panduan-penjual" target="_blank">Klik disini</a>
               </p>
               <p class="text-justify font-weight-bold h6">Video Tutorial SiMotor</p>
               <p class="text-justify">

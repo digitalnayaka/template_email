@@ -719,6 +719,8 @@ export default {
     utc: moment().utcOffset() / 60 - 7,
     waktu: "",
     notif: "",
+    now: new Date(),
+    aa: []
   }),
   methods: {
     ...mapActions({
@@ -784,13 +786,8 @@ export default {
           this.countNotif = data.count;
         })
         .catch((error) => {
-          let responses = error.response;
-          let data = responses.data;
-          this.setAlert({
-            status: true,
-            color: "error",
-            text: data.api_message,
-          });
+          let responses = error.response.data;
+          console.log(responses.api_message);
         });
     },
     getChats() {
@@ -1002,6 +999,19 @@ export default {
         // this.countNotif = [];
       }
     },
+    async getBid() {
+      await db.collection("tawar_bersama")
+        .doc("iklan")
+        .collection("5323")
+        .onSnapshot((querySnapshot) => {
+          let a = [];
+          querySnapshot.forEach((doc) => {
+            console.log(doc.data());
+            a.push(doc.data());
+          });
+          this.aa = a;
+        });
+    },
   },
   computed: {
     ...mapGetters({
@@ -1028,10 +1038,11 @@ export default {
       },
     },
   },
-  created() {
+  async created() {
     this.timezone();
     this.oneSignal();
     this.geolocation();
+    await this.getBid()
     if (!this.guest) {
       this.getNotif();
       this.getChats();
@@ -1044,6 +1055,14 @@ export default {
       this.menungguVerifikasiS();
       this.menungguPembayaranT();
       this.menungguVerifikasiT();
+
+      if (this.now.getTime() > this.user.expiry) {
+        this.setAuth(null);
+        this.setToken(null);
+        window.localStorage.setItem("user", null);
+        window.localStorage.setItem("token", null);
+        window.location.href = "/";
+      }
     }
   },
 };

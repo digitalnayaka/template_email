@@ -7,7 +7,7 @@
       slider-color="yellow"
       show-arrows
     >
-      <v-tab>Info Penjual</v-tab>
+      <v-tab>Performa Penjualan </v-tab>
       <v-tab>Performa Pembelian</v-tab>
     </v-tabs>
 

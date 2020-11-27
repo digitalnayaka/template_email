@@ -20,7 +20,7 @@
                 <v-icon>mdi-cellphone</v-icon>Versi Aplikasi
               </v-list-item-title>
 
-              <v-list-item-subtitle>1.5.0</v-list-item-subtitle>
+              <v-list-item-subtitle>1.7.0</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -44,7 +44,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/larangan_iklan">
+          <v-list-item to="/larangan-iklan">
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon>mdi-alert</v-icon>Larangan Iklan
@@ -76,7 +76,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/panduan_pembeli">
+          <v-list-item to="/panduan-pembeli">
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon>mdi-help-circle-outline</v-icon>Panduan
@@ -86,7 +86,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item to="/kode_etik">
+          <v-list-item to="/kode-etik">
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon>mdi-check-decagram</v-icon>Kode Etik Pengguna

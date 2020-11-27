@@ -14,7 +14,7 @@
       label="Search"
       prepend-inner-icon="mdi-magnify"
       v-model="keyword"
-      @keyup.enter="doSearch(selected)"
+      @keyup.enter="doSearch(selected, tb)"
       append-icon="mdi-filter"
       @click:append="sheet = !sheet"
       autofocus
@@ -51,7 +51,12 @@
             <v-list-item-title>Terdekat</v-list-item-title>
 
             <v-list-item-action>
-              <v-switch v-model="selected" inset value="Y" color="success"></v-switch>
+              <v-switch
+                v-model="selected"
+                inset
+                value="Y"
+                color="success"
+              ></v-switch>
             </v-list-item-action>
           </v-list-item>
 
@@ -63,13 +68,21 @@
 
           <v-list-item v-if="selected != '1'">
             <v-radio-group v-model="order" row dense>
-              <v-radio label="Postingan Terbaru" value="posting_terbaru"></v-radio>
-              <v-radio label="Tawar Bersama dimulai" value="tanggal_mulai"></v-radio>
+              <v-radio
+                label="Postingan Terbaru"
+                value="posting_terbaru"
+              ></v-radio>
+              <v-radio
+                label="Tawar Bersama dimulai"
+                value="tanggal_mulai"
+              ></v-radio>
             </v-radio-group>
           </v-list-item>
 
           <v-list-item>
-            <v-btn block shaped color="success" @click="saveFilter">Simpan</v-btn>
+            <v-btn block shaped color="success" @click="saveFilter"
+              >Simpan</v-btn
+            >
           </v-list-item>
         </v-list>
       </v-sheet>
@@ -79,16 +92,34 @@
       <v-alert
         :value="hits.length == 0 && (keyword != '' || keyword != null)"
         color="warning"
-      >Sorry, but no results were found.</v-alert>
+        >Sorry, but no results were found.</v-alert
+      >
 
       <v-row>
-        <v-col cols="6" sm="3" lg="2" v-for="item in hits" :key="item._source.id" class="pa-0">
-          <list-iklan :item="item" :utc="utc" :timezone="timezone" @click.native="close" />
+        <v-col
+          cols="6"
+          sm="3"
+          lg="2"
+          v-for="item in hits"
+          :key="item._source.id"
+          class="pa-0"
+        >
+          <list-iklan
+            :item="item"
+            :utc="utc"
+            :timezone="timezone"
+            @click.native="close"
+          />
         </v-col>
       </v-row>
     </v-container>
 
-    <v-pagination v-model="page" @input="doSearch" :length="lengthPage" :total-visible="5"></v-pagination>
+    <v-pagination
+      v-model="page"
+      @input="doSearch"
+      :length="lengthPage"
+      :total-visible="5"
+    ></v-pagination>
   </v-container>
 </template>
 
@@ -120,18 +151,25 @@ export default {
     doSearch(id_mst_iklan_jenis, tb_berlangsung) {
       var offset = (this.page - 1) * this.limit;
 
+      let params = new URLSearchParams();
+      params.set("id_mst_iklan_status", 1);
+      params.set("search", this.keyword);
+      if (id_mst_iklan_jenis != undefined && this.selected != "0") {
+        params.set("id_mst_iklan_jenis", id_mst_iklan_jenis);
+      }
+      if (tb_berlangsung != undefined) {
+        params.set("tb_berlangsung", tb_berlangsung);
+      }
+      params.set("sort", this.order);
+      params.set("offset", offset);
+      params.set("limit", this.limit);
+
+      var request = {
+        params: params,
+      };
+
       this.axios
-        .get("/search/v3/search", {
-          params: {
-            id_mst_iklan_status: 1,
-            search: this.keyword,
-            id_mst_iklan_jenis: id_mst_iklan_jenis,
-            tb_berlangsung: tb_berlangsung,
-            sort: this.order,
-            offset: offset,
-            limit: this.limit,
-          },
-        })
+        .get("/search/v3/search", request)
         .then((response) => {
           let data = response.data;
           let { hits } = data.hits;
@@ -174,7 +212,7 @@ export default {
       this.$emit("closed", false);
     },
     saveFilter() {
-      this.doSearch();
+      this.doSearch(this.selected, this.tb);
       this.sheet = false;
     },
     resetFilter() {
