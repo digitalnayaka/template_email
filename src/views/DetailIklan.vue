@@ -755,15 +755,9 @@
 
     <v-bottom-sheet v-model="sheet">
       <v-sheet>
-        <h3 class="text-center my-4">Ingin menggunakan fitur Auto Tawar?</h3>
+       
         <v-row justify="center">
-          <v-btn text color="primary" dark @click.stop="dialogTawar = true">
-            Setuju
-          </v-btn>
-          <v-btn text color="error" dark @click.stop="dialogTawar = true">
-            Tidak
-          </v-btn>
-
+        
           <v-dialog v-model="dialogTawar" max-width="800">
             <v-card>
               <h2 class="text-center my-4">
@@ -969,14 +963,14 @@
 
           <v-tabs
             v-model="tab2"
-            background-color="green darken-3"
+            background-color="teal darken-2"
             color="white"
             slider-color="yellow"
             show-arrows
             grow
           >
-            <v-tab>Tawar Otomatis</v-tab>
-            <v-tab>Tawar Manual</v-tab>
+            <v-tab>Auto Tawar</v-tab>
+            <v-tab>Manual Tawar</v-tab>
           </v-tabs>
 
           <v-tabs-items v-model="tab2">
@@ -1078,15 +1072,36 @@
 
               <v-container fluid>
                 <div class="text-center">
-                  <v-slider
+                  <!-- <v-slider
                     v-model="slider.val"
                     :thumb-color="slider.color"
                     :min="bid"
                     :max="bid + 20000000"
                     :step="iklan.kelipatan"
                   >
-                  </v-slider>
+                  </v-slider> -->
+     <v-list-item>
+                <v-list-item-icon>
+                  <v-btn icon :min="bid">
+                    <v-icon>mdi-minus</v-icon>
+                  </v-btn>
+                </v-list-item-icon>
 
+                <v-list-item-content align="center">
+                  <v-list-item-subtitle>Nominal Penawaran</v-list-item-subtitle>
+
+                  <v-list-item-title class="font-weight-black">
+                    Rp {{ Number(bid).toLocaleString("id-ID") }}
+                  </v-list-item-title>
+                </v-list-item-content>
+
+                <v-list-item-action>
+                  <v-btn icon :max="bid + 20000000"
+                    :step="iklan.kelipatan">
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </v-list-item>
                   <h1>Harga maksimal tawaran anda</h1>
 
                   <h1>Rp {{ slider.val.toLocaleString("id-ID") }}</h1>
@@ -1097,12 +1112,12 @@
                     @click="autoBid"
                     v-if="isAuto == null"
                   >
-                    Aktifkan
+                    Aktifkan Auto Tawar
                   </v-btn>
 
                   <div v-else>
                     <v-btn color="teal" dark @click="autoBid" class="mx-2">
-                      Ubah
+                      Ubah Nominal
                     </v-btn>
 
                     <v-btn color="red" dark @click="offBid" class="mx-2">
