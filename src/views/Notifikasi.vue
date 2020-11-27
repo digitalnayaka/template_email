@@ -192,7 +192,11 @@
                 >
                   <template v-slot:default="{ active }">
                     <v-list-item-avatar>
-                      <v-img src="/img/icons/transaksi.png"></v-img>
+                       <v-img
+                        src="/img/icons/unit_serah_terima.webp"
+                        v-if="item.id_modul == 3"
+                      ></v-img>
+                      <!-- <v-img src="/img/icons/transaksi.png"></v-img> -->
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -230,6 +234,10 @@
                 >
                   <template v-slot:default="{ active }">
                     <v-list-item-avatar>
+                      <v-img
+                        src="/img/icons/unit_moderasi.webp"
+                        v-if="item.id_modul == 4"
+                      ></v-img>
                       <v-img src="/img/icons/unit.png"></v-img>
                     </v-list-item-avatar>
 

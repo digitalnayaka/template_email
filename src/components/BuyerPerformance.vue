@@ -82,8 +82,10 @@
         </v-alert>
 
         <v-alert dense type="warning" v-if="user.id_type_pinalti == 1">
-          Anda terdeteksi melakukan <strong>1 Kali WANPRESTASI,</strong> Mohon
-          maaf, tiket untuk iklan Anda hangus.
+          Anda telah melakukan
+          <strong>1 Kali pembatalan transaksi.</strong> Hindari pembatalan
+          transaksi agar akun anda tidak diblokir ( tidak dapat tawar selama 14
+          hari )
         </v-alert>
 
         <v-alert dense type="warning" v-if="user.id_type_pinalti == 2">
