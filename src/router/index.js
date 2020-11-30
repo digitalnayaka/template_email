@@ -156,6 +156,7 @@ const routes = [
     name: 'Iklan',
     component: () => import(/* webpackChunkName: "iklan" */ '../views/DetailIklan.vue'),
   },
+  
   {
     path: '/account',
     name: 'Account',
