@@ -787,6 +787,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     getChats() {
@@ -818,6 +825,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     menungguPersetujuanB() {
@@ -838,6 +852,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     menungguPembayaranB() {
@@ -858,6 +879,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     menungguVerifikasiB() {
@@ -878,6 +906,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     menungguPersetujuanS() {
@@ -898,6 +933,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     menungguPembayaranS() {
@@ -918,6 +960,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     menungguVerifikasiS() {
@@ -938,6 +987,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     menungguPembayaranT() {
@@ -958,6 +1014,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     menungguVerifikasiT() {
@@ -978,6 +1041,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     signOut(e) {

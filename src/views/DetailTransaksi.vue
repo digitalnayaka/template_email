@@ -256,7 +256,6 @@
         <div
           v-if="
             orders.id_mst_order_status != 3 &&
-            
             orders.id_mst_pembayaran_status != 10
           "
         >
@@ -453,7 +452,7 @@
               orders.id_mst_pembayaran_status == 11)
           "
         >
-         Berikan Ulasan
+          Berikan Ulasan
         </v-btn>
 
         <div v-if="orders.id_mst_order_status != 3">
@@ -551,7 +550,14 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     getIklan(id) {
@@ -569,7 +575,14 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     konfirmasiPenjual() {
@@ -696,6 +709,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     formPenawaran() {
@@ -711,6 +731,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     async getGambar() {
@@ -740,6 +767,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     konfirmasiTolak() {
@@ -821,6 +855,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
   },
