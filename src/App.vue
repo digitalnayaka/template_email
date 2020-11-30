@@ -720,7 +720,6 @@ export default {
     waktu: "",
     notif: "",
     now: new Date(),
-    aa: []
   }),
   methods: {
     ...mapActions({
@@ -999,19 +998,6 @@ export default {
         // this.countNotif = [];
       }
     },
-    async getBid() {
-      await db.collection("tawar_bersama")
-        .doc("iklan")
-        .collection("5323")
-        .onSnapshot((querySnapshot) => {
-          let a = [];
-          querySnapshot.forEach((doc) => {
-            console.log(doc.data());
-            a.push(doc.data());
-          });
-          this.aa = a;
-        });
-    },
   },
   computed: {
     ...mapGetters({
@@ -1038,11 +1024,10 @@ export default {
       },
     },
   },
-  async created() {
+  created() {
     this.timezone();
     this.oneSignal();
     this.geolocation();
-    await this.getBid()
     if (!this.guest) {
       this.getNotif();
       this.getChats();
@@ -1056,7 +1041,13 @@ export default {
       this.menungguPembayaranT();
       this.menungguVerifikasiT();
 
-      if (this.now.getTime() > this.user.expiry) {
+      if (this.user.expiry === undefined) {
+        this.setAuth(null);
+        this.setToken(null);
+        window.localStorage.setItem("user", null);
+        window.localStorage.setItem("token", null);
+        window.location.href = "/";
+      } else if (this.now.getTime() > this.user.expiry) {
         this.setAuth(null);
         this.setToken(null);
         window.localStorage.setItem("user", null);
