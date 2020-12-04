@@ -1094,7 +1094,7 @@ export default {
     },
     unit_mokas(id) {
       this.axios
-        .get("/produk/v3/unit_mokas", {
+        .get("/produk/v3/unit_mokas_iklan", {
           params: {
             id: id,
             limit: 1,
@@ -1139,7 +1139,7 @@ export default {
       };
 
       this.axios
-        .get("/produk/v3/unit_mokas", request)
+        .get("/produk/v3/unit_mokas_iklan", request)
         .then((response) => {
           let { data } = response.data;
           this.motorBekas = data;
