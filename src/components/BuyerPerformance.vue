@@ -107,7 +107,7 @@ import moment from "moment-timezone";
 
 export default {
   name: "buyer-performance",
-  props: ["user"],
+  props: ["user", "utc", "timezone"],
   components: { FlipCountdown },
   data() {
     return {
