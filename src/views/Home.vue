@@ -47,16 +47,12 @@
         <h2>What's on SiMotor?</h2>
         <v-alert
           color="cyan lighten-3"
-          :elevation="hover ? 24 : 6"
+          
           icon="mdi-motorbike"
           border="right"
         >
           <div class="text-justify">
-            Sepeda motor sudah menjadi gaya hidup atau lifestyle masyarakat di
-            Indonesia, benar nggak? Oleh karena itu, kebutuhan akan sepeda motor
-            juga meningkat dan kamu pasti ingin motor yang bagus dan berkualitas
-            kan? Disinilah SiMotor hadir sebagai jawaban. Beli motor jadi
-            semakin mudah, cepat, dan berkualitas.
+           SiMotor adalah platform atau sarana bertemunya penjual dan pembeli untuk proses penjualan motor, baik motor baru maupun motor bekas. Di Simotor pembeli bisa mendapatkan motor dengan harga pas ataupun dapat melakukan penawaran melalui layanan tawar bersama.
           </div>
         </v-alert>
         <v-container fluid>
@@ -102,7 +98,7 @@
               color="cyan lighten-4"
               border="left"
               prominent
-              :elevation="hover ? 24 : 6"
+              
             >
               <h4>Ada 2 (dua) fitur utama diSiMotor, yuk simak!</h4>
               <p class="text-justify">

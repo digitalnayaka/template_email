@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" sm="4">
         <v-card outlined width="800" class="pa-2 rounded-lg">
-          <v-img :src="getImage(user.photo)" contain></v-img>
+          <v-img :src="getImage(user.photo)" contain  max-width="300" max-height="300"></v-img>
           <v-file-input
             id="fileid"
             label="File input"
