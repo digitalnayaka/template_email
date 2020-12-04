@@ -57,7 +57,7 @@
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
     "vue-cli-plugin-axios": "0.0.4",
-    "vue-cli-plugin-vuetify": "^2.0.7",
+    "vue-cli-plugin-vuetify": "^2.0.8",
     "vuetify-loader": "^1.6.0"
   }
 }

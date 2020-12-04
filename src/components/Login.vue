@@ -242,9 +242,14 @@ export default {
         .post("/user/v3/user/login", formData)
         .then((response) => {
           let { data } = response.data;
-          this.setAuth(data[0]);
+          const now = new Date();
+          const auth = {
+            ...data[0],
+            expiry: now.getTime() + 60 * 60 * 24 * 28 * 1000,
+          };
+          this.setAuth(auth);
           this.setToken(data[0].token);
-          window.localStorage.setItem("user", JSON.stringify(data[0]));
+          window.localStorage.setItem("user", JSON.stringify(auth));
           window.localStorage.setItem("token", data[0].token);
           this.setAlert({
             status: true,
