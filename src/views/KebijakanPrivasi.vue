@@ -8,7 +8,7 @@
 
     <v-card class="d-inline-block mx-auto" align="center">
       <v-card color="teal darken-4">
-        <v-img src="img/banner web kebijakan.png" width="600" height="150" contain></v-img>
+        <v-img src="img/banner web kebijakan.webp" width="600" height="150" contain></v-img>
       </v-card>
 
       <v-card color="teal lighten-4">

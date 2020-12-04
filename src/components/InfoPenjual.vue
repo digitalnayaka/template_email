@@ -2,8 +2,9 @@
   <div>
     <v-tabs
       v-model="tab"
-      background-color="green darken-3"
+      background-color="teal darken-"
       color="white"
+      dark
       slider-color="yellow"
       show-arrows
     >
@@ -14,7 +15,7 @@
     <v-tabs-items v-model="tab" class="pa-4">
       <v-tab-item>
         <div class="d-flex align-center">
-          <h3 class="green accent-3 pa-1">
+          <h3 class="cyan lighten-4 pa-1">
             {{ avg.ratting_iklan }}
           </h3>
 
@@ -30,7 +31,8 @@
 
           <div v-if="ulasanSaya > 0">( {{ ulasanSaya }} Ulasan )</div>
         </div>
-
+        <br />
+        <v-divider> </v-divider>
         <h3>Slogan</h3>
 
         <div v-if="!ubahSlogan">
@@ -65,7 +67,7 @@
         </div>
 
         <br />
-
+        <v-divider> </v-divider>
         <div class="d-flex flex-wrap align-center">
           <h3 class="mr-auto">Catatan</h3>
           <v-btn
@@ -184,7 +186,7 @@
       </v-tab-item>
 
       <v-tab-item>
-        <buyer-performance :user="user" :utc="utc" :timezone="timezone" />
+        <buyer-performance :user="user" />
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -197,7 +199,7 @@ import StarRating from "vue-star-rating";
 
 export default {
   name: "info-penjual",
-  props: ["user", "utc", "timezone"],
+  props: ["user"],
   components: {
     StarRating,
     VueEditor,
@@ -249,13 +251,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     postSlogan() {
@@ -279,13 +274,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     openDialog(title) {
@@ -318,13 +306,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getKebijakan() {
@@ -347,13 +328,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     postCatatan() {
@@ -486,14 +460,7 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          console.log(responses);
         });
     },
     myReview() {
@@ -512,13 +479,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
   },

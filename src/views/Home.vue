@@ -6,7 +6,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-carousel cycle hide-delimiters height="280">
+    <!-- <v-carousel cycle hide-delimiters height="300" width="100%">
       <v-carousel-item
         v-for="(item, index) in banners"
         :key="index"
@@ -20,14 +20,71 @@
         :to="'/detail-banner/' + item.id"
         class="rounded-lg"
       ></v-carousel-item>
-    </v-carousel>
+    </v-carousel> -->
+    <v-row justify="center">
+      <v-col cols="12" sm="6" align="center">
+        <!-- <v-img src="/img/app-min.webp" width="280" contain></v-img> -->
+        <v-carousel cycle hide-delimiters height="300">
+          <v-carousel-item
+            v-for="(item, index) in banners"
+            :key="index"
+            :src="getImage(item.foto)"
+            reverse-transition="fade-transition"
+            transition="fade-transition"
+            cycle
+            contain
+            hide-delimiter-background
+            show-arrows-on-hover
+            :to="'/detail-banner/' + item.id"
+            class="rounded-lg"
+          ></v-carousel-item>
+        </v-carousel>
+      </v-col>
 
-    <v-row>
+      <v-col cols="12" sm="6" align="center">
+        <v-img src="/img/mobilehand.webp" width="92" contain></v-img>
+
+        <h2>What's on SiMotor?</h2>
+        <v-alert
+          color="cyan lighten-3"
+          :elevation="hover ? 24 : 6"
+          icon="mdi-motorbike"
+          border="right"
+        >
+          <div class="text-justify">
+            Sepeda motor sudah menjadi gaya hidup atau lifestyle masyarakat di
+            Indonesia, benar nggak? Oleh karena itu, kebutuhan akan sepeda motor
+            juga meningkat dan kamu pasti ingin motor yang bagus dan berkualitas
+            kan? Disinilah SiMotor hadir sebagai jawaban. Beli motor jadi
+            semakin mudah, cepat, dan berkualitas.
+          </div>
+        </v-alert>
+        <v-container fluid>
+          
+          <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
+
+          <a
+            href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
+            target="_blank"
+          >
+            <v-img
+              src="/img/playstore.png"
+              width="162"
+              href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
+              target="_blank"
+            ></v-img>
+          </a>
+          <!-- <v-img src="/img/banner.webp" width="300" contain></v-img> -->
+        </v-container>
+      </v-col>
+    </v-row>
+    <v-divider> </v-divider>
+    <!-- <v-row>
       <v-col cols="6" align="center" v-for="item in categories" :key="item.id">
         <v-card flat :to="'/category/' + item.route">
           <v-img
             :src="item.image"
-            width="500"
+            width="300"
             height="150"
             contain
             class="rounded-lg"
@@ -35,8 +92,56 @@
           <h4>{{ item.name }}</h4>
         </v-card>
       </v-col>
-    </v-row>
+    </v-row> -->
+    <v-container fluid>
+      <div align="center">
+        <v-row>
+          <v-col cols="12" sm="4">
+            <h2 class="teal lighten-5">Fitur</h2>
+            <v-alert
+              color="cyan lighten-4"
+              border="left"
+              prominent
+              :elevation="hover ? 24 : 6"
+            >
+              <h4>Ada 2 (dua) fitur utama diSiMotor, yuk simak!</h4>
+              <p class="text-justify">
+                Ada 2 (dua) fitur utama diSiMotor, yaitu Harga Pas dan Tawar
+                Bersama. Dapatkan tiket tawar bersama dan temukan motor
+                impian-mu di iklan tawar bersama!
+              </p>
+            </v-alert>
+          </v-col>
 
+          <v-col cols="6" sm="4" v-for="item in categories" :key="item.id">
+            <v-card flat :to="'/category/' + item.route">
+              <v-img
+                :src="item.image"
+                width="350"
+                height="150"
+                contain
+                class="rounded-lg"
+              ></v-img>
+              <h4>{{ item.name }}</h4>
+            </v-card>
+          </v-col>
+          <!-- <v-col cols="12" sm="4">
+            <h2>Tiket Tawar Bersama</h2>
+
+            <v-img
+              src="/img/tawar bersama (paketan).webp"
+              width="120"
+              contain
+            ></v-img>
+
+            <div class="text-justify">
+              Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan
+              penawaran sehingga harga yang kamu dapat sesuai dengan isi dompet.
+            </div>
+          </v-col> -->
+        </v-row>
+      </div>
+    </v-container>
     <v-card color="teal lighten-4">
       <v-container fluid class="text-center">
         <h2>Jadwal Tawar Bersama</h2>
@@ -85,7 +190,7 @@
         </div>
 
         <div v-else>
-          <p class="display-2">Tidak ada data</p>
+          <p class="display-2">Belum Ada iklan</p>
         </div>
 
         <v-btn
@@ -129,7 +234,7 @@
     </v-row>
 
     <v-row justify="center" v-else>
-      <p class="display-2">Tidak ada data</p>
+      <p class="display-2">Belum ada iklan tawar bersama</p>
     </v-row>
 
     <v-divider class="my-2"></v-divider>
@@ -140,13 +245,7 @@
         <div>Yuk cek artikel terbaru di SiMotor</div>
         <br />
         <v-row align="center" dense>
-          <v-col
-            cols="6"
-            sm="6"
-            lg="2"
-            v-for="item in artikel"
-            :key="item.id"
-          >
+          <v-col cols="6" sm="6" lg="2" v-for="item in artikel" :key="item.id">
             <v-card
               flat
               class="rounded-lg"
@@ -191,47 +290,10 @@
         >
       </v-container>
     </v-card>
-    <v-row justify="center">
-      <v-col cols="12" sm="6" align="center">
-        <v-img src="/img/app-min.webp" width="280" contain></v-img>
-      </v-col>
 
-      <v-col cols="12" sm="6" align="center">
-        <v-img src="/img/mobilehand.webp" width="92" contain></v-img>
-
-        <h2>Apa itu SiMotor?</h2>
-
-        <div class="text-justify">
-          Sepeda motor sudah menjadi gaya hidup atau lifestyle masyarakat di
-          Indonesia, benar nggak? Oleh karena itu, kebutuhan akan sepeda motor
-          juga meningkat dan kamu pasti ingin motor yang bagus dan berkualitas
-          kan? Disinilah SiMotor hadir sebagai jawaban. Beli motor jadi semakin
-          mudah, cepat, dan berkualitas.
-        </div>
-
-        <v-card class="d-inline-block mx-auto">
-          <v-container fluid>
-            <v-img src="/img/banner.webp" contain></v-img>
-            <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
-
-            <a
-              href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
-              target="_blank"
-            >
-              <v-img
-                src="/img/playstore.png"
-                width="162"
-                href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
-                target="_blank"
-              ></v-img>
-            </a>
-          </v-container>
-        </v-card>
-      </v-col>
-    </v-row>
     <v-divider> </v-divider>
-    <v-container fluid>
-      <div align="center">
+    <!-- <v-container fluid>
+      <v-card align="center">
         <v-img src="/img/logo-sm.webp" width="90"></v-img>
 
         <h4>Apa aja fitur unggulan SiMotor?</h4>
@@ -239,19 +301,19 @@
         <h2>Fitur SiMotor</h2>
 
         <v-row>
-          <v-col cols="12" sm="6">
+          <v-col cols="12" sm="12">
             <h2>Harga Pas</h2>
 
             <v-img src="/img/hargapas.webp" width="120" contain></v-img>
 
-            <div class="text-justify">
+            <div class="text-justify text-center" >
               Harga pas berguna banget untuk kamu yang nggak mau ribet menawar
               unit. Kamu hanya perlu memilih unit motor yang kamu butuhkan lalu
               segera hubungi penjual iklan unit tersebut.
             </div>
           </v-col>
 
-          <v-col cols="12" sm="6">
+          <v-col cols="12" sm="12">
             <h2>Tawar Bersama</h2>
 
             <v-img
@@ -266,8 +328,8 @@
             </div>
           </v-col>
         </v-row>
-      </div>
-    </v-container>
+      </v-card>
+    </v-container> -->
     <v-btn bottom color="pink" dark fab fixed right to="/bantuan">
       <v-img
         to="/bantuan"
@@ -333,13 +395,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     showCategories() {
@@ -352,13 +407,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     artikelBerita() {
@@ -376,13 +424,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     jadwalLelang() {
@@ -400,13 +441,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
 
@@ -429,13 +463,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
   },

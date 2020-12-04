@@ -4,7 +4,10 @@
       <v-btn icon dark @click.native="close">
         <v-icon>mdi-close</v-icon>
       </v-btn>
-      <v-toolbar-title>Login</v-toolbar-title>
+      <v-toolbar-title>
+        <a href="/">
+          <v-img src="/img/logo-tulisan.webp" width="200" contain></v-img> </a
+      ></v-toolbar-title>
     </v-toolbar>
 
     <v-divider></v-divider>
@@ -12,10 +15,10 @@
     <v-container fluid>
       <v-form ref="form" v-model="valid">
         <div align="center">
-          <v-card width="330" class="pa-5 mt-16">
+          <v-card max-width="800" class="pa-5 mt-16 rounded-lg" color="teal lighten-5">
             <div v-if="phoneDisplay">
-              <h2>Masuk</h2>
-
+              <v-img src="/img/simotor_logo.webp" width="200" contain></v-img>
+              <h3>Masuk dengan akun SiMotor</h3>
               <v-text-field
                 v-model="phone"
                 :rules="phoneRules"
@@ -52,7 +55,7 @@
 
               <section id="firebaseui-auth-container"></section>
               Belum punya akun SiMotor?
-              <a @click="setDialogComponent('daftar')">Daftar</a>
+              <a @click="setDialogComponent('daftar')">Daftar sekarang</a>
             </div>
 
             <div v-if="otpDisplay">
@@ -87,19 +90,19 @@
               </p>
 
               <p v-else>
-                Tidak menerima kode?
+                Belum menerima kode?
                 <a @click="resend">Resend</a>
               </p>
 
               <v-btn block color="primary" @click="login" :disabled="!valid"
-                >Submit</v-btn
+                >Masukkan kode OTP</v-btn
               >
 
               <br />
 
               <p @click="ubah">
                 Bukan nomor Anda?
-                <a>Ubah</a>
+                <a>Ubah sekarang</a>
               </p>
             </div>
           </v-card>
@@ -130,9 +133,9 @@ export default {
         (v) => v && v.length >= 10,
       ],
       otpRules: [
-        (v) => !!v || "OTP is required",
+        (v) => !!v || "OTP harus dimasukkan",
         (v) => (v && v.length == 6) || "OTP harus 6 digit",
-        (v) => /^\d+$/.test(v) || "Numbers Only",
+        (v) => /^\d+$/.test(v) || "Harus Angka",
       ],
       mask: "#############",
       valid: true,
@@ -242,14 +245,9 @@ export default {
         .post("/user/v3/user/login", formData)
         .then((response) => {
           let { data } = response.data;
-          const now = new Date();
-          const auth = {
-            ...data[0],
-            expiry: now.getTime() + 60 * 60 * 24 * 28 * 1000,
-          };
-          this.setAuth(auth);
+          this.setAuth(data[0]);
           this.setToken(data[0].token);
-          window.localStorage.setItem("user", JSON.stringify(auth));
+          window.localStorage.setItem("user", JSON.stringify(data[0]));
           window.localStorage.setItem("token", data[0].token);
           this.setAlert({
             status: true,

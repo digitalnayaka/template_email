@@ -91,9 +91,14 @@
     <v-container fluid>
       <v-alert
         :value="hits.length == 0 && (keyword != '' || keyword != null)"
-        color="warning"
-        >Sorry, but no results were found.</v-alert
-      >
+        color="cyan lighten-5"
+        >Harap Tunggu Sebentar...
+        <v-progress-circular
+          :size="40"
+          color="amber"
+          indeterminate
+        ></v-progress-circular
+      ></v-alert>
 
       <v-row>
         <v-col
@@ -181,13 +186,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     clear() {
@@ -213,13 +211,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     close() {

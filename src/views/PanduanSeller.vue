@@ -7,7 +7,7 @@
     </v-app-bar>
     <v-card class="d-inline-block mx-auto" align="center">
       <v-card color="teal darken-4">
-        <v-img src="img/banner web panduan.png" width="600" height="150" contain></v-img>
+        <v-img src="img/banner web panduan.webp" width="600" height="150" contain></v-img>
       </v-card>
 
       <v-card color="teal lighten-4">
@@ -55,7 +55,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >1.1.4. Jika kode OTP benar, maka Anda akan masuk ke menu halaman utama</p>
-              <v-img src="img/penjual1.png" width="600" contain></v-img>
+              <v-img src="img/penjual1.webp" width="600" contain></v-img>
               <br />
               <br />
 
@@ -71,7 +71,7 @@
                 Catatan : Jika nomor Anda belum pernah terdaftar di aplikasi SiMotor, maka akan
                 ada pemberitahuan bahwa Anda harus mendaftar terlebih dahulu.
               </p>
-              <v-img src="img/penjual2.png" width="600" contain></v-img>
+              <v-img src="img/penjual2.webp" width="600" contain></v-img>
               <br />
               <br />
               <p
@@ -89,7 +89,7 @@
               <p
                 class="text-justify ml-4 ml-lg-4 md-4"
               >2.2.4 Jika berhasil, Anda akan masuk ke menu halaman utama</p>
-              <v-img src="img/pembeli3.png" width="600" contain></v-img>
+              <v-img src="img/pembeli3.webp" width="600" contain></v-img>
               <br />
               <br />
               <p class="ml-2 ml-lg-2 md-2 font-weight-bold">3. TAMBAH UNIT</p>
@@ -98,7 +98,7 @@
               <p
                 class="ml-3 ml-lg-3 md-3"
               >3.3. Klik ‘Tambah Unit’ untuk memasukkan data unit motor ke garasi Anda di aplikasi SiMotor</p>
-              <v-img src="img/penjual2.png" width="600" contain></v-img>
+              <v-img src="img/penjual2.webp" width="600" contain></v-img>
               <br />
               <br />
               <p class="ml-3 ml-lg-3 md-3">
@@ -108,7 +108,7 @@
               <p
                 class="ml-3 ml-lg-3 md-3"
               >3.6. Isi detail motor seperti warna, odometer, kapasitas mesin, transmisi dan sebagainya</p>
-              <v-img src="img/penjual3.png" width="600" contain></v-img>
+              <v-img src="img/penjual3.webp" width="600" contain></v-img>
 
               <br />
               <br />
@@ -123,7 +123,7 @@
                 Gambar 19. Klik tombol simpan Gambar 20. Proses moderasi Gambar 21. Unit tersedia diiklankan
                 Catatan: Dalam proses moderasi, unit akan ditolak apabila gambar dianggap tidak sesuai dengan syarat dan ketentuan Aplikasi
               </p>
-              <v-img src="img/penjual4.png" width="600" contain></v-img>
+              <v-img src="img/penjual4.webp" width="600" contain></v-img>
 
               <p
                 class="ml-3 ml-lg-3 md-3"
@@ -141,7 +141,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >4.1.3. Pilih Jenis Iklan ‘Harga Pas’ untuk melanjutkan ke langkah berikutnya</p>
-              <v-img src="img/penjual5.png" width="600" contain></v-img>
+              <v-img src="img/penjual5.webp" width="600" contain></v-img>
               <br />
               <br />
               <p
@@ -150,7 +150,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >4.1.5. Isi data iklan motor seperti Judul Iklan, Deskripsi Iklan, dan Harga yang ingin ditawarkan, kemudian klik tombol ‘Iklankan’</p>
-              <v-img src="img/penjual6.png" width="600" contain></v-img>
+              <v-img src="img/penjual6.webp" width="600" contain></v-img>
               <br />
               <br />
               <p class="ml-3 ml-lg-3 md-3">4.2. Tambah Iklan Tawar Bersama</p>
@@ -163,7 +163,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >4.2.3. Pilih jenis iklan Tawar Bersama Satuan atau Tawar Bersama Paketan</p>
-              <v-img src="img/penjual7-1.png" width="600" contain></v-img>
+              <v-img src="img/penjual7-1.webp" width="600" contain></v-img>
               <br />
               <br />
               <p class="ml-4 ml-lg-4 md-4">4.2.4. Pilih unit Motor yang ingin Anda iklankan</p>
@@ -174,8 +174,8 @@
                 class="ml-4 ml-lg-4 md-4"
               >4.2.6. Setelah itu, iklan akan bisa dilihat di tab iklan pada menu Akun Anda</p>
 
-              <v-img src="img/penjual7.png" width="600" contain></v-img>
-              <v-img src="img/penjual8.png" width="600" contain></v-img>
+              <v-img src="img/penjual7.webp" width="600" contain></v-img>
+              <v-img src="img/penjual8.webp" width="600" contain></v-img>
 
               <p class="ml-4 ml-lg-4 md-4 font-weight-bold">Catatan:</p>
               <p class="ml-4 ml-lg-4 md-4">- Anda bisa memilih kelipatan tawar</p>
@@ -197,7 +197,7 @@
                 class="ml-3 ml-lg-3 md-3"
               >5.2. Klik tombol tab ‘Iklan Anda’ untuk melihat iklan apa saja yang sudah pernah Anda buat baik itu iklan Tawar Bersama maupun iklan Harga Pas (pilih salah satu)</p>
 
-              <v-img src="img/penjual9.png" width="600" contain></v-img>
+              <v-img src="img/penjual9.webp" width="600" contain></v-img>
               <p class="ml-2 ml-lg-2 md-2 font-weight-bold">6. PENGATURAN</p>
               <p class="ml-3 ml-lg-3 md-3 font-weight-bold">6.1. Cara tambah rekening baru</p>
               <p
@@ -230,7 +230,7 @@
               <p
                 class="ml-4 ml-lg-4 md-4"
               >6.2.5. Klik tombol simpan dan Anda telah berhasil menambah chat otomatis</p>
-              <v-img src="img/penjual10.png" width="600" contain></v-img>
+              <v-img src="img/penjual10.webp" width="600" contain></v-img>
             </div>
           </div>
         </v-container>

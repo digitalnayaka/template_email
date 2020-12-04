@@ -8,7 +8,7 @@
 
     <v-card class="d-inline-block mx-auto" align="center">
       <v-card color="teal darken-4">
-        <v-img src="img/banner web panduan.png" width="600" height="150" contain></v-img>
+        <v-img src="img/banner web panduan.webp" width="600" height="150" contain></v-img>
       </v-card>
 
       <v-card color="teal lighten-4">
@@ -58,7 +58,7 @@
                 class="text-justify ml-4 ml-lg-4 md-4"
               >1.1.4. Jika kode OTP benar, maka Anda akan masuk ke menu halaman utama</p>
               <!-- <img src="img/tutorial1.png" width="600px" class="img-fluid" /> -->
-              <v-img src="img/pembeli1.png" width="600" contain></v-img>
+              <v-img src="img/pembeli1.webp" width="600" contain></v-img>
               <br />
               <br />
 
@@ -78,7 +78,7 @@
                 Catatan : Jika nomor Anda belum pernah terdaftar di aplikasi SiMotor, maka akan
                 ada pemberitahuan bahwa Anda harus mendaftar terlebih dahulu.
               </p>
-              <v-img src="img/pembeli2.png" width="600" contain></v-img>
+              <v-img src="img/pembeli2.webp" width="600" contain></v-img>
               <br />
               <br />
               <p
@@ -96,7 +96,7 @@
               <p
                 class="text-justify ml-4 ml-lg-4 md-4"
               >2.2.4 Jika berhasil, Anda akan masuk ke menu halaman utama</p>
-              <v-img src="img/pembeli3.png" width="600" contain></v-img>
+              <v-img src="img/pembeli3.webp" width="600" contain></v-img>
               <br />
               <br />
               <p class="text-justify ml-2 ml-lg-2 md-2 font-weight-bold">3. PENELUSURAN IKLAN</p>
@@ -109,7 +109,7 @@
                 Anda dapat meliat rekomendasi untuk iklan motor baru,
                 motor bekas terdekat dan iklan motor yang dijual melalui metode Tawar Bersama yang sedang berlangsung
               </p>
-              <v-img src="img/pembeli4.png" width="600" contain></v-img>
+              <v-img src="img/pembeli4.webp" width="600" contain></v-img>
               <br />
               <br />
               <p
@@ -118,7 +118,7 @@
               <p
                 class="text-justify ml-4 ml-lg-4 md-4"
               >Ketikkan kata kunci yang ingin Anda cari (contoh: merek motor/ nama penjual)</p>
-              <v-img src="img/pembeli5.png" width="600" contain></v-img>
+              <v-img src="img/pembeli5.webp" width="600" contain></v-img>
               <br />
               <br />
               <p
@@ -136,7 +136,7 @@
               <p
                 class="text-justify ml-4 ml-lg-4 md-4"
               >3.3.4. Klik tombol ‘Simpan’ untuk menerapkan filter</p>
-              <v-img src="img/pembeli6.png" width="600" contain></v-img>
+              <v-img src="img/pembeli6.webp" width="600" contain></v-img>
               <br />
               <br />
               <p class="text-justify ml-4 ml-lg-4 md-4">
@@ -160,7 +160,7 @@
               <p
                 class="text-justify ml-4 ml-lg-4 md-4"
               >4.1.3. Pilihan menghubungi penjualnya adalah dengan cara Chat/ Telepon/ SMS/ Whatsapp</p>
-              <v-img src="img/pembeli7.png" width="600" contain></v-img>
+              <v-img src="img/pembeli7.webp" width="600" contain></v-img>
               <br />
               <br />
               <p
@@ -176,7 +176,7 @@
                 4.2.4. Jika Anda tidak memiliki Tiket, Anda hanya bisa memasang penawaran pada iklan TB yang tidak ada syarat penggunaan Tiket.
                 Anda bisa membeli tiket di Menu ‘Tiket Tawar Bersama’
               </p>
-              <v-img src="img/pembeli8.png" width="600" contain></v-img>
+              <v-img src="img/pembeli8.webp" width="600" contain></v-img>
               <br />
               <br />
               <p
@@ -216,7 +216,7 @@
               <p
                 class="text-justify ml-4 ml-lg-4 md-4"
               >4.2.16. Jika Anda tidak mengunggah bukti pembayaran, maka pembelian Anda dianggap batal dan Tiket yang Anda gunakan pada iklan TB ini akan menjadi hangus.</p>
-              <v-img src="img/pembeli9.png" width="600" contain></v-img>
+              <v-img src="img/pembeli9.webp" width="600" contain></v-img>
               <br />
               <br />
               <p class="text-justify ml-2 ml-lg-2 md-2 font-weight-bold">5. TIKET</p>
@@ -230,7 +230,7 @@
                 class="text-justify ml-4 ml-lg-4 md-4"
               >5.1.3 Klik tombol jumlah tiket atau ketikkan angka jumlah tiket yang ingin Anda beli</p>
               <p class="text-justify ml-4 ml-lg-4 md-4">5.1.4. Klik tombol ‘Lanjutkan’ ke pembayaran</p>
-             <v-img src="img/pembeli10.png" width="600" contain></v-img>
+             <v-img src="img/pembeli10.webp" width="600" contain></v-img>
               <br />
               <br />
              
@@ -243,7 +243,7 @@
               <p
                 class="text-justify ml-4 ml-lg-4 md-4"
               >5.1.7 Setelah diverifikasi oleh admin SiMotor, lalu stok tiket Anda akan bertambah di halaman tiket Tawar Bersama Anda.</p>
-              <v-img src="img/pembeli11.png" width="600" contain></v-img>
+              <v-img src="img/pembeli11.webp" width="600" contain></v-img>
               <br />
               <br />
               <p class="text-justify ml-3 ml-lg-3 md-3 font-weight-bold">5.2. Cara Refund Tiket</p>
@@ -254,7 +254,7 @@
               <p
                 class="text-justify ml-4 ml-lg-4 md-4"
               >5.2.3 Klik tombol jumlah tiket atau ketikkan angka jumlah tiket yang ingin Anda Refund</p>
-              <v-img src="img/pembeli12.png" width="600" contain></v-img>
+              <v-img src="img/pembeli12.webp" width="600" contain></v-img>
               <br />
               <br />
               <p
@@ -264,7 +264,7 @@
               <p
                 class="text-justify ml-4 ml-lg-4 md-4"
               >5.2.6 Setelah diverifikasi oleh Admin SiMotor, uang akan masuk ke rekening Anda ± 2 hari kerja.</p>
-             <v-img src="img/pembeli13.png" width="600" contain></v-img>
+             <v-img src="img/pembeli13.webp" width="600" contain></v-img>
               <br />
               <br />
               <p class="ml-3 ml-lg-3 md-3">5.3 Cara Mencari Iklan Dengan Barcode</p>
@@ -277,7 +277,7 @@
                 Muncul scan dan persiapkan barcode yang ingin dicari iklannya
               </p>
               <p class="ml-4 ml-lg-4 md-4">5.3.3 Anda akan berada di Iklan yang anda cari</p>
-               <v-img src="img/pembeli14.png" width="600" contain></v-img>
+               <v-img src="img/pembeli14.webp" width="600" contain></v-img>
             </div>
           </div>
         </v-container>
