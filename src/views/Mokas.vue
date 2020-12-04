@@ -92,7 +92,9 @@
       <v-alert
         :value="hits.length == 0 && (keyword != '' || keyword != null)"
         color="cyan lighten-5"
-        >Harap Tunggu Sebentar...
+      >
+        Harap Tunggu Sebentar...
+
         <v-progress-circular
           :size="40"
           color="amber"

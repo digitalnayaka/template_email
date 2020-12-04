@@ -6,24 +6,8 @@
       </v-btn>
     </v-app-bar>
 
-    <!-- <v-carousel cycle hide-delimiters height="300" width="100%">
-      <v-carousel-item
-        v-for="(item, index) in banners"
-        :key="index"
-        :src="getImage(item.foto)"
-        reverse-transition="fade-transition"
-        transition="fade-transition"
-        cycle
-        hide-delimiter-background
-        show-arrows-on-hover
-        contain
-        :to="'/detail-banner/' + item.id"
-        class="rounded-lg"
-      ></v-carousel-item>
-    </v-carousel> -->
-    <v-row justify="center">
+    <v-row class="d-flex align-center">
       <v-col cols="12" sm="6" align="center">
-        <!-- <v-img src="/img/app-min.webp" width="280" contain></v-img> -->
         <v-carousel cycle hide-delimiters height="300">
           <v-carousel-item
             v-for="(item, index) in banners"
@@ -45,18 +29,19 @@
         <v-img src="/img/mobilehand.webp" width="92" contain></v-img>
 
         <h2>What's on SiMotor?</h2>
+
         <v-alert
           color="cyan lighten-3"
-          
           icon="mdi-motorbike"
           border="right"
+          prominent
         >
           <div class="text-justify">
            SiMotor adalah platform atau sarana bertemunya penjual dan pembeli untuk proses penjualan motor, baik motor baru maupun motor bekas. Di Simotor pembeli bisa mendapatkan motor dengan harga pas ataupun dapat melakukan penawaran melalui layanan tawar bersama.
           </div>
         </v-alert>
+
         <v-container fluid>
-          
           <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
 
           <a
@@ -70,77 +55,46 @@
               target="_blank"
             ></v-img>
           </a>
-          <!-- <v-img src="/img/banner.webp" width="300" contain></v-img> -->
         </v-container>
       </v-col>
     </v-row>
+
     <v-divider> </v-divider>
-    <!-- <v-row>
-      <v-col cols="6" align="center" v-for="item in categories" :key="item.id">
-        <v-card flat :to="'/category/' + item.route">
-          <v-img
-            :src="item.image"
-            width="300"
-            height="150"
-            contain
-            class="rounded-lg"
-          ></v-img>
-          <h4>{{ item.name }}</h4>
-        </v-card>
-      </v-col>
-    </v-row> -->
-    <v-container fluid>
-      <div align="center">
-        <v-row>
-          <v-col cols="12" sm="4">
-            <h2 class="teal lighten-5">Fitur</h2>
-            <v-alert
-              color="cyan lighten-4"
-              border="left"
-              prominent
-              
-            >
-              <h4>Ada 2 (dua) fitur utama diSiMotor, yuk simak!</h4>
-              <p class="text-justify">
-                Ada 2 (dua) fitur utama diSiMotor, yaitu Harga Pas dan Tawar
-                Bersama. Dapatkan tiket tawar bersama dan temukan motor
-                impian-mu di iklan tawar bersama!
-              </p>
-            </v-alert>
-          </v-col>
 
-          <v-col cols="6" sm="4" v-for="item in categories" :key="item.id">
-            <v-card flat :to="'/category/' + item.route">
-              <v-img
-                :src="item.image"
-                width="350"
-                height="150"
-                contain
-                class="rounded-lg"
-              ></v-img>
-              <h4>{{ item.name }}</h4>
-            </v-card>
-          </v-col>
-          <!-- <v-col cols="12" sm="4">
-            <h2>Tiket Tawar Bersama</h2>
+    <div align="center">
+      <v-row class="d-flex align-center">
+        <v-col cols="12" sm="4">
+          <h2 class="teal lighten-5">Fitur</h2>
+          <v-alert color="cyan lighten-4" border="left" prominent>
+            <h4>Ada 2 (dua) fitur utama diSiMotor, yuk simak!</h4>
 
+            <p class="text-justify">
+              Ada 2 (dua) fitur utama diSiMotor, yaitu Harga Pas dan Tawar
+              Bersama. Dapatkan tiket tawar bersama dan temukan motor impian-mu
+              di iklan tawar bersama!
+            </p>
+          </v-alert>
+        </v-col>
+
+        <v-col cols="6" sm="4" v-for="item in categories" :key="item.id">
+          <v-card flat :to="'/category/' + item.route">
             <v-img
-              src="/img/tawar bersama (paketan).webp"
-              width="120"
+              :src="item.image"
+              width="350"
+              height="150"
               contain
+              class="rounded-lg"
             ></v-img>
+            <h4>{{ item.name }}</h4>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
 
-            <div class="text-justify">
-              Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan
-              penawaran sehingga harga yang kamu dapat sesuai dengan isi dompet.
-            </div>
-          </v-col> -->
-        </v-row>
-      </div>
-    </v-container>
     <v-card color="teal lighten-4">
       <v-container fluid class="text-center">
         <h2>Jadwal Tawar Bersama</h2>
+
         <div>Jangan lewatkan Iklan Tawar Bersama berikut!</div>
 
         <div class="scrolling-wrapper-flexbox mx-2" v-if="jadwal.length > 0">
@@ -199,7 +153,6 @@
         >
       </v-container>
     </v-card>
-    <!-- <v-divider class="my-2"></v-divider> -->
 
     <div class="text-center">
       <h2>Tawar Bersama Berlangsung</h2>
@@ -238,14 +191,17 @@
     <v-card color="teal lighten-4 text-center" flat class="rounded-lg">
       <v-container fluid>
         <h2>Artikel Terbaru</h2>
+
         <div>Yuk cek artikel terbaru di SiMotor</div>
+
         <br />
+
         <v-row align="center" dense>
           <v-col cols="6" sm="6" lg="2" v-for="item in artikel" :key="item.id">
             <v-card
               flat
               class="rounded-lg"
-              href="https://blog.simotor.id"
+              :href="'https://blog.simotor.id/' + item.id"
               target="_blank"
               width="300"
             >
@@ -266,7 +222,6 @@
                       >Tanggal:
                       {{ item.publish_date | dateFormat }}</v-list-item-title
                     >
-                    <!-- <v-list-item-subtitle> By: </v-list-item-subtitle> -->
                     <v-list-item-title class="font-weight-black">
                       {{ item.title }}
                     </v-list-item-title>
@@ -276,6 +231,7 @@
             </v-card>
           </v-col>
         </v-row>
+
         <v-btn
           dark
           color="teal"
@@ -326,6 +282,7 @@
         </v-row>
       </v-card>
     </v-container> -->
+
     <v-btn bottom color="pink" dark fab fixed right to="/bantuan">
       <v-img
         to="/bantuan"
