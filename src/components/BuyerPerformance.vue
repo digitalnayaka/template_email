@@ -92,13 +92,14 @@
                   </v-list-item-avatar>
                   <h2>Harap Diperhatikan!</h2>
                 </v-list-item>
+
                 <v-list-item>
                   <h4>
-                    Akun Anda tidak pernah melakukan
-                    pembatalan transaksi. Hindari pembatalan transaksi agar akun
-                    anda tidak diblokir
+                    Akun Anda tidak pernah melakukan pembatalan transaksi.
+                    Hindari pembatalan transaksi agar akun anda tidak diblokir
                   </h4>
                 </v-list-item>
+
                 <v-list-item>
                   <v-list-item-title>
                     Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
@@ -109,6 +110,7 @@
             </v-col>
           </v-row>
         </v-card>
+
         <v-card
           outlined
           class="rounded-lg"
@@ -130,6 +132,7 @@
                   </v-list-item-avatar>
                   <h2>Harap Diperhatikan!</h2>
                 </v-list-item>
+
                 <v-list-item>
                   <h4>
                     Anda telah melakukan 1x pembatalan transaksi. Hindari
@@ -137,6 +140,7 @@
                     Tiket anda hangus.
                   </h4>
                 </v-list-item>
+
                 <v-list-item>
                   <v-list-item-title>
                     Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
@@ -148,7 +152,7 @@
           </v-row>
         </v-card>
 
-         <v-card
+        <v-card
           outlined
           class="rounded-lg"
           border="bottom"
@@ -169,13 +173,15 @@
                   </v-list-item-avatar>
                   <h2>Harap Diperhatikan!</h2>
                 </v-list-item>
+
                 <v-list-item>
                   <h4>
                     Anda telah melakukan 2x pembatalan transaksi. Hindari
                     melakukan pembatalan transaksi karena dapat mengakibatkan
-                   akun anda di blokir selama 14 hari.
+                    akun anda di blokir selama 14 hari.
                   </h4>
                 </v-list-item>
+
                 <v-list-item>
                   <v-list-item-title>
                     Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
@@ -186,6 +192,7 @@
             </v-col>
           </v-row>
         </v-card>
+
         <v-card
           outlined
           class="rounded-lg"
@@ -200,19 +207,18 @@
               <v-list>
                 <v-list-item>
                   <v-list-item-avatar size="40">
-                    <v-img
-                      src="/img/icons/akun_blokir.webp"
-                      contain
-                    ></v-img>
+                    <v-img src="/img/icons/akun_blokir.webp" contain></v-img>
                   </v-list-item-avatar>
                   <h2>Harap Diperhatikan!</h2>
                 </v-list-item>
+
                 <v-list-item>
                   <h4>
-                    Anda telah melakukan 3x pembatalan transaksi yang mengakibatkan
-                   akun anda di blokir selamanya.
+                    Anda telah melakukan 3x pembatalan transaksi yang
+                    mengakibatkan akun anda di blokir selamanya.
                   </h4>
                 </v-list-item>
+
                 <v-list-item>
                   <v-list-item-title>
                     Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
@@ -274,9 +280,38 @@ export default {
   components: { FlipCountdown },
   data() {
     return {
-      pengguna: []
-    }
-  }  
+      pengguna: [],
+    };
+  },
+  methods: {
+    getUsers() {
+      this.axios
+        .get("/user/v3/user", {
+          params: {
+            id: this.user.id,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.pengguna = data[0];
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
+        });
+    },
+  },
+  created() {
+    this.getUsers();
+  },
 };
 </script>
 
