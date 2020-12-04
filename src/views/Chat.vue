@@ -43,7 +43,7 @@
                   class="d-inline-block mx-auto"
                   flat
                   v-if="item.Message.length > 0"
-                  :href="'/iklan/' + item.Message[0].id"
+                  :to="'/detail_iklan/' + item.Message[0].id"
                 >
                   <v-container fluid>
                     <v-row>

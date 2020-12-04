@@ -77,8 +77,8 @@
         </div> -->
 
         <div>
-          Setelah Anda melakukan konfirmasi pembayaran, tiket Anda akan masuk
-          dalam waktu 2x24 jam.
+          Setelah Anda melakukan konfirmasi pembayaran, tiket Anda akan masuk dalam waktu
+          2x24 jam.
         </div>
       </div>
 
@@ -86,7 +86,7 @@
         <v-card>
           <v-container fluid
             ><h3>Dapatkan Tiket Tawar Bersama</h3>
-            <v-card-subtitle class="font-weight-bold red--text">
+            <v-card-subtitle class="font-weight-bold red--text" >
               Masa berlaku tiket adalah 3 bulan dari tanggal pembelian tiket.
             </v-card-subtitle>
             <v-card-text>Apakah Anda yakin membeli paket ini?</v-card-text>
@@ -161,14 +161,7 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          console.log(responses);
         });
     },
     checkout() {

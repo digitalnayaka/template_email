@@ -16,10 +16,10 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Daftar Unit ({{total}})</v-toolbar-title>
+          <v-toolbar-title>Daftar Unit </v-toolbar-title>
 
           <v-divider class="mx-4" inset vertical></v-divider>
-
+           <v-toolbar-title>({{ total }} Unit) </v-toolbar-title>
           <v-spacer></v-spacer>
 
           <v-btn
@@ -35,7 +35,7 @@
             v-model="search"
             outlined
             dense
-            label="Search"
+            label="Cari Unit"
             class="mt-7"
             slot="extension"
             clearable
@@ -204,13 +204,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getBarcode(id) {
@@ -230,13 +223,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     deleteUnit(item) {
@@ -287,13 +273,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
   },

@@ -15,7 +15,7 @@
 
     <v-tabs-items v-model="tab" class="pa-4">
       <v-tab-item>
-        <biodata-diri :user="user" :utc="utc" :timezone="timezone" />
+        <biodata-diri :user="user" />
       </v-tab-item>
 
       <!-- <v-tab-item>
@@ -38,7 +38,6 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "profile",
-  props: ["utc", "timezone"],
   components: {
     BiodataDiri: () =>
       import(

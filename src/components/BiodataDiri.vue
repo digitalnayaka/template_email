@@ -159,7 +159,7 @@
       </v-col>
     </v-row>
 
-    <info-penjual :user="user" :utc="utc" :timezone="timezone" />
+    <info-penjual :user="user" />
   </div>
 </template>
 
@@ -177,7 +177,7 @@ export default {
         /* webpackChunkName: "biodata-diri" */ "@/components/InfoPenjual.vue"
       ),
   },
-  props: ["user", "utc", "timezone"],
+  props: ["user"],
   data: () => ({
     ubahNama: false,
     tab: 0,
@@ -239,13 +239,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     saveData(param, value) {
@@ -333,14 +326,7 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          console.log(responses);
         });
     },
   },

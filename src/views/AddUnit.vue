@@ -129,7 +129,7 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="e1 = 1">Sebelumnya</v-btn>
+                <v-btn color="red" @click="e1 = 1">Sebelumnya</v-btn>
                 <v-btn color="primary" :disabled="!valid1" @click="e1 = 3"
                   >Selanjutnya</v-btn
                 >
@@ -259,14 +259,14 @@
 
                     <v-date-picker v-model="tglPajak">
                       <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu = false"
-                        >Cancel</v-btn
+                      <v-btn text color="red" @click="menu = false"
+                        >Batalkan</v-btn
                       >
                       <v-btn
                         text
                         color="primary"
                         @click="$refs.menu.save(tglPajak)"
-                        >OK</v-btn
+                        >Simpan</v-btn
                       >
                     </v-date-picker>
                   </v-menu>
@@ -313,14 +313,14 @@
 
                     <v-date-picker v-model="tglSTNK">
                       <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu = false"
-                        >Cancel</v-btn
+                      <v-btn text color="red" @click="menu = false"
+                        >Batalkan</v-btn
                       >
                       <v-btn
                         text
                         color="primary"
                         @click="$refs.menu.save(tglSTNK)"
-                        >OK</v-btn
+                        >Simpan</v-btn
                       >
                     </v-date-picker>
                   </v-menu>
@@ -409,7 +409,7 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="e1 = 2">Sebelumnya</v-btn>
+                <v-btn color="red" @click="e1 = 2">Sebelumnya</v-btn>
                 <v-btn
                   color="primary"
                   :disabled="valid1 == valid2 ? false : true"
@@ -438,7 +438,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     if (this.countRules.length > 0 && this.valid2 == false) {
       const answer = window.confirm(
-        "Do you really want to leave? you have unsaved changes!"
+        "Apakah Anda yakin ingin meninggalkan halaman ini? Data yang Anda masukkan belum disimpan!"
       );
       if (answer) {
         next();
@@ -603,13 +603,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getTahun() {
@@ -626,13 +619,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getTipe() {
@@ -674,13 +660,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getTransmisi() {
@@ -693,13 +672,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getJenis() {
@@ -712,13 +684,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     storeItem() {
@@ -773,13 +738,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
   },
