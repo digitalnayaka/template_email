@@ -128,6 +128,11 @@ export default {
   name: "buyer-performance",
   props: ["user"],
   components: { FlipCountdown },
+  data() {
+    return {
+      pengguna: []
+    }
+  }  
 };
 </script>
 
