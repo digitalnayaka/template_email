@@ -81,7 +81,7 @@
           color="green"
           colored-border
           elevation="2"
-          v-if="user.id_type_pinalti == 0"
+          v-if="pengguna.id_type_pinalti == 0"
         >
           <v-row>
             <v-col cols="12">
@@ -118,7 +118,7 @@
           color="deep-orange darken-4"
           colored-border
           elevation="2"
-          v-if="user.id_type_pinalti == 1"
+          v-if="pengguna.id_type_pinalti == 1"
         >
           <v-row>
             <v-col cols="12">
@@ -159,7 +159,7 @@
           color="deep-orange darken-4"
           colored-border
           elevation="2"
-          v-if="user.id_type_pinalti == 2"
+          v-if="pengguna.id_type_pinalti == 2"
         >
           <v-row>
             <v-col cols="12">
@@ -188,6 +188,10 @@
                     disini
                   </v-list-item-title>
                 </v-list-item>
+
+                <v-list-item>
+                  <flip-countdown :deadline="pengguna.end_time_beku | dateTimeFormat(utc)"></flip-countdown>
+                </v-list-item>
               </v-list>
             </v-col>
           </v-row>
@@ -200,7 +204,7 @@
           color="red darken-4"
           colored-border
           elevation="2"
-          v-if="user.id_type_pinalti == 3"
+          v-if="pengguna.id_type_pinalti == 3"
         >
           <v-row>
             <v-col cols="12">
@@ -262,21 +266,17 @@
           </li>
         </ul>
       </v-col>
-
-      <v-col cols="6" v-if="user.id_type_pinalti == 3">
-        Masa blokir akun Anda berakhir pada:
-        <flip-countdown deadline="2021-01-01 00:00:00"></flip-countdown>
-      </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
 import FlipCountdown from "vue2-flip-countdown";
+import moment from "moment-timezone";
 
 export default {
   name: "buyer-performance",
-  props: ["user"],
+  props: ["user", "utc", "timezone"],
   components: { FlipCountdown },
   data() {
     return {
@@ -311,6 +311,11 @@ export default {
   },
   created() {
     this.getUsers();
+  },
+  filters: {
+    dateTimeFormat: (date, utc) => {
+      return moment.utc(date).add(utc, "h").format("DD MMM YYYY, HH:mm");
+    },
   },
 };
 </script>

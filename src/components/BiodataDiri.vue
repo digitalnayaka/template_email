@@ -159,7 +159,7 @@
       </v-col>
     </v-row>
 
-    <info-penjual :user="user" />
+    <info-penjual :user="user" :utc="utc" :timezone="timezone" />
   </div>
 </template>
 
@@ -177,7 +177,7 @@ export default {
         /* webpackChunkName: "biodata-diri" */ "@/components/InfoPenjual.vue"
       ),
   },
-  props: ["user"],
+  props: ["user", "utc", "timezone"],
   data: () => ({
     ubahNama: false,
     tab: 0,

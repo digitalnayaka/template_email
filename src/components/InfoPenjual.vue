@@ -184,7 +184,7 @@
       </v-tab-item>
 
       <v-tab-item>
-        <buyer-performance :user="user" />
+        <buyer-performance :user="user" :utc="utc" :timezone="timezone" />
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -197,7 +197,7 @@ import StarRating from "vue-star-rating";
 
 export default {
   name: "info-penjual",
-  props: ["user"],
+  props: ["user", "utc", "timezone"],
   components: {
     StarRating,
     VueEditor,
