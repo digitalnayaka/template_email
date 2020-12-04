@@ -1,272 +1,103 @@
 <template>
   <div>
-    <v-row align="center" justify="space-around">
-      <!-- <v-col cols="3" sm="3" align="center">
-        <div v-if="user.id_type_pinalti !== 3">
-          <v-img
-            src="/img/icons/akun_blokir_gray.webp"
-            width="35"
-            contain
-          ></v-img>
+    <v-card outlined class="rounded-lg" :color="color" elevation="2">
+      <v-card class="ma-2">
+        <div class="d-flex align-center">
+          <v-avatar size="40" class="mx-4 my-2">
+            <v-img
+              src="/img/icons/akun_aman.webp"
+              contain
+              v-if="pengguna.id_type_pinalti == 0"
+            ></v-img>
+
+            <v-img
+              src="/img/icons/akun_wanprestasi1.webp"
+              contain
+              v-if="pengguna.id_type_pinalti == 1"
+            ></v-img>
+
+            <v-img
+              src="/img/icons/akun_wanprestasi2.webp"
+              contain
+              v-if="pengguna.id_type_pinalti == 2"
+            ></v-img>
+
+            <v-img
+              src="/img/icons/akun_blokir.webp"
+              contain
+              v-if="pengguna.id_type_pinalti == 3"
+            ></v-img>
+          </v-avatar>
+
+          <h2>Harap Diperhatikan!</h2>
         </div>
 
-        <div v-else>
-          <v-img src="/img/icons/akun_blokir.webp" width="35" contain></v-img>
+        <div class="mx-2">
+          <h4 v-if="pengguna.id_type_pinalti == 0">
+            Akun Anda tidak pernah melakukan pembatalan transaksi. Hindari
+            pembatalan transaksi agar akun anda tidak diblokir
+          </h4>
+
+          <h4 v-if="pengguna.id_type_pinalti == 1">
+            Anda telah melakukan 1x pembatalan transaksi. Hindari melakukan
+            pembatalan transaksi karena dapat mengakibatkan Tiket anda hangus.
+          </h4>
+
+          <h4 v-if="pengguna.id_type_pinalti == 2">
+            Anda telah melakukan 2x pembatalan transaksi. Hindari melakukan
+            pembatalan transaksi karena dapat mengakibatkan akun anda di blokir
+            selama 14 hari.
+          </h4>
+
+          <h4 v-if="pengguna.id_type_pinalti == 3">
+            Anda telah melakukan 3x pembatalan transaksi yang mengakibatkan akun
+            anda di blokir selamanya.
+          </h4>
+
+          <p class="my-2">
+            Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
+            <a href="/bantuan">disini</a>
+          </p>
+
+          <flip-countdown
+            :deadline="pengguna.end_time_beku | dateTimeFormat(utc)"
+            v-if="pengguna.id_type_pinalti == 2"
+          ></flip-countdown>
         </div>
+      </v-card>
+    </v-card>
 
-        <h5>Akun diBlokir</h5>
-      </v-col>
+    <br />
 
-      <v-col cols="3" sm="3" align="center">
-        <div v-if="user.id_type_pinalti == 2">
-          <v-img
-            src="/img/icons/akun_wanprestasi2.webp"
-            width="35"
-            contain
-          ></v-img>
-        </div>
+    <div>
+      Keterangan:
 
-        <div v-else>
-          <v-img
-            src="/img/icons/akun_wanprestasi2_gray.webp"
-            width="35"
-            contain
-          ></v-img>
-        </div>
+      <ul class="red--text">
+        <li>
+          <strong> Melakukan 1x pembatalan transaksi </strong>
+          <p>
+            Anda melakukan pembatalan transaksi 1x yang mengakibatkan Tiket anda
+            hangus
+          </p>
+        </li>
 
-        <h5>2 kali membatalkan transaksi</h5>
-      </v-col>
+        <li>
+          <strong> Melakukan 2x pembatalan transaksi </strong>
+          <p>
+            Anda melakukan pembatalan transaksi 2x yang mengakibatkan akun anda
+            di blokir selama 14 hari
+          </p>
+        </li>
 
-      <v-col cols="3" sm="3" align="center">
-        <div v-if="user.id_type_pinalti == 1">
-          <v-img
-            src="/img/icons/akun_wanprestasi1.webp"
-            width="35"
-            contain
-          ></v-img>
-        </div>
-
-        <div v-else>
-          <v-img
-            src="/img/icons/akun_wanprestasi1_gray.webp"
-            width="35"
-            contain
-          ></v-img>
-
-          <h5>1 kali membatalkan transaksi</h5>
-        </div>
-      </v-col>
-
-      <v-col cols="3" sm="3" align="center">
-        <div v-if="user.id_type_pinalti !== 0">
-          <v-img
-            src="/img/icons/akun_aman_gray.webp"
-            width="35"
-            contain
-          ></v-img>
-        </div>
-
-        <div v-else>
-          <v-img src="/img/icons/akun_aman.webp" width="35" contain></v-img>
-        </div>
-
-        <h5>Tidak pernah membatalkan transaksi</h5>
-      </v-col> -->
-
-      <div>
-        <v-card
-          outlined
-          class="rounded-lg"
-          border="bottom"
-          color="green"
-          colored-border
-          elevation="2"
-          v-if="pengguna.id_type_pinalti == 0"
-        >
-          <v-row>
-            <v-col cols="12">
-              <v-list>
-                <v-list-item>
-                  <v-list-item-avatar size="40">
-                    <v-img src="/img/icons/akun_aman.webp" contain></v-img>
-                  </v-list-item-avatar>
-                  <h2>Harap Diperhatikan!</h2>
-                </v-list-item>
-
-                <v-list-item>
-                  <h4>
-                    Akun Anda tidak pernah melakukan pembatalan transaksi.
-                    Hindari pembatalan transaksi agar akun anda tidak diblokir
-                  </h4>
-                </v-list-item>
-
-                <v-list-item>
-                  <v-list-item-title>
-                    Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
-                    disini
-                  </v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-col>
-          </v-row>
-        </v-card>
-
-        <v-card
-          outlined
-          class="rounded-lg"
-          border="bottom"
-          color="deep-orange darken-4"
-          colored-border
-          elevation="2"
-          v-if="pengguna.id_type_pinalti == 1"
-        >
-          <v-row>
-            <v-col cols="12">
-              <v-list>
-                <v-list-item>
-                  <v-list-item-avatar size="40">
-                    <v-img
-                      src="/img/icons/akun_wanprestasi1.webp"
-                      contain
-                    ></v-img>
-                  </v-list-item-avatar>
-                  <h2>Harap Diperhatikan!</h2>
-                </v-list-item>
-
-                <v-list-item>
-                  <h4>
-                    Anda telah melakukan 1x pembatalan transaksi. Hindari
-                    melakukan pembatalan transaksi karena dapat mengakibatkan
-                    Tiket anda hangus.
-                  </h4>
-                </v-list-item>
-
-                <v-list-item>
-                  <v-list-item-title>
-                    Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
-                    disini
-                  </v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-col>
-          </v-row>
-        </v-card>
-
-        <v-card
-          outlined
-          class="rounded-lg"
-          border="bottom"
-          color="deep-orange darken-4"
-          colored-border
-          elevation="2"
-          v-if="pengguna.id_type_pinalti == 2"
-        >
-          <v-row>
-            <v-col cols="12">
-              <v-list>
-                <v-list-item>
-                  <v-list-item-avatar size="40">
-                    <v-img
-                      src="/img/icons/akun_wanprestasi2.webp"
-                      contain
-                    ></v-img>
-                  </v-list-item-avatar>
-                  <h2>Harap Diperhatikan!</h2>
-                </v-list-item>
-
-                <v-list-item>
-                  <h4>
-                    Anda telah melakukan 2x pembatalan transaksi. Hindari
-                    melakukan pembatalan transaksi karena dapat mengakibatkan
-                    akun anda di blokir selama 14 hari.
-                  </h4>
-                </v-list-item>
-
-                <v-list-item>
-                  <v-list-item-title>
-                    Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
-                    disini
-                  </v-list-item-title>
-                </v-list-item>
-
-                <v-list-item>
-                  <flip-countdown :deadline="pengguna.end_time_beku | dateTimeFormat(utc)"></flip-countdown>
-                </v-list-item>
-              </v-list>
-            </v-col>
-          </v-row>
-        </v-card>
-
-        <v-card
-          outlined
-          class="rounded-lg"
-          border="bottom"
-          color="red darken-4"
-          colored-border
-          elevation="2"
-          v-if="pengguna.id_type_pinalti == 3"
-        >
-          <v-row>
-            <v-col cols="12">
-              <v-list>
-                <v-list-item>
-                  <v-list-item-avatar size="40">
-                    <v-img src="/img/icons/akun_blokir.webp" contain></v-img>
-                  </v-list-item-avatar>
-                  <h2>Harap Diperhatikan!</h2>
-                </v-list-item>
-
-                <v-list-item>
-                  <h4>
-                    Anda telah melakukan 3x pembatalan transaksi yang
-                    mengakibatkan akun anda di blokir selamanya.
-                  </h4>
-                </v-list-item>
-
-                <v-list-item>
-                  <v-list-item-title>
-                    Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
-                    disini
-                  </v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-col>
-          </v-row>
-        </v-card>
-      </div>
-    </v-row>
-
-    <v-row>
-      <v-col cols="12">
-        Keterangan:
-
-        <ul class="red--text">
-          <li>
-            <strong> Melakukan 1x pembatalan transaksi </strong>
-            <p>
-              Anda melakukan pembatalan transaksi 1x yang mengakibatkan Tiket
-              anda hangus
-            </p>
-          </li>
-
-          <li>
-            <strong> Melakukan 2x pembatalan transaksi </strong>
-            <p>
-              Anda melakukan pembatalan transaksi 2x yang mengakibatkan akun
-              anda di blokir selama 14 hari
-            </p>
-          </li>
-
-          <li>
-            <strong> Melakukan 3x pembatalan transaksi </strong>
-            <p>
-              Anda melakukan pembatalan transaksi 3x yang mengakibatkan akun
-              anda di blokir selamanya
-            </p>
-          </li>
-        </ul>
-      </v-col>
-    </v-row>
+        <li>
+          <strong> Melakukan 3x pembatalan transaksi </strong>
+          <p>
+            Anda melakukan pembatalan transaksi 3x yang mengakibatkan akun anda
+            di blokir selamanya
+          </p>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -281,6 +112,7 @@ export default {
   data() {
     return {
       pengguna: [],
+      color: "",
     };
   },
   methods: {
@@ -295,6 +127,16 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.pengguna = data[0];
+          if (
+            this.pengguna.id_type_pinalti == 1 ||
+            this.pengguna.id_type_pinalti == 2
+          ) {
+            this.color = "deep-orange darken-4";
+          } else if (this.pengguna.id_type_pinalti == 3) {
+            this.color = "red darken-4";
+          } else {
+            this.color = "green";
+          }
         })
         .catch((error) => {
           let responses = error.response.data;
