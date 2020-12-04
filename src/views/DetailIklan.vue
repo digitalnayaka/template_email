@@ -694,7 +694,7 @@
             Gunakan Tiket Anda
           </v-btn>
 
-          <v-dialog v-model="dialogKonfirmasiTiket" max-width="350">
+          <v-dialog v-model="dialogKonfirmasiTiket" max-width="400">
             <v-card>
               <div v-if="auto == false">
                 <v-card-title class="headline">
@@ -708,14 +708,14 @@
 
                   <v-btn
                     color="red darken-1"
-                    text
+                    dark
                     @click="dialogKonfirmasiTiket = false"
                   >
-                    Disagree
+                    Batalkan
                   </v-btn>
 
-                  <v-btn color="green darken-1" text @click="konfirmasiTiket()">
-                    Agree
+                  <v-btn dark color="green darken-1" @click="konfirmasiTiket()">
+                    Konfirmasi
                   </v-btn>
                 </v-card-actions>
               </div>
@@ -840,7 +840,9 @@
                       <v-icon>mdi-minus</v-icon>
                     </v-btn>
 
-                    <h2 class="mx-2">Rp {{ amountAuto.toLocaleString("id-ID") }}</h2>
+                    <h2 class="mx-2">
+                      Rp {{ amountAuto.toLocaleString("id-ID") }}
+                    </h2>
 
                     <v-btn icon @click="addAuto()">
                       <v-icon>mdi-plus</v-icon>
@@ -869,8 +871,8 @@
 
                 <br />
 
-                <div class="red--text">
-                  Noted: <br />
+                <div class="red--text font-weight-bold">
+                  Catatan: <br />
                   Fitur Tawar Otomatis tidak menjamin anda akan memenangkan
                   iklan Tawar Bersama
                 </div>

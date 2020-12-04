@@ -117,6 +117,10 @@
                         src="/img/icons/review_pembeli.webp"
                         v-if="item.id_modul == 8"
                       ></v-img>
+                       <v-img
+                        src="/img/icons/id14_blokir.webp"
+                        v-if="item.id_modul == 14"
+                      ></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -280,10 +284,7 @@
                         src="/img/icons/tiket_expired.webp"
                         v-if="item.id_modul == 7"
                       ></v-img>
-                      <v-img
-                        src="/img/icons/tiket_expired.webp"
-                        v-if="item.id_modul == 10"
-                      ></v-img>
+                     
                       <v-img
                         src="/img/icons/tiket_terpakai.webp"
                         v-if="item.id_modul == 11"
@@ -292,10 +293,7 @@
                         src="/img/icons/tiket_tersedia.webp"
                         v-if="item.id_modul == 12"
                       ></v-img>
-                      <v-img
-                        src="/img/icons/tiket_expired.webp"
-                        v-if="item.id_modul == 10"
-                      ></v-img>
+
                       <v-img
                         src="/img/icons/tiket_terpakai.webp"
                         v-if="item.id_modul == 11"
@@ -303,6 +301,10 @@
                       <v-img
                         src="/img/icons/hampir-expired.webp"
                         v-if="item.id_modul == 6"
+                      ></v-img>
+                       <v-img
+                        src="/img/icons/tiket_hangus.webp"
+                        v-if="item.id_modul == 10"
                       ></v-img>
                     </v-list-item-avatar>
 
