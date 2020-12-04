@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row align="center" justify="space-around">
-      <v-col cols="3" sm="3" align="center">
+      <!-- <v-col cols="3" sm="3" align="center">
         <div v-if="user.id_type_pinalti !== 3">
           <v-img
             src="/img/icons/akun_blokir_gray.webp"
@@ -34,7 +34,7 @@
           ></v-img>
         </div>
 
-        <h5>Wanprestasi 2</h5>
+        <h5>2 kali membatalkan transaksi</h5>
       </v-col>
 
       <v-col cols="3" sm="3" align="center">
@@ -44,8 +44,6 @@
             width="35"
             contain
           ></v-img>
-
-          <h5>Wanprestasi 1</h5>
         </div>
 
         <div v-else>
@@ -55,7 +53,7 @@
             contain
           ></v-img>
 
-          <h5>Wanprestasi 1</h5>
+          <h5>1 kali membatalkan transaksi</h5>
         </div>
       </v-col>
 
@@ -72,44 +70,190 @@
           <v-img src="/img/icons/akun_aman.webp" width="35" contain></v-img>
         </div>
 
-        <h5>Akun Aman</h5>
-      </v-col>
+        <h5>Tidak pernah membatalkan transaksi</h5>
+      </v-col> -->
 
       <div>
-        <v-alert dense type="success" v-if="user.id_type_pinalti == 0">
-          Selamat Anda Pembeli <strong>TERPERCAYA,</strong> tingkatkan terus
-          transaksi Anda!
-        </v-alert>
+        <v-card
+          outlined
+          class="rounded-lg"
+          border="bottom"
+          color="green"
+          colored-border
+          elevation="2"
+          v-if="user.id_type_pinalti == 0"
+        >
+          <v-row>
+            <v-col cols="12">
+              <v-list>
+                <v-list-item>
+                  <v-list-item-avatar size="40">
+                    <v-img src="/img/icons/akun_aman.webp" contain></v-img>
+                  </v-list-item-avatar>
+                  <h2>Harap Diperhatikan!</h2>
+                </v-list-item>
+                <v-list-item>
+                  <h4>
+                    Akun Anda tidak pernah melakukan
+                    pembatalan transaksi. Hindari pembatalan transaksi agar akun
+                    anda tidak diblokir
+                  </h4>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
+                    disini
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-col>
+          </v-row>
+        </v-card>
+        <v-card
+          outlined
+          class="rounded-lg"
+          border="bottom"
+          color="deep-orange darken-4"
+          colored-border
+          elevation="2"
+          v-if="user.id_type_pinalti == 1"
+        >
+          <v-row>
+            <v-col cols="12">
+              <v-list>
+                <v-list-item>
+                  <v-list-item-avatar size="40">
+                    <v-img
+                      src="/img/icons/akun_wanprestasi1.webp"
+                      contain
+                    ></v-img>
+                  </v-list-item-avatar>
+                  <h2>Harap Diperhatikan!</h2>
+                </v-list-item>
+                <v-list-item>
+                  <h4>
+                    Anda telah melakukan 1x pembatalan transaksi. Hindari
+                    melakukan pembatalan transaksi karena dapat mengakibatkan
+                    Tiket anda hangus.
+                  </h4>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
+                    disini
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-col>
+          </v-row>
+        </v-card>
 
-        <v-alert dense type="warning" v-if="user.id_type_pinalti == 1">
-          Anda telah melakukan
-          <strong>1 Kali pembatalan transaksi.</strong> Hindari pembatalan
-          transaksi agar akun anda tidak diblokir ( tidak dapat tawar selama 14
-          hari )
-        </v-alert>
-
-        <v-alert dense type="warning" v-if="user.id_type_pinalti == 2">
-          Anda terdeteksi melakukan <strong>2 Kali WANPRESTASI,</strong> Mohon
-          maaf, akun Anda tidak bisa ikut Tawar Bersama.
-        </v-alert>
-
-        <v-alert dense type="error" v-if="user.id_type_pinalti == 3">
-          Anda terdeteksi melakukan <strong>3 Kali WANPRESTASI,</strong> Mohon
-          maaf, akun Anda diBlokir sampai batas waktu yang ditentukan.
-        </v-alert>
+         <v-card
+          outlined
+          class="rounded-lg"
+          border="bottom"
+          color="deep-orange darken-4"
+          colored-border
+          elevation="2"
+          v-if="user.id_type_pinalti == 2"
+        >
+          <v-row>
+            <v-col cols="12">
+              <v-list>
+                <v-list-item>
+                  <v-list-item-avatar size="40">
+                    <v-img
+                      src="/img/icons/akun_wanprestasi2.webp"
+                      contain
+                    ></v-img>
+                  </v-list-item-avatar>
+                  <h2>Harap Diperhatikan!</h2>
+                </v-list-item>
+                <v-list-item>
+                  <h4>
+                    Anda telah melakukan 2x pembatalan transaksi. Hindari
+                    melakukan pembatalan transaksi karena dapat mengakibatkan
+                   akun anda di blokir selama 14 hari.
+                  </h4>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
+                    disini
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-col>
+          </v-row>
+        </v-card>
+        <v-card
+          outlined
+          class="rounded-lg"
+          border="bottom"
+          color="red darken-4"
+          colored-border
+          elevation="2"
+          v-if="user.id_type_pinalti == 3"
+        >
+          <v-row>
+            <v-col cols="12">
+              <v-list>
+                <v-list-item>
+                  <v-list-item-avatar size="40">
+                    <v-img
+                      src="/img/icons/akun_blokir.webp"
+                      contain
+                    ></v-img>
+                  </v-list-item-avatar>
+                  <h2>Harap Diperhatikan!</h2>
+                </v-list-item>
+                <v-list-item>
+                  <h4>
+                    Anda telah melakukan 3x pembatalan transaksi yang mengakibatkan
+                   akun anda di blokir selamanya.
+                  </h4>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
+                    disini
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-col>
+          </v-row>
+        </v-card>
       </div>
     </v-row>
 
     <v-row>
-      <v-col cols="6">
-        Note Wanprestasi:
+      <v-col cols="12">
+        Keterangan:
 
         <ul class="red--text">
-          <li>1 kali gagal Tiket hangus</li>
+          <li>
+            <strong> Melakukan 1x pembatalan transaksi </strong>
+            <p>
+              Anda melakukan pembatalan transaksi 1x yang mengakibatkan Tiket
+              anda hangus
+            </p>
+          </li>
 
-          <li>2 kali gagal tidak bisa ikut Tawar Bersama selama 2 minggu</li>
+          <li>
+            <strong> Melakukan 2x pembatalan transaksi </strong>
+            <p>
+              Anda melakukan pembatalan transaksi 2x yang mengakibatkan akun
+              anda di blokir selama 14 hari
+            </p>
+          </li>
 
-          <li>3 kali gagal Akun anda akan diblokir secara permanen</li>
+          <li>
+            <strong> Melakukan 3x pembatalan transaksi </strong>
+            <p>
+              Anda melakukan pembatalan transaksi 3x yang mengakibatkan akun
+              anda di blokir selamanya
+            </p>
+          </li>
         </ul>
       </v-col>
 
