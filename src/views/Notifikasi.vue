@@ -68,19 +68,19 @@
                   <template v-slot:default="{ active }">
                     <v-list-item-avatar>
                       <v-img
-                        src="/img/icons/unit.png"
+                        src="/img/icons/unit_moderasi.webp"
                         v-if="item.id_modul == 4"
                       ></v-img>
                       <v-img
-                        src="/img/icons/transaksi.png"
+                        src="/img/icons/transaksi.webp"
                         v-if="item.id_modul == 3"
                       ></v-img>
                       <v-img
-                        src="/img/icons/iklan.png"
+                        src="/img/icons/iklan.webp"
                         v-if="item.id_modul == 1"
                       ></v-img>
                       <v-img
-                        src="/img/icons/iklan.png"
+                        src="/img/icons/iklan.webp"
                         v-if="item.id_modul == 5"
                       ></v-img>
                       <v-img
@@ -88,7 +88,7 @@
                         v-if="item.id_modul == 7"
                       ></v-img>
                       <v-img
-                        src="/img/icons/tiket_expired.webp"
+                        src="/img/icons/tiket_hangus.webp"
                         v-if="item.id_modul == 10"
                       ></v-img>
                       <v-img
@@ -158,7 +158,7 @@
                 >
                   <template v-slot:default="{ active }">
                     <v-list-item-avatar>
-                      <v-img src="/img/icons/iklan.png"></v-img>
+                      <v-img src="/img/icons/iklan.webp"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -242,7 +242,7 @@
                         src="/img/icons/unit_moderasi.webp"
                         v-if="item.id_modul == 4"
                       ></v-img>
-                      <v-img src="/img/icons/unit.png"></v-img>
+                      <v-img src="/img/icons/unit.webp"></v-img>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
@@ -344,7 +344,7 @@
 
     <div align="center" v-else>
       <v-img
-        src="/img/notifikasi-belum.png"
+        src="/img/notifikasi-belum.webp"
         width="500"
         height="600"
         contain

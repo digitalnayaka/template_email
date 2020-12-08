@@ -23,7 +23,7 @@
       <v-tabs-items v-model="tab">
         <v-tab-item>
           <v-card
-          color="light-green lighten-5"
+            color="cyan lighten-5"
             outlined
             class="mt-2 mb-4"
             v-for="item in notReview"
@@ -48,8 +48,8 @@
               <v-col cols="12" sm="10" class="d-flex" color="">
                 <v-divider vertical></v-divider>
 
-                <div class="flex-column flex-grow-1" >
-                  <v-list color="light-green lighten-5">
+                <div class="flex-column flex-grow-1">
+                  <v-list color="cyan lighten-5">
                     <v-list-item>
                       <v-list-item-avatar tile>
                         <v-icon v-if="item.app_user_foto_pembeli == ''">
@@ -64,25 +64,46 @@
 
                       <v-list-item-content>
                         <v-list-item-title>
-                          {{ item.app_user_name_pembeli }}
+                          Oleh: {{ item.app_user_name_pembeli }}
                         </v-list-item-title>
 
                         <v-list-item-subtitle>
                           <span class="cyan pa-1 white--text text-caption mr-1">
                             Pembeli
                           </span>
+                       
+                            <v-list-item-avatar
+                              tile
+                              size="25"
+                              v-if="item.ratting_user == 1"
+                            >
+                              <v-img
+                                src="/img/icons/emoji_tidakpuas.png"
+                                contain
+                              ></v-img>
+                            </v-list-item-avatar>
+                            <v-list-item-avatar
+                              tile
+                              size="25"
+                              v-if="item.ratting_user == 2"
+                            >
+                              <v-img
+                                src="/img/icons/emoji_netral.png"
+                                contain
+                              ></v-img>
+                            </v-list-item-avatar>
+                        <v-list-item-avatar
+                              tile
+                              size="25"
+                              v-if="item.ratting_user == 3"
+                            >
+                              <v-img
+                                src="/img/icons/emoji_puas.png"
+                                contain
+                              ></v-img>
+                            </v-list-item-avatar>
 
-                          <v-icon color="red" v-if="item.ratting_user == 1">
-                            mdi-emoticon-angry-outline
-                          </v-icon>
-
-                          <v-icon color="orange" v-if="item.ratting_user == 2">
-                            mdi-emoticon-neutral-outline
-                          </v-icon>
-
-                          <v-icon color="teal" v-if="item.ratting_user == 3">
-                            mdi-emoticon-happy-outline
-                          </v-icon>
+                          
                         </v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -172,7 +193,7 @@
                     <div class="ma-4" v-if="selected.id == item.id">
                       <v-textarea
                         v-model="reply"
-                        placeholder="Tulis deskripsi Anda mengenai produk ini..."
+                        placeholder="Balas ulasan pembeli..."
                         outlined
                         dense
                         rows="3"
@@ -198,7 +219,7 @@
                   </div>
 
                   <div v-else>
-                    <v-list color="light-green lighten-5">
+                    <v-list color="cyan lighten-5">
                       <v-list-item>
                         <v-list-item-avatar tile>
                           <v-icon v-if="item.app_user_foto_penjual == ''">
@@ -207,7 +228,7 @@
 
                           <v-img
                             :src="getImage(item.app_user_foto_penjual)"
-                            v-else 
+                            v-else
                           ></v-img>
                         </v-list-item-avatar>
 
@@ -251,7 +272,7 @@
                     :src="getImage(item.foto_iklan)"
                     contain
                     max-width="250"
-                    max-height="150" 
+                    max-height="150"
                   ></v-img>
 
                   <a :href="'/iklan/' + item.id_iklan">
@@ -287,17 +308,37 @@
                             Pembeli
                           </span>
 
-                          <v-icon color="red" v-if="item.ratting_user == 1">
-                            mdi-emoticon-angry-outline
-                          </v-icon>
+                         <v-list-item-avatar
+                              tile
+                              size="25"
+                              v-if="item.ratting_user == 1"
+                            >
+                              <v-img
+                                src="/img/icons/emoji_tidakpuas.png"
+                                contain
+                              ></v-img>
+                            </v-list-item-avatar>
+                            <v-list-item-avatar
+                              tile
+                              size="25"
+                              v-if="item.ratting_user == 2"
+                            >
+                              <v-img
+                                src="/img/icons/emoji_netral.png"
+                                contain
+                              ></v-img>
+                            </v-list-item-avatar>
+                        <v-list-item-avatar
+                              tile
+                              size="25"
+                              v-if="item.ratting_user == 3"
+                            >
+                              <v-img
+                                src="/img/icons/emoji_puas.png"
+                                contain
+                              ></v-img>
+                            </v-list-item-avatar>
 
-                          <v-icon color="orange" v-if="item.ratting_user == 2">
-                            mdi-emoticon-neutral-outline
-                          </v-icon>
-
-                          <v-icon color="teal" v-if="item.ratting_user == 3">
-                            mdi-emoticon-happy-outline
-                          </v-icon>
                         </v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
