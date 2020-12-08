@@ -21,7 +21,7 @@
             <v-list-item>
               <v-list-item-avatar>
                 <v-img
-                  src="/img/profile.png"
+                  src="/img/icons/people.webp"
                   contain
                   v-if="user.photo == null"
                 ></v-img>
@@ -188,7 +188,7 @@ export default {
       {
         id: 5,
         icon: "mdi-help",
-        title: "About Us",
+        title: "Tentang Kami",
         items: [
           { id: 11, title: "Tentang SiMotor", route: "/about" },
           { id: 12, title: "Bantuan", route: "/bantuan" },

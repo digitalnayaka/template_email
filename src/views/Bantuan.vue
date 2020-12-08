@@ -26,7 +26,7 @@
 
               <v-list-item-subtitle>Video tutorial pemakaian aplikasi SiMotor</v-list-item-subtitle>
             </v-list-item-content>
-          </v-list-item> <v-list-item to="/panduan_pembeli">
+          </v-list-item> <v-list-item to="/panduan-pembeli">
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon>mdi-help-circle-outline</v-icon>Panduan
