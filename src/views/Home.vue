@@ -37,12 +37,15 @@
           prominent
         >
           <div class="text-justify">
-           SiMotor adalah platform atau sarana bertemunya penjual dan pembeli untuk proses penjualan motor, baik motor baru maupun motor bekas. Di Simotor pembeli bisa mendapatkan motor dengan harga pas ataupun dapat melakukan penawaran melalui layanan tawar bersama.
+            SiMotor adalah platform atau sarana bertemunya penjual dan pembeli
+            untuk proses penjualan motor, baik motor baru maupun motor bekas. Di
+            Simotor pembeli bisa mendapatkan motor dengan harga pas ataupun
+            dapat melakukan penawaran melalui layanan tawar bersama.
           </div>
         </v-alert>
 
         <v-container fluid>
-          <h4>Download aplikasi SiMotor yang tersedia di Android.</h4>
+          <h4>Download aplikasi SiMotor yang tersedia di PlayStore.</h4>
 
           <a
             href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
@@ -91,7 +94,9 @@
       </v-row>
     </div>
 
-    <v-card color="teal lighten-4">
+    <v-card
+      color="teal lighten-3"
+    >
       <v-container fluid class="text-center">
         <h2>Jadwal Tawar Bersama</h2>
 
@@ -188,7 +193,7 @@
 
     <v-divider class="my-2"></v-divider>
 
-    <v-card color="teal lighten-4 text-center" flat class="rounded-lg">
+    <v-card color="teal lighten-3 text-center" flat class="rounded-lg">
       <v-container fluid>
         <h2>Artikel Terbaru</h2>
 

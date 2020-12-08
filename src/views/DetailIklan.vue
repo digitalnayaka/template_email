@@ -57,30 +57,30 @@
         <div class="d-flex align-center justify-space-around">
           <div v-if="avg.ratting_user != null">
             <div v-if="avg.ratting_user == 1">
-              <v-avatar size="32" item>
+              <v-avatar size="25" item>
                 <v-img
                   src="/img/icons/emoji_tidakpuas.png"
                   alt="kecewa"
                 ></v-img>
               </v-avatar>
 
-              Kecewa
+              Kurang Memuaskan
             </div>
 
             <div v-if="avg.ratting_user == 2">
-              <v-avatar size="32" item>
+              <v-avatar size="25" item>
                 <v-img src="/img/icons/emoji_netral.png" alt="netral"></v-img>
               </v-avatar>
 
-              Netral
+              Cukup Memuaskan
             </div>
 
             <div v-if="avg.ratting_user == 3">
-              <v-avatar size="32" item>
+              <v-avatar size="25" item>
                 <v-img src="/img/icons/emoji_puas.png" alt="puas"></v-img>
               </v-avatar>
 
-              Puas
+              Sangat Memuaskan
             </div>
           </div>
 
@@ -599,7 +599,7 @@
             </v-list-item-icon>
 
             <v-list-item-icon class="mr-2" v-else>
-              <v-chip color="green">{{ i + 1 }}</v-chip>
+              <v-chip color="green" dark>{{ i + 1 }}</v-chip>
             </v-list-item-icon>
 
             <v-list-item-content>
@@ -701,7 +701,7 @@
                   Konfirmasi Penggunaan Tiket
                 </v-card-title>
 
-                <v-card-text> Gunakan Tiket Anda untuk iklan ini? </v-card-text>
+                <v-card-text> {{ iklan.jumlah_tiket }} Tiket Anda akan tetap terpakai untuk mengikuti iklan Tawar Bersama ini meskipun Anda tidak melakukan penawaran, <br/> Apakah Anda Setuju? </v-card-text>
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -714,8 +714,8 @@
                     Batalkan
                   </v-btn>
 
-                  <v-btn dark color="green darken-1" @click="konfirmasiTiket()">
-                    Konfirmasi
+                  <v-btn dark color="green darken-3" @click="konfirmasiTiket()">
+                   Ya, Gunakan
                   </v-btn>
                 </v-card-actions>
               </div>

@@ -29,7 +29,7 @@
             class="ml-2"
           ></star-rating>
 
-          <div v-if="ulasanSaya > 0">( {{ ulasanSaya }} Ulasan )</div>
+          <div v-if="ulasanSaya > 0" >( {{ ulasanSaya }} Ulasan )</div>
         </div>
         <br />
         <v-divider> </v-divider>
