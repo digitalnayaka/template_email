@@ -3,7 +3,19 @@
     <v-row>
       <v-col cols="12" sm="4">
         <v-card outlined width="800" class="pa-2 rounded-lg">
-          <v-img :src="getImage(user.photo)" contain  max-width="300" max-height="300"></v-img>
+          <v-img
+            :src="getImage(user.photo)"
+            contain
+            max-width="300"
+            max-height="300"
+          ></v-img>
+
+          <div class="text-center" v-if="user.photo == null">
+            <v-avatar size="128">
+              <v-img src="/img/profile.png" contain></v-img>
+            </v-avatar>
+          </div>
+
           <v-file-input
             id="fileid"
             label="File input"
@@ -69,7 +81,7 @@
                 <div v-if="!ubahWA">
                   :
                   {{ user.nomor_whatsapp }}
-                  <a href="javascript:void(0)" @click="ubahWA = true">
+                  <a href="javascript:void(0)" @click="ubahWA = true" v-if="user.nomor_whatsapp != null">
                     <v-icon>mdi-pencil</v-icon>
                   </a>
                 </div>
@@ -95,7 +107,7 @@
                 <div v-if="!ubahKota">
                   :
                   {{ user.kota }}
-                  <a href="javascript:void(0)" @click="ubahKota = true">
+                  <a href="javascript:void(0)" @click="ubahKota = true" v-if="user.kota != null">
                     <v-icon>mdi-pencil</v-icon>
                   </a>
                 </div>
@@ -121,7 +133,7 @@
                 <div v-if="!ubahDeskripsi">
                   :
                   {{ user.deskripsi }}
-                  <a href="javascript:void(0)" @click="ubahDeskripsi = true">
+                  <a href="javascript:void(0)" @click="ubahDeskripsi = true" v-if="user.deskripsi != null">
                     <v-icon>mdi-pencil</v-icon>
                   </a>
                 </div>
@@ -348,7 +360,7 @@ export default {
     this.sellerInfo();
   },
   mounted() {
-    if (this.user.email === "") {
+    if (this.user.email === null) {
       var uiConfig = {
         signInOptions: [
           {
