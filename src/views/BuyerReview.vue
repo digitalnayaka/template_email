@@ -49,7 +49,7 @@
                 <v-divider vertical></v-divider>
 
                 <div class="flex-column flex-grow-1">
-                  <v-list color="cyan lighten-5">
+                  <v-list color="cyan lighten-5" class="pb-0">
                     <v-list-item>
                       <v-list-item-avatar tile>
                         <v-icon v-if="item.app_user_foto_pembeli == ''">
@@ -71,39 +71,39 @@
                           <span class="cyan pa-1 white--text text-caption mr-1">
                             Pembeli
                           </span>
-                       
-                            <v-list-item-avatar
-                              tile
-                              size="25"
-                              v-if="item.ratting_user == 1"
-                            >
-                              <v-img
-                                src="/img/icons/emoji_tidakpuas.png"
-                                contain
-                              ></v-img>
-                            </v-list-item-avatar>
-                            <v-list-item-avatar
-                              tile
-                              size="25"
-                              v-if="item.ratting_user == 2"
-                            >
-                              <v-img
-                                src="/img/icons/emoji_netral.png"
-                                contain
-                              ></v-img>
-                            </v-list-item-avatar>
-                        <v-list-item-avatar
-                              tile
-                              size="25"
-                              v-if="item.ratting_user == 3"
-                            >
-                              <v-img
-                                src="/img/icons/emoji_puas.png"
-                                contain
-                              ></v-img>
-                            </v-list-item-avatar>
 
-                          
+                          <v-list-item-avatar
+                            tile
+                            size="25"
+                            v-if="item.ratting_user == 1"
+                          >
+                            <v-img
+                              src="/img/icons/emoji_tidakpuas.png"
+                              contain
+                            ></v-img>
+                          </v-list-item-avatar>
+
+                          <v-list-item-avatar
+                            tile
+                            size="25"
+                            v-if="item.ratting_user == 2"
+                          >
+                            <v-img
+                              src="/img/icons/emoji_netral.png"
+                              contain
+                            ></v-img>
+                          </v-list-item-avatar>
+
+                          <v-list-item-avatar
+                            tile
+                            size="25"
+                            v-if="item.ratting_user == 3"
+                          >
+                            <v-img
+                              src="/img/icons/emoji_puas.png"
+                              contain
+                            ></v-img>
+                          </v-list-item-avatar>
                         </v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -176,7 +176,7 @@
                     </div>
                   </div>
 
-                  <v-divider></v-divider>
+                  <v-divider class="mt-2"></v-divider>
 
                   <div v-if="item.Reply == null">
                     <v-btn
@@ -202,9 +202,9 @@
 
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="teal" dark @click="selected = []"
-                          >Kembali</v-btn
-                        >
+                        <v-btn color="teal" dark @click="selected = []">
+                          Kembali
+                        </v-btn>
 
                         <v-btn
                           color="teal"
@@ -308,37 +308,36 @@
                             Pembeli
                           </span>
 
-                         <v-list-item-avatar
-                              tile
-                              size="25"
-                              v-if="item.ratting_user == 1"
-                            >
-                              <v-img
-                                src="/img/icons/emoji_tidakpuas.png"
-                                contain
-                              ></v-img>
-                            </v-list-item-avatar>
-                            <v-list-item-avatar
-                              tile
-                              size="25"
-                              v-if="item.ratting_user == 2"
-                            >
-                              <v-img
-                                src="/img/icons/emoji_netral.png"
-                                contain
-                              ></v-img>
-                            </v-list-item-avatar>
-                        <v-list-item-avatar
-                              tile
-                              size="25"
-                              v-if="item.ratting_user == 3"
-                            >
-                              <v-img
-                                src="/img/icons/emoji_puas.png"
-                                contain
-                              ></v-img>
-                            </v-list-item-avatar>
-
+                          <v-list-item-avatar
+                            tile
+                            size="25"
+                            v-if="item.ratting_user == 1"
+                          >
+                            <v-img
+                              src="/img/icons/emoji_tidakpuas.png"
+                              contain
+                            ></v-img>
+                          </v-list-item-avatar>
+                          <v-list-item-avatar
+                            tile
+                            size="25"
+                            v-if="item.ratting_user == 2"
+                          >
+                            <v-img
+                              src="/img/icons/emoji_netral.png"
+                              contain
+                            ></v-img>
+                          </v-list-item-avatar>
+                          <v-list-item-avatar
+                            tile
+                            size="25"
+                            v-if="item.ratting_user == 3"
+                          >
+                            <v-img
+                              src="/img/icons/emoji_puas.png"
+                              contain
+                            ></v-img>
+                          </v-list-item-avatar>
                         </v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -507,6 +506,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     rating() {
@@ -531,6 +537,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     sendReply() {
@@ -584,6 +597,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
   },

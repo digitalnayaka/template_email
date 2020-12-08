@@ -29,10 +29,11 @@
             class="ml-2"
           ></star-rating>
 
-          <div v-if="ulasanSaya > 0" >( {{ ulasanSaya }} Ulasan )</div>
+          <div v-if="ulasanSaya > 0">( {{ ulasanSaya }} Ulasan )</div>
         </div>
-        <br />
-        <v-divider> </v-divider>
+
+        <v-divider class="my-4"></v-divider>
+
         <h3>Slogan</h3>
 
         <div v-if="!ubahSlogan">
@@ -66,10 +67,11 @@
           </div>
         </div>
 
-        <br />
-        <v-divider> </v-divider>
+        <v-divider class="my-4"></v-divider>
+
         <div class="d-flex flex-wrap align-center">
           <h3 class="mr-auto">Catatan</h3>
+          
           <v-btn
             color="teal"
             dark
@@ -251,6 +253,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     postSlogan() {
@@ -274,6 +283,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     openDialog(title) {
@@ -306,6 +322,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     getKebijakan() {
@@ -328,6 +351,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     postCatatan() {
@@ -479,6 +509,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
   },

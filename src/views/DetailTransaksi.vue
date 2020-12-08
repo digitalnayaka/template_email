@@ -696,6 +696,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     formPenawaran() {
@@ -711,6 +718,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     async getGambar() {
@@ -740,6 +754,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     konfirmasiTolak() {
@@ -821,6 +842,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
   },
