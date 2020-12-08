@@ -9,7 +9,7 @@
     >
       <v-toolbar-title style="width: 230" class="ml-0 mr-2 pl-4">
         <a href="/">
-          <v-img src="/img/logo-tulisan.png" width="200" contain></v-img>
+          <v-img src="/img/logo-tulisan.webp" width="200" contain></v-img>
         </a>
       </v-toolbar-title>
 

@@ -1602,7 +1602,7 @@ export default {
             this.isAuto = null;
           } else {
             this.isAuto = data[0];
-            this.slider.val = this.isAuto.max_bid;
+            this.amountAuto = this.isAuto.max_bid;
           }
         })
         .catch((error) => {
