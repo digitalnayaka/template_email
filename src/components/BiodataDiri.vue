@@ -70,7 +70,7 @@
                 <div v-if="!ubahWA">
                   :
                   {{ user.nomor_whatsapp }}
-                  <a href="javascript:void(0)" @click="ubahWA = true">
+                  <a href="javascript:void(0)" @click="ubahWA = true" v-if="user.nomor_whatsapp != null">
                     <v-icon>mdi-pencil</v-icon>
                   </a>
                 </div>
@@ -96,7 +96,7 @@
                 <div v-if="!ubahKota">
                   :
                   {{ user.kota }}
-                  <a href="javascript:void(0)" @click="ubahKota = true">
+                  <a href="javascript:void(0)" @click="ubahKota = true" v-if="user.kota != null">
                     <v-icon>mdi-pencil</v-icon>
                   </a>
                 </div>
@@ -122,7 +122,7 @@
                 <div v-if="!ubahDeskripsi">
                   :
                   {{ user.deskripsi }}
-                  <a href="javascript:void(0)" @click="ubahDeskripsi = true">
+                  <a href="javascript:void(0)" @click="ubahDeskripsi = true" v-if="user.deskripsi != null">
                     <v-icon>mdi-pencil</v-icon>
                   </a>
                 </div>
@@ -240,6 +240,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     saveData(param, value) {
@@ -342,7 +349,7 @@ export default {
     this.sellerInfo();
   },
   mounted() {
-    if (this.user.email === "") {
+    if (this.user.email === null) {
       var uiConfig = {
         signInOptions: [
           {

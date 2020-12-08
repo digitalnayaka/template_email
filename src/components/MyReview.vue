@@ -52,13 +52,12 @@
               <v-img
                 :src="getImage(item.order.iklan.photo)"
                 contain
-                
                 align="center"
               ></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title >
+              <v-list-item-title>
                 <a :href="'/iklan/' + item.order.id_iklan">
                   {{ item.order.iklan.judul }}
                 </a>
@@ -69,7 +68,6 @@
                   color="yellow"
                   v-for="n in item.review.ratting_iklan"
                   :key="n"
-                  class="mr-2"
                 >
                   mdi-star
                 </v-icon>
@@ -94,6 +92,7 @@
 
         <div class="flex-column flex-grow-1">
           <v-divider></v-divider>
+
           <v-row>
             <v-col cols="4" align="center">
               <div>Penilaian Anda</div>
@@ -104,16 +103,18 @@
                     <!-- <v-icon x-large color="red">
                     mdi-emoticon-angry-outline
                   </v-icon> -->
-                    <v-list-item-avatar>
+                    <v-avatar>
                       <v-img src="/img/icons/emoji_tidakpuas.png"></v-img>
-                    </v-list-item-avatar>
+                    </v-avatar>
+
                     <div>Tidak Puas</div>
                   </div>
 
                   <div v-if="item.review.ratting_user == 2">
-                    <v-list-item-avatar>
+                    <v-avatar>
                       <v-img src="/img/icons/emoji_netral.png"></v-img>
-                    </v-list-item-avatar>
+                    </v-avatar>
+
                     <div>Netral</div>
                   </div>
 
@@ -121,9 +122,9 @@
                     <!-- <v-icon x-large color="teal">
                     mdi-emoticon-happy-outline
                   </v-icon> -->
-                    <v-list-item-avatar>
+                    <v-avatar>
                       <v-img src="/img/icons/emoji_puas.png"></v-img>
-                    </v-list-item-avatar>
+                    </v-avatar>
 
                     <div>Puas</div>
                   </div>
@@ -137,53 +138,68 @@
               <div class="d-flex mx-2">
                 <div class="flex-column">
                   <div>Ulasan oleh:</div>
+
                   <div>
-                    <v-list-item-avatar tile size="50">
+                    <v-avatar tile size="50">
                       <v-img
                         src="/img/profile.png"
                         contain
                         v-if="item.order.photo_pembeli == null"
                       ></v-img>
+
                       <v-img
                         :src="getImage(item.order.photo_pembeli)"
                         alt="Avatar"
                         v-else
                       ></v-img>
-                    </v-list-item-avatar>
-                    <b class="blue--text">{{ item.order.nama_pembeli }}</b>
+                    </v-avatar>
+
+                    <b class="blue--text ml-2">{{ item.order.nama_pembeli }}</b>
                   </div>
 
                   <div class="text-justify text-subtitle-2 font-italic">
                     "{{ item.review.review }}"
                   </div>
+
                   <v-divider> </v-divider>
+
                   <div class="d-flex ma-2">
                     <div class="flex-column">
                       <div>Balasan oleh:</div>
-                      <div>
-                        <v-list-item-avatar tile size="50">
-                          <v-img
-                            src="/img/profile.png"
-                            contain
-                            v-if="item.order.photo_penjual == null"
-                          ></v-img>
-                          <v-img
-                            :src="getImage(item.order.photo_penjual)"
-                            alt="Avatar"
-                            v-else
-                          ></v-img>
-                        </v-list-item-avatar>
-                        <v-list-item-subtitle class="d-inline-flex">
-                          <div class="red pa-1 white--text">Penjual</div>
-                        </v-list-item-subtitle> &nbsp;
-                        <b class="teal--text">{{ item.order.nama_penjual }} </b>
-                      </div>
+
+                      <v-list class="pa-0">
+                        <v-list-item>
+                          <v-list-item-avatar tile size="50">
+                            <v-img
+                              src="/img/profile.png"
+                              contain
+                              v-if="item.order.photo_penjual == null"
+                            ></v-img>
+
+                            <v-img
+                              :src="getImage(item.order.photo_penjual)"
+                              alt="Avatar"
+                              v-else
+                            ></v-img>
+                          </v-list-item-avatar>
+
+                          <v-list-item-content>
+                            <v-list-item-title class="teal--text">
+                              {{ item.order.nama_penjual }}
+                            </v-list-item-title>
+
+                            <v-list-item-subtitle class="d-inline-flex">
+                              <div class="red pa-1 white--text">Penjual</div>
+                            </v-list-item-subtitle>
+                          </v-list-item-content>
+                        </v-list-item>
+                      </v-list>
 
                       <div
                         class="text-justify text-subtitle-2 font-italic"
-                        v-if="item.review.reply != null"
+                        v-if="item.review.Reply != null"
                       >
-                        {{ item.review.reply }}
+                        {{ item.review.Reply[0].reply }}
                       </div>
 
                       <div

@@ -61,7 +61,7 @@
 
           <flip-countdown
             :deadline="pengguna.end_time_beku | dateTimeFormat(utc)"
-            v-if="user.mst_user_status == 3 & pengguna.id_type_pinalti == 2"  
+            v-if="user.mst_user_status == 3 && pengguna.id_type_pinalti == 2"
           ></flip-countdown>
         </div>
       </v-card>
@@ -140,6 +140,13 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
           if (error.response.status == 403) {
             this.setAuth(null);
             this.setToken(null);
