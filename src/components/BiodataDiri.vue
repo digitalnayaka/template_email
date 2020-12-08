@@ -81,7 +81,7 @@
                 <div v-if="!ubahWA">
                   :
                   {{ user.nomor_whatsapp }}
-                  <a href="javascript:void(0)" @click="ubahWA = true" v-if="user.nomor_whatsapp != null">
+                  <a href="javascript:void(0)" @click="ubahWA = true">
                     <v-icon>mdi-pencil</v-icon>
                   </a>
                 </div>
@@ -107,7 +107,7 @@
                 <div v-if="!ubahKota">
                   :
                   {{ user.kota }}
-                  <a href="javascript:void(0)" @click="ubahKota = true" v-if="user.kota != null">
+                  <a href="javascript:void(0)" @click="ubahKota = true">
                     <v-icon>mdi-pencil</v-icon>
                   </a>
                 </div>
@@ -133,7 +133,7 @@
                 <div v-if="!ubahDeskripsi">
                   :
                   {{ user.deskripsi }}
-                  <a href="javascript:void(0)" @click="ubahDeskripsi = true" v-if="user.deskripsi != null">
+                  <a href="javascript:void(0)" @click="ubahDeskripsi = true">
                     <v-icon>mdi-pencil</v-icon>
                   </a>
                 </div>
