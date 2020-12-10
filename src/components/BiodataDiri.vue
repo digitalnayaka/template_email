@@ -1,21 +1,10 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" sm="4">
-        <v-card outlined width="800" class="pa-2 rounded-lg">
-          <v-img
-            :src="getImage(user.photo)"
-            contain
-            max-width="300"
-            max-height="300"
-          ></v-img>
-
-          <div class="text-center" v-if="user.photo == null">
-            <v-avatar size="128">
-              <v-img src="/img/profile.png" contain></v-img>
-            </v-avatar>
-          </div>
-
+      <v-col cols="12" sm="4"  align="center">
+        <v-card outlined width="800" class="pa-2 rounded-lg" >
+          <v-img :src="getImage(user.photo)" contain  max-width="300" max-height="300"></v-img>
+          <v-img src="/img/icons/people.webp" v-if="user.photo == null" contain  max-width="300" max-height="300" ></v-img>
           <v-file-input
             id="fileid"
             label="File input"
@@ -159,7 +148,7 @@
               <v-col cols="7">
                 <div v-if="formEmail !== null">: {{ user.email }}</div>
 
-                <div v-else>
+                <div v-else> :
                   <section id="firebaseui-auth-container"></section>
                 </div>
               </v-col>

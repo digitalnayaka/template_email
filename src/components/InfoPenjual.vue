@@ -39,7 +39,8 @@
         <div v-if="!ubahSlogan">
           {{ slogan }}
           <a href="javascript:void(0)" @click="ubahSlogan = true">
-            <v-icon>mdi-pencil</v-icon>
+            <!-- <v-icon>mdi-pencil</v-icon> -->
+            <v-btn small color="teal" dark> <v-icon>mdi-plus</v-icon> Tambah Slogan </v-btn>
           </a>
         </div>
 
@@ -78,7 +79,7 @@
             small
             class="mx-2"
             @click="openDialog('Tambah Catatan')"
-          >
+          > <v-icon>mdi-plus</v-icon> 
             Tambah Catatan
           </v-btn>
 
@@ -163,6 +164,7 @@
             class="mx-2"
             @click="openDialog('Tambah Kebijakan')"
           >
+          <v-icon>mdi-plus</v-icon> 
             Tambah Kebijakan
           </v-btn>
         </div>

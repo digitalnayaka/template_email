@@ -16,8 +16,8 @@
         slider-color="yellow"
         show-arrows
       >
-        <v-tab>Belum Dinilai</v-tab>
-        <v-tab>Sudah Dinilai</v-tab>
+        <v-tab>Berikan Ulasan</v-tab>
+        <v-tab>Sudah Diulas</v-tab>
       </v-tabs>
 
       <v-tabs-items v-model="tab">
@@ -30,6 +30,8 @@
           >
             <list-review :item="item" :utc="utc" :timezone="timezone" />
           </v-card>
+
+          <h3 v-if="review.length == 0">Semua produk telah diulas</h3>
         </v-tab-item>
 
         <v-tab-item>

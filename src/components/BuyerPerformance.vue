@@ -71,7 +71,6 @@
 
     <div>
       Keterangan:
-
       <ul class="red--text">
         <li>
           <strong> Melakukan 1x pembatalan transaksi </strong>

@@ -2,7 +2,7 @@
   <div class="container" style="margin-bottom: 30px">
     <form @submit.prevent="createMessage" enctype="multipart/form-data">
       <div class="form-group">
-        <v-text-field outlined shaped label="Enter message ..." v-model="newMessage">
+        <v-textarea outlined shaped label="Tuliskan pesan..." v-model="newMessage">
           <template v-slot:append>
             <v-menu top :offset-y="true">
               <template v-slot:activator="{ on }">
@@ -16,7 +16,7 @@
               </v-list>
             </v-menu>
           </template>
-        </v-text-field>
+        </v-textarea>
 
         <!-- <v-file-input
           id="file"
@@ -43,7 +43,7 @@
         <!-- <p class="text-danger" v-if="errorText">{{ errorText }}</p> -->
       </div>
 
-      <button class="btn btn-primary" type="submit" name="action">Submit</button>
+      <v-btn class="mx-2" color="teal" type="submit" name="action" fab dark> <v-icon> mdi-send </v-icon> </v-btn>
     </form>
   </div>
 </template>

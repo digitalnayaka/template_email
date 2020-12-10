@@ -27,6 +27,7 @@
       <v-col cols="12" sm="6">
         <v-list>
           <v-list-item>
+            
             <v-list-item-avatar tile size="70">
               <v-img
                 src="/img/profile.png"
@@ -58,8 +59,8 @@
 
         <div class="ma-2 text-center" v-if="point == 0">
           <div>
-            Bagaimana pengalaman Anda berbelanja di
-            <b> {{ item.review.app_user_name_penjual }} </b> ini?
+            Berikan penilaian pada:
+            <b> {{ item.review.app_user_name_penjual }} </b>
           </div>
 
           <v-item-group v-model="point" class="d-flex justify-center">
@@ -115,7 +116,7 @@
               </v-list-item-title>
 
               <v-list-item-subtitle v-if="rating == 0">
-                Belum diulas
+               Berikan Ulasan
               </v-list-item-subtitle>
 
               <v-list-item-subtitle class="d-inline-flex" v-else>
@@ -183,7 +184,7 @@
                 ></star-rating>
 
                 <div class="text-caption">
-                  <div v-if="rating == 0">Bagaimana kualitas produk ini?</div>
+                  <div v-if="rating == 0">Bantu pembeli lain dengan bagikan pengalamanmu</div>
                   <div v-if="rating == 1">Tidak Memuaskan</div>
                   <div v-if="rating == 2">Kurang Memuaskan</div>
                   <div v-if="rating == 3">Cukup Memuaskan</div>
@@ -249,7 +250,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn color="red" outlined dark @click="selected = null"
+            <v-btn color="teal" outlined dark @click="selected = null"
               >Kembali</v-btn
             >
 

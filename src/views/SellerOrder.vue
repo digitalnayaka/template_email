@@ -16,6 +16,7 @@
       show-arrows
     >
       <v-tab>Tawar Bersama</v-tab>
+    
     </v-tabs>
 
     <v-tabs-items v-model="tab" class="pa-4">
@@ -96,8 +97,9 @@
                 {{ item.pembayaran_status }}
               </div>
             </v-col>
+           
           </v-row>
-
+  <h3 v-if="orders.length == 0">Semua produk telah diulas</h3>
           <v-divider></v-divider>
 
           <v-row dense align="center">

@@ -108,7 +108,7 @@
 
         <v-list-item>
           <v-list-item-avatar tile size="80">
-            <v-img src="/img/tiket.png"></v-img>
+            <v-img src="/img/icons/ic_tiket.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>

@@ -12,9 +12,12 @@
     <v-container fluid>
       <v-form ref="form" v-model="valid">
         <div align="center">
-          <v-card :width="phoneDisplay ? 600 : 330" class="pa-5">
+          <v-card :width="phoneDisplay ? 800 : 400" class="pa-5" color="teal lighten-5">
             <div v-if="phoneDisplay">
+               <v-img src="/img/simotor_logo.webp" width="200" contain></v-img>
               <h2>Daftarkan diri Anda</h2>
+               <v-img src="/img/icons/people2.webp" width="200" height="200" contain></v-img>
+               <br/>
               <v-text-field
                 v-model="name"
                 :rules="nameRules"
@@ -28,7 +31,7 @@
               <v-text-field
                 v-model="phone"
                 :rules="phoneRules"
-                label="Phone Number"
+                label="Nomor Ponsel"
                 prepend-inner-icon="mdi-phone"
                 outlined
                 v-mask="mask"
@@ -37,10 +40,10 @@
               <v-card-subtitle>
                 Dengan mendaftar, Anda telah menyetujui
                 <a
-                  href="http://simotor.id/#/syaratketentuan/"
+                  href="https://simotor.id/syarat-ketentuan"
                   target="_new"
                 >syarat ketentuan</a> dan
-                <a href="http://simotor.id/#/kebijakan/" target="_new">kebijakan privasi SiMotor</a>
+                <a href="https://simotor.id/kebijakan_privasi" target="_new">kebijakan privasi SiMotor</a>
               </v-card-subtitle>
             </div>
 

@@ -23,7 +23,7 @@
 
       <div class="card">
         <div class="card-body">
-          <p class="nomessages text-secondary" v-if="messages.length == 0">[No messages yet!]</p>
+          <p class="nomessages text-secondary" v-if="messages.length == 0">Belum ada pesan masuk</p>
 
           <div class="messages" v-chat-scroll="{always: false, smooth: true}">
             <v-card
