@@ -2,7 +2,14 @@
   <div class="container" style="margin-bottom: 30px">
     <form @submit.prevent="createMessage" enctype="multipart/form-data">
       <div class="form-group">
-        <v-textarea outlined shaped label="Tuliskan pesan..." v-model="newMessage">
+        <v-textarea
+          outlined
+          shaped
+          label="Tuliskan pesan..."
+          v-model="newMessage"
+          auto-grow
+          rows="1"
+        >
           <template v-slot:append>
             <v-menu top :offset-y="true">
               <template v-slot:activator="{ on }">
@@ -18,13 +25,6 @@
           </template>
         </v-textarea>
 
-        <!-- <v-file-input
-          id="file"
-          label="File input"
-          style="display:none"
-          v-model="image"
-          @change="sendImage"
-        ></v-file-input>-->
         <image-uploader
           id="file"
           v-model="image"
@@ -38,12 +38,10 @@
           :autoRotate="true"
           outputFormat="blob"
           @input="sendImage"
-          style="display:none"
+          style="display: none"
         ></image-uploader>
         <!-- <p class="text-danger" v-if="errorText">{{ errorText }}</p> -->
       </div>
-
-      <v-btn class="mx-2" color="teal" type="submit" name="action" fab dark> <v-icon> mdi-send </v-icon> </v-btn>
     </form>
   </div>
 </template>
@@ -56,7 +54,7 @@ export default {
   name: "CreateMessage",
   props: ["name"],
   components: {
-    ImageUploader
+    ImageUploader,
   },
   data() {
     return {
@@ -64,7 +62,7 @@ export default {
       errorText: null,
       on: "",
       image: "",
-      hasImage: false
+      hasImage: false,
     };
   },
   methods: {
@@ -77,7 +75,7 @@ export default {
 
       this.axios
         .post("/user/v3/chat/text", formData, formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then(() => {
           this.newMessage = null;
@@ -95,17 +93,17 @@ export default {
 
       this.axios
         .post("/user/v3/chat/image", formData, formData, {
-          headers: { Authorization: "Bearer " + this.user.token }
+          headers: { Authorization: "Bearer " + this.user.token },
         })
-        .then(response => {
+        .then((response) => {
           console.log(response);
         });
-    }
+    },
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
-  }
+      user: "auth/user",
+    }),
+  },
 };
 </script>
