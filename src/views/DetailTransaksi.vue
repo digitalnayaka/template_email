@@ -605,20 +605,6 @@ export default {
           console.log(responses);
         });
     },
-    getBank() {
-      this.axios
-        .get("/master/v3/mst_bank", {
-          headers: { Authorization: "Bearer " + this.user.token },
-        })
-        .then((response) => {
-          let { data } = response.data;
-          this.banks = data;
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          console.log(responses);
-        });
-    },
     getIklan(id) {
       this.axios
         .get("/iklan/v3/iklan_tb_mokas", {
@@ -921,9 +907,6 @@ export default {
     this.getOrder();
     this.detailTolak();
     this.logStatus();
-  },
-  created() {
-    this.getBank();
   },
   computed: {
     ...mapGetters({
