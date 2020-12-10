@@ -9,7 +9,8 @@
     <h1 class="text-center">Detail Transaksi</h1>
 
     <v-card flat>
-      <v-card flat align="center" color="grey lighten-3">
+      <v-card flat align="center" color="deep-orange lighten-3
+">
         <v-avatar size="16" tile>
           <v-img src="/img/error.png"></v-img>
         </v-avatar>
@@ -247,11 +248,14 @@
           orders.id_mst_pembayaran_status == 10 && orders.id_penjual == user.id
         "
       >
-        Konfirmasi Penjualan
+        Konfirmasi
       </v-btn>
 
       <br />
-
+ <div align="center">
+    <h2 align="center">Petunjuk Pembayaran</h2>
+    <p> Transfer dapat dilakukan ke salah satu rekening berikut:</p>
+ </div>
       <div align="center">
         <div
           v-if="
@@ -413,7 +417,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="red darken-1" dark @click="dialogTolak = false">
-                  Cancel
+                  Batalkan
                 </v-btn>
                 <v-btn color="blue darken-1" dark @click="konfirmasiTolak">
                   Tolak
@@ -573,7 +577,7 @@ export default {
         });
     },
     konfirmasiPenjual() {
-      var r = confirm("Yakin ingin mengkonfirmasi penjualan berikut?");
+      var r = confirm("Lanjutkan untuk proses serah terima?");
       if (r == true) {
         let formData = new FormData();
 

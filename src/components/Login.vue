@@ -18,9 +18,10 @@
           <v-card max-width="800" class="pa-5 mt-16 rounded-lg" color="teal lighten-5">
             <div v-if="phoneDisplay">
               <v-img src="/img/simotor_logo.webp" width="200" contain></v-img>
-              <h3>Masuk dengan akun SiMotor</h3>
+             
                  <v-img src="/img/icons/people2.webp" width="200" height="200" contain></v-img>
-                 <br/>
+                 
+                  <h3>Masuk dengan akun SiMotor </h3>
               <v-text-field
                 v-model="phone"
                 :rules="phoneRules"
@@ -79,7 +80,7 @@
               ></v-text-field>
 
               <p v-if="countdown">
-                Tidak menerima kode? Tunggu
+                Belum menerima kode? Tunggu
                 <countdown
                   ref="countdown"
                   :time="60 * 1000"

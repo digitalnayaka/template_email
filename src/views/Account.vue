@@ -158,7 +158,7 @@ export default {
       {
         id: 1,
         icon: "mdi-account",
-        title: "Akun",
+        title: "Akun Saya",
         route: "/account/edit",
       },
       {
@@ -188,9 +188,9 @@ export default {
       {
         id: 5,
         icon: "mdi-help",
-        title: "Tentang Kami",
+        title: "Tentang SiMotor",
         items: [
-          { id: 11, title: "Tentang SiMotor", route: "/about" },
+          { id: 11, title: "Tentang ", route: "/about" },
           { id: 12, title: "Bantuan", route: "/bantuan" },
         ],
       },

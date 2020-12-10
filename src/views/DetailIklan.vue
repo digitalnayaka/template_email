@@ -766,18 +766,18 @@
 
                   <v-btn
                     color="red darken-1"
-                    text
+                   dark
                     @click="dialogKonfirmasi = false"
                   >
-                    Disagree
+                    Tidak
                   </v-btn>
 
                   <v-btn
-                    color="green darken-1"
-                    text
+                    color="primary"
+                    dark
                     @click="konfirmasiNonTiket()"
                   >
-                    Agree
+                   Ya, Setuju
                   </v-btn>
                 </v-card-actions>
               </div>

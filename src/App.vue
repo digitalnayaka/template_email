@@ -416,7 +416,7 @@
           <v-card width="150">
             <v-list dense>
               <v-list-item to="/chat-list">
-                <v-list-item-subtitle>Chat</v-list-item-subtitle>
+                <v-list-item-subtitle>Pesan</v-list-item-subtitle>
 
                 <v-list-item-action v-if="chats.length > 0">
                   <v-avatar color="red" size="25">
