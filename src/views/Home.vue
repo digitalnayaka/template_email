@@ -204,7 +204,7 @@
             <v-card
               flat
               class="rounded-lg"
-              :href="'https://blog.simotor.id/' + item.id"
+              :href="'https://blog.simotor.id/blog/' + item.id"
               target="_blank"
               width="300"
             >

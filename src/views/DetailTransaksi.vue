@@ -252,10 +252,10 @@
       </v-btn>
 
       <br />
- <div align="center">
+ <!-- <div align="center">
     <h2 align="center">Petunjuk Pembayaran</h2>
     <p> Transfer dapat dilakukan ke salah satu rekening berikut:</p>
- </div>
+ </div> -->
       <div align="center">
         <div
           v-if="
