@@ -159,10 +159,10 @@ export default {
     },
     bank: true,
     defaultItem: {},
-    formRules: [(v) => !!v || "Field harus diisi!"],
+    formRules: [(v) => !!v || "tidak boleh kosong"],
     rekeningRules: [
-      (v) => !!v || "Field is diisi",
-      (v) => /^\d+$/.test(v) || "Field harus angka",
+      (v) => !!v || "tidak boleh kosong",
+      (v) => /^\d+$/.test(v) || "harus diisi dengan angka",
     ],
     valid: true,
   }),

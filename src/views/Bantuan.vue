@@ -67,6 +67,16 @@
             </v-list-item-content>
           </v-list-item>
 
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>
+                <v-icon>mdi-instagram</v-icon>Instagram
+              </v-list-item-title>
+
+              <v-list-item-subtitle>simotor.id</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
           <v-list-item href="https://api.whatsapp.com/send?phone=628111873434">
             <v-list-item-content>
               <v-list-item-title>
