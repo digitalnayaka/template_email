@@ -274,7 +274,7 @@
                   <v-toolbar color="teal darken-3" dark>
                     <v-toolbar-title>Info Pemenang Iklan</v-toolbar-title>
 
-                    <div class="flex-grow-1"></div>
+                    <v-spacer></v-spacer>
 
                     <v-btn icon @click="dialogInfo = false">
                       <v-icon>mdi-close</v-icon>
@@ -610,7 +610,10 @@
                     !guest && user.id == item.IdAppUser ? "Anda" : item.IdUniq
                   }}
                 </span>
+
+                <v-icon v-if="item.IdTypeBid == 2">mdi-auto-upload</v-icon>
               </v-list-item-title>
+
               <v-list-item-subtitle>
                 {{ item.CreatedAt.toDate() | datediff }}
               </v-list-item-subtitle>
@@ -766,18 +769,14 @@
 
                   <v-btn
                     color="red darken-1"
-                   dark
+                    dark
                     @click="dialogKonfirmasi = false"
                   >
                     Tidak
                   </v-btn>
 
-                  <v-btn
-                    color="primary"
-                    dark
-                    @click="konfirmasiNonTiket()"
-                  >
-                   Ya, Setuju
+                  <v-btn color="primary" dark @click="konfirmasiNonTiket()">
+                    Ya, Setuju
                   </v-btn>
                 </v-card-actions>
               </div>
@@ -788,6 +787,30 @@
         <div v-if="ikutPenawaran">
           <flip-countdown :deadline="hits.tanggal_selesai"></flip-countdown>
 
+          <v-divider></v-divider>
+
+          <v-list>
+            <v-list-item class="text-center">
+              <v-list-item-content>
+                <v-list-item-title>Harga Awal</v-list-item-title>
+                <v-list-item-subtitle>
+                  Rp
+                  {{ Number(iklan.harga_awal).toLocaleString("id-ID") }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+
+              <v-divider vertical class="mx-2"></v-divider>
+
+              <v-list-item-content>
+                <v-list-item-title>Kelipatan Tawaran</v-list-item-title>
+                <v-list-item-subtitle>
+                  Rp
+                  {{ Number(iklan.kelipatan).toLocaleString("id-ID") }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+
           <v-tabs
             v-model="tab2"
             background-color="teal darken-2"
@@ -796,33 +819,62 @@
             show-arrows
             grow
           >
-            <v-tab>Auto Tawar</v-tab>
-            <v-tab>Manual Tawar</v-tab>
+            <v-tab>Tawar Manual</v-tab>
+            <v-tab>
+              <v-badge color="red" content="Aktif" v-if="isAuto != null"
+                >Tawar Otomatis</v-badge
+              >
+
+              <div v-else>Tawar Otomatis</div>
+            </v-tab>
           </v-tabs>
 
           <v-tabs-items v-model="tab2">
             <v-tab-item>
-              <v-container fluid>
-                <div class="text-center">
-                  <!-- <v-slider
-                    v-model="slider.val"
-                    :thumb-color="slider.color"
-                    :min="bid"
-                    :max="bid + 20000000"
-                    :step="iklan.kelipatan"
-                    hide-details
-                  >
-                    <template v-slot:append>
-                      <v-text-field
-                        v-model="slider.val"
-                        class="mt-0 pt-0"
-                        hide-details
-                        single-line
-                        style="width: 100px"
-                      ></v-text-field>
-                    </template>
-                  </v-slider> -->
+              <v-list dense>
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-btn icon @click="minus">
+                      <v-icon>mdi-minus</v-icon>
+                    </v-btn>
+                  </v-list-item-icon>
 
+                  <v-list-item-content align="center">
+                    <h2>Nominal Penawaran</h2>
+
+                    <h2>Rp {{ Number(bid).toLocaleString("id-ID") }}</h2>
+                  </v-list-item-content>
+
+                  <v-list-item-action>
+                    <v-btn icon @click="bid += iklan.kelipatan">
+                      <v-icon>mdi-plus</v-icon>
+                    </v-btn>
+                  </v-list-item-action>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-btn block dark color="teal" @click="bidding">
+                    Konfirmasi Penawaran
+                  </v-btn>
+                </v-list-item>
+              </v-list>
+            </v-tab-item>
+
+            <v-tab-item>
+              <v-container
+                fluid
+                class="text-center"
+                v-if="!KonfirmasiAuto && isAuto == null"
+              >
+                <h2>Mau coba fitur tawar otomatis?</h2>
+
+                <v-btn color="green" dark @click="KonfirmasiAuto = true">
+                  Mau donk
+                </v-btn>
+              </v-container>
+
+              <v-container fluid v-else>
+                <div class="text-center">
                   <div align="center">
                     <v-text-field
                       v-model="amountAuto"
@@ -841,15 +893,15 @@
                   <h2>Harga maksimal tawaran anda</h2>
 
                   <div class="d-flex align-center justify-center">
-                    <v-btn icon @click="minAuto()">
+                    <v-btn icon color="red" @click="minAuto()">
                       <v-icon>mdi-minus</v-icon>
                     </v-btn>
 
                     <h2 class="mx-2">
-                      Rp {{ amountAuto.toLocaleString("id-ID") }}
+                      Rp {{ Number(amountAuto).toLocaleString("id-ID") }}
                     </h2>
 
-                    <v-btn icon @click="addAuto()">
+                    <v-btn icon color="green" @click="addAuto()">
                       <v-icon>mdi-plus</v-icon>
                     </v-btn>
                   </div>
@@ -864,7 +916,12 @@
                   </v-btn>
 
                   <div v-else>
-                    <v-btn color="teal" dark @click="autoBid" class="mx-2">
+                    <v-btn
+                      color="teal"
+                      @click="autoBid"
+                      class="white--text mx-2"
+                      :disabled="isAuto.max_bid == minBid ? false : true"
+                    >
                       Ubah Nominal
                     </v-btn>
 
@@ -882,60 +939,6 @@
                   iklan Tawar Bersama
                 </div>
               </v-container>
-            </v-tab-item>
-
-            <v-tab-item>
-              <v-list>
-                <v-list-item class="text-center">
-                  <v-list-item-content>
-                    <v-list-item-title>Harga Awal</v-list-item-title>
-                    <v-list-item-subtitle>
-                      Rp
-                      {{ Number(iklan.harga_awal).toLocaleString("id-ID") }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-
-                  <v-divider vertical class="mx-2"></v-divider>
-
-                  <v-list-item-content>
-                    <v-list-item-title>Kelipatan Tawaran</v-list-item-title>
-                    <v-list-item-subtitle>
-                      Rp
-                      {{ Number(iklan.kelipatan).toLocaleString("id-ID") }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-btn icon @click="minus">
-                      <v-icon>mdi-minus</v-icon>
-                    </v-btn>
-                  </v-list-item-icon>
-
-                  <v-list-item-content align="center">
-                    <v-list-item-subtitle>
-                      Nominal Penawaran
-                    </v-list-item-subtitle>
-
-                    <v-list-item-title class="font-weight-black">
-                      Rp {{ Number(bid).toLocaleString("id-ID") }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-
-                  <v-list-item-action>
-                    <v-btn icon @click="bid += iklan.kelipatan">
-                      <v-icon>mdi-plus</v-icon>
-                    </v-btn>
-                  </v-list-item-action>
-                </v-list-item>
-
-                <v-list-item>
-                  <v-btn block dark color="teal" @click="bidding">
-                    Konfirmasi Penawaran
-                  </v-btn>
-                </v-list-item>
-              </v-list>
             </v-tab-item>
           </v-tabs-items>
         </div>
@@ -1682,9 +1685,10 @@ export default {
           let { data } = response.data;
           if (data.length == 0) {
             this.isAuto = null;
+            this.amountAuto = this.bid;
           } else {
             this.isAuto = data[0];
-            this.amountAuto = this.isAuto.max_bid;
+            this.amountAuto = this.bid;
           }
         })
         .catch((error) => {

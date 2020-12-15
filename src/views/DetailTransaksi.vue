@@ -65,12 +65,24 @@
                 </v-list-item-title>
               </v-list-item>
 
-              <v-list-item v-if="orders.id_mst_pembayaran_status == 6">
+              <v-list-item
+                v-if="
+                  orders.id_mst_pembayaran_status == 6 ||
+                  orders.id_mst_pembayaran_status == 11 ||
+                  orders.id_mst_pembayaran_status == 12
+                "
+              >
                 <v-list-item-title>Alasan Ditolak:</v-list-item-title>
                 <v-list-item-title>{{ orders.note }}</v-list-item-title>
               </v-list-item>
 
-              <v-list-item v-if="orders.id_mst_pembayaran_note == 1">
+              <v-list-item
+                v-if="
+                  orders.id_mst_pembayaran_status == 6 ||
+                  orders.id_mst_pembayaran_status == 11 ||
+                  orders.id_mst_pembayaran_status == 12
+                "
+              >
                 <v-list-item-title>Detail Alasan:</v-list-item-title>
                 <v-list-item-title class="font-weight-black red--text">
                   {{ orders.note_detail }}
@@ -181,7 +193,7 @@
         <v-col cols="12" sm="6" md="6">
           <h2 class="text-center">Informasi Produk</h2>
 
-          <v-card :height="orders.id_mst_order_status == 3 ? 310 : 310">
+          <v-card :height="orders.id_mst_order_status == 3 ? 390 : 310">
             <v-list>
               <v-list-item align="center">
                 <v-list-item-avatar tile size="100">
@@ -232,7 +244,8 @@
                 dark
                 @click="formPenawaran"
                 v-if="orders.id_mst_order_status != 3"
-                >Lihat Form Penawaran</v-btn
+              >
+                Lihat Form Penawaran</v-btn
               >
 
               <v-dialog v-model="dialog">
@@ -395,6 +408,7 @@
                   <v-icon>mdi-close</v-icon>
                 </v-btn>
               </v-toolbar>
+
               <v-container fluid>
                 Apakah Anda yakin ingin melakukan konfirmasi pembayaran berikut?
               </v-container>
@@ -403,9 +417,11 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
+
                 <v-btn color="red" dark @click="dialogTolak = true">
                   Tolak
                 </v-btn>
+
                 <v-btn color="primary" dark @click="konfirmasi">
                   Konfirmasi
                 </v-btn>
@@ -417,7 +433,9 @@
             <v-card>
               <v-toolbar dark color="teal darken-3">
                 <v-toolbar-title>Tolak Serah Terima</v-toolbar-title>
+
                 <v-spacer></v-spacer>
+
                 <v-btn icon @click="dialogTolak = false">
                   <v-icon>mdi-close</v-icon>
                 </v-btn>
@@ -493,7 +511,7 @@
             block
             color="red"
             dark
-            @click="batalkan"
+            @click="dialogBatal = true"
             v-if="
               orders.id_mst_pembayaran_status != 2 &&
               orders.id_mst_pembayaran_status != 3 &&
@@ -502,6 +520,47 @@
           >
             Batalkan
           </v-btn>
+
+          <v-dialog v-model="dialogBatal" persistent max-width="500px">
+            <v-card>
+              <v-toolbar dark color="teal darken-3">
+                <v-toolbar-title>Batal Pembayaran</v-toolbar-title>
+
+                <v-spacer></v-spacer>
+
+                <v-btn icon @click="dialogBatal = false">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </v-toolbar>
+
+              <v-select
+                v-model="note"
+                :items="noteTolak"
+                item-text="note"
+                item-value="id"
+                label="Alasan Tolak (Wajib Dipilih)"
+                solo
+                class="px-2 pt-2"
+              ></v-select>
+
+              <v-card-text v-if="note == 1">
+                <v-textarea
+                  label="Alasan Menolak"
+                  v-model="noteDetail"
+                  rows="1"
+                  auto-grow
+                ></v-textarea>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn color="blue darken-1" dark @click="batalkan">
+                  Batalkan
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </div>
       </div>
     </v-card>
@@ -538,6 +597,7 @@ export default {
     dialogKonfirmasi: false,
     dialogTolak: false,
     dialogTerima: false,
+    dialogBatal: false,
     note: "",
     noteTolak: [],
     noteDetail: "",
@@ -567,6 +627,7 @@ export default {
 
           this.getIklan(this.orders.id_iklan);
           this.getRekening();
+          this.logStatus();
 
           if (
             this.orders.id_mst_pembayaran_status == 4 ||
@@ -838,6 +899,7 @@ export default {
             });
             this.dialogKonfirmasi = false;
             this.dialogTolak = false;
+            this.getOrder();
           })
           .catch((error) => {
             let responses = error.response.data;
@@ -852,8 +914,8 @@ export default {
 
         formData.append("id", this.orders.id);
         formData.append("id_app_user", this.user.id);
-        formData.append("id_mst_pembayaran_note", 1);
-        formData.append("note_detail", "Membatalkan Tiket");
+        formData.append("id_mst_pembayaran_note", this.note);
+        formData.append("note_detail", this.noteDetail);
 
         this.axios
           .post("/transaksi/v3/batalkan_pembelian", formData, {

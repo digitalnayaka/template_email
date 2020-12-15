@@ -45,7 +45,7 @@
                 </div>
               </v-col>
 
-              <v-col cols="12" sm="10" class="d-flex" color="">
+              <v-col cols="12" sm="10" class="d-flex">
                 <v-divider vertical></v-divider>
 
                 <div class="flex-column flex-grow-1">
