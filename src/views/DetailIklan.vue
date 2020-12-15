@@ -821,8 +821,8 @@
           >
             <v-tab>Tawar Manual</v-tab>
             <v-tab>
-              <v-badge color="red" content="Aktif" v-if="isAuto != null"
-                >Tawar Otomatis</v-badge
+              <v-badge color="green" content="Aktif" v-if="isAuto != null"
+                >Auto Tawar</v-badge
               >
 
               <div v-else>Tawar Otomatis</div>
@@ -866,10 +866,10 @@
                 class="text-center"
                 v-if="!KonfirmasiAuto && isAuto == null"
               >
-                <h2>Mau coba fitur tawar otomatis?</h2>
+                <h2>Setuju untuk menggunakan fitur Auto Tawar?</h2>
 
                 <v-btn color="green" dark @click="KonfirmasiAuto = true">
-                  Mau donk
+                  Ya, Setuju
                 </v-btn>
               </v-container>
 
@@ -890,7 +890,7 @@
                     ></v-text-field>
                   </div>
 
-                  <h2>Harga maksimal tawaran anda</h2>
+                  <h2>Harga maksimal tawaran anda:</h2>
 
                   <div class="d-flex align-center justify-center">
                     <v-btn icon color="red" @click="minAuto()">

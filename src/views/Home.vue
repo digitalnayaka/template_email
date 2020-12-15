@@ -7,7 +7,7 @@
     </v-app-bar>
 
     <v-row class="d-flex align-center">
-      <v-col cols="12" sm="6" align="center">
+      <v-col cols="12"  align="center">
         <v-carousel cycle hide-delimiters height="300">
           <v-carousel-item
             v-for="(item, index) in banners"
@@ -23,10 +23,9 @@
             class="rounded-lg"
           ></v-carousel-item>
         </v-carousel>
-      </v-col>
-
-      <v-col cols="12" sm="6" align="center">
-        <v-img src="/img/mobilehand.webp" width="92" contain></v-img>
+        <br/>
+        <div>
+          <v-img src="/img/mobilehand.webp" width="92" contain></v-img>
 
         <h2>What's on SiMotor?</h2>
 
@@ -35,6 +34,7 @@
           icon="mdi-motorbike"
           border="right"
           prominent
+          max-width="1000"
         >
           <div class="text-justify">
             SiMotor adalah platform atau sarana bertemunya penjual dan pembeli
@@ -59,6 +59,11 @@
             ></v-img>
           </a>
         </v-container>
+        </div>
+      </v-col>
+
+      <v-col cols="12" sm="6" align="center">
+      
       </v-col>
     </v-row>
 

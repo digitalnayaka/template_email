@@ -147,7 +147,7 @@
                 <v-col cols="12" :sm="selectedIklan == 3 ? 12 : 8">
                   <v-textarea
                     v-model="deskripsi_iklan"
-                    label="Deksripsi Iklan"
+                    label="Deskripsikan Iklan Anda"
                     outlined
                     dense
                     auto-grow
