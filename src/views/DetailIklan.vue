@@ -919,7 +919,8 @@
                     <v-btn
                       color="teal"
                       @click="autoBid"
-                      dark
+                      class="white--text mx-2"
+                      :disabled="isAuto.max_bid >= liveBid[0].Bid ? true : false"
                     >
                       Ubah Nominal
                     </v-btn>
@@ -1212,12 +1213,11 @@ export default {
             this.penawaran =
               Number(this.iklan.harga_awal) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
-            this.amountAuto = this.penawaran;
           } else {
             this.penawaran = Number(this.minBid) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
-            this.amountAuto = this.penawaran;
           }
+          this.getAutoBid();
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -1687,7 +1687,7 @@ export default {
             this.amountAuto = this.bid;
           } else {
             this.isAuto = data[0];
-            this.amountAuto = this.bid;
+            this.amountAuto = this.isAuto.max_bid;
           }
         })
         .catch((error) => {
@@ -1779,7 +1779,7 @@ export default {
     this.getDtlIklan();
     this.GetBid();
     this.getFavourite();
-    this.getAutoBid();
+    
     if (!this.guest) {
       this.getOrder();
     }
