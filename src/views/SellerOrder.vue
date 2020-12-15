@@ -16,7 +16,6 @@
       show-arrows
     >
       <v-tab>Tawar Bersama</v-tab>
-    
     </v-tabs>
 
     <v-tabs-items v-model="tab" class="pa-4">
@@ -72,7 +71,10 @@
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 3">
+              <div
+                class="red--text font-weight-bold"
+                v-if="item.id_mst_pembayaran_status == 3"
+              >
                 {{ item.pembayaran_status }}
               </div>
               <div
@@ -81,7 +83,10 @@
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 6">
+              <div
+                class="red--text font-weight-bold"
+                v-if="item.id_mst_pembayaran_status == 6"
+              >
                 {{ item.pembayaran_status }}
               </div>
               <div
@@ -90,16 +95,21 @@
               >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 11">
+              <div
+                class="red--text font-weight-bold"
+                v-if="item.id_mst_pembayaran_status == 11"
+              >
                 {{ item.pembayaran_status }}
               </div>
-              <div class="red--text font-weight-bold" v-if="item.id_mst_pembayaran_status == 12">
+              <div
+                class="red--text font-weight-bold"
+                v-if="item.id_mst_pembayaran_status == 12"
+              >
                 {{ item.pembayaran_status }}
               </div>
             </v-col>
-           
           </v-row>
-  <h3 v-if="orders.length == 0">Semua produk telah diulas</h3>
+
           <v-divider></v-divider>
 
           <v-row dense align="center">
@@ -145,15 +155,20 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              small
-              color="teal"
-              dark
-              :to="'/chat/' + item.id_pembeli"
-            >
+            <v-btn small color="teal" dark :to="'/chat/' + item.id_pembeli">
               Hubungi Pembeli
             </v-btn>
           </v-card-actions>
+        </v-card>
+
+        <v-card
+          class="d-flex align-center justify-center"
+          flat
+          height="100"
+          tile
+          v-if="orders.length == 0"
+        >
+          <h2>Tidak ada transaksi</h2>
         </v-card>
 
         <v-pagination

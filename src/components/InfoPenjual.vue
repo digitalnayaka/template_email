@@ -34,13 +34,19 @@
 
         <v-divider class="my-4"></v-divider>
 
-        <h3>Slogan</h3>
+        <div class="d-flex align-center">
+          <h3 class="mr-auto">Slogan</h3>
 
-        <div v-if="!ubahSlogan">
-          {{ slogan }}
-          <a href="javascript:void(0)" @click="ubahSlogan = true">
-            <!-- <v-icon>mdi-pencil</v-icon> -->
-            <v-btn small color="teal" dark> <v-icon>mdi-plus</v-icon> Tambah Slogan </v-btn>
+          <v-btn small color="teal" dark @click="ubahSlogan = true" v-if="user.slogan == null">
+            <v-icon left>mdi-plus</v-icon> Tambah Slogan
+          </v-btn>
+        </div>
+
+        <div class="d-flex align-center" v-if="!ubahSlogan">
+          <div>{{ slogan }}</div>
+
+          <a href="javascript:void(0)" @click="ubahSlogan = true" v-if="user.slogan != null">
+            <v-icon>mdi-pencil</v-icon>
           </a>
         </div>
 
@@ -72,14 +78,15 @@
 
         <div class="d-flex flex-wrap align-center">
           <h3 class="mr-auto">Catatan</h3>
-          
+
           <v-btn
             color="teal"
             dark
             small
             class="mx-2"
             @click="openDialog('Tambah Catatan')"
-          > <v-icon>mdi-plus</v-icon> 
+          >
+            <v-icon left>mdi-plus</v-icon>
             Tambah Catatan
           </v-btn>
 
@@ -164,7 +171,7 @@
             class="mx-2"
             @click="openDialog('Tambah Kebijakan')"
           >
-          <v-icon>mdi-plus</v-icon> 
+            <v-icon left>mdi-plus</v-icon>
             Tambah Kebijakan
           </v-btn>
         </div>

@@ -4,10 +4,12 @@
       <v-btn icon dark @click.native="close">
         <v-icon>mdi-close</v-icon>
       </v-btn>
+
       <v-toolbar-title>
         <a href="/">
-          <v-img src="/img/logo-tulisan.webp" width="200" contain></v-img> </a
-      ></v-toolbar-title>
+          <v-img src="/img/logo-tulisan.webp" width="200" contain></v-img>
+        </a>
+      </v-toolbar-title>
     </v-toolbar>
 
     <v-divider></v-divider>
@@ -15,13 +17,23 @@
     <v-container fluid>
       <v-form ref="form" v-model="valid">
         <div align="center">
-          <v-card max-width="800" class="pa-5 mt-16 rounded-lg" color="teal lighten-5">
+          <v-card
+            max-width="800"
+            class="pa-5 mt-16 rounded-lg"
+            color="teal lighten-5"
+          >
             <div v-if="phoneDisplay">
               <v-img src="/img/simotor_logo.webp" width="200" contain></v-img>
-             
-                 <v-img src="/img/icons/people2.webp" width="200" height="200" contain></v-img>
-                 
-                  <h3>Masuk dengan akun SiMotor </h3>
+
+              <v-img
+                src="/img/icons/people2.webp"
+                width="200"
+                height="200"
+                contain
+              ></v-img>
+
+              <h3>Masuk dengan akun SiMotor</h3>
+
               <v-text-field
                 v-model="phone"
                 :rules="phoneRules"
@@ -86,9 +98,9 @@
                   :time="60 * 1000"
                   @end="countdown = !countdown"
                 >
-                  <template slot-scope="props"
-                    >{{ props.seconds }} Detik.</template
-                  >
+                  <template slot-scope="props">
+                    {{ props.seconds }} Detik.
+                  </template>
                 </countdown>
               </p>
 
@@ -97,9 +109,9 @@
                 <a @click="resend">Resend</a>
               </p>
 
-              <v-btn block color="primary" @click="login" :disabled="!valid"
-                >Masukkan kode OTP</v-btn
-              >
+              <v-btn block color="primary" @click="login" :disabled="!valid">
+                Masukkan kode OTP
+              </v-btn>
 
               <br />
 

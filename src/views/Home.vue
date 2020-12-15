@@ -143,7 +143,7 @@
         </div>
 
         <div v-else>
-          <p class="display-2">Belum Ada iklan</p>
+          <h3>Belum Ada iklan</h3>
         </div>
 
         <v-btn
@@ -186,7 +186,7 @@
     </v-row>
 
     <v-row justify="center" v-else>
-      <p class="display-2">Belum ada iklan tawar bersama</p>
+      <h3>Belum ada iklan tawar bersama</h3>
     </v-row>
 
     <v-divider class="my-2"></v-divider>

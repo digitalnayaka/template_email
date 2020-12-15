@@ -9,8 +9,12 @@
     <h1 class="text-center">Detail Transaksi</h1>
 
     <v-card flat>
-      <v-card flat align="center" color="deep-orange lighten-3
-">
+      <v-card
+        flat
+        align="center"
+        color="deep-orange lighten-3
+"
+      >
         <v-avatar size="16" tile>
           <v-img src="/img/error.png"></v-img>
         </v-avatar>
@@ -252,15 +256,39 @@
       </v-btn>
 
       <br />
- <!-- <div align="center">
-    <h2 align="center">Petunjuk Pembayaran</h2>
-    <p> Transfer dapat dilakukan ke salah satu rekening berikut:</p>
- </div> -->
+
+      <div align="center" v-if="orders.id_mst_pembayaran_status == 1">
+        <v-card>
+        <h2 align="center">Petunjuk Pembayaran</h2>
+        <p>Transfer dapat dilakukan ke salah satu rekening berikut:</p>
+
+        <v-list v-if="accounts.length > 0" >
+          <v-list-item v-for="item in accounts" :key="item.id">
+            <v-list-item-content>
+               <v-list-item-avatar tile size="30" align="center">
+              <v-img :src="getImage(item.foto)" contain></v-img>
+            </v-list-item-avatar>
+              <v-list-item-title>{{ item.bank_name }}</v-list-item-title>
+
+              <v-list-item-subtitle>
+                {{ item.nomor_rekening }}
+              </v-list-item-subtitle>
+
+              <v-list-item-subtitle>
+                {{ item.nama_rekening }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        </v-card>
+      </div>
+
+      <v-divider></v-divider>
+
       <div align="center">
         <div
           v-if="
             orders.id_mst_order_status != 3 &&
-            
             orders.id_mst_pembayaran_status != 10
           "
         >
@@ -457,7 +485,7 @@
               orders.id_mst_pembayaran_status == 11)
           "
         >
-         Berikan Ulasan
+          Berikan Ulasan
         </v-btn>
 
         <div v-if="orders.id_mst_order_status != 3">
@@ -514,6 +542,7 @@ export default {
     noteTolak: [],
     noteDetail: "",
     log: [],
+    accounts: [],
   }),
   methods: {
     ...mapActions({
@@ -537,6 +566,7 @@ export default {
             .format("YYYY-MM-DD HH:mm:ss");
 
           this.getIklan(this.orders.id_iklan);
+          this.getRekening();
 
           if (
             this.orders.id_mst_pembayaran_status == 4 ||
@@ -558,32 +588,18 @@ export default {
           console.log(responses);
         });
     },
-   getRekening() {
+    getRekening() {
       this.axios
         .get("/user/v3/user/rekening", {
           params: {
-            id_app_user: this.user.id,
-            limit: 999,
+            id_app_user: this.orders.id_penjual,
+            limit: 5,
           },
           headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
           this.accounts = data;
-        })
-        .catch((error) => {
-          let responses = error.response.data;
-          console.log(responses);
-        });
-    },
-    getBank() {
-      this.axios
-        .get("/master/v3/mst_bank", {
-          headers: { Authorization: "Bearer " + this.user.token },
-        })
-        .then((response) => {
-          let { data } = response.data;
-          this.banks = data;
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -892,11 +908,6 @@ export default {
     this.getOrder();
     this.detailTolak();
     this.logStatus();
-   
-  },
-  created() {
-    this.getRekening();
-    this.getBank();
   },
   computed: {
     ...mapGetters({

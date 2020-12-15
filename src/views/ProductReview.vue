@@ -31,7 +31,15 @@
             <list-review :item="item" :utc="utc" :timezone="timezone" />
           </v-card>
 
-          <h3 v-if="review.length == 0">Semua produk telah diulas</h3>
+          <v-card
+            class="d-flex align-center justify-center"
+            flat
+            height="100"
+            tile
+            v-if="review.length == 0"
+          >
+            <h2>Belum ada ulasan</h2>
+          </v-card>
         </v-tab-item>
 
         <v-tab-item>
