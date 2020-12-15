@@ -919,8 +919,7 @@
                     <v-btn
                       color="teal"
                       @click="autoBid"
-                      class="white--text mx-2"
-                      :disabled="isAuto.max_bid == minBid ? false : true"
+                      dark
                     >
                       Ubah Nominal
                     </v-btn>
