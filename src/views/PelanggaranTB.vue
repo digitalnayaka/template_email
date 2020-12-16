@@ -19,7 +19,7 @@
           <br />
         </v-card>
 
-        <v-card color="#A5B8D3">
+        <v-card >
           <v-container fluid>
             <div class="row mb-5 layout justify-center">
               <div class="col-md-10 text-justify white-gradient">

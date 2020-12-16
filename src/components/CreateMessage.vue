@@ -42,6 +42,7 @@
         ></image-uploader>
         <!-- <p class="text-danger" v-if="errorText">{{ errorText }}</p> -->
       </div>
+       <button class="btn btn-primary" type="submit" name="action"> kirim</button>
     </form>
   </div>
 </template>

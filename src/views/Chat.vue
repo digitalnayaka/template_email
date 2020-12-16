@@ -16,34 +16,41 @@
 
       <v-card dense flat color="grey lighten-2" v-if="pemenang == 'true'">
         <div>
-          User berikut adalah pemenang Tawar Bersama pada iklan yang Anda pasang. Selesaikan status user sebagai pemenang?
+          User berikut adalah pemenang Tawar Bersama pada iklan yang Anda
+          pasang. Selesaikan status user sebagai pemenang?
           <v-btn small dark @click="pinPemenang" color="teal">Selesai</v-btn>
         </div>
       </v-card>
 
       <div class="card">
         <div class="card-body">
-          <p class="nomessages text-secondary" v-if="messages.length == 0">Belum ada pesan masuk</p>
+          <p class="nomessages text-secondary" v-if="messages.length == 0">
+            Belum ada pesan masuk
+          </p>
 
-          <div class="messages" v-chat-scroll="{always: false, smooth: true}">
+          <div class="messages" v-chat-scroll="{ always: false, smooth: true }">
             <v-card
-              v-for="(item,index) in messages"
+              v-for="(item, index) in messages"
               :key="index"
               :align="item.From == user.id ? 'right' : 'left'"
-              :color="item.From == user.id ? 'teal lighten-5' : 'grey lighten-5'"
+              :color="
+                item.From == user.id ? 'teal lighten-5' : 'grey lighten-5'
+              "
               class="pa-2 ma-2"
               flat
             >
-              <span class="text-info">[{{ item.From == user.id ? user.nama : appuser.nama}}]:</span>
-
-              <span v-if="item.Type == 'text'">{{item.Message}}</span>
+              <span class="text-info"
+                >{{ item.From == user.id ? user.nama : appuser.nama }}:</span
+              >
+              <br />
+              <span v-if="item.Type == 'text'">{{ item.Message }}</span>
 
               <span v-if="item.Type == 'iklan'">
                 <v-card
                   class="d-inline-block mx-auto"
                   flat
                   v-if="item.Message.length > 0"
-                  :to="'/detail_iklan/' + item.Message[0].id"
+                  :to="'/iklan/' + item.Message[0].id"
                 >
                   <v-container fluid>
                     <v-row>
@@ -58,15 +65,22 @@
 
                       <v-col cols="auto" class="text-start pl-0">
                         <v-row class="flex-column ma-0">
-                          <v-col class="pa-0 font-weight-bold">{{item.Message[0].deskripsi}}</v-col>
+                          <v-col class="pa-0 font-weight-bold">{{
+                            item.Message[0].deskripsi
+                          }}</v-col>
 
-                          <v-col
-                            class="pa-0"
-                          >{{item.Message[0].mst_iklan_jenis}} {{item.Message[0].mst_iklan_type}} {{item.Message[0].mst_type_tb}}</v-col>
+                          <v-col class="pa-0"
+                            >{{ item.Message[0].mst_iklan_jenis }}
+                            {{ item.Message[0].mst_iklan_type }}
+                            {{ item.Message[0].mst_type_tb }}</v-col
+                          >
 
-                          <v-col
-                            class="pa-0"
-                          >Rp {{item.Message[0].harga_awal.toLocaleString("id-ID")}}</v-col>
+                          <v-col class="pa-0"
+                            >Rp
+                            {{
+                              item.Message[0].harga_awal.toLocaleString("id-ID")
+                            }}</v-col
+                          >
                         </v-row>
                       </v-col>
                     </v-row>
@@ -84,8 +98,7 @@
               </span>
 
               <span class="text-secondary time">
-                {{item.Time.toDate()
-                .toLocaleString("id-ID")}}
+                {{ item.Time.toDate().toLocaleString("id-ID") }}
               </span>
             </v-card>
           </div>
@@ -115,33 +128,33 @@ export default {
   name: "Chat",
   props: ["name"],
   components: {
-    CreateMessage
+    CreateMessage,
   },
   data() {
     return {
       appuser: "",
       messages: [],
       pemenang: this.$route.query.pemenang,
-      selesai: []
+      selesai: [],
     };
   },
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
     }),
     getUser() {
       this.axios
         .get("/user/v3/user", {
           params: {
             id: this.$route.params.id,
-            limit: 1
-          }
+            limit: 1,
+          },
         })
-        .then(response => {
+        .then((response) => {
           let { data } = response.data;
           this.appuser = data[0];
         })
-        .catch(error => {
+        .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
           if (error.response.status == 403) {
@@ -160,18 +173,18 @@ export default {
         .doc(String(this.$route.params.id))
         .collection("messages")
         .orderBy("Time", "asc")
-        .onSnapshot(querySnapshot => {
+        .onSnapshot((querySnapshot) => {
           let messages = [];
-          querySnapshot.forEach(doc => {
+          querySnapshot.forEach((doc) => {
             let iklan = [];
             if (doc.data().Type == "iklan") {
               this.axios
                 .get("/iklan/v3/iklan_tb_mokas", {
                   params: {
-                    id: doc.data().Iklan
-                  }
+                    id: doc.data().Iklan,
+                  },
                 })
-                .then(response => {
+                .then((response) => {
                   let { data } = response.data;
                   iklan.push(data);
                 });
@@ -183,7 +196,7 @@ export default {
               Receive: doc.data().Receive,
               Seen: doc.data().Seen,
               Time: doc.data().Time,
-              Type: doc.data().Type
+              Type: doc.data().Type,
             };
             messages.push(dataa);
           });
@@ -197,9 +210,9 @@ export default {
       formData.append("receive", this.$route.params.id);
 
       this.axios.post("/user/v3/chat/pin_pemenang", formData, {
-        headers: { Authorization: "Bearer " + this.user.token }
+        headers: { Authorization: "Bearer " + this.user.token },
       });
-    }
+    },
   },
   async mounted() {
     this.getUser();
@@ -207,9 +220,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "auth/user"
-    })
-  }
+      user: "auth/user",
+    }),
+  },
 };
 </script>
 

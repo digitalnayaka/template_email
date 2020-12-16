@@ -35,7 +35,7 @@
         <div class="mx-2">
           <h4 v-if="pengguna.id_type_pinalti == 0">
             Akun Anda tidak pernah melakukan pembatalan transaksi. Hindari
-            pembatalan transaksi agar akun anda tidak diblokir
+            pembatalan transaksi agar akun anda tidak diblokir.
           </h4>
 
           <h4 v-if="pengguna.id_type_pinalti == 1">
@@ -76,7 +76,7 @@
           <strong> Melakukan 1x pembatalan transaksi </strong>
           <p>
             Anda melakukan pembatalan transaksi 1x yang mengakibatkan Tiket anda
-            hangus
+            hangus.
           </p>
         </li>
 
@@ -84,7 +84,7 @@
           <strong> Melakukan 2x pembatalan transaksi </strong>
           <p>
             Anda melakukan pembatalan transaksi 2x yang mengakibatkan akun anda
-            di blokir selama 14 hari
+            di blokir selama 14 hari.
           </p>
         </li>
 
@@ -92,10 +92,14 @@
           <strong> Melakukan 3x pembatalan transaksi </strong>
           <p>
             Anda melakukan pembatalan transaksi 3x yang mengakibatkan akun anda
-            di blokir selamanya
+            di blokir selamanya.
           </p>
         </li>
       </ul>
+      <h4 class="text-justify font-weight-bold ml-2 ml-lg-2">
+       Informasi selengkapnya mengenai pelanggaran Tawar Bersama dapat dilihat
+        <a href="/pelanggaran-tb">Disini</a>
+      </h4>
     </div>
   </div>
 </template>

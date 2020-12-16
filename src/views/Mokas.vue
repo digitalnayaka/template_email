@@ -21,7 +21,18 @@
       clearable
       @click:clear="clear"
     ></v-text-field>
+    <v-card color="blue lighten-4">
+      <div class="d-flex align-center">
+        <v-avatar class="ma-3" size="20" tile>
+          <v-img src="/img/error.png"></v-img>
+        </v-avatar>
 
+        <v-card-text>
+          Informasi mengenai Tawar Bersama dapat dilihat
+          <a href="/tb-rules">disini</a>
+        </v-card-text>
+      </div>
+    </v-card>
     <v-bottom-sheet v-model="sheet">
       <v-sheet :height="selected == '1' ? 240 : 350">
         <v-list>
@@ -68,10 +79,7 @@
 
           <v-list-item v-if="selected != '1'">
             <v-radio-group v-model="order" row dense>
-              <v-radio
-                label="Postingan Terbaru"
-                value="posting_terbaru"
-              ></v-radio>
+              <v-radio label="Iklan Terbaru" value="posting_terbaru"></v-radio>
               <v-radio
                 label="Tawar Bersama dimulai"
                 value="tanggal_mulai"

@@ -57,25 +57,19 @@ const routes = [
     path: '/tb-rules',
     name: 'tb-rules',
     component: () => import(/* webpackChunkName: "tb-rules" */ '../views/TBRules.vue'),
-    meta: {
-      Auth: true
-    }
+  
   },
   {
     path: '/pelanggaran-tb',
     name: 'pelanggaran-tb',
     component: () => import(/* webpackChunkName: "pelanggaran-tb" */ '../views/PelanggaranTB.vue'),
-    meta: {
-      Auth: true
-    }
+    
   },
   {
     path: '/autotawar-rules',
     name: 'autotawar-rules',
     component: () => import(/* webpackChunkName: "autotawar-rules" */ '../views/AutoTawarRules.vue'),
-    meta: {
-      Auth: true
-    }
+   
   },
   {
     path: '/get-ticket',

@@ -1132,7 +1132,7 @@ export default {
         this.setAlert({
           status: true,
           color: "success",
-          text: "Logout successfully",
+          text: "Logout Berhasil",
         });
         window.location.href = "/";
         // this.countNotif = [];

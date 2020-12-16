@@ -22,6 +22,8 @@
             reverse-transition="fade-transition"
             transition="fade-transition"
             contain
+            align="center"
+            height="300"
           ></v-carousel-item>
         </v-carousel>
       </v-col>
@@ -825,7 +827,7 @@
                 >Auto Tawar</v-badge
               >
 
-              <div v-else>Tawar Otomatis</div>
+              <div v-else>Auto Tawar</div>
             </v-tab>
           </v-tabs>
 
@@ -916,11 +918,7 @@
                   </v-btn>
 
                   <div v-else>
-                    <v-btn
-                      color="teal"
-                      @click="autoBid"
-                      dark
-                    >
+                    <v-btn color="teal" @click="autoBid" dark>
                       Ubah Nominal
                     </v-btn>
 
@@ -935,7 +933,11 @@
                 <div class="red--text font-weight-bold">
                   Catatan: <br />
                   Fitur Tawar Otomatis tidak menjamin anda akan memenangkan
-                  iklan Tawar Bersama
+                  iklan Tawar Bersama.
+                </div>
+                <div class="font-weight-bold">
+                  Informasi mengenai Auto Tawar dapat dilihat
+                  <a href="/autotawar-rules">disini</a>
                 </div>
               </v-container>
             </v-tab-item>

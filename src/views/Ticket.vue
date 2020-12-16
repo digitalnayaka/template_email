@@ -17,7 +17,13 @@
             <v-img src="/img/error.png"></v-img>
           </v-avatar>
 
-          <v-card-text>{{ events.deskripsi }}</v-card-text>
+          <v-card-text
+            ><p>{{ events.deskripsi }}</p>
+            <p class="font-weight-bold">
+              Informasi mengenai Tiket dapat dilihat
+              <a href="/ticket-rules">disini</a>
+            </p></v-card-text
+          >
         </div>
       </v-card>
     </div>

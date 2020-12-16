@@ -7,7 +7,7 @@
     </v-app-bar>
 
     <v-row class="d-flex align-center">
-      <v-col cols="12"  align="center">
+      <v-col cols="12" sm="6" align="center">
         <v-carousel cycle hide-delimiters height="300">
           <v-carousel-item
             v-for="(item, index) in banners"
@@ -23,9 +23,10 @@
             class="rounded-lg"
           ></v-carousel-item>
         </v-carousel>
-        <br/>
-        <div>
-          <v-img src="/img/mobilehand.webp" width="92" contain></v-img>
+      </v-col>
+
+      <v-col cols="12" sm="6" align="center">
+        <!-- <v-img src="/img/mobilehand.webp" width="92" contain></v-img>
 
         <h2>What's on SiMotor?</h2>
 
@@ -34,7 +35,6 @@
           icon="mdi-motorbike"
           border="right"
           prominent
-          max-width="1000"
         >
           <div class="text-justify">
             SiMotor adalah platform atau sarana bertemunya penjual dan pembeli
@@ -58,12 +58,20 @@
               target="_blank"
             ></v-img>
           </a>
-        </v-container>
-        </div>
-      </v-col>
-
-      <v-col cols="12" sm="6" align="center">
-      
+        </v-container> -->
+        <v-carousel cycle hide-delimiters height="300">
+          <v-carousel-item
+          reverse-transition="fade-transition"
+            transition="fade-transition"
+            cycle
+            contain
+            hide-delimiter-background
+            show-arrows-on-hover
+            v-for="(item2, i) in penjelasan"
+            :key="i"
+            :src="item2.src"
+          ></v-carousel-item>
+        </v-carousel>
       </v-col>
     </v-row>
 
@@ -71,7 +79,7 @@
 
     <div align="center">
       <v-row class="d-flex align-center">
-        <v-col cols="12" sm="4">
+        <!-- <v-col cols="12" sm="4">
           <h2 class="teal lighten-5">Fitur</h2>
           <v-alert color="cyan lighten-4" border="left" prominent>
             <h4>Ada 2 (dua) fitur utama diSiMotor, yuk simak!</h4>
@@ -82,9 +90,9 @@
               di iklan tawar bersama!
             </p>
           </v-alert>
-        </v-col>
+        </v-col> -->
 
-        <v-col cols="6" sm="4" v-for="item in categories" :key="item.id">
+        <v-col cols="12" sm="6" v-for="item in categories" :key="item.id">
           <v-card flat :to="'/category/' + item.route">
             <v-img
               :src="item.image"
@@ -340,6 +348,15 @@ export default {
       //   name: "Bengkel",
       //   route: "bengkel",
       // },
+    ],
+    penjelasan: [
+      {
+        src: "/img/icons/penjelasan_simotor.webp",
+      },
+      {
+        src: "/img/icons/penjelasan_fitur.webp",
+      },
+      
     ],
     jadwal: [],
     tbBerlangsung: [],

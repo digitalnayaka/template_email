@@ -2,14 +2,17 @@
   <v-container fluid>
     <v-card
       class="rounded-lg mx-auto my-12"
-      outlined
+      
       tile
+      width="300"
       :href="'/iklan/' + item._source.id"
     >
       <v-img
         :src="getThumb(item._source.photo)"
+        
+        align="center"
+        width="300"
         height="230"
-        contain
         class="rounded-lg"
       >
         <v-card-title>
@@ -116,13 +119,19 @@
             >
 
             <v-list-item-subtitle>
-              <v-avatar size="16" item v-if="item._source.id_mst_user_type == 2">
+              <v-avatar
+                size="16"
+                item
+                v-if="item._source.id_mst_user_type == 2"
+              >
                 <v-img src="/img/verified.png" alt="verified"></v-img>
               </v-avatar>
               {{ item._source.app_user }}
             </v-list-item-subtitle>
 
-            <v-list-item-action-text v-if="item._source.id_mst_iklan_jenis == 2">
+            <v-list-item-action-text
+              v-if="item._source.id_mst_iklan_jenis == 2"
+            >
               <v-icon small>mdi-calendar</v-icon>
               {{ item._source.tanggal_mulai | dateTimeFormat(utc) }}
               {{ timezone }}
