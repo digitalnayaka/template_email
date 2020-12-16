@@ -920,7 +920,9 @@
                       color="teal"
                       @click="autoBid"
                       class="white--text mx-2"
-                      :disabled="isAuto.max_bid >= liveBid[0].Bid ? true : false"
+                      :disabled="
+                        isAuto.max_bid >= liveBid[0].Bid ? true : false
+                      "
                     >
                       Ubah Nominal
                     </v-btn>
@@ -1209,12 +1211,12 @@ export default {
           if (this.hits.id_mst_iklan_type === 2) {
             this.paketMokas();
           }
-          if (this.minBid == 0) {
+          if (this.hits.harga_saat_ini == null) {
             this.penawaran =
               Number(this.iklan.harga_awal) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
           } else {
-            this.penawaran = Number(this.minBid) + Number(this.iklan.kelipatan);
+            this.penawaran = Number(this.hits.harga_saat_ini) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
           }
           this.getAutoBid();
@@ -1779,7 +1781,7 @@ export default {
     this.getDtlIklan();
     this.GetBid();
     this.getFavourite();
-    
+
     if (!this.guest) {
       this.getOrder();
     }
