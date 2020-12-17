@@ -61,7 +61,7 @@
         </v-container> -->
         <v-carousel cycle hide-delimiters height="300">
           <v-carousel-item
-          reverse-transition="fade-transition"
+            reverse-transition="fade-transition"
             transition="fade-transition"
             cycle
             contain
@@ -127,9 +127,14 @@
             <v-list>
               <v-list-item>
                 <v-list-item-avatar size="70">
-                  <v-icon x-large v-if="item.photo == 'null'"
+                  <!-- <v-icon x-large v-if="item.photo == 'null'"
                     >mdi-account-circle</v-icon
-                  >
+                  > -->
+                  <v-img
+                    src="/img/icons/people.webp"
+                    contain
+                    v-if="item.photo == 'null'"
+                  ></v-img>
                   <v-img :src="getImage(item.photo)" v-else></v-img>
                 </v-list-item-avatar>
 
@@ -356,7 +361,6 @@ export default {
       {
         src: "/img/icons/penjelasan_fitur.webp",
       },
-      
     ],
     jadwal: [],
     tbBerlangsung: [],

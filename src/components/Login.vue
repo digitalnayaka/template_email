@@ -7,8 +7,9 @@
 
       <v-toolbar-title>
         <a href="/">
-          <v-img src="/img/logo-tulisan.webp" width="200" contain></v-img>
+          <v-img src="/img/logo-tulisan.webp" max-width="200" contain></v-img>
         </a>
+      
       </v-toolbar-title>
     </v-toolbar>
 
@@ -23,7 +24,7 @@
             color="teal lighten-5"
           >
             <div v-if="phoneDisplay">
-              <v-img src="/img/simotor_logo.webp" width="200" contain></v-img>
+                 <h2>Masuk dengan akun SiMotor</h2>
 
               <v-img
                 src="/img/icons/people2.webp"
@@ -32,7 +33,7 @@
                 contain
               ></v-img>
 
-              <h3>Masuk dengan akun SiMotor</h3>
+           <v-divider> </v-divider>
 
               <v-text-field
                 v-model="phone"

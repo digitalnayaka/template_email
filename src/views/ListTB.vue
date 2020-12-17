@@ -12,9 +12,14 @@
           <v-list>
             <v-list-item>
               <v-list-item-avatar size="100">
-                <v-icon x-large v-if="appuser.photo == 'null'">
+                <!-- <v-icon x-large v-if="appuser.photo == 'null'">
                   mdi-account-circle
-                </v-icon>
+                </v-icon> -->
+                <v-img
+                  src="/img/icons/people.webp"
+                  contain
+                  v-if="appuser.photo == 'null'"
+                ></v-img>
                 <v-img :src="getImage(appuser.photo)" v-else></v-img>
               </v-list-item-avatar>
 
@@ -123,7 +128,10 @@
         <v-col cols="12" sm="6">
           <v-row>
             <v-col cols="12" sm="6" class="text-center">
-              <div class="text-h5">Rating Penjual</div>
+              <div class="text-h5">Ulasan Penjual</div>
+              <div class="text" v-if="avg.ratting_user == 0">
+                Belum ada ulasan
+              </div>
 
               <div v-if="avg.ratting_user == 1">
                 <v-avatar size="32" item>
@@ -314,6 +322,7 @@
                     contain
                     max-width="250"
                     max-height="150"
+                    align="center"
                   ></v-img>
 
                   <a :href="'/iklan/' + item.id_iklan">
@@ -329,10 +338,15 @@
                   <v-list>
                     <v-list-item>
                       <v-list-item-avatar tile>
-                        <v-icon v-if="item.app_user_foto_pembeli == ''">
+                        <!-- <v-icon v-if="item.app_user_foto_pembeli == ''">
                           mdi-account-circle
-                        </v-icon>
-
+                        </v-icon>  -->
+                <v-img
+                  src="/img/icons/people.webp"
+                  contain
+                  v-if="item.app_user_foto_pembeli == ''"
+                ></v-img>
+               
                         <v-img
                           class="rounded-lg"
                           :src="getImage(item.app_user_foto_pembeli)"
@@ -350,17 +364,42 @@
                             Pembeli
                           </span>
 
-                          <v-icon color="red" v-if="item.ratting_user == 1">
+                          <!-- <v-icon color="red" v-if="item.ratting_user == 1">
                             mdi-emoticon-angry-outline
-                          </v-icon>
+                          </v-icon> -->
 
-                          <v-icon color="orange" v-if="item.ratting_user == 2">
-                            mdi-emoticon-neutral-outline
-                          </v-icon>
+                          <div v-if="item.ratting_user == 1">
+                            <v-avatar size="25" item>
+                              <v-img
+                                src="/img/icons/emoji_tidakpuas.png"
+                                alt="kecewa"
+                              ></v-img>
+                            </v-avatar>
 
-                          <v-icon color="teal" v-if="item.ratting_user == 3">
-                            mdi-emoticon-happy-outline
-                          </v-icon>
+                            Kurang Memuaskan
+                          </div>
+
+                          <div v-if="item.ratting_user == 2">
+                            <v-avatar size="25" item>
+                              <v-img
+                                src="/img/icons/emoji_netral.png"
+                                alt="netral"
+                              ></v-img>
+                            </v-avatar>
+
+                            Cukup Memuaskan
+                          </div>
+
+                          <div v-if="item.ratting_user == 3">
+                            <v-avatar size="25" item>
+                              <v-img
+                                src="/img/icons/emoji_puas.png"
+                                alt="puas"
+                              ></v-img>
+                            </v-avatar>
+
+                            Sangat Memuaskan
+                          </div>
                         </v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -457,7 +496,7 @@
 
                           <v-list-item-subtitle>
                             <span
-                              class="red pa-1 white--text text-caption mr-1"
+                              class="green pa-1 white--text text-caption mr-1"
                             >
                               Penjual
                             </span>

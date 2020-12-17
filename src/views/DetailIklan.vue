@@ -32,7 +32,7 @@
         <v-list>
           <v-list-item>
             <v-list-item-avatar size="50">
-              <v-icon x-large v-if="appuser.photo == 'null'">
+              <v-icon x-large v-if="appuser.photo == ''">
                 mdi-account-circle
               </v-icon>
               <v-img :src="getImage(appuser.photo)" v-else></v-img>
@@ -614,11 +614,10 @@
                 </span>
 
                 <!-- <v-icon v-if="item.IdTypeBid == 2">mdi-auto-upload</v-icon> -->
-             
-                   <v-avatar v-if="item.IdTypeBid == 2" size="28" >
-                  <v-img  src="/img/icons/autotawar.png"></v-img>
-                   </v-avatar>
-               
+
+                <v-avatar v-if="item.IdTypeBid == 2 && user.id" size="28">
+                  <v-img src="/img/icons/autotawar.png"></v-img>
+                </v-avatar>
               </v-list-item-title>
 
               <v-list-item-subtitle>
@@ -798,11 +797,18 @@
 
           <v-list>
             <v-list-item class="text-center">
-              <v-list-item-content>
+              <v-list-item-content v-if="liveBid.length == 0">
                 <v-list-item-title>Harga Awal</v-list-item-title>
                 <v-list-item-subtitle>
                   Rp
                   {{ Number(iklan.harga_awal).toLocaleString("id-ID") }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-content v-else>
+                <v-list-item-title>Harga Saat ini</v-list-item-title>
+                <v-list-item-subtitle>
+                  Rp
+                  {{ Number(liveBid[0].Bid).toLocaleString("id-ID") }}
                 </v-list-item-subtitle>
               </v-list-item-content>
 
@@ -826,7 +832,7 @@
             show-arrows
             grow
           >
-            <v-tab>Tawar Manual</v-tab>
+            <v-tab>Tawar</v-tab>
             <v-tab>
               <v-badge color="green" content="Aktif" v-if="isAuto != null"
                 >Auto Tawar</v-badge
@@ -937,10 +943,26 @@
                     <v-btn color="red" dark @click="offBid" class="mx-2">
                       Non Aktifkan
                     </v-btn>
+                   
                   </div>
                 </div>
 
-                <br />
+               <br />
+                    <div>
+                      <v-alert outlined type="error" prominent border="left">
+                        Harga saat ini sudah mencapai harga maksimal tawaran
+                        Anda. Apakah Anda ingin mengaktifkan kembali Auto Tawar?
+                        <v-btn
+                          color="teal"
+                          dark
+                          small
+                          @click="autoBid"
+                          v-if="isAuto.max_bid >= liveBid[0].Bid ? true : false"
+                        >
+                          Aktifkan Kembali
+                        </v-btn>
+                      </v-alert>
+                    </div>
 
                 <div class="red--text font-weight-bold">
                   Catatan: <br />
@@ -1227,7 +1249,8 @@ export default {
               Number(this.iklan.harga_awal) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
           } else {
-            this.penawaran = Number(this.hits.harga_saat_ini) + Number(this.iklan.kelipatan);
+            this.penawaran =
+              Number(this.hits.harga_saat_ini) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
           }
           this.getAutoBid();
@@ -1439,7 +1462,7 @@ export default {
           let responses = error.response.data;
           this.setAlert({
             status: true,
-            color: "error",
+            color: "success",
             text: responses.api_message,
           });
           if (responses.api_status == 2) {

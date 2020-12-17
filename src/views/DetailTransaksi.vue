@@ -46,21 +46,21 @@
           <v-card max-height="500">
             <v-list dense>
               <v-list-item>
-                <v-list-item-title>Nomor Order:</v-list-item-title>
-                <v-list-item-title>{{ orders.no_order }}</v-list-item-title>
+                <v-list-item-title>Nomor Order</v-list-item-title>
+                <v-list-item-title>: {{ orders.no_order }}</v-list-item-title>
               </v-list-item>
 
               <v-list-item>
-                <v-list-item-title>Status:</v-list-item-title>
+                <v-list-item-title>Status</v-list-item-title>
                 <v-list-item-title class="font-weight-black">
-                  {{ orders.pembayaran_status }}
+                  : {{ orders.pembayaran_status }}
                 </v-list-item-title>
               </v-list-item>
 
               <v-list-item>
-                <v-list-item-title>Tanggal Order:</v-list-item-title>
+                <v-list-item-title>Tanggal Order</v-list-item-title>
                 <v-list-item-title>
-                  {{ orders.created_at | dateTimeFormat(utc) }}
+                  : {{ orders.created_at | dateTimeFormat(utc) }}
                   {{ timezone }}
                 </v-list-item-title>
               </v-list-item>
@@ -72,8 +72,8 @@
                   orders.id_mst_pembayaran_status == 12
                 "
               >
-                <v-list-item-title>Alasan Ditolak:</v-list-item-title>
-                <v-list-item-title>{{ orders.note }}</v-list-item-title>
+                <v-list-item-title>Alasan Ditolak</v-list-item-title>
+                <v-list-item-title>: {{ orders.note }}</v-list-item-title>
               </v-list-item>
 
               <v-list-item
@@ -83,20 +83,23 @@
                   orders.id_mst_pembayaran_status == 12
                 "
               >
-                <v-list-item-title>Detail Alasan:</v-list-item-title>
+                <v-list-item-title>Detail Alasan</v-list-item-title>
                 <v-list-item-title class="font-weight-black red--text">
-                  {{ orders.note_detail }}
+                 : {{ orders.note_detail }}
                 </v-list-item-title>
               </v-list-item>
 
               <v-list-item>
-                <v-list-item-title>Nama Penjual:</v-list-item-title>
-                <v-list-item-title>{{ orders.nama_penjual }}</v-list-item-title>
+                <v-list-item-title>Nama Penjual</v-list-item-title>
+                <v-list-item-title>: {{ orders.nama_penjual }}</v-list-item-title>
               </v-list-item>
-
               <v-list-item>
-                <v-list-item-title>Metode Pembayaran:</v-list-item-title>
-                <v-list-item-title>{{ orders.metode }}</v-list-item-title>
+                <v-list-item-title>Nama Pembeli</v-list-item-title>
+                <v-list-item-title>: {{ orders.nama_pembeli }}</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>Metode Pembayaran</v-list-item-title>
+                <v-list-item-title>: {{ orders.metode }}</v-list-item-title>
               </v-list-item>
 
               <v-divider></v-divider>
@@ -272,27 +275,27 @@
 
       <div align="center" v-if="orders.id_mst_pembayaran_status == 1">
         <v-card>
-        <h2 align="center">Petunjuk Pembayaran</h2>
-        <p>Transfer dapat dilakukan ke salah satu rekening berikut:</p>
+          <h2 align="center">Petunjuk Pembayaran</h2>
+          <p>Transfer dapat dilakukan ke salah satu rekening berikut:</p>
 
-        <v-list v-if="accounts.length > 0" >
-          <v-list-item v-for="item in accounts" :key="item.id">
-            <v-list-item-content>
-               <v-list-item-avatar tile size="30" align="center">
-              <v-img :src="getImage(item.foto)" contain></v-img>
-            </v-list-item-avatar>
-              <v-list-item-title>{{ item.bank_name }}</v-list-item-title>
+          <v-list v-if="accounts.length > 0">
+            <v-list-item v-for="item in accounts" :key="item.id">
+              <v-list-item-content>
+                <v-list-item-avatar tile size="30" align="center">
+                  <v-img :src="getImage(item.foto)" contain></v-img>
+                </v-list-item-avatar>
+                <v-list-item-title>{{ item.bank_name }}</v-list-item-title>
 
-              <v-list-item-subtitle>
-                {{ item.nomor_rekening }}
-              </v-list-item-subtitle>
+                <v-list-item-subtitle>
+                  {{ item.nomor_rekening }}
+                </v-list-item-subtitle>
 
-              <v-list-item-subtitle>
-                {{ item.nama_rekening }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
+                <v-list-item-subtitle>
+                  {{ item.nama_rekening }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
         </v-card>
       </div>
 

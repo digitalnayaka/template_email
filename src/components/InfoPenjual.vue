@@ -37,7 +37,13 @@
         <div class="d-flex align-center">
           <h3 class="mr-auto">Slogan</h3>
 
-          <v-btn small color="teal" dark @click="ubahSlogan = true" v-if="user.slogan == null">
+          <v-btn
+            small
+            color="teal"
+            dark
+            @click="ubahSlogan = true"
+            v-if="user.slogan == null"
+          >
             <v-icon left>mdi-plus</v-icon> Tambah Slogan
           </v-btn>
         </div>
@@ -45,7 +51,11 @@
         <div class="d-flex align-center" v-if="!ubahSlogan">
           <div>{{ slogan }}</div>
 
-          <a href="javascript:void(0)" @click="ubahSlogan = true" v-if="user.slogan != null">
+          <a
+            href="javascript:void(0)"
+            @click="ubahSlogan = true"
+            v-if="user.slogan != null"
+          >
             <v-icon>mdi-pencil</v-icon>
           </a>
         </div>
@@ -197,7 +207,7 @@
       </v-tab-item>
 
       <v-tab-item>
-        <buyer-performance :user="user" />
+        <buyer-performance :user="user" :utc="utc" :timezone="timezone" />
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -210,7 +220,7 @@ import StarRating from "vue-star-rating";
 
 export default {
   name: "info-penjual",
-  props: ["user"],
+  props: ["user", "utc", "timezone"],
   components: {
     StarRating,
     VueEditor,

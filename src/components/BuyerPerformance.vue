@@ -58,12 +58,11 @@
             Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
             <a href="/bantuan">disini</a>
           </p>
-          <div>
-            <flip-countdown
-              :deadline="pengguna.end_time_beku | dateTimeFormat(utc)"
-              v-if="user.mst_user_status == 3 && pengguna.id_type_pinalti == 2"
-            ></flip-countdown>
-          </div>
+
+          <flip-countdown
+            :deadline="pengguna.end_time_beku | dateTimeFormat(utc)"
+            v-if="pengguna.id_mst_user_status == 3 && pengguna.id_type_pinalti == 2"
+          ></flip-countdown>
         </div>
       </v-card>
     </v-card>

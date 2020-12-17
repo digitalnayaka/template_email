@@ -458,9 +458,12 @@ export default {
             this.$router.push({ path: "/detail-transaksi/" + data });
             } else if (modul == 13) {
             this.$router.push({ path: "/product/review" });
+             } else if (modul == 14) {
+            this.$router.push({ path: "/detail-transaksi/" + data });
           } else {
             this.$router.push({ path: "/upload-bukti/" + data });
           }
+          
           this.$root.$children[0].getNotif();
         })
         .catch((error) => {
