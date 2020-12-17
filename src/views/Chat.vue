@@ -40,9 +40,9 @@
               flat
             >
               <span class="text-info"
-                >{{ item.From == user.id ? user.nama : appuser.nama }}:</span
+                >[{{ item.From == user.id ? user.nama : appuser.nama }}]:</span
               >
-              <br />
+
               <span v-if="item.Type == 'text'">{{ item.Message }}</span>
 
               <span v-if="item.Type == 'iklan'">
@@ -89,12 +89,15 @@
               </span>
 
               <span>
-                <v-img
-                  :src="getThumb(item.Image)"
-                  width="300"
-                  height="200"
-                  v-if="item.Type == 'image'"
-                ></v-img>
+                <div v-viewer="{ movable: false }">
+                  <img
+                    :src="getImage(item.Image)"
+                    width="300"
+                    height="200"
+                    contain
+                    v-if="item.Type == 'image'"
+                  />
+                </div>
               </span>
 
               <span class="text-secondary time">
@@ -121,6 +124,9 @@ import VueChatScroll from "vue-chat-scroll";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Vue from "vue";
+import "viewerjs/dist/viewer.css";
+import Viewer from "v-viewer";
+Vue.use(Viewer);
 
 Vue.use(VueChatScroll);
 

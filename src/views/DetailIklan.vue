@@ -613,7 +613,12 @@
                   }}
                 </span>
 
-                <v-icon v-if="item.IdTypeBid == 2">mdi-auto-upload</v-icon>
+                <!-- <v-icon v-if="item.IdTypeBid == 2">mdi-auto-upload</v-icon> -->
+             
+                   <v-avatar v-if="item.IdTypeBid == 2" size="28" >
+                  <v-img  src="/img/icons/autotawar.png"></v-img>
+                   </v-avatar>
+               
               </v-list-item-title>
 
               <v-list-item-subtitle>
@@ -918,7 +923,14 @@
                   </v-btn>
 
                   <div v-else>
-                    <v-btn color="teal" @click="autoBid" dark>
+                    <v-btn
+                      color="teal"
+                      @click="autoBid"
+                      class="white--text mx-2"
+                      :disabled="
+                        isAuto.max_bid >= liveBid[0].Bid ? true : false
+                      "
+                    >
                       Ubah Nominal
                     </v-btn>
 
@@ -1210,16 +1222,15 @@ export default {
           if (this.hits.id_mst_iklan_type === 2) {
             this.paketMokas();
           }
-          if (this.minBid == 0) {
+          if (this.hits.harga_saat_ini == null) {
             this.penawaran =
               Number(this.iklan.harga_awal) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
-            this.amountAuto = this.penawaran;
           } else {
-            this.penawaran = Number(this.minBid) + Number(this.iklan.kelipatan);
+            this.penawaran = Number(this.hits.harga_saat_ini) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
-            this.amountAuto = this.penawaran;
           }
+          this.getAutoBid();
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -1689,7 +1700,7 @@ export default {
             this.amountAuto = this.bid;
           } else {
             this.isAuto = data[0];
-            this.amountAuto = this.bid;
+            this.amountAuto = this.isAuto.max_bid;
           }
         })
         .catch((error) => {
@@ -1781,7 +1792,7 @@ export default {
     this.getDtlIklan();
     this.GetBid();
     this.getFavourite();
-    this.getAutoBid();
+
     if (!this.guest) {
       this.getOrder();
     }
