@@ -614,13 +614,7 @@
                     !guest && user.id == item.IdAppUser ? "Anda" : item.IdUniq
                   }}
                 </span>
-                <!-- <div v-if="!guest">
-                  <v-icon
-                    v-if="item.IdTypeBid == 2 && item.IdAppUser == user.id"
-                  >
-                    mdi-auto-upload
-                  </v-icon>
-                </div> -->
+
                 <v-avatar
                   v-if="
                     !guest && item.IdTypeBid == 2 && item.IdAppUser == user.id
@@ -914,64 +908,68 @@
                     ></v-text-field>
                   </div>
 
-                  <h2>Harga maksimal tawaran anda:</h2>
+                  <div v-if="reactivated">
+                    <h2>Harga maksimal tawaran anda:</h2>
 
-                  <div class="d-flex align-center justify-center">
-                    <v-btn icon color="red" @click="minAuto()">
-                      <v-icon>mdi-minus</v-icon>
-                    </v-btn>
+                    <div class="d-flex align-center justify-center">
+                      <v-btn icon color="red" @click="minAuto()">
+                        <v-icon>mdi-minus</v-icon>
+                      </v-btn>
 
-                    <h2 class="mx-2">
-                      Rp {{ Number(amountAuto).toLocaleString("id-ID") }}
-                    </h2>
+                      <h2 class="mx-2">
+                        Rp {{ Number(amountAuto).toLocaleString("id-ID") }}
+                      </h2>
 
-                    <v-btn icon color="green" @click="addAuto()">
-                      <v-icon>mdi-plus</v-icon>
-                    </v-btn>
-                  </div>
+                      <v-btn icon color="green" @click="addAuto()">
+                        <v-icon>mdi-plus</v-icon>
+                      </v-btn>
+                    </div>
 
-                  <v-btn
-                    color="teal"
-                    dark
-                    @click="autoBid"
-                    v-if="isAuto == null"
-                  >
-                    Aktifkan Auto Tawar
-                  </v-btn>
-
-                  <div v-else>
                     <v-btn
                       color="teal"
+                      dark
                       @click="autoBid"
-                      class="white--text mx-2"
-                      :disabled="
-                        isAuto.max_bid >= liveBid[0].Bid ? true : false
-                      "
+                      v-if="isAuto == null"
                     >
-                      Ubah Penawaran
+                      Aktifkan Auto Tawar
                     </v-btn>
-                    <v-btn
-                      color="teal"
-                      @click="autoBid"
-                      class="white--text mx-2"
-                    >
-                      Masukkan Penawaran
-                    </v-btn>
-                    <v-btn color="red" dark @click="offBid" class="mx-2">
-                      Non Aktifkan
-                    </v-btn>
-                  </div>
-                </div>
 
-                <br />
-                <div v-if="isAuto.max_bid <= liveBid[0].Bid ? true : false">
-                  <v-alert outlined type="error" prominent border="left">
-                    Harga saat ini sudah mencapai harga maksimal tawaran Anda.
-                    Apakah Anda ingin mengaktifkan kembali Auto Tawar?
-                    <v-btn color="teal" dark small @click="autoBid">
-                      Aktifkan Kembali
-                    </v-btn>
-                  </v-alert>
+                    <div v-else>
+                      <v-btn
+                        color="teal"
+                        @click="autoBid"
+                        class="white--text mx-2"
+                        :disabled="
+                          isAuto.max_bid >= liveBid[0].Bid ? true : false
+                        "
+                      >
+                        Ubah Penawaran
+                      </v-btn>
+
+                      <v-btn color="red" dark @click="offBid" class="mx-2">
+                        Non Aktifkan
+                      </v-btn>
+                    </div>
+                  </div>
+
+                  <div v-if="!reactivated">
+                    <div v-if="isAuto != null">
+                      <v-alert
+                        outlined
+                        type="error"
+                        prominent
+                        border="left"
+                        v-if="isAuto.max_bid < liveBid[0].Bid"
+                      >
+                        Harga saat ini sudah mencapai harga maksimal tawaran
+                        Anda. Apakah Anda ingin mengaktifkan kembali Auto Tawar?
+
+                        <v-btn color="teal" dark small @click="reactivated = true">
+                          Aktifkan Kembali
+                        </v-btn>
+                      </v-alert>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="red--text font-weight-bold">
@@ -979,6 +977,7 @@
                   Fitur Tawar Otomatis tidak menjamin anda akan memenangkan
                   iklan Tawar Bersama.
                 </div>
+
                 <div class="font-weight-bold">
                   Informasi mengenai Auto Tawar dapat dilihat
                   <a href="/autotawar-rules">disini</a>
@@ -1086,12 +1085,15 @@ export default {
         thousands: ".",
         precision: 0,
       },
+      reactivated: false,
     };
   },
   methods: {
     ...mapActions({
       setAlert: "alert/set",
       setAds: "ads/setAds",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
     }),
     getDtlIklan() {
       this.axios
@@ -1106,9 +1108,6 @@ export default {
           let { hits } = data.hits;
           this.hits = hits[0]._source;
           this.getUser(this.hits.id_app_user);
-          this.reviewAvg();
-          this.getCatatan();
-          this.getKebijakan();
           this.unit_mokas(this.hits.unit_motor_bekas[0].id);
           if (this.hits.id_mst_iklan_jenis == 1) {
             this.getHP(this.id);
@@ -1137,6 +1136,9 @@ export default {
               disabled: true,
             }
           );
+          this.reviewAvg();
+          this.getCatatan();
+          this.getKebijakan();
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -1266,7 +1268,9 @@ export default {
               Number(this.hits.harga_saat_ini) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
           }
-          this.getAutoBid();
+          if (!this.guest) {
+            this.getAutoBid();
+          }
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -1287,7 +1291,6 @@ export default {
             id_app_user: this.hits.id_app_user,
             type_catatan: 2,
           },
-          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -1312,7 +1315,6 @@ export default {
             id_app_user: this.hits.id_app_user,
             type_catatan: 1,
           },
-          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -1747,6 +1749,11 @@ export default {
           } else {
             this.isAuto = data[0];
             this.amountAuto = this.isAuto.max_bid;
+            if(this.isAuto.max_bid <= this.minBid){
+              this.reactivated = false
+            } else {
+              this.reactivated = true
+            }
           }
         })
         .catch((error) => {
