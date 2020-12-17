@@ -56,6 +56,10 @@
 
         <div class="d-flex align-center justify-space-around">
           <div v-if="avg.ratting_user != null">
+            <div v-if="avg.ratting_user == 0">
+              Belum ada nilai
+            </div>
+
             <div v-if="avg.ratting_user == 1">
               <v-avatar size="25" item>
                 <v-img
@@ -282,9 +286,9 @@
                   </v-toolbar>
 
                   <div v-if="!guest">
-                    <v-card-title v-if="hits.id_app_user == user.id"
-                      >Segera hubungi pemenang iklan Anda</v-card-title
-                    >
+                    <v-card-title v-if="hits.id_app_user == user.id">
+                      Segera hubungi pemenang iklan Anda
+                    </v-card-title>
                   </div>
 
                   <v-btn
@@ -611,7 +615,13 @@
                   }}
                 </span>
 
-                <v-icon v-if="item.IdTypeBid == 2">mdi-auto-upload</v-icon>
+                <div v-if="!guest">
+                  <v-icon
+                    v-if="item.IdTypeBid == 2 && item.IdAppUser == user.id"
+                  >
+                    mdi-auto-upload
+                  </v-icon>
+                </div>
               </v-list-item-title>
 
               <v-list-item-subtitle>
@@ -1063,6 +1073,9 @@ export default {
           let { hits } = data.hits;
           this.hits = hits[0]._source;
           this.getUser(this.hits.id_app_user);
+          this.reviewAvg();
+          this.getCatatan();
+          this.getKebijakan();
           this.unit_mokas(this.hits.unit_motor_bekas[0].id);
           if (this.hits.id_mst_iklan_jenis == 1) {
             this.getHP(this.id);
@@ -1216,7 +1229,8 @@ export default {
               Number(this.iklan.harga_awal) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
           } else {
-            this.penawaran = Number(this.hits.harga_saat_ini) + Number(this.iklan.kelipatan);
+            this.penawaran =
+              Number(this.hits.harga_saat_ini) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
           }
           this.getAutoBid();
@@ -1237,7 +1251,7 @@ export default {
       this.axios
         .get("/user/v3/user/catatan_penjual", {
           params: {
-            id_app_user: this.appuser.id,
+            id_app_user: this.hits.id_app_user,
             type_catatan: 2,
           },
           headers: { Authorization: "Bearer " + this.user.token },
@@ -1262,7 +1276,7 @@ export default {
       this.axios
         .get("/user/v3/user/catatan_penjual", {
           params: {
-            id_app_user: this.appuser.id,
+            id_app_user: this.hits.id_app_user,
             type_catatan: 1,
           },
           headers: { Authorization: "Bearer " + this.user.token },
@@ -1594,21 +1608,24 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.appuser = data[0];
-
-          this.getCatatan();
-          this.getKebijakan();
-          this.reviewAvg();
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     reviewAvg() {
       this.axios
         .get("/transaksi/v3/review_avg", {
           params: {
-            id_penjual: this.appuser.id,
+            id_penjual: this.hits.id_app_user,
           },
         })
         .then((response) => {
@@ -1617,7 +1634,14 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     getFavourite() {
@@ -1780,10 +1804,10 @@ export default {
   created() {
     this.getDtlIklan();
     this.GetBid();
-    this.getFavourite();
 
     if (!this.guest) {
       this.getOrder();
+      this.getFavourite();
     }
 
     var app = this;
