@@ -58,6 +58,8 @@
 
         <div class="d-flex align-center justify-space-around">
           <div v-if="avg.ratting_user != null">
+            <div v-if="avg.ratting_user == 0">Belum ada nilai</div>
+
             <div v-if="avg.ratting_user == 1">
               <v-avatar size="25" item>
                 <v-img
@@ -284,9 +286,9 @@
                   </v-toolbar>
 
                   <div v-if="!guest">
-                    <v-card-title v-if="hits.id_app_user == user.id"
-                      >Segera hubungi pemenang iklan Anda</v-card-title
-                    >
+                    <v-card-title v-if="hits.id_app_user == user.id">
+                      Segera hubungi pemenang iklan Anda
+                    </v-card-title>
                   </div>
 
                   <v-btn
@@ -612,10 +614,19 @@
                     !guest && user.id == item.IdAppUser ? "Anda" : item.IdUniq
                   }}
                 </span>
-
-                <!-- <v-icon v-if="item.IdTypeBid == 2">mdi-auto-upload</v-icon> -->
-
-                <v-avatar v-if="item.IdTypeBid == 2 && user.id" size="28">
+                <!-- <div v-if="!guest">
+                  <v-icon
+                    v-if="item.IdTypeBid == 2 && item.IdAppUser == user.id"
+                  >
+                    mdi-auto-upload
+                  </v-icon>
+                </div> -->
+                <v-avatar
+                  v-if="
+                    !guest && item.IdTypeBid == 2 && item.IdAppUser == user.id
+                  "
+                  size="28"
+                >
                   <v-img src="/img/icons/autotawar.png"></v-img>
                 </v-avatar>
               </v-list-item-title>
@@ -937,32 +948,31 @@
                         isAuto.max_bid >= liveBid[0].Bid ? true : false
                       "
                     >
-                      Ubah Nominal
+                      Ubah Penawaran
                     </v-btn>
-
+                    <v-btn
+                      color="teal"
+                      @click="autoBid"
+                      class="white--text mx-2"
+                    >
+                      Masukkan Penawaran
+                    </v-btn>
                     <v-btn color="red" dark @click="offBid" class="mx-2">
                       Non Aktifkan
                     </v-btn>
-                   
                   </div>
                 </div>
 
-               <br />
-                    <div>
-                      <v-alert outlined type="error" prominent border="left">
-                        Harga saat ini sudah mencapai harga maksimal tawaran
-                        Anda. Apakah Anda ingin mengaktifkan kembali Auto Tawar?
-                        <v-btn
-                          color="teal"
-                          dark
-                          small
-                          @click="autoBid"
-                          v-if="isAuto.max_bid >= liveBid[0].Bid ? true : false"
-                        >
-                          Aktifkan Kembali
-                        </v-btn>
-                      </v-alert>
-                    </div>
+                <br />
+                <div v-if="isAuto.max_bid <= liveBid[0].Bid ? true : false">
+                  <v-alert outlined type="error" prominent border="left">
+                    Harga saat ini sudah mencapai harga maksimal tawaran Anda.
+                    Apakah Anda ingin mengaktifkan kembali Auto Tawar?
+                    <v-btn color="teal" dark small @click="autoBid">
+                      Aktifkan Kembali
+                    </v-btn>
+                  </v-alert>
+                </div>
 
                 <div class="red--text font-weight-bold">
                   Catatan: <br />
@@ -1096,6 +1106,9 @@ export default {
           let { hits } = data.hits;
           this.hits = hits[0]._source;
           this.getUser(this.hits.id_app_user);
+          this.reviewAvg();
+          this.getCatatan();
+          this.getKebijakan();
           this.unit_mokas(this.hits.unit_motor_bekas[0].id);
           if (this.hits.id_mst_iklan_jenis == 1) {
             this.getHP(this.id);
@@ -1271,7 +1284,7 @@ export default {
       this.axios
         .get("/user/v3/user/catatan_penjual", {
           params: {
-            id_app_user: this.appuser.id,
+            id_app_user: this.hits.id_app_user,
             type_catatan: 2,
           },
           headers: { Authorization: "Bearer " + this.user.token },
@@ -1296,7 +1309,7 @@ export default {
       this.axios
         .get("/user/v3/user/catatan_penjual", {
           params: {
-            id_app_user: this.appuser.id,
+            id_app_user: this.hits.id_app_user,
             type_catatan: 1,
           },
           headers: { Authorization: "Bearer " + this.user.token },
@@ -1628,21 +1641,24 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.appuser = data[0];
-
-          this.getCatatan();
-          this.getKebijakan();
-          this.reviewAvg();
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     reviewAvg() {
       this.axios
         .get("/transaksi/v3/review_avg", {
           params: {
-            id_penjual: this.appuser.id,
+            id_penjual: this.hits.id_app_user,
           },
         })
         .then((response) => {
@@ -1651,7 +1667,14 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     getFavourite() {
@@ -1814,10 +1837,10 @@ export default {
   created() {
     this.getDtlIklan();
     this.GetBid();
-    this.getFavourite();
 
     if (!this.guest) {
       this.getOrder();
+      this.getFavourite();
     }
 
     var app = this;

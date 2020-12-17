@@ -314,7 +314,14 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     totalTiket() {
@@ -331,7 +338,14 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     getTiket() {
@@ -387,7 +401,14 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     tiketDicairkan() {
@@ -414,7 +435,14 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     tiketHangus() {
@@ -439,7 +467,14 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     tiketExpired() {
@@ -464,7 +499,14 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
-          console.log(responses);
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     loadData() {
