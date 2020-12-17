@@ -58,15 +58,15 @@
             Untuk informasi tentang kebijakan, silahkan kunjungi Bantuan
             <a href="/bantuan">disini</a>
           </p>
-
-          <flip-countdown
-            :deadline="pengguna.end_time_beku | dateTimeFormat(utc)"
-            v-if="user.mst_user_status == 3 && pengguna.id_type_pinalti == 2"
-          ></flip-countdown>
+          <div>
+            <flip-countdown
+              :deadline="pengguna.end_time_beku | dateTimeFormat(utc)"
+              v-if="user.mst_user_status == 3 && pengguna.id_type_pinalti == 2"
+            ></flip-countdown>
+          </div>
         </div>
       </v-card>
     </v-card>
-
     <br />
 
     <div>
@@ -97,7 +97,7 @@
         </li>
       </ul>
       <h4 class="text-justify font-weight-bold ml-2 ml-lg-2">
-       Informasi selengkapnya mengenai pelanggaran Tawar Bersama dapat dilihat
+        Informasi selengkapnya mengenai pelanggaran Tawar Bersama dapat dilihat
         <a href="/pelanggaran-tb">Disini</a>
       </h4>
     </div>

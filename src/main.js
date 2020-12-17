@@ -10,27 +10,27 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 // Your web app's Firebase configuration dev
-// var firebaseConfig = {
-//   apiKey: "AIzaSyD2w8s4gCjiENlJdBORtSkZ6e5pghzVQDY",
-//   authDomain: "simotordev.firebaseapp.com",
-//   databaseURL: "https://simotordev.firebaseio.com",
-//   projectId: "simotordev",
-//   storageBucket: "simotordev.appspot.com",
-//   messagingSenderId: "1089890778962",
-//   appId: "1:1089890778962:web:12e78426fa6969e896448b"
-// };
+var firebaseConfig = {
+  apiKey: "AIzaSyD2w8s4gCjiENlJdBORtSkZ6e5pghzVQDY",
+  authDomain: "simotordev.firebaseapp.com",
+  databaseURL: "https://simotordev.firebaseio.com",
+  projectId: "simotordev",
+  storageBucket: "simotordev.appspot.com",
+  messagingSenderId: "1089890778962",
+  appId: "1:1089890778962:web:12e78426fa6969e896448b"
+};
 
 // prod
-var firebaseConfig = {
-  apiKey: "AIzaSyB2fsNR4-M_6YBO65sF0x9MemAXLY_5gDQ",
-  authDomain: "simotor-dna.firebaseapp.com",
-  databaseURL: "https://simotor-dna.firebaseio.com",
-  projectId: "simotor-dna",
-  storageBucket: "simotor-dna.appspot.com",
-  messagingSenderId: "73051776825",
-  appId: "1:73051776825:web:250eaa838d239d94",
-  measurementId: "G-23ZJ6QFKBV"
-};
+// var firebaseConfig = {
+//   apiKey: "AIzaSyB2fsNR4-M_6YBO65sF0x9MemAXLY_5gDQ",
+//   authDomain: "simotor-dna.firebaseapp.com",
+//   databaseURL: "https://simotor-dna.firebaseio.com",
+//   projectId: "simotor-dna",
+//   storageBucket: "simotor-dna.appspot.com",
+//   messagingSenderId: "73051776825",
+//   appId: "1:73051776825:web:250eaa838d239d94",
+//   measurementId: "G-23ZJ6QFKBV"
+// };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
