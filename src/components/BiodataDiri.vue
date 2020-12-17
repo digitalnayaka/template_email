@@ -1,10 +1,21 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" sm="4"  align="center">
-        <v-card outlined width="800" class="pa-2 rounded-lg" >
-          <v-img :src="getImage(user.photo)" contain  max-width="300" max-height="300"></v-img>
-          <v-img src="/img/icons/people.webp" v-if="user.photo == null" contain  max-width="300" max-height="300" ></v-img>
+      <v-col cols="12" sm="4" align="center">
+        <v-card outlined width="800" class="pa-2 rounded-lg">
+          <v-img
+            :src="getImage(user.photo)"
+            contain
+            max-width="300"
+            max-height="300"
+          ></v-img>
+          <v-img
+            src="/img/icons/people.webp"
+            v-if="user.photo == null"
+            contain
+            max-width="300"
+            max-height="300"
+          ></v-img>
           <v-file-input
             id="fileid"
             label="File input"
@@ -148,7 +159,8 @@
               <v-col cols="7">
                 <div v-if="formEmail !== null">: {{ user.email }}</div>
 
-                <div v-else> :
+                <div v-else>
+                  :
                   <section id="firebaseui-auth-container"></section>
                 </div>
               </v-col>
@@ -160,7 +172,7 @@
       </v-col>
     </v-row>
 
-    <info-penjual :user="user" />
+    <info-penjual :user="user" :utc="utc" :timezone="timezone" />
   </div>
 </template>
 
@@ -178,7 +190,7 @@ export default {
         /* webpackChunkName: "biodata-diri" */ "@/components/InfoPenjual.vue"
       ),
   },
-  props: ["user"],
+  props: ["user", "utc", "timezone"],
   data: () => ({
     ubahNama: false,
     tab: 0,
