@@ -85,17 +85,21 @@
               >
                 <v-list-item-title>Detail Alasan</v-list-item-title>
                 <v-list-item-title class="font-weight-black red--text">
-                 : {{ orders.note_detail }}
+                  : {{ orders.note_detail }}
                 </v-list-item-title>
               </v-list-item>
 
               <v-list-item>
                 <v-list-item-title>Nama Penjual</v-list-item-title>
-                <v-list-item-title>: {{ orders.nama_penjual }}</v-list-item-title>
+                <v-list-item-title
+                  >: {{ orders.nama_penjual }}</v-list-item-title
+                >
               </v-list-item>
               <v-list-item>
                 <v-list-item-title>Nama Pembeli</v-list-item-title>
-                <v-list-item-title>: {{ orders.nama_pembeli }}</v-list-item-title>
+                <v-list-item-title
+                  >: {{ orders.nama_pembeli }}</v-list-item-title
+                >
               </v-list-item>
               <v-list-item>
                 <v-list-item-title>Metode Pembayaran</v-list-item-title>
@@ -258,7 +262,23 @@
           </v-card>
         </v-col>
       </v-row>
-
+      <br />
+      <div>
+        <v-alert dense outlined type="error" v-if="user.id_type_pinalti == 1">
+          <h4>
+            Perhatian! Akun <b> {{ orders.nama_pembeli }} </b> sudah melakukan
+            pembatalan transaksi sebanyak 1x. Anda tetap dapat melakukan
+            konfirmasi atas transaksi ini!
+          </h4>
+        </v-alert>
+        <v-alert dense outlined type="error" v-if="user.id_type_pinalti == 2">
+          <h4>
+            Perhatian! Akun <b> {{ orders.nama_pembeli }} </b> sudah melakukan
+            pembatalan transaksi sebanyak 2x. Anda tetap dapat melakukan
+            konfirmasi atas transaksi ini!
+          </h4>
+        </v-alert>
+      </div>
       <v-btn
         block
         color="primary"
@@ -274,11 +294,11 @@
       <br />
 
       <div align="center" v-if="orders.id_mst_pembayaran_status == 1">
-        <v-card>
+        <v-card v-if="accounts.length > 0">
           <h2 align="center">Petunjuk Pembayaran</h2>
           <p>Transfer dapat dilakukan ke salah satu rekening berikut:</p>
 
-          <v-list v-if="accounts.length > 0">
+          <v-list>
             <v-list-item v-for="item in accounts" :key="item.id">
               <v-list-item-content>
                 <v-list-item-avatar tile size="30" align="center">
@@ -449,7 +469,7 @@
                 :items="noteTolak"
                 item-text="note"
                 item-value="id"
-                label="Alasan Tolak (Wajib Dipilih)"
+                label="Alasan Pembatalan (Wajib Dipilih)"
                 solo
                 class="px-2 pt-2"
               ></v-select>
@@ -527,7 +547,7 @@
           <v-dialog v-model="dialogBatal" persistent max-width="500px">
             <v-card>
               <v-toolbar dark color="teal darken-3">
-                <v-toolbar-title>Batal Pembayaran</v-toolbar-title>
+                <v-toolbar-title>Alasan Pembatalan</v-toolbar-title>
 
                 <v-spacer></v-spacer>
 
@@ -539,6 +559,7 @@
               <v-select
                 v-model="note"
                 :items="noteTolak"
+                :rules="AlasanRules"
                 item-text="note"
                 item-value="id"
                 label="Alasan Tolak (Wajib Dipilih)"
@@ -606,6 +627,7 @@ export default {
     noteDetail: "",
     log: [],
     accounts: [],
+    AlasanRules: [(v) => !!v || "Anda belum memilih alasan pembatalan"],
   }),
   methods: {
     ...mapActions({
