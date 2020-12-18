@@ -260,11 +260,7 @@
                 dark
                 @click="dialogInfo = true"
                 class="mx-2"
-                v-if="
-                  liveBid.length > 0 &&
-                  (liveBid[0].IdAppUser == user.id ||
-                    iklan.id_app_user == user.id)
-                "
+                v-if="liveBid.length > 0 && liveBid[0].IdAppUser == user.id"
               >
                 {{
                   liveBid[0].IdAppUser == user.id
@@ -285,36 +281,37 @@
                     </v-btn>
                   </v-toolbar>
 
-                  <div v-if="!guest">
-                    <v-card-title v-if="hits.id_app_user == user.id">
-                      Segera hubungi pemenang iklan Anda
-                    </v-card-title>
-                  </div>
+                  <v-card-title>
+                    Segera hubungi pemenang iklan Anda
+                  </v-card-title>
 
-                  <v-btn
-                    value="left"
-                    tile
-                    color="white"
-                    v-if="liveBid.length > 0"
-                  >
-                    <div v-if="!guest">
-                      <a
-                        :href="'/chat/' + iklan.id_app_user"
-                        v-if="liveBid[0].IdAppUser == user.id"
-                      >
-                        Chat Penjual
+                  <div class="d-flex justify-space-around">
+                    <v-btn
+                      tile
+                      color="white"
+                      text
+                      v-if="liveBid[0].IdAppUser == user.id"
+                    >
+                      <a :href="'/chat/' + iklan.id_app_user"> Chat Penjual </a>
+                    </v-btn>
+
+                    <v-btn
+                      tile
+                      color="white"
+                      text
+                      v-if="hits.id_app_user == user.id"
+                    >
+                      <a :href="'/chat/' + liveBid[0].IdAppUser">
+                        Chat Pemenang
                       </a>
-                    </div>
-                    <a :href="'/chat/' + liveBid[0].IdAppUser" v-else>
-                      Chat Pemenang
-                    </a>
-                  </v-btn>
+                    </v-btn>
 
-                  <v-btn value="center" tile color="white">
-                    <a :href="'/detail-transaksi/' + orders.id">
-                      Detail Transaksi
-                    </a>
-                  </v-btn>
+                    <v-btn tile color="white" text>
+                      <a :href="'/detail-transaksi/' + orders.id">
+                        Detail Transaksi
+                      </a>
+                    </v-btn>
+                  </div>
                 </v-card>
               </v-dialog>
             </div>
@@ -954,17 +951,16 @@
 
                   <div v-if="!reactivated">
                     <div v-if="isAuto != null">
-                      <v-alert
-                        outlined
-                        type="error"
-                        prominent
-                        border="left"
-                        v-if="isAuto.max_bid < liveBid[0].Bid"
-                      >
+                      <v-alert outlined type="error" prominent border="left">
                         Harga saat ini sudah mencapai harga maksimal tawaran
                         Anda. Apakah Anda ingin mengaktifkan kembali Auto Tawar?
 
-                        <v-btn color="teal" dark small @click="reactivated = true">
+                        <v-btn
+                          color="teal"
+                          dark
+                          small
+                          @click="reactivated = true"
+                        >
                           Aktifkan Kembali
                         </v-btn>
                       </v-alert>
@@ -1268,9 +1264,9 @@ export default {
               Number(this.hits.harga_saat_ini) + Number(this.iklan.kelipatan);
             this.bid = this.penawaran;
           }
-          if (!this.guest) {
-            this.getAutoBid();
-          }
+          // if (!this.guest) {
+          //   this.getAutoBid();
+          // }
         })
         .catch((error) => {
           let responses = error.response.data;
@@ -1467,6 +1463,7 @@ export default {
         })
         .then((response) => {
           let { data } = response;
+          this.getAutoBid();
           if (data.api_status == 1) {
             this.sheet = !this.sheet;
             this.height = 350;
@@ -1475,6 +1472,7 @@ export default {
         })
         .catch((error) => {
           let responses = error.response.data;
+          this.getAutoBid();
           this.setAlert({
             status: true,
             color: "success",
@@ -1743,17 +1741,19 @@ export default {
         })
         .then((response) => {
           let { data } = response.data;
+          console.log(data);
+          console.log(data.length);
           if (data.length == 0) {
             this.isAuto = null;
             this.amountAuto = this.bid;
-            this.reactivated = true
+            this.reactivated = true;
           } else {
             this.isAuto = data[0];
             this.amountAuto = this.isAuto.max_bid;
-            if(this.isAuto.max_bid <= this.minBid){
-              this.reactivated = false
+            if (this.isAuto.max_bid <= this.minBid) {
+              this.reactivated = false;
             } else {
-              this.reactivated = true
+              this.reactivated = true;
             }
           }
         })

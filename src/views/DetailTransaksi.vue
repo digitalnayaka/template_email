@@ -200,7 +200,7 @@
         <v-col cols="12" sm="6" md="6">
           <h2 class="text-center">Informasi Produk</h2>
 
-          <v-card :height="orders.id_mst_order_status == 3 ? 390 : 310">
+          <v-card :height="orders.id_mst_order_status == 3 ? 390 : 350">
             <v-list>
               <v-list-item align="center">
                 <v-list-item-avatar tile size="100">
@@ -266,7 +266,12 @@
       <br />
 
       <div>
-        <v-alert dense outlined type="error" v-if="pengguna.id_type_pinalti == 1">
+        <v-alert
+          dense
+          outlined
+          type="error"
+          v-if="pengguna.id_type_pinalti == 1"
+        >
           <h4>
             Perhatian! Akun <b> {{ pengguna.nama_pembeli }} </b> sudah melakukan
             pembatalan transaksi sebanyak 1x. Anda tetap dapat melakukan
@@ -274,7 +279,12 @@
           </h4>
         </v-alert>
 
-        <v-alert dense outlined type="error" v-if="pengguna.id_type_pinalti == 2">
+        <v-alert
+          dense
+          outlined
+          type="error"
+          v-if="pengguna.id_type_pinalti == 2"
+        >
           <h4>
             Perhatian! Akun <b> {{ pengguna.nama_pembeli }} </b> sudah melakukan
             pembatalan transaksi sebanyak 2x. Anda tetap dapat melakukan
@@ -549,45 +559,52 @@
           </v-btn>
 
           <v-dialog v-model="dialogBatal" persistent max-width="500px">
-            <v-card>
-              <v-toolbar dark color="teal darken-3">
-                <v-toolbar-title>Alasan Pembatalan</v-toolbar-title>
+            <v-form ref="form" v-model="valid">
+              <v-card>
+                <v-toolbar dark color="teal darken-3">
+                  <v-toolbar-title>Alasan Pembatalan</v-toolbar-title>
 
-                <v-spacer></v-spacer>
+                  <v-spacer></v-spacer>
 
-                <v-btn icon @click="dialogBatal = false">
-                  <v-icon>mdi-close</v-icon>
-                </v-btn>
-              </v-toolbar>
+                  <v-btn icon @click="dialogBatal = false">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                </v-toolbar>
 
-              <v-select
-                v-model="note"
-                :items="noteTolak"
-                :rules="AlasanRules"
-                item-text="note"
-                item-value="id"
-                label="Alasan Tolak (Wajib Dipilih)"
-                solo
-                class="px-2 pt-2"
-              ></v-select>
+                <v-select
+                  v-model="note"
+                  :items="noteTolak"
+                  :rules="AlasanRules"
+                  item-text="note"
+                  item-value="id"
+                  label="Alasan Tolak (Wajib Dipilih)"
+                  solo
+                  class="px-2 pt-2"
+                ></v-select>
 
-              <v-card-text v-if="note == 1">
                 <v-textarea
                   label="Alasan Menolak"
                   v-model="noteDetail"
                   rows="1"
                   auto-grow
+                  class="mx-4"
+                  v-if="note == 1"
                 ></v-textarea>
-              </v-card-text>
 
-              <v-card-actions>
-                <v-spacer></v-spacer>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
 
-                <v-btn color="blue darken-1" dark @click="batalkan">
-                  Batalkan
-                </v-btn>
-              </v-card-actions>
-            </v-card>
+                  <v-btn
+                    color="blue darken-1"
+                    class="white--text"
+                    @click="batalkan"
+                    :disabled="!valid"
+                  >
+                    Batalkan
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-form>
           </v-dialog>
         </div>
       </div>
@@ -633,6 +650,7 @@ export default {
     accounts: [],
     AlasanRules: [(v) => !!v || "Anda belum memilih alasan pembatalan"],
     pengguna: [],
+    valid: true,
   }),
   methods: {
     ...mapActions({
