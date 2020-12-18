@@ -260,7 +260,11 @@
                 dark
                 @click="dialogInfo = true"
                 class="mx-2"
-                v-if="liveBid.length > 0 && liveBid[0].IdAppUser == user.id"
+                v-if="
+                  liveBid.length > 0 &&
+                  (liveBid[0].IdAppUser == user.id ||
+                    hits.id_app_user == user.id)
+                "
               >
                 {{
                   liveBid[0].IdAppUser == user.id
