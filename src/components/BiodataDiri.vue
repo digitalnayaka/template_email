@@ -9,6 +9,7 @@
             max-width="300"
             max-height="300"
           ></v-img>
+
           <v-img
             src="/img/icons/people.webp"
             v-if="user.photo == null"
@@ -16,6 +17,7 @@
             max-width="300"
             max-height="300"
           ></v-img>
+          
           <v-file-input
             id="fileid"
             label="File input"

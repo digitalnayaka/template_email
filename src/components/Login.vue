@@ -9,7 +9,6 @@
         <a href="/">
           <v-img src="/img/logo-tulisan.webp" max-width="200" contain></v-img>
         </a>
-      
       </v-toolbar-title>
     </v-toolbar>
 
@@ -24,7 +23,7 @@
             color="teal lighten-5"
           >
             <div v-if="phoneDisplay">
-                 <h2>Masuk dengan akun SiMotor</h2>
+              <h2>Masuk dengan akun SiMotor</h2>
 
               <v-img
                 src="/img/icons/people2.webp"
@@ -33,7 +32,7 @@
                 contain
               ></v-img>
 
-           <v-divider> </v-divider>
+              <v-divider> </v-divider>
 
               <v-text-field
                 v-model="phone"
@@ -58,8 +57,9 @@
                 class="white--text"
                 :disabled="!valid"
                 @click="logincheck"
-                >Selanjutnya</v-btn
               >
+                Selanjutnya
+              </v-btn>
 
               <div class="d-flex align-center pt-5">
                 <v-divider></v-divider>
@@ -70,6 +70,7 @@
               </div>
 
               <section id="firebaseui-auth-container"></section>
+              
               Belum punya akun SiMotor?
               <a @click="setDialogComponent('daftar')">Daftar sekarang</a>
             </div>
