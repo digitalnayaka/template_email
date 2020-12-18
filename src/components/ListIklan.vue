@@ -4,14 +4,14 @@
       class="rounded-lg mx-auto my-12"
       
       tile
-      width="300"
+      width="500"
       :href="'/iklan/' + item._source.id"
     >
       <v-img
         :src="getThumb(item._source.photo)"
         
         align="center"
-        width="300"
+        width="500"
         height="230"
         class="rounded-lg"
       >

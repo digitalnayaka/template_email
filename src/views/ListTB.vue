@@ -141,7 +141,7 @@
                   ></v-img>
                 </v-avatar>
 
-                <div>Kecewa</div>
+                <div>Cukup memuaskan</div>
               </div>
 
               <div v-if="avg.ratting_user == 2">
@@ -149,7 +149,7 @@
                   <v-img src="/img/icons/emoji_netral.png" alt="rating"></v-img>
                 </v-avatar>
 
-                <div>Netral</div>
+                <div>Cukup Memuaskan</div>
               </div>
 
               <div v-if="avg.ratting_user == 3">
@@ -157,7 +157,7 @@
                   <v-img src="/img/icons/emoji_puas.png" alt="rating"></v-img>
                 </v-avatar>
 
-                <div>Puas</div>
+                <div>Sangat Memuaskan</div>
               </div>
             </v-col>
 

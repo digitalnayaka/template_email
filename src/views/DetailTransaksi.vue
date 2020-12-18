@@ -264,23 +264,34 @@
       </v-row>
 
       <br />
-
-      <div>
-        <v-alert dense outlined type="error" v-if="pengguna.id_type_pinalti == 1">
+      
+      <div v-if ="user.id != orders.id_pembeli" >
+        <v-alert
+          dense
+          outlined
+          type="error"
+          v-if="pengguna.id_type_pinalti == 1"
+        >
           <h4>
-            Perhatian! Akun <b> {{ pengguna.nama_pembeli }} </b> sudah melakukan
+            Perhatian! Akun <b> {{ pengguna.nama }} </b> sudah melakukan
             pembatalan transaksi sebanyak 1x. Anda tetap dapat melakukan
             konfirmasi atas transaksi ini!
           </h4>
         </v-alert>
 
-        <v-alert dense outlined type="error" v-if="pengguna.id_type_pinalti == 2">
+        <v-alert
+          dense
+          outlined
+          type="error"
+          v-if="pengguna.id_type_pinalti == 2"
+        >
           <h4>
-            Perhatian! Akun <b> {{ pengguna.nama_pembeli }} </b> sudah melakukan
+            Perhatian! Akun <b> {{ pengguna.nama }} </b> sudah melakukan
             pembatalan transaksi sebanyak 2x. Anda tetap dapat melakukan
             konfirmasi atas transaksi ini!
           </h4>
-        </v-alert> -->
+        </v-alert>
+        
       </div>
 
       <v-btn
@@ -1046,6 +1057,9 @@ export default {
     this.getOrder();
     this.detailTolak();
     this.logStatus();
+  },
+  created(){
+    this.getUsers();
   },
   computed: {
     ...mapGetters({

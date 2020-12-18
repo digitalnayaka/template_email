@@ -253,7 +253,6 @@
 
           <div align="center" v-if="start == true && end == true">
             <h2 class="teal--text">Tawar Bersama selesai</h2>
-
             <div v-if="!guest">
               <v-btn
                 color="indigo darken-3"
@@ -394,11 +393,15 @@
                   <v-card
                     :to="'/garasi/detail-unit/' + item.id"
                     class="rounded-lg"
+                    max-height="300"
+                      max-weight="100"
                   >
                     <v-img
                       :src="getImage(item.foto_1)"
-                      height="230"
+                      max-height="200"
+                      max-weight="100"
                       contain
+                      align="center"
                     ></v-img>
 
                     <v-divider></v-divider>
@@ -646,6 +649,7 @@
           v-else
         >
           <h2>Belum ada Penawaran</h2>
+         
         </v-card>
       </v-tab-item>
     </v-tabs-items>
