@@ -262,23 +262,27 @@
           </v-card>
         </v-col>
       </v-row>
+
       <br />
+
       <div>
-        <v-alert dense outlined type="error" v-if="user.id_type_pinalti == 1">
+        <v-alert dense outlined type="error" v-if="pengguna.id_type_pinalti == 1">
           <h4>
-            Perhatian! Akun <b> {{ orders.nama_pembeli }} </b> sudah melakukan
+            Perhatian! Akun <b> {{ pengguna.nama_pembeli }} </b> sudah melakukan
             pembatalan transaksi sebanyak 1x. Anda tetap dapat melakukan
             konfirmasi atas transaksi ini!
           </h4>
         </v-alert>
-        <v-alert dense outlined type="error" v-if="user.id_type_pinalti == 2">
+
+        <v-alert dense outlined type="error" v-if="pengguna.id_type_pinalti == 2">
           <h4>
-            Perhatian! Akun <b> {{ orders.nama_pembeli }} </b> sudah melakukan
+            Perhatian! Akun <b> {{ pengguna.nama_pembeli }} </b> sudah melakukan
             pembatalan transaksi sebanyak 2x. Anda tetap dapat melakukan
             konfirmasi atas transaksi ini!
           </h4>
         </v-alert>
       </div>
+
       <v-btn
         block
         color="primary"
@@ -628,6 +632,7 @@ export default {
     log: [],
     accounts: [],
     AlasanRules: [(v) => !!v || "Anda belum memilih alasan pembatalan"],
+    pengguna: [],
   }),
   methods: {
     ...mapActions({
@@ -653,6 +658,7 @@ export default {
           this.getIklan(this.orders.id_iklan);
           this.getRekening();
           this.logStatus();
+          this.getUsers();
 
           if (
             this.orders.id_mst_pembayaran_status == 4 ||
@@ -998,6 +1004,30 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.log = data;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
+        });
+    },
+    getUsers() {
+      this.axios
+        .get("/user/v3/user", {
+          params: {
+            id: this.orders.id_pembeli,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.pengguna = data[0];
         })
         .catch((error) => {
           let responses = error.response.data;
