@@ -263,21 +263,21 @@
         </v-col>
       </v-row>
       <br />
-      <div>
-        <v-alert dense outlined type="error" v-if="user.id_type_pinalti == 1">
+      <div >
+        <v-alert dense outlined type="error" v-if="user.id != orders.id_pembeli && user.id_type_pinalti == 2">
           <h4>
             Perhatian! Akun <b> {{ orders.nama_pembeli }} </b> sudah melakukan
             pembatalan transaksi sebanyak 1x. Anda tetap dapat melakukan
             konfirmasi atas transaksi ini!
           </h4>
         </v-alert>
-        <v-alert dense outlined type="error" v-if="user.id_type_pinalti == 2">
+        <!-- <v-alert dense outlined type="error" v-if="user.id != orders.id_pembeli">
           <h4>
             Perhatian! Akun <b> {{ orders.nama_pembeli }} </b> sudah melakukan
             pembatalan transaksi sebanyak 2x. Anda tetap dapat melakukan
             konfirmasi atas transaksi ini!
           </h4>
-        </v-alert>
+        </v-alert> -->
       </div>
       <v-btn
         block
