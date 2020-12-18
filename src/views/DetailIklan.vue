@@ -964,7 +964,7 @@
                 </div>
 
                 <br />
-                <div v-if="isAuto.max_bid <= liveBid[0].Bid ? true : false">
+                <div >
                   <v-alert outlined type="error" prominent border="left">
                     Harga saat ini sudah mencapai harga maksimal tawaran Anda.
                     Apakah Anda ingin mengaktifkan kembali Auto Tawar?
