@@ -9,26 +9,25 @@
     <h1 class="text-center">Detail Transaksi</h1>
 
     <v-card flat>
-      <v-card
-        flat
-        align="center"
-        color="deep-orange lighten-3
-"
-      >
-        <v-avatar size="16" tile>
-          <v-img src="/img/error.png"></v-img>
-        </v-avatar>
-        Selalu waspada terhadap pihak yang tidak bertanggung jawab. Pastikan
-        bukti pembayaran yang diupload sudah benar.
-      </v-card>
-
+     
       <v-container
         fluid
         class="text-center"
         v-if="orders.id_mst_pembayaran_status == 1"
       >
-        <h2>Batas Waktu Pembayaran</h2>
-
+       
+         <v-card
+          flat
+          align="center"
+          color="deep-orange lighten-3"
+        >
+          <v-avatar size="16" tile>
+            <v-img src="/img/error.png"></v-img>
+          </v-avatar>
+          Selalu waspada terhadap pihak yang tidak bertanggung jawab. Pastikan
+          bukti pembayaran yang diupload sudah benar.
+        </v-card>
+         <h3>Batas Waktu Pembayaran</h3>
         <flip-countdown :deadline="countdown"></flip-countdown>
 
         <v-card flat color="grey lighten-3">
@@ -36,7 +35,32 @@
           {{ timezone }}
         </v-card>
       </v-container>
+      <v-container
+        fluid
+        class="text-center"
+        v-if="orders.id_mst_pembayaran_status == 10"
+      > 
+        <v-card
+          flat
+          align="center"
+          color="deep-orange lighten-3
+"
+        >
+        
+          <v-avatar size="16" tile>
+            <v-img src="/img/error.png"></v-img>
+          </v-avatar>
+          Lakukan konfirmasi penjualan diterima atau ditolak dengan batas waktu
+          yang ditentukan
+        </v-card>
+        <h3>Batas Waktu Konfirmasi</h3>
+        <flip-countdown :deadline="countdown"></flip-countdown>
 
+        <v-card flat color="grey lighten-3">
+          Sebelum: {{ orders.expired_at | dateTimeFormat(utc) }}
+          {{ timezone }}
+        </v-card>
+      </v-container>
       <v-divider></v-divider>
 
       <v-row no-gutters align="center" class="mt-2">
@@ -264,8 +288,8 @@
       </v-row>
 
       <br />
-      
-      <div v-if ="user.id != orders.id_pembeli" >
+
+      <div v-if="user.id != orders.id_pembeli">
         <v-alert
           dense
           outlined
@@ -291,7 +315,6 @@
             konfirmasi atas transaksi ini!
           </h4>
         </v-alert>
-        
       </div>
 
       <v-btn
@@ -1066,7 +1089,7 @@ export default {
     this.detailTolak();
     this.logStatus();
   },
-  created(){
+  created() {
     this.getUsers();
   },
   computed: {
