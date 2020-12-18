@@ -30,17 +30,11 @@
               :value="tag.id"
               @click="filterStatus"
             >
-              <v-img
-                :src="tag.img"
-                contain
-                :width="25"
-                :height="25"
-                v-on="on"
-              ></v-img>
+              <v-img :src="tag.img" contain width="25" height="25"></v-img>
               {{ tag.text }}
-              <span class="ml-1" v-if="tag.id == chip"
-                >({{ orders.length }})</span
-              >
+              <span class="ml-1" v-if="tag.id == chip">
+                ({{ orders.length }})
+              </span>
             </v-chip>
           </div>
         </v-chip-group>
