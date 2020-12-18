@@ -1741,8 +1741,6 @@ export default {
         })
         .then((response) => {
           let { data } = response.data;
-          console.log(data);
-          console.log(data.length);
           if (data.length == 0) {
             this.isAuto = null;
             this.amountAuto = this.bid;
