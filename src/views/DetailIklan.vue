@@ -1746,6 +1746,7 @@ export default {
           if (data.length == 0) {
             this.isAuto = null;
             this.amountAuto = this.bid;
+            this.reactivated = true
           } else {
             this.isAuto = data[0];
             this.amountAuto = this.isAuto.max_bid;
