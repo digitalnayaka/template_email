@@ -350,7 +350,7 @@
 
                 <v-list-item>
                   <v-list-item-avatar>
-                    <v-img src="/img/icons/icon_jenis_motor.png"></v-img>
+                    <v-img src="/img/icons/icon_jenis_motor.webp"></v-img>
                   </v-list-item-avatar>
 
                   <v-list-item-content>
@@ -384,7 +384,7 @@
             <v-col cols="12" sm="6">
               <v-list-item>
                 <v-list-item-avatar>
-                  <v-img src="/img/icons/icon_list.png"></v-img>
+                  <v-img src="/img/icons/icon_list.webp"></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -519,7 +519,7 @@
             <v-list dense>
               <v-list-item>
                 <v-list-item-avatar>
-                  <v-img src="/img/icons/icon_jenis_iklan.png"></v-img>
+                  <v-img src="/img/icons/icon_jenis_iklan.webp"></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -536,7 +536,7 @@
 
               <v-list-item>
                 <v-list-item-avatar>
-                  <v-img src="/img/icons/icon_tiket_dibutuhkan.png"></v-img>
+                  <v-img src="/img/icons/icon_tiket_dibutuhkan.webp"></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -552,7 +552,7 @@
 
               <v-list-item>
                 <v-list-item-avatar>
-                  <v-img src="/img/icons/icon_jumlah_tiket.png"></v-img>
+                  <v-img src="/img/icons/icon_jumlah_tiket.webp"></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -570,7 +570,7 @@
             <v-list dense>
               <v-list-item>
                 <v-list-item-avatar>
-                  <v-img src="/img/icons/icon_harga_awal.png"></v-img>
+                  <v-img src="/img/icons/icon_harga_awal.webp"></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
@@ -587,7 +587,7 @@
 
               <v-list-item>
                 <v-list-item-avatar>
-                  <v-img src="/img/icons/icon_harga_kelipatan.png"></v-img>
+                  <v-img src="/img/icons/icon_harga_kelipatan.webp"></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>

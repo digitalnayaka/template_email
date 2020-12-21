@@ -6,7 +6,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_id_iklan.png"></v-img>
+            <v-img src="/img/icons/icon_id_iklan.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -56,7 +56,7 @@
         <v-divider></v-divider>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_merek.png"></v-img>
+            <v-img src="/img/icons/icon_merek.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -70,7 +70,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_tipe.png"></v-img>
+            <v-img src="/img/icons/icon_tipe.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -84,7 +84,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_tahun.png"></v-img>
+            <v-img src="/img/icons/icon_tahun.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -98,7 +98,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_odometer.png"></v-img>
+            <v-img src="/img/icons/icon_odometer.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -112,7 +112,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_warna.png"></v-img>
+            <v-img src="/img/icons/icon_warna.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -126,7 +126,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_cc_mesin.png"></v-img>
+            <v-img src="/img/icons/icon_cc_mesin.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -140,7 +140,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_transmisi.png"></v-img>
+            <v-img src="/img/icons/icon_transmisi.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -168,7 +168,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_lokasi_samsat.png"></v-img>
+            <v-img src="/img/icons/icon_lokasi_samsat.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -182,7 +182,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_lokasi.png"></v-img>
+            <v-img src="/img/icons/icon_lokasi.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -200,7 +200,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_stnk.png"></v-img>
+            <v-img src="/img/icons/icon_stnk.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -230,7 +230,7 @@
 
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_lembar_pajak.png"></v-img>
+            <v-img src="/img/icons/icon_lembar_pajak.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -263,7 +263,7 @@
         <v-divider></v-divider>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="/img/icons/icon_bpkb.png"></v-img>
+            <v-img src="/img/icons/icon_bpkb.webp"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
