@@ -54,7 +54,6 @@ import "viewerjs/dist/viewer.css";
 import Viewer from "v-viewer";
 import Vue from "vue";
 Vue.use(Viewer);
-
 export default {
   name: "unit-mokas",
   components: {
@@ -92,7 +91,6 @@ export default {
           let { data } = response.data;
           this.unitMokas = data[0];
           this.linkIklan(this.unitMokas.id);
-
           let foto1 = this.unitMokas.foto_1;
           let foto2 = this.unitMokas.foto_2;
           let foto3 = this.unitMokas.foto_3;
@@ -128,7 +126,6 @@ export default {
         .then((response) => {
           let { data } = response.data;
           this.iklan = data[0];
-
           this.getDtlIklan(this.iklan.id_iklan);
         })
         .catch((error) => {
@@ -198,10 +195,8 @@ export default {
       var r = confirm("Yakin akan dihapus");
       if (r == true) {
         let formData = new FormData();
-
         formData.append("id", this.id);
         formData.append("limit", 1);
-
         this.axios
           .post("/produk/v3/unit_mokas_delete", formData, {
             headers: { Authorization: "Bearer " + this.user.token },

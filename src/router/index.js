@@ -41,17 +41,13 @@ const routes = [
     path: '/bantuan',
     name: 'bantuan',
     component: () => import(/* webpackChunkName: "bantuan" */ '../views/Bantuan.vue'),
-    meta: {
-      Auth: true
-    }
+   
   },
   {
     path: '/ticket-rules',
     name: 'ticket-rules',
     component: () => import(/* webpackChunkName: "ticket-rules" */ '../views/TicketRules.vue'),
-    meta: {
-      Auth: true
-    }
+    
   },
   {
     path: '/tb-rules',
@@ -83,9 +79,7 @@ const routes = [
     path: '/bengkel',
     name: 'bengkel',
     component: () => import(/* webpackChunkName: "bengkel" */ '../views/Bengkel.vue'),
-    meta: {
-      Auth: true
-    }
+ 
   },
   {
     path: '/iklan-favorit',
