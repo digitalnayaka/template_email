@@ -272,8 +272,6 @@
                 }}
               </v-btn>
 
-              
-
               <v-dialog v-model="dialogInfo" persistent max-width="500px">
                 <v-card>
                   <v-toolbar color="teal darken-3" dark>
@@ -397,7 +395,7 @@
                     :to="'/garasi/detail-unit/' + item.id"
                     class="rounded-lg"
                     max-height="300"
-                      max-weight="100"
+                    max-weight="100"
                   >
                     <v-img
                       :src="getImage(item.foto_1)"
@@ -652,7 +650,6 @@
           v-else
         >
           <h2>Belum ada Penawaran</h2>
-         
         </v-card>
       </v-tab-item>
     </v-tabs-items>
