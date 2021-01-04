@@ -81,7 +81,7 @@ export default {
     }),
     unit_mokas() {
       this.axios
-        .get("/produk/v3/unit_mokas_iklan", {
+        .get("/produk/v3/unit_mokas", {
           params: {
             id: this.id,
             limit: 1,
