@@ -212,7 +212,8 @@
 
       <v-divider></v-divider>
 
-      <div align="center"
+      <div
+        align="center"
         v-if="orders.id_mst_order_status != 3 && orders.id_mst_order_type == 1"
       >
         <h2>Konfirmasi Pembelian</h2>
@@ -320,6 +321,8 @@ export default {
   methods: {
     ...mapActions({
       setAlert: "alert/set",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
     }),
     getOrder() {
       this.axios
@@ -352,13 +355,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     upload() {
@@ -390,6 +386,13 @@ export default {
             color: "success",
             text: responses.api_message,
           });
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     batalkan() {
@@ -420,6 +423,13 @@ export default {
             color: "success",
             text: responses.api_message,
           });
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     dtlPembayaran(id_pembayaran) {
@@ -439,13 +449,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     async getGambar() {
@@ -496,13 +499,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
   },

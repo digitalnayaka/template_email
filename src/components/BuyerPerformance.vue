@@ -104,6 +104,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import FlipCountdown from "vue2-flip-countdown";
 import moment from "moment-timezone";
 
@@ -118,6 +119,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
+    }),
     getUsers() {
       this.axios
         .get("/user/v3/user", {
@@ -143,13 +148,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
   },

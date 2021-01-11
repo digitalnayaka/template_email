@@ -17,7 +17,7 @@
             max-width="300"
             max-height="300"
           ></v-img>
-          
+
           <v-file-input
             id="fileid"
             label="File input"
@@ -254,13 +254,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     saveData(param, value) {
@@ -295,6 +288,13 @@ export default {
               color: "error",
               text: responses.api_message,
             });
+            if (error.response.status == 403) {
+              this.setAuth(null);
+              this.setToken(null);
+              window.localStorage.setItem("user", null);
+              window.localStorage.setItem("token", null);
+              window.location.href = "/";
+            }
           });
       } else {
         this.setAlert({
@@ -333,6 +333,13 @@ export default {
             color: "error",
             text: responses.api_message,
           });
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     reviewAvg() {
@@ -349,13 +356,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
   },

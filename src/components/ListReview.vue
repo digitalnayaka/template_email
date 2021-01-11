@@ -27,7 +27,6 @@
       <v-col cols="12" sm="6">
         <v-list>
           <v-list-item>
-            
             <v-list-item-avatar tile size="70">
               <v-img
                 src="/img/profile.png"
@@ -116,7 +115,7 @@
               </v-list-item-title>
 
               <v-list-item-subtitle v-if="rating == 0">
-               Berikan Ulasan
+                Berikan Ulasan
               </v-list-item-subtitle>
 
               <v-list-item-subtitle class="d-inline-flex" v-else>
@@ -184,7 +183,9 @@
                 ></star-rating>
 
                 <div class="text-caption">
-                  <div v-if="rating == 0">Bantu pembeli lain dengan bagikan pengalamanmu</div>
+                  <div v-if="rating == 0">
+                    Bantu pembeli lain dengan bagikan pengalamanmu
+                  </div>
                   <div v-if="rating == 1">Tidak Memuaskan</div>
                   <div v-if="rating == 2">Kurang Memuaskan</div>
                   <div v-if="rating == 3">Cukup Memuaskan</div>
@@ -351,6 +352,8 @@ export default {
   methods: {
     ...mapActions({
       setAlert: "alert/set",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN"
     }),
     setPoint(item) {
       let r = confirm("Apakah Anda yakin memberi penilaian " + item.text + "?");
@@ -444,6 +447,13 @@ export default {
           .catch((error) => {
             let responses = error.response.data;
             console.log(responses);
+            if (error.response.status == 403) {
+              this.setAuth(null);
+              this.setToken(null);
+              window.localStorage.setItem("user", null);
+              window.localStorage.setItem("token", null);
+              window.location.href = "/";
+            }
           });
       }
     },

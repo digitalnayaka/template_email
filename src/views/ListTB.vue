@@ -295,6 +295,8 @@
                 </v-col>
               </v-row>
 
+              <br />
+
               <v-pagination
                 v-model="page"
                 @input="daftarTB"
@@ -933,13 +935,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
     sellerInfo() {
@@ -964,13 +960,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
     getSlogan() {
@@ -979,7 +969,6 @@ export default {
           params: {
             id_app_user: this.appuser.id,
           },
-          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -990,13 +979,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
     getCatatan() {
@@ -1006,7 +989,6 @@ export default {
             id_app_user: this.appuser.id,
             type_catatan: 2,
           },
-          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -1015,13 +997,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
     getKebijakan() {
@@ -1031,7 +1007,6 @@ export default {
             id_app_user: this.appuser.id,
             type_catatan: 1,
           },
-          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -1040,13 +1015,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
 
@@ -1076,13 +1045,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
     clear() {
@@ -1110,13 +1073,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
     saveFilter() {
@@ -1148,13 +1105,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
     myReview() {
@@ -1167,7 +1118,6 @@ export default {
             offset: offset,
             limit: this.limit,
           },
-          headers: { Authorization: "Bearer " + this.user.token },
         })
         .then((response) => {
           let { data } = response.data;
@@ -1180,13 +1130,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
     reviewAvg() {
@@ -1203,13 +1147,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
   },

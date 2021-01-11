@@ -17,14 +17,21 @@
                 <h1 class="text-left">{{ tersedia }}</h1>
                 <h3 class="text-left">Tiket Tersedia</h3>
 
-                <h5
-                  class="text-left"
-                >Tiket yang tersedia dapat Anda refund. Silahkan refund dengan klik tombol dibawah ini:</h5>
+                <h5 class="text-left">
+                  Tiket yang tersedia dapat Anda refund. Silahkan refund dengan
+                  klik tombol dibawah ini:
+                </h5>
 
                 <v-dialog v-model="dialog" fullscreen>
                   <template v-slot:activator="{ on, attrs }">
                     <div align="right" class="mt-4">
-                      <v-btn dark v-bind="attrs" v-on="on" @click="open" color="teal darken-2">
+                      <v-btn
+                        dark
+                        v-bind="attrs"
+                        v-on="on"
+                        @click="open"
+                        color="teal darken-2"
+                      >
                         Pilih Tiket
                         <v-icon>mdi-chevron-right</v-icon>
                       </v-btn>
@@ -44,13 +51,17 @@
                       class="mx-2"
                       @click="getTiket"
                       :disabled="listRefund.length > 0 ? false : true"
-                    >Refund</v-btn>
+                      >Refund</v-btn
+                    >
                   </v-toolbar>
 
                   <v-card>
                     <v-container fluid>
                       <div class="d-flex justify-space-between">
-                        <h3>Pilih tiket yang akan di refund: {{ listRefund.length }} Tiket</h3>
+                        <h3>
+                          Pilih tiket yang akan di refund:
+                          {{ listRefund.length }} Tiket
+                        </h3>
                         <v-switch
                           class="my-0 py-0"
                           label="Select All"
@@ -61,14 +72,23 @@
 
                       <v-item-group>
                         <v-row>
-                          <v-col cols="12" sm="4" v-for="item in listTersedia" :key="item.id">
+                          <v-col
+                            cols="12"
+                            sm="4"
+                            v-for="item in listTersedia"
+                            :key="item.id"
+                          >
                             <v-item v-slot:default="{ active }">
                               <v-card>
                                 <v-list>
                                   <v-list-item>
                                     <v-list-item-content>
-                                      <v-list-item-subtitle>Kode Tiket</v-list-item-subtitle>
-                                      <v-list-item-title>{{ item.code }}</v-list-item-title>
+                                      <v-list-item-subtitle
+                                        >Kode Tiket</v-list-item-subtitle
+                                      >
+                                      <v-list-item-title>{{
+                                        item.code
+                                      }}</v-list-item-title>
                                     </v-list-item-content>
 
                                     <v-list-item-action>
@@ -82,17 +102,30 @@
 
                                   <v-list-item>
                                     <v-list-item-content>
-                                      <v-list-item-subtitle>Harga</v-list-item-subtitle>
-                                      <v-list-item-title
-                                        class="teal--text"
-                                      >Rp {{ Number(item.harga_beli).toLocaleString("id-ID") }}</v-list-item-title>
+                                      <v-list-item-subtitle
+                                        >Harga</v-list-item-subtitle
+                                      >
+                                      <v-list-item-title class="teal--text"
+                                        >Rp
+                                        {{
+                                          Number(
+                                            item.harga_beli
+                                          ).toLocaleString("id-ID")
+                                        }}</v-list-item-title
+                                      >
                                     </v-list-item-content>
 
                                     <v-list-item-content>
-                                      <v-list-item-subtitle>Masa Berlaku</v-list-item-subtitle>
+                                      <v-list-item-subtitle
+                                        >Masa Berlaku</v-list-item-subtitle
+                                      >
                                       <v-list-item-title
                                         class="red--text text-caption"
-                                      >{{ item.expired_at | dateTimeFormat(utc) }} {{ timezone }}</v-list-item-title>
+                                        >{{
+                                          item.expired_at | dateTimeFormat(utc)
+                                        }}
+                                        {{ timezone }}</v-list-item-title
+                                      >
                                     </v-list-item-content>
                                   </v-list-item>
                                 </v-list>
@@ -119,15 +152,19 @@
 
           <h2>Detail Tiket</h2>
 
-          <v-row v-for="(item,i) in groupHarga" :key="i">
-            <v-col
-              cols="6"
-              class="text-left"
-            >- {{ item.qty.length }} Tiket x Rp {{ Number(item.harga_beli).toLocaleString("id-ID") }}</v-col>
-            <v-col
-              cols="6"
-              class="text-right"
-            >Rp {{ Number(item.qty.length * item.harga_beli).toLocaleString("id-ID") }}</v-col>
+          <v-row v-for="(item, i) in groupHarga" :key="i">
+            <v-col cols="6" class="text-left"
+              >- {{ item.qty.length }} Tiket x Rp
+              {{ Number(item.harga_beli).toLocaleString("id-ID") }}</v-col
+            >
+            <v-col cols="6" class="text-right"
+              >Rp
+              {{
+                Number(item.qty.length * item.harga_beli).toLocaleString(
+                  "id-ID"
+                )
+              }}</v-col
+            >
           </v-row>
 
           <v-row>
@@ -152,8 +189,12 @@
 
               <v-list-item-content class="text-left">
                 <v-list-item-title>{{ item.bank_name }}</v-list-item-title>
-                <v-list-item-subtitle>{{ item.nomor_rekening }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ item.nama_rekening }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{
+                  item.nomor_rekening
+                }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{
+                  item.nama_rekening
+                }}</v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action>
@@ -186,7 +227,7 @@
                         :items="banks"
                         item-value="id"
                         item-text="bank_name"
-                        :rules="[v => !!v || 'Field is required']"
+                        :rules="[(v) => !!v || 'Field is required']"
                         label="Pilih Nama Bank"
                       ></v-select>
                     </v-col>
@@ -194,7 +235,7 @@
                       <v-text-field
                         v-model="editedItem.nama_rekening"
                         :counter="20"
-                        :rules="[v => !!v || 'Field is required']"
+                        :rules="[(v) => !!v || 'Field is required']"
                         label="Nama Pemilik Rekening"
                       ></v-text-field>
                     </v-col>
@@ -202,7 +243,10 @@
                       <v-text-field
                         v-model="editedItem.nomor_rekening"
                         :counter="20"
-                        :rules="[v => !!v || 'Field is required', v => /^\d+$/.test(v) || 'Numbers Only']"
+                        :rules="[
+                          (v) => !!v || 'Field is required',
+                          (v) => /^\d+$/.test(v) || 'Numbers Only',
+                        ]"
                         label="Nomor Rekening"
                       ></v-text-field>
                     </v-col>
@@ -212,14 +256,29 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" dark class="mb-2" align="right" @click="save">Simpan</v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  dark
+                  class="mb-2"
+                  align="right"
+                  @click="save"
+                  >Simpan</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-dialog>
 
-          <v-btn block class="ma-2" color="primary" @click="dialogRekening = true">Tambah Rekening</v-btn>
+          <v-btn
+            block
+            class="ma-2"
+            color="primary"
+            @click="dialogRekening = true"
+            >Tambah Rekening</v-btn
+          >
 
-          <h4 class="my-3">*Refund akan diproses maksimal 2x24 Jam hari kerja</h4>
+          <h4 class="my-3">
+            *Refund akan diproses maksimal 2x24 Jam hari kerja
+          </h4>
           <!-- <h5 class="my-3">Jumlah refund diatas belum termasuk biaya antar bank</h5> -->
 
           <v-btn
@@ -228,7 +287,8 @@
             color="teal"
             @click="refund"
             :disabled="selected == '' || !valid2 ? true : false"
-          >Refund</v-btn>
+            >Refund</v-btn
+          >
         </v-container>
       </v-card>
     </div>
@@ -273,6 +333,8 @@ export default {
   methods: {
     ...mapActions({
       setAlert: "alert/set",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
     }),
     totalTiket() {
       this.axios
@@ -289,13 +351,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getRekening() {
@@ -314,13 +369,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getBank() {
@@ -335,13 +383,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     close() {
@@ -443,13 +484,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     open() {

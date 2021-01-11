@@ -9,7 +9,13 @@
     <v-stepper v-model="e1">
       <v-stepper-header>
         <template v-for="n in steps">
-          <v-stepper-step :key="`${n}-step`" :complete="e1 > n" :step="n" editable>Tahap {{ n }}</v-stepper-step>
+          <v-stepper-step
+            :key="`${n}-step`"
+            :complete="e1 > n"
+            :step="n"
+            editable
+            >Tahap {{ n }}</v-stepper-step
+          >
           <v-divider v-if="n !== steps" :key="n"></v-divider>
         </template>
       </v-stepper-header>
@@ -21,20 +27,23 @@
               <v-card-title>Pilih Foto Motor Anda</v-card-title>
 
               <div class="d-flex flex-wrap justify-space-around text-center">
-                <div v-for="(item) in list" :key="item.id">
+                <div v-for="item in list" :key="item.id">
                   <image-uploader
                     v-model="item.foto"
                     :quality="0.7"
                     :scaleRatio="0.5"
                     accept="image/*"
                     :preview="false"
-                    :className="['fileinput', { 'fileinput--loaded': hasImage }]"
+                    :className="[
+                      'fileinput',
+                      { 'fileinput--loaded': hasImage },
+                    ]"
                     :autoRotate="true"
                     outputFormat="blob"
-                    @input="setImage('foto'+item.id)"
-                    :id="'foto'+item.id"
+                    @input="setImage('foto' + item.id)"
+                    :id="'foto' + item.id"
                   >
-                    <label :for="'foto'+item.id" slot="upload-label">
+                    <label :for="'foto' + item.id" slot="upload-label">
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
                           <v-img
@@ -49,7 +58,7 @@
                       </v-tooltip>
                     </label>
                   </image-uploader>
-                  {{item.label}}
+                  {{ item.label }}
                 </div>
               </div>
 
@@ -67,11 +76,18 @@
 
               <v-card-text
                 class="d-flex flex-nowrap justify-space-between text-center mb-4"
-                style="overflow-x: auto;"
+                style="overflow-x: auto"
               >
-                <v-card flat v-for="(item) in list" :key="item.id" class="mx-2">
-                  <v-img :src="item.previewUrl" contain width="180" height="180"></v-img>
-                  <v-chip small left color="red" text-color="white">{{item.label}}</v-chip>
+                <v-card flat v-for="item in list" :key="item.id" class="mx-2">
+                  <v-img
+                    :src="item.previewUrl"
+                    contain
+                    width="180"
+                    height="180"
+                  ></v-img>
+                  <v-chip small left color="red" text-color="white">{{
+                    item.label
+                  }}</v-chip>
                 </v-card>
               </v-card-text>
 
@@ -202,11 +218,18 @@
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title>Lembar Pajak Ada</v-list-item-title>
-                    <v-list-item-subtitle>Anda memiliki lembar Surat Ketetapan Pajak untuk motor berikut</v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      >Anda memiliki lembar Surat Ketetapan Pajak untuk motor
+                      berikut</v-list-item-subtitle
+                    >
                   </v-list-item-content>
 
                   <v-list-item-action>
-                    <v-switch v-model="unitMokas.lembar_pajak" input-value="true" color="success"></v-switch>
+                    <v-switch
+                      v-model="unitMokas.lembar_pajak"
+                      input-value="true"
+                      color="success"
+                    ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
 
@@ -233,8 +256,15 @@
 
                     <v-date-picker v-model="unitMokas.tanggal_pajak">
                       <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.menu1.save(tglPajak)">OK</v-btn>
+                      <v-btn text color="primary" @click="menu1 = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="$refs.menu1.save(tglPajak)"
+                        >OK</v-btn
+                      >
                     </v-date-picker>
                   </v-menu>
                 </v-list-item>
@@ -242,11 +272,18 @@
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title>Lembar STNK Ada</v-list-item-title>
-                    <v-list-item-subtitle>Anda memiliki lembar Surat Tanda Nomor Kendaraan untuk motor berikut</v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      >Anda memiliki lembar Surat Tanda Nomor Kendaraan untuk
+                      motor berikut</v-list-item-subtitle
+                    >
                   </v-list-item-content>
 
                   <v-list-item-action>
-                    <v-switch v-model="unitMokas.lembar_stnk" input-value="true" color="success"></v-switch>
+                    <v-switch
+                      v-model="unitMokas.lembar_stnk"
+                      input-value="true"
+                      color="success"
+                    ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
 
@@ -273,8 +310,15 @@
 
                     <v-date-picker v-model="unitMokas.tanggal_stnk">
                       <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
-                      <v-btn text color="primary" @click="$refs.menu2.save(tglSTNK)">OK</v-btn>
+                      <v-btn text color="primary" @click="menu2 = false"
+                        >Cancel</v-btn
+                      >
+                      <v-btn
+                        text
+                        color="primary"
+                        @click="$refs.menu2.save(tglSTNK)"
+                        >OK</v-btn
+                      >
                     </v-date-picker>
                   </v-menu>
                 </v-list-item>
@@ -282,11 +326,18 @@
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-title>Lembar BPKB Ada</v-list-item-title>
-                    <v-list-item-subtitle>Anda memiliki Buku Pemilik Kendaraan Bermotor (BPKB) untuk motor berikut</v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      >Anda memiliki Buku Pemilik Kendaraan Bermotor (BPKB)
+                      untuk motor berikut</v-list-item-subtitle
+                    >
                   </v-list-item-content>
 
                   <v-list-item-action>
-                    <v-switch v-model="unitMokas.lembar_bpkb" input-value="true" color="success"></v-switch>
+                    <v-switch
+                      v-model="unitMokas.lembar_bpkb"
+                      input-value="true"
+                      color="success"
+                    ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
               </v-list>
@@ -295,11 +346,18 @@
                 <v-list-item-content>
                   <v-list-item-title>Deskripsi Unit</v-list-item-title>
                   <v-list-item-subtitle>Opsional</v-list-item-subtitle>
-                  <v-list-item-subtitle>Deskripsikan unit anda secara singkat dan jelas.</v-list-item-subtitle>
+                  <v-list-item-subtitle
+                    >Deskripsikan unit anda secara singkat dan
+                    jelas.</v-list-item-subtitle
+                  >
                 </v-list-item-content>
 
                 <v-list-item-action>
-                  <v-switch v-model="desc" input-value="true" color="success"></v-switch>
+                  <v-switch
+                    v-model="desc"
+                    input-value="true"
+                    color="success"
+                  ></v-switch>
                 </v-list-item-action>
               </v-list-item>
 
@@ -320,22 +378,36 @@
                 <v-list-item-content>
                   <v-list-item-title>Kode Barcode</v-list-item-title>
                   <v-list-item-subtitle>Opsional</v-list-item-subtitle>
-                  <v-list-item-subtitle>Anda dapat memasukan kode barcode untuk mempermudah pencarian unit anda.</v-list-item-subtitle>
+                  <v-list-item-subtitle
+                    >Anda dapat memasukan kode barcode untuk mempermudah
+                    pencarian unit anda.</v-list-item-subtitle
+                  >
                 </v-list-item-content>
 
                 <v-list-item-action>
-                  <v-switch v-model="scan" input-value="true" color="success"></v-switch>
+                  <v-switch
+                    v-model="scan"
+                    input-value="true"
+                    color="success"
+                  ></v-switch>
                 </v-list-item-action>
               </v-list-item>
 
               <v-list-item v-if="scan">
-                <v-text-field v-model="barcode" label="Contoh: 1234xxx" outlined dense></v-text-field>
+                <v-text-field
+                  v-model="barcode"
+                  label="Contoh: 1234xxx"
+                  outlined
+                  dense
+                ></v-text-field>
               </v-list-item>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="primary" @click="e6 = 2">Sebelumnya</v-btn>
-                <v-btn color="primary" :disabled="!valid" @click="storeItem">Simpan</v-btn>
+                <v-btn color="primary" :disabled="!valid" @click="storeItem"
+                  >Simpan</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-stepper-content>
@@ -503,13 +575,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     clear() {
@@ -527,13 +592,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getTahun(data) {
@@ -550,13 +608,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getTipe(data) {
@@ -591,13 +642,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getTransmisi() {
@@ -610,13 +654,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getJenis() {
@@ -629,13 +666,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     storeItem() {

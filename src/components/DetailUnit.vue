@@ -17,43 +17,7 @@
         </v-list-item>
 
         <v-divider></v-divider>
-        <!-- <v-list-item>
-          <v-list-item-avatar>
-            <v-img src="/img/icons/icon_tipe.png"></v-img>
-          </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title>No. Polisi</v-list-item-title>
-          </v-list-item-content>
-
-          <v-list-item-action>{{ unitMokas.nomor_polisi }}</v-list-item-action>
-        </v-list-item>
-        <v-divider></v-divider> -->
-        <!-- <v-list-item>
-          <v-list-item-avatar>
-            <v-img src="/img/icons/icon_tipe.png"></v-img>
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title>Status Unit</v-list-item-title>
-          </v-list-item-content>
-
-          <v-list-item-action>{{ unitMokas.status }}</v-list-item-action>
-        </v-list-item> -->
-
-        <!-- <v-divider></v-divider>
-        <v-list-item>
-          <v-list-item-avatar>
-            <v-img src="/img/icons/icon_tipe.png"></v-img>
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title>Deskripsi</v-list-item-title>
-          </v-list-item-content>
-
-          <v-list-item-action>{{ unitMokas.deskripsi }}</v-list-item-action>
-        </v-list-item> -->
-        <v-divider></v-divider>
         <v-list-item>
           <v-list-item-avatar>
             <v-img src="/img/icons/icon_merek.png"></v-img>
@@ -207,11 +171,13 @@
             <v-list-item-title>STNK</v-list-item-title>
           </v-list-item-content>
 
-          <v-list-item-action
-            >{{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }}
+          <v-list-item-action>
+            {{ unitMokas.lembar_stnk ? "ADA" : "TIDAK" }}
           </v-list-item-action>
         </v-list-item>
+
         <v-divider> </v-divider>
+
         <v-list-item v-if="unitMokas.tanggal_stnk != null">
           <v-list-item-avatar>
             <v-img src="/img/icons/icon_stnk.png"></v-img>
@@ -240,13 +206,10 @@
           <v-list-item-action
             >{{ unitMokas.lembar_pajak ? "ADA" : "TIDAK" }}
           </v-list-item-action>
-
-          <!-- <v-list-item-action v-if="unitMokas.id_mst_motor_bekas_status == 1">{{
-            unitMokas.lembar_pajak ? "ADA" : "TIDAK"
-          }}</v-list-item-action> -->
         </v-list-item>
 
         <v-divider></v-divider>
+
         <v-list-item v-if="unitMokas.tanggal_pajak != null">
           <v-list-item-avatar>
             <v-img src="/img/icons/icon_lembar_pajak.png"></v-img>
@@ -260,7 +223,9 @@
             {{ unitMokas.tanggal_pajak | dateFormat }}
           </v-list-item-action>
         </v-list-item>
+
         <v-divider></v-divider>
+
         <v-list-item>
           <v-list-item-avatar>
             <v-img src="/img/icons/icon_bpkb.png"></v-img>
@@ -270,34 +235,21 @@
             <v-list-item-title>BPKB</v-list-item-title>
           </v-list-item-content>
 
-          <v-list-item-action>{{
-            unitMokas.lembar_bpkb ? "ADA" : "TIDAK"
-          }}</v-list-item-action>
+          <v-list-item-action>
+            {{ unitMokas.lembar_bpkb ? "ADA" : "TIDAK" }}
+          </v-list-item-action>
         </v-list-item>
       </v-list>
-
-      <!-- <div v-if="unitMokas.id_mst_motor_bekas_status == 1">
-        <v-btn block color="teal" dark :to="'/toko/add-ads?id=' + unitMokas.id">Iklankan</v-btn>
-      </div>
-      <br />
-      <div
-        v-if="unitMokas.id_mst_motor_bekas_status == 2 || unitMokas.id_mst_motor_bekas_status == 4"
-      >
-        <v-btn block color="teal" dark :to="'/produk/' + urlSeller + '/' + urlJudul">Lihat Iklan</v-btn>
-      </div> -->
     </v-col>
   </v-row>
 </template>
 
 <script>
 import moment from "moment-timezone";
+
 export default {
   name: "detail-unit",
   props: ["unitMokas", "hits"],
-  // data: () => ({
-  //   urlSeller: this.unitMokas.appuser.toLowerCase().replace(" ", "-"),
-  //   urlJudul: this.hits.judul.toLowerCase().replace(" ", "-"),
-  // }),
   filters: {
     dateFormat: (date) => {
       return moment.utc(date).format("DD MMM YYYY");

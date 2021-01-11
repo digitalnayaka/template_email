@@ -4,14 +4,17 @@
       <v-list>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="font-weight-bold">Daftar Rekening Bank</v-list-item-title>
+            <v-list-item-title class="font-weight-bold"
+              >Daftar Rekening Bank</v-list-item-title
+            >
             <v-btn
               color="teal"
               dark
               small
               @click="dialog = true"
               class="d-flex d-sm-none"
-            >Tambah Rekening</v-btn>
+              >Tambah Rekening</v-btn
+            >
           </v-list-item-content>
 
           <v-list-item-action class="d-none d-sm-flex">
@@ -22,7 +25,10 @@
 
               <v-card>
                 <v-card-title>{{ formTitle }}</v-card-title>
-                <v-card-subtitle>Rekening bank yang telah ditambahkan bisa kamu gunakan untuk pengembalian Refund Tiket SiMotor</v-card-subtitle>
+                <v-card-subtitle
+                  >Rekening bank yang telah ditambahkan bisa kamu gunakan untuk
+                  pengembalian Refund Tiket SiMotor</v-card-subtitle
+                >
 
                 <v-card-text>
                   <v-form ref="form" v-model="valid">
@@ -41,13 +47,20 @@
                             v-if="bank"
                           ></v-select>
 
-                          <v-text-field v-model="editedItem.bank_name" outlined dense v-else></v-text-field>
+                          <v-text-field
+                            v-model="editedItem.bank_name"
+                            outlined
+                            dense
+                            v-else
+                          ></v-text-field>
                         </v-list-item-content>
                       </v-list-item>
 
                       <v-list-item>
                         <v-list-item-content>
-                          <v-list-item-title>Nama Pemilik Rekening</v-list-item-title>
+                          <v-list-item-title
+                            >Nama Pemilik Rekening</v-list-item-title
+                          >
                           <v-text-field
                             v-model="editedItem.nama_rekening"
                             outlined
@@ -85,7 +98,8 @@
                     @click="save"
                     :disabled="!valid"
                     v-if="editedIndex == -1"
-                  >Simpan</v-btn>
+                    >Simpan</v-btn
+                  >
 
                   <v-btn
                     color="teal"
@@ -93,14 +107,16 @@
                     @click="update"
                     :disabled="!valid"
                     v-if="editedItem.is_main == false"
-                  >Jadikan Utama</v-btn>
+                    >Jadikan Utama</v-btn
+                  >
 
                   <v-btn
                     color="teal"
                     class="white--text"
                     disabled
                     v-if="editedIndex != -1 && editedItem.is_main == true"
-                  >Sudah Utama</v-btn>
+                    >Sudah Utama</v-btn
+                  >
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -116,14 +132,18 @@
     <template v-slot:item.actions="{ item }">
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
-          <v-icon v-bind="attrs" v-on="on" @click="editItem(item)">mdi-pencil</v-icon>
+          <v-icon v-bind="attrs" v-on="on" @click="editItem(item)"
+            >mdi-pencil</v-icon
+          >
         </template>
         <span>Edit</span>
       </v-tooltip>
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
-          <v-icon v-bind="attrs" v-on="on" @click="deleteItem(item)">mdi-delete</v-icon>
+          <v-icon v-bind="attrs" v-on="on" @click="deleteItem(item)"
+            >mdi-delete</v-icon
+          >
         </template>
         <span>Hapus</span>
       </v-tooltip>
@@ -181,6 +201,8 @@ export default {
   methods: {
     ...mapActions({
       setAlert: "alert/set",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
     }),
     getRekening() {
       this.axios
@@ -197,13 +219,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getBank() {
@@ -216,13 +231,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     editItem(item) {
@@ -268,6 +276,13 @@ export default {
             color: "success",
             text: responses.api_message,
           });
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     update() {
@@ -298,6 +313,13 @@ export default {
             color: "error",
             text: responses.api_message,
           });
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     deleteItem(item) {
@@ -330,6 +352,13 @@ export default {
               color: "error",
               text: responses.api_message,
             });
+            if (error.response.status == 403) {
+              this.setAuth(null);
+              this.setToken(null);
+              window.localStorage.setItem("user", null);
+              window.localStorage.setItem("token", null);
+              window.location.href = "/";
+            }
           });
       }
     },

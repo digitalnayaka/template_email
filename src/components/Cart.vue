@@ -134,6 +134,8 @@ export default {
       addCart: "cart/add",
       removeCart: "cart/remove",
       setCart: "cart/set",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
     }),
     buy() {
       this.loader = "loading";

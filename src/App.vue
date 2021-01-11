@@ -540,92 +540,6 @@
 
             <v-divider></v-divider>
 
-            <!-- <v-tabs
-              v-model="tab"
-              grow
-              slider-color="teal"
-              @change="content = false"
-            >
-              <v-tab class="text-caption">Penjualan</v-tab>
-              <v-tab class="text-caption">Aktivitas</v-tab>
-            </v-tabs>
-
-            <v-tabs-items v-model="tab">
-              <v-tab-item>
-                <v-row no-gutters>
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item
-                        to="/garasi/add-unit"
-                        @click="content = true"
-                      >
-                        <v-list-item-subtitle>Tambah Unit</v-list-item-subtitle>
-                      </v-list-item>
-
-                      <v-list-item
-                        href="/garasi/manage-unit"
-                        @click="content = true"
-                      >
-                        <v-list-item-subtitle>Garasi</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item to="/toko/add-ads" @click="content = true">
-                        <v-list-item-subtitle
-                          >Tambah Iklan</v-list-item-subtitle
-                        >
-                      </v-list-item>
-
-                      <v-list-item
-                        href="/toko/manage-ads"
-                        @click="content = true"
-                      >
-                        <v-list-item-subtitle
-                          >Daftar Iklan</v-list-item-subtitle
-                        >
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-                </v-row>
-              </v-tab-item>
-
-              <v-tab-item>
-                <v-row no-gutters>
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item
-                        href="/activity/buyer"
-                        @click="content = true"
-                      >
-                        <v-list-item-subtitle>Pembeli</v-list-item-subtitle>
-                      </v-list-item>
-
-                      <v-list-item
-                        href="/activity/seller"
-                        @click="content = true"
-                      >
-                        <v-list-item-subtitle>Penjual</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-
-                  <v-col cols="6">
-                    <v-list dense>
-                      <v-list-item
-                        href="/product/review"
-                        @click="content = true"
-                      >
-                        <v-list-item-subtitle>Ulasan</v-list-item-subtitle>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-                </v-row>
-              </v-tab-item>
-            </v-tabs-items> -->
-
             <v-card-actions>
               <v-spacer></v-spacer>
 
@@ -787,20 +701,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getChats() {
@@ -832,20 +732,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     menungguPersetujuanB() {
@@ -866,20 +752,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     menungguPembayaranB() {
@@ -900,20 +772,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     menungguVerifikasiB() {
@@ -934,20 +792,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     menungguPersetujuanS() {
@@ -968,20 +812,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     menungguPembayaranS() {
@@ -1002,20 +832,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     menungguVerifikasiS() {
@@ -1036,20 +852,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     menungguPembayaranT() {
@@ -1070,20 +872,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     menungguVerifikasiT() {
@@ -1104,20 +892,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     signOut(e) {
