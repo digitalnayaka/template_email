@@ -794,7 +794,7 @@ export default {
     this.dateTimeRange();
     if (this.id != "") {
       this.axios
-        .get("/produk/v3/unit_mokas_iklan", {
+        .get("/produk/v3/unit_mokas", {
           params: {
             id: this.id,
             id_app_user: this.user.id,
