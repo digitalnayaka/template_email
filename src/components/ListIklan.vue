@@ -1,10 +1,11 @@
 <template>
   <v-container fluid>
+    <v-col cols="12">
     <v-card
-      class="rounded-lg mx-auto my-12"
-      
+      class="rounded-lg"
       tile
       width="500"
+      height="300"
       :href="'/iklan/' + item._source.id"
     >
       <v-img
@@ -140,6 +141,7 @@
         </v-list-item>
       </v-list>
     </v-card>
+    </v-col>
   </v-container>
 </template>
 

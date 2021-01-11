@@ -113,8 +113,9 @@
       <v-row>
         <v-col
           cols="6"
-          sm="3"
+          sm="2"
           lg="2"
+          md="3"
           v-for="item in hits"
           :key="item._source.id"
           class="pa-0"

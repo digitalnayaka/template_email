@@ -379,6 +379,7 @@
             </v-col>
 
             <v-divider></v-divider>
+
             <v-col cols="12" sm="6">
               <v-list-item>
                 <v-list-item-avatar>
@@ -389,19 +390,26 @@
                   <v-list-item-title>Daftar Paket Motor:</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
+
               <v-row>
-                <v-col v-for="(item, i) in motorBekas" :key="i">
+                <v-col
+                  cols="6"
+                  sm="2"
+                  lg="3"
+                  md="3"
+                  v-for="(item, i) in motorBekas"
+                  :key="i"
+                >
                   <v-card
                     :to="'/garasi/detail-unit/' + item.id"
                     class="rounded-lg"
                     max-height="300"
-                    max-weight="100"
+                    max-weight="200"
                   >
                     <v-img
                       :src="getImage(item.foto_1)"
                       max-height="200"
                       max-weight="100"
-                      contain
                       align="center"
                     ></v-img>
 
@@ -1157,7 +1165,7 @@ export default {
     },
     unit_mokas(id) {
       this.axios
-        .get("/produk/v3/unit_mokas", {
+        .get("/produk/v3/unit_mokas_iklan", {
           params: {
             id: id,
             limit: 1,
@@ -1202,7 +1210,7 @@ export default {
       };
 
       this.axios
-        .get("/produk/v3/unit_mokas", request)
+        .get("/produk/v3/unit_mokas_iklan", request)
         .then((response) => {
           let { data } = response.data;
           this.motorBekas = data;

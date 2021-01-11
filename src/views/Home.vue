@@ -27,9 +27,7 @@
 
       <v-col cols="12" sm="6" align="center">
         <!-- <v-img src="/img/mobilehand.webp" width="92" contain></v-img>
-
         <h2>What's on SiMotor?</h2>
-
         <v-alert
           color="cyan lighten-3"
           icon="mdi-motorbike"
@@ -43,10 +41,8 @@
             dapat melakukan penawaran melalui layanan tawar bersama.
           </div>
         </v-alert>
-
         <v-container fluid>
           <h4>Download aplikasi SiMotor yang tersedia di PlayStore.</h4>
-
           <a
             href="https://play.google.com/store/apps/details?id=com.digitalnetworkasia.simotorbeta"
             target="_blank"
@@ -83,7 +79,6 @@
           <h2 class="teal lighten-5">Fitur</h2>
           <v-alert color="cyan lighten-4" border="left" prominent>
             <h4>Ada 2 (dua) fitur utama diSiMotor, yuk simak!</h4>
-
             <p class="text-justify">
               Ada 2 (dua) fitur utama diSiMotor, yaitu Harga Pas dan Tawar
               Bersama. Dapatkan tiket tawar bersama dan temukan motor impian-mu
@@ -268,33 +263,25 @@
     <!-- <v-container fluid>
       <v-card align="center">
         <v-img src="/img/logo-sm.webp" width="90"></v-img>
-
         <h4>Apa aja fitur unggulan SiMotor?</h4>
-
         <h2>Fitur SiMotor</h2>
-
         <v-row>
           <v-col cols="12" sm="12">
             <h2>Harga Pas</h2>
-
             <v-img src="/img/hargapas.webp" width="120" contain></v-img>
-
             <div class="text-justify text-center" >
               Harga pas berguna banget untuk kamu yang nggak mau ribet menawar
               unit. Kamu hanya perlu memilih unit motor yang kamu butuhkan lalu
               segera hubungi penjual iklan unit tersebut.
             </div>
           </v-col>
-
           <v-col cols="12" sm="12">
             <h2>Tawar Bersama</h2>
-
             <v-img
               src="/img/tawar bersama (paketan).webp"
               width="120"
               contain
             ></v-img>
-
             <div class="text-justify">
               Keuntungan Tawar Bersama (TB) adalah kamu dapat melakukan
               penawaran sehingga harga yang kamu dapat sesuai dengan isi dompet.
@@ -318,7 +305,6 @@
 
 <script>
 import moment from "moment-timezone";
-
 export default {
   name: "Home",
   props: ["utc", "timezone"],
@@ -453,7 +439,6 @@ export default {
           }
         });
     },
-
     TBBerlangsung() {
       this.axios
         .get("/search/v3/search", {
@@ -507,7 +492,6 @@ export default {
   flex-wrap: nowrap;
   overflow-x: auto;
 }
-
 .scrolling-wrapper-flexbox {
   height: 180;
   margin-bottom: 20;
