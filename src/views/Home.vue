@@ -326,7 +326,7 @@ export default {
         id: 1,
         image: "/img/icons/ic_iklanbaris.webp",
         name: "Iklan Baris",
-        route: "mokas",
+        route: "iklan-baris",
       },
       {
         id: 2,
