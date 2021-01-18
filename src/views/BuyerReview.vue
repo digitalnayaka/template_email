@@ -482,6 +482,8 @@ export default {
   methods: {
     ...mapActions({
       setAlert: "alert/set",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
     }),
     getReview() {
       let offset = (this.page - 1) * this.limit;
@@ -506,13 +508,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     rating() {
@@ -537,13 +532,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     sendReply() {
@@ -571,6 +559,13 @@ export default {
           .catch((error) => {
             let responses = error.response.data;
             console.log(responses);
+            if (error.response.status == 403) {
+              this.setAuth(null);
+              this.setToken(null);
+              window.localStorage.setItem("user", null);
+              window.localStorage.setItem("token", null);
+              window.location.href = "/";
+            }
           });
       }
     },
@@ -597,13 +592,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
   },

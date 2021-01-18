@@ -78,6 +78,8 @@ export default {
     ...mapActions({
       setAlert: "alert/set",
       setAds: "ads/setAds",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
     }),
     unit_mokas() {
       this.axios
@@ -107,13 +109,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     linkIklan(id) {
@@ -131,13 +126,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getDtlIklan(id) {
@@ -156,13 +144,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getBarcode() {
@@ -182,13 +163,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     deleteUnit() {
@@ -214,12 +188,21 @@ export default {
           .catch((error) => {
             let responses = error.response.data;
             console.log(responses.api_message);
+            if (error.response.status == 403) {
+              this.setAuth(null);
+              this.setToken(null);
+              window.localStorage.setItem("user", null);
+              window.localStorage.setItem("token", null);
+              window.location.href = "/";
+            }
           });
       }
     },
     go() {
       this.setAds(this.hits.id);
-      let urlSeller = this.unitMokas.nama_user.toLowerCase().replaceAll(" ", "-");
+      let urlSeller = this.unitMokas.nama_user
+        .toLowerCase()
+        .replaceAll(" ", "-");
       let urlJudul = this.hits.judul.toLowerCase().replaceAll(" ", "-");
       this.$router.push("/produk/" + urlSeller + "/" + urlJudul);
     },

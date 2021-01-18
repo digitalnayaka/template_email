@@ -44,6 +44,8 @@ export default {
   methods: {
     ...mapActions({
       setAlert: "alert/set",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN"
     }),
     getTemplate() {
       this.axios
@@ -60,13 +62,7 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
 
           this.chat = this.template;
         });

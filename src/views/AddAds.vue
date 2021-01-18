@@ -320,10 +320,12 @@
                       </template>
                     </v-datetime-picker>
                     <v-list-item-subtitle
-                        >Iklan akan aktif setelah Anda menekan tombol "Iklankan". </v-list-item-subtitle>
-                        <v-list-item-subtitle
-                        > Penawaran akan dimulai berdasarkan tanggal diatas.</v-list-item-subtitle
-                      >
+                      >Iklan akan aktif setelah Anda menekan tombol "Iklankan".
+                    </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      Penawaran akan dimulai berdasarkan tanggal
+                      diatas.</v-list-item-subtitle
+                    >
                   </v-col>
 
                   <v-col cols="12" sm="6">
@@ -481,6 +483,8 @@ export default {
     ...mapActions({
       setAlert: "alert/set",
       setAds: "ads/setAds",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
     }),
     getJenisIklan() {
       this.axios
@@ -497,13 +501,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     step2(item) {
@@ -548,13 +545,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     selectUnit(item) {
@@ -661,6 +651,13 @@ export default {
                 color: "error",
                 text: responses.api_message,
               });
+              if (error.response.status == 403) {
+                this.setAuth(null);
+                this.setToken(null);
+                window.localStorage.setItem("user", null);
+                window.localStorage.setItem("token", null);
+                window.location.href = "/";
+              }
             });
         }
 
@@ -714,6 +711,13 @@ export default {
                 color: "error",
                 text: responses.api_message,
               });
+              if (error.response.status == 403) {
+                this.setAuth(null);
+                this.setToken(null);
+                window.localStorage.setItem("user", null);
+                window.localStorage.setItem("token", null);
+                window.location.href = "/";
+              }
             });
         }
 
@@ -771,6 +775,13 @@ export default {
                 color: "error",
                 text: responses.api_message,
               });
+              if (error.response.status == 403) {
+                this.setAuth(null);
+                this.setToken(null);
+                window.localStorage.setItem("user", null);
+                window.localStorage.setItem("token", null);
+                window.location.href = "/";
+              }
             });
         }
       }
@@ -800,13 +811,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     }
   },

@@ -117,7 +117,7 @@
                         src="/img/icons/review_pembeli.webp"
                         v-if="item.id_modul == 8"
                       ></v-img>
-                       <v-img
+                      <v-img
                         src="/img/icons/id14_blokir.webp"
                         v-if="item.id_modul == 14"
                       ></v-img>
@@ -196,7 +196,7 @@
                 >
                   <template v-slot:default="{ active }">
                     <v-list-item-avatar>
-                       <v-img
+                      <v-img
                         src="/img/icons/unit_serah_terima.webp"
                         v-if="item.id_modul == 3"
                       ></v-img>
@@ -284,7 +284,7 @@
                         src="/img/icons/tiket_expired.webp"
                         v-if="item.id_modul == 7"
                       ></v-img>
-                     
+
                       <v-img
                         src="/img/icons/tiket_terpakai.webp"
                         v-if="item.id_modul == 11"
@@ -302,7 +302,7 @@
                         src="/img/icons/hampir-expired.webp"
                         v-if="item.id_modul == 6"
                       ></v-img>
-                       <v-img
+                      <v-img
                         src="/img/icons/tiket_hangus.webp"
                         v-if="item.id_modul == 10"
                       ></v-img>
@@ -419,13 +419,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     read(id, modul, data) {
@@ -462,7 +455,7 @@ export default {
             this.$router.push({ path: "/account/edit" });
           } else {
             this.$router.push({ path: "/upload-bukti/" + data });
-          }         
+          }
           this.$root.$children[0].getNotif();
         })
         .catch((error) => {

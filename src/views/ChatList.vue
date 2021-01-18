@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import moment from "moment-timezone";
 import "firebase/firestore";
 import { db } from "../main";
@@ -77,6 +77,10 @@ export default {
     item: 0,
   }),
   methods: {
+    ...mapActions({
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
+    }),
     getChats() {
       db.collection("chat")
         .doc(String(this.user.id))
@@ -124,13 +128,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     read(id, pemenang) {

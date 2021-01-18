@@ -42,13 +42,13 @@
         ></image-uploader>
         <!-- <p class="text-danger" v-if="errorText">{{ errorText }}</p> -->
       </div>
-       <button class="btn btn-primary" type="submit" name="action"> kirim</button>
+      <button class="btn btn-primary" type="submit" name="action">kirim</button>
     </form>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import ImageUploader from "vue-image-upload-resize";
 
 export default {
@@ -67,6 +67,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
+    }),
     createMessage() {
       let formData = new FormData();
 
@@ -80,6 +84,17 @@ export default {
         })
         .then(() => {
           this.newMessage = null;
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     browse() {
@@ -98,6 +113,17 @@ export default {
         })
         .then((response) => {
           console.log(response);
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
   },

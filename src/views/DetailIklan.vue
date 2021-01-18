@@ -175,7 +175,9 @@
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <v-btn icon class="mx-2" v-on="on" @click="favourite">
-                  <v-icon v-if="favorit == undefined">mdi-heart-outline</v-icon>
+                  <v-icon v-if="favorit == undefined || favorit.length == 0"
+                    >mdi-heart-outline</v-icon
+                  >
                   <v-icon color="red" v-else>mdi-heart</v-icon>
                 </v-btn>
               </template>
@@ -271,8 +273,6 @@
                     : "Info Pemenang"
                 }}
               </v-btn>
-
-              
 
               <v-dialog v-model="dialogInfo" persistent max-width="500px">
                 <v-card>
@@ -381,6 +381,7 @@
             </v-col>
 
             <v-divider></v-divider>
+
             <v-col cols="12" sm="6">
               <v-list-item>
                 <v-list-item-avatar>
@@ -391,22 +392,26 @@
                   <v-list-item-title>Daftar Paket Motor:</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
+
               <v-row>
-                <v-col  cols="6"
+                <v-col
+                  cols="6"
                   sm="2"
                   lg="3"
-                  md="3" v-for="(item, i) in motorBekas" :key="i">
+                  md="3"
+                  v-for="(item, i) in motorBekas"
+                  :key="i"
+                >
                   <v-card
                     :to="'/garasi/detail-unit/' + item.id"
                     class="rounded-lg"
                     max-height="300"
-                      max-weight="200"
+                    max-weight="200"
                   >
                     <v-img
                       :src="getImage(item.foto_1)"
                       max-height="200"
                       max-weight="100"
-                      
                       align="center"
                     ></v-img>
 
@@ -655,7 +660,6 @@
           v-else
         >
           <h2>Belum ada Penawaran</h2>
-         
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -1153,13 +1157,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     unit_mokas(id) {
@@ -1185,13 +1182,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     paketMokas() {
@@ -1224,13 +1214,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getHP(id) {
@@ -1247,13 +1230,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getTB(id) {
@@ -1285,13 +1261,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getCatatan() {
@@ -1309,13 +1278,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getKebijakan() {
@@ -1333,13 +1295,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getTiket() {
@@ -1383,13 +1338,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     konfirmasiTiket() {
@@ -1426,6 +1374,13 @@ export default {
             color: "error",
             text: responses.api_message,
           });
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
       // }
     },
@@ -1463,6 +1418,13 @@ export default {
             color: "error",
             text: responses.api_message,
           });
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     ikutTB() {
@@ -1499,6 +1461,13 @@ export default {
             this.sheet = !this.sheet;
             this.height = 350;
             this.noTiket = true;
+          }
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
           }
         });
     },
@@ -1558,6 +1527,13 @@ export default {
             color: "error",
             text: responses.api_message,
           });
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
         });
     },
     terjual() {
@@ -1590,6 +1566,13 @@ export default {
             if (responses.api_status == 2) {
               this.getTiket();
             }
+            if (error.response.status == 403) {
+              this.setAuth(null);
+              this.setToken(null);
+              window.localStorage.setItem("user", null);
+              window.localStorage.setItem("token", null);
+              window.location.href = "/";
+            }
           });
       }
     },
@@ -1610,13 +1593,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     deleteIklan() {
@@ -1640,7 +1616,14 @@ export default {
           })
           .catch((error) => {
             let responses = error.response.data;
-            console.log(responses);
+            console.log(responses.api_message);
+            if (error.response.status == 403) {
+              this.setAuth(null);
+              this.setToken(null);
+              window.localStorage.setItem("user", null);
+              window.localStorage.setItem("token", null);
+              window.location.href = "/";
+            }
           });
       }
     },
@@ -1659,13 +1642,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     reviewAvg() {
@@ -1682,13 +1658,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     getFavourite() {
@@ -1708,13 +1677,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     favourite() {
@@ -1772,13 +1734,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     autoBid() {

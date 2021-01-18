@@ -113,7 +113,9 @@ export default {
   }),
   methods: {
     ...mapActions({
-      setAlert: "alert/set"
+      setAlert: "alert/set",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN"
     }),
     initialize() {
       if (this.user.id_mst_user_type == 1) {
@@ -143,13 +145,7 @@ export default {
         .catch(error => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
     listUser() {
@@ -173,13 +169,7 @@ export default {
         .catch(error => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     },
     report() {
@@ -236,13 +226,7 @@ export default {
         .catch(error => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
+          
         });
     }
   },

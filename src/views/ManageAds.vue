@@ -242,6 +242,8 @@ export default {
     ...mapActions({
       setAlert: "alert/set",
       setAds: "ads/setAds",
+      setAuth: "auth/set",
+      setToken: "auth/SET_TOKEN",
     }),
     daftarIklan() {
       var offset = (this.page - 1) * this.limit;
@@ -273,13 +275,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     filter(id) {
@@ -299,13 +294,6 @@ export default {
         .catch((error) => {
           let responses = error.response.data;
           console.log(responses.api_message);
-          if (error.response.status == 403) {
-            this.setAuth(null);
-            this.setToken(null);
-            window.localStorage.setItem("user", null);
-            window.localStorage.setItem("token", null);
-            window.location.href = "/";
-          }
         });
     },
     edit(item) {
@@ -340,6 +328,13 @@ export default {
               color: "success",
               text: responses.api_message,
             });
+            if (error.response.status == 403) {
+              this.setAuth(null);
+              this.setToken(null);
+              window.localStorage.setItem("user", null);
+              window.localStorage.setItem("token", null);
+              window.location.href = "/";
+            }
           });
       } else {
         this.axios
@@ -362,6 +357,13 @@ export default {
               color: "success",
               text: responses.api_message,
             });
+            if (error.response.status == 403) {
+              this.setAuth(null);
+              this.setToken(null);
+              window.localStorage.setItem("user", null);
+              window.localStorage.setItem("token", null);
+              window.location.href = "/";
+            }
           });
       }
     },
@@ -386,7 +388,14 @@ export default {
           })
           .catch((error) => {
             let responses = error.response.data;
-            console.log(responses);
+            console.log(responses.api_message);
+            if (error.response.status == 403) {
+              this.setAuth(null);
+              this.setToken(null);
+              window.localStorage.setItem("user", null);
+              window.localStorage.setItem("token", null);
+              window.location.href = "/";
+            }
           });
       }
     },
