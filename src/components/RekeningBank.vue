@@ -6,7 +6,7 @@
           <v-list-item-content>
             <v-list-item-title class="font-weight-bold">Daftar Rekening Bank</v-list-item-title>
             <v-btn
-              color="teal"
+              color="#22939E"
               dark
               small
               @click="dialog = true"
@@ -17,7 +17,7 @@
           <v-list-item-action class="d-none d-sm-flex">
             <v-dialog v-model="dialog" max-width="400px">
               <template v-slot:activator="{ on }">
-                <v-btn color="teal" dark small v-on="on">Tambah Rekening</v-btn>
+                <v-btn color="#22939E" dark small v-on="on">Tambah Rekening</v-btn>
               </template>
 
               <v-card>
@@ -80,7 +80,7 @@
                   <v-btn color="red" outlined @click="close">Cancel</v-btn>
 
                   <v-btn
-                    color="teal"
+                    color="#22939E"
                     class="white--text"
                     @click="save"
                     :disabled="!valid"
@@ -88,7 +88,7 @@
                   >Simpan</v-btn>
 
                   <v-btn
-                    color="teal"
+                    color="#22939E"
                     class="white--text"
                     @click="update"
                     :disabled="!valid"
@@ -96,7 +96,7 @@
                   >Jadikan Utama</v-btn>
 
                   <v-btn
-                    color="teal"
+                    color="#22939E"
                     class="white--text"
                     disabled
                     v-if="editedIndex != -1 && editedItem.is_main == true"

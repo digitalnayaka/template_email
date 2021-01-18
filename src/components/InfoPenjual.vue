@@ -2,7 +2,7 @@
   <div>
     <v-tabs
       v-model="tab"
-      background-color="teal darken-"
+      background-color="#22939E"
       color="white"
       dark
       slider-color="yellow"
@@ -39,7 +39,7 @@
 
           <v-btn
             small
-            color="teal"
+            color="#22939E"
             dark
             @click="ubahSlogan = true"
             v-if="user.slogan == null"
@@ -90,7 +90,7 @@
           <h3 class="mr-auto">Catatan</h3>
 
           <v-btn
-            color="teal"
+            color="#22939E"
             dark
             small
             class="mx-2"
@@ -175,7 +175,7 @@
         <div class="d-flex flex-wrap">
           <h3 class="mr-auto">Kebijakan</h3>
           <v-btn
-            color="teal"
+            color="#22939E"
             dark
             small
             class="mx-2"

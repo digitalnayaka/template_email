@@ -1,6 +1,6 @@
 <template>
   <v-card flat>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -8,7 +8,7 @@
 
     <v-card-title>Jadwal Tawar Bersama</v-card-title>
 
-    <v-tabs background-color="teal" dark grow>
+    <v-tabs background-color="#22939E" dark grow>
       <v-tabs-slider color="yellow"></v-tabs-slider>
       <v-tab>Semua</v-tab>
       <v-tab>Kalendar</v-tab>

@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -57,8 +57,8 @@
           </v-list-item-content>
          
         </v-list>
-         <v-btn outlined color="primary">Nanti Saja </v-btn>
-          <v-btn color="teal"> Simpan </v-btn>
+         <v-btn outlined color="red lighten-1">Nanti Saja </v-btn>
+          <v-btn color="#22939E"> Simpan </v-btn>
       </v-card>
       
     </div>

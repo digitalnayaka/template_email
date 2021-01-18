@@ -1,17 +1,17 @@
 <template>
   <div>
-    <v-app-bar app color="teal" dark>
+    <v-app-bar app color="#22939E" dark>
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
     </v-app-bar>
 
     <v-card class="d-inline-block mx-auto" align="center">
-      <v-card color="teal darken-4">
+      <v-card color="#22939E">
         <v-img src="img/banner web larangan.webp" width="600" height="150" contain></v-img>
       </v-card>
 
-      <v-card color="teal lighten-4">
+      <v-card >
         <v-container fluid>
           <div class="row mb-5 layout justify-center">
             <div class="col-md-10 text-justify white-gradient">

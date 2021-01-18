@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <div class="d-flex d-sm-none">
-      <v-app-bar app color="teal" dark>
+      <v-app-bar app color="#22939E" dark>
         <v-btn icon @click.stop="$router.go(-1)">
           <v-icon>mdi-arrow-left-circle</v-icon>
         </v-btn>
@@ -51,7 +51,7 @@
             </v-list-item>
           </v-list>
 
-          <v-btn block color="teal" dark>Pilih</v-btn>
+          <v-btn block color="#22939E" dark>Pilih</v-btn>
         </v-card>
       </v-col>
     </v-row>
@@ -63,7 +63,7 @@
       transition="dialogbottom-transition"
       persistent
     >
-      <v-toolbar dark color="teal">
+      <v-toolbar dark color="#22939E">
         <v-btn icon dark @click="close">
           <v-icon>mdi-close</v-icon>
         </v-btn>

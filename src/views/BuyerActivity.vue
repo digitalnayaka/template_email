@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -8,7 +8,7 @@
 
     <div class="text-h4 mb-2">Aktivitas Pembeli</div>
 
-    <v-tabs background-color="teal" dark grow>
+    <v-tabs background-color="#22939E" dark grow>
       <v-tabs-slider color="yellow"></v-tabs-slider>
       <v-tab>Berlangsung</v-tab>
       <v-tab>Riwayat</v-tab>
@@ -111,7 +111,7 @@
 
               <v-btn
                 block
-                color="teal"
+                color="#22939E"
                 dark
                 @click="getBid(item)"
                 v-if="item.id_mst_status_pemenang == 3"
@@ -177,7 +177,7 @@
               </v-list-item>
 
               <v-list-item>
-                <v-btn block dark color="teal" @click="bidding"
+                <v-btn block dark color="#22939E" @click="bidding"
                   >Konfirmasi Penawaran</v-btn
                 >
               </v-list-item>

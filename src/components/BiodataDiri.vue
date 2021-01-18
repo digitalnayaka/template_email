@@ -1,9 +1,21 @@
 <template>
   <div>
+    <v-card color="red lighten-3" v-if="user.id_verifikasi_ktp == 4">
+      <div class="d-flex align-center">
+        <v-avatar class="ma-3" size="25" tile>
+          <v-img src="/img/icons/warning.png"></v-img>
+        </v-avatar> 
+          <p class="font-weight-bold">
+            Anda belum melakukan verifikasi KTP, silahkan lakukan verifikasi
+            <a href="/ticket-rules">disini</a>
+          </p>
+      </div>
+    </v-card>
     <v-row>
       <v-col cols="12" sm="4" align="center">
         <v-card outlined width="800" class="pa-2 rounded-lg">
           <v-img
+          v-if="user.photo !== null"
             :src="getImage(user.photo)"
             contain
             max-width="300"
@@ -12,12 +24,12 @@
 
           <v-img
             src="/img/icons/people.webp"
-            v-if="user.photo == null"
+           v-else
             contain
             max-width="300"
             max-height="300"
           ></v-img>
-          
+
           <v-file-input
             id="fileid"
             label="File input"
@@ -263,6 +275,32 @@ export default {
           }
         });
     },
+
+      ListKTPUser() {
+      this.axios
+        .get("/user/v3/user/verifikasi_ktp_pengguna", {
+          params: {
+            id: this.id_app_user,
+            limit: 1,
+          },
+        })
+        .then((response) => {
+          let { data } = response.data;
+          this.appuser = data[0];
+          
+        })
+        .catch((error) => {
+          let responses = error.response.data;
+          console.log(responses.api_message);
+          if (error.response.status == 403) {
+            this.setAuth(null);
+            this.setToken(null);
+            window.localStorage.setItem("user", null);
+            window.localStorage.setItem("token", null);
+            window.location.href = "/";
+          }
+        });
+    },
     saveData(param, value) {
       if (this.valid) {
         let formData = new FormData();
@@ -368,6 +406,7 @@ export default {
     this.formDeskripsi = this.user.deskripsi;
     this.formKota = this.user.kota === null ? "" : this.user.kota;
     this.sellerInfo();
+    this.ListKTPUser();
   },
   mounted() {
     if (this.user.email === null) {
@@ -400,7 +439,7 @@ export default {
 
 <style scoped>
 a {
-  color: teal;
+  color: #22939E;
   text-decoration: none;
 }
 

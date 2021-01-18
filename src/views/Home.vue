@@ -1,12 +1,19 @@
 <template>
   <v-container fluid>
-    <v-app-bar app color="teal" dark class="d-none">
+    <v-app-bar app color="#22939E" dark class="d-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
     </v-app-bar>
+    <!-- <div>
+    <v-breadcrumbs
+      :items="menu"
+      divider="-"
+    ></v-breadcrumbs>
 
+  </div> -->
     <v-row class="d-flex align-center">
+      
       <v-col cols="12" sm="6" align="center">
         <v-carousel cycle hide-delimiters height="300">
           <v-carousel-item
@@ -87,7 +94,7 @@
           </v-alert>
         </v-col> -->
 
-        <v-col cols="12" sm="6" v-for="item in categories" :key="item.id">
+        <v-col cols="4" sm="4" v-for="item in categories" :key="item.id">
           <v-card flat :to="'/category/' + item.route">
             <v-img
               :src="item.image"
@@ -102,7 +109,7 @@
       </v-row>
     </div>
 
-    <v-card color="teal lighten-3">
+    <v-card color="#86CFD9">
       <v-container fluid class="text-center">
         <h2>Jadwal Tawar Bersama</h2>
 
@@ -134,7 +141,7 @@
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-                  <v-btn small color="teal" dark rounded>
+                  <v-btn small color="#22939E" dark rounded>
                     <v-list-item-title>{{
                       item.date | dateFormat
                     }}</v-list-item-title>
@@ -161,7 +168,7 @@
 
         <v-btn
           dark
-          color="teal"
+          color="#22939E"
           to="/jadwal"
           :small="$vuetify.breakpoint.xsOnly ? true : false"
           class="mt-4"
@@ -191,7 +198,7 @@
       <v-col cols="12" align="center">
         <v-btn
           dark
-          color="teal"
+          color="#22939E"
           :to="{ path: '/category/mokas', query: { tb: true } }"
           >Lihat Semua</v-btn
         >
@@ -250,7 +257,7 @@
 
         <v-btn
           dark
-          color="teal"
+          color="#22939E"
           href="https://blog.simotor.id"
           target="_blank"
           class="mt-4"
@@ -317,16 +324,16 @@ export default {
     categories: [
       {
         id: 1,
-        image: "/img/icons/mokas2.webp",
+        image: "/img/icons/ic_iklanbaris.webp",
+        name: "Iklan Baris",
+        route: "mokas",
+      },
+      {
+        id: 2,
+         image: "/img/icons/mokas2.webp",
         name: "Motor Bekas",
         route: "mokas",
       },
-      // {
-      //   id: 2,
-      //   image: "/img/icons/motorbaru.png",
-      //   name: "Motor Baru",
-      //   route: "motor_baru",
-      // },
       {
         id: 3,
         image: "/img/icons/tiket_tb.webp",
@@ -348,6 +355,23 @@ export default {
         src: "/img/icons/penjelasan_fitur.webp",
       },
     ],
+     menu: [
+        {
+          text: 'Iklan Baris',
+          disabled: false,
+          href: 'breadcrumbs_dashboard',
+        },
+        {
+          text: 'Iklan Tawar Bersama',
+          disabled: false,
+          href: '/category/mokas',
+        },
+        {
+          text: 'Tiket Tawar Bersama',
+          disabled: false,
+          href: 'breadcrumbs_link_2',
+        },
+      ],
     jadwal: [],
     tbBerlangsung: [],
     artikel: [],

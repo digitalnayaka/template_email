@@ -276,15 +276,6 @@
         </v-list-item>
       </v-list>
 
-      <!-- <div v-if="unitMokas.id_mst_motor_bekas_status == 1">
-        <v-btn block color="teal" dark :to="'/toko/add-ads?id=' + unitMokas.id">Iklankan</v-btn>
-      </div>
-      <br />
-      <div
-        v-if="unitMokas.id_mst_motor_bekas_status == 2 || unitMokas.id_mst_motor_bekas_status == 4"
-      >
-        <v-btn block color="teal" dark :to="'/produk/' + urlSeller + '/' + urlJudul">Lihat Iklan</v-btn>
-      </div> -->
     </v-col>
   </v-row>
 </template>

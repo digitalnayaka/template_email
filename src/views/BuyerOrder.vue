@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -10,9 +10,9 @@
 
     <v-tabs
       v-model="tab"
-      background-color="blue-grey"
+      background-color="#22939E"
       dark
-      slider-color="teal"
+      slider-color="yellow"
       show-arrows
     >
       <v-tab>Tawar Bersama</v-tab>
@@ -156,7 +156,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn small color="teal" dark :to="'/chat/' + item.id_penjual">
+            <v-btn small color="#22939E" dark :to="'/chat/' + item.id_penjual">
               Hubungi Penjual
             </v-btn>
           </v-card-actions>

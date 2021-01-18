@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="teal" dark>
+    <v-app-bar app color="#22939E" dark>
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -25,24 +25,7 @@
       </div>
     </v-app-bar>
 
-    <!-- <div class="text-center">
-      <div class="display-1 font-weight-bold">Transaksi Pembeli</div>
-      <v-tabs  :centered="centered" grow dark background-color="teal accent-4">
-        
-        <v-tab>Semua</v-tab>
-        <v-tab>Menunggu Konfirmasi</v-tab>
-         <v-tab>Menunggu Pembayaran</v-tab>
-          <v-tab>Selesai</v-tab>
-           <v-tab>Dibatalkan</v-tab>
-
-        <v-tab-item>
-         <v-card align="center" class="d-inline-block mx-auto">
-         </v-card>
-        </v-tab-item>
-        <v-tab-item>Lol</v-tab-item>
-      </v-tabs>
-      <br />
-    </div>-->
+ 
     <v-tabs v-model="tab" grow show-arrows dark background-color="blue accent-4">
       <v-tab>Pembeli</v-tab>
       <v-tab>Penjual</v-tab>

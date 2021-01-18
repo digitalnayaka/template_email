@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -199,13 +199,13 @@
 
         <v-row>
           <v-col cols="6">
-            <v-btn block outlined color="teal" dark to="/bantuan"
+            <v-btn block outlined color="#22939E" dark to="/bantuan"
               >Bantuan</v-btn
             >
           </v-col>
 
           <v-col cols="6">
-            <v-btn block color="teal" dark>Kirim Pesan</v-btn>
+            <v-btn block color="#22939E" dark>Kirim Pesan</v-btn>
           </v-col>
         </v-row>
       </v-container>

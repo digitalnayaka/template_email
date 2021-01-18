@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -24,14 +24,14 @@
                 <v-dialog v-model="dialog" fullscreen>
                   <template v-slot:activator="{ on, attrs }">
                     <div align="right" class="mt-4">
-                      <v-btn dark v-bind="attrs" v-on="on" @click="open" color="teal darken-2">
+                      <v-btn dark v-bind="attrs" v-on="on" @click="open" color="#22939E">
                         Pilih Tiket
                         <v-icon>mdi-chevron-right</v-icon>
                       </v-btn>
                     </div>
                   </template>
 
-                  <v-toolbar dark color="teal">
+                  <v-toolbar dark color="#22939E">
                     <v-btn icon dark @click="dialog = false">
                       <v-icon>mdi-close</v-icon>
                     </v-btn>
@@ -168,7 +168,7 @@
 
           <v-dialog v-model="dialogRekening" persistent max-width="650px">
             <v-card height="380px">
-              <v-toolbar dark color="teal darken-3">
+              <v-toolbar dark color="#22939E">
                 <v-toolbar-title>Tambah Rekening</v-toolbar-title>
 
                 <div class="flex-grow-1"></div>
@@ -225,7 +225,7 @@
           <v-btn
             block
             class="my-3 white--text"
-            color="teal"
+            color="#22939E"
             @click="refund"
             :disabled="selected == '' || !valid2 ? true : false"
           >Refund</v-btn>

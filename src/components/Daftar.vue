@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-toolbar dark color="teal">
+    <v-toolbar dark color="#22939E">
       <v-btn icon dark @click.native="close">
         <v-icon>mdi-close</v-icon>
       </v-btn>
@@ -36,7 +36,7 @@
                 outlined
                 v-mask="mask"
               ></v-text-field>
-              <v-btn block color="teal" :disabled="!valid" @click="signupcheck">Daftar</v-btn>
+              <v-btn block color="#22939E" :disabled="!valid" @click="signupcheck">Daftar</v-btn>
               <v-card-subtitle>
                 Dengan mendaftar, Anda telah menyetujui
                 <a

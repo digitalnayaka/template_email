@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -22,7 +22,7 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn color="teal" dark class="mb-2 text-caption" to="/toko/add-ads">
+          <v-btn color="#22939E" dark class="mb-2 text-caption" to="/toko/add-ads">
             <v-icon left>mdi-plus</v-icon>Tambah Iklan
           </v-btn>
 
@@ -102,7 +102,7 @@
               small
               @click="HapusIklan(item._source.tanggal_mulai)"
               outlined
-              color="teal"
+              color="#22939E"
               dark
               v-bind="attrs"
               v-on="on"
@@ -161,7 +161,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
-                  color="teal"
+                  color="#22939E"
                   :disabled="!valid"
                   class="white--text"
                   @click="updateIklan(item)"
@@ -219,7 +219,7 @@ export default {
     deskripsi: "",
     page: 1,
     offset: 0,
-    limit: 20,
+    limit: 10,
     total: 0,
     lengthPage: 0,
   }),

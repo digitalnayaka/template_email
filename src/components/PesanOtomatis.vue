@@ -20,7 +20,7 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn block color="teal" class="white--text" :disabled="!valid" @click="save">Simpan</v-btn>
+      <v-btn block color="#22939E" class="white--text" :disabled="!valid" @click="save">Simpan</v-btn>
     </v-card-actions>
   </v-card>
 </template>

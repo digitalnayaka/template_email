@@ -1,12 +1,12 @@
 <template>
   <v-card>
-    <v-app-bar app color="teal" dark class="d-none">
+    <v-app-bar app color="#22939E" dark class="d-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <v-tabs v-model="tab" slider-color="teal" show-arrows>
+    <v-tabs v-model="tab" slider-color="#22939E" show-arrows>
       <v-tab>Biodata Diri</v-tab>
       <!-- <v-tab>Info Penjual</v-tab> -->
       <v-tab>Rekening Bank</v-tab>

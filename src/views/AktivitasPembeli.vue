@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <v-tabs background-color="teal" dark grow>
+    <v-tabs background-color="#22939E" dark grow>
       <v-tabs-slider color="yellow"></v-tabs-slider>
       <v-tab>Berlangsung</v-tab>
       <v-tab>Riwayat</v-tab>

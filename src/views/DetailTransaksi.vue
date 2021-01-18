@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="back">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -132,7 +132,7 @@
               <v-spacer></v-spacer>
 
               <v-btn
-                color="teal"
+                color="#22939E"
                 dark
                 :to="'/chat/' + orders.id_pembeli"
                 v-if="orders.id_penjual == user.id"
@@ -141,7 +141,7 @@
               </v-btn>
 
               <v-btn
-                color="teal"
+                color="#22939E"
                 dark
                 :to="'/chat/' + orders.id_penjual"
                 v-else
@@ -149,7 +149,7 @@
                 Tanya Penjual
               </v-btn>
 
-              <v-btn color="teal" outlined @click.stop="statusOrder = true">
+              <v-btn color="#22939E" outlined @click.stop="statusOrder = true">
                 Lacak
               </v-btn>
 
@@ -246,7 +246,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
-                color="teal"
+                color="#22939E"
                 dark
                 @click="formPenawaran"
                 v-if="orders.id_mst_order_status != 3"
@@ -422,7 +422,7 @@
           <v-btn
             rounded
             dark
-            color="teal"
+            color="#22939E"
             class="my-4"
             @click="dialogKonfirmasi = true"
             v-if="

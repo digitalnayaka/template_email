@@ -1,6 +1,6 @@
 <template>
   <v-card flat>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -58,7 +58,7 @@
               <v-spacer></v-spacer>
 
               <v-btn
-                color="primary"
+                color="#22939E"
                 :disabled="countRules.length >= 5 ? false : true"
                 @click="e1 = 2"
                 >Selanjutnya</v-btn
@@ -130,7 +130,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="red" @click="e1 = 1">Sebelumnya</v-btn>
-                <v-btn color="primary" :disabled="!valid1" @click="e1 = 3"
+                <v-btn color="#22939E" :disabled="!valid1" @click="e1 = 3"
                   >Selanjutnya</v-btn
                 >
               </v-card-actions>
@@ -231,7 +231,7 @@
                     <v-switch
                       v-model="pajak"
                       input-value="true"
-                      color="teal"
+                      color="#22939E"
                     ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
@@ -264,7 +264,7 @@
                       >
                       <v-btn
                         text
-                        color="primary"
+                        color="#22939E"
                         @click="$refs.menu.save(tglPajak)"
                         >Simpan</v-btn
                       >
@@ -285,7 +285,7 @@
                     <v-switch
                       v-model="stnk"
                       input-value="true"
-                      color="teal"
+                      color="#22939E"
                     ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
@@ -318,7 +318,7 @@
                       >
                       <v-btn
                         text
-                        color="primary"
+                        color="#22939E"
                         @click="$refs.menu.save(tglSTNK)"
                         >Simpan</v-btn
                       >
@@ -339,7 +339,7 @@
                     <v-switch
                       v-model="bpkb"
                       input-value="true"
-                      color="teal"
+                      color="#22939E"
                     ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
@@ -360,7 +360,7 @@
                     <v-switch
                       v-model="desc"
                       input-value="true"
-                      color="teal"
+                      color="#22939E"
                     ></v-switch>
                   </v-list-item-action>
                 </v-list-item>
@@ -411,7 +411,7 @@
                 <v-spacer></v-spacer>
                 <v-btn color="red" @click="e1 = 2">Sebelumnya</v-btn>
                 <v-btn
-                  color="primary"
+                  color="#22939E"
                   :disabled="valid1 == valid2 ? false : true"
                   @click="storeItem"
                   :loading="loading"

@@ -3,7 +3,7 @@
     <v-app-bar
       app
       clipped-left
-      color="teal"
+      color="#22939E"
       dark
       v-if="$vuetify.breakpoint.smAndUp || isHome"
     >

@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -164,7 +164,7 @@
                   v-if="selectedIklan < 3"
                 >
                   <v-btn
-                    color="teal"
+                    color="#22939E"
                     dark
                     small
                     class="mt-1"
@@ -196,7 +196,7 @@
                     <v-col cols="12" sm="4">
                       <v-item v-slot:default="{ active, toggle }" value="50000">
                         <v-card
-                          :color="active ? 'teal' : ''"
+                          :color="active ? '#22939E' : ''"
                           dark
                           @click="toggle"
                         >
@@ -218,7 +218,7 @@
                         value="100000"
                       >
                         <v-card
-                          :color="active ? 'teal' : ''"
+                          :color="active ? '#22939E' : ''"
                           class="d-flex align-center"
                           dark
                           @click="toggle"
@@ -239,7 +239,7 @@
                         value="150000"
                       >
                         <v-card
-                          :color="active ? 'teal' : ''"
+                          :color="active ? '#22939E' : ''"
                           class="d-flex align-center"
                           dark
                           @click="toggle"
@@ -366,7 +366,7 @@
                   >Sebelumnya</v-btn
                 >
                 <v-btn
-                  color="teal"
+                  color="#22939E"
                   class="white--text"
                   :disabled="!valid"
                   @click="storeItem"

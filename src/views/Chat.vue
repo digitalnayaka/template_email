@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -18,7 +18,7 @@
         <div>
           User berikut adalah pemenang Tawar Bersama pada iklan yang Anda
           pasang. Selesaikan status user sebagai pemenang?
-          <v-btn small dark @click="pinPemenang" color="teal">Selesai</v-btn>
+          <v-btn small dark @click="pinPemenang" color="#22939E">Selesai</v-btn>
         </div>
       </v-card>
 

@@ -2,7 +2,7 @@
   <nav>
     <v-container fluid>
       <div class="d-flex d-sm-none">
-        <v-app-bar app color="teal" dark>
+        <v-app-bar app color="#22939E" dark>
           <v-btn icon @click.stop="$router.go(-1)">
             <v-icon>mdi-arrow-left-circle</v-icon>
           </v-btn>

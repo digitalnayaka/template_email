@@ -1,6 +1,6 @@
 <template>
   <v-card flat>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="$router.go(-1)">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -23,7 +23,7 @@
           <v-spacer></v-spacer>
 
           <v-btn
-            color="teal"
+            color="#22939E"
             dark
             class="mb-2 text-caption"
             to="/garasi/add-unit"
@@ -83,7 +83,7 @@
       <template v-slot:item.actions="{ item }">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn small outlined color="teal" dark v-bind="attrs" v-on="on">
+            <v-btn small outlined color="#22939E" dark v-bind="attrs" v-on="on">
               Atur
               <v-icon right v-if="attrs['aria-expanded'] === 'false'"
                 >mdi-chevron-down</v-icon
@@ -130,7 +130,7 @@
         </v-menu>
       </template>
 
-      <template v-slot:no-data>Belum ada unit.</template>
+      <template v-slot:no-data>Belum ada unit. Upload unit Anda <a href="/garasi/add-unit">disini</a> </template>
     </v-data-table>
 
     <v-pagination
@@ -162,7 +162,7 @@ export default {
     barcode: null,
     page: 1,
     offset: 0,
-    limit: 20,
+    limit: 10,
     total: 0,
     lengthPage: 0,
   }),

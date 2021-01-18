@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-toolbar dark color="teal">
+    <v-toolbar dark color="#22939E">
       <v-btn icon dark @click.native="close">
         <v-icon>mdi-close</v-icon>
       </v-btn>
@@ -53,7 +53,7 @@
 
               <v-btn
                 block
-                color="teal"
+                color="#22939E"
                 class="white--text"
                 :disabled="!valid"
                 @click="logincheck"
@@ -111,8 +111,8 @@
                 <a @click="resend">Resend</a>
               </p>
 
-              <v-btn block color="primary" @click="login" :disabled="!valid">
-                Masukkan kode OTP
+              <v-btn block color="#22939E" @click="login" :disabled="!valid">
+                Verifikasi
               </v-btn>
 
               <br />

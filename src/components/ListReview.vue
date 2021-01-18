@@ -250,12 +250,12 @@
           <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn color="teal" outlined dark @click="selected = null"
+            <v-btn color="#22939E" outlined dark @click="selected = null"
               >Kembali</v-btn
             >
 
             <v-btn
-              color="teal"
+              color="#22939E"
               class="white--text"
               :disabled="rating == 0 || deskripsiUlasan == '' ? true : false"
               @click="sendReview"
@@ -464,7 +464,7 @@ export default {
 <style>
 a:link,
 a:visited {
-  color: teal;
+  color: #22939E;
 }
 
 #foto1 {

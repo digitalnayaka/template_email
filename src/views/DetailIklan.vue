@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="back">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -101,7 +101,7 @@
 
           <div>
             <v-btn
-              color="teal"
+              color="#22939E"
               small
               dark
               @click="dialogInfo2 = true"
@@ -112,7 +112,7 @@
             </v-btn>
 
             <v-btn
-              color="teal"
+              color="#22939E"
               small
               dark
               :to="'/chat/' + appuser.id"
@@ -126,7 +126,7 @@
 
         <v-dialog v-model="dialogInfo2" persistent max-width="500px">
           <v-card>
-            <v-toolbar dark color="teal">
+            <v-toolbar dark color="#22939E">
               <v-toolbar-title>Hubungi</v-toolbar-title>
 
               <v-spacer></v-spacer>
@@ -234,7 +234,7 @@
 
         <div v-if="iklan.id_mst_iklan_jenis > 1">
           <div
-            class="teal--text"
+            class="#22939E--text"
             align="center"
             v-if="start == false && end == false"
           >
@@ -243,7 +243,7 @@
           </div>
 
           <div
-            class="teal--text"
+            class="#22939E--text"
             align="center"
             v-if="start == true && end == false"
           >
@@ -252,7 +252,7 @@
           </div>
 
           <div align="center" v-if="start == true && end == true">
-            <h2 class="teal--text">Tawar Bersama selesai</h2>
+            <h2 class="#22939E--text">Tawar Bersama selesai</h2>
             <div v-if="!guest">
               <v-btn
                 color="indigo darken-3"
@@ -276,7 +276,7 @@
 
               <v-dialog v-model="dialogInfo" persistent max-width="500px">
                 <v-card>
-                  <v-toolbar color="teal darken-3" dark>
+                  <v-toolbar color="#22939E darken-3" dark>
                     <v-toolbar-title>Info Pemenang Iklan</v-toolbar-title>
 
                     <v-spacer></v-spacer>
@@ -327,7 +327,7 @@
 
     <v-divider></v-divider>
 
-    <v-tabs v-model="tab" color="teal" slider-color="teal" show-arrows>
+    <v-tabs v-model="tab" color="#22939E" slider-color="#22939E" show-arrows>
       <v-tab>Spesifikasi</v-tab>
       <v-tab v-if="hits.id_mst_iklan_jenis == 2">Info Tawar Bersama</v-tab>
       <v-tab v-if="hits.id_mst_iklan_jenis == 2">Penawaran</v-tab>
@@ -484,7 +484,7 @@
           <v-col cols="12" sm="6">
             <v-card class="d-flex justify-space-between align-center" flat>
               <v-card align="center">
-                <v-card-subtitle class="teal accent-4 white--text">
+                <v-card-subtitle class="#22939E accent-4 white--text">
                   Tanggal Mulai
                 </v-card-subtitle>
 
@@ -677,7 +677,7 @@
         <div v-if="iklan.id_app_user != user.id">
           <v-btn
             block
-            color="teal"
+            color="#22939E"
             dark
             @click="ikutTB()"
             v-if="iklan.id_mst_iklan_status == 1"
@@ -841,7 +841,7 @@
 
           <v-tabs
             v-model="tab2"
-            background-color="teal darken-2"
+            background-color="#22939E"
             color="white"
             slider-color="yellow"
             show-arrows
@@ -881,7 +881,7 @@
                 </v-list-item>
 
                 <v-list-item>
-                  <v-btn block dark color="teal" @click="bidding">
+                  <v-btn block dark color="#22939E" @click="bidding">
                     Konfirmasi Penawaran
                   </v-btn>
                 </v-list-item>
@@ -936,7 +936,7 @@
                     </div>
 
                     <v-btn
-                      color="teal"
+                      color="#22939E"
                       dark
                       @click="autoBid"
                       v-if="isAuto == null"
@@ -946,7 +946,7 @@
 
                     <div v-else>
                       <v-btn
-                        color="teal"
+                        color="#22939E"
                         @click="autoBid"
                         class="white--text mx-2"
                         :disabled="
@@ -969,7 +969,7 @@
                         Anda. Apakah Anda ingin mengaktifkan kembali Auto Tawar?
 
                         <v-btn
-                          color="teal"
+                          color="#22939E"
                           dark
                           small
                           @click="reactivated = true"
@@ -981,10 +981,11 @@
                   </div>
                 </div>
 
-                <div class="red--text font-weight-bold">
+                <div class=" font-weight-bold">
                   Catatan: <br />
-                  Fitur Tawar Otomatis tidak menjamin anda akan memenangkan
-                  iklan Tawar Bersama.
+                  <li> Fitur Tawar Otomatis tidak menjamin anda akan memenangkan
+                  iklan Tawar Bersama. </li>
+                  <li> 2 menit sebelum iklan berakhir, Auto Tawar otomatis mengeluarkan angka maksimal tawar yang telah diatur oleh Anda. </li>
                 </div>
 
                 <div class="font-weight-bold">
@@ -1003,7 +1004,7 @@
         <div v-if="iklan.id_app_user == user.id">
           <v-btn
             block
-            color="teal"
+            color="#22939E"
             dark
             @click="terjual"
             v-if="iklan.id_mst_iklan_status != 2"

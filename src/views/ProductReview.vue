@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="teal" dark class="d-flex d-sm-none">
+    <v-app-bar app color="#22939E" dark class="d-flex d-sm-none">
       <v-btn icon @click.stop="back">
         <v-icon>mdi-arrow-left-circle</v-icon>
       </v-btn>
@@ -11,7 +11,7 @@
     <v-card flat>
       <v-tabs
         v-model="tab"
-        background-color="teal"
+        background-color="#22939E"
         dark
         slider-color="yellow"
         show-arrows

@@ -11,7 +11,7 @@
         <template v-for="(item, index) in carts">
           <v-list-item :key="'cart' + index">
             <v-list-item-avatar tile size="80">
-              <v-img src="/img/icons/ic_tiket.png"></v-img>
+               <v-img src="/img/icons/ic_tiket.webp"></v-img>
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -58,7 +58,7 @@
             <v-flex pa-1 xs6 text-right align-self-center>
               <v-btn
                 dark
-                color="teal"
+                color="#22939E"
                 @click="dialog = true"
                 :loading="loading"
                 :disabled="totalQuantity == 0"
@@ -96,8 +96,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="red" dark @click="dialog = false">Batalkan</v-btn>
-            <v-btn color="teal" dark @click="buy" :loading="loading"
+            <v-btn color="red" text dark @click="dialog = false">Batalkan</v-btn>
+            <v-btn color="#22939E" text dark @click="buy" :loading="loading"
               >Lanjutkan</v-btn
             >
           </v-card-actions>
